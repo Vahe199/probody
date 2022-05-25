@@ -7,7 +7,7 @@ jobs:
     steps:
       - id: get-id
         run: |
-          id=$(echo ${{github.sha}} | cut -c-8)
+          id=$(echo ${{ github.sha }} | cut -c-8)
           echo "::set-output name=id::$id"
       - name: Send telegram message on push
         uses: appleboy/telegram-action@master
@@ -16,9 +16,8 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            *${{ github.actor }}* pushed:
-            Msg: `${{ github.event.commits[0].message }}`
+            *${{ github.actor }}* pushed to *${{ github.ref_name }}*:
+            ```${{ github.event.commits[0].message }}```
             
-            Repository: *${{ github.repository }}*
-            
-            See changes: [${{steps.get-id.outputs.id}}](https://github.com/${{ github.repository }}/commit/${{github.sha}})
+            Repo: *${{ github.repository }}*            
+            See changes: [${{ steps.get-id.outputs.id }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
