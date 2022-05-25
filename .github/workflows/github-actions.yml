@@ -16,8 +16,8 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            *${{ github.actor }}* pushed to *${{ github.ref_name }}*:
-            ```${{ github.event.commits[0].message }}```
+            *${{ github.actor }}* pushed to *${{ github.repository }}* - *${{ github.ref_name }}*:
             
-            Repo: *${{ github.repository }}*            
+            `${{ github.event.commits[0].message }}`
+                       
             See changes: [${{ steps.get-id.outputs.id }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
