@@ -17,4 +17,4 @@ jobs:
             
             Repository: *${{ github.repository }}*
             
-            See changes: [$(echo ${{github.}} | cut -c-8)](https://github.com/${{ github.repository }}/commit/${{github.sha}})
+            See changes: [$(echo ${{github.sha}} | cut -c-8)](https://github.com/${{ github.repository }}/commit/${{github.sha}})
