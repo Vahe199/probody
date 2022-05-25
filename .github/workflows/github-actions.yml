@@ -1,7 +1,6 @@
-name: telegram message
+name: Telegram Notify
 on: [push]
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -11,10 +10,11 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            *${{ github.actor }}* pushed:
+            Msg: `${{ github.event.commits[0].message }}`
             
-            Repository: ${{ github.repository }}
+            Repository: *${{ github.repository }}*
             
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            See changes: [$(echo ${{github.}} | cut -c-8)](https://github.com/${{ github.repository }}/commit/${{github.sha}})
