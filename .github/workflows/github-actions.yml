@@ -1,0 +1,13 @@
+- name: Telegram Notify
+  uses: appleboy/telegram-action@0.0.3
+  env:
+    GITHUB_CONTEXT: ${{ toJSON(github) }}
+  with:
+    to: ${{ secrets.TELEGRAM_ID }}
+    token: ${{ secrets.TELEGRAM_TOKEN }}
+    format: markdown
+    message: |
+      Application: *ProBody Backend*
+      Branch: *${{ github.ref }}*
+      Repository: *${{ github.repository }}*
+      Owner: *${{ github.repository_owner }}*
