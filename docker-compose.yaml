@@ -1,0 +1,48 @@
+version: '3'
+services:
+  appcore:
+    build:
+      context: .
+      dockerfile: core.dockerfile
+    container_name: probody_appcore
+    volumes:
+      - ./src:/app
+    networks:
+      - probodynet
+    depends_on:
+      - mongo
+      - redis
+    ports:
+      - "4119:4119"
+    restart: unless-stopped
+
+  redis:
+    image: redislabs/redisearch:2.0.1
+    container_name: probody_redis
+    networks:
+      - probodynet
+    ports:
+      - "6399:6379"
+    restart: unless-stopped
+    entrypoint: redis-server --loadmodule /usr/lib/redis/modules/redisearch.so --appendonly yes
+    volumes:
+      - ./volumes/redis-data:/data
+
+  mongo:
+    image: mongo
+    container_name: probody_mongo
+    volumes:
+      - ./volumes/db:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - probodynet
+    ports:
+      - "27022:27017"
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 2jkpJeB8yGXt
+      MONGO_INITDB_DATABASE: probodydb
+
+networks:
+  probodynet:

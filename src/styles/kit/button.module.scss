@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+.btn {
+    padding: 20px 15px;
+}
+
+.primary {
+    background: $bg-primary;
+    color: $text-primary;
+}
+
+.secondary {
+    background: $bg-secondary;
+    color: $text-secondary;
+}
+
+.tertiary {
+    background: $bg-tertiary;
+    color: $text-tertiary;
+}
