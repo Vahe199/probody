@@ -25,14 +25,20 @@ const ReviewSchema = new Schema({
     },
     interior: {
         type: Number,
+        min: 1,
+        max: 5,
         required: true
     },
     massage: {
         type: Number,
+        min: 1,
+        max: 5,
         required: true
     },
     service: {
         type: Number,
+        min: 1,
+        max: 5,
         required: true
     },
     avg: {

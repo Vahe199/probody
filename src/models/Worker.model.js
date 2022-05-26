@@ -29,8 +29,7 @@ const WorkerSchema = new Schema({
         coordinates: {
             type: [Number],
             required: true
-        },
-        required: true
+        }
     },
     parent: {
         type: Schema.Types.ObjectId,
@@ -79,10 +78,14 @@ const WorkerSchema = new Schema({
     },
     characteristics: {
         height: {
-            type: Number
+            type: Number,
+            min: 70,
+            max: 250
         },
         weight: {
-            type: Number
+            type: Number,
+            min: 30,
+            max: 150
         },
         hair: {
             type: String,
@@ -93,7 +96,9 @@ const WorkerSchema = new Schema({
             enum: ["blue", "lightblue", "green", "hazel", "grey", "black", "yellow", "other"]
         },
         age: {
-            type: Number
+            type: Number,
+            min: 18,
+            max: 99
         },
         bust: {
             type: Number,
@@ -108,10 +113,6 @@ const WorkerSchema = new Schema({
         type: [Schema.Types.ObjectId],
         ref: "Service"
     },
-    programs: {
-        type: [Schema.Types.ObjectId],
-        ref: "Program"
-    },
     massageTypes: {
         type: [Schema.Types.ObjectId],
         ref: "MassageType"
@@ -122,7 +123,9 @@ const WorkerSchema = new Schema({
     },
     rooms: {
         type: Number,
-        default: 1
+        default: 1,
+        min: 1,
+        max: 20
     },
     photos: {
         type: [String],
@@ -131,17 +134,15 @@ const WorkerSchema = new Schema({
     workHours: {
         from: {
             type: Number,
-            required: true
+            required: true,
+            min: 0,
+            max: 23
         },
         to: {
             type: Number,
-            required: true
-        },
-        isInfinite: {
-            type: Boolean,
-            default() {
-                return this.from === 0 && this.to === 24
-            }
+            required: true,
+            min: 1,
+            max: 24
         }
     },
     workDays: {

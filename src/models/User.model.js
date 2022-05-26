@@ -14,9 +14,6 @@ const UserSchema = new Schema({
   email: {
     type: String,
   },
-  avatar: {
-    type: String,
-  },
   nickName: {
     type: String,
   }

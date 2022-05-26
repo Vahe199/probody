@@ -14,7 +14,7 @@ const ScheduleRaiseSchema = new Schema({
   }
 }, {
   versionKey: false,
-  timestamps: false
+  timestamps: true
 });
 
 export default mongoose.model('ScheduleRaise', ScheduleRaiseSchema)
