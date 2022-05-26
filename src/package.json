@@ -7,8 +7,7 @@
     "dev": "next dev",
     "expressdev": "nodemon --ignore . server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

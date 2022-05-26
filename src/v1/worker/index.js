@@ -52,6 +52,7 @@ router.get('/:id', async (req, res) => {
             return res.json(await Worker
                 .findOne({_id: new mongoose.mongo.ObjectId(req.params.id)})
                 .populate('services', 'name')
+                .populate('leads', 'name')
                 .populate('massageTypes', 'name')
                 .populate('region', 'name'))
         } else {

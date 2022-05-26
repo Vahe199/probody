@@ -3,6 +3,8 @@ import * as redis from 'redis'
 const escapeQuotes = s => s.replace(/\\([\s\S])|(")/g, "\\$1$2")
 
 class RedisHelper {
+    redisClient = null;
+
     async init() {
         if (!this.redisClient) {
             const host = process.env.REDIS_HOST,
@@ -55,27 +57,16 @@ class RedisHelper {
         return this.redisClient.unlink(...arguments);
     }
 
-    async hset(key, field, value, expire = undefined) {
+    async hset(key, field, value) {
         await this.init();
 
-        // const cacheValue = {
-        //     value: JSON.stringify(value)
-        // };
-        //
-        // promisify(this.redisClient.hset).bind(this.redisClient)(key, field, JSON.stringify(cacheValue));
-        this.redisClient.hset(key, field, value)
-
-        if (expire) {
-            await this.expire(key, expire);
-        }
-
-        return true;
+        return this.redisClient.sendCommand(["HSET", ...arguments]);
     }
 
     async hget(key, field) {
         await this.init();
 
-        return this.redisClient.hget(key, field);
+        return this.redisClient.HGET(key, field);
     }
 
     async hincrby(key, field, increment) {

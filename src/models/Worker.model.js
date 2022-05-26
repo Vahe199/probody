@@ -127,6 +127,10 @@ const WorkerSchema = new Schema({
         min: 1,
         max: 20
     },
+    leads: {
+        type: [Schema.Types.ObjectId],
+        ref: "Lead"
+    },
     photos: {
         type: [String],
         required: true
