@@ -10,7 +10,7 @@ import AuthorizedToken from "../../models/AuthorizedToken.model.js"
 
 const router = express.Router()
 
-router.post('/auth/register', AuthValidator.register, async (req, res) => {
+router.post('/register', AuthValidator.register, async (req, res) => {
     try {
         let {phone} = req.body;
 
@@ -47,12 +47,12 @@ router.post('/auth/register', AuthValidator.register, async (req, res) => {
     }
 })
 
-router.patch('/auth/approve', AuthValidator.phoneAndPassword, async (req, res) => {
+router.patch('/approve', AuthValidator.phoneAndPassword, async (req, res) => {
     let {phone, code, password} = req.body
 
     phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
 
-    const usersRedisKey = 'pending_register:' + phone
+    const usersRedisKey = 'pending:register:' + phone
     let userDoc = await RedisHelper.get(usersRedisKey)
 
     if (!userDoc) {
@@ -93,7 +93,7 @@ router.patch('/auth/approve', AuthValidator.phoneAndPassword, async (req, res) =
     })
 })
 
-router.post('/auth/resend-sms', AuthValidator.resendSMS, async (req, res) => {
+router.post('/resend-sms', AuthValidator.resendSMS, async (req, res) => {
     let {phone, target} = req.body,
         code = '',
         redisKey = ''
@@ -146,7 +146,7 @@ router.post('/auth/resend-sms', AuthValidator.resendSMS, async (req, res) => {
     })
 })
 
-router.post('/auth/login', AuthValidator.auth, async (req, res) => {
+router.post('/login', AuthValidator.auth, async (req, res) => {
     try {
         let {password, phone} = req.body;
         let userDoc = await User.findOne({phone})
@@ -180,7 +180,7 @@ router.post('/auth/login', AuthValidator.auth, async (req, res) => {
     }
 })
 
-router.post('/auth/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
     await AuthorizedToken.findOneAndDelete({token: req.headers['x-auth-token']})
 
     res.json({
@@ -188,7 +188,7 @@ router.post('/auth/logout', async (req, res) => {
     })
 })
 
-router.post('/auth/request-reset', AuthValidator.onlyPhone, async (req, res) => {
+router.post('/request-reset', AuthValidator.onlyPhone, async (req, res) => {
     let {phone} = req.body
 
     phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
@@ -214,7 +214,7 @@ router.post('/auth/request-reset', AuthValidator.onlyPhone, async (req, res) => 
     })
 })
 
-router.patch('/auth/update-password', AuthValidator.phoneAndPassword, async (req, res) => {
+router.patch('/update-password', AuthValidator.phoneAndPassword, async (req, res) => {
     let {phone, code, password} = req.body
 
     phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
