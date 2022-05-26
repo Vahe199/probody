@@ -11,4 +11,4 @@ const MassageTypeSchema = new Schema({
   timestamps: false
 });
 
-export default mongoose.model('MassageType', MassageTypeSchema)
+export default mongoose.model('MassageType', MassageTypeSchema, 'massageTypes')

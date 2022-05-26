@@ -3,7 +3,7 @@ import {DateTime} from 'luxon'
 
 const {Schema} = mongoose
 
-const AuthorizedTokensSchema = new Schema({
+const AuthorizedTokenSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId, ref: 'User'
     },
@@ -22,4 +22,4 @@ const AuthorizedTokensSchema = new Schema({
     timestamps: false
 });
 
-export default mongoose.model('AuthorizedTokens', AuthorizedTokensSchema)
+export default mongoose.model('AuthorizedToken', AuthorizedTokenSchema, 'authorizedTokens')

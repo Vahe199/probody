@@ -26,4 +26,4 @@ const BlogArticleSchema = new Schema({
   timestamps: false
 });
 
-export default mongoose.model('BlogArticle', BlogArticleSchema)
+export default mongoose.model('BlogArticle', BlogArticleSchema, 'blogArticles')

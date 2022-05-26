@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import '../models/index.js'
 
 export function getMongoURL() {
     return `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DBNAME}`

@@ -16,6 +16,10 @@ const UserSchema = new Schema({
   },
   nickName: {
     type: String,
+  },
+  balance: {
+    type: Number,
+    default: 0
   }
 }, {
   versionKey: false,

@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const {Schema} = mongoose
 
-const AuthorizedTokensSchema = new Schema({
+const VacancySchema = new Schema({
     host: {
         type: Schema.Types.ObjectId, ref: 'User'
     },
@@ -50,4 +50,4 @@ const AuthorizedTokensSchema = new Schema({
     timestamps: true
 });
 
-export default mongoose.model('AuthorizedTokens', AuthorizedTokensSchema)
+export default mongoose.model('Vacancy', VacancySchema)
