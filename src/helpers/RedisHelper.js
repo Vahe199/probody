@@ -90,14 +90,13 @@ class RedisHelper {
     async ftSearch(index, query, limit, offset) {
         await this.init();
 
-        return this.redisClient.send_command(
-            'FT.SEARCH',
-            [
+        return this.redisClient.sendCommand([
+                'FT.SEARCH',
                 index,
-                `"${escapeQuotes(query.toLowerCase())}"`,
+                `${escapeQuotes(query.toLowerCase())}`,
                 'LIMIT',
-                offset,
-                limit
+                String(offset),
+                String(limit)
             ]
         );
     }
@@ -105,24 +104,23 @@ class RedisHelper {
     async createIndex(name, prefix, schema) {
         await this.init();
 
-        return this.redisClient.send_command(
-            'FT.CREATE',
+        return this.redisClient.sendCommand(
             [
+                'FT.CREATE',
                 name,
                 'ON',
                 'hash',
                 'PREFIX',
-                1,
+                '1',
                 prefix,
                 'SCHEMA',
                 ...Object.keys(schema).reduce((acc, key) => {
                     return acc + key + ' ' + schema[key] + ' '
                 }, '').trim().split(' ')
-            ]
-        );
+            ]);
     }
 
-    async auth(password){
+    async auth(password) {
         return this.redisClient.auth(password);
     }
 }

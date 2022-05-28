@@ -72,6 +72,9 @@ const WorkerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    description: {
+        type: String
+    },
     phone: {
         type: String,
         required: true
