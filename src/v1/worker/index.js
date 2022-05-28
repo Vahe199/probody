@@ -88,4 +88,33 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/:id/slaves', async (req, res) => {
+    try {
+        if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
+            return res.status(406).json({
+                message: 'invalidId'
+            })
+        }
+
+        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ["kind", 'slaves'])
+
+        if (!worker) {
+            return res.status(404).json({
+                message: 'workerNotFound'
+            })
+        }
+
+        if (worker.kind === 'salon') {
+            return res.json(await Worker
+                .find({_id: {$in: worker.slaves}}))
+        } else {
+            return res.json(null)
+        }
+    } catch (e) {
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+})
+
 export default router

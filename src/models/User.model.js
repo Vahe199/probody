@@ -20,6 +20,11 @@ const UserSchema = new Schema({
   balance: {
     type: Number,
     default: 0
+  },
+  role: {
+    type: String,
+    enum: ['serviceProvider', 'admin'],
+    default: 'serviceProvider'
   }
 }, {
   versionKey: false,

@@ -1,4 +1,7 @@
 import mongoose from "mongoose"
+import Point from "./Point.schema.js";
+import CyrillicToTranslit from "cyrillic-to-translit-js";
+import Numbers from "../helpers/Numbers.js";
 
 const {Schema} = mongoose
 
@@ -17,6 +20,10 @@ const VacancySchema = new Schema({
     experience: {
         type: [String],
         enum: ['none', '1-3mon', '3-6mon', '6-12mon', 'more']
+    },
+    previewText: {
+        type: String,
+        required: true
     },
     description: {
         type: String,
@@ -40,6 +47,20 @@ const VacancySchema = new Schema({
     salonAddress: {
         type: String,
         required: true
+    },
+    photo: {
+      type: [String],
+      required: true
+    },
+    salonLocation: {
+        type: Point,
+        required: true
+    },
+    slug: {
+        type: String,
+        default() {// Привет, мир! => privet-mir-25
+            return (new CyrillicToTranslit).transform(this.salonTitle.replace(/[&\/\\#,!+()$~%.'":*?<>{}]/g, '').trim(), '-') + Numbers.random(1, 1000)
+        }
     },
     region: {
         type: Schema.Types.ObjectId,

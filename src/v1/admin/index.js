@@ -4,6 +4,19 @@ import Worker from '../../models/Worker.model.js'
 
 const router = express.Router()
 
+router.get('/worker', async (req, res) => {
+        const workersKey = 'pending:check:worker:*',
+            vacanciesKey = 'pending:check:vacancy:*',
+            reviewsKey = 'pending:check:review:*',
+            uuidExtractor = key => key.split(':')[3]
+
+        res.json({
+            workers: (await RedisHelper.keys(workersKey)).map(uuidExtractor),
+            vacancies: (await RedisHelper.keys(vacanciesKey)).map(uuidExtractor),
+            reviews: (await RedisHelper.keys(reviewsKey)).map(uuidExtractor)
+        })
+})
+
 router.patch('/worker/:uuid/approve', async (req, res) => {
     try {
         const redisKey = 'pending:check:worker:' + req.params.uuid,

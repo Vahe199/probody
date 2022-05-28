@@ -1,5 +1,7 @@
 import mongoose from "mongoose"
 import PointSchema from "./Point.schema.js";
+import CyrillicToTranslit from "cyrillic-to-translit-js";
+import Numbers from "../helpers/Numbers.js";
 
 const {Schema} = mongoose
 
@@ -152,6 +154,12 @@ const WorkerSchema = new Schema({
     photos: {
         type: [String],
         required: true
+    },
+    slug: {
+        type: String,
+        default() {// Привет, мир! => privet-mir-25
+            return (new CyrillicToTranslit).transform(this.name.replace(/[&\/\\#,!+()$~%.'":*?<>{}]/g, '').trim(), '-') + Numbers.random(1, 1000)
+        }
     },
     workHours: {
         from: {
