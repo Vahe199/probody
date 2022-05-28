@@ -4,7 +4,12 @@ const {Schema} = mongoose
 
 const ServiceSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true
+  },
+  icon: {
+    type: String,
+    required: true
   }
 }, {
   versionKey: false,

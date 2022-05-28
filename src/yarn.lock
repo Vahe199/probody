@@ -293,6 +293,11 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+apicache@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/apicache/-/apicache-1.6.3.tgz#4441aa40f2a48c9dd6f11c73be937d563405355b"
+  integrity sha512-jS3VfUFpQ9BesFQZcdd1vVYg3ZsO2kGPmTJHqycIYPAQs54r74CRiyj8DuzJpwzLwIfCBYzh4dy9Jt8xYbo27w==
+
 argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
@@ -1973,11 +1978,6 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
-
-redis-redisearch@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/redis-redisearch/-/redis-redisearch-1.0.1.tgz#181132d9bec6ee68307987f85c6f2a615689ad7c"
-  integrity sha512-Zk3o/FnFgVCn6k//YPuZzWwrH812P/WQSnP1B6r/LBV4ggrdGSSShWaRjf4QuA8TWbUFpuA9Yp0/2pNWcvSDWg==
 
 redis@^4.1.0:
   version "4.1.0"

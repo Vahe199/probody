@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const {Schema} = mongoose
 
-const LeadSchema = new Schema({
+const MessengerSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -16,4 +16,4 @@ const LeadSchema = new Schema({
   timestamps: false
 });
 
-export default mongoose.model('Lead', LeadSchema)
+export default mongoose.model('Messenger', MessengerSchema)
