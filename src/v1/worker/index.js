@@ -5,6 +5,7 @@ import {v4 as uuidv4} from 'uuid'
 import RedisHelper from "../../helpers/RedisHelper.js"
 import mongoose from "mongoose";
 import apicache from "apicache";
+import Review from "../../models/Review.model.js"
 
 const router = express.Router()
 
@@ -33,7 +34,14 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     })
 })
 
-router.get('/:id/similar', apicache.middleware('5 minutes'), async (req, res) => {
+router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
+    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {$group: {_id: '$target', averageRate: {$avg: "$avg"}}}]).sort({ averageRate: -1 }).limit(3)).map(item => ({[item._id]: item.averageRate}))),
+        top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+
+    res.json(top3Workers)
+})
+
+router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) => {
     if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
         return res.status(406).json({
             message: 'invalidId'

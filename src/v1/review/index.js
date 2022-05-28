@@ -5,7 +5,7 @@ import apicache from "apicache"
 
 const router = express.Router()
 
-router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
+router.get('/:workerId', apicache.middleware('15 minutes'), async (req, res) => {
     if (!mongoose.mongo.ObjectId.isValid(req.params.workerId)) {
         return res.status(406).json({
             message: 'invalidId'

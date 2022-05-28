@@ -13,6 +13,11 @@ const ReviewSchema = new Schema({
         ref: 'Worker',
         required: true
     },
+    targetType: {
+        type: String,
+        enum: ['worker', 'salon'],
+        required: true
+    },
     name: {
         type: String,
         required: true

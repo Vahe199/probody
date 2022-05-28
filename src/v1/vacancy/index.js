@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 
     res.json({
-        vacancies: await Vacancy.find({}, ['previewText', 'phone', 'photo', 'slug', 'salary', 'description', 'workHours', 'salonTitle', 'region']).populate('region').limit(req.query.limit).skip((req.query.page - 1) * req.query.limit).sort({createdAt: -1}),
+        vacancies: await Vacancy.find({}, ['previewText', 'phone', 'photo', 'slug', 'salary', 'description', 'workHours', 'salonTitle', 'region', 'title']).populate('region').limit(req.query.limit).skip((req.query.page - 1) * req.query.limit).sort({createdAt: -1}),
         pageCount: Math.ceil(await Vacancy.countDocuments({}) / req.query.limit)
     })
 })

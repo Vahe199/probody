@@ -17,7 +17,7 @@ router.post('/region', async (req, res) => {
     res.json(await Search.findRegion(`@name:{${req.body.query}*}`, 7, 0))
 })
 
-router.get('/filter', apicache.middleware('5 minutes'), async (req, res) => {
+router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
     res.json({
         leads: await Lead.find({}),
         services: await Service.find({}),

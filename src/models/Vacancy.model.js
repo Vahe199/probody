@@ -29,6 +29,10 @@ const VacancySchema = new Schema({
         type: String,
         required: true
     },
+    title: {
+        type: String,
+        required: true
+    },
     workHours: {
         from: {
             type: Number
@@ -39,6 +43,11 @@ const VacancySchema = new Schema({
         isOther: {
             type: Boolean
         }
+    },
+    workDays: {
+        type: [String],
+        enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+        default: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     },
     salonTitle: {
         type: String,
