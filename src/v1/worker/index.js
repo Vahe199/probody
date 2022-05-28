@@ -4,6 +4,7 @@ import Worker from '../../models/Worker.model.js'
 import {v4 as uuidv4} from 'uuid'
 import RedisHelper from "../../helpers/RedisHelper.js"
 import mongoose from "mongoose";
+import apicache from "apicache";
 
 const router = express.Router()
 
@@ -30,6 +31,28 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
             message: "createdWorker"
         })
     })
+})
+
+router.get('/:id/similar', apicache.middleware('5 minutes'), async (req, res) => {
+    if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
+        return res.status(406).json({
+            message: 'invalidId'
+        })
+    }
+
+    const workerDoc = await Worker.findById(req.params.id, 'location')
+
+    if (!workerDoc) {
+        return res.status(404).json({
+            message: 'workerNotFound'
+        })
+    }
+
+    if (workerDoc.kind === 'master') {
+        res.json(await Worker.find({parent: {$exists: false}}).where('location').near({ center: { coordinates: workerDoc.location.coordinates, type: 'Point' }}).limit(3)) // TODO: set up projection
+    } else {
+        res.json(await Worker.find({slaves: {$exists: true, $ne: []}}).where('location').near({ center: { coordinates: workerDoc.location.coordinates, type: 'Point' }}).limit(3)) // TODO: set up projection
+    }
 })
 
 router.get('/:id', async (req, res) => {

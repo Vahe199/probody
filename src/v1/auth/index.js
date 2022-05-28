@@ -10,7 +10,7 @@ import AuthorizedToken from "../../models/AuthorizedToken.model.js"
 
 const router = express.Router()
 
-router.post('/register', AuthValidator.register, async (req, res) => {
+router.post('/register', AuthValidator.onlyPhone, async (req, res) => {
     try {
         let {phone} = req.body;
 

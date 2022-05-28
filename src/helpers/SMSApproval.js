@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 import RedisHelper from "./RedisHelper.js";
 
 export const APPROVAL_LENGTH = 5
@@ -36,10 +37,8 @@ export default class SMSApproval {
         await RedisHelper.set(redisBanKey, '')
         await RedisHelper.expire(redisBanKey, 30)
 
-        //TODO: Send this.code to this.phone
-        return new Promise(resolve => {
-            setTimeout(resolve, 250)
-        })
+        return fetch(`https://api.mobizon.kz/service/message/sendsmsmessage?recipient=${this.phone}&text=${this.code}%20%E2%80%93%20%D0%92%D0%B0%D1%88%20%D0%BA%D0%BE%D0%B4%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%85%D0%BE%D0%B4%D0%B0%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82.%0A%40probody.kz%20%23${this.code}&apiKey=${process.env.SMS_API_KEY}`)
+            .catch(console.error)
     }
 
     get code () {

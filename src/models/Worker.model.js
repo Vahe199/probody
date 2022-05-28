@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import PointSchema from "./Point.schema.js";
 
 const {Schema} = mongoose
 
@@ -21,15 +22,8 @@ const WorkerSchema = new Schema({
         required: true
     },
     location: {
-        type: {
-            type: String,
-            enum: ['Point'],
-            default: 'Point'
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
+        type: PointSchema,
+        index: '2dsphere'
     },
     parent: {
         type: Schema.Types.ObjectId,
@@ -120,9 +114,30 @@ const WorkerSchema = new Schema({
         type: [Schema.Types.ObjectId],
         ref: "MassageType"
     },
+    programs: [{
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        duration: {
+            type: Number,
+            enum: [15, 30, 60, 90],
+            required: true
+        },
+        price: {
+            type: Number,
+            required: true
+        }
+    }],
     avgCost: {
         type: Number,
-        default: 0
+        default() {
+            return this.programs.reduce((acc, cur) => acc + (cur.price / cur.duration * 60), 0)
+        }
     },
     rooms: {
         type: Number,

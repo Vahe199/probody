@@ -20,6 +20,7 @@
     "libphonenumber-js": "^1.10.6",
     "luxon": "^2.4.0",
     "mongoose": "^6.3.4",
+    "node-fetch": "^3.2.4",
     "redis": "^4.1.0",
     "uuid": "^8.3.2"
   },
