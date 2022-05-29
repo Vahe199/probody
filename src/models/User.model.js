@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import ReffCode from "../helpers/ReffCode.js"
 
 const {Schema} = mongoose
 
@@ -25,6 +26,10 @@ const UserSchema = new Schema({
     type: String,
     enum: ['serviceProvider', 'admin'],
     default: 'serviceProvider'
+  },
+  paymentCode: {
+    type: String,
+    default: ReffCode.generate
   }
 }, {
   versionKey: false,

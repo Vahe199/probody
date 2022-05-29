@@ -1,6 +1,6 @@
 import Worker from "../models/Worker.model.js"
-import Region from "../models/Region.model.js";
-import RedisHelper from "./RedisHelper.js";
+import Region from "../models/Region.model.js"
+import RedisHelper from "./RedisHelper.js"
 
 const BATCHSIZE = 100;
 
@@ -13,15 +13,15 @@ export default class Search {
     static async addWorker(keyPrefix, workerId, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
-            'phone', phone,
-            'lastRaise', String(+lastRaise),
+            'phone', phone.replace('+', ''),
+            'lastraise', String(+lastRaise),
             'description', description.toLowerCase(),
             'region', regionName.toLowerCase() + ' район',
             'services', services.map(s => s.name.toLowerCase()).join(','),
             'leads', leads.map(l => l.name.toLowerCase()).join(','),
-            'massageTypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
+            'massagetypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
             'rooms', String(rooms),
-            'avgCost', String(avgCost)
+            'avgcost', String(avgCost)
         )
     }
 
@@ -92,7 +92,7 @@ export default class Search {
     static async createRegionIndex() {
         try {
             await RedisHelper.createIndex("idx:region", "search:region:", {
-                name: "TAG"
+                name: "TEXT"
             })
         } catch (e) {
         }
@@ -104,14 +104,15 @@ export default class Search {
         try {
             await RedisHelper.createIndex("idx:worker", "search:worker:", {
                 rooms: 'NUMERIC',
-                region: 'TAG',
-                lastRaise: 'NUMERIC SORTABLE',
-                avgCost: 'NUMERIC',
+                region: 'TEXT',
+                lastraise: 'NUMERIC SORTABLE',
+                avgcost: 'NUMERIC',
                 name: 'TEXT',
                 description: 'TEXT',
                 leads: 'TEXT',
+                phone: 'TAG',
                 services: 'TEXT',
-                massageTypes: 'TEXT'
+                massagetypes: 'TEXT'
             })
         } catch (e) {
         }
@@ -122,15 +123,31 @@ export default class Search {
     static async findRegion(queryString, limit, offset) {
         const searchResults = await RedisHelper.ftSearch('idx:region', queryString, limit, offset),
             searchResultsIds = searchResults
-                .filter(s => typeof s === 'string' && s.includes('region'))
+                .splice(1)
                 .map(key => key.split(':')[2])
-
-        console.log(searchResults, searchResultsIds)
 
         return {
             count: searchResults[0],
             results: await Region.find({_id: {$in: searchResultsIds}})
         }
     }
+
+    static async findWorker(queryString, isMapView, limit, offset) {
+        const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
+            searchResultsIds = searchResults
+                .splice(1)
+                .map(key => key.split(':')[2]),
+            workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
+
+        if (isMapView) {
+            workerQuery.projection('location name slug workHours workDays isVerified messengers address')
+        } else {
+            workerQuery.populate('region', 'name')
+        }
+
+        return {
+            count: searchResults[0],
+            results: await workerQuery
+        }
+    }
 }
-//

@@ -87,16 +87,18 @@ class RedisHelper {
         return this.redisClient.keys(pattern);
     }
 
-    async ftSearch(index, query, limit, offset) {
+    async ftSearch(index, query, limit, offset, additionalArgs = []) {
         await this.init();
 
         return this.redisClient.sendCommand([
                 'FT.SEARCH',
                 index,
                 `${escapeQuotes(query.toLowerCase())}`,
+                ...additionalArgs,
                 'LIMIT',
                 String(offset),
-                String(limit)
+                String(limit),
+                'NOCONTENT'
             ]
         );
     }
