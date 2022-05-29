@@ -10,6 +10,21 @@ export default class Search {
         await Search.syncRegions()
     }
 
+    static async addWorker(keyPrefix, workerId, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
+        return RedisHelper.hset(keyPrefix + workerId,
+            "name", name.toLowerCase(),
+            'phone', phone,
+            'lastRaise', String(+lastRaise),
+            'description', description.toLowerCase(),
+            'region', regionName.toLowerCase() + ' район',
+            'services', services.map(s => s.name.toLowerCase()).join(','),
+            'leads', leads.map(l => l.name.toLowerCase()).join(','),
+            'massageTypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
+            'rooms', String(rooms),
+            'avgCost', String(avgCost)
+        )
+    }
+
     static async syncWorkers() {
         const PREFIX = "search:worker:"
         let workerCount = await Worker.count({parent: {$exists: false}}),
@@ -25,18 +40,18 @@ export default class Search {
                 .limit(BATCHSIZE)
 
             for (let worker of workers) {
-                await RedisHelper.hset(PREFIX + worker._id,
-                    "name", worker.name.toLowerCase(),
-                    'phone', worker.phone,
-                    'lastRaise', String(+worker.lastRaise),
-                    // 'description', worker.description.toLowerCase(),
-                    'region', worker.region.name.toLowerCase() + ' район',
-                    'services', worker.services.map(s => s.name.toLowerCase()).join(','),
-                    'leads', worker.leads.map(l => l.name.toLowerCase()).join(','),
-                    'massageTypes', worker.massageTypes.map(m => m.name.toLowerCase()).join(','),
-                    'rooms', String(worker.rooms),
-                    'avgCost', String(worker.avgCost)
-                )
+                await Search.addWorker(PREFIX,
+                    worker._id,
+                    worker.name,
+                    worker.phone,
+                    worker.lastRaise,
+                    worker.avgCost,
+                    worker.rooms,
+                    worker.description,
+                    worker.leads,
+                    worker.services,
+                    worker.massageTypes,
+                    worker.region.name)
             }
 
             offset += BATCHSIZE

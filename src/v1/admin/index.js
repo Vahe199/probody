@@ -1,6 +1,8 @@
 import express from "express"
 import RedisHelper from "../../helpers/RedisHelper.js"
 import Worker from '../../models/Worker.model.js'
+import Search from "../../helpers/Search.js";
+import Region from "../../models/Region.model.js";
 
 const router = express.Router()
 
@@ -28,7 +30,8 @@ router.patch('/worker/:uuid/approve', async (req, res) => {
             })
         }
 
-        await (new Worker(doc)).save()
+        const workerId = await (new Worker(doc)).save()
+        await Search.addWorker('search:workers:', workerId, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.massageTypes, (await Region.findById(doc.region)).name)
         await RedisHelper.unlink(redisKey)
 
         res.status(202).json({
@@ -93,6 +96,7 @@ router.patch('/worker/:uuid/editandapprove', async (req, res) => {
             }
 
             await mongoDoc.save()
+            await Search.addWorker('search:workers:', workerId, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.massageTypes, (await Region.findById(doc.region)).name)
             await RedisHelper.unlink(redisKey)
 
             res.status(202).json({
