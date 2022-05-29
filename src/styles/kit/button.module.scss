@@ -1,20 +1,74 @@
 @import '../variables.scss';
 
 .btn {
-    padding: 20px 15px;
+    border: 0;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: Lack, sans-serif;
+    transition: box-shadow .2s;
+}
+
+.disabled {
+    cursor: not-allowed;
+    background: $bg-disabled !important;
+
+    i, span {
+        color: $text-disabled !important;
+    }
 }
 
 .primary {
     background: $bg-primary;
     color: $text-primary;
+
+    &:focus {
+        box-shadow: 0 0 0 4px inset $bg-secondary;
+    }
 }
 
 .secondary {
     background: $bg-secondary;
     color: $text-secondary;
+
+    &:focus {
+        box-shadow: 0 0 0 4px inset $bg-primary;
+    }
 }
 
 .tertiary {
     background: $bg-tertiary;
     color: $text-tertiary;
+
+    &:focus {
+        box-shadow: 0 0 0 4px inset $bg-secondary;
+    }
+}
+
+.success {
+    background: $bg-success;
+    color: #fff;
+}
+
+.danger {
+    background: $bg-danger;
+    color: #fff;
+}
+
+.small {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.medium {
+    padding: 16px 32px;
+    font-size: 16px;
+
+    :has(.icon) {
+        padding: 12px 32px;
+    }
+}
+
+.large {
+    padding: 16px 32px;
+    font-size: 18px;
 }

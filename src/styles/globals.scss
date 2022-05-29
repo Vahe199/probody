@@ -1,3 +1,18 @@
+@import "simple-grid.min.css";
+@import "fonts.scss";
+@import '_reset.scss';
+@import "helpers.scss";
+
+:root {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+::selection, ::-moz-selection {
+  background: #ffc83a85;
+}
+
 body {
-  background: bisque
+  box-sizing: border-box !important;
 }
