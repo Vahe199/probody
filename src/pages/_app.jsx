@@ -8,6 +8,7 @@ import React from "react"
 import en from '../locales/en'
 import ru from '../locales/ru'
 import kz from '../locales/kz'
+import AboutUsSection from "../components/AboutUsSection.jsx";
 
 const translations = {
     en,
@@ -52,6 +53,7 @@ class ProbodyApp extends React.Component {
         return (<GlobalContext.Provider value={this.state}>
                 <Navbar/>
                 <Component {...pageProps} />
+                <AboutUsSection />
                 <Footer/>
             </GlobalContext.Provider>
         )

@@ -9,7 +9,7 @@ class Footer extends React.Component {
         const {isMobile, t} = this.context;
 
         return (
-            <footer className={cnb(isMobile ? '' : 'container', css.footer)}>
+            <footer className={cnb('container', css.footer)}>
                 <img alt={t('siteLogo')} className={css.textLogo} bp={'hide show@md'} src={'/text_logo.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
