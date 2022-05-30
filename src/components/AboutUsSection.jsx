@@ -1,23 +1,89 @@
 import React from "react";
 import TextSection from "./kit/TextSection";
+import {GlobalContext} from "../contexts/Global.js";
+import InfoBlock from "./kit/InfoBlock.jsx";
+import StatsInfoBlock from "./kit/StatsInfoBlock.jsx";
+import css from '../styles/about-us.module.scss';
+import {cnb} from "cnbuilder";
 
-export default class AboutUsSection extends React.Component {
+class AboutUsSection extends React.Component {
     render() {
+        const {t, isMobile} = this.context;
+
         return (
-            <section className={'container'}>
-                <div>
-                    <TextSection style={{marginBottom: 12}}>
-                        Популярность эротического массажа среди представителей сильного пола вполне обоснована, ведь именно таким способом они могут избавиться от стресса, восстановиться физически и морально, проводя время в компании девушек сногшибательной красоты.<br/><br/>Среди любителей подобного времяпровождения есть самые разные мужчины – студенты, представители “золотой молодежи” офисные сотрудники, успешные бизнесмены, и топ-менеджеры, политики, спортсмены и многие другие.
+            <section className={'container'} bp={'grid'} style={{marginBottom: 24}}>
+                <div bp={'12 8@md'}>
+                    <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: 24}}>
                     </TextSection>
 
-                    <TextSection>
-                        Наш город предоставляет массу возможностей для того, чтобы ощутить на себе потрясающий эффект от массажа, нужно только решить, в какой конкретно салон отправиться.<br/><br/>Сделать выбор простым и быстрым позволит наш специализированный портал, где представлены заведения разного класса, включая те, куда периодически приходят знаменитости.<br/><br/>Не теряйте ни секунды – оценивайте актуальные предложения и записывайтесь на эротический массаж в Алматы, который обеспечиваетт полноценную релаксацию и взрыв удовольтвия!<br/><br/>Наш город предоставляет массу возможностей для того, чтобы ощутить на себе потрясающий эффект от массажа, нужно только решить, в какой конкретно салон отправиться.<br/><br/>Сделать выбор простым и быстрым позволит наш специализированный портал, где представлены заведения разного класса, включая те, куда периодически приходят знаменитости.<br/><br/>Не теряйте ни секунды – оценивайте актуальные предложения и записывайтесь на эротический массаж в Алматы, который обеспечиваетт полноценную релаксацию и взрыв удовольтвия!
+                    <div bp={'show hide@md'} style={{marginBottom: 24}}>
+                        <StatsInfoBlock title={t('siteStatsTitle')} stats={[
+                            {
+                                title: t('avgRating'),
+                                value: '4.8',
+                                accent: true
+                            },
+                            {
+                                title: t('totalRatings'),
+                                value: '376'
+                            },
+                            {
+                                title: t('totalReviews'),
+                                value: '152'
+                            }
+                        ]}/>
+                    </div>
+
+                    <TextSection style={{marginTop: isMobile ? 24 : undefined}} dangerouslySetInnerHTML={{__html: t('seoText2')}}>
                     </TextSection>
                 </div>
-                <div bp={'first@md'}>
-                    // infoblocks
+                <div bp={'first@md 12 4@md'}>
+                    <div bp={'hide show@md'} style={{marginBottom: 24, display: isMobile ? undefined : 'block !important'}}>
+                        <StatsInfoBlock title={t('siteStatsTitle')} stats={[
+                            {
+                                title: t('avgRating'),
+                                value: '4.8',
+                                accent: true
+                            },
+                            {
+                                title: t('totalRatings'),
+                                value: '376'
+                            },
+                            {
+                                title: t('totalReviews'),
+                                value: '152'
+                            }
+                        ]}/>
+                    </div>
+                    <InfoBlock>
+                        <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
+                        <div className={cnb(css.socialBlock)}>
+                            <div>
+                                <img src="/icons/vk.svg" alt={t('vkontakte')}/>
+                            </div>
+                            <div>
+                                <img src="/icons/facebook.svg" alt={t('facebook')}/>
+                            </div>
+                            <div>
+                                <img src="/icons/odnoklassniki.svg" alt={t('odnoklassniki')}/>
+                            </div>
+                            <div>
+                                <img src="/icons/viber.svg" alt={t('viber')}/>
+                            </div>
+                            <div>
+                                <img src="/icons/whatsapp.svg" alt={t('whatsapp')}/>
+                            </div>
+                            <div>
+                                <img src="/icons/tg.svg" alt={t('telegram')}/>
+                            </div>
+                        </div>
+                    </InfoBlock>
                 </div>
             </section>
         )
     }
 }
+
+AboutUsSection.contextType = GlobalContext;
+
+export default AboutUsSection;

@@ -10,7 +10,7 @@ class Footer extends React.Component {
 
         return (
             <footer className={cnb('container', css.footer)}>
-                <img alt={t('siteLogo')} className={css.textLogo} bp={'hide show@md'} src={'/text_logo.svg'}/>
+                <img alt={t('siteLogo')} className={css.textLogo} src={'/text_logo.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
                         <div bp={'grid 4@md 6'}>

@@ -17,18 +17,20 @@ class TextSection extends React.Component {
 
     static propTypes = {
         lines: PropTypes.number,
-        style: PropTypes.object
+        style: PropTypes.object,
+        dangerouslySetInnerHTML: PropTypes.object
     }
 
     static defaultProps = {
         lines: 7,
-        style: {}
+        style: {},
+        dangerouslySetInnerHTML: undefined
     }
 
     render() {
         return (
             <section className={css.text} style={this.props.style}>
-                <div ref={this.state.textRef} style={{
+                <div dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} ref={this.state.textRef} style={{
                     lineHeight: this.lineHeight + 'px',
                     maxHeight: this.state.isOpen ? this.state.textRef.current?.scrollHeight : this.lineHeight * this.props.lines
                 }} className={this.state.isOpen ? css.expanded : ''}>
