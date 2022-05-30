@@ -1,5 +1,5 @@
-import React from "react";
-import {GlobalContext} from "../contexts/Global";
+import React from "react"
+import {GlobalContext} from "../contexts/Global"
 
 export default class Navbar extends React.Component {
     render() {

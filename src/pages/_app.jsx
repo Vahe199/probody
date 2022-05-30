@@ -1,23 +1,18 @@
 import '../styles/globals.scss'
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar.jsx";
-import {GlobalContext} from "../contexts/Global";
-import React from "react";
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar.jsx"
+import {GlobalContext} from "../contexts/Global"
+import React from "react"
 
-// function ProbodyApp({Component, pageProps}) {
-//     const initialValue = {
-//         isLoggedIn: false,
-//         locale: 'en',
-//         theme: 'light',
-//     }
-//
-//     return (<GlobalContext.Provider value={this.state}>
-//             <Navbar/>
-//             <Component {...pageProps} />
-//             <Footer/>
-//         </GlobalContext.Provider>
-//     )
-// }
+import en from '../locales/en'
+import ru from '../locales/ru'
+import kz from '../locales/kz'
+
+const translations = {
+    en,
+    ru,
+    kz
+}
 
 class ProbodyApp extends React.Component {
     constructor(props) {
@@ -25,8 +20,8 @@ class ProbodyApp extends React.Component {
 
         this.state = {
             isLoggedIn: false,
-            locale: 'en',
             theme: 'light',
+            t: key => translations[props.router.locale][key] || translations[props.router.defaultLocale][key] || key,
             setLocale: this.setLocale.bind(this),
             toggleTheme: this.toggleTheme.bind(this)
         }
@@ -50,8 +45,6 @@ class ProbodyApp extends React.Component {
             </GlobalContext.Provider>
         )
     }
-
-
 }
 
-export default ProbodyApp
+export default (ProbodyApp)
