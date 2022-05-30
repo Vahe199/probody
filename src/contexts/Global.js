@@ -2,8 +2,10 @@ import React from "react"
 
 export const GlobalContext = React.createContext({
     isLoggedIn: false,
-    locale: 'en',
     theme: 'light',
-    setLocale: () => {},
-    toggleTheme: () => {},
+    isMobile: false,
+    t: Function.prototype,
+    setLocale: Function.prototype,
+    toggleTheme: Function.prototype,
+    setLoggedIn: Function.prototype
 });

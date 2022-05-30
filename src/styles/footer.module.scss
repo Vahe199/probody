@@ -1,0 +1,42 @@
+@import "variables.scss";
+
+.footer {
+  border-radius: 32px 32px 0 0;
+  background-color: #f7f7f7;
+  padding: 20px;
+  font-size: 16px;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      margin-bottom: 16px;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-primary;
+    font-family: Lack, sans-serif;
+  }
+}
+
+.caption {
+  color: #616161;
+}
+
+.splitter {
+  width: 90%;
+  height: 1px;
+  background: #E4E4E4;
+  margin: 0 auto;
+
+  &::before {
+    content: ' ';
+  }
+}
+
+.textLogo {
+  display: block;
+  margin: 12px 0;
+}

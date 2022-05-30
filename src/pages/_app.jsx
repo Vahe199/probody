@@ -1,3 +1,4 @@
+import window from 'global'
 import '../styles/globals.scss'
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar.jsx"
@@ -21,14 +22,24 @@ class ProbodyApp extends React.Component {
         this.state = {
             isLoggedIn: false,
             theme: 'light',
+            isMobile: false,
             t: key => translations[props.router.locale][key] || translations[props.router.defaultLocale][key] || key,
             setLocale: this.setLocale.bind(this),
-            toggleTheme: this.toggleTheme.bind(this)
+            toggleTheme: this.toggleTheme.bind(this),
+            setLoggedIn: this.setLoggedIn.bind(this),
         }
+    }
+
+    componentDidMount() {
+        this.setState({isMobile: window.innerWidth < 768})
     }
 
     setLocale(locale) {
         this.setState({locale})
+    }
+
+    setLoggedIn(isLoggedIn) {
+        this.setState({isLoggedIn})
     }
 
     toggleTheme() {

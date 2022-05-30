@@ -21,10 +21,6 @@ const VacancySchema = new Schema({
         type: [String],
         enum: ['none', '1-3mon', '3-6mon', '6-12mon', 'more']
     },
-    previewText: {
-        type: String,
-        required: true
-    },
     description: {
         type: String,
         required: true
@@ -43,6 +39,13 @@ const VacancySchema = new Schema({
         isOther: {
             type: Boolean
         }
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    whatsapp: {
+        type: String,
     },
     workDays: {
         type: [String],
