@@ -30,19 +30,23 @@
   margin-bottom: 16px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid #252420;
+  border: 1px solid #9A9A9A;
 
-  &.checked::after {
-    content: " ";
-    display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    animation: fill .3s ease;
-    animation-fill-mode: both;
-    position: absolute;
-    top: 4px;
-    left: 4px;
+  &.checked {
+    border: 1px solid #252420;
+
+    &::after {
+      content: " ";
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      animation: fill .3s ease;
+      animation-fill-mode: both;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
   }
 }
 

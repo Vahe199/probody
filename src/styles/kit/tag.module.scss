@@ -1,0 +1,19 @@
+@import '../variables.scss';
+
+.root {
+  display: inline-flex;
+  border-radius: 8px;
+  padding: 8px 12px 8px 8px;
+}
+
+.disabled {
+  color: #9A9A9A;
+  cursor: not-allowed;
+  background: #fff;
+  border: 1px solid #9A9A9A;
+}
+
+.enabled {
+  background-color: #F6F6F6;
+  color: $text-primary;
+}
