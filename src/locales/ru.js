@@ -27,4 +27,5 @@ export default {
     facebook: 'Facebook',
     odnoklassniki: 'Одноклассники',
     viber: 'Viber',
+    showLess: 'Скрыть',
 }

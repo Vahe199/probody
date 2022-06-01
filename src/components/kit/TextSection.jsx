@@ -11,8 +11,11 @@ class TextSection extends React.Component {
 
         this.state = {
             isOpen: false,
-            textRef: React.createRef()
+            textRef: React.createRef(),
+            showMoreRef: React.createRef()
         }
+
+        this.toggle = this.toggle.bind(this)
     }
 
     static propTypes = {
@@ -27,16 +30,20 @@ class TextSection extends React.Component {
         dangerouslySetInnerHTML: undefined
     }
 
+    toggle() {
+        this.setState({isOpen: !this.state.isOpen})
+    }
+
     render() {
         return (
             <section className={css.text} style={this.props.style}>
                 <div dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} ref={this.state.textRef} style={{
                     lineHeight: this.lineHeight + 'px',
                     maxHeight: this.state.isOpen ? this.state.textRef.current?.scrollHeight : this.lineHeight * this.props.lines
-                }} className={this.state.isOpen ? css.expanded : ''}>
+                }}>
                     {this.props.children}
                 </div>
-                <a className={css.showMore} bp={this.state.isOpen ? 'hide' : ''} onClick={() => this.setState({isOpen: true})}>{this.context.t('showMore')}</a>
+                <a className={css.showMore} onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>
             </section>
         )
     }

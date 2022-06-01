@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.column {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+.caption {
+  color: #616161;
+  font-size: 13px;
+}
+
+.radioItem {
+  display: inline-block;
+
+  span {
+    padding-left: 8px;
+  }
+}
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 24px;
+  margin-bottom: 16px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #252420;
+
+  &.checked::after {
+    content: " ";
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    animation: fill .3s ease;
+    animation-fill-mode: both;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+}
+
+@keyframes fill {
+  to {
+    background-color: #252420;
+  }
+}

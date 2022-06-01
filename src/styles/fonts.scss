@@ -4,6 +4,7 @@
   url('../fonts/lack_regular.woff') format('woff'),
   url('../fonts/lack_regular.ttf') format('truetype');
   font-weight: normal;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -11,5 +12,6 @@
   font-family: 'Lato';
   src: url('../fonts/LatoRegular.ttf') format('truetype');
   font-weight: normal;
+  font-display: swap;
   font-style: normal;
 }

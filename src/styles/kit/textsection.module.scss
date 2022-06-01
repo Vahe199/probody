@@ -9,10 +9,6 @@
     overflow: hidden;
     transition: max-height 0.3s ease;
     margin-bottom: 12px;
-
-    &.expanded {
-      margin-bottom: 0;
-    }
   }
 }
 
@@ -21,4 +17,7 @@
   cursor: pointer;
   font-family: Lack, sans-serif;
   border-bottom: 1px solid $bg-primary;
+  transition: height 0.3s ease;
+  overflow: hidden;
+  display: inline-block;
 }
