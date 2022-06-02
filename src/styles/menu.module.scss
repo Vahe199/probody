@@ -1,0 +1,26 @@
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.list {
+  min-width: 250px;
+
+  li {
+    font-size: 20px;
+    padding: 16px 0;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #E4E4E4;
+    }
+  }
+}

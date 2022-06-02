@@ -9,6 +9,8 @@ import en from '../locales/en'
 import ru from '../locales/ru'
 import kz from '../locales/kz'
 import AboutUsSection from "../components/AboutUsSection.jsx";
+import Cookie from "../helpers/Cookie.js";
+import {DateTime} from "luxon";
 
 const translations = {
     en,
@@ -29,14 +31,27 @@ class ProbodyApp extends React.Component {
             toggleTheme: this.toggleTheme.bind(this),
             setLoggedIn: this.setLoggedIn.bind(this),
         }
+
+        this.computeIsMobile = this.computeIsMobile.bind(this)
     }
 
     componentDidMount() {
-        this.setState({isMobile: window.innerWidth < 768})
+        this.computeIsMobile()
+
+        window.addEventListener('resize', this.computeIsMobile);
+    }
+
+    computeIsMobile() {
+        this.setState({isMobile: window.document.body.clientWidth < 768})
     }
 
     setLocale(locale) {
-        this.setState({locale})
+        const { pathname, asPath, query } = this.props.router
+
+        this.props.router.push({ pathname, query }, asPath, { locale });
+        (new Cookie('NEXT_LOCALE', locale, {
+            expires: DateTime.now().plus({years: 10}).toJSDate()
+        })).set()
     }
 
     setLoggedIn(isLoggedIn) {
@@ -48,11 +63,13 @@ class ProbodyApp extends React.Component {
     }
 
     render() {
-        const {Component, pageProps} = this.props;
+        const {Component: Page, pageProps} = this.props;
 
         return (<GlobalContext.Provider value={this.state}>
                 <Navbar/>
-                <Component {...pageProps} />
+                <div className={'container'}>
+                    <Page {...pageProps} />
+                </div>
                 <AboutUsSection />
                 <Footer/>
             </GlobalContext.Provider>

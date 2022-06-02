@@ -13,3 +13,16 @@
 .vertical-center {
   align-items: center;
 }
+
+.non-selectable {
+  user-select: none;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+  display: flex;
+}

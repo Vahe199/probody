@@ -9,9 +9,10 @@ class Icon extends React.Component {
 
     render() {
         return <i className={css.icon} style={{
-            '-webkit-mask-image': `url(/icons/${this.props.name}.svg)`,
+            WebkitMaskImage: `url(/icons/${this.props.name}.svg)`,
             maskImage: `url(/icons/${this.props.name}.svg)`,
-            backgroundColor: 'currentColor'
+            backgroundColor: 'currentColor',
+            ...this.props.style
         }}>&nbsp;</i>
     }
 }

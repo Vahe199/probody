@@ -6,10 +6,10 @@ import Link from "next/link.js";
 
 class Footer extends React.Component {
     render() {
-        const {isMobile, t} = this.context;
+        const {t} = this.context;
 
         return (
-            <footer className={cnb('container', css.footer)}>
+            <footer className={cnb('container', 'non-selectable', css.footer)}>
                 <img alt={t('siteLogo')} className={css.textLogo} src={'/text_logo.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>

@@ -1,0 +1,29 @@
+@import '../variables.scss';
+
+.massageList {
+  margin: 12px 0 0 16px;
+  padding-bottom: 10px;
+
+  li {
+    color: #9A9A9A;
+
+    &::before {
+      content: "\2022";
+      color: $bg-primary;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+  }
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.secondSection i {
+  color: #9A9A9A;
+}

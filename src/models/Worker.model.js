@@ -130,6 +130,24 @@ const WorkerSchema = new Schema({
             enum: [15, 30, 60, 90],
             required: true
         },
+        classicCnt: {
+            type: Number,
+            min: 1,
+            max: 3,
+            required: true
+        },
+        eroticCnt: {
+            type: Number,
+            min: 1,
+            max: 3,
+            required: true
+        },
+        relaxCnt: {
+            type: Number,
+            min: 1,
+            max: 3,
+            required: true
+        },
         price: {
             type: Number,
             required: true

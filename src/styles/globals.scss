@@ -7,10 +7,15 @@ $base-font-size: 16px;
 $heading-scale: 8;
 
 :root {
+  -webkit-tap-highlight-color: transparent;
   font-family: Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -22,7 +27,16 @@ body {
 }
 
 .number-font {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif !important;
+}
+
+.lack {
+  font-family: Lack, sans-serif;
+}
+
+.subtitle2 {
+  font-size: 20px;
+  font-family: Lack, sans-serif;
 }
 
 @for $i from 1 through 6 {

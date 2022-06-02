@@ -12,10 +12,19 @@ class TextSection extends React.Component {
         this.state = {
             isOpen: false,
             textRef: React.createRef(),
-            showMoreRef: React.createRef()
+            showMoreRef: React.createRef(),
+            needsShowMoreButton: false,
         }
 
         this.toggle = this.toggle.bind(this)
+    }
+
+    componentDidMount() {
+        const needsShowMoreButton = !this.state.isOpen && this.state.textRef.current?.scrollHeight <= this.state.textRef.current?.clientHeight
+
+        this.setState({
+            needsShowMoreButton
+        })
     }
 
     static propTypes = {
@@ -43,7 +52,7 @@ class TextSection extends React.Component {
                 }}>
                     {this.props.children}
                 </div>
-                <a className={css.showMore} onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>
+                {this.state.needsShowMoreButton ? [] : <a className={css.showMore} onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>}
             </section>
         )
     }
