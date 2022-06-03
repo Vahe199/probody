@@ -59,10 +59,10 @@ class AboutUsSection extends React.Component {
                         <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
                         <div className={cnb(css.socialBlock)}>
                             <div>
-                                <img src="/icons/vk.svg" alt={t('vk')}/>
+                                <img src="/icons/vk_light.svg" alt={t('vk')}/>
                             </div>
                             <div>
-                                <img src="/icons/fb.svg" alt={t('fb')}/>
+                                <img src="/icons/fb_light.svg" alt={t('fb')}/>
                             </div>
                             <div>
                                 <img src="/icons/ok.svg" alt={t('ok')}/>
@@ -71,7 +71,7 @@ class AboutUsSection extends React.Component {
                                 <img src="/icons/vi.svg" alt={t('vi')}/>
                             </div>
                             <div>
-                                <img src="/icons/wa.svg" alt={t('wa')}/>
+                                <img src="/icons/wa_light.svg" alt={t('wa')}/>
                             </div>
                             <div>
                                 <img src="/icons/tg.svg" alt={t('tg')}/>
