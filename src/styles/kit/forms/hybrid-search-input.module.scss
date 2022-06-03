@@ -1,37 +1,32 @@
 .root {
-    border: 2px solid #ccc;
-    padding: 16px;
-    border-radius: 16px;
+  border: 2px solid #ccc;
+  padding: 16px;
+  border-radius: 16px;
 }
 
 .inputGroup {
-    align-items: center;
+  align-items: center;
 
-    i:last-child {
-        color: #9A9A9A;
-        width: 12px;
-        height: 12px;
-        margin-top: -3px;
+  i:last-child {
+    color: #9A9A9A;
+    width: 12px;
+    height: 12px;
+    margin-top: -3px;
+  }
+
+  input {
+    margin: 0 8px;
+
+    &::placeholder {
+      color: #9A9A9A;
     }
-
-    input {
-        border: none;
-        margin: 0 8px;
-        min-width: 0;
-        padding: 0;
-        font-size: 16px;
-        color: #333;
-
-        &:focus {
-            outline: none;
-        }
-    }
+  }
 }
 
 .rightSplitter {
-    width: 1px;
-    margin: 0 8px;
-    display: inline-block;
-    height: 80%;
-    background: #ccc;
+  width: 1px;
+  margin: 0 8px;
+  display: inline-block;
+  height: 80%;
+  background: #ccc;
 }

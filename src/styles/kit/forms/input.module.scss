@@ -1,0 +1,43 @@
+@import "../../variables.scss";
+
+.inputRoot {
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  padding: 16px 20px;
+  transition: border-color 0.2s linear, background-color 0.2s linear;
+
+  .label {
+    font-size: 12px;
+    user-select: none;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  &:focus-within {
+    border-color: $text-primary;
+  }
+
+  .errored {
+    border-color: $bg-danger;
+  }
+
+  &.locked {
+    &, input {
+      background: #f7f7f7;
+    }
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+  }
+}
+
+.editIcon {
+  cursor: pointer;
+  color: $text-primary;
+  margin-top: -5px;
+}

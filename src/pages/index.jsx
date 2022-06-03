@@ -1,8 +1,8 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import TagCard from "../components/kit/TagCard";
-import ReviewBlock from "../components/ReviewBlock";
+import TextInput from "../components/kit/Form/TextInput";
+import TextArea from "../components/kit/Form/TextArea";
 
 class Home extends React.Component {
   render() {
@@ -14,7 +14,11 @@ class Home extends React.Component {
             <p className="subtitle additional-text">Привет 👋</p>
             <h1>Мы подобрали массажные салоны в Алматы</h1>
             <br/>
-            <ReviewBlock service={5} name={'Марат'} avg={4.7} interior={4} massage={5} text={'Все отлично. Котики супер, будем брать еще. Всем рекомендую, сервис на высоте!'} dateCreated={new Date('1.05.2022')} />
+            <div style={{maxWidth: 330}}>
+                <TextArea label={'Метка'} max={100} placeholder={'Text'} />
+                <br/>
+                <TextInput label={'Метка'} placeholder={'Text'} value={'Какой-то текст'} lock={true} />
+            </div>
 
           <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
             <br/><br/>
