@@ -50,5 +50,9 @@ export default {
     years: 'лет',
     kg: 'кг',
     cm: 'см',
-    size: 'размер'
+    size: 'размер',
+    generalGrade: 'общая оценка',
+    massage: 'массаж',
+    service: 'сервис',
+    interior: 'интерьер',
 }
