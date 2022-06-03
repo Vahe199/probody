@@ -1,9 +1,7 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import Program from "../components/kit/Program.jsx";
-import SocialBlock from "../components/kit/SocialBlock.jsx";
-import ParameterView from "../components/kit/ParameterView.jsx";
+import TagCard from "../components/kit/TagCard";
 
 class Home extends React.Component {
   render() {
@@ -14,9 +12,13 @@ class Home extends React.Component {
         <div>
             <p className="subtitle additional-text">Привет 👋</p>
             <h1>Мы подобрали массажные салоны в Алматы</h1>
-            <Program title={'Экспресс'} description={'Среди любителей подобного времяпровождения есть самые разные мужчины – студенты'} price={12000} duration={30} classicCnt={1} eroticCnt={1} relaxCnt={1} />
-            <ParameterView height={156} age={24} bust={1.5} eyes={'голубой'} hair={'блондинка'} weight={52} />
             <br/>
+            <div className="flex">
+                <TagCard title={'оценка салона'} value={4.8} accent={true} dark={true}/>
+                <TagCard title={'оценок'} value={125} />
+                <TagCard title={'отзывов'} value={12} />
+            </div>
+
           <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
             <br/><br/>
             <p>Convict blenny burrowing goby ladyfish smalltooth sawfish. Shortnose greeneye greeneye Blenny peacock flounder? Pacific salmon driftwood catfish American sole; Sundaland noodlefish whiting sand diver hake; cownose ray char. Pearl danio boga, bonefish alligatorfish basking shark redtooth triggerfish emperor angelfish dartfish beardfish butterfly ray pejerrey ghost fish noodlefish sea dragon quillback. Píntano sauger, paradise fish archerfish: fusilier fish; tadpole fish telescopefish!</p>

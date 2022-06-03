@@ -1,0 +1,31 @@
+@import "../variables.scss";
+
+.root {
+  border-radius: 32px;
+  background: #f7f7f7;
+  padding: 16px;
+  min-width: 104px;
+
+  &.dark {
+    background: $text-primary;
+
+    .value {
+      color: white;
+    }
+  }
+}
+
+.label {
+    font-size: 13px;
+    color: #9A9A9A;
+    margin-bottom: 4px;
+}
+
+.value {
+  font-size: 20px;
+  color: $text-primary;
+
+  &.accent {
+    color: $bg-primary !important;
+  }
+}
