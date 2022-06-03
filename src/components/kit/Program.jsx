@@ -21,7 +21,7 @@ class Program extends React.Component {
     render() {
         const {t} = this.context
 
-        return <InfoBlock style={{maxWidth: 400}}>
+        return <InfoBlock style={{maxWidth: 425}}>
             <p className="subtitle2" style={{marginBottom: 16}}>{this.props.title}</p>
             <p>{this.props.description}</p>
             <ul className={css.massageList}>

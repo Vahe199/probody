@@ -88,11 +88,11 @@ const WorkerSchema = new Schema({
         },
         hair: {
             type: String,
-            enum: ["brunette", "blonde", "grey", "redhead", "fair", "brown", "other"]
+            enum: ["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другое"]
         },
         eyes: {
             type: String,
-            enum: ["blue", "lightblue", "green", "hazel", "grey", "black", "yellow", "other"]
+            enum: ["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"]
         },
         age: {
             type: Number,

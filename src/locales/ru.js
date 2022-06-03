@@ -40,5 +40,15 @@ export default {
     relaxMassage: 'релакс',
     apply: 'Записаться',
     minutesShort: 'мин',
-    social: 'Социальные сети'
+    social: 'Социальные сети',
+    age: 'возраст',
+    weight: 'вес',
+    height: 'рост',
+    bust: 'бюст',
+    hair: 'волосы',
+    eyes: 'глаза',
+    years: 'лет',
+    kg: 'кг',
+    cm: 'см',
+    size: 'размер'
 }
