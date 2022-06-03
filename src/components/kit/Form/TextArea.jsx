@@ -54,6 +54,7 @@ export default class TextArea extends React.Component {
         lock: PropTypes.bool,
         value: PropTypes.string,
         lines: PropTypes.number,
+        variant: PropTypes.string, // 'outlined' || 'underline'
         onUpdate: PropTypes.func,
         max: PropTypes.number,
         placeholder: PropTypes.string.isRequired
@@ -61,14 +62,15 @@ export default class TextArea extends React.Component {
 
     static defaultProps = {
         lock: false,
+        variant: 'outlined',
         lines: 5,
-        maxLength: 100,
+        max: 100,
         value: ''
     }
 
     render() {
         return <div>
-            <div className={cnb(css.inputRoot, this.state.locked ? css.locked : '')}>
+            <div className={cnb(css.inputRoot, this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
                     <textarea rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}

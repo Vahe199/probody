@@ -1,9 +1,21 @@
 @import "../../variables.scss";
 
 .inputRoot {
-  border-radius: 16px;
-  border: 1px solid #ccc;
-  padding: 16px 20px;
+  &.outlined {
+    border-radius: 16px;
+    border: 1px solid #ccc;
+    padding: 16px 20px;
+  }
+
+  &.underline {
+    border-bottom: 1px solid #ccc;
+    padding: 16px 0;
+
+    .label {
+      color: #9A9A9A;
+    }
+  }
+
   transition: border-color 0.2s linear, background-color 0.2s linear;
 
   .label {
@@ -20,8 +32,21 @@
     border-color: $text-primary;
   }
 
-  .errored {
+  &.errored {
     border-color: $bg-danger;
+
+    & + span {
+      font-size: 12px;
+      user-select: none;
+      color: $bg-danger;
+
+      i {
+        width: 14px;
+        height: 14px;
+        vertical-align: text-top;
+        margin-right: 8px;
+      }
+    }
   }
 
   &.locked {
@@ -40,4 +65,21 @@
   cursor: pointer;
   color: $text-primary;
   margin-top: -5px;
+}
+
+.closeIcon {
+  cursor: pointer;
+  color: $text-primary;
+  margin-top: 12px;
+  padding-right: 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.hideIcon {
+  width: 20px;
+  color: $text-primary;
+  margin-right: 12px;
+  height: 18px;
+  margin-top: 8px;
 }

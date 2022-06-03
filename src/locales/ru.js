@@ -55,4 +55,7 @@ export default {
     massage: 'массаж',
     service: 'сервис',
     interior: 'интерьер',
+    incorrectPhone: 'Номер телефона введен некорректно',
+    incorrectEmail: 'Адрес электронной почты введен некорректно',
+    shortPassword: 'Пароль должен быть не менее 6 символов',
 }
