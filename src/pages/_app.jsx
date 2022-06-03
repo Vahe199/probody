@@ -10,7 +10,7 @@ import ru from '../locales/ru'
 import kz from '../locales/kz'
 import AboutUsSection from "../components/AboutUsSection.jsx";
 import Cookie from "../helpers/Cookie.js";
-import {DateTime} from "luxon";
+import {DateTime, Settings} from "luxon";
 
 const translations = {
     en,
@@ -38,6 +38,8 @@ class ProbodyApp extends React.Component {
     componentDidMount() {
         this.computeIsMobile()
 
+        Settings.defaultLocale = this.props.router.locale
+
         window.addEventListener('resize', this.computeIsMobile);
     }
 
@@ -47,6 +49,8 @@ class ProbodyApp extends React.Component {
 
     setLocale(locale) {
         const { pathname, asPath, query } = this.props.router
+
+        Settings.defaultLocale = locale
 
         this.props.router.push({ pathname, query }, asPath, { locale });
         (new Cookie('NEXT_LOCALE', locale, {
