@@ -59,22 +59,22 @@ class AboutUsSection extends React.Component {
                         <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
                         <div className={cnb(css.socialBlock)}>
                             <div>
-                                <img src="/icons/vk.svg" alt={t('vkontakte')}/>
+                                <img src="/icons/vk.svg" alt={t('vk')}/>
                             </div>
                             <div>
-                                <img src="/icons/facebook.svg" alt={t('facebook')}/>
+                                <img src="/icons/fb.svg" alt={t('fb')}/>
                             </div>
                             <div>
-                                <img src="/icons/odnoklassniki.svg" alt={t('odnoklassniki')}/>
+                                <img src="/icons/ok.svg" alt={t('ok')}/>
                             </div>
                             <div>
-                                <img src="/icons/viber.svg" alt={t('viber')}/>
+                                <img src="/icons/vi.svg" alt={t('vi')}/>
                             </div>
                             <div>
-                                <img src="/icons/whatsapp.svg" alt={t('whatsapp')}/>
+                                <img src="/icons/wa.svg" alt={t('wa')}/>
                             </div>
                             <div>
-                                <img src="/icons/tg.svg" alt={t('telegram')}/>
+                                <img src="/icons/tg.svg" alt={t('tg')}/>
                             </div>
                         </div>
                     </InfoBlock>

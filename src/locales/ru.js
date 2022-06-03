@@ -22,11 +22,11 @@ export default {
     totalRatings: 'всего оценок',
     totalReviews: 'всего отзывов',
     shareInSocial: 'Поделитесь в социальных сетях',
-    telegram: 'Telegram',
-    vkontakte: 'ВКонтакте',
-    facebook: 'Facebook',
-    odnoklassniki: 'Одноклассники',
-    viber: 'Viber',
+    tg: 'Telegram',
+    vk: 'ВКонтакте',
+    fb: 'Facebook',
+    ok: 'Одноклассники',
+    vi: 'Viber',
     showLess: 'Скрыть',
     toLogIn: 'Войти',
     registration: 'Регистрация',
@@ -40,4 +40,5 @@ export default {
     relaxMassage: 'релакс',
     apply: 'Записаться',
     minutesShort: 'мин',
+    social: 'Социальные сети'
 }
