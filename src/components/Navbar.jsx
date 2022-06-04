@@ -15,7 +15,7 @@ class Navbar extends React.Component {
         return this.context.isMobile ?
             <nav style={{justifyContent: 'space-around'}} className={cnb(css.navbar, css.mobile)} bp={'flex'}>
                 <ThemeSwitcher/>
-                <Link href={'/'}><img src='/text_logo.svg' alt={'logo'}/></Link>
+                <Link href={'/'}><img className={'cursor-pointer'} src='/text_logo.svg' alt={'logo'}/></Link>
                 <div className={'flex'}>
                     <LanguageSelector/>
                     <div style={{marginLeft: 8}}><Menu /></div>
@@ -26,7 +26,7 @@ class Navbar extends React.Component {
                 display: 'flex !important',
                 borderBottom: '1px solid #E4E4E4'
             }} className={cnb('container', css.navbar, 'non-selectable')} bp={'grid'}>
-                <img src='/text_logo.svg' alt={'logo'}/>
+                <Link href={'/'}><img className={'cursor-pointer'} src='/text_logo.svg' alt={'logo'}/></Link>
                 <div bp={'fill'} style={{margin: '0 16px'}}>
                     <HybridSearchInput searchPlaceholder={t('searchPlaceholder')} geoPlaceholder={t('geoPlaceholder')} />
                 </div>

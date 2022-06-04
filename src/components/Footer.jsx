@@ -10,7 +10,7 @@ class Footer extends React.Component {
 
         return (
             <footer className={cnb('container', 'non-selectable', css.footer)}>
-                <img alt={t('siteLogo')} className={css.textLogo} src={'/text_logo.svg'}/>
+                <img alt={t('siteLogo')} className={cnb('cursor-pointer', css.textLogo)} src={'/text_logo.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
                         <div bp={'grid 4@md 6'}>
@@ -25,7 +25,7 @@ class Footer extends React.Component {
                         </div>
 
                         <div bp={'hide@md'} style={{marginTop: 24}}>
-                            <a href={'/'}><span className={css.caption}>{t('privacyPolicy')}</span></a>
+                            <Link href={'/'}><span className={cnb(css.caption, 'cursor-pointer')}>{t('privacyPolicy')}</span></Link>
                         </div>
                     </div>
                     <div bp={'hide@md 12@sm'}>
@@ -97,14 +97,14 @@ class Footer extends React.Component {
                 <div style={{marginTop: 12}} bp={'grid'}>
                     <div bp={'hide@md 12'}>
                         <span className={css.caption}>{t('whatsapp')}</span>
-                        <Link href={'tel:+77629878791'}><h1 className={'number-font'}>+7 (762) 987-87-91</h1></Link>
+                        <Link href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762) 987-87-91</h1></Link>
                     </div>
                     <div bp={'4@md 12'}>
-                        <Link href={'mailto:mail@gmail.com'}><h1 style={{marginBottom: 12}}>mail@gmail.com</h1></Link>
+                        <Link href={'mailto:mail@gmail.com'}><h1 className={'cursor-pointer'} style={{marginBottom: 12}}>mail@gmail.com</h1></Link>
                         <span className={css.caption}>{t('allRightsReserved')}</span>
                     </div>
                     <div bp={'8@md hide show@md'} style={{marginTop: 12}}>
-                        <a href={'/'}><span className={css.caption}>{t('privacyPolicy')}</span></a>
+                        <Link href={'/'}><span className={cnb(css.caption, 'cursor-pointer')}>{t('privacyPolicy')}</span></Link>
                     </div>
                 </div>
             </footer>
