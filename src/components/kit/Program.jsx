@@ -6,6 +6,7 @@ import {GlobalContext} from "../../contexts/Global.js";
 import Button from "./Button.jsx";
 import Icon from "./Icon.jsx";
 import {cnb} from "cnbuilder";
+import {formatPrice} from "../../helpers/String.js";
 
 class Program extends React.Component {
     static propTypes = {
@@ -43,7 +44,7 @@ class Program extends React.Component {
                     </div>
                     <div className={'items-center'}>
                         <Icon style={{width: 14, height: 14, marginRight: 8}} name={'kzt'} />
-                        <p className={'subtitle2 number-font'}>{this.props.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</p>
+                        <p className={'subtitle2 number-font'}>{formatPrice(this.props.price)}</p>
                     </div>
                 </div>
                 <div className={css.flexEnd}>

@@ -29,3 +29,11 @@
     color: $bg-primary !important;
   }
 }
+
+.arrowDown {
+  color: $bg-primary !important;
+  width: 22px !important;
+  height: 14px !important;
+  cursor: pointer;
+  transform: rotate(90deg);
+}

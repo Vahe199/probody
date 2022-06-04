@@ -1,7 +1,7 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import TextInput from "../components/kit/Form/TextInput";
+import TagCard from "../components/kit/TagCard";
 
 class Home extends React.Component {
   render() {
@@ -14,9 +14,7 @@ class Home extends React.Component {
             <h1>Мы подобрали массажные салоны в Алматы</h1>
             <br/>
             <div style={{maxWidth: 330}}>
-                <TextInput type={'password'} variant={'underline'} label={'Метка'} placeholder={'Text'} />
-                <br/>
-                <TextInput label={'Метка'} placeholder={'Text'} value={'Какой-то текст'} lock={true} />
+                <TagCard dark={true} title={'количество комнат'} value={12} link={'https://google.com'} />
             </div>
 
           <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
