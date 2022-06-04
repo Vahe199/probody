@@ -30,6 +30,7 @@ input, textarea, select {
   &::placeholder {
     color: #ccc;
     font-family: Lato, sans-serif;
+    user-select: none;
   }
 }
 

@@ -26,6 +26,14 @@
   justify-content: space-around;
 }
 
+.justify-end {
+    justify-content: flex-end;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
 .items-center {
   align-items: center;
   display: flex;

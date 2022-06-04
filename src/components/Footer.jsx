@@ -21,7 +21,7 @@ class Footer extends React.Component {
                             <div><Link href={'/'}>{t('salonAds')}</Link></div>
                             <div><Link href={'/'}>{t('salonVacancies')}</Link></div>
                             <div><Link href={'/'}>{t('records')}</Link></div>
-                            <div><Link href={'/'}>{t('addSalon')}</Link></div>
+                            <div><Link href={'/salon/new'}>{t('addSalon')}</Link></div>
                         </div>
 
                         <div bp={'hide@md'} style={{marginTop: 24}}>

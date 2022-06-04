@@ -9,8 +9,9 @@ class Button extends React.Component {
         color: PropTypes.string, // primary | secondary | tertiary | success | danger
         iconLeft: PropTypes.string,
         iconRight: PropTypes.string,
-        size: PropTypes.string, // small | medium | large
-        isDisabled: PropTypes.bool
+        size: PropTypes.string, // small | medium | large | fill
+        isDisabled: PropTypes.bool,
+        onClick: PropTypes.func,
     }
 
     static defaultProps = {
@@ -18,7 +19,7 @@ class Button extends React.Component {
         bordered: false,
         icon: null,
         size: 'medium',
-        isDisabled: false
+        isDisabled: false,
     }
 
     render() {
@@ -35,7 +36,9 @@ class Button extends React.Component {
         }
 
         return <button
-            className={cnb(css.btn, css[this.props.size], css[this.props.color], this.props.isDisabled ? css.disabled : '')}>
+            onClick={this.props.onClick}
+            style={this.props.style}
+            className={cnb('non-selectable', css.btn, css[this.props.size], css[this.props.color], this.props.isDisabled ? css.disabled : '')}>
             {this.props.iconLeft && <Icon name={this.props.iconLeft}/>}
             <span className={'va-middle'} style={textMargins}>{this.props.children}</span>
             {this.props.iconRight && <Icon name={this.props.iconRight}/>}
