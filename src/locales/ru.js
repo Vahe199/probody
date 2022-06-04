@@ -64,4 +64,10 @@ export default {
     howYourSalonNamed: 'Как называется ваш салон',
     pass: 'Далее',
     finish: 'Завершить',
+    city: 'Город',
+    inWhichCity: 'В каком городе',
+    streetAndAddress: 'Улица и дом',
+    salonAddress: 'Адрес салона',
+    typeYourPhoneNumber: 'Введите Ваш номер телефона',
+    phone: 'Телефон',
 }

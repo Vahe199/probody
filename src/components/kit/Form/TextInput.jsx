@@ -53,7 +53,7 @@ export default class TextInput extends React.Component {
             this.validateInput(e.target.value)
         }
 
-        if (!this.props.value) {
+        if (this.props.value === undefined) {
             this.setState({value:
             this.props.type === 'phone' ? formatIncompletePhoneNumber(e.target.value, 'KZ') : e.target.value})
         } else {

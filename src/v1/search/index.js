@@ -5,17 +5,21 @@ import Lead from "../../models/Lead.model.js"
 import Messenger from "../../models/Messenger.model.js"
 import Service from "../../models/Service.model.js"
 import {parsePhoneNumber} from "libphonenumber-js";
+import Region from "../../models/Region.model.js";
 
 const router = express.Router()
 
-router.post('/region', async (req, res) => {
-    if (!req.body.query || req.body.query.length < 3) {
-        return res.status(422).json({
-            message: 'invalidQueryLength'
-        })
-    }
-
-    res.json(await Search.findRegion(req.body.query + '*', 7, 0))
+// router.post('/region', async (req, res) => {
+//     if (!req.body.query || req.body.query.length < 3) {
+//         return res.status(422).json({
+//             message: 'invalidQueryLength'
+//         })
+//     }
+//
+//     res.json(await Search.findRegion(req.body.query + '*', 7, 0))
+// })
+router.get('/region', apicache.middleware('15 minutes'), async (req, res) => {
+    res.json(await Region.find({}))
 })
 
 router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {

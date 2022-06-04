@@ -42,7 +42,7 @@ export default class TextArea extends React.Component {
             return
         }
 
-        if (!this.props.value) {
+        if (this.props.value === undefined) {
             this.setState({value: e.target.value})
         } else {
             this.props.onUpdate(e.target.value)

@@ -16,7 +16,7 @@ export default class Popup extends React.Component {
 
     render() {
         return <div className={cnb(css.root, this.props.fullSize ? css.fullsize : '')}>
-            <div className={cnb(css.popup, this.props.isOpen ? css.open : '', this.props.fullSize ? css.fullsize : '')}>{this.props.children}</div>
+            <div style={this.props.style} className={cnb(css.popup, this.props.isOpen ? css.open : '', this.props.fullSize ? css.fullsize : '')}>{this.props.children}</div>
         </div>
     }
 }

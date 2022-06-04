@@ -1,5 +1,4 @@
 import Worker from "../models/Worker.model.js"
-import Region from "../models/Region.model.js"
 import RedisHelper from "./RedisHelper.js"
 
 const BATCHSIZE = 100;
@@ -7,7 +6,7 @@ const BATCHSIZE = 100;
 export default class Search {
     static async fullSync() {
         await Search.syncWorkers()
-        await Search.syncRegions()
+        // await Search.syncRegions()
     }
 
     static async addWorker(keyPrefix, workerId, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
@@ -61,44 +60,44 @@ export default class Search {
         console.log('Synced all workers with RediSearch')
     }
 
-    static async syncRegions() {
-        const PREFIX = "search:region:"
-        let regCount = await Region.count(),
-            offset = 0
-
-        while (offset < regCount) {
-            let regions = await Region.find()
-                .skip(offset)
-                .limit(BATCHSIZE)
-
-            for (let region of regions) {
-                await RedisHelper.hset(PREFIX + region._id,
-                    "name", region.name.toLowerCase()
-                )
-            }
-
-            offset += BATCHSIZE
-            console.log('next batch')
-        }
-
-        console.log('Synced all workers with RediSearch')
-    }
+    // static async syncRegions() {
+    //     const PREFIX = "search:region:"
+    //     let regCount = await Region.count(),
+    //         offset = 0
+    //
+    //     while (offset < regCount) {
+    //         let regions = await Region.find()
+    //             .skip(offset)
+    //             .limit(BATCHSIZE)
+    //
+    //         for (let region of regions) {
+    //             await RedisHelper.hset(PREFIX + region._id,
+    //                 "name", region.name.toLowerCase()
+    //             )
+    //         }
+    //
+    //         offset += BATCHSIZE
+    //         console.log('next batch')
+    //     }
+    //
+    //     console.log('Synced all regions with RediSearch')
+    // }
 
     static async createIndexes() {
-        await Search.createRegionIndex()
+        // await Search.createRegionIndex()
         await Search.createWorkerIndex()
     }
 
-    static async createRegionIndex() {
-        try {
-            await RedisHelper.createIndex("idx:region", "search:region:", {
-                name: "TEXT"
-            })
-        } catch (e) {
-        }
-
-        console.log('Created region index')
-    }
+    // static async createRegionIndex() {
+    //     try {
+    //         await RedisHelper.createIndex("idx:region", "search:region:", {
+    //             name: "TEXT"
+    //         })
+    //     } catch (e) {
+    //     }
+    //
+    //     console.log('Created region index')
+    // }
 
     static async createWorkerIndex() {
         try {
@@ -120,17 +119,17 @@ export default class Search {
         console.log('Created worker index')
     }
 
-    static async findRegion(queryString, limit, offset) {
-        const searchResults = await RedisHelper.ftSearch('idx:region', queryString, limit, offset),
-            searchResultsIds = searchResults
-                .splice(1)
-                .map(key => key.split(':')[2])
-
-        return {
-            count: searchResults[0],
-            results: await Region.find({_id: {$in: searchResultsIds}})
-        }
-    }
+    // static async findRegion(queryString, limit, offset) {
+    //     const searchResults = await RedisHelper.ftSearch('idx:region', queryString, limit, offset),
+    //         searchResultsIds = searchResults
+    //             .splice(1)
+    //             .map(key => key.split(':')[2])
+    //
+    //     return {
+    //         count: searchResults[0],
+    //         results: await Region.find({_id: {$in: searchResultsIds}})
+    //     }
+    // }
 
     static async findWorker(queryString, isMapView, limit, offset) {
         const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
