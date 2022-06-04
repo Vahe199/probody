@@ -17,7 +17,8 @@ export default class TextInput extends React.Component {
             errorMsg: '',
             locked: false,
             visible: false,
-            value: ''
+            value: '',
+            success: false
         }
 
         this.toggleLock = this.toggleLock.bind(this)
@@ -64,31 +65,35 @@ export default class TextInput extends React.Component {
         this.setState({visible: !this.state.visible})
     }
 
-    validateInput() {
+    async validateInput(e) {
         switch (this.props.type) {
             case 'email':
                 if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.value)) {
-                    this.setState({errored: true, errorMsg: this.context.t('incorrectEmail')})
+                    await this.setState({errored: true, success: false, errorMsg: this.context.t('incorrectEmail')})
                 } else {
-                    this.setState({errored: false})
+                    await this.setState({errored: false})
                 }
 
                 break
 
             case 'phone':
                 if (!isValidPhoneNumber(this.state.value, 'KZ')) {
-                    this.setState({errored: true, errorMsg: this.context.t('incorrectPhone')})
+                    await this.setState({errored: true, success: false, errorMsg: this.context.t('incorrectPhone')})
                 } else {
-                    this.setState({errored: false})
+                    await this.setState({errored: false})
                 }
                 break
 
             case 'password':
                 if (this.state.value.length < 6) {
-                    this.setState({errored: true, errorMsg: this.context.t('shortPassword')})
+                    await this.setState({errored: true, success: false, errorMsg: this.context.t('shortPassword')})
                 } else {
-                    this.setState({errored: false})
+                    await this.setState({errored: false})
                 }
+        }
+
+        if (e && !this.state.errored && this.state.value.length > 0) {
+            this.setState({success: true})
         }
     }
 
@@ -115,7 +120,7 @@ export default class TextInput extends React.Component {
 
     render() {
         return <div>
-            <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+            <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
                     <input onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />
