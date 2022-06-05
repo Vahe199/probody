@@ -18,6 +18,8 @@ export default class Checkbox extends React.Component {
         reverse: PropTypes.bool,
         icon: PropTypes.string,
         name: PropTypes.string,
+        value: PropTypes.bool,
+        onUpdate: PropTypes.func
     }
 
     static defaultProps = {
@@ -25,10 +27,26 @@ export default class Checkbox extends React.Component {
         icon: undefined
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.value !== prevProps.value) {
+            this.setState({checked: this.props.value})
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.value) {
+            this.setState({checked: this.props.value})
+        }
+    }
+
     toggle() {
-        this.setState({
-            checked: !this.state.checked
-        })
+        if (this.props.value === undefined) {
+            this.setState({
+                    checked: !this.state.checked
+                })
+        } else {
+            this.props.onUpdate(!this.state.checked)
+        }
     }
 
     render() {

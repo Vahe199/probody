@@ -32,7 +32,7 @@ export default class Stepper extends React.Component {
         return <div>
             <div>
                 {isMobile ? (
-                    <div style={{marginTop: -40}}>
+                    <div style={{marginTop: -40, userSelect: 'none'}}>
                         <ProgressBar mobile={true} value={this.props.step / this.props.steps.length} />
 
                         <div style={{margin: '0 16px'}}>
@@ -41,7 +41,7 @@ export default class Stepper extends React.Component {
                 ) : (
                     <div bp={'grid 6'} style={{marginBottom: 16}}>
                         <h1 style={{marginBottom: -10}}>{this.props.title}</h1>
-                        <div className={'flex justify-end align-end'}>
+                        <div className={'flex justify-end align-end non-selectable'}>
                             <div style={{marginRight: 8, marginBottom: -10}}><h1 className={'inline-block number-font'}>{this.props.step + 1}</h1> <span style={{color: '#9a9a9a'}} className={'caption'}>/ {this.props.steps.length}</span></div>
                             <div style={{width: '80%'}}><ProgressBar value={this.props.step / this.props.steps.length} /></div>
                         </div>

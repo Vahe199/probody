@@ -1,7 +1,6 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import ImageInput from "../components/kit/Form/ImageInput";
 
 class Home extends React.Component {
   render() {
@@ -13,11 +12,6 @@ class Home extends React.Component {
             <p className="subtitle additional-text">Привет 👋</p>
             <h1>Мы подобрали массажные салоны в Алматы</h1>
             <br/>
-            <div bp={'grid'}>
-                <ImageInput />
-                <ImageInput />
-                <ImageInput />
-            </div>
 
           <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
             <br/><br/>

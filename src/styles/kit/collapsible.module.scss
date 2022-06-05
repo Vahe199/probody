@@ -1,0 +1,23 @@
+.head {
+  display: flex;
+  background: #F6F6F6;
+  border-radius: 20px;
+  padding: 22px;
+  user-select: none;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.body {
+  padding: 0 16px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.chevron {
+  transition: transform .3s linear;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}

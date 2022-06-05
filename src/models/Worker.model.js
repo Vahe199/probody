@@ -148,7 +148,7 @@ const WorkerSchema = new Schema({
             max: 3,
             required: true
         },
-        price: {
+        cost: {
             type: Number,
             required: true
         }

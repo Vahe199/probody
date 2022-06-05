@@ -3,7 +3,7 @@ import css from '../../../styles/kit/forms/input.module.scss'
 import PropTypes from "prop-types"
 import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
-import {formatIncompletePhoneNumber, isValidPhoneNumber} from "libphonenumber-js";
+import {AsYouType, formatIncompletePhoneNumber, isValidPhoneNumber} from "libphonenumber-js";
 import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class TextInput extends React.Component {
@@ -28,9 +28,13 @@ export default class TextInput extends React.Component {
         this.toggleVisibility = this.toggleVisibility.bind(this)
     }
 
-    componentDidUpdate(prevProps) {
+    async componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
-            this.setState({value: this.props.value})
+            await this.setState({value: this.props.value})
+
+            if (this.state.errored) {
+                await this.validateInput()
+            }
         }
     }
 
@@ -48,16 +52,17 @@ export default class TextInput extends React.Component {
         this.setState({locked: !this.state.locked})
     }
 
-    handleUpdate(e) {
-        if (this.state.errored) {
-            this.validateInput(e.target.value)
-        }
+    async handleUpdate(e) {
+        const value = this.props.type === 'phone' ? (new AsYouType('KZ')).input(e.target.value) : e.target.value
 
         if (this.props.value === undefined) {
-            this.setState({value:
-            this.props.type === 'phone' ? formatIncompletePhoneNumber(e.target.value, 'KZ') : e.target.value})
+            await this.setState({value})
+
+            if (this.state.errored) {
+                await this.validateInput()
+            }
         } else {
-            this.props.onUpdate(e.target.value)
+            this.props.onUpdate(value)
         }
     }
 
@@ -121,7 +126,7 @@ export default class TextInput extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div style={this.props.style}>
             <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>

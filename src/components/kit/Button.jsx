@@ -31,9 +31,9 @@ class Button extends React.Component {
         focus: true
     }
 
-    handleClick() {
+    handleClick(e) {
         if (this.props.onClick) {
-            this.props.onClick()
+            this.props.onClick(e)
         } else if (this.props.mapClick) {
             this.props.mapClick.current?.click()
         }

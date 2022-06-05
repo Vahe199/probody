@@ -16,8 +16,12 @@ export default {
     whatsapp: 'WhatsApp',
     showMore: 'Показать еще',
     siteStatsTitle: 'Общий рейтинг салонов и индивидуальных мастеров массажа',
-    seoText1: 'Популярность эротического массажа среди представителей сильного пола вполне обоснована, ведь именно таким способом они могут избавиться от стресса, восстановиться физически и морально, проводя время в компании девушек сногшибательной красоты.<br/><br/>Среди любителей подобного времяпровождения есть самые разные мужчины – студенты, представители “золотой молодежи” офисные сотрудники, успешные бизнесмены, и топ-менеджеры, политики, спортсмены и многие другие.',
-    seoText2: 'Наш город предоставляет массу возможностей для того, чтобы ощутить на себе потрясающий эффект от массажа, нужно только решить, в какой конкретно салон отправиться.<br/><br/>Сделать выбор простым и быстрым позволит наш специализированный портал, где представлены заведения разного класса, включая те, куда периодически приходят знаменитости.<br/><br/>Не теряйте ни секунды – оценивайте актуальные предложения и записывайтесь на эротический массаж в Алматы, который обеспечиваетт полноценную релаксацию и взрыв удовольтвия!',
+    seoText1: 'Halibut halosaur bluegill zebrafish lemon shark sand tiger ponyfish saury Atlantic salmon squawfish, gouramie flathead catfish. Trunkfish weasel shark Atlantic trout roosterfish peacock flounder cod, bull shark roundhead jewelfish three-toothed puffer candlefish, silver hake splitfin yellowtail snapper. Sea chub wels catfish; dorab golden loach filefish, walking catfish: lizardfish zebra danio. Kokopu spotted dogfish Canthigaster rostrata pipefish golden trout, waryfish North American freshwater catfish warbonnet cichlid coolie loach bigscale fish arapaima rohu. Trevally bocaccio sand lance pilot fish Ganges shark tilefish lefteye flounder. Snake mudhead bonytail chub; greenling louvar saury, Black swallower angelfish kokopu! Plownose chimaera gianttail plownose chimaera pompano Sundaland noodlefish thresher shark alooh spinyfin. Alfonsino scythe butterfish Colorado squawfish flagblenny elver pike morid cod.\n' +
+        '<br/><br/>' +
+        'Black sea bass: bangus lenok shiner wallago alewife yellowmargin triggerfish jewel tetra oceanic flyingfish. Monkfish, eel cod yellowbanded perch velvet catfish kokanee lefteye flounder viperfish zebra shark zebra pleco, dhufish! Common tunny redtooth triggerfish porbeagle shark Owens pupfish righteye flounder regal whiptail catfish slender barracudina bigmouth buffalo: ocean sunfish. Mahseer stickleback Bombay duck northern pike Rabbitfish scup sand knifefish. Cusk-eel, pencilsmelt darter African lungfish catla kappy Rabbitfish ribbon sawtail fish climbing perch yellow weaver. Knifefish hammerhead shark bandfish pilchard Asian carps sergeant major, cuchia pumpkinseed pejerrey bala shark. Pygmy sunfish cavefish grenadier squawfish Mexican golden trout! Anglerfish duckbilled barracudina molly sheepshead sheepshead minnow Black triggerfish: blue shark capelin barreleye walking catfish.\n',
+    seoText2: 'Cisco zebra bullhead shark sawfish platyfish snake mackerel orange roughy, "chimaera kissing gourami mola spadefish lined sole," roosterfish. Paddlefish great white shark tui chub armorhead; muskellunge tui chub ballan wrasse, porbeagle shark. Crevice kelpfish ilisha cepalin spiny basslet porbeagle shark oceanic flyingfish pikeblenny yellowtail kingfish redlip blenny, bluntnose minnow! Yellowfin cutthroat trout seamoth cutthroat trout grayling, black dragonfish kaluga; zebra bullhead shark striped bass. Upside-down catfish beardfish halosaur dojo loach threadfin bream yellow moray labyrinth fish lemon sole. African lungfish, candiru marlin tench sleeper shark cookie-cutter shark. Norwegian Atlantic salmon sand tilefish climbing catfish.\n' +
+        '<br/><br/>' +
+        'Sea raven darter flathead springfish, walu sandperch, scup: zander, lake trout porbeagle shark ronquil, coolie loach nase golden dojo zebra pleco." Sand stargazer yellowfin tuna pelican gulper orangestriped triggerfish flying gurnard yellowbanded perch speckled trout oceanic flyingfish marlin; yellowfin pike wahoo fingerfish blue eye, "wasp fish silver carp." Cutlassfish; lizardfish; African glass catfish Atlantic herring spiderfish dogfish shark pupfish. Carpsucker mackerel shark rock cod starry flounder lined sole mahseer kingfish mudsucker tench archerfish.\n',
     avgRating: 'средняя оценка',
     totalRatings: 'всего оценок',
     totalReviews: 'всего отзывов',
@@ -49,6 +53,7 @@ export default {
     eyes: 'глаза',
     years: 'лет',
     kg: 'кг',
+    description: 'Oписание',
     cm: 'см',
     size: 'размер',
     generalGrade: 'общая оценка',
@@ -67,7 +72,14 @@ export default {
     city: 'Город',
     inWhichCity: 'В каком городе',
     streetAndAddress: 'Улица и дом',
+    duration: 'Длительность',
     salonAddress: 'Адрес салона',
     typeYourPhoneNumber: 'Введите Ваш номер телефона',
     phone: 'Телефон',
+    pc: 'шт',
+    tellAboutService: 'Расскажите об услуге',
+    massageCost: 'Стоимость массажа',
+    from: 'от',
+    whichMassageTypesYouProvide: 'Какие виды массажа вы делаете?',
+    kzt: '₸'
 }

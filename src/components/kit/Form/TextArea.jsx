@@ -80,7 +80,7 @@ export default class TextArea extends React.Component {
                 </div>
             </div>
 
-            <span style={{fontSize: 12}}>{this.state.value.length}/{this.props.max}</span>
+            <span style={{fontSize: 12, userSelect: 'none'}}>{this.state.value.length}/{this.props.max}</span>
         </div>
     }
 }

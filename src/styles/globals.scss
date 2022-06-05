@@ -23,6 +23,17 @@ input, textarea, select {
   font-size: 16px;
   color: #333;
 
+  &[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
   &:focus {
     outline: none;
   }
@@ -50,6 +61,10 @@ body {
   font-family: 'Lato', sans-serif !important;
 }
 
+img {
+  user-select: none;
+}
+
 .lack {
   font-family: Lack, sans-serif;
 }
@@ -63,6 +78,7 @@ body {
   h#{$i} {
     font-family: 'Lack', sans-serif;
     margin: 0;
+    user-select: none;
   }
 }
 

@@ -11,6 +11,7 @@ export default class Select extends React.Component {
 
         this.state = {
             value: '',
+            label: '',
             open: false,
             locked: false
         }
@@ -21,7 +22,10 @@ export default class Select extends React.Component {
 
     static propTypes = {
         label: PropTypes.string.isRequired,
-        options: PropTypes.shape().isRequired,
+        options: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
+        })).isRequired,
         variant: PropTypes.string, // 'outlined' || 'underline'
         placeholder: PropTypes.string.isRequired,
         value: PropTypes.string,
@@ -30,13 +34,13 @@ export default class Select extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
-            this.setState({value: this.props.value})
+            this.setState({value: this.props.value, label: this.props.options.find(i => i._id === this.props.value).name})
         }
     }
 
     async handleUpdate(key) {
         if (this.props.value === undefined) {
-            await this.setState({value: key})
+            await this.setState({value: key, label: this.props.options.find(i => i._id === this.props.value).name})
         } else {
             this.props.onUpdate(key)
         }
@@ -54,7 +58,7 @@ export default class Select extends React.Component {
             <div className={'flex'}>
                 <div style={{
                     width: '100%'
-                }} onClick={() => this.setState({open: true})}>{this.props.options[this.state.value]}&nbsp;</div>
+                }} onClick={() => this.setState({open: true})}>{this.state.label || <span className={css.caption}>{this.props.placeholder}</span>}</div>
                 {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
             </div>
 
@@ -62,12 +66,12 @@ export default class Select extends React.Component {
                 top: 16,
                 left: -23
             }}>
-                    {Object.keys(this.props.options).map((key) =>
+                    {this.props.options.map(option =>
                         <div style={{
                             minWidth: 300,
                             cursor: 'pointer',
                             marginBottom: 8
-                        }} key={key} onClick={() => this.handleUpdate(key)}>{this.props.options[key]}</div>
+                        }} key={option._id} onClick={() => this.handleUpdate(option._id)}>{option.name}</div>
                     )}
             </Popup>
         </div>

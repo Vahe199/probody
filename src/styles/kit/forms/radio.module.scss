@@ -1,6 +1,7 @@
 .root {
   display: flex;
-  justify-content: space-between;
+  user-select: none;
+  //justify-content: space-between;
   align-items: center;
 
   &.column {
@@ -12,10 +13,12 @@
 .caption {
   color: #616161;
   font-size: 13px;
+  user-select: none;
 }
 
 .radioItem {
   display: inline-block;
+  margin-right: 16px;
 
   span {
     padding-left: 8px;
