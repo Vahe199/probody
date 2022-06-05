@@ -10,6 +10,18 @@
   display: flex;
 }
 
+.d-none {
+  display: none;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.relative {
+    position: relative;
+}
+
 .vertical-center {
   align-items: center;
 }
@@ -27,11 +39,11 @@
 }
 
 .justify-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .inline-block {

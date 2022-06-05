@@ -21,7 +21,7 @@
     background: $bg-primary;
     color: $text-primary;
 
-    &:focus {
+    &:not(.non-focusable):focus {
         box-shadow: 0 0 0 4px inset $bg-secondary;
     }
 }
@@ -30,7 +30,7 @@
     background: $bg-secondary;
     color: $text-secondary;
 
-    &:focus {
+    &:not(.non-focusable):focus {
         box-shadow: 0 0 0 4px inset $bg-primary;
     }
 }
@@ -39,7 +39,7 @@
     background: $bg-tertiary;
     color: $text-tertiary;
 
-    &:focus {
+    &:not(.non-focusable):focus {
         box-shadow: 0 0 0 4px inset $bg-secondary;
     }
 }
@@ -52,6 +52,11 @@
 .danger {
     background: $bg-danger;
     color: #fff;
+}
+
+.x-small {
+    border-radius: 8px;
+    padding: 0;
 }
 
 .small {
