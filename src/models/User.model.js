@@ -14,9 +14,11 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
+    default: ''
   },
   nickName: {
     type: String,
+    default: ''
   },
   balance: {
     type: Number,

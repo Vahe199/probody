@@ -15,7 +15,7 @@ const ReviewSchema = new Schema({
     },
     targetType: {
         type: String,
-        enum: ['worker', 'salon'],
+        enum: ['master', 'salon'],
         required: true
     },
     name: {
