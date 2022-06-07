@@ -46,7 +46,7 @@ services:
 
   mailserver:
     image: docker.io/mailserver/docker-mailserver:latest
-    container_name: mailserver
+    container_name: probody_mailserver
     hostname: mail
     domainname: probody.kz
     ports:
@@ -70,6 +70,15 @@ services:
       - SPOOF_PROTECTION=0
     cap_add:
       - NET_ADMIN
+    restart: unless-stopped
+
+  rainloop:
+    container_name: "probody_rainloop"
+    image: solidnerd/rainloop:1.10.5.192
+    volumes:
+      - ./volumes/rainloop:/var/www/rainloop/data
+    ports:
+      - "9530:80"
 
 networks:
   probodynet:
