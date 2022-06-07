@@ -23,7 +23,7 @@ const BlogArticleSchema = new Schema({
   }
 }, {
   versionKey: false,
-  timestamps: false
+  timestamps: true
 });
 
 export default mongoose.model('BlogArticle', BlogArticleSchema, 'blogArticles')

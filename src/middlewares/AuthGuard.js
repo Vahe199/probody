@@ -21,7 +21,13 @@ export default function AuthGuard(allowedRole /* serviceProvider | admin */) {
                 break
 
             case 'admin':
-            // TODO: check if user is admin
+                // TODO: check if user is admin
+                break;
+
+            default:
+                return res.status(500).json({
+                    message: 'Internal server error'
+                })
         }
 
         next()

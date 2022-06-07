@@ -63,15 +63,9 @@ router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) =
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:slug', async (req, res) => {
     try {
-        if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
-            return res.status(406).json({
-                message: 'invalidId'
-            })
-        }
-
-        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, "kind")
+        const worker = await Worker.findOne({slug: req.params.slug}, "kind")
 
         if (!worker) {
             return res.status(404).json({
@@ -81,7 +75,7 @@ router.get('/:id', async (req, res) => {
 
         if (worker.kind === 'master') {
             return res.json(await Worker
-                .findOne({_id: new mongoose.mongo.ObjectId(req.params.id)})
+                .findOne({slug: req.params.slug})
                 .populate('services', 'name')
                 .populate('leads', 'name')
                 .populate('massageTypes', 'name')

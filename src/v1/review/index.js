@@ -4,6 +4,8 @@ import Worker from "../../models/Worker.model.js";
 import express from "express"
 import apicache from "apicache"
 import AuthGuard from "../../middlewares/AuthGuard.js";
+import {v4 as uuidv4} from "uuid";
+import RedisHelper from "../../helpers/RedisHelper.js";
 
 const router = express.Router()
 
@@ -50,7 +52,7 @@ router.post('/:workerId', AuthGuard('serviceProvider'), async (req, res) => {
             })
         }
 
-        await (new Review({
+        const reviewData = {
             userId: req.user._id,
             target: req.params.workerId,
             targetType: salonDoc.kind,
@@ -60,10 +62,22 @@ router.post('/:workerId', AuthGuard('serviceProvider'), async (req, res) => {
             interior,
             massage,
             service
-        })).save()
+        }
 
-        res.status(200).json({
-            message: 'Created'
+        ;(new Review(reviewData)).validate(async (err) => {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal Server Error"
+                })
+            }
+
+            const redisKey = 'pending:check:review:' + uuidv4()
+
+            await RedisHelper.set(redisKey, JSON.stringify(reviewData))
+
+            res.status(202).json({
+                message: "createdReview"
+            })
         })
     }catch (e) {
         res.status(500).json({
