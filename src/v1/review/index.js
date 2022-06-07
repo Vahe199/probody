@@ -86,4 +86,35 @@ router.post('/:workerId', AuthGuard('serviceProvider'), async (req, res) => {
     }
 })
 
+router.post('/:reviewId/answer', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const {text} = req.body
+
+        if (!mongoose.mongo.ObjectId.isValid(req.params.reviewId)) {
+            return res.status(406).json({
+                message: 'invalidId'
+            })
+        }
+
+        const reviewDoc = await Review.findOne({_id: req.params.reviewId}).populate('target')
+
+        if (!reviewDoc || String(reviewDoc.target.host) !== String(req.user._id)) {
+            return res.status(406).json({
+                message: 'Review not found'
+            })
+        }
+
+        reviewDoc.answer = text
+        await reviewDoc.save()
+
+        res.status(202).json({
+            message: "createdAnswer"
+        })
+    }catch (e) {
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+})
+
 export default router
