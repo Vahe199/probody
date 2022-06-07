@@ -32,6 +32,10 @@ const UserSchema = new Schema({
   paymentCode: {
     type: String,
     default: ReffCode.generate
+  },
+  approvedEmail: {
+    type: Boolean,
+    default: false
   }
 }, {
   versionKey: false,
