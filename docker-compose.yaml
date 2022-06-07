@@ -44,5 +44,32 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: 2jkpJeB8yGXt
       MONGO_INITDB_DATABASE: probodydb
 
+  mailserver:
+    image: docker.io/mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: mail
+    domainname: probody.kz
+    ports:
+      - "25:25"
+      - "587:587"
+      - "465:465"
+    volumes:
+      - ./volumes/dms/mail-data:/var/mail
+      - ./volumes/dms/mail-state:/var/mail-state
+      - ./volumes/dms/mail-logs:/var/log/mail
+      - ./volumes/dms/config:/tmp/docker-mailserver
+      - ./volumes/certs:/etc/letsencrypt
+    environment:
+      - ENABLE_FAIL2BAN=1
+      - SSL_TYPE=letsencrypt
+      - PERMIT_DOCKER=network
+      - ONE_DIR=1
+      - ENABLE_POSTGREY=0
+      - ENABLE_CLAMAV=0
+      - ENABLE_SPAMASSASSIN=0
+      - SPOOF_PROTECTION=0
+    cap_add:
+      - NET_ADMIN
+
 networks:
   probodynet:
