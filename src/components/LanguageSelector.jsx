@@ -21,6 +21,12 @@ class LanguageSelector extends React.Component {
         this.setState({isPopupOpen: !this.state.isPopupOpen})
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.router.pathname !== this.props.router.pathname) {
+            this.setState({isPopupOpen: false})
+        }
+    }
+
     render() {
         const {locale} = this.props.router;
 

@@ -4,6 +4,7 @@ import Icon from "./kit/Icon.jsx";
 import Popup from "./kit/Popup";
 import Link from "next/link.js";
 import {GlobalContext} from "../contexts/Global.js";
+import {withRouter} from "next/router.js";
 
 class Menu extends React.Component {
     constructor(props) {
@@ -14,6 +15,12 @@ class Menu extends React.Component {
         }
 
         this.toggleMenu = this.toggleMenu.bind(this)
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.router.pathname !== this.props.router.pathname) {
+            this.setState({isOpen: false})
+        }
     }
 
     toggleMenu() {
@@ -41,4 +48,4 @@ class Menu extends React.Component {
 
 Menu.contextType = GlobalContext
 
-export default Menu
+export default withRouter(Menu)

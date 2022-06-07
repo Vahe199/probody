@@ -165,7 +165,7 @@ export default class NewSalonPage extends React.Component {
                                                          value: 2
                                                      },
                                                      {
-                                                         label: 3,
+                                                         label: '3+',
                                                          value: 3
                                                      }
                                                  ]}/>
@@ -183,7 +183,7 @@ export default class NewSalonPage extends React.Component {
                                                          value: 2
                                                      },
                                                      {
-                                                         label: 3,
+                                                         label: '3+',
                                                          value: 3
                                                      }
                                                  ]}/>
@@ -201,7 +201,7 @@ export default class NewSalonPage extends React.Component {
                                                          value: 2
                                                      },
                                                      {
-                                                         label: 3,
+                                                         label: '3+',
                                                          value: 3
                                                      }
                                                  ]}/>
