@@ -44,7 +44,9 @@ class TextSection extends React.Component {
     }
 
     render() {
-        return (
+        const {theme} = this.context
+
+        return <div className={css['theme--' + theme]}>
             <section className={css.text} style={this.props.style}>
                 <div dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} ref={this.state.textRef} style={{
                     lineHeight: this.lineHeight + 'px',
@@ -52,9 +54,10 @@ class TextSection extends React.Component {
                 }}>
                     {this.props.children}
                 </div>
-                {this.state.needsShowMoreButton ? [] : <a className={css.showMore} onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>}
+                {this.state.needsShowMoreButton ? [] : <a className={css.showMore}
+                                                          onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>}
             </section>
-        )
+        </div>
     }
 }
 

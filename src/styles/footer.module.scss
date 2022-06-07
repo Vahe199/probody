@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "themes";
 
 .footer {
   border-radius: 32px 32px 0 0;
@@ -16,7 +16,9 @@
 
   a {
     text-decoration: none;
-    color: $text-primary;
+    @include themify() {
+      color: t('text-primary');
+    }
     font-family: Lack, sans-serif;
   }
 }

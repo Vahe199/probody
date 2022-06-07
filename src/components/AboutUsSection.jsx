@@ -6,11 +6,13 @@ import StatsInfoBlock from "./kit/StatsInfoBlock.jsx";
 import css from '../styles/about-us.module.scss';
 import {cnb} from "cnbuilder";
 
-class AboutUsSection extends React.Component {
-    render() {
-        const {t, isMobile} = this.context;
+export default class AboutUsSection extends React.Component {
+    static contextType = GlobalContext;
 
-        return (
+    render() {
+        const {t, isMobile, theme} = this.context;
+
+        return <div className={css['theme--' + theme]}>
             <section className={'container'} bp={'grid'} style={{marginBottom: 24}}>
                 <div bp={'12 8@md'}>
                     <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: 24}}>
@@ -80,10 +82,6 @@ class AboutUsSection extends React.Component {
                     </InfoBlock>
                 </div>
             </section>
-        )
+        </div>
     }
 }
-
-AboutUsSection.contextType = GlobalContext;
-
-export default AboutUsSection;

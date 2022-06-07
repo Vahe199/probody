@@ -81,5 +81,6 @@ export default {
     massageCost: 'Стоимость массажа',
     from: 'от',
     whichMassageTypesYouProvide: 'Какие виды массажа вы делаете?',
-    kzt: '₸'
+    kzt: '₸',
+    verificationCode: 'код подтверждения',
 }

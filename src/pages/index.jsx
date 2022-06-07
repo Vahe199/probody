@@ -1,6 +1,7 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
+import OTPInput from "../components/kit/Form/OTPInput";
 
 class Home extends React.Component {
   render() {
@@ -12,6 +13,10 @@ class Home extends React.Component {
             <p className="subtitle additional-text">Привет 👋</p>
             <h1>Мы подобрали массажные салоны в Алматы</h1>
             <br/>
+
+            <div style={{maxWidth: 330}}>
+                <OTPInput />
+            </div>
 
           <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
             <br/><br/>

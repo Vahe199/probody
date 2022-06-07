@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@import '../themes';
 
 .text {
   border-radius: 32px;
@@ -13,11 +13,14 @@
 }
 
 .showMore {
-  color: $text-primary;
+  @include themify() {
+    color: t('text-primary');
+    border-bottom: 1px solid t('bg-primary');
+  }
+
   user-select: none;
   cursor: pointer;
   font-family: Lack, sans-serif;
-  border-bottom: 1px solid $bg-primary;
   transition: height 0.3s ease;
   overflow: hidden;
   display: inline-block;

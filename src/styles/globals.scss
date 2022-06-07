@@ -2,6 +2,7 @@
 @import "fonts.scss";
 @import '_reset.scss';
 @import "helpers.scss";
+@import 'themes.scss';
 
 $base-font-size: 16px;
 $heading-scale: 8;
@@ -53,8 +54,15 @@ html, body {
   background: #ffc83a85;
 }
 
-body {
+* {
+  transition: background-color .3s linear, border-color .3s linear, color .3s linear, box-shadow .3s linear;
+}
+
+.body {
   box-sizing: border-box !important;
+  @include themify() {
+    background: t('body-bg');
+  }
 }
 
 .number-font {

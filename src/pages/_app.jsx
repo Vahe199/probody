@@ -2,13 +2,13 @@ import window from 'global'
 import '../styles/globals.scss'
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar.jsx"
+import AboutUsSection from "../components/AboutUsSection.jsx";
 import {GlobalContext} from "../contexts/Global"
 import React from "react"
 
 import en from '../locales/en'
 import ru from '../locales/ru'
 import kz from '../locales/kz'
-import AboutUsSection from "../components/AboutUsSection.jsx";
 import Cookie from "../helpers/Cookie.js";
 import {DateTime, Settings} from "luxon";
 
@@ -40,6 +40,26 @@ class ProbodyApp extends React.Component {
 
         Settings.defaultLocale = this.props.router.locale
 
+        const storedTheme = localStorage.getItem('APP_THEME')
+
+        if (storedTheme) {
+            this.setState({theme: storedTheme})
+        } else {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                this.setState({
+                    theme: 'dark'
+                })
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                const newColorScheme = event.matches ? "dark" : "light";
+
+                this.setState({
+                    theme: newColorScheme
+                })
+            });
+        }
+
         window.addEventListener('resize', this.computeIsMobile);
     }
 
@@ -48,11 +68,11 @@ class ProbodyApp extends React.Component {
     }
 
     setLocale(locale) {
-        const { pathname, asPath, query } = this.props.router
+        const {pathname, asPath, query} = this.props.router
 
         Settings.defaultLocale = locale
 
-        this.props.router.push({ pathname, query }, asPath, { locale });
+        this.props.router.push({pathname, query}, asPath, {locale});
         (new Cookie('NEXT_LOCALE', locale, {
             expires: DateTime.now().plus({years: 10}).toJSDate()
         })).set()
@@ -63,19 +83,27 @@ class ProbodyApp extends React.Component {
     }
 
     toggleTheme() {
-        this.setState({theme: this.state.theme === 'light' ? 'dark' : 'light'})
+        const theme = this.state.theme === 'light' ? 'dark' : 'light'
+
+        localStorage.setItem('APP_THEME', theme)
+
+        this.setState({theme})
     }
 
     render() {
         const {Component: Page, pageProps} = this.props;
 
         return (<GlobalContext.Provider value={this.state}>
-                <Navbar/>
-                <div className={'container'}>
-                    <Page {...pageProps} />
+                <div className={'theme--' + this.state.theme}>
+                    <div className={'body'}>
+                        <Navbar/>
+                        <div className={'container'}>
+                            <Page {...pageProps} />
+                        </div>
+                        <AboutUsSection/>
+                        <Footer/>
+                    </div>
                 </div>
-                <AboutUsSection />
-                <Footer/>
             </GlobalContext.Provider>
         )
     }

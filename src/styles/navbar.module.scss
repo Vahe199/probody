@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import 'themes';
 
 .navbar {
   align-items: center;
@@ -9,7 +9,9 @@
   a {
     font-family: Lack, sans-serif;
     text-decoration: unset;
-    color: $text-primary;
+    @include themify() {
+        color: t('text-primary');
+    }
   }
 
   &.mobile::after {

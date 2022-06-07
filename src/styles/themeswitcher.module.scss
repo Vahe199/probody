@@ -1,8 +1,10 @@
-@import 'variables.scss';
+@import 'themes';
 
 .root {
   cursor: pointer;
-  background: #F6F6F6;
+  @include themify() {
+    background: t('bg-disabled');
+  }
   position: relative;
   border-radius: 24px;
   width: 57px;
@@ -10,7 +12,10 @@
 }
 
 .icon {
-  color: $bg-primary;
+  @include themify() {
+    color: t('bg-primary');
+    background-color: t('body-bg');
+  }
   position: absolute;
   height: 24px;
   width: 24px;

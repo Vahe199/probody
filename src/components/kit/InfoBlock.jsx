@@ -1,13 +1,16 @@
 import React from "react"
 import css from '../../styles/kit/infoblock.module.scss'
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../contexts/Global.js";
 
-class Icon extends React.Component {
+export default class InfoBlock extends React.Component {
+    static contextType = GlobalContext
+
     render() {
-        return <section style={this.props.style} className={cnb('non-selectable', css.infoBlock)}>
+        const {theme} = this.context
+
+        return <div className={css['theme--' + theme]}><section style={this.props.style} className={cnb('non-selectable', css.infoBlock)}>
             {this.props.children}
-        </section>
+        </section></div>
     }
 }
-
-export default Icon

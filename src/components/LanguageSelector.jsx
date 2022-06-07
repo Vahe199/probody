@@ -28,22 +28,24 @@ class LanguageSelector extends React.Component {
     }
 
     render() {
-        const {locale} = this.props.router;
+        const {locale, theme} = this.props.router;
 
         const availableOptions = this.props.router.locales.filter(i => i !== locale);
 
-        return <div onClick={this.togglePopup} className={cnb(css.root, this.state.isPopupOpen ? css.popupOpen : '')}>
-            <span>{locale}</span>
-            <Icon name={'chevron_down'}/>
-            <Popup isOpen={this.state.isPopupOpen}>
-                <ul className={css.list}>
-                    {availableOptions.map(lang =>
-                        <li key={lang} onClick={() => this.context.setLocale(lang)}>
-                            {lang}
-                        </li>
-                    )}
-                </ul>
-            </Popup>
+        return <div className={css['theme--' + theme]}>
+            <div onClick={this.togglePopup} className={cnb(css.root, this.state.isPopupOpen ? css.popupOpen : '')}>
+                <span>{locale}</span>
+                <Icon name={'chevron_down'}/>
+                <Popup isOpen={this.state.isPopupOpen}>
+                    <ul className={css.list}>
+                        {availableOptions.map(lang =>
+                            <li key={lang} onClick={() => this.context.setLocale(lang)}>
+                                {lang}
+                            </li>
+                        )}
+                    </ul>
+                </Popup>
+            </div>
         </div>
     }
 }

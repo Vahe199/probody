@@ -4,11 +4,13 @@ import css from '../styles/footer.module.scss'
 import {cnb} from "cnbuilder"
 import Link from "next/link.js";
 
-class Footer extends React.Component {
-    render() {
-        const {t} = this.context;
+export default class Footer extends React.Component {
+    static contextType = GlobalContext
 
-        return (
+    render() {
+        const {t, theme} = this.context;
+
+        return <div className={css['theme--' + theme]}>
             <footer className={cnb('container', 'non-selectable', css.footer)}>
                 <img alt={t('siteLogo')} className={cnb('cursor-pointer', css.textLogo)} src={'/text_logo.svg'}/>
                 <div bp={'grid'}>
@@ -108,10 +110,6 @@ class Footer extends React.Component {
                     </div>
                 </div>
             </footer>
-        )
+        </div>
     }
 }
-
-Footer.contextType = GlobalContext;
-
-export default Footer;

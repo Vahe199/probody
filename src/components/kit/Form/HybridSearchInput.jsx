@@ -3,8 +3,11 @@ import React from "react";
 import Icon from "../Icon.jsx";
 import PropTypes from "prop-types";
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class HybridSearchInput extends React.Component {
+    static contextType = GlobalContext
+
     static propTypes = {
         searchPlaceholder: PropTypes.string.isRequired,
         geoPlaceholder: PropTypes.string.isRequired
@@ -20,7 +23,10 @@ export default class HybridSearchInput extends React.Component {
     }
 
     render() {
-        return <div className={cnb('flex', css.root)}>
+        const {theme} = this.context;
+
+        return <div className={css['theme--' + theme]}>
+            <div className={cnb('flex', css.root)}>
             <div bp={'fill flex'} className={css.inputGroup}>
                 <Icon name={'search'}/>
                 <input bp={'fill'} type="text" value={this.state.search} onChange={e => this.setState({search: e.target.value})} placeholder={this.props.searchPlaceholder}/>
@@ -32,6 +38,7 @@ export default class HybridSearchInput extends React.Component {
                 <input type="text" value={this.state.geo} onChange={e => this.setState({geo: e.target.value})} placeholder={this.props.geoPlaceholder}/>
                 <div onClick={() => this.setState({geo: ''})}><Icon name={'close'}/></div>
             </div>
+        </div>
         </div>
     }
 }

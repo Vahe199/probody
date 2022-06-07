@@ -39,6 +39,10 @@ const WorkerSchema = new Schema({
         type: Date,
         default: new Date(0)
     },
+    raises: {
+        type: [Date],
+        default: []
+    },
     messengers: {
         tg: {
             type: String

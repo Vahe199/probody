@@ -1,7 +1,9 @@
-@import "../variables.scss";
+@import "../themes";
 
 .accent {
-  color: $bg-primary
+  @include themify() {
+    color: t('bg-primary');
+  }
 }
 
 .caption {
