@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import css from '../../styles/kit/progressbar.module.scss';
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../contexts/Global.js";
 
 export default class ProgressBar extends React.Component {
     static propTypes = {
@@ -9,13 +10,19 @@ export default class ProgressBar extends React.Component {
         mobile: PropTypes.bool
     }
 
+    static contextType = GlobalContext;
+
     static defaultProps = {
         mobile: false
     }
 
     render() {
-        return <div className={cnb(css.root, this.props.mobile ? css.mobile : '')}>
-            <div className={css.progress} style={{width: this.props.value * 100 + '%'}}>&nbsp;</div>
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}>
+            <div className={cnb(css.root, this.props.mobile ? css.mobile : '')}>
+                <div className={css.progress} style={{width: this.props.value * 100 + '%'}}>&nbsp;</div>
+            </div>
         </div>
     }
 }

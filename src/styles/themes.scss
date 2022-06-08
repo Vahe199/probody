@@ -23,7 +23,9 @@ $themes: (
                 border-accent-color: #616161,
                 bg-accent: #252420,
                 text-accent: #f7f7f7,
-                accent-shadow: #6a6a6a
+                accent-shadow: #6a6a6a,
+                another-text-disabled: #9a9a9a,
+                border-disabled: #9a9a9a,
         ),
         dark: (
                 bg-primary: #FFC83A,
@@ -49,7 +51,9 @@ $themes: (
                 text-secondlayer: #ccc,
                 bg-accent: #f7f7f7,
                 text-accent: #252420,
-                accent-shadow: #5a5a5a
+                accent-shadow: #5a5a5a,
+                another-text-disabled: #9a9a9a,
+                border-disabled: #9a9a9a,
         )
 );
 

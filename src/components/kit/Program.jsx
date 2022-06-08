@@ -20,9 +20,9 @@ class Program extends React.Component {
     }
 
     render() {
-        const {t} = this.context
+        const {t, theme} = this.context
 
-        return <InfoBlock style={{maxWidth: 425}}>
+        return <div className={'theme--' + theme}><InfoBlock style={{maxWidth: 425}}>
             <p className="subtitle2" style={{marginBottom: 16}}>{this.props.title}</p>
             <p>{this.props.description}</p>
             <ul className={css.massageList}>
@@ -51,7 +51,7 @@ class Program extends React.Component {
                     <Button size={'medium'}>{t('apply')}</Button>
                 </div>
             </div>
-        </InfoBlock>
+        </InfoBlock></div>
     }
 }
 Program.contextType = GlobalContext

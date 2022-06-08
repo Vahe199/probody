@@ -11,7 +11,10 @@
   }
 
   .progress {
-    background-color: $bg-primary;
+    @include themify() {
+      background-color: t('bg-primary');
+    }
+
     height: 100%;
     border-radius: 3px;
     transition: width 0.3s ease-in-out;

@@ -9,48 +9,62 @@
 }
 
 .disabled {
-    cursor: not-allowed;
-    background: $bg-disabled !important;
+    @include themify() {
+        cursor: not-allowed;
+        background: t('bg-disabled') !important;
 
-    i, span {
-        color: $text-disabled !important;
+        i, span {
+            color: t('text-disabled') !important;
+        }
     }
 }
 
 .primary {
-    background: $bg-primary;
-    color: $text-primary;
+    @include themify() {
+        background: t('bg-primary');
+        color: t('text-primary');
 
-    &:not(.non-focusable):focus {
-        box-shadow: 0 0 0 4px inset $bg-secondary;
+        &:not(.non-focusable):focus {
+            box-shadow: 0 0 0 4px inset t('bg-secondary');
+        }
     }
 }
 
 .secondary {
-    background: $bg-secondary;
-    color: $text-secondary;
+    @include themify() {
+        background: t('bg-secondary');
+        color: t('text-secondary');
 
-    &:not(.non-focusable):focus {
-        box-shadow: 0 0 0 4px inset $bg-primary;
+        &:not(.non-focusable):focus {
+            box-shadow: 0 0 0 4px inset t('bg-primary');
+        }
     }
 }
 
 .tertiary {
-    background: $bg-tertiary;
-    color: $text-tertiary;
+    @include themify() {
+        background: t('bg-tertiary');
+        color: t('text-tertiary');
 
-    &:not(.non-focusable):focus {
-        box-shadow: 0 0 0 4px inset $bg-secondary;
+        &:not(.non-focusable):focus {
+            box-shadow: 0 0 0 4px inset t('bg-secondary');
+        }
     }
 }
 
 .success {
-    background: $bg-success;
+    @include themify() {
+        background: t('bg-success');
+    }
+
     color: #fff;
 }
 
 .danger {
-    background: $bg-danger;
+    @include themify() {
+        background: t('bg-danger');
+    }
+
     color: #fff;
 }
 

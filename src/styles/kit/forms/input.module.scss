@@ -1,92 +1,99 @@
 @import "../../themes";
 
 .inputRoot {
-  &.outlined {
-    border-radius: 16px;
-    border: 1px solid #ccc;
-    padding: 16px 20px;
-  }
+  @include themify() {
+    &.outlined {
+      border-radius: 16px;
+      border: 1px solid #ccc;
+      padding: 16px 20px;
+    }
 
-  &.underline {
-    border-bottom: 1px solid #ccc;
-    padding: 16px 0;
+    &.underline {
+      border-bottom: 1px solid #ccc;
+      padding: 16px 0;
+
+      .label {
+        color: #9A9A9A;
+      }
+    }
+
+    transition: border-color 0.2s linear, background-color 0.2s linear;
 
     .label {
-      color: #9A9A9A;
-    }
-  }
-
-  transition: border-color 0.2s linear, background-color 0.2s linear;
-
-  .label {
-    font-size: 12px;
-    user-select: none;
-  }
-
-  input {
-    width: 100%;
-    margin-top: 6px;
-  }
-
-  &:focus-within {
-    border-color: $text-primary;
-  }
-
-  &.errored {
-    border-color: $bg-danger;
-
-    & + span {
       font-size: 12px;
       user-select: none;
-      color: $bg-danger;
+    }
 
-      i {
-        width: 14px;
-        height: 14px;
-        vertical-align: text-top;
-        margin-right: 8px;
+    input {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    &:focus-within {
+      border-color: t('text-primary');
+    }
+
+    &.errored {
+      border-color: t('bg-danger');
+
+      & + span {
+        font-size: 12px;
+        user-select: none;
+        color: t('bg-danger');
+
+        i {
+          width: 14px;
+          height: 14px;
+          vertical-align: text-top;
+          margin-right: 8px;
+        }
       }
     }
-  }
 
-  &.success {
-    border-color: $bg-success;
+    &.success {
+      border-color: t('bg-success');
 
-    & + span {
-      font-size: 12px;
-      user-select: none;
-      color: $bg-success;
+      & + span {
+        font-size: 12px;
+        user-select: none;
+        color: t('bg-success');
 
-      i {
-        width: 14px;
-        height: 14px;
-        vertical-align: text-top;
-        margin-right: 8px;
+        i {
+          width: 14px;
+          height: 14px;
+          vertical-align: text-top;
+          margin-right: 8px;
+        }
       }
     }
-  }
 
-  &.locked {
-    &, input {
-      background: #f7f7f7;
+    &.locked {
+      &, input {
+        background: #f7f7f7;
+      }
     }
-  }
 
-  textarea {
-    resize: none;
-    width: 100%;
+    textarea {
+      resize: none;
+      width: 100%;
+    }
   }
 }
 
 .editIcon {
   cursor: pointer;
-  color: $text-primary;
+
+  @include themify() {
+    color: t('text-primary');
+  }
   margin-top: -5px;
 }
 
 .closeIcon {
   cursor: pointer;
-  color: $text-primary;
+  @include themify() {
+    color: t('text-primary');
+  }
   //margin-top: 12px;
   padding-right: 12px;
   width: 12px;
@@ -95,7 +102,9 @@
 
 .hideIcon {
   width: 20px;
-  color: $text-primary;
+  @include themify() {
+    color: t('text-primary');
+  }
   margin-right: 12px;
   height: 18px;
   margin-top: 8px;

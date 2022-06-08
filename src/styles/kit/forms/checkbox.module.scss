@@ -17,6 +17,8 @@
 
   &.checked {
     border: 0;
-    background: url("/icons/checkmark.svg") no-repeat center center $bg-primary;
+    @include themify() {
+      background: url("/icons/checkmark.svg") no-repeat center center t('bg-primary');
+    }
   }
 }

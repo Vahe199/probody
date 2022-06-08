@@ -3,6 +3,7 @@ import {cnb} from "cnbuilder"
 import PropTypes from 'prop-types'
 import css from '../../styles/kit/button.module.scss'
 import Icon from "./Icon.jsx"
+import {GlobalContext} from "../../contexts/Global.js";
 
 class Button extends React.Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class Button extends React.Component {
 
         this.handleClick = this.handleClick.bind(this)
     }
+
+    static contextType = GlobalContext
 
     static propTypes = {
         color: PropTypes.string, // primary | secondary | tertiary | success | danger
@@ -41,6 +44,7 @@ class Button extends React.Component {
 
     render() {
         const textMargins = {}
+        const {theme} = this.context
 
         if (this.props.children) {
             if (this.props.iconLeft) {
@@ -52,14 +56,14 @@ class Button extends React.Component {
             }
         }
 
-        return <button
+        return <div className={css['theme--' + theme]}><button
             onClick={this.handleClick}
             style={this.props.style}
             className={cnb('non-selectable', this.props.className, css.btn, css[this.props.size], css[this.props.color], this.props.isDisabled ? css.disabled : '', this.props.focus ? '' : css['non-focusable'])}>
             {this.props.iconLeft && <Icon name={this.props.iconLeft}/>}
             <span className={'va-middle'} style={textMargins}>{this.props.children}</span>
             {this.props.iconRight && <Icon name={this.props.iconRight}/>}
-        </button>
+        </button></div>
     }
 }
 

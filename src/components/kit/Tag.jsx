@@ -3,8 +3,11 @@ import css from '../../styles/kit/tag.module.scss'
 import PropTypes from "prop-types"
 import Icon from "./Icon.jsx"
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../contexts/Global.js";
 
 export default class Tag extends React.Component {
+    static contextType = GlobalContext
+
     static propTypes = {
         icon: PropTypes.string,
         label: PropTypes.string,
@@ -16,9 +19,11 @@ export default class Tag extends React.Component {
     }
 
     render() {
-        return <div className={cnb(css.root, 'non-selectable', this.props.enabled ? css.enabled : css.disabled)}>
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}><div className={cnb(css.root, 'non-selectable', this.props.enabled ? css.enabled : css.disabled)}>
             {this.props.icon && <Icon name={this.props.icon}/>}
             <span style={{marginLeft: this.props.icon ? 8 : 0}}>{this.props.label}</span>
-        </div>
+        </div></div>
     }
 }

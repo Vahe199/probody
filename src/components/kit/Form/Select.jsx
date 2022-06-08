@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {cnb} from "cnbuilder";
 import Icon from "../Icon.jsx";
 import Popup from "../Popup";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class Select extends React.Component {
     constructor(props) {
@@ -19,6 +20,8 @@ export default class Select extends React.Component {
         this.toggleLock = this.toggleLock.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
     }
+
+    static contextType = GlobalContext
 
     static propTypes = {
         label: PropTypes.string.isRequired,
@@ -53,7 +56,9 @@ export default class Select extends React.Component {
     }
 
     render() {
-        return <div className={cnb(css.inputRoot, this.props.variant === 'underline' ? css.underline : css.outlined)}>
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}><div className={cnb(css.inputRoot, this.props.variant === 'underline' ? css.underline : css.outlined)}>
             <div className={css.label}>{this.props.label}</div>
             <div className={'flex'}>
                 <div style={{
@@ -74,6 +79,6 @@ export default class Select extends React.Component {
                         }} key={option._id} onClick={() => this.handleUpdate(option._id)}>{option.name}</div>
                     )}
             </Popup>
-        </div>
+        </div></div>
     }
 }

@@ -3,6 +3,7 @@ import css from '../../../styles/kit/forms/input.module.scss'
 import PropTypes from "prop-types"
 import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class TextArea extends React.Component {
     constructor(props) {
@@ -16,6 +17,8 @@ export default class TextArea extends React.Component {
         this.toggleLock = this.toggleLock.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
     }
+
+    static contextType = GlobalContext
 
     componentDidMount() {
         if (this.props.lock) {
@@ -69,7 +72,9 @@ export default class TextArea extends React.Component {
     }
 
     render() {
-        return <div>
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}>
             <div className={cnb(css.inputRoot, this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>

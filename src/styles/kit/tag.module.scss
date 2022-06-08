@@ -7,12 +7,17 @@
 }
 
 .disabled {
-  color: #9A9A9A;
-  background: #fff;
-  border: 1px solid #9A9A9A;
+  @include themify() {
+    color: t('another-text-disabled');
+    background: #fff;
+    border: 1px solid t('border-disabled');;
+  }
 }
 
 .enabled {
   background-color: #F6F6F6;
-  color: $text-primary;
+
+  @include themify() {
+    color: t('text-main');
+  }
 }

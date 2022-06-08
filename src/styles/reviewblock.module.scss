@@ -30,13 +30,17 @@
     color: #9A9A9A;
 
     &.general {
-      color: $text-primary;
+      @include themify() {
+        color: t('text-main');
+      }
     }
   }
 }
 
 .star {
-  color: $bg-primary !important;
+  @include themify() {
+    color: t('bg-primary') !important;
+  }
   margin-right: 8px;
 
   i {

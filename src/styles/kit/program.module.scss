@@ -9,7 +9,11 @@
 
     &::before {
       content: "\2022";
-      color: $bg-primary;
+
+      @include themify() {
+        color: t('bg-primary');
+      }
+
       font-weight: bold;
       display: inline-block;
       width: 1em;

@@ -3,6 +3,7 @@ import css from '../../../styles/kit/forms/checkbox.module.scss'
 import PropTypes from "prop-types"
 import Icon from "../Icon.jsx"
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class Checkbox extends React.Component {
     constructor(props) {
@@ -14,6 +15,9 @@ export default class Checkbox extends React.Component {
 
         this.toggle = this.toggle.bind(this);
     }
+
+    static contextType = GlobalContext
+
     static propTypes = {
         reverse: PropTypes.bool,
         icon: PropTypes.string,
@@ -50,12 +54,14 @@ export default class Checkbox extends React.Component {
     }
 
     render() {
-        return <div className={css.root}>
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}><div className={css.root}>
             <div>
                 {this.props.icon && <Icon name={this.props.icon}/>}
                 <span>{this.props.name}</span>
             </div>
             <div onClick={this.toggle} className={cnb(css.checkbox, this.state.checked ? css.checked : '')}>&nbsp;</div>
-        </div>
+        </div></div>
     }
 }

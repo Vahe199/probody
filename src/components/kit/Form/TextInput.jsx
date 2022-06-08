@@ -3,7 +3,7 @@ import css from '../../../styles/kit/forms/input.module.scss'
 import PropTypes from "prop-types"
 import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
-import {AsYouType, formatIncompletePhoneNumber, isValidPhoneNumber} from "libphonenumber-js";
+import {AsYouType, isValidPhoneNumber} from "libphonenumber-js";
 import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class TextInput extends React.Component {
@@ -126,7 +126,9 @@ export default class TextInput extends React.Component {
     }
 
     render() {
-        return <div style={this.props.style}>
+        const {theme} = this.context
+
+        return <div style={this.props.style} className={'theme--' + theme}>
             <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>

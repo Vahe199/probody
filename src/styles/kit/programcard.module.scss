@@ -4,7 +4,10 @@
   border-radius: 32px;
   padding: 16px;
   width: 175px;
-  background: $text-primary;
+
+    @include themify() {
+      background: t('text-primary');
+    }
 
   .value {
     color: white;
@@ -35,7 +38,10 @@
 }
 
 .arrowRight {
-  color: $bg-primary !important;
+  @include themify() {
+    color: t('bg-primary') !important;
+  }
+
   width: 22px !important;
     height: 14px !important;
   cursor: pointer;

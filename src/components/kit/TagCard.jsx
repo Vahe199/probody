@@ -4,8 +4,11 @@ import {cnb} from "cnbuilder";
 import css from '../../styles/kit/tagcard.module.scss';
 import Icon from "./Icon.jsx";
 import Link from "next/link.js";
+import {GlobalContext} from "../../contexts/Global.js";
 
 export default class TagCard extends React.Component {
+    static contextType = GlobalContext
+
     static propTypes = {
         title: PropTypes.string.isRequired,
         value: PropTypes.oneOfType([
@@ -23,11 +26,17 @@ export default class TagCard extends React.Component {
     }
 
     render() {
-        return <div className={cnb(css.root, this.props.dark ? css.dark : '')}>
-            <div className={css.label}>{this.props.title}</div>
-            <div className={cnb(css.value, this.props.accent ? css.accent : '', 'flex', 'justify-between')}>
-                <div>{this.props.value}</div>
-                {this.props.link && <div><Link href={this.props.link}><Icon className={css.arrowDown} name={'arrow_right'} /></Link></div>}
+        const {theme} = this.context
+
+        return <div className={'theme--' + theme}>
+            <div className={cnb(css.root, this.props.dark ? css.dark : '')}>
+                <div className={css.label}>{this.props.title}</div>
+                <div className={cnb(css.value, this.props.accent ? css.accent : '', 'flex', 'justify-between')}>
+                    <div>{this.props.value}</div>
+                    {this.props.link &&
+                        <div><Link href={this.props.link}><Icon className={css.arrowDown} name={'arrow_right'}/></Link>
+                        </div>}
+                </div>
             </div>
         </div>
     }

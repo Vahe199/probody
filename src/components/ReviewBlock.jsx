@@ -20,40 +20,43 @@ export default class ReviewBlock extends React.Component {
     }
 
     render() {
-        const {t} = this.context;
+        const {t, theme} = this.context;
 
-        return <div className={css.root}>
-            <div className={cnb("flex", 'justify-between', css.gradeContainer)}>
-                <div>
-                    <span className={css.general}>{t('generalGrade')}</span>
-                    <div className={'flex vertical-center'}>
-                        <span className={css.star}><Icon name={'star'} /></span>
-                        <span className={css.general}>{this.props.avg.toFixed(1)}</span>
-                    </div>
-                </div>
-                <div>
-                    <span>{t('service')}</span>
-                    <div>{this.props.service.toFixed(1)}</div>
-                </div>
-                <div>
-                    <span>{t('massage')}</span>
+        return <div className={css['theme--' + theme]}>
+            <div className={css.root}>
+                <div className={cnb("flex", 'justify-between', css.gradeContainer)}>
                     <div>
-                        {this.props.massage.toFixed(1)}
+                        <span className={css.general}>{t('generalGrade')}</span>
+                        <div className={'flex vertical-center'}>
+                            <span className={css.star}><Icon name={'star'}/></span>
+                            <span className={css.general}>{this.props.avg.toFixed(1)}</span>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <span>{t('interior')}</span>
                     <div>
-                        {this.props.interior.toFixed(1)}
+                        <span>{t('service')}</span>
+                        <div>{this.props.service.toFixed(1)}</div>
+                    </div>
+                    <div>
+                        <span>{t('massage')}</span>
+                        <div>
+                            {this.props.massage.toFixed(1)}
+                        </div>
+                    </div>
+                    <div>
+                        <span>{t('interior')}</span>
+                        <div>
+                            {this.props.interior.toFixed(1)}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div style={{marginTop: 16}} className="flex justify-between align-end">
-                <span className={css.name}>{this.props.name}</span>
-                <span className={css.date}>{DateTime.fromJSDate(this.props.dateCreated).toFormat('d.MM.yyyy')}</span>
-            </div>
-            <div className={css.text}>
-                {this.props.text}
+                <div style={{marginTop: 16}} className="flex justify-between align-end">
+                    <span className={css.name}>{this.props.name}</span>
+                    <span
+                        className={css.date}>{DateTime.fromJSDate(this.props.dateCreated).toFormat('d.MM.yyyy')}</span>
+                </div>
+                <div className={css.text}>
+                    {this.props.text}
+                </div>
             </div>
         </div>
     }

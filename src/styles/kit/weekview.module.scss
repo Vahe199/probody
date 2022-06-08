@@ -27,7 +27,9 @@
 }
 
 .enabled {
-  color: $text-primary;
+  @include themify() {
+    color: t('text-primary');
+  }
 }
 
 .disabled {
@@ -35,7 +37,10 @@
 }
 
 .today {
-  background: $text-primary;
+  @include themify() {
+    background: t('text-primary');
+  }
+
   border-radius: 14px;
   padding: 0 2px;
 
