@@ -10,7 +10,7 @@
     font-family: Lack, sans-serif;
     text-decoration: unset;
     @include themify() {
-        color: t('text-primary');
+        color: t('text-main');
     }
   }
 

@@ -32,7 +32,7 @@ class Menu extends React.Component {
 
         return <div className={'non-selectable'}>
             <div className={css.hamburger} onClick={this.toggleMenu}><Icon name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
-            <Popup fullSize={isMobile} isOpen={this.state.isOpen}>
+            <Popup style={isMobile ? {} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
                 <ul className={css.list}>
                     <li><Link href={'/blog'}>{t('news')}</Link></li>
                     <li><Link href={'/visitors'}>{t('forVisitors')}</Link></li>

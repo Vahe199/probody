@@ -2,8 +2,8 @@
 
 .infoBlock {
   @include themify() {
-    background: t('bg-secondary');
-    color: t('text-secondary');
+    background: t('bg-accent');
+    color: t('text-accent');
   }
 
   border-radius: 32px;

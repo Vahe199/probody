@@ -22,7 +22,11 @@ input, textarea, select {
   font-family: Lato, sans-serif;
   transition: background-color 0.2s linear;
   font-size: 16px;
-  color: #333;
+  background: transparent;
+
+  @include themify() {
+    color: t('text-main');
+  }
 
   &[type=number] {
     -moz-appearance: textfield; /* Firefox */
@@ -55,7 +59,7 @@ html, body {
 }
 
 * {
-  transition: background-color .2s linear, border-color .2s linear, color .2s linear, box-shadow .2s linear;
+  transition: background-color .3s linear, border-color .3s linear, color .1s linear, box-shadow .3s linear;
 }
 
 .body {

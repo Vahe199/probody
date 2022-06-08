@@ -24,7 +24,7 @@ class ProbodyApp extends React.Component {
 
         this.state = {
             isLoggedIn: false,
-            theme: 'light',
+            theme: 'dark',
             isMobile: false,
             t: key => translations[props.router.locale][key] || translations[props.router.defaultLocale][key] || key,
             setLocale: this.setLocale.bind(this),
@@ -48,6 +48,10 @@ class ProbodyApp extends React.Component {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 this.setState({
                     theme: 'dark'
+                })
+            } else {
+                this.setState({
+                    theme: 'light'
                 })
             }
 

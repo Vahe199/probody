@@ -18,7 +18,12 @@ $themes: (
                 input-border-color: #ccc,
                 logo-color: #252420,
                 line-color: #e4e4e4,
-                bg-secondlayer: #f7f7f7
+                bg-secondlayer: #f7f7f7,
+                text-secondlayer: #252420,
+                border-accent-color: #616161,
+                bg-accent: #252420,
+                text-accent: #f7f7f7,
+                accent-shadow: #6a6a6a
         ),
         dark: (
                 bg-primary: #FFC83A,
@@ -36,10 +41,15 @@ $themes: (
                 text-disabled: #616161,
                 text-caption: #ccc,
                 input-focus-border-color: #f6f6f6,
+                border-accent-color: #ccc,
                 input-border-color: #616161,
                 logo-color: #f7f7f7,
                 line-color: #454543,
-                bg-secondlayer: #454543
+                bg-secondlayer: #454543,
+                text-secondlayer: #ccc,
+                bg-accent: #f7f7f7,
+                text-accent: #252420,
+                accent-shadow: #5a5a5a
         )
 );
 

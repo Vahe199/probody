@@ -1,3 +1,5 @@
+@import "themes";
+
 .socialBlock {
   display: flex;
   justify-content: space-around;
@@ -11,7 +13,11 @@
     img {
       width: 48px;
       height: 48px;
-      border: 1px solid #616161;
+
+      @include themify() {
+        border: 1px solid t('border-accent-color');
+      }
+
       padding: 10px;
       border-radius: 16px;
       display: inline-block;

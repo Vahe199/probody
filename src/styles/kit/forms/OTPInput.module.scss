@@ -12,7 +12,7 @@
     font-size: 32px;
     text-align: center;
     @include themify() {
-      border-bottom: t('input-border-color');
+      border-bottom: 1px solid t('input-border-color');
     }
   }
 }
