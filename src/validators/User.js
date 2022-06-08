@@ -6,7 +6,7 @@ export async function updateUser(req, res, next) {
     req.validation = []
 
     if (field) { //проверяем наличие ключа
-        if (!['avatar', 'nickName'].includes(field)) {//проверяем на валидность ключ
+        if (!['avatar', 'nickName', 'email'].includes(field)) {//проверяем на валидность ключ
             req.validation.push({text: 'invalidField', field: 'field'})
         } else {//ключ правильный, проверяем на валидность значение
             switch (field) {
@@ -21,6 +21,13 @@ export async function updateUser(req, res, next) {
                         req.validation.push({text: 'tooLongValue', field})
                     } else if (field.length < 3) {
                         req.validation.push({text: 'tooShortValue', field})
+                    }
+                    break
+
+                case 'email':
+                    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+                        req.validation.push({text: 'invalidValue', field})
+                        break
                     }
             }
         }
