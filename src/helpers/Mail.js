@@ -3,16 +3,16 @@ import fs from "fs";
 import path from "path";
 
 const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
+        host: "mail.probody.kz",
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_ACCOUNT,
             pass: process.env.MAIL_PASSWORD
         },
     }),
     senderInfo = {
-        from: '"Fred Foo 👻" <foo@example.com>'
+        from: 'ProBody.kz <' + process.env.MAIL_ACCOUNT + '>'
     },
     templates = {
         confirmMail: {
