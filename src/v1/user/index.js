@@ -70,9 +70,7 @@ router.patch('/approvemail', AuthGuard('serviceProvider'), async (req, res) => {
             })
         }
 
-        const result = await mailer.addRecipient(email).send()
-
-        console.log(result)
+        await mailer.addRecipient(email).send()
 
         await RedisHelper.set(redisKey, '',)
         await RedisHelper.expire(redisKey, 30 * 60)//30 minutes
