@@ -25,7 +25,7 @@ input, textarea, select {
   color: #333;
 
   &[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield; /* Firefox */
   }
 
   &::-webkit-outer-spin-button,
@@ -55,13 +55,14 @@ html, body {
 }
 
 * {
-  transition: background-color .3s linear, border-color .3s linear, color .3s linear, box-shadow .3s linear;
+  transition: background-color .2s linear, border-color .2s linear, color .2s linear, box-shadow .2s linear;
 }
 
 .body {
   box-sizing: border-box !important;
   @include themify() {
     background: t('body-bg');
+    color: t('text-main');
   }
 }
 

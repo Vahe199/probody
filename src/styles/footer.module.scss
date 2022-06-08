@@ -2,7 +2,11 @@
 
 .footer {
   border-radius: 32px 32px 0 0;
-  background-color: #f7f7f7;
+
+  @include themify() {
+    background-color: t('bg-secondlayer');
+  }
+
   padding: 20px;
   font-size: 16px;
 
@@ -17,20 +21,26 @@
   a {
     text-decoration: none;
     @include themify() {
-      color: t('text-primary');
+      color: t('link-color');
     }
     font-family: Lack, sans-serif;
   }
 }
 
 .caption {
-  color: #616161;
+  @include themify() {
+    color: t('text-caption');
+  }
 }
 
 .splitter {
   width: 90%;
   height: 1px;
-  background: #E4E4E4;
+
+  @include themify() {
+    background-color: t('line-color');
+  }
+
   margin: 0 auto;
 
   &::before {

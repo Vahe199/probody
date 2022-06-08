@@ -12,9 +12,13 @@ $themes: (
                 text-secondary: #F6F6F6,
                 text-tertiary: #252420,
                 text-disabled: #616161,
-                text-caption: #9a9a9a,
+                text-caption: #616161,
+                link-color: #252420,
                 input-focus-border-color: #252420,
                 input-border-color: #ccc,
+                logo-color: #252420,
+                line-color: #e4e4e4,
+                bg-secondlayer: #f7f7f7
         ),
         dark: (
                 bg-primary: #FFC83A,
@@ -24,14 +28,18 @@ $themes: (
                 bg-success: #6FCF97,
                 bg-danger: #FF5252,
                 body-bg: #252420,
-                text-main: #f6f6f6,
+                link-color: #f7f7f7,
+                text-main: #F7F7F7,
                 text-primary: #252420,
                 text-secondary: #F6F6F6,
                 text-tertiary: #252420,
                 text-disabled: #616161,
-                text-caption: #9a9a9a,
+                text-caption: #ccc,
                 input-focus-border-color: #f6f6f6,
                 input-border-color: #616161,
+                logo-color: #f7f7f7,
+                line-color: #454543,
+                bg-secondlayer: #454543
         )
 );
 

@@ -76,6 +76,7 @@ export default {
     salonAddress: 'Адрес салона',
     typeYourPhoneNumber: 'Введите Ваш номер телефона',
     phone: 'Телефон',
+    mail: 'Почта',
     pc: 'шт',
     tellAboutService: 'Расскажите об услуге',
     massageCost: 'Стоимость массажа',
