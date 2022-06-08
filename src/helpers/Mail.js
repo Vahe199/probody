@@ -41,10 +41,8 @@ export default class Mail {
     }
 
     async send() {
-        const res = await transporter.sendMail(Object.assign({}, this.config, {
+        transporter.sendMail(Object.assign({}, this.config, {
             to: this.recipients.join(', ')
         }))
-
-        console.log(res)
     }
 }

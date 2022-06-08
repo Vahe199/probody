@@ -1,8 +1,8 @@
 import express from 'express'
-import next from 'next'
-import APIv1 from './v1/index.js'
 import './helpers/Environment.js'
 import './helpers/MongoDB.js'
+import next from 'next'
+import APIv1 from './v1/index.js'
 import bodyParser from "body-parser"
 import cookieParser from 'cookie-parser'
 import * as mime from "mime-types"
