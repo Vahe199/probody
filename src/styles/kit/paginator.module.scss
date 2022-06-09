@@ -1,0 +1,47 @@
+@import "../themes";
+
+.pageList {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  align-items: center;
+  user-select: none;
+  border-radius: 16px;
+}
+
+.bgTertiary {
+  @include themify() {
+    background: t('bg-tertiary');
+  }
+}
+
+.bgSecondlayer {
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+}
+
+.darkModeBtn {
+  @include themify() {
+    background: t('bg-secondlayer') !important;
+    color: t('text-main') !important;
+  }
+}
+
+.page {
+  @include themify() {
+    cursor: pointer;
+    width: 85%;
+    height: 85%;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    border-radius: 16px;
+    margin: 0 4px;
+
+    &.current {
+      background: t('secondlayer-accent-bg');
+      color: t('secondlayer-accent-text');
+    }
+  }
+}

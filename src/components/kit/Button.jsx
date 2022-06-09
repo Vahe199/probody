@@ -35,6 +35,10 @@ class Button extends React.Component {
     }
 
     handleClick(e) {
+        if (this.props.isDisabled) {
+            return
+        }
+
         if (this.props.onClick) {
             this.props.onClick(e)
         } else if (this.props.mapClick) {
@@ -59,7 +63,7 @@ class Button extends React.Component {
         return <div className={css['theme--' + theme]}><button
             onClick={this.handleClick}
             style={this.props.style}
-            className={cnb('non-selectable', this.props.className, css.btn, css[this.props.size], css[this.props.color], this.props.isDisabled ? css.disabled : '', this.props.focus ? '' : css['non-focusable'])}>
+            className={cnb('non-selectable', this.props.className, css.btn, css[this.props.size], css[this.props.color], this.props.isDisabled ? [css['non-focusable'], css.disabled] : '', this.props.focus ? '' : css['non-focusable'])}>
             {this.props.iconLeft && <Icon name={this.props.iconLeft}/>}
             <span className={'va-middle'} style={textMargins}>{this.props.children}</span>
             {this.props.iconRight && <Icon name={this.props.iconRight}/>}

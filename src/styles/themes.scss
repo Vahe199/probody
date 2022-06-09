@@ -2,7 +2,7 @@ $themes: (
         light: (
                 bg-primary: #FFC83A,
                 bg-secondary: #000,
-                bg-tertiary: #E4E4E4,
+                bg-tertiary: #F6F6F6,
                 bg-disabled: #F6F6F6,
                 bg-success: #6FCF97,
                 bg-danger: #FF5252,
@@ -25,7 +25,9 @@ $themes: (
                 text-accent: #f7f7f7,
                 accent-shadow: #6a6a6a,
                 another-text-disabled: #9a9a9a,
-                border-disabled: #9a9a9a
+                border-disabled: #9a9a9a,
+                secondlayer-accent-bg: #fff,
+                secondlayer-accent-text: #252420,
         ),
         dark: (
                 bg-primary: #FFC83A,
@@ -53,7 +55,9 @@ $themes: (
                 text-accent: #252420,
                 accent-shadow: #5a5a5a,
                 another-text-disabled: #9a9a9a,
-                border-disabled: #9a9a9a
+                border-disabled: #9a9a9a,
+                secondlayer-accent-bg: #f7f7f7,
+                secondlayer-accent-text: #252420,
         )
 );
 
