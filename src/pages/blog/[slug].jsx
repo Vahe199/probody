@@ -75,10 +75,10 @@ class BlogArticlePage extends React.Component {
     }
 
     render() {
-        const {t} = this.context
+        const {t, isMobile} = this.context
 
         return <section>
-            <div style={{marginTop: 32}} bp={'grid'}>
+            <div style={{marginTop: isMobile ? 0 : 32}} bp={'grid'}>
                 <div bp={'12 8@md'}>
                     {this.state.article.title &&
                         <ArticleCard single={true} title={this.state.article.title} photos={this.state.article.photos}

@@ -22,6 +22,15 @@
     position: relative;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.fit {
+  height: 100%;
+  width: 100%;
+}
+
 .grow-1 {
     flex-grow: 1;
 }

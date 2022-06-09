@@ -184,11 +184,13 @@ class BlogPage extends React.Component {
     }
 
     render() {
-        const {t} = this.context
+        const {t, isMobile} = this.context
 
         return <section>
-            <p className="caption">{t('gladToSeeYouHere')}</p>
-            <h1>{t('welcomeToOurBlog')}</h1>
+            <div className={'responsive-content'}>
+                <p className="caption">{t('gladToSeeYouHere')}</p>
+                <h1>{t('welcomeToOurBlog')}</h1>
+            </div>
             <div style={{marginTop: 32}} bp={'grid'}>
                 <div bp={'12 8@md'}>
                     <div bp={'grid'} style={{marginBottom: 12}}>
@@ -199,7 +201,7 @@ class BlogPage extends React.Component {
                         )}
                     </div>
                     {this.state.pageCount > 1 && <Paginator page={this.state.page} onChange={this.handlePageChange}
-                               pageCnt={this.state.pageCount}/>}
+                                                            pageCnt={this.state.pageCount}/>}
                 </div>
                 <div bp={'12 4@md'}>
                     <ShareInSocialMedia/>
