@@ -89,4 +89,5 @@ export default {
     detail: 'Подробнее',
     forward: 'Вперед',
     backward: 'Назад',
+    otherNews: 'Другие новости',
 }
