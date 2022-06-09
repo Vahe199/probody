@@ -2,6 +2,7 @@ import React from "react"
 import css from '../../../styles/kit/forms/radio.module.scss'
 import PropTypes from "prop-types"
 import {cnb} from "cnbuilder"
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class RadioGroup extends React.Component {
     constructor(props) {
@@ -29,6 +30,8 @@ export default class RadioGroup extends React.Component {
         columnView: false
     }
 
+    static contextType = GlobalContext
+
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
             this.setState({value: this.props.value})
@@ -50,7 +53,9 @@ export default class RadioGroup extends React.Component {
     }
 
     render() {
-        return <div style={this.props.style}>
+        const {theme} = this.context
+
+        return <div style={this.props.style} className={css['theme--' + theme]}>
             <div style={{marginBottom: 8}}>
                 <span className={css.caption}>{this.props.name}</span>
             </div>

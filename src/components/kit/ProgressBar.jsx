@@ -19,7 +19,7 @@ export default class ProgressBar extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}>
+        return <div className={css['theme--' + theme]}>
             <div className={cnb(css.root, this.props.mobile ? css.mobile : '')}>
                 <div className={css.progress} style={{width: this.props.value * 100 + '%'}}>&nbsp;</div>
             </div>

@@ -74,7 +74,7 @@ export default class TextArea extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}>
+        return <div className={css['theme--' + theme]}>
             <div className={cnb(css.inputRoot, this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>

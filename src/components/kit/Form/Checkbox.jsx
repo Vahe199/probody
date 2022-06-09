@@ -56,7 +56,7 @@ export default class Checkbox extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}><div className={css.root}>
+        return <div className={css['theme--' + theme]}><div className={css.root}>
             <div>
                 {this.props.icon && <Icon name={this.props.icon}/>}
                 <span>{this.props.name}</span>

@@ -29,7 +29,7 @@ export default class WeekView extends React.Component {
                 return weekDays[dayName]
             })
 
-        return <div className={'theme--' + theme}>
+        return <div className={css['theme--' + theme]}>
             <div className={cnb('flex', 'non-selectable', css.root)}>
                 {(new Array(7)).fill('').map((day, dayIndex) => {
                     const dayDate = monDate.plus({days: dayIndex})

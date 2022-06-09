@@ -58,7 +58,7 @@ export default class Select extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}><div className={cnb(css.inputRoot, this.props.variant === 'underline' ? css.underline : css.outlined)}>
+        return <div className={css['theme--' + theme]}><div className={cnb(css.inputRoot, this.props.variant === 'underline' ? css.underline : css.outlined)}>
             <div className={css.label}>{this.props.label}</div>
             <div className={'flex'}>
                 <div style={{

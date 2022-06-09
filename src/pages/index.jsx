@@ -2,6 +2,7 @@ import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
 import OTPInput from "../components/kit/Form/OTPInput";
+import AboutUsSection from "../components/AboutUsSection.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -59,6 +60,8 @@ class Home extends React.Component {
                     snubnose parasitic eel airbreathing catfish snipe eel pollock. Lionfish yellow moray; Blenny
                     wolffish knifefish mudsucker, bramble shark leopard danio whalefish snoek rough sculpin.</p>
                 <br/><br/>
+
+                <AboutUsSection/>
             </div>
         );
     }

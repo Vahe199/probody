@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Icon from "./Icon.jsx";
 import Checkbox from "./Form/Checkbox";
 import {cnb} from "cnbuilder";
+import {GlobalContext} from "../../contexts/Global.js";
 
 export default class Collapsible extends React.Component {
     constructor(props) {
@@ -29,6 +30,8 @@ export default class Collapsible extends React.Component {
         selectable: false
     }
 
+    static contextType = GlobalContext
+
     componentDidMount() {
         if (this.props.defaultOpen) {
             this.setState({
@@ -42,9 +45,11 @@ export default class Collapsible extends React.Component {
     }
 
     render() {
-        return <div>
-            <div className={css.head}>
-                <div className={'flex grow-1'}>
+        const {theme} = this.context
+
+        return <div className={css['theme--' + theme]}>
+            <div className={cnb(css.head, this.props.value ? css.checked : '')}>
+                <div className={'flex grow-1 vertical-center'}>
                     {this.props.selectable && <Checkbox onUpdate={this.props.onUpdate} value={this.props.value} />}
                     <span onClick={this.toggle} className={'subtitle2 fullwidth'} style={{marginLeft: 12}}>{this.props.title}</span>
                 </div>

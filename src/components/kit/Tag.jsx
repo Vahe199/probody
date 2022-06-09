@@ -21,7 +21,7 @@ export default class Tag extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}><div className={cnb(css.root, 'non-selectable', this.props.enabled ? css.enabled : css.disabled)}>
+        return <div className={css['theme--' + theme]}><div className={cnb(css.root, 'non-selectable', this.props.enabled ? css.enabled : css.disabled)}>
             {this.props.icon && <Icon name={this.props.icon}/>}
             <span style={{marginLeft: this.props.icon ? 8 : 0}}>{this.props.label}</span>
         </div></div>

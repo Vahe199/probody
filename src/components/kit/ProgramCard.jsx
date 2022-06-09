@@ -20,7 +20,7 @@ export default class ProgramCard extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={'theme--' + theme}>
+        return <div className={css['theme--' + theme]}>
             <div className={cnb(css.root)}>
                 <div className={css.label}>{this.props.title}</div>
                 <div className={cnb(css.value)}>

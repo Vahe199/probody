@@ -128,7 +128,7 @@ export default class TextInput extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div style={this.props.style} className={'theme--' + theme}>
+        return <div style={this.props.style} className={css['theme--' + theme]}>
             <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>

@@ -51,19 +51,19 @@ export default class OTPInput extends React.Component {
                 <span className={css.subtitle}>{t('verificationCode')}</span>
 
                 <div className="flex justify-between" style={{gap: 4}}>
-                    <input type={'number'} value={this.state.values[0]} ref={this.state.refs[0]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[0]} ref={this.state.refs[0]}
                            onInput={e => this.handleInputFrom(0, e)} autoComplete={'one-time-code'}
                            autoFocus={true}/>
-                    <input type={'number'} value={this.state.values[1]} ref={this.state.refs[1]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[1]} ref={this.state.refs[1]}
                            onKeyDown={e => this.handleKeyDown(1, e.key)} onInput={e => this.handleInputFrom(1, e)}
                            maxLength={1}/>
-                    <input type={'number'} value={this.state.values[2]} ref={this.state.refs[2]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[2]} ref={this.state.refs[2]}
                            onKeyDown={e => this.handleKeyDown(2, e.key)} onInput={e => this.handleInputFrom(2, e)}
                            maxLength={1}/>
-                    <input type={'number'} value={this.state.values[3]} ref={this.state.refs[3]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[3]} ref={this.state.refs[3]}
                            onKeyDown={e => this.handleKeyDown(3, e.key)} onInput={e => this.handleInputFrom(3, e)}
                            maxLength={1}/>
-                    <input type={'number'} value={this.state.values[4]} ref={this.state.refs[4]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[4]} ref={this.state.refs[4]}
                            onKeyDown={e => this.handleKeyDown(4, e.key)} onInput={e => this.handleInputFrom(4, e)}
                            maxLength={1}/>
                 </div>

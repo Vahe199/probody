@@ -1,6 +1,17 @@
+@import "../themes";
+
 .head {
   display: flex;
-  background: #F6F6F6;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+    color: t('text-secondlayer');
+
+    &.checked {
+      color: t('text-main');
+    }
+  }
+
   border-radius: 20px;
   padding: 22px;
   user-select: none;

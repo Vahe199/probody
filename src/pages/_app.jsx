@@ -2,7 +2,6 @@ import window from 'global'
 import '../styles/globals.scss'
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar.jsx"
-import AboutUsSection from "../components/AboutUsSection.jsx";
 import {GlobalContext} from "../contexts/Global"
 import React from "react"
 
@@ -104,7 +103,6 @@ class ProbodyApp extends React.Component {
                         <div className={'container'}>
                             <Page {...pageProps} />
                         </div>
-                        <AboutUsSection/>
                         <Footer/>
                     </div>
                 </div>

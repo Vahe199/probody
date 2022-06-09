@@ -1,10 +1,9 @@
 import React from "react";
 import TextSection from "./kit/TextSection";
 import {GlobalContext} from "../contexts/Global.js";
-import InfoBlock from "./kit/InfoBlock.jsx";
 import StatsInfoBlock from "./kit/StatsInfoBlock.jsx";
 import css from '../styles/about-us.module.scss';
-import {cnb} from "cnbuilder";
+import ShareInSocialMedia from "./ShareInSocialMedia.jsx";
 
 export default class AboutUsSection extends React.Component {
     static contextType = GlobalContext;
@@ -13,7 +12,7 @@ export default class AboutUsSection extends React.Component {
         const {t, isMobile, theme} = this.context;
 
         return <div className={css['theme--' + theme]}>
-            <section className={'container'} bp={'grid'} style={{marginBottom: 24}}>
+            <section className={'container'} bp={'grid'}>
                 <div bp={'12 8@md'}>
                     <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: 24}}>
                     </TextSection>
@@ -57,29 +56,7 @@ export default class AboutUsSection extends React.Component {
                             }
                         ]}/>
                     </div>
-                    <InfoBlock>
-                        <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
-                        <div className={cnb(css.socialBlock)}>
-                            <div>
-                                <img src={"/icons/vk_" + theme + ".svg"} alt={t('vk')}/>
-                            </div>
-                            <div>
-                                <img src={"/icons/fb_" + theme + ".svg"} alt={t('fb')}/>
-                            </div>
-                            <div>
-                                <img src={"/icons/ok_" + theme + ".svg"} alt={t('ok')}/>
-                            </div>
-                            <div>
-                                <img src={"/icons/vi_" + theme + ".svg"} alt={t('vi')}/>
-                            </div>
-                            <div>
-                                <img src={"/icons/wa_" + theme + ".svg"} alt={t('wa')}/>
-                            </div>
-                            <div>
-                                <img src={"/icons/tg_" + theme + ".svg"} alt={t('tg')}/>
-                            </div>
-                        </div>
-                    </InfoBlock>
+                    <ShareInSocialMedia />
                 </div>
             </section>
         </div>
