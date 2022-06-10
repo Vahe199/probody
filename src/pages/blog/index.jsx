@@ -184,7 +184,7 @@ class BlogPage extends React.Component {
     }
 
     render() {
-        const {t, isMobile} = this.context
+        const {t} = this.context
 
         return <section>
             <div className={'responsive-content'}>

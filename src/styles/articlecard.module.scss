@@ -47,3 +47,44 @@
     }
   }
 }
+
+.vacancyInfo {
+  line-height: 34px;
+  padding: 16px;
+}
+
+.value {
+  @include themify() {
+    font-size: 18px;
+    color: t('text-main');
+  }
+}
+
+.vacancyCard {
+  &:not(:last-child)::after {
+    content: ' ';
+    user-select: none;
+
+    @include themify() {
+      background: t('line-color');
+      height: 1px;
+      grid-column: span 12;
+      margin-bottom: 16px;
+      display: block;
+    }
+  }
+}
+
+.contactContainer {
+  display: flex;
+  padding: 12px 8px;
+  gap: 8px;
+
+  &.mobile div {
+    width: 50%;
+
+    button {
+      width: 100%;
+    }
+  }
+}

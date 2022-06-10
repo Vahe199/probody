@@ -31,10 +31,10 @@ const VacancySchema = new Schema({
     },
     workHours: {
         from: {
-            type: Number
+            type: String
         },
         to: {
-            type: Number
+            type: String
         },
         isOther: {
             type: Boolean
@@ -60,7 +60,7 @@ const VacancySchema = new Schema({
         type: String,
         required: true
     },
-    photo: {
+    photos: {
       type: [String],
       required: true
     },
@@ -70,7 +70,7 @@ const VacancySchema = new Schema({
     },
     slug: {
         type: String,
-        default() {// Привет, мир! => privet-mir-25
+        default() {// Привет, мир! => privet-mir25
             return (new CyrillicToTranslit).transform(this.salonTitle.replace(/[&\/\\#,!+()$~%.'":*?<>{}]/g, '').trim(), '-') + Numbers.random(1, 1000)
         }
     },

@@ -11,7 +11,7 @@
 
 .bgTertiary {
   @include themify() {
-    background: t('bg-tertiary');
+    background: t('bg-secondlayer');
   }
 }
 
@@ -21,7 +21,7 @@
   }
 }
 
-.darkModeBtn {
+.btn {
   @include themify() {
     background: t('bg-secondlayer') !important;
     color: t('text-main') !important;

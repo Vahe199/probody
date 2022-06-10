@@ -185,16 +185,10 @@ const WorkerSchema = new Schema({
     },
     workHours: {
         from: {
-            type: Number,
-            required: true,
-            min: 0,
-            max: 23
+            type: String
         },
         to: {
-            type: Number,
-            required: true,
-            min: 1,
-            max: 24
+            type: String
         }
     },
     workDays: {

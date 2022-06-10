@@ -21,7 +21,7 @@ export default class Footer extends React.Component {
                             <div><Link href={'/'}>{t('aboutProject')}</Link></div>
                             <div><Link href={'/'}>{t('visitors')}</Link></div>
                             <div><Link href={'/'}>{t('salonAds')}</Link></div>
-                            <div><Link href={'/'}>{t('salonVacancies')}</Link></div>
+                            <div><Link href={'/vacancies'}>{t('salonVacancies')}</Link></div>
                             <div><Link href={'/blog'}>{t('records')}</Link></div>
                             <div><Link href={'/salon/new'}>{t('addSalon')}</Link></div>
                         </div>

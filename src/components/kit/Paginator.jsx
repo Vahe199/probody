@@ -27,7 +27,7 @@ export default class Paginator extends React.Component {
         return <div className={css['theme--' + theme]}>
             <div className="flex justify-between" style={{gap: 6}}>
                 <div>
-                    <Button isDisabled={this.props.page === 1} className={theme === 'dark' ? css.darkModeBtn : ''} onClick={() => this.props.onChange(this.props.page - 1)} color={'tertiary'}>
+                    <Button isDisabled={this.props.page === 1} className={css.btn} onClick={() => this.props.onChange(this.props.page - 1)} color={'tertiary'}>
                         <Icon name={'arrow_left'} style={{width: 18, height: 12, marginRight: 8}} />
                         {t('backward')}
                     </Button>
@@ -38,7 +38,7 @@ export default class Paginator extends React.Component {
                     )}
                 </div>
                 <div>
-                    <Button isDisabled={this.props.page === this.props.pageCnt} className={theme === 'dark' ? css.darkModeBtn : ''} onClick={() => this.props.onChange(this.props.page + 1)} color={'tertiary'}>
+                    <Button isDisabled={this.props.page === this.props.pageCnt} className={css.btn} onClick={() => this.props.onChange(this.props.page + 1)} color={'tertiary'}>
                         {t('forward')}
                         <Icon name={'arrow_right'} style={{width: 18, height: 12, marginLeft: 8}} />
                     </Button>

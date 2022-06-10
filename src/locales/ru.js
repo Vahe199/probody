@@ -90,4 +90,9 @@ export default {
     forward: 'Вперед',
     backward: 'Назад',
     otherNews: 'Другие новости',
+    call: 'Позвонить',
+    workDays: 'Рабочие дни',
+    salaryShort: 'ЗП',
+    workTime: 'Часы работы',
+    welcomeToOurAnnouncementBoard: 'Добро пожаловать на нашу доску объявлений',
 }

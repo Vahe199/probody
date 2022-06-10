@@ -35,11 +35,11 @@ class Menu extends React.Component {
             <Popup style={isMobile ? {} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
                 <ul className={css.list}>
                     <li><Link href={'/blog'}>{t('news')}</Link></li>
-                    <li><Link href={'/visitors'}>{t('forVisitors')}</Link></li>
+                    <li><Link href={'/'}>{t('forVisitors')}</Link></li>
                     <li><Link href={'/vacancies'}>{t('salonVacancies')}</Link></li>
                     <li><Link href={'/salon/new'}>{t('addArticle')}</Link></li>
-                    <li><Link href={'/contacts'}>{t('contacts')}</Link></li>
-                    <li><Link href={'/about'}>{t('aboutProject')}</Link></li>
+                    <li><Link href={'/'}>{t('contacts')}</Link></li>
+                    <li><Link href={'/'}>{t('aboutProject')}</Link></li>
                 </ul>
             </Popup>
         </div>
