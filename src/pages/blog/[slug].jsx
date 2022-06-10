@@ -3,6 +3,7 @@ import React from "react";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import ArticleCard from "../../components/ArticleCard.jsx";
 import {GlobalContext} from "../../contexts/Global.js";
+import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 
 class BlogArticlePage extends React.Component {
     static contextType = GlobalContext
@@ -75,10 +76,24 @@ class BlogArticlePage extends React.Component {
     }
 
     render() {
-        const {t, isMobile} = this.context
+        const {t} = this.context
 
         return <section>
-            <div style={{marginTop: isMobile ? 0 : 32}} bp={'grid'}>
+            <Breadcrumbs items={[
+                {
+                    name: t('mainPage'),
+                    href: '/',
+                },
+                {
+                    name: t('records'),
+                    href: '/blog',
+                },
+                {
+                    name: this.state.article.title || t('record'),
+                    href: '/blog/' + this.state.article.slug,
+                }
+            ]} />
+            <div bp={'grid'}>
                 <div bp={'12 8@md'}>
                     {this.state.article.title &&
                         <ArticleCard single={true} title={this.state.article.title} photos={this.state.article.photos}

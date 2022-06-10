@@ -5,6 +5,7 @@ import {withRouter} from "next/router.js";
 import ArticleCard from "../../components/ArticleCard";
 import Paginator from "../../components/kit/Paginator";
 import Objects from "../../helpers/Objects.js";
+import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -187,6 +188,16 @@ class BlogPage extends React.Component {
         const {t} = this.context
 
         return <section>
+            <Breadcrumbs items={[
+                {
+                    name: t('mainPage'),
+                    href: '/',
+                },
+                {
+                    name: t('records'),
+                    href: '/blog',
+                }
+            ]}/>
             <div className={'responsive-content'}>
                 <p className="caption">{t('gladToSeeYouHere')}</p>
                 <h1>{t('welcomeToOurBlog')}</h1>

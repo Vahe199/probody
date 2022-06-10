@@ -223,12 +223,12 @@ class BlogPage extends React.Component {
 
                                         {isMobile
                                             ? <div className={css.content}>
-                                                <p className={css.caption}>{vac.salonName}</p>
+                                                <p className={css.caption}>{vac.salonTitle}</p>
                                                 <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
                                                 <p>{vac.description}</p>
                                             </div>
                                             : <div className={css.contactContainer}>
-                                                <Link href={'/blog/' + vac.slug}><Button>{t('detail')}</Button></Link>
+                                                <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
                                                 <Link href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
                                                     {t('call')}
                                                 </Button></Link>
@@ -237,20 +237,20 @@ class BlogPage extends React.Component {
                                 </div>
                                 <div bp={'12 7@md'} className={cnb(css.cardRoot, css.vacancyInfo)}>
                                     {!isMobile && <div className={css.content} style={{padding: 0, marginBottom: 12}}>
-                                        <p className={css.caption}>{vac.salonName}</p>
+                                        <p className={css.caption}>{vac.salonTitle}</p>
                                         <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
                                         <p>{vac.description}</p>
                                     </div>}
 
-                                    <div className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
                                         <span className={css.caption}>{t('workDays')}</span>
                                         <span className={css.value}>{Dates.humanizeDuration(vac.workDays, this.props.router.locale)}</span>
                                     </div>
-                                    <div className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
                                         <span className={css.caption}>{t('workTime')}</span>
                                         <span className={css.value}>{vac.workHours.from}-{vac.workHours.to}</span>
                                     </div>
-                                    <div className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
                                         <span className={css.caption}>{t('salaryShort')}</span>
                                         <span className={css.value}>{t('from')} {formatPrice(vac.salary)} {t('kzt')}</span>
                                     </div>
@@ -260,7 +260,7 @@ class BlogPage extends React.Component {
                                     </div>
 
                                     {isMobile && <div className={cnb(css.contactContainer, css.mobile)}>
-                                        <Link href={'/blog/' + vac.slug}><Button>{t('detail')}</Button></Link>
+                                        <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
                                         <Link href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
                                             {t('call')}
                                         </Button></Link>

@@ -1,0 +1,26 @@
+@import "../themes";
+
+
+.item:not(:last-child) {
+  cursor: pointer;
+
+  &::after {
+    content: " - ";
+    margin-left: 8px;
+  }
+}
+
+.item:last-child {
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  cursor: not-allowed;
+}
+
+.body {
+  display: flex;
+  user-select: none;
+  margin-bottom: 16px;
+  gap: 8px;
+}

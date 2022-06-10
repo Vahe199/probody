@@ -7,7 +7,8 @@ import Select from "../../components/kit/Form/Select.jsx";
 import Collapsible from "../../components/kit/Collapsible.jsx";
 import TextArea from "../../components/kit/Form/TextArea";
 import RadioGroup from "../../components/kit/Form/RadioGroup";
-import {capitalize, formatPrice} from "../../helpers/String";
+import {capitalize} from "../../helpers/String";
+import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 
 export default class NewSalonPage extends React.Component {
     static contextType = GlobalContext
@@ -106,6 +107,16 @@ export default class NewSalonPage extends React.Component {
         const {t, isMobile} = this.context;
 
         return <div>
+            <Breadcrumbs items={[
+                {
+                    name: t('mainPage'),
+                    href: '/',
+                },
+                {
+                    name: t('addingSalon'),
+                    href: '/salon/new',
+                },
+            ]} />
             <Stepper step={this.state.step} onStepChange={this.stepChangeHandler} title={t('addingSalon')}
                      steps={[
                          (<div className={css.stepBody}>

@@ -18,8 +18,8 @@ const VacancySchema = new Schema({
         enum: ['full', 'part', 'secondary'],
     },
     experience: {
-        type: [String],
-        enum: ['none', '1-3mon', '3-6mon', '6-12mon', 'more']
+        type: String,
+        enum: ['none', '3mon', '6mon', '12mon', 'more']
     },
     description: {
         type: String,
@@ -28,6 +28,10 @@ const VacancySchema = new Schema({
     title: {
         type: String,
         required: true
+    },
+    withdrawalType: {
+        type: String,
+        enum: ['cash', 'card', 'both'],
     },
     workHours: {
         from: {

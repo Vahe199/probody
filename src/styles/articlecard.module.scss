@@ -9,6 +9,7 @@
 
     .caption {
       color: t('text-caption');
+      font-size: 14px;
     }
 
     h2 {
@@ -49,14 +50,31 @@
 }
 
 .vacancyInfo {
-  line-height: 34px;
   padding: 16px;
 }
 
 .value {
   @include themify() {
     font-size: 18px;
+    text-align: right;
+    max-width: 75%;
     color: t('text-main');
+  }
+}
+
+.primaryColor {
+    @include themify() {
+        color: t('bg-primary');
+    }
+}
+
+.bigger {
+  font-size: 20px;
+  margin-right: 12px;
+  margin-left: 8px;
+
+  i {
+    vertical-align: text-bottom;
   }
 }
 
