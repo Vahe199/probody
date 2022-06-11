@@ -147,5 +147,7 @@ export default {
     sat: 'Сб',
     sun: 'Вс',
     uploadSalonPhotos: 'Загрузите фото салона',
-    woWeekend: 'Без выходных'
+    woWeekend: 'Без выходных',
+    yourNickname: 'Ваш ник',
+    enterYourWorkNickname: 'Введите Ваш рабочий ник',
 }

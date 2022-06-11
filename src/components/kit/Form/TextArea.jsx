@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
 import {GlobalContext} from "../../../contexts/Global.js";
+import ControlledTextArea from "./ControlledTextArea.jsx";
 
 export default class TextArea extends React.Component {
     constructor(props) {
@@ -80,7 +81,7 @@ export default class TextArea extends React.Component {
             <div className={cnb(css.inputRoot, (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
-                    <textarea rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
+                    <ControlledTextArea rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
                               disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder}/>
                     {this.state.locked ?
                         <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}

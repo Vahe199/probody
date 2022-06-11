@@ -5,6 +5,7 @@ import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
 import {AsYouType, isValidPhoneNumber} from "libphonenumber-js";
 import {GlobalContext} from "../../../contexts/Global.js";
+import ControlledInput from "./ControlledInput.jsx";
 
 export default class TextInput extends React.Component {
     static contextType = GlobalContext
@@ -132,7 +133,8 @@ export default class TextInput extends React.Component {
             <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
-                    <input onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />
+                    {this.props.type === 'phone' ? <input onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />
+                        : <ControlledInput onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />}
                     {this.props.type === 'password' && <Icon name={this.state.visible ? 'visible' : 'hidden'} className={css.hideIcon} onClick={this.toggleVisibility} />}
                     {this.props.type !== 'text' ? <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
                     {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}

@@ -30,7 +30,7 @@
     }
 
     &:focus-within {
-      border-color: t('text-primary');
+      border-color: t('input-focus-border-color');
     }
 
     &.errored {

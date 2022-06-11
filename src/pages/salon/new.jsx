@@ -26,7 +26,7 @@ export default class NewSalonPage extends React.Component {
         super(props);
 
         this.state = {
-            step: 4,
+            step: -1,
             model: {
                 kind: 'salon',
 
@@ -207,6 +207,21 @@ export default class NewSalonPage extends React.Component {
 
         switch (step) {
             case 0:
+                if (!isValidNumber(this.state.model.phone, 'KZ')) {
+                    isValid = false
+                    break
+                } else if (this.state.model.messengers.wa.length === 0) {
+                    this.setState({
+                        model: {
+                            ...this.state.model,
+                            messengers: {
+                                ...this.state.model.messengers,
+                                wa: this.state.model.phone
+                            }
+                        }
+                    })
+                }
+
                 if (this.state.model.name.length < 3 || this.state.model.name.length > 64) {
                     isValid = false
                     break
@@ -222,10 +237,6 @@ export default class NewSalonPage extends React.Component {
                     break
                 }
 
-                if (!isValidNumber(this.state.model.phone, 'KZ')) {
-                    isValid = false
-                    break
-                }
                 break;
 
             case 1:
@@ -236,12 +247,7 @@ export default class NewSalonPage extends React.Component {
                 break
 
             case 2:
-                if (!this.state.model.messengers.tg.length || !this.state.model.messengers.wa.length) {
-                    isValid = false
-                    break
-                }
-
-                if (!Object.values(this.state.model.social).some(Boolean)) {
+                if (!isValidNumber(this.state.model.messengers.wa, 'KZ')) {
                     isValid = false
                     break
                 }
@@ -429,7 +435,7 @@ export default class NewSalonPage extends React.Component {
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillCommonInfo')}</h2>
                                       <div bp={'grid 12 6@md'}>
-                                          <TextInput label={t('salonName')} placeholder={t('howYourSalonNamed')}
+                                          <TextInput label={t(this.state.model.kind === 'salon' ? 'salonName' : 'yourNickname')} placeholder={t(this.state.model.kind === 'salon' ? 'howYourSalonNamed' : 'enterYourWorkNickname')}
                                                      value={this.state.model.name}
                                                      onUpdate={(val) => this.setField('name', val)}/>
                                           <Select options={this.state.prefetched.regions} label={t('city')}
