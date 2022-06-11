@@ -96,6 +96,10 @@ img {
   }
 }
 
+.cursor-default * {
+    cursor: default;
+}
+
 h1 {
   font-size: 32px;
 }

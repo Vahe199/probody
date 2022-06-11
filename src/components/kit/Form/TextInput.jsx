@@ -97,8 +97,8 @@ export default class TextInput extends React.Component {
                 }
         }
 
-        if (e && !this.state.errored && this.state.value.length > 0) {
-            this.setState({success: true})
+        if (e && !this.state.errored && this.state.value.length > 3) {
+            // this.setState({success: true})
         } else if (e && !this.state.errored && this.state.value.length === 0) {
             this.setState({success: false})
         }

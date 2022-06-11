@@ -1,9 +1,0 @@
-@media (max-width: 480px) {
-    .stepBody {
-        margin: 0 16px;
-    }
-}
-
-.stepBody h2 {
-    margin-bottom: 16px;
-}

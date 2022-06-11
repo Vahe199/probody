@@ -11,6 +11,7 @@
 
   &.mobile {
     height: 4px;
+    margin-top: 16px;
   }
 
   .progress {
@@ -19,6 +20,7 @@
     }
 
     height: 100%;
+    width: 0;
     border-radius: 3px;
     transition: width 0.3s ease-in-out;
   }

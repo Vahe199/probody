@@ -139,7 +139,7 @@ export default class Footer extends React.Component {
                     </div>
                     <div bp={'4@md 12'}>
                         <span className={css.caption}>{t('mail')}</span>
-                        <Link href={'mailto:mail@gmail.com'}><h1 className={'cursor-pointer'} style={{marginBottom: 12}}>mail@gmail.com</h1></Link>
+                        <Link href={'mailto:support@probody.kz'}><h1 className={'cursor-pointer'} style={{marginBottom: 12}}>support@probody.kz</h1></Link>
                         <span className={css.caption}>{t('allRightsReserved')}</span>
                     </div>
                     <div bp={'8@md hide show@md'} style={{marginTop: 12}}>

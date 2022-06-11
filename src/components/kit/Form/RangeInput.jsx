@@ -22,7 +22,7 @@ export default class RangeInput extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={cnb(css['theme--' + theme], 'non-selectable')}>
+        return <div style={{margin: '2px 0 5px 0'}} className={cnb(css['theme--' + theme], 'non-selectable')}>
                 <div className="flex justify-between">
                     <div className={css.limit}>{this.props.min}</div>
                     <div className={css.limit}>{this.props.max}</div>

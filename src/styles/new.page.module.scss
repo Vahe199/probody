@@ -1,0 +1,84 @@
+@import "themes";
+
+@media (max-width: 480px) {
+  .stepBody {
+    margin: 0 16px;
+  }
+}
+
+.stepBody h2 {
+  margin-bottom: 16px;
+}
+
+.radioItem {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #9A9A9A;
+
+  &.checked {
+    @include themify() {
+      border: 1px solid t('bg-accent');
+    }
+
+    &::after {
+      content: " ";
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+  }
+}
+
+.proceedBtn {
+  margin: 28px 0 24px 0;
+
+  i {
+    width: 18px;
+    height: 12px;
+    margin-left: 16px;
+  }
+}
+
+.secondLayer {
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.theme--light .radio.checked::after {
+  animation: fillInLightMode .3s ease;
+  animation-fill-mode: both;
+}
+
+.theme--dark .radio.checked::after {
+  animation: fillInDarkMode .3s ease;
+  animation-fill-mode: both;
+}
+
+@keyframes fillInDarkMode {
+  to {
+    background-color: #f7f7f7;
+  }
+}
+
+@keyframes fillInLightMode {
+  to {
+    background-color: #252420;
+  }
+}

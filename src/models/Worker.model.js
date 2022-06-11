@@ -61,9 +61,6 @@ const WorkerSchema = new Schema({
         ws: {
             type: String
         },
-        fb: {
-            type: String
-        },
         tgCh: {
             type: String
         }
@@ -106,6 +103,10 @@ const WorkerSchema = new Schema({
         bust: {
             type: Number,
             enum: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]
+        },
+        show: {
+            type: Boolean,
+            default: true
         }
     },
     region: {
