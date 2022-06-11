@@ -49,7 +49,12 @@ export default class Select extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({value: this.props.value, label: this.props.options.find(i => i._id === this.props.value).name})
+        if (this.props.value) {
+            this.setState({
+                value: this.props.value,
+                label: this.props.options.find(i => i._id === this.props.value).name
+            })
+        }
     }
 
     async handleUpdate(key) {
