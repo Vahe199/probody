@@ -4,16 +4,16 @@
   @include themify() {
     &.outlined {
       border-radius: 16px;
-      border: 1px solid #ccc;
+      border: 1px solid t('input-border-color');
       padding: 16px 20px;
     }
 
     &.underline {
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid t('input-border-color');
       padding: 16px 0;
 
       .label {
-        color: #9A9A9A;
+        color: t('text-caption');
       }
     }
 

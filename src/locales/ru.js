@@ -147,4 +147,5 @@ export default {
     sat: 'Сб',
     sun: 'Вс',
     uploadSalonPhotos: 'Загрузите фото салона',
+    woWeekend: 'Без выходных'
 }

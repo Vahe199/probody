@@ -26,7 +26,7 @@ export default class NewSalonPage extends React.Component {
         super(props);
 
         this.state = {
-            step: -1,
+            step: 4,
             model: {
                 kind: 'salon',
 
@@ -80,6 +80,7 @@ export default class NewSalonPage extends React.Component {
         this.toggleWorkDay = this.toggleWorkDay.bind(this);
         this.addPhotoInput = this.addPhotoInput.bind(this);
         this.setPhoto = this.setPhoto.bind(this);
+        this.setAllWorkDays = this.setAllWorkDays.bind(this);
     }
 
     toggleWorkDay(day) {
@@ -132,6 +133,15 @@ export default class NewSalonPage extends React.Component {
                 services,
                 leads,
                 regions
+            }
+        })
+    }
+
+    setAllWorkDays() {
+        this.setState({
+            model: {
+                ...this.state.model,
+                workDays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
             }
         })
     }
@@ -766,14 +776,8 @@ export default class NewSalonPage extends React.Component {
                                               </div>
 
                                               <div className={'flex'} style={{marginTop: 16}}>
-                                                  <Checkbox value={this.state.model.workHours.roundclock}
+                                                  <Checkbox reverse value={this.state.model.workHours.roundclock} name={t('roundclock')}
                                                             onUpdate={() => this.updateWorkHours({roundclock: !this.state.model.workHours.roundclock})}/>
-                                                  <span className={'non-selectable'}
-                                                        onClick={() => this.updateWorkHours({roundclock: !this.state.model.workHours.roundclock})}
-                                                        style={{
-                                                            marginLeft: 12,
-                                                            cursor: 'pointer'
-                                                        }}>{t('roundclock')}</span>
                                               </div>
                                           </div>
 
@@ -795,6 +799,11 @@ export default class NewSalonPage extends React.Component {
                                                             name={t('sat')} onUpdate={() => this.toggleWorkDay('sat')}/>
                                                   <Checkbox reverse value={this.state.model.workDays.includes('sun')}
                                                             name={t('sun')} onUpdate={() => this.toggleWorkDay('sun')}/>
+                                              </div>
+
+                                              <div className={'flex'} style={{marginTop: 16}}>
+                                                  <Checkbox reverse name={t('woWeekend')} value={this.state.model.workDays.length === 7}
+                                                            onUpdate={this.setAllWorkDays}/>
                                               </div>
                                           </div>
                                       </div>

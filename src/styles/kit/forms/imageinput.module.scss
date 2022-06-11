@@ -2,7 +2,7 @@
 
 .root {
   @include themify() {
-    border: 1px solid t('border-color');
+    border: 1px solid t('input-border-color');
     background-color: t('bg-secondlayer');
   }
 
