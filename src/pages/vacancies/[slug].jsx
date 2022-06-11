@@ -149,19 +149,19 @@ class VacancyViewPage extends React.Component {
                             <InfoBlock>
                                 <div bp={'grid 6'}>
                                     <div>
-                                        <div className={css.caption}>{t('salaryShort')}</div>
+                                        <div className={css.infoCaption}>{t('salaryShort')}</div>
                                         <div>{t('from')} {formatPrice(this.state.vacancy.salary)} {t('kzt')}</div>
                                     </div>
                                     <div>
-                                        <div className={css.caption}>{t('withdrawal')}</div>
+                                        <div className={css.infoCaption}>{t('withdrawal')}</div>
                                         <div>{t('withdrawal_' + this.state.vacancy.withdrawalType)}</div>
                                     </div>
                                     <div>
-                                        <div className={css.caption}>{t('workExperience')}</div>
+                                        <div className={css.infoCaption}>{t('workExperience')}</div>
                                         <div>{t('workExperience_' + this.state.vacancy.experience)}</div>
                                     </div>
                                     <div>
-                                        <div className={css.caption}>{t('')}</div>
+                                        <div className={css.infoCaption}>{t('')}</div>
                                         <div></div>
                                     </div>
                                 </div>

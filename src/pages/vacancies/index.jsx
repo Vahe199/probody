@@ -7,11 +7,7 @@ import Objects from "../../helpers/Objects.js";
 import css from "../../styles/articlecard.module.scss";
 import Link from "next/link.js";
 import Button from "../../components/kit/Button.jsx";
-import Point from "../../models/Point.schema.js";
-import CyrillicToTranslit from "cyrillic-to-translit-js";
-import Numbers from "../../helpers/Numbers.js";
 import {cnb} from "cnbuilder";
-import Icon from "../../components/kit/Icon.jsx";
 import Dates from "../../helpers/Dates.js";
 import {formatPrice} from "../../helpers/String.js";
 
@@ -60,78 +56,6 @@ class BlogPage extends React.Component {
             page: Number(this.props.router.query.page) || 1
         })
 
-        // host: {
-        //     type: Schema.Types.ObjectId, ref: 'User'
-        // },
-        // salary: {
-        //     type: Number,
-        //         required: true
-        // },
-        // employment: {
-        //     type: [String],
-        //     enum: ['full', 'part', 'secondary'],
-        // },
-        // experience: {
-        //     type: [String],
-        //     enum: ['none', '1-3mon', '3-6mon', '6-12mon', 'more']
-        // },
-        // description: {
-        //     type: String,
-        //         required: true
-        // },
-        // title: {
-        //     type: String,
-        //         required: true
-        // },
-        // workHours: {
-        //     from: {
-        //         type: Number
-        //     },
-        //     to: {
-        //         type: Number
-        //     },
-        //     isOther: {
-        //         type: Boolean
-        //     }
-        // },
-        // phone: {
-        //     type: String,
-        //         required: true
-        // },
-        // whatsapp: {
-        //     type: String,
-        // },
-        // workDays: {
-        //     type: [String],
-        //     enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
-        // default: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-        // },
-        // salonTitle: {
-        //     type: String,
-        //         required: true
-        // },
-        // salonAddress: {
-        //     type: String,
-        //         required: true
-        // },
-        // photos: {
-        //     type: [String],
-        //         required: true
-        // },
-        // salonLocation: {
-        //     type: Point,
-        //         required: true
-        // },
-        // slug: {
-        //     type: String,
-        // default() {// Привет, мир! => privet-mir25
-        //         return (new CyrillicToTranslit).transform(this.salonTitle.replace(/[&\/\\#,!+()$~%.'":*?<>{}]/g, '').trim(), '-') + Numbers.random(1, 1000)
-        //     }
-        // },
-        // region: {
-        //     type: Schema.Types.ObjectId,
-        //         ref: "Region"
-        // }
         await this.setState({
             vacancies: [
                 {

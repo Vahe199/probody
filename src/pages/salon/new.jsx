@@ -9,6 +9,7 @@ import TextArea from "../../components/kit/Form/TextArea";
 import RadioGroup from "../../components/kit/Form/RadioGroup";
 import {capitalize} from "../../helpers/String";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
+import RangeInput from "../../components/kit/Form/RangeInput.jsx";
 
 export default class NewSalonPage extends React.Component {
     static contextType = GlobalContext
@@ -24,7 +25,8 @@ export default class NewSalonPage extends React.Component {
                 region: '',
                 phone: '+7',
                 address: '',
-                programs: []
+                programs: [],
+                rooms: 3
             },
             prefetched: {
                 regions: [
@@ -121,6 +123,8 @@ export default class NewSalonPage extends React.Component {
                      steps={[
                          (<div className={css.stepBody}>
                              <h1>Шаг 1</h1>
+                             <p>{t('roomCount')}</p>
+                             <RangeInput min={1} max={20} value={this.state.model.rooms} onUpdate={(value) => this.setField('rooms', value)} />
                          </div>),
                          (<div className={css.stepBody}>
                              <h2>{t('fillCommonInfo')}</h2>

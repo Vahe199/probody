@@ -116,4 +116,5 @@ export default {
     workExperience_6mon: 'От 3 месяцев',
     workExperience_12mon: 'От 6 месяцев',
     workExperience_more: 'Более 1 года',
+    roomCount: 'Количество комнат',
 }
