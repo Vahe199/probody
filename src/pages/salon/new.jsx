@@ -26,7 +26,7 @@ export default class NewSalonPage extends React.Component {
         super(props);
 
         this.state = {
-            step: 5,
+            step: -1,
             model: {
                 kind: 'salon',
 
