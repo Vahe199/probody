@@ -44,6 +44,13 @@
 
 .proceedBtn {
   margin: 28px 0 24px 0;
+  min-width: 300px;
+
+  span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   i {
     width: 18px;

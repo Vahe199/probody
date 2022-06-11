@@ -68,8 +68,10 @@
     }
 
     &.locked {
-      &, input {
-        background: #f7f7f7;
+      &, input, textarea {
+        color: t('text-disabled');
+        background: t('bg-disabled');
+        cursor: default;
       }
     }
 

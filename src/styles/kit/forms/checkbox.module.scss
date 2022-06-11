@@ -6,6 +6,14 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
+
+  &.reverse {
+    flex-direction: row-reverse;
+
+    .checkbox {
+      margin-right: 8px;
+    }
+  }
 }
 
 .checkbox {

@@ -3,50 +3,66 @@ import css from '../../../styles/kit/forms/imageinput.module.scss';
 import Numbers from "../../../helpers/Numbers.js";
 import Button from "../Button.jsx";
 import PropTypes from "prop-types";
+import {GlobalContext} from "../../../contexts/Global.js";
+import {cnb} from "cnbuilder";
+import APIRequests from "../../../helpers/APIRequests.js";
 
 export default class ImageInput extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            imageURI: ''
+            preview: '',
+            uploaded: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
     }
 
+    static contextType = GlobalContext
+
     static propTypes = {
-        onChange: PropTypes.func
+        onUpload: PropTypes.func.isRequired
     }
 
-    readURI(e) {
+    handleChange(e) {
         if (e.target.files && e.target.files[0]) {
             let reader = new FileReader();
-            reader.onload = function (ev) {
-                this.setState({imageURI: ev.target.result});
-            }.bind(this);
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    }
+            this.setState({uploaded: false});
 
-    handleChange(e){
-        this.readURI(e); // maybe call this with webworker or async library?
-        if (this.props.onChange !== undefined)
-            this.props.onChange(e); // propagate to parent component
+            reader.onload = function (ev) {
+                this.setState({preview: ev.target.result});
+            }.bind(this);
+
+            reader.readAsDataURL(e.target.files[0]);
+
+            APIRequests.uploadPic(e.target.files[0]).then(res => {
+                const newImageURL = 'https://probody.kz/pic/' + res
+
+                this.setState({uploaded: true, preview: newImageURL});
+                this.props.onUpload(newImageURL);
+            })
+        }
     }
 
     render() {
         const inputId = 'image-input-' + Numbers.random(0, 99999),
-            inputRef = React.createRef()
+            inputRef = React.createRef(),
+            {theme} = this.context
 
-        return <label className={'inline-block relative'} htmlFor={inputId}>
-            <div className={css.root}>
-                {this.state.imageURI ? <img className={css.thumb} src={this.state.imageURI} /> : ' '}
-            </div>
+        return <div className={cnb(css['theme--' + theme], 'grid')}>
+            <label className={'inline-block relative'} htmlFor={inputId}>
+                <div className={css.root}>
+                    {this.state.preview ? <img className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
+                                               src={this.state.preview}/> : ' '}
+                </div>
 
-            <Button className={this.state.imageURI ? css.edit : css.plus} focus={false} size={'x-small'} iconLeft={this.state.imageURI ? 'edit' : 'plus'} mapClick={inputRef}/>
+                <Button className={this.state.preview ? css.edit : css.plus} focus={false} size={'x-small'}
+                        iconLeft={this.state.preview ? 'edit' : 'plus'} mapClick={inputRef}/>
 
-            <input onChange={this.handleChange} ref={inputRef} type='file' id={inputId} className={'d-none'}/>
-        </label>
+                <input accept="image/png, image/jpg, image/jpeg" onChange={this.handleChange} ref={inputRef} type='file'
+                       id={inputId} className={'d-none'}/>
+            </label>
+        </div>
     }
 }

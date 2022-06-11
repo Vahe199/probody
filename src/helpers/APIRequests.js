@@ -17,4 +17,15 @@ export default class APIRequests {
     static async getRegions() {
         return (await fetch(`${API_URL}/region`)).json()
     }
+
+    static async uploadPic(file) {
+        const formData = new FormData();
+
+        formData.append('pic', file);
+
+        return (await fetch(`https://probody.kz/pic`, {
+            method: 'POST',
+            body: formData
+        })).text()
+    }
 }

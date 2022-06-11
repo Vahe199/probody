@@ -171,7 +171,7 @@ class BlogPage extends React.Component {
                                         <span className={css.value}>{Dates.humanizeDuration(vac.workDays, this.props.router.locale)}</span>
                                     </div>
                                     <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
-                                        <span className={css.caption}>{t('workTime')}</span>
+                                        <span className={css.caption}>{t('workHours')}</span>
                                         <span className={css.value}>{vac.workHours.from}-{vac.workHours.to}</span>
                                     </div>
                                     <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>

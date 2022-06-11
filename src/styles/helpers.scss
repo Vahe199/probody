@@ -51,6 +51,22 @@
   justify-content: space-between;
 }
 
+.grid {
+  display: grid;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.column {
+    flex-direction: column;
+}
+
 .justify-around {
   justify-content: space-around;
 }
@@ -61,10 +77,6 @@
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.inline-block {
-  display: inline-block;
 }
 
 .items-center {

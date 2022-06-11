@@ -1,9 +1,14 @@
+@import "../../themes";
+
 .root {
-  border: 1px solid #ccc;
-  background-color: #f7f7f7;
+  @include themify() {
+    border: 1px solid t('border-color');
+    background-color: t('bg-secondlayer');
+  }
+
   border-radius: 12px;
-  width: 160px;
-  height: 220px;
+  height: 222px;
+  width: 100%;
   cursor: pointer;
   margin-bottom: 12px;
 }
@@ -11,13 +16,20 @@
 .plus {
   position: absolute;
   bottom: 0;
-  left: 40%;
+  left: 45%;
+}
+
+.mockPlus {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  filter: grayscale(100%);
 }
 
 .edit {
   position: absolute;
   bottom: 0;
-  left: 40%;
+  left: 45%;
   padding: 4px 6px !important;
 
   i {
@@ -28,6 +40,12 @@
 
 .thumb {
   border-radius: 12px;
-  width: 160px;
   height: 220px;
+  width: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+
+  &.uploading {
+    filter: grayscale(75%);
+  }
 }

@@ -56,7 +56,7 @@ export default class Checkbox extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={css['theme--' + theme]}><div style={this.props.style} className={css.root} onClick={this.toggle}>
+        return <div className={css['theme--' + theme]}><div style={this.props.style} className={cnb(css.root, this.props.reverse ? css.reverse : '')} onClick={this.toggle}>
             <div className={'grow-1'}>
                 {this.props.icon && <Icon name={this.props.icon}/>}
                 <span style={this.props.icon ? {marginLeft: 8} : {}}>{this.props.name}</span>

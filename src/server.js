@@ -10,6 +10,7 @@ import * as shortid from 'shortid'
 import multer from 'multer'
 import Search from "./helpers/Search.js"
 import path from "path"
+import AuthGuard from "./middlewares/AuthGuard.js";
 
 const port = parseInt(process.env.PORT)
 const dev = process.env.NODE_ENV !== 'production'
@@ -48,7 +49,7 @@ app.prepare().then(() => {
     server.use(cookieParser())
     server.use('/v1', APIv1)
 
-    server.post('/pic', uploader.any(), (req, res) => {
+    server.post('/pic', AuthGuard('serviceProvider'), uploader.any(), (req, res) => {
         res.send(req.files[0].filename)
     })
     server.use('/pic', express.static(path.resolve('uploads')))

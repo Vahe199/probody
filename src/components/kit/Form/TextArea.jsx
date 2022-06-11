@@ -56,6 +56,7 @@ export default class TextArea extends React.Component {
         label: PropTypes.string.isRequired,
         lock: PropTypes.bool,
         value: PropTypes.string,
+        disabled: PropTypes.bool,
         lines: PropTypes.number,
         variant: PropTypes.string, // 'outlined' || 'underline'
         onUpdate: PropTypes.func,
@@ -67,6 +68,7 @@ export default class TextArea extends React.Component {
         lock: false,
         variant: 'outlined',
         lines: 5,
+        disabled: false,
         max: 100,
         value: ''
     }
@@ -75,11 +77,11 @@ export default class TextArea extends React.Component {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(css.inputRoot, this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+            <div className={cnb(css.inputRoot, (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
                     <textarea rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
-                              disabled={this.state.locked} placeholder={this.props.placeholder}/>
+                              disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder}/>
                     {this.state.locked ?
                         <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
                 </div>
