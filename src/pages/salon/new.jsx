@@ -292,7 +292,7 @@ export default class NewSalonPage extends React.Component {
             if (!this.state.map) {
                 const initMap = async () => {
                     await this.setState({
-                        map: new window.ymaps.Map('addSalonMap', {
+                        map: new ymaps.Map('addSalonMap', {
                             center: userLocation,
                             zoom: 12,
                             controls: []
