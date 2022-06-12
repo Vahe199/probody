@@ -229,12 +229,6 @@ export default class NewSalonPage extends React.Component {
             }
 
             if (this.state.model.kind === 'master' && !this.state.model.masters[0].name.length) {
-                console.log({
-                    model: {
-                        ...this.state.model,
-                        masters: [Object.assign({}, this.state.model.masters[0], {name: this.state.model.name})]
-                    }
-                })
                 await this.setState({
                     model: {
                         ...this.state.model,
@@ -266,26 +260,28 @@ export default class NewSalonPage extends React.Component {
                 const coords = e.get('coords');
 
                 if (this.state.placeMark) {
-                    this.state.placeMark.geometry.setCoordinates(coords);
-
                     await this.setState({
                         model: {
                             ...this.state.model,
                             location: coords
                         }
                     });
+
+                    this.state.placeMark.geometry.setCoordinates(this.state.model.location);
                 } else {
+                    const placeMark = new window.ymaps.Placemark(coords, {}, {
+                        preset: 'islands#circleDotIcon',
+                    })
+
                     await this.setState({
-                        placeMark: new window.ymaps.Placemark(coords, {}, {
-                            preset: 'islands#circleDotIcon',
-                        }),
+                        placeMark,
                         model: {
                             ...this.state.model,
                             location: coords
                         }
                     });
 
-                    this.state.map.geoObjects.add(this.state.placeMark);
+                    this.state.map.geoObjects.add(placeMark);
                 }
             }
 
@@ -297,8 +293,8 @@ export default class NewSalonPage extends React.Component {
                         controls: []
                     }, {})
 
-                    map.events.add('touchstart', mapClickHandler.bind(this))
-                    map.events.add('mouseup', mapClickHandler.bind(this))
+                    // map.events.add('touchstart', mapClickHandler.bind(this))
+                    map.events.add('click', mapClickHandler.bind(this))
 
                     this.setState({
                         map
@@ -1298,7 +1294,7 @@ export default class NewSalonPage extends React.Component {
                                                   <Icon onClick={() => this.stepChangeHandler(3)}
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
-                                              <div style={{padding: 16}}>
+                                              <div style={{padding: 16}} className={'flex wrap gap-12'}>
                                                   {this.state.model.programs.filter(i => i.enabled).map((program, i) =>
                                                       <Program key={i} title={program.name}
                                                                description={program.description}
