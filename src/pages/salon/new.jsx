@@ -262,20 +262,20 @@ export default class NewSalonPage extends React.Component {
                 userLocation = [43.2177019, 76.9441652]
             }
 
-            const mapClickHandler = (e) => {
+            const mapClickHandler = async (e) => {
                 const coords = e.get('coords');
 
                 if (this.state.placeMark) {
                     this.state.placeMark.geometry.setCoordinates(coords);
 
-                    this.setState({
+                    await this.setState({
                         model: {
                             ...this.state.model,
                             location: coords
                         }
                     });
                 } else {
-                    this.setState({
+                    await this.setState({
                         placeMark: new window.ymaps.Placemark(coords, {}, {
                             preset: 'islands#circleDotIcon',
                         }),
@@ -290,19 +290,19 @@ export default class NewSalonPage extends React.Component {
             }
 
             if (!this.state.map) {
-                const initMap = async () => {
+                const initMap = () => {
                     const map = new ymaps.Map('addSalonMap', {
                         center: userLocation,
                         zoom: 12,
                         controls: []
                     }, {})
 
-                    await this.setState({
-                        map
-                    })
-
                     map.events.add('touchstart', mapClickHandler.bind(this))
                     map.events.add('mouseup', mapClickHandler.bind(this))
+
+                    this.setState({
+                        map
+                    })
                 }
 
                 window.ymaps.ready(initMap.bind(this))
