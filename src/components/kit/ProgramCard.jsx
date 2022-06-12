@@ -14,7 +14,7 @@ export default class ProgramCard extends React.Component {
         title: PropTypes.string.isRequired,
         duration: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
-        link: PropTypes.string.isRequired
+        link: PropTypes.string
     }
 
     render() {
@@ -38,7 +38,7 @@ export default class ProgramCard extends React.Component {
                         {formatPrice(this.props.price)}
                     </div>
                     <div>
-                        <Link href={this.props.link}><Icon className={css.arrowRight} name={'arrow_right'}/></Link>
+                        {this.props.link && <Link href={this.props.link}><Icon className={css.arrowRight} name={'arrow_right'}/></Link>}
                     </div>
                 </div>
             </div>

@@ -89,7 +89,7 @@ const WorkerSchema = new Schema({
         },
         hair: {
             type: String,
-            enum: ["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другое"]
+            enum: ["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"]
         },
         eyes: {
             type: String,
@@ -122,7 +122,7 @@ const WorkerSchema = new Schema({
         ref: "MassageType"
     },
     programs: [{
-        title: {
+        name: {
             type: String,
             required: true
         },

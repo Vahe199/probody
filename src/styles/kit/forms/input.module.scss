@@ -71,12 +71,14 @@
       &, input, textarea {
         color: t('text-disabled');
         background: t('bg-disabled');
+        user-select: none;
         cursor: default;
       }
     }
 
     textarea {
       resize: none;
+      user-select: none;
       width: 100%;
     }
   }

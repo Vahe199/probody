@@ -25,8 +25,9 @@ export default class ImageInput extends React.Component {
         onUpload: PropTypes.func.isRequired
     }
 
-    handleChange(e) {
+   async handleChange(e) {
         if (e.target.files && e.target.files[0]) {
+            console.log('replaced')
             let reader = new FileReader();
             this.setState({uploaded: false});
 
@@ -36,12 +37,19 @@ export default class ImageInput extends React.Component {
 
             reader.readAsDataURL(e.target.files[0]);
 
-            APIRequests.uploadPic(e.target.files[0]).then(res => {
-                const newImageURL = 'https://probody.kz/pic/' + res
+            try {
+                await APIRequests.uploadPic(e.target.files[0], this.state.preview.startsWith('https://probody.kz') ? this.state.preview.replace('https://probody.kz/pic/', '') : undefined).then(async res => {
+                    const newImageURL = 'https://probody.kz/pic/' + await res.text()
 
-                this.setState({uploaded: true, preview: newImageURL});
-                this.props.onUpload(newImageURL);
-            })
+                    this.setState({uploaded: true, preview: newImageURL});
+                    this.props.onUpload(newImageURL);
+                })
+
+            } catch (e) {
+                this.setState({uploaded: false, preview: ''})
+            }
+
+            e.target.value = ''
         }
     }
 

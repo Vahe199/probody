@@ -18,6 +18,9 @@ import RangeInput from "../../components/kit/Form/RangeInput";
 import APIRequests from "../../helpers/APIRequests.js";
 import ImageInput from "../../components/kit/Form/ImageInput";
 import MockImageInput from "../../components/kit/Form/MockImageInput";
+import Tag from "../../components/kit/Tag";
+import ProgramCard from "../../components/kit/ProgramCard";
+import Program from "../../components/kit/Program.jsx";
 
 export default class NewSalonPage extends React.Component {
     static contextType = GlobalContext
@@ -26,7 +29,7 @@ export default class NewSalonPage extends React.Component {
         super(props);
 
         this.state = {
-            step: -1,
+            step: 7,
             model: {
                 kind: 'salon',
 
@@ -60,6 +63,8 @@ export default class NewSalonPage extends React.Component {
                 workDays: [],
 
                 photos: [],
+
+                masters: []
             },
             prefetched: {
                 regions: [],
@@ -81,6 +86,9 @@ export default class NewSalonPage extends React.Component {
         this.addPhotoInput = this.addPhotoInput.bind(this);
         this.setPhoto = this.setPhoto.bind(this);
         this.setAllWorkDays = this.setAllWorkDays.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.addAnotherMaster = this.addAnotherMaster.bind(this);
+        this.addMasterPhotoInput = this.addMasterPhotoInput.bind(this);
     }
 
     toggleWorkDay(day) {
@@ -123,11 +131,23 @@ export default class NewSalonPage extends React.Component {
             enabled: false
         })
 
-        this.setState({//will be replaced with fetch
+        this.setState({
             model: {
                 ...this.state.model,
                 programs,
                 photos: Array(this.context.isMobile ? 5 : 3).fill(''),
+                masters: [{
+                    name: '',
+                    characteristics: {
+                        height: '',
+                        weight: '',
+                        age: '',
+                        bust: '1',
+                        hair: 'брюнетка',
+                        eyes: 'голубой'
+                    },
+                    photos: Array(5).fill('')
+                }]
             },
             prefetched: {
                 services,
@@ -155,7 +175,75 @@ export default class NewSalonPage extends React.Component {
         })
     }
 
-    stepChangeHandler(step) {
+    addMasterPhotoInput(index) {
+        this.setState({
+            model: {
+                ...this.state.model,
+                masters: [...this.state.model.masters.slice(0, index), {
+                    ...this.state.model.masters[index],
+                    photos: [...this.state.model.masters[index].photos, '']
+                }, ...this.state.model.masters.slice(index + 1)]
+            }
+        })
+    }
+
+    addAnotherMaster() {
+        this.setState({
+            model: {
+                ...this.state.model,
+                masters: [...this.state.model.masters, {
+                    name: '',
+                    characteristics: {
+                        height: '',
+                        weight: '',
+                        age: '',
+                        bust: '1',
+                        hair: 'брюнетка',
+                        eyes: 'голубой'
+                    },
+                    photos: Array(5).fill('')
+                }]
+            }
+        })
+    }
+
+    async stepChangeHandler(step) {
+        if (step === 1) {
+            if (this.state.model.messengers.wa.length === 0) {
+                await this.setState({
+                    model: {
+                        ...this.state.model,
+                        messengers: {
+                            ...this.state.model.messengers,
+                            wa: this.state.model.phone
+                        }
+                    }
+                })
+            }
+
+            if (this.state.model.kind === 'master' && !this.state.model.masters[0].name.length) {
+                console.log({
+                    model: {
+                        ...this.state.model,
+                        masters: [Object.assign({}, this.state.model.masters[0], {name: this.state.model.name})]
+                    }
+                })
+                await this.setState({
+                    model: {
+                        ...this.state.model,
+                        masters: [Object.assign({}, this.state.model.masters[0], {name: this.state.model.name})]
+                    }
+                })
+            }
+        } else if (step === 7) {
+            await this.setState({
+                model: {
+                    ...this.state.model,
+                    masters: [...this.state.model.masters].filter(i => i.name.length && i.characteristics.height.length && i.characteristics.weight.length && i.characteristics.age.length)
+                }
+            })
+        }
+
         this.setState({step})
     }
 
@@ -164,6 +252,19 @@ export default class NewSalonPage extends React.Component {
             model: {
                 ...this.state.model,
                 [field]: value
+            }
+        })
+    }
+
+    setMasterField(masterIndex, field, value) {
+        const masters = [...this.state.model.masters];
+
+        masters[masterIndex][field] = value;
+
+        this.setState({
+            model: {
+                ...this.state.model,
+                masters
             }
         })
     }
@@ -181,6 +282,19 @@ export default class NewSalonPage extends React.Component {
             model: {
                 ...this.state.model,
                 services
+            }
+        })
+    }
+
+    setMasterParam(masterIndex, param, value) {
+        const masters = [...this.state.model.masters];
+
+        masters[masterIndex].characteristics[param] = value;
+
+        this.setState({
+            model: {
+                ...this.state.model,
+                masters
             }
         })
     }
@@ -210,16 +324,6 @@ export default class NewSalonPage extends React.Component {
                 if (!isValidNumber(this.state.model.phone, 'KZ')) {
                     isValid = false
                     break
-                } else if (this.state.model.messengers.wa.length === 0) {
-                    this.setState({
-                        model: {
-                            ...this.state.model,
-                            messengers: {
-                                ...this.state.model.messengers,
-                                wa: this.state.model.phone
-                            }
-                        }
-                    })
                 }
 
                 if (this.state.model.name.length < 3 || this.state.model.name.length > 64) {
@@ -302,7 +406,17 @@ export default class NewSalonPage extends React.Component {
                 break
 
             case 6:
-                //validate master
+                const testingTargets = [...this.state.model.masters].filter(i => i.name.length && i.characteristics.height.length && i.characteristics.weight.length && i.characteristics.age.length)
+
+                if (testingTargets.length < 1) {
+                    isValid = false
+                    break
+                }
+
+                if (!testingTargets.every(i => i.name.length >= 3 && i.name.length <= 64 && i.characteristics.height >= 70 && i.characteristics.height <= 250 && i.characteristics.weight >= 30 && i.characteristics.weight <= 150 && i.characteristics.age >= 18 && i.characteristics.age <= 99)) {
+                    isValid = false
+                    break
+                }
         }
 
         return !isValid
@@ -359,6 +473,19 @@ export default class NewSalonPage extends React.Component {
         })
     }
 
+    setMasterPhoto(masterIndex, photoIndex, photo) {
+        const masters = [...this.state.model.masters];
+
+        masters[masterIndex].photos[photoIndex] = photo;
+
+        this.setState({
+            model: {
+                ...this.state.model,
+                masters
+            }
+        })
+    }
+
     updatePrograms(id, index, field, val) {
         const newModel = {...this.state.model};
 
@@ -369,6 +496,21 @@ export default class NewSalonPage extends React.Component {
         }
 
         this.setState({model: newModel})
+    }
+
+    async submitForm() {
+        const model = {...this.state.model}
+
+        model.programs = model.programs.filter(i => i.enabled)
+        model.photos = model.photos.filter(i => i.length > 0)
+        model.masters = model.masters.map(i => {
+            i.photos = i.photos.filter(j => j.length > 0)
+
+            return i
+        })
+
+        await APIRequests.createWorker(model)
+        console.log('done')
     }
 
     render() {
@@ -435,9 +577,11 @@ export default class NewSalonPage extends React.Component {
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillCommonInfo')}</h2>
                                       <div bp={'grid 12 6@md'}>
-                                          <TextInput label={t(this.state.model.kind === 'salon' ? 'salonName' : 'yourNickname')} placeholder={t(this.state.model.kind === 'salon' ? 'howYourSalonNamed' : 'enterYourWorkNickname')}
-                                                     value={this.state.model.name}
-                                                     onUpdate={(val) => this.setField('name', val)}/>
+                                          <TextInput
+                                              label={t(this.state.model.kind === 'salon' ? 'salonName' : 'yourNickname')}
+                                              placeholder={t(this.state.model.kind === 'salon' ? 'howYourSalonNamed' : 'enterYourWorkNickname')}
+                                              value={this.state.model.name}
+                                              onUpdate={(val) => this.setField('name', val)}/>
                                           <Select options={this.state.prefetched.regions} label={t('city')}
                                                   placeholder={t('inWhichCity')} value={this.state.model.region}
                                                   onUpdate={(val) => this.setField('region', val)}/>
@@ -782,7 +926,8 @@ export default class NewSalonPage extends React.Component {
                                               </div>
 
                                               <div className={'flex'} style={{marginTop: 16}}>
-                                                  <Checkbox reverse value={this.state.model.workHours.roundclock} name={t('roundclock')}
+                                                  <Checkbox reverse value={this.state.model.workHours.roundclock}
+                                                            name={t('roundclock')}
                                                             onUpdate={() => this.updateWorkHours({roundclock: !this.state.model.workHours.roundclock})}/>
                                               </div>
                                           </div>
@@ -808,7 +953,8 @@ export default class NewSalonPage extends React.Component {
                                               </div>
 
                                               <div className={'flex'} style={{marginTop: 16}}>
-                                                  <Checkbox reverse name={t('woWeekend')} value={this.state.model.workDays.length === 7}
+                                                  <Checkbox reverse name={t('woWeekend')}
+                                                            value={this.state.model.workDays.length === 7}
                                                             onUpdate={this.setAllWorkDays}/>
                                               </div>
                                           </div>
@@ -828,7 +974,8 @@ export default class NewSalonPage extends React.Component {
                                           {this.state.model.photos.map((photo, i) =>
                                               <ImageInput onUpload={url => this.setPhoto(i, url)} key={i}/>
                                           )}
-                                          {this.state.model.photos.length < 12 && <MockImageInput onClick={this.addPhotoInput}/>}
+                                          {this.state.model.photos.length < 12 &&
+                                              <MockImageInput onClick={this.addPhotoInput}/>}
                                       </div>
 
                                       <Button isDisabled={this.validateStep(5)} className={css.proceedBtn}
@@ -839,21 +986,361 @@ export default class NewSalonPage extends React.Component {
                                       </Button>
                                   </div>),
                                   (<div className={css.stepBody}>
-                                      <h2>добавление мастера</h2>
+                                      <h2>{t('addingSalonMaster')}</h2>
 
-                                      <Button isDisabled={this.validateStep(6)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
+                                      {this.state.model.masters.map((master, i) =>
+                                          <div key={i}>
+                                              <h3 style={{margin: '12px 0'}}>{t('masterCharacteristics')}</h3>
+
+                                              <div bp={'grid'} style={{gridGap: 24}}>
+                                                  <div bp={'12 4@md'}>
+                                                      <TextInput
+                                                          onUpdate={val => this.setMasterField(i, 'name', val)}
+                                                          disabled={this.state.model.kind === 'master'}
+                                                          value={this.state.model.masters[i].name}
+                                                          style={{marginBottom: 6}}
+                                                          label={t('nickname')}
+                                                          placeholder={t('enterMastersWorkingNickname')}/>
+
+                                                      <TextInput
+                                                          onUpdate={val => this.setMasterParam(i, 'height', val)}
+                                                          value={this.state.model.masters[i].characteristics.height}
+                                                          style={{marginBottom: 6}}
+                                                          label={capitalize(t('height'))}
+                                                          type={'number'}
+                                                          min={70}
+                                                          max={250}
+                                                          placeholder={t('enterMastersHeight')}/>
+
+                                                      <TextInput
+                                                          onUpdate={val => this.setMasterParam(i, 'weight', val)}
+                                                          value={this.state.model.masters[i].characteristics.weight}
+                                                          style={{marginBottom: 6}}
+                                                          label={capitalize(t('weight'))}
+                                                          type={'number'}
+                                                          min={30}
+                                                          max={150}
+                                                          placeholder={t('enterMastersWeight')}/>
+
+                                                      <TextInput
+                                                          onUpdate={val => this.setMasterParam(i, 'age', val)}
+                                                          value={this.state.model.masters[i].characteristics.age}
+                                                          style={{marginBottom: 6}}
+                                                          label={capitalize(t('age'))}
+                                                          type={'number'}
+                                                          min={18}
+                                                          max={99}
+                                                          placeholder={t('enterMastersAge')}/>
+                                                  </div>
+
+                                                  <div bp={'12 4@md'}>
+                                                      <RadioGroup onUpdate={val => this.setMasterParam(i, 'eyes', val)}
+                                                                  name={t('eyeColor')}
+                                                                  value={this.state.model.masters[i].characteristics.eyes}
+                                                                  options={["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"].map(i => ({
+                                                                      label: i,
+                                                                      value: i
+                                                                  }))}/>
+                                                      <RadioGroup onUpdate={val => this.setMasterParam(i, 'bust', val)}
+                                                                  name={capitalize(t('bust'))}
+                                                                  value={this.state.model.masters[i].characteristics.bust}
+                                                                  options={[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5].map(i => ({
+                                                                      label: String(i),
+                                                                      value: String(i)
+                                                                  }))}/>
+                                                  </div>
+                                                  <div bp={'12 4@md'}>
+                                                      <RadioGroup onUpdate={val => this.setMasterParam(i, 'hair', val)}
+                                                                  name={t('hairColor')}
+                                                                  value={this.state.model.masters[i].characteristics.hair}
+                                                                  options={["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"].map(i => ({
+                                                                      label: i,
+                                                                      value: i
+                                                                  }))}/>
+                                                  </div>
+
+                                                  {master.photos.map((photo, j) =>
+                                                      <div bp={'6 2@md'} key={j}><ImageInput
+                                                          onUpload={url => this.setMasterPhoto(i, j, url)}/></div>
+                                                  )}
+                                                  {master.photos.length < 12 &&
+                                                      <div bp={'6 2@md'}><MockImageInput
+                                                          onClick={() => this.addMasterPhotoInput(i)}/>
+                                                      </div>}
+                                              </div>
+                                          </div>
+                                      )}
+
+                                      <div className={cnb('flex wrap gap-12', css.multipleButtonContainer)}>
+                                          {(this.state.model.kind === 'salon' && this.state.model.masters.length < 20) &&
+                                              <Button className={css.addMasterBtn}
+                                                      color={'primary'}
+                                                      onClick={this.addAnotherMaster}>
+                                                  {t('addAnotherMaster')}
+                                              </Button>}
+
+                                          <Button isDisabled={this.validateStep(6)} className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
                                   </div>),
                                   (<div className={css.stepBody}>
-                                      <h2>повторная проверка</h2>
+                                      <h2>{t('checkDataCorrectness')}</h2>
+
+                                      <div bp={'grid'} style={{gridGap: 32}}>
+                                          <div bp={'12 6@md'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('commonInfo')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(0)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  <TextInput style={{marginBottom: 12}} disabled
+                                                             label={t(this.state.model.kind === 'salon' ? 'salonName' : 'yourNickname')}
+                                                             placeholder={t(this.state.model.kind === 'salon' ? 'howYourSalonNamed' : 'enterYourWorkNickname')}
+                                                             value={this.state.model.name}/>
+                                                  <Select disabled style={{marginBottom: 12}}
+                                                          options={this.state.prefetched.regions} label={t('city')}
+                                                          placeholder={t('inWhichCity')}
+                                                          value={this.state.model.region}/>
+                                                  <TextInput disabled style={{marginBottom: 12}}
+                                                             label={t('streetAndAddress')}
+                                                             placeholder={t('salonAddress')}
+                                                             value={this.state.model.address}/>
+                                                  <TextInput disabled label={t('phone')} type={'phone'}
+                                                             placeholder={t('typeYourPhoneNumber')}
+                                                             value={this.state.model.phone}/>
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12 6@md'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('socialMedia')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(2)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  <TextInput disabled style={{marginBottom: 12}} label={t('vkFull')}
+                                                             placeholder={'https://vk.com/'}
+                                                             value={this.state.model.social.vk}/>
+
+                                                  <TextInput disabled style={{marginBottom: 12}} label={t('instagram')}
+                                                             placeholder={'https://instagram.com/'}
+                                                             value={this.state.model.social.inst}/>
+
+                                                  <TextInput disabled style={{marginBottom: 12}} label={t('tgChannel')}
+                                                             placeholder={'https://t.me/'}
+                                                             value={this.state.model.social.tgCh}/>
+
+                                                  <TextInput disabled label={t('site')} placeholder={'https://'}
+                                                             value={this.state.model.social.ws}/>
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12 6@md'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('serviceAndServices')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(1)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  <span className={css.caption}>{t('youDoMassage')}</span>
+
+                                                  <div className="flex wrap gap-12" style={{marginTop: 12}}>
+                                                      {this.state.prefetched.leads.filter(i => this.state.model.leads.includes(i._id)).map((lead, i) =>
+                                                          <Tag label={lead.name} icon={lead.icon} key={i}/>
+                                                      )}
+                                                  </div>
+
+                                                  <span className={css.caption}>{t('services')}</span>
+
+                                                  <div className="flex wrap gap-12" style={{marginTop: 12}}>
+                                                      {this.state.prefetched.services.filter(i => this.state.model.services.includes(i._id)).map((service, i) =>
+                                                          <Tag label={service.name} icon={service.icon} key={i}/>
+                                                      )}
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12 6@md'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('messengers')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(2)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  <TextInput disabled style={{marginBottom: 12}} label={t('tg')}
+                                                             placeholder={'@'}
+                                                             value={this.state.model.messengers.tg}/>
+
+                                                  <TextInput disabled type={'phone'} label={t('whatsapp')}
+                                                             placeholder={'+7'}
+                                                             value={this.state.model.messengers.wa}/>
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('massageTypes')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(3)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  {this.state.model.programs.filter(i => i.enabled).map((program, i) =>
+                                                      <Program key={i} title={program.name}
+                                                               description={program.description}
+                                                               price={program.cost || 0} duration={program.duration}
+                                                               classicCnt={program.classicCnt}
+                                                               eroticCnt={program.eroticCnt}
+                                                               relaxCnt={program.relaxCnt}/>
+                                                  )}
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('workSchedule')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(4)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  <div bp={'grid'} style={{gridGap: 24}}>
+                                                      <div bp={'12 3@md'}>
+                                                          <p style={{marginBottom: 12}}>{t('workDays')}</p>
+
+                                                          <div className="flex wrap gap-12">
+                                                              {this.state.model.workDays.map((day, i) =>
+                                                                  <Tag label={t(day)} key={i}/>
+                                                              )}
+                                                          </div>
+
+                                                          <p style={{
+                                                              marginBottom: 12,
+                                                              marginTop: 24
+                                                          }}>{t('holidays')}</p>
+
+                                                          <div className="flex wrap gap-12">
+                                                              {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].filter(i => !this.state.model.workDays.includes(i)).map((day, i) =>
+                                                                  <Tag label={t(day)} key={i}/>
+                                                              )}
+                                                          </div>
+                                                      </div>
+
+                                                      <div bp={'12 5@md'}>
+                                                          <p style={{marginBottom: 12}}>{t('workHours')}</p>
+
+                                                          <div className="flex wrap gap-12">
+                                                              <Select disabled
+                                                                      value={this.state.model.workHours.from}
+                                                                      label={t('opening')} options={workHours}
+                                                                      placeholder={''}/>
+                                                              <Select disabled
+                                                                      value={this.state.model.workHours.to}
+                                                                      label={t('closing')}
+                                                                      options={workHours.slice(1 + workHours.findIndex(i => i.name === this.state.model.workHours.from))}
+                                                                      placeholder={''}/>
+                                                          </div>
+
+                                                          <div className={'flex'} style={{marginTop: 16}}>
+                                                              <Checkbox disabled reverse value={this.state.model.workHours.roundclock}
+                                                                        name={t('roundclock')}/>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('salonPhotos')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(5)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div bp={'grid 6 3@md'} style={{padding: 16}}>
+                                                  {this.state.model.photos.map((photo, i) =>
+                                                      <div className={css.img} key={i} style={{
+                                                          backgroundImage: `url(${photo})`
+                                                      }}>&nbsp;</div>
+                                                  )}
+                                              </div>
+                                          </div>
+
+                                          <div bp={'12'}>
+                                              <div className={css.sectionHead}>
+                                                  <h3>{t('salonMasters')}</h3>
+                                                  <Icon onClick={() => this.stepChangeHandler(6)}
+                                                        className={css.editIcon} name={'edit'}/>
+                                              </div>
+                                              <div style={{padding: 16}}>
+                                                  {this.state.model.masters.map((master, i) =>
+                                                    <div key={i} className={css.finalMasterCard}>
+                                                        <div bp={'grid 12 6@md'} style={{gridGap: '8px 32px'}}>
+
+                                                            <TextInput
+                                                                disabled={this.state.model}
+                                                                value={master.name}
+                                                                placeholder={''}
+                                                                label={t('nickname')}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.height}
+                                                                label={capitalize(t('height'))}
+                                                                placeholder={''}
+                                                                type={'number'}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.weight}
+                                                                label={capitalize(t('weight'))}
+                                                                type={'number'}
+                                                                placeholder={''}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.age}
+                                                                label={capitalize(t('age'))}
+                                                                type={'number'}
+                                                                placeholder={''}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.eyes}
+                                                                label={capitalize(t('eyeColor'))}
+                                                                placeholder={''}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.hair}
+                                                                label={capitalize(t('hairColor'))}
+                                                                placeholder={''}/>
+
+                                                            <TextInput
+                                                                disabled
+                                                                value={master.characteristics.bust}
+                                                                label={capitalize(t('bust'))}
+                                                                placeholder={''}/>
+                                                        </div>
+
+                                                        <div bp={'grid 6 2@md'} style={{marginTop: 12}}>
+                                                            {master.photos.map((photo, i) =>
+                                                                <div className={css.img} key={i} style={{
+                                                                    backgroundImage: `url(${photo})`
+                                                                }}>&nbsp;</div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                  )}
+                                              </div>
+                                          </div>
+                                      </div>
 
                                       <Button className={css.proceedBtn}
                                               color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              onClick={() => this.submitForm()}>
                                           {t('finish')}
                                           <Icon name={'arrow_right'}/>
                                       </Button>

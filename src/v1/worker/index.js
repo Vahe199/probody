@@ -9,7 +9,7 @@ import Review from "../../models/Review.model.js"
 
 const router = express.Router()
 
-router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
+router.post('/', /*AuthGuard('serviceProvider'),*/ async (req, res) => {
     if (req.body.location) {
         req.body.location = {
             type: "Point",
@@ -17,8 +17,14 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
         }
     }
 
+    for (const programElement in req.program) {
+        console.log(programElement)
+    }
+    return;
+
     (new Worker(req.body)).validate(async (err) => {
         if (err) {
+            console.log(err)
             return res.status(500).json({
                 message: "Internal Server Error"
             })

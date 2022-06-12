@@ -14,6 +14,17 @@
       margin-right: 8px;
     }
   }
+
+  &.disabled {
+    cursor: default;
+    opacity: .8;
+
+    .checkbox.checked {
+      @include themify() {
+        background: url("/icons/checkmark.svg") no-repeat center center t('bg-disabled');
+      }
+    }
+  }
 }
 
 .checkbox {

@@ -96,6 +96,16 @@ export default class TextInput extends React.Component {
                 } else {
                     await this.setState({errored: false})
                 }
+                break
+
+            case 'number':
+                if (this.props.min && this.props.max) {
+                    if (this.state.value < this.props.min || this.state.value > this.props.max) {
+                        await this.setState({errored: true, success: false, errorMsg: this.context.t('incorrectValue')})
+                    } else {
+                        await this.setState({errored: false})
+                    }
+                }
         }
 
         if (e && !this.state.errored && this.state.value.length > 3) {
@@ -111,6 +121,8 @@ export default class TextInput extends React.Component {
 
     static propTypes = {
         label: PropTypes.string.isRequired,
+        max: PropTypes.number,
+        min: PropTypes.number,
         lock: PropTypes.bool,
         value: PropTypes.string,
         type: PropTypes.string, // text, password, email
@@ -130,13 +142,13 @@ export default class TextInput extends React.Component {
         const {theme} = this.context
 
         return <div style={this.props.style} className={css['theme--' + theme]}>
-            <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', this.state.locked ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+            <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
-                    {this.props.type === 'phone' ? <input onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />
-                        : <ControlledInput onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={this.state.locked} placeholder={this.props.placeholder} />}
+                    {this.props.type === 'phone' ? <input onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} />
+                        : <ControlledInput onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} />}
                     {this.props.type === 'password' && <Icon name={this.state.visible ? 'visible' : 'hidden'} className={css.hideIcon} onClick={this.toggleVisibility} />}
-                    {this.props.type !== 'text' ? <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
+                    {this.props.type !== 'text' && !this.props.disabled && !this.state.locked ? <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
                     {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
                 </div>
         </div>

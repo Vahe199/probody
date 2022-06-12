@@ -11,6 +11,7 @@ import multer from 'multer'
 import Search from "./helpers/Search.js"
 import path from "path"
 import AuthGuard from "./middlewares/AuthGuard.js";
+import fs from "fs";
 
 const port = parseInt(process.env.PORT)
 const dev = process.env.NODE_ENV !== 'production'
@@ -25,7 +26,7 @@ const uploader = multer({
             let id = shortid.generate(),
                 ext = mime.extension(file.mimetype)
 
-            cb(null, `${id}.${ext}`)
+            cb(null, `${req.user._id}.${id}.${ext}`)
         },
         fileFilter(req, file, cb) {
             const fileSize = parseInt(req.headers["content-length"])
@@ -50,6 +51,12 @@ app.prepare().then(() => {
     server.use('/v1', APIv1)
 
     server.post('/pic', AuthGuard('serviceProvider'), uploader.any(), (req, res) => {
+        if (req.headers['x-replacement-for'] && req.headers['x-replacement-for'].startsWith(String(req.user._id))) {
+            try {
+                fs.unlink(path.resolve(`./uploads/${req.headers['x-replacement-for']}`), Function.prototype)
+            } catch (e) {}
+        }
+
         res.send(req.files[0].filename)
     })
     server.use('/pic', express.static(path.resolve('uploads')))

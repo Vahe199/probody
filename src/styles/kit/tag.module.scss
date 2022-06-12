@@ -9,15 +9,14 @@
 .disabled {
   @include themify() {
     color: t('another-text-disabled');
-    background: #fff;
-    border: 1px solid t('border-disabled');;
+    background: t('bg-disabled');
+    border: 1px solid t('border-disabled');
   }
 }
 
 .enabled {
-  background-color: #F6F6F6;
-
   @include themify() {
+    background: t('bg-secondlayer');
     color: t('text-main');
   }
 }
