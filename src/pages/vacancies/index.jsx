@@ -10,6 +10,8 @@ import Button from "../../components/kit/Button.jsx";
 import {cnb} from "cnbuilder";
 import Dates from "../../helpers/Dates.js";
 import {formatPrice} from "../../helpers/String.js";
+import Head from "next/head.js";
+import {TITLE_POSTFIX} from "../../helpers/constants.js";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -131,6 +133,10 @@ class BlogPage extends React.Component {
         const {t, isMobile, theme} = this.context
 
         return <section className={css['theme--' + theme]}>
+            <Head>
+                <title>{t('vacancies')}{TITLE_POSTFIX}</title>
+            </Head>
+
             <div className={'responsive-content'}>
                 <p className="caption">{t('gladToSeeYouHere')}</p>
                 <h1>{t('welcomeToOurAnnouncementBoard')}</h1>

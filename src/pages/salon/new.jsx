@@ -19,8 +19,10 @@ import APIRequests from "../../helpers/APIRequests.js";
 import ImageInput from "../../components/kit/Form/ImageInput";
 import MockImageInput from "../../components/kit/Form/MockImageInput";
 import Tag from "../../components/kit/Tag";
-import ProgramCard from "../../components/kit/ProgramCard";
 import Program from "../../components/kit/Program.jsx";
+import Head from "next/head.js";
+import {TITLE_POSTFIX, YANDEX_APIKEY} from "../../helpers/constants.js";
+import Script from "next/script.js";
 
 export default class NewSalonPage extends React.Component {
     static contextType = GlobalContext
@@ -29,7 +31,7 @@ export default class NewSalonPage extends React.Component {
         super(props);
 
         this.state = {
-            step: 7,
+            step: -1,
             model: {
                 kind: 'salon',
 
@@ -155,6 +157,8 @@ export default class NewSalonPage extends React.Component {
                 regions
             }
         })
+
+        console.log(window.ymaps)
     }
 
     setAllWorkDays() {
@@ -525,6 +529,11 @@ export default class NewSalonPage extends React.Component {
             }))
 
         return <div className={css['theme--' + theme]}>
+            <Head>
+                <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
+            </Head>
+            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY} />
+
             <Breadcrumbs items={[
                 {
                     name: t('mainPage'),
@@ -592,6 +601,8 @@ export default class NewSalonPage extends React.Component {
                                                      placeholder={t('typeYourPhoneNumber')}
                                                      value={this.state.model.phone}
                                                      onUpdate={(val) => this.setField('phone', val)}/>
+
+                                          <TextArea max={500} label={t('salonDescription')} placeholder={t('describeYourSalon')} />
                                       </div>
 
                                       <Button isDisabled={this.validateStep(0)} className={css.proceedBtn}

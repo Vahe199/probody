@@ -20,19 +20,21 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:slug', async (req, res) => {
-    res.json(await BlogArticle.findOne({slug: req.params.slug}))
+    res.json(await BlogArticle.findOne({slug: req.params.slug}).populate('tags'))
 })
 
 router.post('/', AuthGuard('admin'), async (req, res) => {
     try {
         const {title,
             photos,
+            tag,
             text} = req.body
 
         const doc = await (new BlogArticle({
             title,
             photos,
-            text
+            text,
+            tags: [tag]
         })).save()
 
         res.status(200).json({

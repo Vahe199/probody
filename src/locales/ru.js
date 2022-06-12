@@ -170,4 +170,6 @@ export default {
     salonMasters: 'Мастеры салона',
     youDoMassage: 'Делаете массаж',
     holidays: 'Выходные',
+    salonDescription: 'Описание салона',
+    describeYourSalon: 'Опишите Ваш салон',
 }

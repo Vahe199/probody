@@ -6,6 +6,8 @@ import ArticleCard from "../../components/ArticleCard";
 import Paginator from "../../components/kit/Paginator";
 import Objects from "../../helpers/Objects.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
+import Head from "next/head.js";
+import {TITLE_POSTFIX} from "../../helpers/constants.js";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -188,6 +190,10 @@ class BlogPage extends React.Component {
         const {t} = this.context
 
         return <section>
+            <Head>
+                <title>{t('records')}{TITLE_POSTFIX}</title>
+            </Head>
+
             <Breadcrumbs items={[
                 {
                     name: t('mainPage'),

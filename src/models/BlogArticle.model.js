@@ -11,6 +11,10 @@ const BlogArticleSchema = new Schema({
   photos: {
     type: [String]
   },
+  tags: {
+    type: [Schema.Types.ObjectId],
+    ref: 'ArticleTag'
+  },
   slug: {
     type: String,
     default() {// Привет, мир! => privet-mir-25

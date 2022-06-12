@@ -8,10 +8,11 @@ import Button from "../../components/kit/Button.jsx";
 import ImageCarousel from "../../components/kit/ImageCarousel";
 import {cnb} from "cnbuilder";
 import Icon from "../../components/kit/Icon.jsx";
-import Dates from "../../helpers/Dates.js";
 import {formatPrice} from "../../helpers/String.js";
 import TextSection from "../../components/kit/TextSection.jsx";
 import InfoBlock from "../../components/kit/InfoBlock";
+import Head from "next/head.js";
+import {TITLE_POSTFIX} from "../../helpers/constants.js";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -70,6 +71,10 @@ class VacancyViewPage extends React.Component {
         const {t, isMobile, theme} = this.context
 
         return <section className={css['theme--' + theme]}>
+            <Head>
+                <title>{this.state.vacancy.title || t('vacancy')}{TITLE_POSTFIX}</title>
+            </Head>
+
             <Breadcrumbs items={[
                 {
                     name: t('mainPage'),

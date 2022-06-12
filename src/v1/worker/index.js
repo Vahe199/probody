@@ -9,7 +9,7 @@ import Review from "../../models/Review.model.js"
 
 const router = express.Router()
 
-router.post('/', /*AuthGuard('serviceProvider'),*/ async (req, res) => {
+router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     if (req.body.location) {
         req.body.location = {
             type: "Point",
@@ -17,10 +17,11 @@ router.post('/', /*AuthGuard('serviceProvider'),*/ async (req, res) => {
         }
     }
 
-    for (const programElement in req.program) {
-        console.log(programElement)
-    }
-    return;
+    req.body.programs = req.body.programs.map(i => {
+       i.cost = Number(i.cost)
+
+       return i
+   });
 
     (new Worker(req.body)).validate(async (err) => {
         if (err) {

@@ -161,7 +161,7 @@ const WorkerSchema = new Schema({
     avgCost: {
         type: Number,
         default() {
-            return this.programs.reduce((acc, cur) => acc + (cur.price / cur.duration * 60), 0)
+            return this.programs.reduce((acc, cur) => acc + (cur.cost / cur.duration * 60), 0)
         }
     },
     rooms: {

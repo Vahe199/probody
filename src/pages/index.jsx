@@ -3,6 +3,8 @@ import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
 import OTPInput from "../components/kit/Form/OTPInput";
 import AboutUsSection from "../components/AboutUsSection.jsx";
+import {TITLE_POSTFIX} from "../helpers/constants.js";
+import Head from "next/head.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -21,6 +23,9 @@ class Home extends React.Component {
 
         return (
             <div>
+                <Head>
+                    <title>{t('mainPage')}{TITLE_POSTFIX}</title>
+                </Head>
                 <p className="subtitle additional-text">Привет 👋</p>
                 <h1>Мы подобрали массажные салоны в Алматы</h1>
                 <br/>

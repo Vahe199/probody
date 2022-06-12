@@ -4,6 +4,8 @@ import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import ArticleCard from "../../components/ArticleCard.jsx";
 import {GlobalContext} from "../../contexts/Global.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
+import Head from "next/head.js";
+import {TITLE_POSTFIX} from "../../helpers/constants.js";
 
 class BlogArticlePage extends React.Component {
     static contextType = GlobalContext
@@ -79,6 +81,10 @@ class BlogArticlePage extends React.Component {
         const {t} = this.context
 
         return <section>
+            <Head>
+                <title>{this.state.article.title || t('record')}{TITLE_POSTFIX}</title>
+            </Head>
+
             <Breadcrumbs items={[
                 {
                     name: t('mainPage'),
