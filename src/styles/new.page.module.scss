@@ -72,6 +72,31 @@
   margin: 16px 0;
 }
 
+.addSalonMap {
+  @include themify() {
+    background: t('bg-secondlayer')
+  }
+
+  &, &>ymaps {
+    min-height: 300px;
+    height: auto !important;
+    border-radius: 32px;
+    width: 100% !important;
+
+    &>ymaps, &>ymaps>ymaps {
+      border-radius: 32px;
+    }
+  }
+}
+
+.textAreaGrow {
+  height: 100%;
+
+  &>div {
+    height: 100%;
+  }
+}
+
 .sectionHead {
   @include themify() {
     background: t('bg-secondlayer');

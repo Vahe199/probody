@@ -32,6 +32,8 @@ export default class NewSalonPage extends React.Component {
 
         this.state = {
             step: -1,
+            placeMark: undefined,
+            map: undefined,
             model: {
                 kind: 'salon',
 
@@ -39,6 +41,8 @@ export default class NewSalonPage extends React.Component {
                 region: '',
                 phone: '+7',
                 address: '',
+                description: '',
+                location: [],
 
                 services: [],
                 leads: [],
@@ -91,6 +95,7 @@ export default class NewSalonPage extends React.Component {
         this.submitForm = this.submitForm.bind(this);
         this.addAnotherMaster = this.addAnotherMaster.bind(this);
         this.addMasterPhotoInput = this.addMasterPhotoInput.bind(this);
+        this.geoCode = this.geoCode.bind(this);
     }
 
     toggleWorkDay(day) {
@@ -157,8 +162,6 @@ export default class NewSalonPage extends React.Component {
                 regions
             }
         })
-
-        console.log(window.ymaps)
     }
 
     setAllWorkDays() {
@@ -248,7 +251,61 @@ export default class NewSalonPage extends React.Component {
             })
         }
 
-        this.setState({step})
+        await this.setState({step})
+
+        if (step === 0) {
+            let userLocation
+
+            try {
+                userLocation = (await window.ymaps.geolocation.get()).geoObjects.position
+            } catch (e) {
+                userLocation = [43.2177019, 76.9441652]
+            }
+
+            const mapClickHandler = (e) => {
+                const coords = e.get('coords');
+
+                if (this.state.placeMark) {
+                    this.state.placeMark.geometry.setCoordinates(coords);
+
+                    this.setState({
+                        model: {
+                            ...this.state.model,
+                            location: coords
+                        }
+                    });
+                } else {
+                    this.setState({
+                        placeMark: new window.ymaps.Placemark(coords, {}, {
+                            preset: 'islands#circleDotIcon',
+                        }),
+                        model: {
+                            ...this.state.model,
+                            location: coords
+                        }
+                    });
+
+                    this.state.map.geoObjects.add(this.state.placeMark);
+                }
+            }
+
+            if (!this.state.map) {
+                const initMap = async () => {
+                    await this.setState({
+                        map: new window.ymaps.Map('addSalonMap', {
+                            center: userLocation,
+                            zoom: 12,
+                            controls: []
+                        }, {})
+                    })
+
+                    this.state.map.events.add('touchstart', mapClickHandler.bind(this))
+                    this.state.map.events.add('mouseup', mapClickHandler.bind(this))
+                }
+
+                window.ymaps.ready(initMap.bind(this))
+            }
+        }
     }
 
     setField(field, value) {
@@ -336,6 +393,16 @@ export default class NewSalonPage extends React.Component {
                 }
 
                 if (!this.state.model.region) {
+                    isValid = false
+                    break
+                }
+
+                if (this.state.model.location.length < 2) {
+                    isValid = false
+                    break
+                }
+
+                if (this.state.model.description.length < 20) {
                     isValid = false
                     break
                 }
@@ -459,6 +526,27 @@ export default class NewSalonPage extends React.Component {
         })
     }
 
+    geoCode() {
+        const region = this.state.prefetched.regions.find(i => i._id === this.state.model.region)?.name,
+            fullAddress = (region ? region + ', ' : '') + this.state.model.address
+
+        window.ymaps.geocode(fullAddress, {
+            results: 1
+        }).then((res) => {
+            const coords = res.geoObjects.get(0).geometry.getCoordinates()
+
+            this.setState({
+                placeMark: new window.ymaps.Placemark(coords, {}, {
+                    preset: 'islands#circleDotIcon',
+                }),
+                model: {
+                    ...this.state.model,
+                    location: coords
+                }
+            })
+        })
+    }
+
     updateWorkHours(workHours) {
         let newWorkHours = Object.assign({}, this.state.model.workHours, workHours);
 
@@ -532,7 +620,8 @@ export default class NewSalonPage extends React.Component {
             <Head>
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
             </Head>
-            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY} />
+            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                    strategy={'beforeInteractive'}/>
 
             <Breadcrumbs items={[
                 {
@@ -594,15 +683,23 @@ export default class NewSalonPage extends React.Component {
                                           <Select options={this.state.prefetched.regions} label={t('city')}
                                                   placeholder={t('inWhichCity')} value={this.state.model.region}
                                                   onUpdate={(val) => this.setField('region', val)}/>
-                                          <TextInput label={t('streetAndAddress')} placeholder={t('salonAddress')}
+                                          <TextInput label={t('streetAndAddress')}
+                                                     placeholder={t('salonAddress')}
                                                      value={this.state.model.address}
                                                      onUpdate={(val) => this.setField('address', val)}/>
                                           <TextInput label={t('phone')} type={'phone'}
                                                      placeholder={t('typeYourPhoneNumber')}
                                                      value={this.state.model.phone}
                                                      onUpdate={(val) => this.setField('phone', val)}/>
+                                          <div>
+                                              <TextArea max={500} label={t('salonDescription')}
+                                                        onUpdate={(val) => this.setField('description', val)}
+                                                        value={this.state.model.description}
+                                                        className={css.textAreaGrow}
+                                                        placeholder={t('describeYourSalon')}/>
+                                          </div>
 
-                                          <TextArea max={500} label={t('salonDescription')} placeholder={t('describeYourSalon')} />
+                                          <div id={'addSalonMap'} className={css.addSalonMap}></div>
                                       </div>
 
                                       <Button isDisabled={this.validateStep(0)} className={css.proceedBtn}
@@ -1256,7 +1353,8 @@ export default class NewSalonPage extends React.Component {
                                                           </div>
 
                                                           <div className={'flex'} style={{marginTop: 16}}>
-                                                              <Checkbox disabled reverse value={this.state.model.workHours.roundclock}
+                                                              <Checkbox disabled reverse
+                                                                        value={this.state.model.workHours.roundclock}
                                                                         name={t('roundclock')}/>
                                                           </div>
                                                       </div>
@@ -1287,63 +1385,63 @@ export default class NewSalonPage extends React.Component {
                                               </div>
                                               <div style={{padding: 16}}>
                                                   {this.state.model.masters.map((master, i) =>
-                                                    <div key={i} className={css.finalMasterCard}>
-                                                        <div bp={'grid 12 6@md'} style={{gridGap: '8px 32px'}}>
+                                                      <div key={i} className={css.finalMasterCard}>
+                                                          <div bp={'grid 12 6@md'} style={{gridGap: '8px 32px'}}>
 
-                                                            <TextInput
-                                                                disabled={this.state.model}
-                                                                value={master.name}
-                                                                placeholder={''}
-                                                                label={t('nickname')}/>
+                                                              <TextInput
+                                                                  disabled={this.state.model}
+                                                                  value={master.name}
+                                                                  placeholder={''}
+                                                                  label={t('nickname')}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.height}
-                                                                label={capitalize(t('height'))}
-                                                                placeholder={''}
-                                                                type={'number'}/>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.height}
+                                                                  label={capitalize(t('height'))}
+                                                                  placeholder={''}
+                                                                  type={'number'}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.weight}
-                                                                label={capitalize(t('weight'))}
-                                                                type={'number'}
-                                                                placeholder={''}/>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.weight}
+                                                                  label={capitalize(t('weight'))}
+                                                                  type={'number'}
+                                                                  placeholder={''}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.age}
-                                                                label={capitalize(t('age'))}
-                                                                type={'number'}
-                                                                placeholder={''}/>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.age}
+                                                                  label={capitalize(t('age'))}
+                                                                  type={'number'}
+                                                                  placeholder={''}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.eyes}
-                                                                label={capitalize(t('eyeColor'))}
-                                                                placeholder={''}/>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.eyes}
+                                                                  label={capitalize(t('eyeColor'))}
+                                                                  placeholder={''}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.hair}
-                                                                label={capitalize(t('hairColor'))}
-                                                                placeholder={''}/>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.hair}
+                                                                  label={capitalize(t('hairColor'))}
+                                                                  placeholder={''}/>
 
-                                                            <TextInput
-                                                                disabled
-                                                                value={master.characteristics.bust}
-                                                                label={capitalize(t('bust'))}
-                                                                placeholder={''}/>
-                                                        </div>
+                                                              <TextInput
+                                                                  disabled
+                                                                  value={master.characteristics.bust}
+                                                                  label={capitalize(t('bust'))}
+                                                                  placeholder={''}/>
+                                                          </div>
 
-                                                        <div bp={'grid 6 2@md'} style={{marginTop: 12}}>
-                                                            {master.photos.map((photo, i) =>
-                                                                <div className={css.img} key={i} style={{
-                                                                    backgroundImage: `url(${photo})`
-                                                                }}>&nbsp;</div>
-                                                            )}
-                                                        </div>
-                                                    </div>
+                                                          <div bp={'grid 6 2@md'} style={{marginTop: 12}}>
+                                                              {master.photos.map((photo, i) =>
+                                                                  <div className={css.img} key={i} style={{
+                                                                      backgroundImage: `url(${photo})`
+                                                                  }}>&nbsp;</div>
+                                                              )}
+                                                          </div>
+                                                      </div>
                                                   )}
                                               </div>
                                           </div>

@@ -72,6 +72,10 @@ export default class TextInput extends React.Component {
     }
 
     async validateInput(e) {
+        if (this.props.onBlur) {
+            this.props.onBlur(e)
+        }
+
         switch (this.props.type) {
             case 'email':
                 if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.value)) {
