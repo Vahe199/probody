@@ -291,16 +291,18 @@ export default class NewSalonPage extends React.Component {
 
             if (!this.state.map) {
                 const initMap = async () => {
+                    const map = new ymaps.Map('addSalonMap', {
+                        center: userLocation,
+                        zoom: 12,
+                        controls: []
+                    }, {})
+
                     await this.setState({
-                        map: new ymaps.Map('addSalonMap', {
-                            center: userLocation,
-                            zoom: 12,
-                            controls: []
-                        }, {})
+                        map
                     })
 
-                    this.state.map.events.add('touchstart', mapClickHandler.bind(this))
-                    this.state.map.events.add('mouseup', mapClickHandler.bind(this))
+                    map.events.add('touchstart', mapClickHandler.bind(this))
+                    map.events.add('mouseup', mapClickHandler.bind(this))
                 }
 
                 window.ymaps.ready(initMap.bind(this))
