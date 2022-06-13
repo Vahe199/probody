@@ -44,7 +44,7 @@ export default class LoginModal extends React.Component {
                 phone: '',
                 password: ''
             }
-        }
+        })
 
         try {
             const response = await APIRequests.logIn(this.state.phone, this.state.password)
