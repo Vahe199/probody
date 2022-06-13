@@ -36,7 +36,7 @@ class Menu extends React.Component {
             <div className={css.hamburger} onClick={this.toggleMenu}><Icon name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
             <Popup style={isMobile ? {padding: 0} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
                 <div className={css.columnFlex}>
-                <ul className={css.list}>
+                <ul className={cnb(css.list, isMobile ? css.mobile : '')}>
                     <li><Link href={'/account'}>{t('personalArea')}</Link></li>
                     <li><Link href={'/salon/new'}>{t('addArticle')}</Link></li>
                     <li><Link href={'/blog'}>{t('news')}</Link></li>

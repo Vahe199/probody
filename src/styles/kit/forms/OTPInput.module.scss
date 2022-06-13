@@ -15,4 +15,25 @@
       border-bottom: 1px solid t('input-border-color');
     }
   }
+
+  &.errored {
+    margin-bottom: 8px;
+
+    @include themify() {
+      border-color: t('bg-danger');
+
+      & + span {
+        font-size: 12px;
+        user-select: none;
+        color: t('bg-danger');
+
+        i {
+          width: 14px;
+          height: 14px;
+          vertical-align: text-top;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
 }

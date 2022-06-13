@@ -65,6 +65,33 @@ export default class APIRequests {
         })
     }
 
+    static async verifyCode(phone, code) {
+        return fetch(`${API_URL}/auth/checkcode`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                code
+            })
+        })
+    }
+
+    static async approveAccount(phone, code, password) {
+        return fetch(`${API_URL}/auth/approve`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                code,
+                password
+            })
+        })
+    }
+
     static async createWorker(model) {
         return fetch(`${API_URL}/worker`, {
             method: 'POST',

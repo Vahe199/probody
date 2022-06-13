@@ -30,10 +30,6 @@ class Home extends React.Component {
                 <h1>Мы подобрали массажные салоны в Алматы</h1>
                 <br/>
 
-                <div style={{maxWidth: 330}}>
-                    <OTPInput onUpdate={this.handleOTPInput}/>
-                </div>
-
                 <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict
                     cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep
                     sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>

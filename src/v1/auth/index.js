@@ -76,6 +76,8 @@ router.post('/checkcode', AuthValidator.onlyPhone, async (req, res) => {
             message: 'invalidApprovalCode'
         })
     }
+
+    res.send('ok')
 })
 
 router.patch('/approve', AuthValidator.phoneAndPassword, async (req, res) => {

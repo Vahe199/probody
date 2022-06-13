@@ -2,6 +2,8 @@ import React from "react";
 import css from '../../../styles/kit/forms/OTPInput.module.scss';
 import {GlobalContext} from "../../../contexts/Global.js";
 import PropTypes from "prop-types";
+import Icon from "../Icon.jsx";
+import {cnb} from "cnbuilder";
 
 export default class OTPInput extends React.Component {
     static contextType = GlobalContext
@@ -11,6 +13,8 @@ export default class OTPInput extends React.Component {
 
         this.state = {
             values: ['', '', '', '', ''],
+            errored: false,
+            errorMsg: '',
             refs: [React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef()],
         }
 
@@ -19,6 +23,16 @@ export default class OTPInput extends React.Component {
 
     static propTypes = {
         onUpdate: PropTypes.func.isRequired,
+    }
+
+    async componentDidUpdate(prevProps) {
+        if (this.props.error !== prevProps.error) {
+            if (prevProps.error && !this.props.error.length) {
+                await this.setState({errored: false, success: false, errorMsg: ''})
+            } else {
+                await this.setState({errored: true, errorMsg: this.props.error})
+            }
+        }
     }
 
     async handleInputFrom(index, event) {
@@ -46,8 +60,8 @@ export default class OTPInput extends React.Component {
     render() {
         const {t, theme} = this.context
 
-        return <div className={css['theme--' + theme]}>
-            <div className={css.root}>
+        return <div className={css['theme--' + theme]} style={this.props.style}>
+            <div className={cnb(css.root, this.state.errored ? css.errored : '')}>
                 <span className={css.subtitle}>{t('verificationCode')}</span>
 
                 <div className="flex justify-between" style={{gap: 4}}>
@@ -68,6 +82,10 @@ export default class OTPInput extends React.Component {
                            maxLength={1}/>
                 </div>
             </div>
+
+            {this.state.errored && <span>
+                    <Icon name={'error'} />
+                {this.state.errorMsg}</span>}
         </div>
     }
 }
