@@ -90,7 +90,7 @@ export default class LoginModal extends React.Component {
                 <TextInput error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')} placeholder={t('enterYourPhoneNumber')}
                            value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}
                            variant={'underline'}/>
-                <TextInput error={this.state.errors.password} style={{marginTop: 12}} label={t('password')} placeholder={t('enterYourPassword')}
+                <TextInput error={this.state.errors.password} style={{marginTop: 12}} label={t('password')} placeholder={t('enterYourPassword')} autocomplete={'current-password'}
                            value={this.state.password} onUpdate={val => this.setField('password', val)}
                            type={'password'} variant={'underline'}/>
                 <p onClick={() => openModal('forgotPassword')} className={css.hint}>{t('qForgotPassword')}</p>

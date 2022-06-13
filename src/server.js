@@ -49,7 +49,9 @@ app.prepare().then(() => {
 
     server.use(bodyParser.json());
     server.use(cookieParser())
-    server.use(helmet())
+    server.use(helmet({
+        contentSecurityPolicy: false,
+    }))
     server.use('/v1', APIv1)
 
     server.post('/pic', AuthGuard('serviceProvider'), uploader.any(), (req, res) => {
