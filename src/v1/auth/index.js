@@ -21,6 +21,12 @@ router.post('/register', AuthValidator.onlyPhone, async (req, res) => {
         let userNotExistsInMongo = (await User.countDocuments({phone})) === 0,
             userNotExistsInRedis = !Boolean(await RedisHelper.exists(usersRedisKey))
 
+        if (userNotExistsInMongo && !userNotExistsInRedis) {
+            return res.status(406).json({
+                message: "codeAlreadySent"
+            })
+        }
+
         if (userNotExistsInMongo && userNotExistsInRedis) {
             const approval = new SMSApproval(phone)
 
