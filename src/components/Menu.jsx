@@ -30,7 +30,7 @@ class Menu extends React.Component {
     }
 
     render() {
-        const {t, isMobile, openModal, theme} = this.context
+        const {t, isMobile, openModal, theme, isLoggedIn} = this.context
 
         return <div className={cnb('non-selectable', css['theme--' + theme])}>
             <div className={css.hamburger} onClick={this.toggleMenu}><Icon name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
@@ -46,7 +46,7 @@ class Menu extends React.Component {
                     <li><Link href={'/'}>{t('aboutProject')}</Link></li>
                 </ul>
 
-                    {isMobile && <div className={css.bottomSection}>
+                    {isMobile && !isLoggedIn && <div className={css.bottomSection}>
                         <Button className={css.btn} onClick={() => {
                             this.toggleMenu()
                             openModal('register')

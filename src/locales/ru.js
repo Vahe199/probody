@@ -207,4 +207,9 @@ export default {
     findYourselfSalon: 'Найдите для себя подходящий салон или мастера',
     resendWithin: 'Отправить повторно через',
     resendCode: 'Отправить код повторно',
+    restoredLogin: 'Вход на платформу восстановлен',
+    wellSendResetCodeThere: 'Мы вышлем на него код для восстановления доступа к платформе',
+    passwordRestoration: 'Восстановление пароля',
+    savePassword: 'Сохранить пароль',
+    createNewPassword: 'Создать новый пароль',
 }

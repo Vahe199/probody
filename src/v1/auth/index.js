@@ -80,6 +80,31 @@ router.post('/checkcode', AuthValidator.onlyPhone, async (req, res) => {
     res.send('ok')
 })
 
+router.post('/checkcode/reset', AuthValidator.onlyPhone, async (req, res) => {
+    let {phone, code} = req.body
+
+    phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
+
+    const usersRedisKey = 'password_reset:' + phone
+    let userDoc = await RedisHelper.get(usersRedisKey)
+
+    if (!userDoc) {
+        return res.status(422).json({
+            type: 'Error',
+            message: 'userNotFound'
+        })
+    }
+
+    if (userDoc.approvalCode !== String(code)) {
+        return res.status(406).json({
+            type: 'Error',
+            message: 'invalidApprovalCode'
+        })
+    }
+
+    res.send('ok')
+})
+
 router.patch('/approve', AuthValidator.phoneAndPassword, async (req, res) => {
     let {phone, code, password} = req.body
 

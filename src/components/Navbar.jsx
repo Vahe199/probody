@@ -10,7 +10,7 @@ import HybridSearchInput from "./kit/Form/HybridSearchInput";
 
 class Navbar extends React.Component {
     render() {
-        const {t, theme, openModal} = this.context
+        const {t, theme, openModal, isLoggedIn} = this.context
 
         return <div className={css['theme--' + theme]}>
             {this.context.isMobile ?
@@ -32,12 +32,13 @@ class Navbar extends React.Component {
                                            geoPlaceholder={t('geoPlaceholder')}/>
                     </div>
                     <LanguageSelector/>
-                    <div className={'flex'}>
+                    {!isLoggedIn && <div className={'flex'}>
                         <span className={'cursor-pointer'} onClick={() => openModal('login')}>{t('toLogIn')}</span>
                         <div style={{margin: '0 8px'}} className={css.rightSplitter}>&nbsp;</div>
                         <span className={'cursor-pointer'}
                               onClick={() => openModal('register')}>{t('registration')}</span>
-                    </div>
+                    </div>}
+                    {isLoggedIn && <div className={'flex cursor-pointer justify-center'}><Link href={'/'}>{t('personalArea')}</Link></div>}
                     <Menu/>
                     <ThemeSwitcher/>
                 </nav>

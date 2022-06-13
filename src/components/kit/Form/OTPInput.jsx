@@ -57,6 +57,12 @@ export default class OTPInput extends React.Component {
         }
     }
 
+    handleSecondaryFocus() {
+        if (this.state.values.every(v => v.length === 0)) {
+            this.state.refs[0].current.focus();
+        }
+    }
+
     render() {
         const {t, theme} = this.context
 
@@ -68,16 +74,16 @@ export default class OTPInput extends React.Component {
                     <input pattern="\d*" type={'number'} value={this.state.values[0]} ref={this.state.refs[0]}
                            onInput={e => this.handleInputFrom(0, e)} autoComplete={'one-time-code'}
                            autoFocus={true}/>
-                    <input pattern="\d*" type={'number'} value={this.state.values[1]} ref={this.state.refs[1]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[1]} ref={this.state.refs[1]} onFocus={this.handleSecondaryFocus}
                            onKeyDown={e => this.handleKeyDown(1, e.key)} onInput={e => this.handleInputFrom(1, e)}
                            maxLength={1}/>
-                    <input pattern="\d*" type={'number'} value={this.state.values[2]} ref={this.state.refs[2]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[2]} ref={this.state.refs[2]} onFocus={this.handleSecondaryFocus}
                            onKeyDown={e => this.handleKeyDown(2, e.key)} onInput={e => this.handleInputFrom(2, e)}
                            maxLength={1}/>
-                    <input pattern="\d*" type={'number'} value={this.state.values[3]} ref={this.state.refs[3]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[3]} ref={this.state.refs[3]} onFocus={this.handleSecondaryFocus}
                            onKeyDown={e => this.handleKeyDown(3, e.key)} onInput={e => this.handleInputFrom(3, e)}
                            maxLength={1}/>
-                    <input pattern="\d*" type={'number'} value={this.state.values[4]} ref={this.state.refs[4]}
+                    <input pattern="\d*" type={'number'} value={this.state.values[4]} ref={this.state.refs[4]} onFocus={this.handleSecondaryFocus}
                            onKeyDown={e => this.handleKeyDown(4, e.key)} onInput={e => this.handleInputFrom(4, e)}
                            maxLength={1}/>
                 </div>

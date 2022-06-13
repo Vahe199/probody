@@ -65,8 +65,47 @@ export default class APIRequests {
         })
     }
 
+    static async changePassword(phone, code, password) {
+        return fetch(`${API_URL}/auth/update-password`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                code,
+                password
+            })
+        })
+    }
+
+    static async requestPasswordReset(phone) {
+        return fetch(`${API_URL}/auth/request-reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone
+            })
+        })
+    }
+
     static async verifyCode(phone, code) {
         return fetch(`${API_URL}/auth/checkcode`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                code
+            })
+        })
+    }
+
+    static async verifyResetCode(phone, code) {
+        return fetch(`${API_URL}/auth/checkcode/reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

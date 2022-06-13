@@ -91,7 +91,7 @@ export default class LoginModal extends React.Component {
                     <h1>{t('enterYourCredentials')}</h1>
                     <p>{t('forAuth')}</p>
 
-                    <TextInput autoFocus error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')}
+                    <TextInput error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')}
                                placeholder={t('enterYourPhoneNumber')}
                                value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}
                                variant={'underline'}/>
@@ -99,7 +99,7 @@ export default class LoginModal extends React.Component {
                                placeholder={t('enterYourPassword')} autoComplete={'current-password'}
                                value={this.state.password} onUpdate={val => this.setField('password', val)}
                                type={'password'} variant={'underline'}/>
-                    <p onClick={() => openModal('forgotPassword')} className={css.hint}>{t('qForgotPassword')}</p>
+                    <p onClick={() => openModal('forgot')} className={css.hint}>{t('qForgotPassword')}</p>
 
                     <Button color={theme === 'dark' ? 'primary' : 'secondary'} isDisabled={!this.validateCredentials()}
                             style={{marginTop: 24}} onClick={this.logIn}

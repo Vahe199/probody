@@ -1,16 +1,17 @@
 import React from "react";
-import {GlobalContext} from "../../contexts/Global.js";
-import Icon from "../kit/Icon.jsx";
-import css from '../../styles/kit/modal-content.module.scss';
-import TextInput from "../kit/Form/TextInput";
+import css from "../../styles/kit/modal-content.module.scss";
 import Button from "../kit/Button.jsx";
+import {GlobalContext} from "../../contexts/Global.js";
+import {withRouter} from "next/router.js";
 import {isValidPhoneNumber} from "libphonenumber-js";
 import APIRequests from "../../helpers/APIRequests.js";
 import {cnb} from "cnbuilder";
-import OTPInput from "../kit/Form/OTPInput";
+import Icon from "../kit/Icon.jsx";
+import TextInput from "../kit/Form/TextInput.jsx";
+import OTPInput from "../kit/Form/OTPInput.jsx";
 import UserHelper from "../../helpers/UserHelper.js";
 
-export default class RegisterModal extends React.Component {
+class ForgotModal extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,9 +31,8 @@ export default class RegisterModal extends React.Component {
 
         this.setField = this.setField.bind(this)
         this.validateCredentials = this.validateCredentials.bind(this)
-        this.signUp = this.signUp.bind(this)
+        this.requestReset = this.requestReset.bind(this)
         this.verifyCode = this.verifyCode.bind(this)
-        this.createAccount = this.createAccount.bind(this)
         this.resendCode = this.resendCode.bind(this)
     }
 
@@ -57,7 +57,7 @@ export default class RegisterModal extends React.Component {
         }
     }
 
-    async signUp() {
+    async requestReset() {
         await this.setState({
             errors: {
                 phone: '',
@@ -65,14 +65,14 @@ export default class RegisterModal extends React.Component {
         })
 
         try {
-            const response = await APIRequests.signUp(this.state.phone)
+            const response = await APIRequests.requestPasswordReset(this.state.phone)
 
             if (!response.ok) {
-                    this.setState({
-                        errors: {
-                            phone: this.context.t('phone_' + (await response.json()).message)
-                        }
-                    })
+                this.setState({
+                    errors: {
+                        phone: this.context.t('phone_' + (await response.json()).message)
+                    }
+                })
             } else {
                 const intervalId = setInterval(() => {
                     this.setState({
@@ -100,7 +100,7 @@ export default class RegisterModal extends React.Component {
         })
 
         try {
-            const response = await APIRequests.verifyCode(this.state.phone, this.state.code)
+            const response = await APIRequests.verifyResetCode(this.state.phone, this.state.code)
 
             if (!response.ok) {
                 this.setState({
@@ -122,10 +122,10 @@ export default class RegisterModal extends React.Component {
             secondsBeforeResend: 30
         })
 
-        APIRequests.resendCode(this.state.phone, 'register')
+        APIRequests.resendCode(this.state.phone, 'reset')
     }
 
-    async createAccount() {
+    async savePassword() {
         await this.setState({
             errors: {
                 password: ''
@@ -133,12 +133,12 @@ export default class RegisterModal extends React.Component {
         })
 
         try {
-            const response = await APIRequests.approveAccount(this.state.phone, this.state.code, this.state.password)
+            const response = await APIRequests.changePassword(this.state.phone, this.state.code, this.state.password)
 
             if (response.ok) {
                 UserHelper.logIn((await response.json()).jwt)
 
-                this.context.openModal('registered')
+                this.context.openModal('changedPassword')
             }
         } catch (e) {}
     }
@@ -150,7 +150,7 @@ export default class RegisterModal extends React.Component {
             <div className={cnb(css.modalHead, isMobile ? css.mobile : css.desktop)}>
                 {(isMobile && this.state.step > 0) ? <div style={{marginRight: -24}}>{t('backward')}</div> : <div>&nbsp;</div>}
 
-                <h2>{t('registration')}</h2>
+                <h2>{t('passwordRestoration')}</h2>
 
                 <Icon name={'close'} onClick={() => openModal('')}/>
             </div>
@@ -158,7 +158,7 @@ export default class RegisterModal extends React.Component {
             <div className={cnb(css.body, isMobile ? css.mobile : css.desktop)}>
                 {this.state.step === 0 && <div>
                     <h1>{t('enterYourPhoneNumber')}</h1>
-                    <p>{t('wellSendCodeThere')}</p>
+                    <p>{t('wellSendResetCodeThere')}</p>
 
                     <TextInput error={this.state.errors.phone} style={{marginTop: 12}}
                                label={t('phoneNumber')}
@@ -168,7 +168,7 @@ export default class RegisterModal extends React.Component {
 
                     <Button color={theme === 'dark' ? 'primary' : 'secondary'}
                             isDisabled={!this.validateCredentials('phone')}
-                            style={{marginTop: 24}} onClick={this.signUp}
+                            style={{marginTop: 24}} onClick={this.requestReset}
                             size={'fill'}>
                         <div className={'flex justify-between vertical-center'}>
                             <span>{t('getCode')}</span>
@@ -194,7 +194,7 @@ export default class RegisterModal extends React.Component {
                             size={'fill'}>
 
                         <div className={'flex justify-between vertical-center'}>
-                            <span>{t('createPassword')}</span>
+                            <span>{t('createNewPassword')}</span>
                             <Icon name={'arrow_right'} className={css.arrowRight}/>
                         </div>
                     </Button>
@@ -208,15 +208,17 @@ export default class RegisterModal extends React.Component {
 
                     <Button color={theme === 'dark' ? 'primary' : 'secondary'}
                             isDisabled={!this.validateCredentials('password')}
-                            style={{marginTop: 24}} onClick={this.createAccount}
+                            style={{marginTop: 24}} onClick={this.savePassword}
                             size={'fill'}>
                         <div className={'flex justify-between vertical-center'}>
-                            <span>{t('createAccount')}</span>
+                            <span>{t('savePassword')}</span>
                             <Icon name={'arrow_right'} className={css.arrowRight}/>
                         </div>
                     </Button>
                 </div>}
             </div>
-        </div>
+        </div>;
     }
 }
+
+export default withRouter(ForgotModal);

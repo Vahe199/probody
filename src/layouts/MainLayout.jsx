@@ -13,6 +13,9 @@ import Modal from "../components/kit/Modal.jsx";
 import LoginModal from "../components/modals/LoginModal.jsx";
 import RegisterModal from "../components/modals/RegisterModal.jsx";
 import RegisteredModal from "../components/modals/RegisteredModal.jsx";
+import UserHelper from "../helpers/UserHelper.js";
+import ForgotModal from "../components/modals/ForgotModal.jsx";
+import ChangedPasswordModal from "../components/modals/ChangedPasswordModal";
 
 const translations = {
     en,
@@ -38,14 +41,22 @@ class MainLayout extends React.Component {
 
         this.computeIsMobile = this.computeIsMobile.bind(this)
         this.openModal = this.openModal.bind(this)
+        this.computeIsLoggedIn = this.computeIsLoggedIn.bind(this)
     }
 
     openModal(modal) {
         this.setState({modal})
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.openModal !== this.state.openModal) {
+            this.computeIsLoggedIn()
+        }
+    }
+
     componentDidMount() {
         this.computeIsMobile()
+        this.computeIsLoggedIn()
 
         Settings.defaultLocale = this.props.router.locale
 
@@ -74,6 +85,10 @@ class MainLayout extends React.Component {
         }
 
         window.addEventListener('resize', this.computeIsMobile);
+    }
+
+    computeIsLoggedIn() {
+        this.setState({isLoggedIn: UserHelper.isLoggedIn()})
     }
 
     computeIsMobile() {
@@ -118,7 +133,8 @@ class MainLayout extends React.Component {
                         {this.state.modal === 'login' && <LoginModal/>}
                         {this.state.modal === 'register' && <RegisterModal/>}
                         {this.state.modal === 'registered' && <RegisteredModal/>}
-                        {/*{this.state.modal === 'forgot' && <ForgotModal/>}*/}
+                        {this.state.modal === 'forgot' && <ForgotModal/>}
+                        {this.state.modal === 'changedPassword' && <ChangedPasswordModal/>}
                     </Modal>
                 </div>
             </GlobalContext.Provider>
