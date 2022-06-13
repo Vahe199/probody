@@ -48,7 +48,7 @@ export default class Search {
                     worker.description,
                     worker.leads,
                     worker.services,
-                    worker.programs.map(p => p.name),
+                    worker.programs,
                     worker.region.name)
             }
 
