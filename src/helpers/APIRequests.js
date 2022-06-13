@@ -54,7 +54,7 @@ export default class APIRequests {
     }
 
     static async createWorker(model) {
-        return await fetch(`${API_URL}/worker`, {
+        return fetch(`${API_URL}/worker`, {
             method: 'POST',
             headers: APIRequests.withCredentials({
                 'Content-Type': 'application/json'

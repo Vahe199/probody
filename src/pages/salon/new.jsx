@@ -23,8 +23,10 @@ import Program from "../../components/kit/Program.jsx";
 import Head from "next/head.js";
 import {TITLE_POSTFIX, YANDEX_APIKEY} from "../../helpers/constants.js";
 import Script from "next/script.js";
+import Modal from "../../components/kit/Modal";
+import {withRouter} from "next/router.js";
 
-export default class NewSalonPage extends React.Component {
+class NewSalonPage extends React.Component {
     static contextType = GlobalContext
 
     constructor(props) {
@@ -32,6 +34,7 @@ export default class NewSalonPage extends React.Component {
 
         this.state = {
             step: -1,
+            dialogOpen: false,
             placeMark: undefined,
             map: undefined,
             model: {
@@ -96,6 +99,8 @@ export default class NewSalonPage extends React.Component {
         this.addAnotherMaster = this.addAnotherMaster.bind(this);
         this.addMasterPhotoInput = this.addMasterPhotoInput.bind(this);
         this.geoCode = this.geoCode.bind(this);
+        this.openSuccessDialog = this.openSuccessDialog.bind(this);
+        this.closeSuccessDialog = this.closeSuccessDialog.bind(this);
     }
 
     toggleWorkDay(day) {
@@ -563,6 +568,16 @@ export default class NewSalonPage extends React.Component {
         })
     }
 
+    openSuccessDialog() {
+        this.setState({
+            dialogOpen: true
+        })
+    }
+
+    closeSuccessDialog() {
+        this.props.router.push('/')
+    }
+
     setMasterPhoto(masterIndex, photoIndex, photo) {
         const masters = [...this.state.model.masters];
 
@@ -599,8 +614,11 @@ export default class NewSalonPage extends React.Component {
             return i
         })
 
-        await APIRequests.createWorker(model)
-        console.log('done')
+        const res = await APIRequests.createWorker(model)
+
+        if (res.ok) {
+            this.openSuccessDialog()
+        }
     }
 
     render() {
@@ -620,6 +638,18 @@ export default class NewSalonPage extends React.Component {
             </Head>
             <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
                     strategy={'beforeInteractive'}/>
+
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} onUpdate={this.closeSuccessDialog}>
+                <div className={css.modalBody}>
+                    <p>{t('cool')}</p>
+
+                    <h1>{t('salonSentToModeration')}</h1>
+
+                    <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('toMainPage')}</Button>
+
+                    <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                </div>
+            </Modal>
 
             <Breadcrumbs items={[
                 {
@@ -1456,3 +1486,5 @@ export default class NewSalonPage extends React.Component {
         </div>
     }
 }
+
+export default withRouter(NewSalonPage)

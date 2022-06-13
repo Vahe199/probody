@@ -72,6 +72,22 @@
   margin: 16px 0;
 }
 
+.modalBody {
+  padding: 24px;
+
+  button {
+    margin-top: 16px;
+  }
+
+  .modalClose {
+    position: absolute;
+    bottom: -40px;
+    left: 45%;
+    cursor: pointer;
+    color: #e4e4e4;
+  }
+}
+
 .addSalonMap {
   @include themify() {
     background: t('bg-secondlayer')
