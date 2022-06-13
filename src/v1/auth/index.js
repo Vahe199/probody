@@ -95,7 +95,7 @@ router.post('/checkcode/reset', AuthValidator.onlyPhone, async (req, res) => {
         })
     }
 
-    if (userDoc.approvalCode !== String(code)) {
+    if (userDoc !== String(code)) {
         return res.status(406).json({
             type: 'Error',
             message: 'invalidApprovalCode'
