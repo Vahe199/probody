@@ -1,6 +1,5 @@
 import './Worker.model.js'
 import './ScheduleRaise.model.js'
-import './MassageType.model.js'
 import './Service.model.js'
 import './Region.model.js'
 import './BlogArticle.model.js'

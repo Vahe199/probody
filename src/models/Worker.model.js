@@ -117,10 +117,6 @@ const WorkerSchema = new Schema({
         type: [Schema.Types.ObjectId],
         ref: "Service"
     },
-    massageTypes: {
-        type: [Schema.Types.ObjectId],
-        ref: "MassageType"
-    },
     programs: [{
         name: {
             type: String,

@@ -85,7 +85,6 @@ router.get('/:slug', async (req, res) => {
                 .findOne({slug: req.params.slug})
                 .populate('services', 'name')
                 .populate('leads', 'name')
-                .populate('massageTypes', 'name')
                 .populate('region', 'name'))
         } else {
             return res.json({kind: 'salon'})

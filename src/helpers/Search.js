@@ -33,7 +33,6 @@ export default class Search {
             let workers = await Worker.find({parent: {$exists: false}})
                 .populate('services', 'name')
                 .populate('leads', 'name')
-                .populate('massageTypes', 'name')
                 .populate('region', 'name')
                 .skip(offset)
                 .limit(BATCHSIZE)
@@ -49,7 +48,7 @@ export default class Search {
                     worker.description,
                     worker.leads,
                     worker.services,
-                    worker.massageTypes,
+                    worker.programs.map(p => p.name),
                     worker.region.name)
             }
 
