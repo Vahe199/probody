@@ -7,5 +7,6 @@ export const GlobalContext = React.createContext({
     t: Function.prototype,
     setLocale: Function.prototype,
     toggleTheme: Function.prototype,
-    setLoggedIn: Function.prototype
+    setLoggedIn: Function.prototype,
+    openModal: Function.prototype,
 });

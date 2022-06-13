@@ -1,0 +1,49 @@
+@import "../themes";
+
+.modalHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px;
+  border-radius: 32px 32px 0 0;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+    color: t('text-secondlayer');
+  }
+
+  i {
+    cursor: pointer;
+    @include themify() {
+      color: t('text-disabled');
+    }
+  }
+}
+
+.body {
+    padding: 24px 32px 32px 32px;
+
+  @include themify() {
+    color: t('text-main');
+  }
+}
+
+.hint {
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: Lack, sans-serif;
+}
+
+.caption {
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  font-size: 14px;
+}
+
+.arrowRight {
+  width: 18px;
+  height: 12px;
+}

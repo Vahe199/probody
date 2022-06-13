@@ -6,6 +6,7 @@ import APIv1 from './v1/index.js'
 import bodyParser from "body-parser"
 import cookieParser from 'cookie-parser'
 import * as mime from "mime-types"
+import helmet from 'helmet'
 import * as shortid from 'shortid'
 import multer from 'multer'
 import Search from "./helpers/Search.js"
@@ -48,6 +49,7 @@ app.prepare().then(() => {
 
     server.use(bodyParser.json());
     server.use(cookieParser())
+    server.use(helmet())
     server.use('/v1', APIv1)
 
     server.post('/pic', AuthGuard('serviceProvider'), uploader.any(), (req, res) => {

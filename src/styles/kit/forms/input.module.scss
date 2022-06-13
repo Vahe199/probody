@@ -88,7 +88,7 @@
   cursor: pointer;
 
   @include themify() {
-    color: t('text-primary');
+    color: t('inactive-slide');
   }
   margin-top: -5px;
 }
@@ -96,9 +96,9 @@
 .closeIcon {
   cursor: pointer;
   @include themify() {
-    color: t('text-primary');
+    color: t('inactive-slide');
   }
-  //margin-top: 12px;
+  margin-top: 12px;
   padding-right: 12px;
   width: 12px;
   height: 12px;
@@ -107,10 +107,11 @@
 .hideIcon {
   width: 20px;
   @include themify() {
-    color: t('text-primary');
+    color: t('inactive-slide');
   }
   margin-right: 12px;
   height: 18px;
+  cursor: pointer;
   margin-top: 8px;
 }
 

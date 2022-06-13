@@ -69,7 +69,7 @@ export async function auth(req, res, next) {
 
     req.validation = []
     if (password) {
-        if (password.length < 8) {//проверяем пароль
+        if (password.length < 6) {//проверяем пароль
             req.validation.push({text: 'tooShortPassword', field: 'password'})
         }
         if (password.length > 50) {
@@ -104,7 +104,7 @@ export async function phoneAndPassword(req, res, next) {
 
     req.validation = []
     if (password) {
-        if (password.length < 8) {//проверяем пароль
+        if (password.length < 6) {//проверяем пароль
             req.validation.push({text: 'tooShortPassword', field: 'password'})
         }
         if (password.length > 50) {
