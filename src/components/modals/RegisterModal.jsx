@@ -47,7 +47,7 @@ export default class RegisterModal extends React.Component {
     validateCredentials(field) {
         switch (field) {
             case 'phone':
-                return isValidPhoneNumber(this.state.phone)
+                return isValidPhoneNumber(this.state.phone, 'KZ')
 
             case 'code':
                 return this.state.code.length === 5

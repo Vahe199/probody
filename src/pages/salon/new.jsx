@@ -11,7 +11,7 @@ import {capitalize} from "../../helpers/String";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 import {cnb} from "cnbuilder";
 import Button from "../../components/kit/Button.jsx";
-import {isValidNumber} from "libphonenumber-js";
+import {isValidPhoneNumber} from "libphonenumber-js";
 import Icon from "../../components/kit/Icon.jsx";
 import Checkbox from "../../components/kit/Form/Checkbox";
 import RangeInput from "../../components/kit/Form/RangeInput";
@@ -385,7 +385,7 @@ class NewSalonPage extends React.Component {
 
         switch (step) {
             case 0:
-                if (!isValidNumber(this.state.model.phone, 'KZ')) {
+                if (!isValidPhoneNumber(this.state.model.phone, 'KZ')) {
                     isValid = false
                     break
                 }
@@ -425,7 +425,7 @@ class NewSalonPage extends React.Component {
                 break
 
             case 2:
-                if (!isValidNumber(this.state.model.messengers.wa, 'KZ')) {
+                if (!isValidPhoneNumber(this.state.model.messengers.wa, 'KZ')) {
                     isValid = false
                     break
                 }

@@ -36,7 +36,7 @@ export default class LoginModal extends React.Component {
     }
 
     validateCredentials() {
-        return isValidPhoneNumber(this.state.phone) && this.state.password.length >= 6
+        return isValidPhoneNumber(this.state.phone, 'KZ') && this.state.password.length >= 6
     }
 
     async logIn() {
