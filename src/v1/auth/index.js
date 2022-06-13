@@ -261,7 +261,17 @@ router.post('/request-reset', AuthValidator.onlyPhone, async (req, res) => {
 
     phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
 
-    const userDoc = await User.findOne({phone})
+    const usersRedisKey = 'password_reset:' + phone
+    let userDoc = await RedisHelper.get(usersRedisKey)
+
+    if (userDoc) {
+        return res.status(406).json({
+            type: 'Error',
+            message: 'codeAlreadySent'
+        })
+    }
+
+    userDoc = await User.findOne({phone})
 
     if (!userDoc) {
         return res.status(422).json({

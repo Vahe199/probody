@@ -34,6 +34,7 @@ class ForgotModal extends React.Component {
         this.requestReset = this.requestReset.bind(this)
         this.verifyCode = this.verifyCode.bind(this)
         this.resendCode = this.resendCode.bind(this)
+        this.savePassword = this.savePassword.bind(this)
     }
 
     static contextType = GlobalContext
@@ -148,7 +149,7 @@ class ForgotModal extends React.Component {
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb(css.modalHead, isMobile ? css.mobile : css.desktop)}>
-                {(isMobile && this.state.step > 0) ? <div style={{marginRight: -24}}>{t('backward')}</div> : <div>&nbsp;</div>}
+                {isMobile && <div>&nbsp;</div>}
 
                 <h2>{t('passwordRestoration')}</h2>
 
