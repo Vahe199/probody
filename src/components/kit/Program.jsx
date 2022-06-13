@@ -16,7 +16,8 @@ class Program extends React.Component {
         duration: PropTypes.number.isRequired,
         classicCnt: PropTypes.number.isRequired,
         eroticCnt: PropTypes.number.isRequired,
-        relaxCnt: PropTypes.number.isRequired
+        relaxCnt: PropTypes.number.isRequired,
+        link: PropTypes.string,
     }
 
     render() {
@@ -48,7 +49,7 @@ class Program extends React.Component {
                     </div>
                 </div>
                 <div className={css.flexEnd}>
-                    <Button size={'medium'}>{t('apply')}</Button>
+                    {this.props.link && <Button size={'medium'}>{t('apply')}</Button>}
                 </div>
             </div>
         </InfoBlock></div>
