@@ -16,6 +16,8 @@ export default class RegisterModal extends React.Component {
 
         this.state = {
             step: 0,
+            interval: null,
+            secondsBeforeResend: 30,
             phone: '+7',
             password: '',
             code: '',
@@ -30,6 +32,8 @@ export default class RegisterModal extends React.Component {
         this.validateCredentials = this.validateCredentials.bind(this)
         this.signUp = this.signUp.bind(this)
         this.verifyCode = this.verifyCode.bind(this)
+        this.createAccount = this.createAccount.bind(this)
+        this.resendCode = this.resendCode.bind(this)
     }
 
     static contextType = GlobalContext
@@ -70,6 +74,16 @@ export default class RegisterModal extends React.Component {
                         }
                     })
             } else {
+                const intervalId = setInterval(() => {
+                    this.setState({
+                        secondsBeforeResend: this.state.secondsBeforeResend - 1
+                    })
+
+                    if (this.state.secondsBeforeResend === 0) {
+                        clearInterval(intervalId)
+                    }
+                }, 1000)
+
                 this.setState({
                     step: this.state.step + 1
                 })
@@ -101,6 +115,14 @@ export default class RegisterModal extends React.Component {
             }
         } catch (e) {
         }
+    }
+
+    resendCode() {
+        this.setState({
+            secondsBeforeResend: 30
+        })
+
+        APIRequests.resendCode(this.state.phone, 'register')
     }
 
     async createAccount() {
@@ -161,10 +183,16 @@ export default class RegisterModal extends React.Component {
 
                     <OTPInput style={{marginTop: 16}} error={this.state.errors.code} onUpdate={val => this.setField('code', val)} />
 
+                    <div className={'flex justify-center'} style={{marginTop: 32}}>
+                        {this.state.secondsBeforeResend > 0 && <span>{t('resendWithin')} 00:{String(this.state.secondsBeforeResend).padStart(2, '0')}</span>}
+                        {this.state.secondsBeforeResend <= 0 && <Button size={'small'} onClick={this.resendCode}>{t('resendCode')}</Button>}
+                    </div>
+
                     <Button color={theme === 'dark' ? 'primary' : 'secondary'}
                             isDisabled={!this.validateCredentials('code')}
                             style={{marginTop: 24}} onClick={this.verifyCode}
                             size={'fill'}>
+
                         <div className={'flex justify-between vertical-center'}>
                             <span>{t('createPassword')}</span>
                             <Icon name={'arrow_right'} className={css.arrowRight}/>

@@ -79,6 +79,12 @@
     margin-top: 16px;
   }
 
+  p, h1 {
+    @include themify() {
+      color: t('text-main')
+    }
+  }
+
   .modalClose {
     position: absolute;
     bottom: -40px;

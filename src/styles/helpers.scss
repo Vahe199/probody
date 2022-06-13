@@ -15,15 +15,19 @@
 }
 
 .inline-block {
-    display: inline-block;
+  display: inline-block;
 }
 
 .relative {
-    position: relative;
+  position: relative;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .overflow-hidden {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .fit {
@@ -32,11 +36,11 @@
 }
 
 .grow-1 {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .fullwidth {
-    width: 100%;
+  width: 100%;
 }
 
 .vertical-center {
@@ -56,7 +60,7 @@
 }
 
 .wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .gap-12 {
@@ -64,7 +68,7 @@
 }
 
 .column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .justify-around {

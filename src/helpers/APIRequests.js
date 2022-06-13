@@ -80,7 +80,7 @@ export default class APIRequests {
 
     static async approveAccount(phone, code, password) {
         return fetch(`${API_URL}/auth/approve`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -88,6 +88,19 @@ export default class APIRequests {
                 phone,
                 code,
                 password
+            })
+        })
+    }
+
+    static resendCode(phone, target) {
+        return fetch(`${API_URL}/auth/resend-sms`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                target
             })
         })
     }

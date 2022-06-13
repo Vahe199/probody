@@ -11,8 +11,8 @@ import Cookie from "../helpers/Cookie.js";
 import {DateTime, Settings} from "luxon";
 import Modal from "../components/kit/Modal.jsx";
 import LoginModal from "../components/modals/LoginModal.jsx";
-import Popup from "../components/kit/Popup";
 import RegisterModal from "../components/modals/RegisterModal.jsx";
+import RegisteredModal from "../components/modals/RegisteredModal.jsx";
 
 const translations = {
     en,
@@ -114,11 +114,11 @@ class MainLayout extends React.Component {
                         <Footer/>
                     </div>
 
-                    <Modal isMobile={this.state.isMobile} onUpdate={this.openModal} open={!!this.state.modal.length}>
+                    <Modal isMobile={this.state.isMobile && this.state.modal !== 'registered'} onUpdate={this.openModal} open={!!this.state.modal.length}>
                         {this.state.modal === 'login' && <LoginModal/>}
                         {this.state.modal === 'register' && <RegisterModal/>}
+                        {this.state.modal === 'registered' && <RegisteredModal/>}
                         {/*{this.state.modal === 'forgot' && <ForgotModal/>}*/}
-{/*{this.state.modal === 'reset' && <ResetModal/>}*/}
                     </Modal>
                 </div>
             </GlobalContext.Provider>

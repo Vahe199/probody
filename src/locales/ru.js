@@ -202,4 +202,9 @@ export default {
     composeNewPassword: 'Придумайте пароль для входа на платформу',
     passwordCanOnlyContain: 'Пароль может состоять из цифр, символов или латинских букв',
     createAccount: 'Создать аккаунт',
+    youCreatedProfile: 'Вы создали профиль',
+    close: 'Закрыть',
+    findYourselfSalon: 'Найдите для себя подходящий салон или мастера',
+    resendWithin: 'Отправить повторно через',
+    resendCode: 'Отправить код повторно',
 }
