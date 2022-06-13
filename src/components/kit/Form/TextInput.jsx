@@ -37,6 +37,10 @@ export default class TextInput extends React.Component {
                 await this.validateInput()
             }
         }
+
+        if (this.props.error !== prevProps.error) {
+            await this.setState({errored: true, errorMsg: this.props.error})
+        }
     }
 
     componentDidMount() {

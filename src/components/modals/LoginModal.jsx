@@ -6,6 +6,7 @@ import TextInput from "../kit/Form/TextInput";
 import Button from "../kit/Button.jsx";
 import {isValidPhoneNumber} from "libphonenumber-js";
 import APIRequests from "../../helpers/APIRequests.js";
+import UserHelper from "../../helpers/UserHelper.js";
 
 export default class LoginModal extends React.Component {
     constructor(props) {
@@ -14,6 +15,10 @@ export default class LoginModal extends React.Component {
         this.state = {
             phone: '+7',
             password: '',
+            errors: {
+                phone: '',
+                password: ''
+            }
         }
 
         this.setField = this.setField.bind(this)
@@ -35,10 +40,30 @@ export default class LoginModal extends React.Component {
 
     async logIn() {
         try {
-            await APIRequests.logIn(this.state.phone, this.state.password)
-        } catch (e) {
-            console.log('invalid credentials')
-        }
+            const response = await APIRequests.logIn(this.state.phone, this.state.password)
+
+            if (response.type === 'Error') {
+                if (response.field === 'password') {
+                    this.setState({
+                        errors: {
+                            ...this.state.errors,
+                            password: this.context.t('passwordIsWrong')
+                        }
+                    })
+                } else {
+                    this.setState({
+                        errors: {
+                            ...this.state.errors,
+                            phone: this.context.t('phoneIsWrong')
+                        }
+                    })
+                }
+            } else {
+                UserHelper.logIn(response.jwt)
+
+                this.context.openModal('')
+            }
+        } catch (e) {}
     }
 
     render() {
@@ -55,10 +80,10 @@ export default class LoginModal extends React.Component {
                 <h1>{t('enterYourCredentials')}</h1>
                 <p>{t('forAuth')}</p>
 
-                <TextInput style={{marginTop: 12}} label={t('phoneNumber')} placeholder={t('enterYourPhoneNumber')}
+                <TextInput error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')} placeholder={t('enterYourPhoneNumber')}
                            value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}
                            variant={'underline'}/>
-                <TextInput style={{marginTop: 12}} label={t('password')} placeholder={t('enterYourPassword')}
+                <TextInput error={this.state.errors.password} style={{marginTop: 12}} label={t('password')} placeholder={t('enterYourPassword')}
                            value={this.state.password} onUpdate={val => this.setField('password', val)}
                            type={'password'} variant={'underline'}/>
                 <p onClick={() => openModal('forgotPassword')} className={css.hint}>{t('qForgotPassword')}</p>

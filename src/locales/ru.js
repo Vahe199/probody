@@ -182,4 +182,6 @@ export default {
     logInFull: 'Войти на платформу',
     qDontHaveAccount: 'Нет аккаунта?',
     register: 'Зарегистрироваться',
+    passwordIsWrong: 'Пароль введен неверно',
+    phoneIsWrong: 'Номер телефона введен неверно',
 }

@@ -166,12 +166,19 @@ router.post('/login', AuthValidator.auth, async (req, res) => {
                     type: 'Success',
                     jwt: signedToken
                 })
+            } else {
+                return res.status(401).json({
+                    type: 'Error',
+                    message: "invalidCredentials",
+                    field: 'password'
+                });
             }
         }
 
         res.status(401).json({
             type: 'Error',
             message: "invalidCredentials",
+            field: 'phone'
         });
     } catch (e) {
         res.status(500).json({
