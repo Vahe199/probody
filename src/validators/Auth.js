@@ -1,5 +1,5 @@
 import {parsePhoneNumber} from 'libphonenumber-js'
-import PostValidator from "../../../helpers/PostValidator.js";
+import PostValidator from "../helpers/PostValidator.js";
 
 export async function register(req, res, next) {
     let {password, phone} = req.body;
