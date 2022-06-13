@@ -4,12 +4,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px;
-  border-radius: 32px 32px 0 0;
 
   @include themify() {
-    background: t('bg-secondlayer');
-    color: t('text-secondlayer');
+    &.desktop {
+      padding: 32px;
+      border-radius: 32px 32px 0 0;
+      background: t('bg-secondlayer');
+      color: t('text-secondlayer');
+    }
+
+    &.mobile {
+      padding: 16px;
+
+      h2 {
+        font-size: 20px;
+        font-family: Lato, sans-serif;
+        font-weight: normal;
+      }
+
+      //background: t('bg-secondlayer');
+      color: t('text-secondlayer');
+
+      i {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 
   i {
@@ -21,7 +41,18 @@
 }
 
 .body {
+  input {
+    font-size: 24px;
+    margin-bottom: -5px;
+  }
+
+  &.mobile {
+    padding: 16px;
+  }
+
+  &.desktop {
     padding: 24px 32px 32px 32px;
+  }
 
   @include themify() {
     color: t('text-main');

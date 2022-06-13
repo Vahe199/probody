@@ -53,6 +53,18 @@ export default class APIRequests {
         })).json()
     }
 
+    static async signUp(phone) {
+        return fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone
+            })
+        })
+    }
+
     static async createWorker(model) {
         return fetch(`${API_URL}/worker`, {
             method: 'POST',

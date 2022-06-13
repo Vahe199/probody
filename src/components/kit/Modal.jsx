@@ -20,7 +20,7 @@ export default class Modal extends React.Component {
                 if (e.target.classList.contains(css.overlay)) {
                     this.props.onUpdate('')
                 }
-            }} className={cnb(css.overlay, this.props.open ? css.visible : '')}>
+            }} className={cnb(css.overlay, this.props.isMobile ? css.mobile : css.desktop, this.props.open ? css.visible : '')}>
             <div style={this.props.modalStyle} className={css.modal}>
                 {this.props.children}
             </div>

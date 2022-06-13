@@ -47,6 +47,31 @@ router.post('/register', AuthValidator.onlyPhone, async (req, res) => {
     }
 })
 
+router.post('/checkcode', AuthValidator.onlyPhone, async (req, res) => {
+    let {phone, code} = req.body
+
+    phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
+
+    const usersRedisKey = 'pending:register:' + phone
+    let userDoc = await RedisHelper.get(usersRedisKey)
+
+    if (!userDoc) {
+        return res.status(422).json({
+            type: 'Error',
+            message: 'userNotFound'
+        })
+    }
+
+    userDoc = JSON.parse(userDoc)
+
+    if (userDoc.approvalCode !== String(code)) {
+        return res.status(406).json({
+            type: 'Error',
+            message: 'invalidApprovalCode'
+        })
+    }
+})
+
 router.patch('/approve', AuthValidator.phoneAndPassword, async (req, res) => {
     let {phone, code, password} = req.body
 

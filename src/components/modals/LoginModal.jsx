@@ -7,6 +7,7 @@ import Button from "../kit/Button.jsx";
 import {isValidPhoneNumber} from "libphonenumber-js";
 import APIRequests from "../../helpers/APIRequests.js";
 import UserHelper from "../../helpers/UserHelper.js";
+import {cnb} from "cnbuilder";
 
 export default class LoginModal extends React.Component {
     constructor(props) {
@@ -70,45 +71,50 @@ export default class LoginModal extends React.Component {
 
                 this.context.openModal('')
             }
-        } catch (e) {}
+        } catch (e) {
+        }
     }
 
     render() {
-        const {t, openModal, theme} = this.context
+        const {t, openModal, theme, isMobile} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={css.modalHead}>
-                <h2>{t('toLogIn')}</h2>
+                <div className={cnb(css.modalHead, isMobile ? css.mobile : css.desktop)}>
+                    {isMobile && <div>&nbsp;</div>}
 
-                <Icon name={'close'} onClick={() => openModal('')}/>
-            </div>
+                    <h2>{t(isMobile ? 'logIn' : 'toLogIn')}</h2>
 
-            <div className={css.body}>
-                <h1>{t('enterYourCredentials')}</h1>
-                <p>{t('forAuth')}</p>
-
-                <TextInput error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')} placeholder={t('enterYourPhoneNumber')}
-                           value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}
-                           variant={'underline'}/>
-                <TextInput error={this.state.errors.password} style={{marginTop: 12}} label={t('password')} placeholder={t('enterYourPassword')} autocomplete={'current-password'}
-                           value={this.state.password} onUpdate={val => this.setField('password', val)}
-                           type={'password'} variant={'underline'}/>
-                <p onClick={() => openModal('forgotPassword')} className={css.hint}>{t('qForgotPassword')}</p>
-
-                <Button color={theme === 'dark' ? 'primary' : 'secondary'} isDisabled={!this.validateCredentials()}
-                        style={{marginTop: 24}} onClick={this.logIn}
-                        size={'fill'}>
-                    <div className={'flex justify-between vertical-center'}>
-                        <span>{t('logInFull')}</span>
-                        <Icon name={'arrow_right'} className={css.arrowRight}/>
-                    </div>
-                </Button>
-
-                <div style={{marginTop: 16}}>
-                    <p className={css.caption}>{t('qDontHaveAccount')}</p>
-                    <p className={'cursor-pointer'} onClick={() => openModal('register')}>{t('register')}</p>
+                    <Icon name={'close'} onClick={() => openModal('')}/>
                 </div>
-            </div>
+
+                <div className={cnb(css.body, isMobile ? css.mobile : css.desktop)}>
+                    <h1>{t('enterYourCredentials')}</h1>
+                    <p>{t('forAuth')}</p>
+
+                    <TextInput autoFocus error={this.state.errors.phone} style={{marginTop: 12}} label={t('phoneNumber')}
+                               placeholder={t('enterYourPhoneNumber')}
+                               value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}
+                               variant={'underline'}/>
+                    <TextInput error={this.state.errors.password} style={{marginTop: 12}} label={t('password')}
+                               placeholder={t('enterYourPassword')} autoComplete={'current-password'}
+                               value={this.state.password} onUpdate={val => this.setField('password', val)}
+                               type={'password'} variant={'underline'}/>
+                    <p onClick={() => openModal('forgotPassword')} className={css.hint}>{t('qForgotPassword')}</p>
+
+                    <Button color={theme === 'dark' ? 'primary' : 'secondary'} isDisabled={!this.validateCredentials()}
+                            style={{marginTop: 24}} onClick={this.logIn}
+                            size={'fill'}>
+                        <div className={'flex justify-between vertical-center'}>
+                            <span>{t('logInFull')}</span>
+                            <Icon name={'arrow_right'} className={css.arrowRight}/>
+                        </div>
+                    </Button>
+
+                    <div style={{marginTop: 16}}>
+                        <p className={css.caption}>{t('qDontHaveAccount')}</p>
+                        <p className={'cursor-pointer'} onClick={() => openModal('register')}>{t('register')}</p>
+                    </div>
+                </div>
         </div>
     }
 }
