@@ -50,7 +50,7 @@ app.prepare().then(() => {
     server.use(bodyParser.json());
     server.use(cookieParser())
     server.use(helmet({
-        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false,
     }))
     server.use('/v1', APIv1)
 
