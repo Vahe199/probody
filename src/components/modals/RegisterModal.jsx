@@ -160,7 +160,7 @@ export default class RegisterModal extends React.Component {
                     <h1>{t('enterYourPhoneNumber')}</h1>
                     <p>{t('wellSendCodeThere')}</p>
 
-                    <TextInput error={this.state.errors.phone} style={{marginTop: 12}}
+                    <TextInput error={this.state.errors.phone} style={{marginTop: 12}} autoFocus
                                label={t('phoneNumber')}
                                placeholder={t('enterYourPhoneNumber')}
                                value={this.state.phone} onUpdate={val => this.setField('phone', val)} type={'phone'}

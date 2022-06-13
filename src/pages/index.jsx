@@ -1,7 +1,6 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import OTPInput from "../components/kit/Form/OTPInput";
 import AboutUsSection from "../components/AboutUsSection.jsx";
 import {TITLE_POSTFIX} from "../helpers/constants.js";
 import Head from "next/head.js";

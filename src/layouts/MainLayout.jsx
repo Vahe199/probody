@@ -129,7 +129,7 @@ class MainLayout extends React.Component {
                         <Footer/>
                     </div>
 
-                    <Modal isMobile={this.state.isMobile && this.state.modal !== 'registered'} onUpdate={this.openModal} open={!!this.state.modal.length}>
+                    <Modal isMobile={this.state.isMobile && this.state.modal !== 'registered' && this.state.modal !== 'changedPassword'} onUpdate={this.openModal} open={!!this.state.modal.length}>
                         {this.state.modal === 'login' && <LoginModal/>}
                         {this.state.modal === 'register' && <RegisterModal/>}
                         {this.state.modal === 'registered' && <RegisteredModal/>}

@@ -19,6 +19,7 @@ export default class OTPInput extends React.Component {
         }
 
         this.handleInputFrom = this.handleInputFrom.bind(this);
+        this.handleSecondaryFocus = this.handleSecondaryFocus.bind(this);
     }
 
     static propTypes = {
