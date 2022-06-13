@@ -149,6 +149,9 @@ router.post('/resend-sms', AuthValidator.resendSMS, async (req, res) => {
 router.post('/login', AuthValidator.auth, async (req, res) => {
     try {
         let {password, phone} = req.body;
+
+        phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
+
         let userDoc = await User.findOne({phone})
 
         if (userDoc) {

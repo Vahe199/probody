@@ -39,6 +39,13 @@ export default class LoginModal extends React.Component {
     }
 
     async logIn() {
+        await this.setState({
+            errors: {
+                phone: '',
+                password: ''
+            }
+        }
+
         try {
             const response = await APIRequests.logIn(this.state.phone, this.state.password)
 
