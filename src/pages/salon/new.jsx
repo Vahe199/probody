@@ -475,7 +475,7 @@ export default class NewSalonPage extends React.Component {
                 break
 
             case 6:
-                const testingTargets = [...this.state.model.masters].filter(i => i.name.length && i.photos.length && i.characteristics.height.length && i.characteristics.weight.length && i.characteristics.age.length)
+                const testingTargets = [...this.state.model.masters].filter(i => i.name.length && i.photos.some(j => j.length) && i.characteristics.height.length && i.characteristics.weight.length && i.characteristics.age.length)
 
                 if (testingTargets.length < 1) {
                     isValid = false
