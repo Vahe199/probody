@@ -11,6 +11,7 @@ export default class Search {
     }
 
     static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
+        console.log(process.env)
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
             'phone', parsePhoneNumber(phone, 'KZ').number.replace('+', ''),
