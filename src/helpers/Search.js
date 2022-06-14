@@ -143,7 +143,7 @@ export default class Search {
         if (isMapView) {
             workerQuery.projection('location name slug workHours workDays isVerified messengers address')
         } else {
-            workerQuery = Worker.populate(await workerQuery.projection('location name slug isVerified photos address social programs description phone messengers region'), { path: 'region', select: 'name' })
+            workerQuery.projection('location name slug isVerified photos address social programs description phone messengers')
         }
 
         return {
