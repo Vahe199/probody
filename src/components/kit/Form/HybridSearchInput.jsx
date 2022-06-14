@@ -25,6 +25,7 @@ class HybridSearchInput extends React.Component {
         }
 
         this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.setRegion = this.setRegion.bind(this)
     }
 
     componentDidMount() {
@@ -44,25 +45,32 @@ class HybridSearchInput extends React.Component {
                 }).then(result => {
                     const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
 
-                    APIRequests.getNearestCity(ipCoords).then(city => {
-                        this.setState({
+                    APIRequests.getNearestCity(ipCoords).then(async city => {
+                        await this.setState({
                             geo: regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ')
                         })
+
+                        this.handleKeyPress({key: 'Enter'})
                     })
                 });
             }
         })
     }
 
+    async setRegion(region) {
+        await this.setState({geo: region})
+
+        this.handleKeyPress({key: 'Enter'})
+    }
+
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            console.log(this.state)
             this.props.router.push({
                 pathname: '/',
-                query: {
+                query: Object.assign({}, this.props.router.query, {
                     search: this.state.search,
-                    'filters[region]': this.state.geo === this.context.t('entireKZ') ? undefined : this.state.geo
-                }
+                    'filters[region]': this.state.geo === this.context.t('entireKZ') ? '' : this.state.geo
+                })
             })
         }
     }
@@ -84,8 +92,8 @@ class HybridSearchInput extends React.Component {
                     <Icon name={'geo'}/>
                     <Select className={css.customSelect} label={''} options={this.state.regions}
                             placeholder={this.props.geoPlaceholder} value={this.state.geo}
-                            onUpdate={val => this.setState({geo: val})}/>
-                    <div onClick={() => this.setState({geo: t('entireKZ')})}><Icon name={'close'}/></div>
+                            onUpdate={val => this.setRegion(val)}/>
+                    <div onClick={() => this.setRegion(t('entireKZ'))}><Icon name={'close'}/></div>
                 </div>
             </div>
         </div>

@@ -161,8 +161,6 @@ export default class APIRequests {
     }
 
     static searchWorkers(page = 1, query = '', filters = {}) {
-        let queryString = ''
-
         if (filters.kind === 'all') {
             delete filters.kind
         }
@@ -172,7 +170,7 @@ export default class APIRequests {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({query: queryString, filters})
+            body: JSON.stringify({query, filters})
         }).then(res => res.json())
     }
 

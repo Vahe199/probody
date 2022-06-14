@@ -71,7 +71,7 @@ router.post('/worker', async (req, res) => {
         if (req.body.filters) {
             for (let filterName in req.body.filters) {
                 if (req.body.filters[filterName].length) {
-                    req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
+                    req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
                 }
             }
         }

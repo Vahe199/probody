@@ -36,8 +36,8 @@ class Home extends React.Component {
         this.performSearch = this.performSearch.bind(this)
     }
 
-    initPageLoad() {
-        this.restoreSearchFromURL()
+    async initPageLoad() {
+        await this.restoreSearchFromURL()
 
         if (Objects.isEmpty(this.state.filters)) {
             APIRequests.getFilters().then(filters => {
@@ -54,21 +54,29 @@ class Home extends React.Component {
         this.initPageLoad()
     }
 
-    restoreSearchFromURL() {
+    async restoreSearchFromURL() {
         if (this.props.router.query.page) {
-            this.setState({
+            await this.setState({
                 page: parseInt(this.props.router.query.page)
             })
         }
 
         if (this.props.router.query.search) {
-            this.setState({
+            await this.setState({
                 query: this.props.router.query.search
+            })
+        }
+
+        if (this.props.router.query['filters[region]']) {
+            await this.setState({
+                region: this.props.router.query['filters[region]']
             })
         }
     }
 
     componentDidUpdate(prevProps) {
+        console.log(Objects.shallowEqual(prevProps.router.query, this.props.router.query))
+        console.log(prevProps.router.query, this.props.router.query)
         if (!Objects.shallowEqual(prevProps.router.query, this.props.router.query)) {
             window.scrollTo(0, 0)
 
