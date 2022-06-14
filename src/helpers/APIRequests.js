@@ -158,11 +158,11 @@ export default class APIRequests {
         })
     }
 
-    static searchWorkers(page = 1, query = {}) {
+    static searchWorkers(page = 1, query = '', filters = {}) {
         let queryString = ''
 
-        if (query.kind !== 'all') {
-            queryString += `@kind={${query.kind}} `
+        if (filters.kind === 'all') {
+            delete filters.kind
         }
 
         return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}`, {
@@ -170,7 +170,7 @@ export default class APIRequests {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({query: queryString})
+            body: JSON.stringify({query: queryString, filters})
         }).then(res => res.json())
     }
 }

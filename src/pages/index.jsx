@@ -51,9 +51,8 @@ class Home extends React.Component {
     }
 
     performSearch() {
-        APIRequests.searchWorkers(this.state.page, {
-            kind: this.state.kind,
-            query: this.state.query
+        APIRequests.searchWorkers(this.state.page, this.state.query, {
+            kind: this.state.kind
         }).then(workers => {
             console.log(workers);
             this.setState({workers});
@@ -95,7 +94,8 @@ class Home extends React.Component {
 
                 <div bp={'grid'}>
                     <div bp={'12 6@md'}>
-                        <RadioGroup className={css.kindSelector} name={''} value={this.state.kind} onUpdate={this.setKind} options={[
+                        <RadioGroup className={css.kindSelector} name={''} value={this.state.kind}
+                                    onUpdate={this.setKind} options={[
                             {
                                 label: t('all'),
                                 value: 'all'
@@ -108,7 +108,7 @@ class Home extends React.Component {
                                 label: t('privateMasters'),
                                 value: 'master'
                             }
-                        ]} />
+                        ]}/>
                     </div>
                     <div bp={'12 6@md'}>
                         <div className="flex fit justify-end">
