@@ -1,4 +1,5 @@
 @import "themes";
+@import "articlecard.module";
 
 .kindSelector {
   padding: 16px 0 4px 16px;
@@ -9,4 +10,32 @@
     background-color: t('bg-secondlayer');
     color: t('text-secondlayer');
   }
+}
+
+.padded {
+  padding: 16px;
+}
+
+.workerBlock {
+  grid-gap: 8px;
+
+  &::after {
+    content: " ";
+    display: block;
+    grid-column: span 12;
+    width: 80%;
+    margin: 0 auto;
+    height: 1px;
+
+    @include themify() {
+      background-color: t('bg-secondlayer');
+    }
+  }
+}
+
+.verifiedIcon {
+  width: 18px;
+  vertical-align: text-top;
+  height: 18px;
+  margin-right: 4px;
 }

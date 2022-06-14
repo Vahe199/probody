@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import css from '../../styles/kit/imagecarousel.module.scss';
 import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../contexts/Global.js";
+import {withRouter} from "next/router.js";
 
-export default class ImageCarousel extends React.Component {
+class ImageCarousel extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,6 +20,7 @@ export default class ImageCarousel extends React.Component {
     static propTypes = {
         pics: PropTypes.arrayOf(PropTypes.string).isRequired,
         height: PropTypes.number,
+        link: PropTypes.string,
     }
 
     static defaultProps = {
@@ -38,11 +40,16 @@ export default class ImageCarousel extends React.Component {
             <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
                 <div ref={this.state.slider} className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>
-                        <div className={css.slide} style={{
+                        <div onClick={() => {
+                            if (this.props.link) {
+                                this.props.router.push(this.props.link)
+                            }
+                        }} className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -this.props.height,
                             height: this.props.height,
                             marginLeft: index * 100 + '%',
+                            cursor: this.props.link ? 'pointer' : 'default'
                         }} key={index}>
                             &nbsp;
                         </div>
@@ -60,3 +67,5 @@ export default class ImageCarousel extends React.Component {
         </div>
     }
 }
+
+export default withRouter(ImageCarousel);

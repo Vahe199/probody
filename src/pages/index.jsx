@@ -8,6 +8,9 @@ import css from '../styles/mainpage.module.scss'
 import APIRequests from "../helpers/APIRequests.js";
 import RadioGroup from "../components/kit/Form/RadioGroup";
 import ImageCarousel from "../components/kit/ImageCarousel";
+import {cnb} from "cnbuilder";
+import Icon from "../components/kit/Icon.jsx";
+import Link from "next/link.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -83,7 +86,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const {t, theme} = this.context
+        const {t, theme, isMobile} = this.context
 
         return (
             <div className={css['theme--' + theme]}>
@@ -119,18 +122,44 @@ class Home extends React.Component {
                         </div>
                     </div>
 
-                    {this.state.workers.map((worker, index) =>
-                        <div bp={'12'} key={index}>
-                            <div bp={'grid'}>
+                    {this.state.workers.map((worker, index) => {
+                        worker.url = '/worker/' + worker.slug
+
+                        return <div bp={'12'} key={index}>
+                            <div bp={'grid'} className={css.workerBlock}>
                                 <div bp={'12 5@md'}>
-                                    <ImageCarousel pics={worker.photos} />
+                                    <div className={css.cardRoot}>
+                                        <ImageCarousel link={worker.url} pics={worker.photos}/>
+
+                                        {isMobile && <div className={css.padded}>
+                                            {worker.isVerified && <div className={css.caption}>
+                                                <Icon name={'round_check'} className={css.verifiedIcon}/>
+
+                                                <span>{t('verified')}</span>
+                                            </div>}
+
+                                            <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                        </div>}
+                                    </div>
                                 </div>
                                 <div bp={'12 7@md'}>
-                                    info
+                                    <div className={css.cardRoot}>
+                                        {!isMobile && <div className={css.padded}>
+                                            {worker.isVerified && <div className={css.caption}>
+                                                <Icon name={'round_check'} className={css.verifiedIcon}/>
+
+                                                <span>{t('verified')}</span>
+                                            </div>}
+
+                                            <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                        </div>}
+
+                                        ff
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    )}
+                    })}
                 </div>
                 <AboutUsSection/>
             </div>
