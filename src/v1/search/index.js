@@ -4,7 +4,7 @@ import Search from "../../helpers/Search.js"
 import Lead from "../../models/Lead.model.js"
 import Messenger from "../../models/Messenger.model.js"
 import Service from "../../models/Service.model.js"
-import {parsePhoneNumber} from "libphonenumber-js";
+import {isValidPhoneNumber, parsePhoneNumber} from "libphonenumber-js";
 import Region from "../../models/Region.model.js";
 
 const router = express.Router()
@@ -47,7 +47,9 @@ router.post('/worker', async (req, res) => {
 
         try {
             parsedPN = parsePhoneNumber(req.body.query, process.env.PHONE_REGION)
-            console.log(parsedPN)
+            if (!isValidPhoneNumber(parsedPN.number, process.env.PHONE_REGION)) {
+                parsedPN = null
+            }
         } catch (e) {
         }
 
