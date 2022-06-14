@@ -5,7 +5,6 @@ import Lead from "../../models/Lead.model.js"
 import Messenger from "../../models/Messenger.model.js"
 import Service from "../../models/Service.model.js"
 import {isValidPhoneNumber, parsePhoneNumber} from "libphonenumber-js";
-import Region from "../../models/Region.model.js";
 
 const router = express.Router()
 
