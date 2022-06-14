@@ -90,6 +90,16 @@ class RedisHelper {
     async ftSearch(index, query, limit, offset, additionalArgs = []) {
         await this.init();
 
+        console.log([
+            'FT.SEARCH',
+            index,
+            `${escapeQuotes(query.toLowerCase())}`,
+            ...additionalArgs,
+            'LIMIT',
+            String(offset),
+            String(limit),
+            'NOCONTENT'
+        ].join(' '))
         return this.redisClient.sendCommand([
                 'FT.SEARCH',
                 index,
