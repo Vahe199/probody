@@ -69,12 +69,12 @@ router.post('/worker', async (req, res) => {
     if (parsedPN && parsedPN.isValid()) {
         req.body.query = '@phone:{' + parsedPN.number.replace('+', '') + '}'
     } else {
-        req.body.query += '*'
+        // req.body.query += '*'
     }
 
     if (req.body.filters) {
         for (let filterName in req.body.filters) {
-            req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
+            req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
         }
     }
 
