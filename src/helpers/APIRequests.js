@@ -1,3 +1,5 @@
+import {YANDEX_RASP_KEY} from "./constants.js";
+
 const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
 const PAGE_SIZE = 10;
@@ -172,5 +174,9 @@ export default class APIRequests {
             },
             body: JSON.stringify({query: queryString, filters})
         }).then(res => res.json())
+    }
+
+    static getNearestCity(coords) {
+        return fetch(`https://api.rasp.yandex.net/v3.0/nearest_settlement/?apikey=${YANDEX_RASP_KEY}&lat=${coords[0]}&lng=${coords[1]}`).then(res => res.json()).then(res => 'Караганда')
     }
 }

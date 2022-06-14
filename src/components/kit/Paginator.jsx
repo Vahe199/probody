@@ -24,7 +24,7 @@ export default class Paginator extends React.Component {
             pages.push(i);
         }
 
-        return <div className={css['theme--' + theme]}>
+        return <div className={css['theme--' + theme]} style={this.props.style}>
             <div className="flex justify-between" style={{gap: 6}}>
                 <div>
                     <Button isDisabled={this.props.page === 1} className={css.btn} onClick={() => this.props.onChange(this.props.page - 1)} color={'tertiary'}>

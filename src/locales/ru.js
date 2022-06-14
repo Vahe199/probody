@@ -219,4 +219,5 @@ export default {
     all: 'Все',
     entireKZ: 'Казахстан',
     verified: 'Верифицирован',
+    masters: 'Мастера',
 }

@@ -6,8 +6,9 @@ import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../../contexts/Global.js";
 import Select from "./Select";
 import APIRequests from "../../../helpers/APIRequests.js";
+import {withRouter} from "next/router.js";
 
-export default class HybridSearchInput extends React.Component {
+class HybridSearchInput extends React.Component {
     static contextType = GlobalContext
 
     static propTypes = {
@@ -22,6 +23,8 @@ export default class HybridSearchInput extends React.Component {
             search: '',
             regions: []
         }
+
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
 
     componentDidMount() {
@@ -30,31 +33,38 @@ export default class HybridSearchInput extends React.Component {
                 name: this.context.t('entireKZ'),
             })
 
-            // let userLocation
-            //
-            // ymaps.geolocation.get({
-            //     // Зададим способ определения геолокации
-            //     // на основе ip пользователя.
-            //     provider: 'yandex',
-            //     // Включим автоматическое геокодирование результата.
-            //     mapStateAutoApply: true
-            // }).then(function (result) {
-            //     // Выведем результат геокодирования.
-            //     console.log(result.geoObjects.get(0).properties.get('metaDataProperty.GeocoderMetaData.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName'));
-            // });
-            //
-            // try {
-            //     // userLocation = (await window.ymaps.geolocation.get()).geoObjects.position
-            //     console.log(window.ymaps.geolocation.city)
-            // } catch (e) {
-            //     userLocation = [43.2177019, 76.9441652]
-            // }
-
             this.setState({
                 regions: regions.map(r => ({_id: r.name, name: r.name})),
-                geo: regions[1].name
+                geo: this.context.t('entireKZ')
             })
+
+            if (window.ymaps.geolocation) {
+                window.ymaps.geolocation.get({
+                    provider: 'yandex'
+                }).then(result => {
+                    const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
+
+                    APIRequests.getNearestCity(ipCoords).then(city => {
+                        this.setState({
+                            geo: regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ')
+                        })
+                    })
+                });
+            }
         })
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            console.log(this.state)
+            this.props.router.push({
+                pathname: '/',
+                query: {
+                    search: this.state.search,
+                    'filters[region]': this.state.geo === this.context.t('entireKZ') ? undefined : this.state.geo
+                }
+            })
+        }
     }
 
     render() {
@@ -64,7 +74,7 @@ export default class HybridSearchInput extends React.Component {
             <div className={cnb('flex', css.root)}>
                 <div bp={'fill flex'} className={css.inputGroup}>
                     <Icon name={'search'}/>
-                    <input bp={'fill'} type="text" value={this.state.search}
+                    <input bp={'fill'} type="text" value={this.state.search} onKeyUp={this.handleKeyPress}
                            onChange={e => this.setState({search: e.target.value})}
                            placeholder={this.props.searchPlaceholder}/>
                     <div onClick={() => this.setState({search: ''})}><Icon name={'close'}/></div>
@@ -81,3 +91,5 @@ export default class HybridSearchInput extends React.Component {
         </div>
     }
 }
+
+export default withRouter(HybridSearchInput);

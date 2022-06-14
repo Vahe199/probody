@@ -53,6 +53,12 @@
       top: 4px;
       left: 4px;
     }
+
+    &+span {
+      @include themify() {
+        color: t('text-main');
+      }
+    }
   }
 }
 

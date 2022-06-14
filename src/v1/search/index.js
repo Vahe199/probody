@@ -42,42 +42,50 @@ router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
 })
 
 router.post('/worker', async (req, res) => {
-    let parsedPN
-
     try {
-        parsedPN = parsePhoneNumber(req.body.query, process.env.PHONE_REGION)
-    } catch (e) {
-    }
+        let parsedPN
 
-    if (!req.query.limit || req.query.limit > 20) {
-        req.query.limit = 20
-    }
-
-    if (!req.query.page) {
-        req.query.page = 1
-    }
-
-    if (req.query.onlyCount === 'true') {
-        req.query.limit = 0
-    }
-
-    if (parsedPN && parsedPN.isValid()) {
-        req.body.query = '@phone:{' + parsedPN.number.replace('+', '') + '}'
-    } else if (req.body.query.length) {
-        req.body.query += '*'
-    }
-
-    if (req.body.filters) {
-        for (let filterName in req.body.filters) {
-            req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
+        try {
+            parsedPN = parsePhoneNumber(req.body.query, process.env.PHONE_REGION)
+        } catch (e) {
         }
-    }
 
-    if (!req.body.query.length) {
-        req.body.query = '*'
-    }
+        if (!req.query.limit || req.query.limit > 20) {
+            req.query.limit = 20
+        }
 
-    res.json(await Search.findWorker(req.body.query, req.query.hasOwnProperty('mapView'), req.query.limit, (req.query.page - 1) * req.query.limit))
+        if (!req.query.page) {
+            req.query.page = 1
+        }
+
+        if (req.query.onlyCount === 'true') {
+            req.query.limit = 0
+        }
+
+        if (parsedPN && parsedPN.isValid()) {
+            req.body.query = '@phone:{' + parsedPN.number.replace('+', '') + '}'
+        } else if (req.body.query.length) {
+            req.body.query += '*'
+        }
+
+        if (req.body.filters) {
+            for (let filterName in req.body.filters) {
+                if (req.body.filters[filterName].length) {
+                    req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
+                }
+            }
+        }
+
+        if (!req.body.query.length) {
+            req.body.query = '*'
+        }
+
+        res.json(await Search.findWorker(req.body.query, req.query.hasOwnProperty('mapView'), req.query.limit, (req.query.page - 1) * req.query.limit))
+    } catch (e) {
+        res.status(500).json({
+            message: 'Internal server error'
+        })
+    }
 })
 
 export default router

@@ -11,6 +11,9 @@ import ImageCarousel from "../components/kit/ImageCarousel";
 import {cnb} from "cnbuilder";
 import Icon from "../components/kit/Icon.jsx";
 import Link from "next/link.js";
+import Paginator from "../components/kit/Paginator.jsx";
+import Button from "../components/kit/Button.jsx";
+import Objects from "../helpers/Objects.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -21,6 +24,7 @@ class Home extends React.Component {
             filters: {},
             isMapView: false,
             kind: 'all',
+            region: '',
             query: '',
             page: 1,
             pageCount: 1
@@ -33,11 +37,15 @@ class Home extends React.Component {
     }
 
     initPageLoad() {
-        APIRequests.getFilters().then(filters => {
-            this.setState({
-                filters
+        this.restoreSearchFromURL()
+
+        if (Objects.isEmpty(this.state.filters)) {
+            APIRequests.getFilters().then(filters => {
+                this.setState({
+                    filters
+                })
             })
-        })
+        }
 
         this.performSearch()
     }
@@ -46,8 +54,22 @@ class Home extends React.Component {
         this.initPageLoad()
     }
 
+    restoreSearchFromURL() {
+        if (this.props.router.query.page) {
+            this.setState({
+                page: parseInt(this.props.router.query.page)
+            })
+        }
+
+        if (this.props.router.query.search) {
+            this.setState({
+                query: this.props.router.query.search
+            })
+        }
+    }
+
     componentDidUpdate(prevProps) {
-        if (prevProps.router.query.page !== this.props.router.query.page) {
+        if (!Objects.shallowEqual(prevProps.router.query, this.props.router.query)) {
             window.scrollTo(0, 0)
 
             this.initPageLoad()
@@ -56,7 +78,8 @@ class Home extends React.Component {
 
     performSearch() {
         APIRequests.searchWorkers(this.state.page, this.state.query, {
-            kind: this.state.kind
+            kind: this.state.kind,
+            region: this.state.region
         }).then(workers => {
             this.setState({
                 pageCount: workers.pageCount,
@@ -94,11 +117,11 @@ class Home extends React.Component {
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
                 </Head>
 
-                <p className="subtitle additional-text">{t('greet')}</p>
+                <p className="subtitle additional-text non-selectable">{t('greet')}</p>
                 <h1>{t('qWhatToFindForYou')}</h1>
-                <br/>
+                <br className={'non-selectable'}/>
 
-                <div bp={'grid'}>
+                <div bp={'grid'} style={{marginBottom: 24}}>
                     <div bp={'12 6@md'}>
                         <RadioGroup className={css.kindSelector} name={''} value={this.state.kind}
                                     onUpdate={this.setKind} options={[
@@ -111,7 +134,7 @@ class Home extends React.Component {
                                 value: 'salon'
                             },
                             {
-                                label: t('privateMasters'),
+                                label: isMobile ? t('masters') : t('privateMasters'),
                                 value: 'master'
                             }
                         ]}/>
@@ -132,7 +155,7 @@ class Home extends React.Component {
                                         <ImageCarousel link={worker.url} pics={worker.photos}/>
 
                                         {isMobile && <div className={css.padded}>
-                                            {worker.isVerified && <div className={css.caption}>
+                                            {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
                                                 <Icon name={'round_check'} className={css.verifiedIcon}/>
 
                                                 <span>{t('verified')}</span>
@@ -145,13 +168,24 @@ class Home extends React.Component {
                                 <div bp={'12 7@md'}>
                                     <div className={css.cardRoot}>
                                         {!isMobile && <div className={css.padded}>
-                                            {worker.isVerified && <div className={css.caption}>
+                                            {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
                                                 <Icon name={'round_check'} className={css.verifiedIcon}/>
 
                                                 <span>{t('verified')}</span>
                                             </div>}
 
-                                            <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                            <div bp={'grid'}>
+                                                <Link href={worker.url}><h1 bp={'7'} className={'cursor-pointer'}>{worker.name}</h1></Link>
+
+                                                <div bp={'5'} className="flex justify-between gap-12">
+                                                    <div className={'flex'}>
+                                                        <Icon name={'star'}/>
+                                                        <span>{worker.rating}ср.оценка</span>
+                                                    </div>
+
+                                                    <Button size={'small'}>{t('onTheMap')}</Button>
+                                                </div>
+                                            </div>
                                         </div>}
 
                                         ff
@@ -161,6 +195,10 @@ class Home extends React.Component {
                         </div>
                     })}
                 </div>
+
+                {this.state.pageCount > 1 && <Paginator style={{marginBottom: 24}} page={this.state.page} onChange={this.handlePageChange}
+                                                        pageCnt={this.state.pageCount}/>}
+
                 <AboutUsSection/>
             </div>
         );
