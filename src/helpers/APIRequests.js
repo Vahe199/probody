@@ -179,6 +179,7 @@ export default class APIRequests {
     }
 
     static getNearestCity(coords) {
-        return fetch(`https://api.rasp.yandex.net/v3.0/nearest_settlement/?apikey=${YANDEX_RASP_KEY}&lat=${coords[0]}&lng=${coords[1]}`).then(res => res.json()).then(res => 'Караганда')
+        // return fetch(`https://api.rasp.yandex.net/v3.0/nearest_settlement/?apikey=${YANDEX_RASP_KEY}&lat=${coords[0]}&lng=${coords[1]}`).then(res => res.json()).then(res => 'Караганда')
+        return new Promise(resolve => resolve('Караганда'))
     }
 }

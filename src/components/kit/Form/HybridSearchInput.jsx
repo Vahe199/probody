@@ -21,11 +21,23 @@ class HybridSearchInput extends React.Component {
         super(props);
 
         this.state = {
-            regions: []
+            regions: [],
+            myRegion: '',
         }
 
         this.setRegion = this.setRegion.bind(this)
+        this.handleKeyUp = this.handleKeyUp.bind(this)
         this.clearQuery = this.clearQuery.bind(this)
+    }
+
+    componentDidUpdate() {
+        if (!this.props.router.query.region) {
+            this.props.router.push({
+                query: Object.assign({}, this.props.router.query, {
+                    region: this.state.myRegion,
+                })
+            })
+        }
     }
 
     componentDidMount() {
@@ -44,12 +56,15 @@ class HybridSearchInput extends React.Component {
                         const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
                         const newQuery = {}
 
+                        this.setState({
+                            myRegion: city
+                        })
+
                         if (!this.props.router.query['region']) {
                             newQuery['region'] = geo
                         }
 
                         this.props.router.push({
-                            pathname: '/',
                             query: Object.assign({}, this.props.router.query, newQuery)
                         })
 
@@ -64,6 +79,7 @@ class HybridSearchInput extends React.Component {
 
     async setRegion(region) {
         this.props.router.push({
+            // pathname: '/',
             query: Object.assign({}, this.props.router.query, {
                 region,
             })
@@ -78,6 +94,12 @@ class HybridSearchInput extends React.Component {
         })
     }
 
+    handleKeyUp(e) {
+        if (e.key === 'Enter') {
+            this.props.router.push({pathname: '/', query: this.props.router.query})
+        }
+    }
+
     render() {
         const {theme, t} = this.context;
 
@@ -85,7 +107,7 @@ class HybridSearchInput extends React.Component {
             <div className={cnb('flex', css.root)}>
                 <div bp={'fill flex'} className={css.inputGroup}>
                     <Icon name={'search'}/>
-                    <ControlledInput bp={'fill'} type="text" value={this.props.router.query.search}
+                    <ControlledInput bp={'fill'} type="text" value={this.props.router.query.search} onKeyUp={this.handleKeyUp}
                            onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
                            placeholder={this.props.searchPlaceholder}/>
                     <div onClick={this.clearQuery}><Icon name={'close'}/></div>

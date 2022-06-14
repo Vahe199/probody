@@ -45,7 +45,7 @@ export default class Select extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
-            this.setState({value: this.props.value, label: this.props.options.find(i => i._id === this.props.value).name})
+            this.setState({value: this.props.value, label: this.props.options.find(i => i._id === this.props.value)?.name})
         }
     }
 
@@ -60,7 +60,7 @@ export default class Select extends React.Component {
 
     async handleUpdate(key) {
         if (this.props.value === undefined) {
-            await this.setState({value: key, label: this.props.options.find(i => i._id === this.props.value).name})
+            await this.setState({value: key, label: this.props.options.find(i => i._id === this.props.value)?.name})
         } else {
             this.props.onUpdate(key)
         }
