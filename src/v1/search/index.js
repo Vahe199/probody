@@ -62,6 +62,8 @@ router.post('/worker', async (req, res) => {
             req.query.limit = 0
         }
 
+        req.body.query = req.body.query.trim().replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+
         if (parsedPN && parsedPN.isValid()) {
             req.body.query = '@phone:{' + parsedPN.number.replace('+', '') + '}'
         } else if (req.body.query.length) {

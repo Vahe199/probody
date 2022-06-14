@@ -14,6 +14,7 @@ import Link from "next/link.js";
 import Paginator from "../components/kit/Paginator.jsx";
 import Button from "../components/kit/Button.jsx";
 import Objects from "../helpers/Objects.js";
+import Popup from "../components/kit/Popup";
 
 class Home extends React.Component {
     constructor(props) {
@@ -24,9 +25,7 @@ class Home extends React.Component {
             filters: {},
             isMapView: false,
             kind: 'all',
-            region: '',
-            query: '',
-            page: 1,
+            filterPopupOpen: false,
             pageCount: 1
         }
 
@@ -34,12 +33,11 @@ class Home extends React.Component {
         this.handlePageChange = this.handlePageChange.bind(this)
         this.setKind = this.setKind.bind(this)
         this.performSearch = this.performSearch.bind(this)
-        this.restoreSearchFromURL = this.restoreSearchFromURL.bind(this)
+        this.toggleFilterPopup = this.toggleFilterPopup.bind(this)
+        this.getPage = this.getPage.bind(this)
     }
 
     async initPageLoad() {
-        await this.restoreSearchFromURL()
-
         if (Objects.isEmpty(this.state.filters)) {
             APIRequests.getFilters().then(filters => {
                 this.setState({
@@ -48,7 +46,6 @@ class Home extends React.Component {
             })
         }
 
-        console.log(this.state)
         this.performSearch()
     }
 
@@ -56,30 +53,13 @@ class Home extends React.Component {
         this.initPageLoad()
     }
 
-    async restoreSearchFromURL() {
-        if (this.props.router.query.page) {
-            await this.setState({
-                page: parseInt(this.props.router.query.page)
-            })
-        }
-
-        if (this.props.router.query.search) {
-            await this.setState({
-                query: this.props.router.query.search
-            })
-        }
-
-        if (this.props.router.query['filters[region]']) {
-            await this.setState({
-                region: this.props.router.query['filters[region]']
-            })
-            console.log('set region', this.state.region)
-        }
+    toggleFilterPopup() {
+        this.setState({
+            filterPopupOpen: !this.state.filterPopupOpen
+        })
     }
 
     componentDidUpdate(prevProps) {
-        console.log(Objects.shallowEqual(prevProps.router.query, this.props.router.query))
-        console.log(prevProps.router.query, this.props.router.query)
         if (!Objects.shallowEqual(prevProps.router.query, this.props.router.query)) {
             window.scrollTo(0, 0)
 
@@ -87,10 +67,14 @@ class Home extends React.Component {
         }
     }
 
+    getPage() {
+        return parseInt(this.props.router.query.page) || 1
+    }
+
     performSearch() {
-        APIRequests.searchWorkers(this.state.page, this.state.query, {
+        APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
             kind: this.state.kind,
-            region: this.state.region
+            region: this.props.router.query['region']
         }).then(workers => {
             this.setState({
                 pageCount: workers.pageCount,
@@ -100,7 +84,7 @@ class Home extends React.Component {
     }
 
     handlePageChange(page) {
-        if (page !== this.state.page
+        if (page !== this.getPage()
             && page > 0
             && page <= this.state.pageCount) {
             this.props.router.push({
@@ -152,7 +136,15 @@ class Home extends React.Component {
                     </div>
                     <div bp={'12 6@md'}>
                         <div className="flex fit justify-end">
-                            <span>frefefe</span>
+                            <span>список / карта</span>
+                            <Button className={css.filterButton} color={'secondary'} onClick={this.toggleFilterPopup}>
+                                <span className={css.cnt}>0</span>
+                                <Icon name={'filter'}/>
+
+                                <Popup onClose={() => this.setState({filterPopupOpen: false})} isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
+                                    filters
+                                </Popup>
+                            </Button>
                         </div>
                     </div>
 
@@ -199,7 +191,7 @@ class Home extends React.Component {
                                             </div>
                                         </div>}
 
-                                        ff
+                                        инфо
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +199,7 @@ class Home extends React.Component {
                     })}
                 </div>
 
-                {this.state.pageCount > 1 && <Paginator style={{marginBottom: 24}} page={this.state.page} onChange={this.handlePageChange}
+                {this.state.pageCount > 1 && <Paginator style={{marginBottom: 24}} page={this.getPage()} onChange={this.handlePageChange}
                                                         pageCnt={this.state.pageCount}/>}
 
                 <AboutUsSection/>

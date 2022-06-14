@@ -20,19 +20,14 @@ class HybridSearchInput extends React.Component {
         super(props);
 
         this.state = {
-            search: '',
             regions: []
         }
 
-        this.handleKeyPress = this.handleKeyPress.bind(this)
         this.setRegion = this.setRegion.bind(this)
+        this.clearQuery = this.clearQuery.bind(this)
     }
 
     componentDidMount() {
-        if (this.props.router.query?.search) {
-            this.setState({search: this.props.router.query.search})
-        }
-
         APIRequests.getRegions().then(async regions => {
             regions.unshift({
                 name: this.context.t('entireKZ'),
@@ -45,20 +40,20 @@ class HybridSearchInput extends React.Component {
                     const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
 
                     APIRequests.getNearestCity(ipCoords).then(async city => {
-                        await this.setState({
-                            regions: regions.map(r => ({_id: r.name, name: r.name})),
-                            geo: this.props.router.query['filters[region]'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-                        })
-
+                        const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
                         const newQuery = {}
 
-                        if (!this.props.router.query['filters[region]']) {
-                            newQuery['filters[region]'] = this.state.geo
+                        if (!this.props.router.query['region']) {
+                            newQuery['region'] = geo
                         }
 
                         this.props.router.push({
                             pathname: '/',
                             query: Object.assign({}, this.props.router.query, newQuery)
+                        })
+
+                        this.setState({
+                            regions: regions.map(r => ({_id: r.name, name: r.name}))
                         })
                     })
                 });
@@ -67,21 +62,19 @@ class HybridSearchInput extends React.Component {
     }
 
     async setRegion(region) {
-        await this.setState({geo: region})
-
-        this.handleKeyPress({key: 'Enter'})
+        this.props.router.push({
+            query: Object.assign({}, this.props.router.query, {
+                region,
+            })
+        })
     }
 
-    handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            this.props.router.push({
-                pathname: '/',
-                query: Object.assign({}, this.props.router.query, {
-                    search: this.state.search,
-                    'filters[region]': this.state.geo
-                })
+    async clearQuery() {
+        this.props.router.push({
+            query: Object.assign({}, this.props.router.query, {
+                search: '',
             })
-        }
+        })
     }
 
     render() {
@@ -91,17 +84,17 @@ class HybridSearchInput extends React.Component {
             <div className={cnb('flex', css.root)}>
                 <div bp={'fill flex'} className={css.inputGroup}>
                     <Icon name={'search'}/>
-                    <input bp={'fill'} type="text" value={this.state.search} onKeyUp={this.handleKeyPress}
-                           onChange={e => this.setState({search: e.target.value})}
+                    <input bp={'fill'} type="text" value={this.props.router.query.search}
+                           onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
                            placeholder={this.props.searchPlaceholder}/>
-                    <div onClick={() => this.setState({search: ''})}><Icon name={'close'}/></div>
+                    <div onClick={this.clearQuery}><Icon name={'close'}/></div>
                 </div>
                 <div className={css.rightSplitter}>&nbsp;</div>
                 <div className={cnb(css.inputGroup, 'flex')}>
                     <Icon name={'geo'}/>
-                    <Select className={css.customSelect} label={''} options={this.state.regions}
-                            placeholder={this.props.geoPlaceholder} value={this.state.geo}
-                            onUpdate={val => this.setRegion(val)}/>
+                    {this.state.regions.length && <Select className={css.customSelect} label={''} options={this.state.regions}
+                            placeholder={this.props.geoPlaceholder} value={this.props.router.query.region}
+                            onUpdate={val => this.setRegion(val)}/>}
                     <div onClick={() => this.setRegion(t('entireKZ'))}><Icon name={'close'}/></div>
                 </div>
             </div>

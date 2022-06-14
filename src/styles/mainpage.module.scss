@@ -33,6 +33,26 @@
   }
 }
 
+.filterButton {
+  padding: 22px;
+  border-radius: 24px;
+
+  @include themify() {
+    i {
+      color: t('bg-primary');
+    }
+  }
+
+  span.cnt {
+    background-color: white;
+    color: #252420;
+    border-radius: 11px;
+    padding: 6px 11px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+
 .verifiedIcon {
   width: 18px;
   vertical-align: text-top;
