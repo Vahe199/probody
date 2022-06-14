@@ -1,6 +1,6 @@
 import Worker from "../models/Worker.model.js"
 import RedisHelper from "./RedisHelper.js"
-import {parsePhoneNumber} from "libphonenumber-js";
+import {parsePhoneNumberFromString as parsePhoneNumber} from "libphonenumber-js";
 
 const BATCHSIZE = 100;
 
