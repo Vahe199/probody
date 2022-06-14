@@ -1,5 +1,3 @@
-import {YANDEX_RASP_KEY} from "./constants.js";
-
 const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
 const PAGE_SIZE = 10;

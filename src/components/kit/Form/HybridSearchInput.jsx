@@ -41,9 +41,13 @@ class HybridSearchInput extends React.Component {
     }
 
     componentDidMount() {
-        APIRequests.getRegions().then(async regions => {
+        APIRequests.getRegions().then(regions => {
             regions.unshift({
                 name: this.context.t('entireKZ'),
+            })
+
+            this.setState({
+                regions: regions.map(r => ({_id: r.name, name: r.name}))
             })
 
             if (window.ymaps.geolocation) {
@@ -54,11 +58,8 @@ class HybridSearchInput extends React.Component {
 
                     APIRequests.getNearestCity(ipCoords).then(async city => {
                         const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
+                        console.log(geo)
                         const newQuery = {}
-
-                        this.setState({
-                            myRegion: city
-                        })
 
                         if (!this.props.router.query['region']) {
                             newQuery['region'] = geo
@@ -69,10 +70,14 @@ class HybridSearchInput extends React.Component {
                         })
 
                         this.setState({
-                            regions: regions.map(r => ({_id: r.name, name: r.name}))
+                            myRegion: city
                         })
                     })
                 });
+            } else {
+                this.setState({
+                    myRegion: this.context.t('entireKZ')
+                })
             }
         })
     }
