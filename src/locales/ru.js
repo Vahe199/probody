@@ -217,4 +217,5 @@ export default {
     salons: 'Салоны',
     privateMasters: 'Частные мастера',
     all: 'Все',
+    entireKZ: 'Казахстан',
 }

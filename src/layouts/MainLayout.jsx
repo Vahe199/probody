@@ -16,6 +16,8 @@ import RegisteredModal from "../components/modals/RegisteredModal.jsx";
 import UserHelper from "../helpers/UserHelper.js";
 import ForgotModal from "../components/modals/ForgotModal.jsx";
 import ChangedPasswordModal from "../components/modals/ChangedPasswordModal";
+import {YANDEX_APIKEY} from "../helpers/constants.js";
+import Script from "next/script.js";
 
 const translations = {
     en,
@@ -120,6 +122,9 @@ class MainLayout extends React.Component {
 
     render() {
         return (<GlobalContext.Provider value={this.state}>
+                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                        strategy={'beforeInteractive'}/>
+
                 <div className={'theme--' + this.state.theme}>
                     <div className={'body'}>
                         <Navbar/>

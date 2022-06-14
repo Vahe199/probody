@@ -1,5 +1,6 @@
 import Worker from "../models/Worker.model.js"
 import RedisHelper from "./RedisHelper.js"
+import Vacancy from "../models/Vacancy.model.js";
 
 const BATCHSIZE = 100;
 
@@ -147,7 +148,7 @@ export default class Search {
         }
 
         return {
-            count: searchResults[0],
+            pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
             results: await workerQuery
         }
     }

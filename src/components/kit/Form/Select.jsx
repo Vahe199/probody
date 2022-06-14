@@ -33,7 +33,8 @@ export default class Select extends React.Component {
         variant: PropTypes.string, // 'outlined' || 'underline'
         placeholder: PropTypes.string.isRequired,
         value: PropTypes.string,
-        lock: PropTypes.bool
+        lock: PropTypes.bool,
+        onUpdate: PropTypes.func,
     }
 
     openMenu() {
@@ -74,7 +75,7 @@ export default class Select extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={css['theme--' + theme]}><div style={Object.assign({minWidth: 150}, this.props.style)} className={cnb(css.inputRoot, 'non-selectable', this.props.variant === 'underline' ? css.underline : css.outlined, (this.state.locked || this.props.disabled) ? css.locked : '')}>
+        return <div className={css['theme--' + theme]}><div style={Object.assign({minWidth: 150}, this.props.style)} className={cnb(this.props.className, css.inputRoot, 'non-selectable', this.props.variant === 'underline' ? css.underline : css.outlined, (this.state.locked || this.props.disabled) ? css.locked : '')}>
             <div className={css.label}>{this.props.label}</div>
             <div className={'flex'}>
                 <div style={{

@@ -636,8 +636,6 @@ class NewSalonPage extends React.Component {
             <Head>
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
             </Head>
-            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                    strategy={'beforeInteractive'}/>
 
             <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} onUpdate={this.closeSuccessDialog}>
                 <div className={css.modalBody}>

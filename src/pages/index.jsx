@@ -7,6 +7,7 @@ import Head from "next/head.js";
 import css from '../styles/mainpage.module.scss'
 import APIRequests from "../helpers/APIRequests.js";
 import RadioGroup from "../components/kit/Form/RadioGroup";
+import ImageCarousel from "../components/kit/ImageCarousel";
 
 class Home extends React.Component {
     constructor(props) {
@@ -54,8 +55,10 @@ class Home extends React.Component {
         APIRequests.searchWorkers(this.state.page, this.state.query, {
             kind: this.state.kind
         }).then(workers => {
-            console.log(workers);
-            this.setState({workers});
+            this.setState({
+                pageCount: workers.pageCount,
+                workers: workers.results
+            });
         })
     }
 
@@ -115,6 +118,19 @@ class Home extends React.Component {
                             <span>frefefe</span>
                         </div>
                     </div>
+
+                    {this.state.workers.map((worker, index) =>
+                        <div bp={'12'} key={index}>
+                            <div bp={'grid'}>
+                                <div bp={'12 5@md'}>
+                                    <ImageCarousel pics={worker.photos} />
+                                </div>
+                                <div bp={'12 7@md'}>
+                                    info
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <AboutUsSection/>
             </div>

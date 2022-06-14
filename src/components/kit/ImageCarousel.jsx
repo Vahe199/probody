@@ -18,6 +18,11 @@ export default class ImageCarousel extends React.Component {
 
     static propTypes = {
         pics: PropTypes.arrayOf(PropTypes.string).isRequired,
+        height: PropTypes.number,
+    }
+
+    static defaultProps = {
+        height: 400,
     }
 
     setSlide(index) {
@@ -35,7 +40,8 @@ export default class ImageCarousel extends React.Component {
                     {this.props.pics.map((image, index) =>
                         <div className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
-                            marginTop: index * -400,
+                            marginTop: index === 0 ? 0 : -this.props.height,
+                            height: this.props.height,
                             marginLeft: index * 100 + '%',
                         }} key={index}>
                             &nbsp;
