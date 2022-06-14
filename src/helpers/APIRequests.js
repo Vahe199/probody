@@ -159,12 +159,18 @@ export default class APIRequests {
     }
 
     static searchWorkers(page = 1, query = {}) {
+        let queryString = ''
+
+        if (query.kind !== 'all') {
+            queryString += `@kind={${query.kind}} `
+        }
+
         return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({query})
+            body: JSON.stringify({query: queryString})
         }).then(res => res.json())
     }
 }

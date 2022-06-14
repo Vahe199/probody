@@ -4,6 +4,29 @@ import Review from "../../models/Review.model.js";
 
 const router = express.Router();
 
+router.get('/:uuid/view', async (req, res) => {
+    try {
+        const redisKey = 'pending:check:review:' + req.params.uuid,
+            doc = JSON.parse(await RedisHelper.get(redisKey))
+
+        if (!doc) {
+            return res.status(404).json({
+                message: 'Entity not found'
+            })
+        }
+
+        res.status(200).json({
+            data: doc
+        })
+    } catch (err) {
+        console.error(err)
+
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+})
+
 router.patch('/:uuid/approve', async (req, res) => {
     try {
         const redisKey = 'pending:check:review:' + req.params.uuid,

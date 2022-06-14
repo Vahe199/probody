@@ -17,6 +17,7 @@ class Home extends React.Component {
             filters: {},
             isMapView: false,
             kind: 'all',
+            query: '',
             page: 1,
             pageCount: 1
         }
@@ -50,7 +51,10 @@ class Home extends React.Component {
     }
 
     performSearch() {
-        APIRequests.searchWorkers(this.state.page, 'сал').then(workers => {
+        APIRequests.searchWorkers(this.state.page, {
+            kind: this.state.kind,
+            query: this.state.query
+        }).then(workers => {
             console.log(workers);
             this.setState({workers});
         })
