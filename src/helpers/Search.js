@@ -1,6 +1,6 @@
 import Worker from "../models/Worker.model.js"
 import RedisHelper from "./RedisHelper.js"
-import {parsePhoneNumberFromString as parsePhoneNumber} from "libphonenumber-js";
+import {parsePhoneNumber} from "libphonenumber-js";
 
 const BATCHSIZE = 100;
 
@@ -11,7 +11,6 @@ export default class Search {
     }
 
     static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
-        console.log(process.env)
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
             'phone', parsePhoneNumber(phone, 'KZ').number.replace('+', ''),
