@@ -137,13 +137,13 @@ export default class Search {
         const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
             searchResultsIds = searchResults
                 .splice(1)
-                .map(key => key.split(':')[2]),
-            workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
+                .map(key => key.split(':')[2])
+        let workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
 
         if (isMapView) {
             workerQuery.projection('location name slug workHours workDays isVerified messengers address')
         } else {
-            workerQuery.projection('location name slug isVerified photos address social programs description phone messengers region').populate('region', 'name')
+            workerQuery = (await workerQuery.projection('location name slug isVerified photos address social programs description phone messengers region')).populate('region', 'name')
         }
 
         return {
