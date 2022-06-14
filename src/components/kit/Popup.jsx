@@ -9,7 +9,8 @@ export default class Popup extends React.Component {
 
     static propTypes = {
         isOpen: PropTypes.bool,
-        fullSize: PropTypes.bool
+        fullSize: PropTypes.bool,
+        onClose: PropTypes.func.isRequired
     }
 
     static defaultProps = {
@@ -17,9 +18,33 @@ export default class Popup extends React.Component {
         fullSize: false
     }
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            wrapperRef: React.createRef()
+        }
+
+        this.handleClickOutside = this.handleClickOutside.bind(this)
+    }
+
+    componentDidMount() {
+        window.document.addEventListener("mousedown", this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        window.document.removeEventListener("mousedown", this.handleClickOutside);
+    }
+
+    handleClickOutside(e) {
+        if (this.state.wrapperRef && !this.state.wrapperRef.current.contains(e.target)) {
+            this.props.isOpen && this.props.onClose()
+        }
+    }
+
     render() {
         const {theme} = this.context
-        return <div className={css['theme--' + theme]}>
+        return <div ref={this.state.wrapperRef} className={css['theme--' + theme]}>
             <div className={cnb(css.root, this.props.fullSize ? css.fullsize : '')}>
                 <div style={this.props.style}
                      className={cnb(css.popup, this.props.isOpen ? css.open : '', this.props.fullSize ? css.fullsize : '')}>{this.props.children}</div>

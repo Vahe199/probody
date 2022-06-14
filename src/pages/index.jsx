@@ -34,6 +34,7 @@ class Home extends React.Component {
         this.handlePageChange = this.handlePageChange.bind(this)
         this.setKind = this.setKind.bind(this)
         this.performSearch = this.performSearch.bind(this)
+        this.restoreSearchFromURL = this.restoreSearchFromURL.bind(this)
     }
 
     async initPageLoad() {
@@ -47,6 +48,7 @@ class Home extends React.Component {
             })
         }
 
+        console.log(this.state)
         this.performSearch()
     }
 
@@ -71,6 +73,7 @@ class Home extends React.Component {
             await this.setState({
                 region: this.props.router.query['filters[region]']
             })
+            console.log('set region', this.state.region)
         }
     }
 
@@ -101,9 +104,9 @@ class Home extends React.Component {
             && page > 0
             && page <= this.state.pageCount) {
             this.props.router.push({
-                query: {
+                query: Object.assign({}, this.props.router.query, {
                     page
-                }
+                })
             })
         }
     }

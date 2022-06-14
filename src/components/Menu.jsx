@@ -34,7 +34,7 @@ class Menu extends React.Component {
 
         return <div className={cnb('non-selectable', css['theme--' + theme])}>
             <div className={css.hamburger} onClick={this.toggleMenu}><Icon name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
-            <Popup style={isMobile ? {padding: 0} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
+            <Popup onClose={() => this.setState({isOpen: false})} style={isMobile ? {padding: 0} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
                 <div className={css.columnFlex}>
                 <ul className={cnb(css.list, isMobile ? css.mobile : '')}>
                     <li><Link href={'/account'}>{t('personalArea')}</Link></li>

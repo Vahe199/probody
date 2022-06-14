@@ -84,7 +84,7 @@ export default class Select extends React.Component {
                 {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
             </div>
 
-            <Popup isOpen={this.state.open} style={{
+            <Popup isOpen={this.state.open} onClose={() => this.setState({open: false})} style={{
                 top: 16,
                 left: -23,
                 maxHeight: 280,

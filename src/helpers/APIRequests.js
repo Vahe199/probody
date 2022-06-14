@@ -165,6 +165,10 @@ export default class APIRequests {
             delete filters.kind
         }
 
+        if (filters.region === 'Казахстан') {
+            delete filters.region
+        }
+
         return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}`, {
             method: 'POST',
             headers: {

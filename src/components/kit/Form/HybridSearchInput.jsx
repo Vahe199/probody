@@ -29,14 +29,13 @@ class HybridSearchInput extends React.Component {
     }
 
     componentDidMount() {
+        if (this.props.router.query?.search) {
+            this.setState({search: this.props.router.query.search})
+        }
+
         APIRequests.getRegions().then(async regions => {
             regions.unshift({
                 name: this.context.t('entireKZ'),
-            })
-
-            this.setState({
-                regions: regions.map(r => ({_id: r.name, name: r.name})),
-                geo: this.context.t('entireKZ')
             })
 
             if (window.ymaps.geolocation) {
@@ -47,10 +46,20 @@ class HybridSearchInput extends React.Component {
 
                     APIRequests.getNearestCity(ipCoords).then(async city => {
                         await this.setState({
-                            geo: regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ')
+                            regions: regions.map(r => ({_id: r.name, name: r.name})),
+                            geo: this.props.router.query['filters[region]'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
                         })
 
-                        this.handleKeyPress({key: 'Enter'})
+                        const newQuery = {}
+
+                        if (!this.props.router.query['filters[region]']) {
+                            newQuery['filters[region]'] = this.state.geo
+                        }
+
+                        this.props.router.push({
+                            pathname: '/',
+                            query: Object.assign({}, this.props.router.query, newQuery)
+                        })
                     })
                 });
             }
@@ -69,7 +78,7 @@ class HybridSearchInput extends React.Component {
                 pathname: '/',
                 query: Object.assign({}, this.props.router.query, {
                     search: this.state.search,
-                    'filters[region]': this.state.geo === this.context.t('entireKZ') ? '' : this.state.geo
+                    'filters[region]': this.state.geo
                 })
             })
         }
