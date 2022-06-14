@@ -16,7 +16,7 @@ export default class Search {
             'kind', kind,
             'lastraise', String(+lastRaise),
             'description', description.toLowerCase(),
-            'region', regionName.toLowerCase() + ' район',
+            'region', regionName.toLowerCase(),
             'services', services.map(s => s.name.toLowerCase()).join(','),
             'leads', leads.map(l => l.name.toLowerCase()).join(','),
             'massagetypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
