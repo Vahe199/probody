@@ -7,6 +7,7 @@ import {GlobalContext} from "../../../contexts/Global.js";
 import Select from "./Select";
 import APIRequests from "../../../helpers/APIRequests.js";
 import {withRouter} from "next/router.js";
+import ControlledInput from "./ControlledInput.jsx";
 
 class HybridSearchInput extends React.Component {
     static contextType = GlobalContext
@@ -84,7 +85,7 @@ class HybridSearchInput extends React.Component {
             <div className={cnb('flex', css.root)}>
                 <div bp={'fill flex'} className={css.inputGroup}>
                     <Icon name={'search'}/>
-                    <input bp={'fill'} type="text" value={this.props.router.query.search}
+                    <ControlledInput bp={'fill'} type="text" value={this.props.router.query.search}
                            onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
                            placeholder={this.props.searchPlaceholder}/>
                     <div onClick={this.clearQuery}><Icon name={'close'}/></div>

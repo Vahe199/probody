@@ -47,6 +47,7 @@ router.post('/worker', async (req, res) => {
 
         try {
             parsedPN = parsePhoneNumber(req.body.query, process.env.PHONE_REGION)
+            console.log(parsedPN)
         } catch (e) {
         }
 
