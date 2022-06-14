@@ -9,10 +9,11 @@ export default class Search {
         // await Search.syncRegions()
     }
 
-    static async addWorker(keyPrefix, workerId, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
+    static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
             'phone', phone.replace('+', ''),
+            'kind', kind,
             'lastraise', String(+lastRaise),
             'description', description.toLowerCase(),
             'region', regionName.toLowerCase() + ' район',
@@ -40,6 +41,7 @@ export default class Search {
             for (let worker of workers) {
                 await Search.addWorker(PREFIX,
                     worker._id,
+                    worker.kind,
                     worker.name,
                     worker.phone,
                     worker.lastRaise,
@@ -106,6 +108,7 @@ export default class Search {
                 lastraise: 'NUMERIC SORTABLE',
                 avgcost: 'NUMERIC',
                 name: 'TEXT',
+                kind: 'TAG',
                 description: 'TEXT',
                 leads: 'TEXT',
                 phone: 'TAG',
@@ -140,7 +143,7 @@ export default class Search {
         if (isMapView) {
             workerQuery.projection('location name slug workHours workDays isVerified messengers address')
         } else {
-            workerQuery.populate('region', 'name')
+            workerQuery.projection('location name slug isVerified photos address social programs description phone messengers region').populate('region', 'name')
         }
 
         return {

@@ -4,63 +4,114 @@ import {GlobalContext} from "../contexts/Global.js"
 import AboutUsSection from "../components/AboutUsSection.jsx";
 import {TITLE_POSTFIX} from "../helpers/constants.js";
 import Head from "next/head.js";
+import css from '../styles/mainpage.module.scss'
+import APIRequests from "../helpers/APIRequests.js";
+import RadioGroup from "../components/kit/Form/RadioGroup";
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleOTPInput = this.handleOTPInput.bind(this);
+        this.state = {
+            workers: [],
+            filters: {},
+            isMapView: false,
+            kind: 'all',
+            page: 1,
+            pageCount: 1
+        }
+
+        this.initPageLoad = this.initPageLoad.bind(this)
+        this.handlePageChange = this.handlePageChange.bind(this)
+        this.setKind = this.setKind.bind(this)
+        this.performSearch = this.performSearch.bind(this)
     }
 
-    handleOTPInput(otp) {
-        console.log(otp)
+    initPageLoad() {
+        APIRequests.getFilters().then(filters => {
+            this.setState({
+                filters
+            })
+        })
+
+        this.performSearch()
+    }
+
+    componentDidMount() {
+        this.initPageLoad()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.router.query.page !== this.props.router.query.page) {
+            window.scrollTo(0, 0)
+
+            this.initPageLoad()
+        }
+    }
+
+    performSearch() {
+        APIRequests.searchWorkers(this.state.page, 'сал').then(workers => {
+            console.log(workers);
+            this.setState({workers});
+        })
+    }
+
+    handlePageChange(page) {
+        if (page !== this.state.page
+            && page > 0
+            && page <= this.state.pageCount) {
+            this.props.router.push({
+                query: {
+                    page
+                }
+            })
+        }
+    }
+
+    async setKind(kind) {
+        await this.setState({
+            kind
+        })
+
+        this.performSearch()
     }
 
     render() {
-        const {router} = this.props,
-            {t} = this.context
+        const {t, theme} = this.context
 
         return (
-            <div>
+            <div className={css['theme--' + theme]}>
                 <Head>
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
                 </Head>
-                <p className="subtitle additional-text">Привет 👋</p>
-                <h1>Мы подобрали массажные салоны в Алматы</h1>
+
+                <p className="subtitle additional-text">{t('greet')}</p>
+                <h1>{t('qWhatToFindForYou')}</h1>
                 <br/>
 
-                <p>Cornish Spaktailed Bream: deepwater cardinalfish grass carp emperor angelfish sharksucker, convict
-                    cichlid sardine Indian mul driftfish shortnose sucker glass catfish slickhead jewel tetra tang? Deep
-                    sea eel guppy barramundi grayling cusk-eel Antarctic cod.</p>
-                <br/><br/>
-                <p>Convict blenny burrowing goby ladyfish smalltooth sawfish. Shortnose greeneye greeneye Blenny peacock
-                    flounder? Pacific salmon driftwood catfish American sole; Sundaland noodlefish whiting sand diver
-                    hake; cownose ray char. Pearl danio boga, bonefish alligatorfish basking shark redtooth triggerfish
-                    emperor angelfish dartfish beardfish butterfly ray pejerrey ghost fish noodlefish sea dragon
-                    quillback. Píntano sauger, paradise fish archerfish: fusilier fish; tadpole fish telescopefish!</p>
-                <br/><br/>
-                <p>Knifefish amur pike wolffish prickleback; Oregon chub steelhead walking catfish, Sacramento
-                    blackfish, northern anchovy kelp perch herring bullhead walleye ground shark batfish. Climbing
-                    gourami basking shark tilefish slickhead; snubnose eel; giant sea bass sand eel Ratfish loach
-                    catfish.</p>
-                <br/><br/>
-                <p>Bamboo shark lightfish, bleak sergeant major lionfish stickleback Ragfish Bombay duck harelip sucker,
-                    convict cichlid; northern Stargazer telescopefish shad armored searobin; stonefish scorpionfish New
-                    Zealand sand diver northern anchovy. Popeye catafula Japanese eel aruana Sundaland noodlefish
-                    stingray northern pearleye Atlantic cod plownose chimaera flyingfish. Snake mackerel mustard eel,
-                    lighthousefish noodlefish yellow-eye mullet grideye pompano dolphinfish pomfret mako shark
-                    surgeonfish. Sand tiger pineconefish torrent catfish Antarctic icefish. Australian prowfish ballan
-                    wrasse snake mackerel trumpeter broadband dogfish cookie-cutter shark bonefish smoothtongue
-                    thornyhead thorny catfish. Blind shark Owens pupfish, "spiny-back dhufish pigfish; dace, Bitterling
-                    lake trout, hardhead catfish."</p>
-                <br/><br/>
-                <p>Threadtail megamouth shark blue catfish Owens pupfish filefish eagle ray walleye sabertooth;
-                    telescopefish oceanic flyingfish archerfish Billfish; North American freshwater catfish. Reedfish
-                    ballan wrasse giant gourami flier triplefin blenny white croaker airbreathing catfish monkfish;
-                    snubnose parasitic eel airbreathing catfish snipe eel pollock. Lionfish yellow moray; Blenny
-                    wolffish knifefish mudsucker, bramble shark leopard danio whalefish snoek rough sculpin.</p>
-                <br/><br/>
-
+                <div bp={'grid'}>
+                    <div bp={'12 6@md'}>
+                        <RadioGroup className={css.kindSelector} name={''} value={this.state.kind} onUpdate={this.setKind} options={[
+                            {
+                                label: t('all'),
+                                value: 'all'
+                            },
+                            {
+                                label: t('salons'),
+                                value: 'salon'
+                            },
+                            {
+                                label: t('privateMasters'),
+                                value: 'master'
+                            }
+                        ]} />
+                    </div>
+                    <div bp={'12 6@md'}>
+                        <div className="flex fit justify-end">
+                            <span>frefefe</span>
+                        </div>
+                    </div>
+                </div>
                 <AboutUsSection/>
             </div>
         );

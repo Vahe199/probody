@@ -18,9 +18,9 @@ const router = express.Router()
 //
 //     res.json(await Search.findRegion(req.body.query + '*', 7, 0))
 // })
-router.get('/region', apicache.middleware('15 minutes'), async (req, res) => {
-    res.json(await Region.find({}))
-})
+// router.get('/region', apicache.middleware('15 minutes'), async (req, res) => {
+//     res.json(await Region.find({}))
+// })
 
 router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
     res.json({
@@ -48,11 +48,11 @@ router.post('/worker', async (req, res) => {
         parsedPN = parsePhoneNumber(req.body.query, process.env.PHONE_REGION)
     } catch (e) {}
 
-    if (!req.body.query || req.body.query.length < 3) {
-        return res.status(422).json({
-            message: 'invalidQueryLength'
-        })
-    }
+    // if (!req.body.query || req.body.query.length < 3) {
+    //     return res.status(422).json({
+    //         message: 'invalidQueryLength'
+    //     })
+    // }
 
     if (!req.query.limit || req.query.limit > 20) {
         req.query.limit = 20

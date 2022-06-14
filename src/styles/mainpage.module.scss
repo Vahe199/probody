@@ -1,0 +1,12 @@
+@import "themes";
+
+.kindSelector {
+  padding: 16px 0 4px 16px;
+  border-radius: 16px;
+  display: inline-block;
+
+  @include themify() {
+    background-color: t('bg-secondlayer');
+    color: t('text-secondlayer');
+  }
+}

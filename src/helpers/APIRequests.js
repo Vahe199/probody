@@ -40,6 +40,10 @@ export default class APIRequests {
         })
     }
 
+    static getFilters() {
+        return fetch(`${API_URL}/search/filter`).then(res => res.json())
+    }
+
     static async logIn(phone, password) {
         return (await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
@@ -152,5 +156,15 @@ export default class APIRequests {
             }),
             body: JSON.stringify(model)
         })
+    }
+
+    static searchWorkers(page = 1, query = {}) {
+        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({query})
+        }).then(res => res.json())
     }
 }
