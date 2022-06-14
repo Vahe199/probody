@@ -49,12 +49,6 @@ router.post('/worker', async (req, res) => {
     } catch (e) {
     }
 
-    // if (!req.body.query || req.body.query.length < 3) {
-    //     return res.status(422).json({
-    //         message: 'invalidQueryLength'
-    //     })
-    // }
-
     if (!req.query.limit || req.query.limit > 20) {
         req.query.limit = 20
     }
@@ -77,6 +71,10 @@ router.post('/worker', async (req, res) => {
         for (let filterName in req.body.filters) {
             req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
         }
+    }
+
+    if (!req.body.query.length) {
+        req.body.query = '*'
     }
 
     res.json(await Search.findWorker(req.body.query, req.query.hasOwnProperty('mapView'), req.query.limit, (req.query.page - 1) * req.query.limit))
