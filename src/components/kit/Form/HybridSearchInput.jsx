@@ -31,7 +31,7 @@ class HybridSearchInput extends React.Component {
     }
 
     componentDidUpdate() {
-        if (!this.props.router.query.region.length && this.state.myRegion.length) {
+        if (!this.props.router.query.region && this.state.myRegion.length) {
             this.props.router.push({
                 query: Object.assign({}, this.props.router.query, {
                     region: this.state.myRegion,
