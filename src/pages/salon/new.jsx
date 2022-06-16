@@ -1076,11 +1076,11 @@ class NewSalonPage extends React.Component {
                                               <h3 style={{marginBottom: 12}}>{t('workTime')}</h3>
                                               <div className="flex gap-12">
                                                   <Select disabled={this.state.model.workHours.roundclock}
-                                                          value={this.state.model.workHours.from}
+                                                          value={this.state.model.workHours.roundclock ? '00:00' : this.state.model.workHours.from}
                                                           onUpdate={val => this.updateWorkHours({from: val})}
                                                           label={t('opening')} options={workHours} placeholder={''}/>
                                                   <Select disabled={this.state.model.workHours.roundclock}
-                                                          value={this.state.model.workHours.to}
+                                                          value={this.state.model.workHours.roundclock ? '00:00' : this.state.model.workHours.to}
                                                           onUpdate={val => this.updateWorkHours({to: val})}
                                                           label={t('closing')}
                                                           options={workHours.filter(h => h.value !== this.state.model.workHours.from)}
