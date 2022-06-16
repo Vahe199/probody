@@ -29,13 +29,13 @@ export default class ImageInput extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.url !== this.props.url) {
-            this.setState({preview: this.props.url})
+            this.setState({preview: this.props.url, uploaded: true})
         }
     }
 
     componentDidMount() {
         if (this.props.url) {
-            this.setState({preview: this.props.url})
+            this.setState({preview: this.props.url, uploaded: true})
         }
     }
 

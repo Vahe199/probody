@@ -1083,7 +1083,7 @@ class NewSalonPage extends React.Component {
                                                           value={this.state.model.workHours.to}
                                                           onUpdate={val => this.updateWorkHours({to: val})}
                                                           label={t('closing')}
-                                                          options={workHours.slice(1 + workHours.findIndex(i => i.name === this.state.model.workHours.from))}
+                                                          options={workHours.filter(h => h.value !== this.state.model.workHours.from)}
                                                           placeholder={''}/>
                                               </div>
 
