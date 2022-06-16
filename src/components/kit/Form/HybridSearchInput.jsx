@@ -8,6 +8,7 @@ import Select from "./Select";
 import APIRequests from "../../../helpers/APIRequests.js";
 import {withRouter} from "next/router.js";
 import ControlledInput from "./ControlledInput.jsx";
+import Numbers from "../../../helpers/Numbers.js";
 
 class HybridSearchInput extends React.Component {
     static contextType = GlobalContext
@@ -106,23 +107,27 @@ class HybridSearchInput extends React.Component {
 
     render() {
         const {theme, t} = this.context;
+        const inputId = 'text-input-' + Numbers.random(0, 99999),
+            selectId = 'select-' + Numbers.random(0, 99999)
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb('flex', css.root)}>
-                <div bp={'fill flex'} className={css.inputGroup}>
-                    <Icon name={'search'}/>
-                    <ControlledInput bp={'fill'} type="text" value={this.props.router.query.search} onKeyUp={this.handleKeyUp}
-                           onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
-                           placeholder={this.props.searchPlaceholder}/>
-                    <div onClick={this.clearQuery}><Icon name={'close'}/></div>
-                </div>
+                <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup} style={{paddingLeft: 16}}>
+                        <Icon name={'search'}/>
+                        <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
+                                         onKeyUp={this.handleKeyUp}
+                                         onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
+                                         placeholder={this.props.searchPlaceholder}/>
+                        <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                </label>
                 <div className={css.rightSplitter}>&nbsp;</div>
-                <div className={cnb(css.inputGroup, 'flex')}>
-                    <Icon name={'geo'}/>
-                    {this.state.regions.length && <Select className={css.customSelect} label={''} options={this.state.regions}
-                            placeholder={this.props.geoPlaceholder} value={this.props.router.query.region}
-                            onUpdate={val => this.setRegion(val)}/>}
-                    <div onClick={() => this.setRegion(t('entireKZ'))}><Icon name={'close'}/></div>
+                <div className={cnb(css.inputGroup, 'flex')} style={{paddingRight: 16}} onClick={() => window.document.getElementById(selectId).click()}>
+                        <Icon name={'geo'}/>
+                        {this.state.regions.length &&
+                            <Select className={css.customSelect} label={''} options={this.state.regions} id={selectId}
+                                    placeholder={this.props.geoPlaceholder} value={this.props.router.query.region}
+                                    onUpdate={val => this.setRegion(val)}/>}
+                        <div onClick={() => this.setRegion(t('entireKZ'))}><Icon name={'close'}/></div>
                 </div>
             </div>
         </div>

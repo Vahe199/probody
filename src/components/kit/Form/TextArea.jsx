@@ -5,6 +5,7 @@ import {cnb} from "cnbuilder"
 import Icon from "../Icon.jsx";
 import {GlobalContext} from "../../../contexts/Global.js";
 import ControlledTextArea from "./ControlledTextArea.jsx";
+import Numbers from "../../../helpers/Numbers.js";
 
 export default class TextArea extends React.Component {
     constructor(props) {
@@ -91,23 +92,30 @@ export default class TextArea extends React.Component {
 
     render() {
         const {theme} = this.context
+        const inputId = 'textarea-' + Numbers.random(0, 99999)
 
-        return <div style={{paddingBottom: this.state.errorMessage ? 24 : 4}} className={cnb(css['theme--' + theme], this.props.className)}>
-            <div className={cnb(css.inputRoot, this.state.errorMessage.length ? css.errored : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
-                <div className={css.label}>{this.props.label}</div>
-                <div className={'fit'}>
-                    <ControlledTextArea onBlur={this.validate} rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
-                              disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder}/>
-                    {this.state.locked ?
-                        <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
+        return <label htmlFor={inputId}>
+            <div style={{paddingBottom: this.state.errorMessage ? 24 : 4}}
+                 className={cnb(css['theme--' + theme], this.props.className)}>
+                <div
+                    className={cnb(css.inputRoot, this.state.errorMessage.length ? css.errored : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+                    <div className={css.label}>{this.props.label}</div>
+                    <div className={'fit'}>
+                        <ControlledTextArea id={inputId} onBlur={this.validate} rows={this.props.lines}
+                                            value={this.state.value} onChange={this.handleUpdate}
+                                            disabled={(this.state.locked || this.props.disabled)}
+                                            placeholder={this.props.placeholder}/>
+                        {this.state.locked ?
+                            <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
+                    </div>
                 </div>
+
+                {this.state.errorMessage.length > 0 && <span>
+                    <Icon name={'error'}/>
+                    {this.state.errorMessage}</span>}
+
+                <div style={{fontSize: 12, userSelect: 'none'}}>{this.state.value.length}/{this.props.max}</div>
             </div>
-
-            {this.state.errorMessage.length > 0 && <span>
-                    <Icon name={'error'} />
-                {this.state.errorMessage}</span>}
-
-            <div style={{fontSize: 12, userSelect: 'none'}}>{this.state.value.length}/{this.props.max}</div>
-        </div>
+        </label>
     }
 }

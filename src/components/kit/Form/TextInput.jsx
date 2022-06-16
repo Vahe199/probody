@@ -6,6 +6,7 @@ import Icon from "../Icon.jsx";
 import {AsYouType, isValidPhoneNumber} from "libphonenumber-js";
 import {GlobalContext} from "../../../contexts/Global.js";
 import ControlledInput from "./ControlledInput.jsx";
+import Numbers from "../../../helpers/Numbers.js";
 
 export default class TextInput extends React.Component {
     static contextType = GlobalContext
@@ -77,7 +78,7 @@ export default class TextInput extends React.Component {
         return value
     }
 
-    toggleVisibility () {
+    toggleVisibility() {
         this.setState({visible: !this.state.visible})
     }
 
@@ -155,21 +156,36 @@ export default class TextInput extends React.Component {
 
     render() {
         const {theme} = this.context
+        const inputId = 'text-input-' + Numbers.random(0, 99999)
 
-        return <div style={this.props.style} className={css['theme--' + theme]}>
-            <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
-                <div className={css.label}>{this.props.label}</div>
-                <div className={'flex'}>
-                    <ControlledInput pattern={this.props.type === 'phone' || this.props.type === 'number' ? '\\d*' : ''} onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} data-type={this.props.type} />
-                    {this.props.type === 'password' && <Icon name={this.state.visible ? 'visible' : 'hidden'} className={css.hideIcon} onClick={this.toggleVisibility} />}
-                    {this.props.type !== 'text' && !this.props.disabled && !this.state.locked ? <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
-                    {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
+        return <label htmlFor={inputId}>
+            <div style={this.props.style} className={css['theme--' + theme]}>
+                <div
+                    className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+                    <div className={css.label}>{this.props.label}</div>
+                    <div className={'flex'}>
+                        <ControlledInput id={inputId}
+                                         pattern={this.props.type === 'phone' || this.props.type === 'number' ? '\\d*' : ''}
+                                         onBlur={this.validateInput}
+                                         type={this.state.visible ? 'text' : this.props.type} value={this.state.value}
+                                         autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus}
+                                         onChange={this.handleUpdate}
+                                         disabled={(this.state.locked || this.props.disabled)}
+                                         placeholder={this.props.placeholder} data-type={this.props.type}/>
+                        {this.props.type === 'password' &&
+                            <Icon name={this.state.visible ? 'visible' : 'hidden'} className={css.hideIcon}
+                                  onClick={this.toggleVisibility}/>}
+                        {this.props.type !== 'text' && !this.props.disabled && !this.state.locked ?
+                            <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
+                        {this.state.locked ?
+                            <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
+                    </div>
                 </div>
-        </div>
 
-            {this.state.errored && <span>
-                    <Icon name={'error'} />
-                {this.state.errorMsg}</span>}
-        </div>
+                {this.state.errored && <span>
+                    <Icon name={'error'}/>
+                    {this.state.errorMsg}</span>}
+            </div>
+        </label>
     }
 }

@@ -327,6 +327,32 @@ class NewSalonPage extends React.Component {
             }
         }
 
+        if (step === 6) {
+            this.setState({
+                model: {
+                    ...this.state.model,
+                    photos: this.state.model.photos.filter(i => i.length)
+                }
+            })
+        }
+
+        if (step === 7) {
+            let masters = {...this.state.model.masters}
+
+            masters = masters.map(i => {
+                i.photos = i.photos.filter(j => j.length > 0)
+
+                return i
+            })
+
+            this.setState({
+                model: {
+                    ...this.state.model,
+                    masters
+                }
+            })
+        }
+
         window.document.body.scrollTo(0, 0)
     }
 
@@ -626,12 +652,6 @@ class NewSalonPage extends React.Component {
         const model = {...this.state.model}
 
         model.programs = model.programs.filter(i => i.enabled)
-        model.photos = model.photos.filter(i => i.length > 0)
-        model.masters = model.masters.map(i => {
-            i.photos = i.photos.filter(j => j.length > 0)
-
-            return i
-        })
 
         const res = await APIRequests.createWorker(model)
 

@@ -20,8 +20,7 @@ const WorkerSchema = new Schema({
         default: false
     },
     address: {
-        type: String,
-        required: true
+        type: String
     },
     location: {
         type: PointSchema,
@@ -29,10 +28,6 @@ const WorkerSchema = new Schema({
     },
     parent: {
         type: Schema.Types.ObjectId,
-        ref: "Worker"
-    },
-    slaves: {
-        type: [Schema.Types.ObjectId],
         ref: "Worker"
     },
     lastRaise: {
@@ -71,61 +66,50 @@ const WorkerSchema = new Schema({
         required: true
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     characteristics: {
         height: {
             type: Number,
             min: 70,
-            max: 250,
-            required: true
+            max: 250
         },
         weight: {
             type: Number,
             min: 30,
-            max: 150,
-            required: true
+            max: 150
         },
         hair: {
             type: String,
-            enum: ["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"],
-            required: true
+            enum: ["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"]
         },
         eyes: {
             type: String,
-            enum: ["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"],
-            required: true
+            enum: ["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"]
         },
         age: {
             type: Number,
             min: 18,
-            max: 99,
-            required: true
+            max: 99
         },
         bust: {
             type: Number,
-            enum: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5],
-            required: true
+            enum: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]
         },
         show: {
-            type: Boolean,
-            default: true
+            type: Boolean
         }
     },
     region: {
         type: Schema.Types.ObjectId,
-        ref: "Region",
-        required: true
+        ref: "Region"
     },
     services: {
         type: [Schema.Types.ObjectId],
-        ref: "Service",
-        required: true
+        ref: "Service"
     },
     programs: [{
         name: {
@@ -174,13 +158,11 @@ const WorkerSchema = new Schema({
         type: Number,
         default: 1,
         min: 1,
-        max: 20,
-        required: true
+        max: 20
     },
     leads: {
         type: [Schema.Types.ObjectId],
-        ref: "Lead",
-        required: true
+        ref: "Lead"
     },
     photos: {
         type: [String],
@@ -206,8 +188,7 @@ const WorkerSchema = new Schema({
     },
     workDays: {
         type: [String],
-        enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
-        required: true
+        enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     }
 }, {
     versionKey: false,

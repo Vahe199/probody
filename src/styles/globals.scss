@@ -17,6 +17,10 @@ $heading-scale: 8;
   scroll-behavior: smooth;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 input, textarea, select {
   border: none;
   min-width: 0;

@@ -37,6 +37,16 @@ export default class Popup extends React.Component {
         window.document.removeEventListener("mousedown", this.handleClickOutside);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.fullSize) {
+            if (this.props.isOpen && !prevProps.isOpen) {
+                window.document.body.classList.add('no-scroll')
+            } else if (!this.props.isOpen && prevProps.isOpen) {
+                window.document.body.classList.remove('no-scroll')
+            }
+        }
+    }
+
     handleClickOutside(e) {
         if (this.state.wrapperRef && !this.state.wrapperRef.current.contains(e.target) && this.props.handleRef && !this.props.handleRef.current.contains(e.target)) {
             this.props.isOpen && this.props.onClose()

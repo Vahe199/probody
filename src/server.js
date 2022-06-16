@@ -45,7 +45,13 @@ const uploader = multer({
 await Search.fullSync()
 await Search.createIndexes()
 
-const workerDocuments = await RedisHelper.get('pending:check:worker:*')
+const pwKeys = await RedisHelper.keys('pending:check:worker:*')
+
+pwKeys.map(key => {
+    const doc = JSON.parse(RedisHelper.get(key))
+
+    RedisHelper.set('haspw:' + doc.host, '')
+})
 
 app.prepare().then(() => {
     const server = express()

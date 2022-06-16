@@ -62,11 +62,15 @@ class MainLayout extends React.Component {
             return
         }
 
+        this.props.router.events.on('routeChangeComplete', () => setTimeout(() => {
+            window.document.body.scrollTo(0, 0)
+        }, 150))
+
         const storedTheme = window.localStorage.getItem('APP_THEME')
 
         if (storedTheme) {
             this.setState({theme: storedTheme})
-        } else {
+        } /*else {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 this.setState({
                     theme: 'dark'
@@ -84,7 +88,7 @@ class MainLayout extends React.Component {
                     theme: newColorScheme
                 })
             });
-        }
+        }*/
 
         this.computeIsMobile()
         this.computeIsLoggedIn()

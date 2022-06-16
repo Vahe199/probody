@@ -5,6 +5,7 @@ import {cnb} from "cnbuilder";
 import Icon from "../Icon.jsx";
 import Popup from "../Popup";
 import {GlobalContext} from "../../../contexts/Global.js";
+import Numbers from "../../../helpers/Numbers.js";
 
 export default class Select extends React.Component {
     constructor(props) {
@@ -44,6 +45,10 @@ export default class Select extends React.Component {
         }
     }
 
+    click() {
+        console.log('click')
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
             this.setState({
@@ -80,34 +85,34 @@ export default class Select extends React.Component {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div style={Object.assign({minWidth: 150}, this.props.style)}
+            <div id={this.props.id} onClick={this.toggleMenu} ref={this.state.handleRef} style={Object.assign({minWidth: 150}, this.props.style)}
                  className={cnb(this.props.className, css.inputRoot, 'non-selectable', this.props.variant === 'underline' ? css.underline : css.outlined, (this.state.locked || this.props.disabled) ? css.locked : '')}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
                     <div style={{
                         width: '100%'
-                    }} onClick={this.toggleMenu} ref={this.state.handleRef}>{this.state.label ||
+                    }}>{this.state.label ||
                         <span className={css.caption}>{this.props.placeholder}</span>}</div>
                     {this.state.locked ?
                         <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
                 </div>
-
-                <Popup handleRef={this.state.handleRef} isOpen={this.state.open}
-                       onClose={() => this.setState({open: false})} style={{
-                    top: 16,
-                    left: -23,
-                    maxHeight: 280,
-                    overflowX: 'scroll'
-                }}>
-                    {this.props.options.map(option =>
-                        <div style={{
-                            minWidth: 300,
-                            cursor: 'pointer',
-                            marginBottom: 8
-                        }} key={option._id} onClick={() => this.handleUpdate(option._id)}>{option.name}</div>
-                    )}
-                </Popup>
             </div>
+
+            <Popup handleRef={this.state.handleRef} isOpen={this.state.open}
+                   onClose={() => this.setState({open: false})} style={{
+                top: 0,
+                left: 0,
+                maxHeight: 280,
+                overflowX: 'scroll'
+            }}>
+                {this.props.options.map(option =>
+                    <div style={{
+                        minWidth: 300,
+                        cursor: 'pointer',
+                        marginBottom: 8
+                    }} key={option._id} onClick={() => this.handleUpdate(option._id)}>{option.name}</div>
+                )}
+            </Popup>
         </div>
     }
 }

@@ -40,9 +40,24 @@ router.patch('/:uuid/approve', async (req, res) => {
             })
         }
 
-        const worker = await (new Worker(doc)).save()
+        const parentWorker = await (new Worker(doc)).save()
 
-        await Search.addWorker('search:workers:', worker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
+        if (doc.kind === 'salon') {
+            doc.masters.forEach(master => {
+                const masterDoc = {
+                        kind: 'master',
+                        name: master.name,
+                        characteristics: master.characteristics,
+                        parent: doc._id,
+                        host: doc.host,
+                        photos: master.photos
+                    }
+
+                ;(new Worker(masterDoc)).save()
+            })
+        }
+
+        await Search.addWorker('search:workers:', parentWorker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
         await RedisHelper.unlink(redisKey)
         await RedisHelper.unlink('haspw:' + doc.host)
 
