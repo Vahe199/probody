@@ -31,7 +31,7 @@ class MainLayout extends React.Component {
 
         this.state = {
             isLoggedIn: false,
-            theme: 'dark',
+            theme: 'light',
             modal: '',
             isMobile: false,
             t: key => translations[props.router.locale][key] || translations[props.router.defaultLocale][key] || key,
@@ -57,12 +57,11 @@ class MainLayout extends React.Component {
     }
 
     componentDidMount() {
-        this.computeIsMobile()
-        this.computeIsLoggedIn()
+        if (!window.localStorage) {
+            return
+        }
 
-        Settings.defaultLocale = this.props.router.locale
-
-        const storedTheme = localStorage.getItem('APP_THEME')
+        const storedTheme = window.localStorage.getItem('APP_THEME')
 
         if (storedTheme) {
             this.setState({theme: storedTheme})
@@ -86,8 +85,14 @@ class MainLayout extends React.Component {
             });
         }
 
+        this.computeIsMobile()
+        this.computeIsLoggedIn()
+
+        Settings.defaultLocale = this.props.router.locale
+
         window.addEventListener('resize', this.computeIsMobile);
     }
+
 
     computeIsLoggedIn() {
         this.setState({isLoggedIn: UserHelper.isLoggedIn()})
@@ -134,7 +139,9 @@ class MainLayout extends React.Component {
                         <Footer/>
                     </div>
 
-                    <Modal isMobile={this.state.isMobile && this.state.modal !== 'registered' && this.state.modal !== 'changedPassword'} onUpdate={this.openModal} open={!!this.state.modal.length}>
+                    <Modal
+                        isMobile={this.state.isMobile && this.state.modal !== 'registered' && this.state.modal !== 'changedPassword'}
+                        onUpdate={this.openModal} open={!!this.state.modal.length}>
                         {this.state.modal === 'login' && <LoginModal/>}
                         {this.state.modal === 'register' && <RegisterModal/>}
                         {this.state.modal === 'registered' && <RegisteredModal/>}
