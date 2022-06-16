@@ -78,8 +78,8 @@ export default class ImageInput extends React.Component {
             inputRef = React.createRef(),
             {theme} = this.context
 
-        return <div className={cnb(css['theme--' + theme], 'grid')}>
-            <label className={'inline-block relative'} htmlFor={inputId}>
+        return <div className={cnb(css['theme--' + theme], 'grid', 'relative')}>
+            <label className={'inline-block'} htmlFor={inputId}>
                 <div className={css.root}>
                     {this.state.preview ? <img className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
                                                src={this.state.preview}/> : ' '}

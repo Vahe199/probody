@@ -21,8 +21,7 @@ import MockImageInput from "../../components/kit/Form/MockImageInput";
 import Tag from "../../components/kit/Tag";
 import Program from "../../components/kit/Program.jsx";
 import Head from "next/head.js";
-import {TITLE_POSTFIX, YANDEX_APIKEY} from "../../helpers/constants.js";
-import Script from "next/script.js";
+import {TITLE_POSTFIX} from "../../helpers/constants.js";
 import Modal from "../../components/kit/Modal";
 import {withRouter} from "next/router.js";
 
@@ -741,7 +740,7 @@ class NewSalonPage extends React.Component {
 
                                           <div bp={'hide show@md'}></div>
                                           <div>
-                                              <TextArea max={500} label={t('salonDescription')}
+                                              <TextArea max={500} min={20} label={t('salonDescription')}
                                                         onUpdate={(val) => this.setField('description', val)}
                                                         value={this.state.model.description}
                                                         className={css.textAreaGrow}

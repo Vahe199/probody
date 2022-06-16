@@ -221,4 +221,5 @@ export default {
     verified: 'Верифицирован',
     masters: 'Мастера',
     addOwnVariant: 'Добавить свой вариант',
+    lengthMustNotBeLessThan: 'Количество символов должно быть не менее'
 }

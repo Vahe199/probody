@@ -12,11 +12,13 @@ export default class TextArea extends React.Component {
 
         this.state = {
             locked: false,
-            value: ''
+            value: '',
+            errorMessage: ''
         }
 
         this.toggleLock = this.toggleLock.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
+        this.validate = this.validate.bind(this)
     }
 
     static contextType = GlobalContext
@@ -46,10 +48,22 @@ export default class TextArea extends React.Component {
             return
         }
 
+        if (this.props.min && this.state.errorMessage.length && e.target.value.length >= this.props.min) {
+            this.setState({errorMessage: ''})
+        }
+
         if (this.props.value === undefined) {
             this.setState({value: e.target.value})
         } else {
             this.props.onUpdate(e.target.value)
+        }
+    }
+
+    validate(e) {
+        if (this.props.min && e.target.value.length < this.props.min) {
+            this.setState({
+                errorMessage: this.context.t('lengthMustNotBeLessThan') + ' ' + this.props.min
+            })
         }
     }
 
@@ -62,6 +76,7 @@ export default class TextArea extends React.Component {
         variant: PropTypes.string, // 'outlined' || 'underline'
         onUpdate: PropTypes.func,
         max: PropTypes.number,
+        min: PropTypes.number,
         placeholder: PropTypes.string.isRequired
     }
 
@@ -77,18 +92,22 @@ export default class TextArea extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div style={{paddingBottom: 4}} className={cnb(css['theme--' + theme], this.props.className)}>
-            <div className={cnb(css.inputRoot, (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
+        return <div style={{paddingBottom: this.state.errorMessage ? 24 : 4}} className={cnb(css['theme--' + theme], this.props.className)}>
+            <div className={cnb(css.inputRoot, this.state.errorMessage.length ? css.errored : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
-                <div className={'flex'}>
-                    <ControlledTextArea rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
+                <div className={'fit'}>
+                    <ControlledTextArea onBlur={this.validate} rows={this.props.lines} value={this.state.value} onChange={this.handleUpdate}
                               disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder}/>
                     {this.state.locked ?
                         <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
                 </div>
             </div>
 
-            <span style={{fontSize: 12, userSelect: 'none'}}>{this.state.value.length}/{this.props.max}</span>
+            {this.state.errorMessage.length > 0 && <span>
+                    <Icon name={'error'} />
+                {this.state.errorMessage}</span>}
+
+            <div style={{fontSize: 12, userSelect: 'none'}}>{this.state.value.length}/{this.props.max}</div>
         </div>
     }
 }

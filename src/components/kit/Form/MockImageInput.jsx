@@ -1,6 +1,5 @@
 import React from "react";
 import css from '../../../styles/kit/forms/imageinput.module.scss';
-import Numbers from "../../../helpers/Numbers.js";
 import Button from "../Button.jsx";
 import PropTypes from "prop-types";
 import {GlobalContext} from "../../../contexts/Global.js";

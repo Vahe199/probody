@@ -119,7 +119,7 @@
 .textAreaGrow {
   height: 100%;
 
-  &>div {
+  &>div, textarea {
     height: 100%;
   }
 }
