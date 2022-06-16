@@ -84,6 +84,7 @@ export default class ImageInput extends React.Component {
                     {this.state.preview ? <img className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
                                                src={this.state.preview}/> : ' '}
                 </div>
+            </label>
 
                 {this.state.uploaded && <Button color={'tertiary'} className={css.delete} focus={false} size={'x-small'}
                         iconLeft={'trashcan'} onClick={this.deletePic}/>}
@@ -93,7 +94,6 @@ export default class ImageInput extends React.Component {
 
                 <input accept="image/png, image/jpg, image/jpeg" onChange={this.handleChange} ref={inputRef} type='file'
                        id={inputId} className={'d-none'}/>
-            </label>
         </div>
     }
 }
