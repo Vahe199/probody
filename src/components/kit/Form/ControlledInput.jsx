@@ -9,6 +9,10 @@ const ControlledInput = (props) => {
         const input = ref.current;
 
         if (input && input.type !== 'number') input.setSelectionRange(cursor, cursor);
+
+        if (input.getAttribute('data-type') === 'phone' && input.selectionStart < 2) {
+            setCursor(2);
+        }
     }, [ref, cursor, value]);
 
     const handleChange = async (e) => {
@@ -35,6 +39,7 @@ const ControlledInput = (props) => {
             onFocus(e);
         }
 
+        console.log('focus', e.target.value);
         setCursor(e.target.value.length);
     }
 
