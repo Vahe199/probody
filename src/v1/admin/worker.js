@@ -40,9 +40,11 @@ router.patch('/:uuid/approve', async (req, res) => {
             })
         }
 
-        const workerId = await (new Worker(doc)).save()
-        await Search.addWorker('search:workers:', workerId, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
+        const worker = await (new Worker(doc)).save()
+
+        await Search.addWorker('search:workers:', worker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
         await RedisHelper.unlink(redisKey)
+        await RedisHelper.unlink('haspw:' + doc.host)
 
         res.status(202).json({
             message: 'approvedWorker'
@@ -69,6 +71,7 @@ router.patch('/:uuid/decline', async (req, res) => {
 
         // maybe, we'll have to notify the user here...
         await RedisHelper.unlink(redisKey)
+        await RedisHelper.unlink('haspw:' + doc.host)
 
         res.status(202).json({
             message: 'declinedWorker'
@@ -108,6 +111,7 @@ router.patch('/:uuid/editandapprove', async (req, res) => {
             await mongoDoc.save()
             await Search.addWorker('search:workers:', mongoDoc._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
             await RedisHelper.unlink(redisKey)
+            await RedisHelper.unlink('haspw:' + doc.host)
 
             res.status(202).json({
                 message: 'approvedWorker'

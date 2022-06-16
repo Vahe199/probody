@@ -23,6 +23,8 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
        return i
    });
 
+    req.body.host = req.user._id
+
     (new Worker(req.body)).validate(async (err) => {
         if (err) {
             console.log(err)
@@ -33,6 +35,7 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 
         const redisKey = 'pending:check:worker:' + uuidv4()
 
+        await RedisHelper.set('haspw:' + req.user._id, '')
         await RedisHelper.set(redisKey, JSON.stringify(req.body))
 
         res.status(202).json({

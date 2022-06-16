@@ -13,6 +13,7 @@ import Search from "./helpers/Search.js"
 import path from "path"
 import AuthGuard from "./middlewares/AuthGuard.js";
 import fs from "fs";
+import RedisHelper from "./helpers/RedisHelper.js";
 
 const port = parseInt(process.env.PORT)
 const dev = process.env.NODE_ENV !== 'production'
@@ -43,6 +44,8 @@ const uploader = multer({
 
 await Search.fullSync()
 await Search.createIndexes()
+
+const workerDocuments = await RedisHelper.get('pending:check:worker:*')
 
 app.prepare().then(() => {
     const server = express()
