@@ -11,6 +11,7 @@ import LeadRouter from "./lead/index.js"
 import BlogRouter from "./blog/index.js"
 import ServiceRouter from "./service/index.js"
 import RegionRouter from "./region/index.js"
+import FAQRouter from './faq/index.js'
 import AuthGuard from "../middlewares/AuthGuard.js"
 
 const router = express.Router()
@@ -24,6 +25,7 @@ router.use('/user', UserRouter)
 router.use('/lead', LeadRouter)
 router.use('/search', SearchRouter)
 router.use('/review', ReviewRouter)
+router.use('/faq', FAQRouter)
 router.use('/region', RegionRouter)
 router.use('/vacancy', VacancyRouter)
 router.use('/blog', BlogRouter)
