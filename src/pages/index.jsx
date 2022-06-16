@@ -25,6 +25,7 @@ class Home extends React.Component {
             filters: {},
             isMapView: false,
             kind: 'all',
+            handleRef: React.createRef(),
             filterPopupOpen: false,
             pageCount: 1
         }
@@ -61,7 +62,7 @@ class Home extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!Objects.shallowEqual(prevProps.router.query, this.props.router.query)) {
-            window.scrollTo(0, 0)
+            window.document.body.scrollTo(0, 0)
 
             this.initPageLoad()
         }
@@ -137,14 +138,15 @@ class Home extends React.Component {
                     <div bp={'12 6@md'}>
                         <div className="flex fit justify-end">
                             <span>список / карта</span>
-                            <Button className={css.filterButton} color={'secondary'} onClick={this.toggleFilterPopup}>
+
+                            <Button className={css.filterButton} color={'secondary'} ref={this.state.handleRef} onClick={this.toggleFilterPopup}>
                                 <span className={css.cnt}>0</span>
                                 <Icon name={'filter'}/>
-
-                                <Popup onClose={() => this.setState({filterPopupOpen: false})} isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
-                                    filters
-                                </Popup>
                             </Button>
+
+                            <Popup handleRef={this.state.handleRef} onClose={() => this.setState({filterPopupOpen: false})} isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
+                                filters
+                            </Popup>
                         </div>
                     </div>
 

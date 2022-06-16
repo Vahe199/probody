@@ -101,6 +101,7 @@ class NewSalonPage extends React.Component {
         this.geoCode = this.geoCode.bind(this);
         this.openSuccessDialog = this.openSuccessDialog.bind(this);
         this.closeSuccessDialog = this.closeSuccessDialog.bind(this);
+        this.addOwnVariant = this.addOwnVariant.bind(this);
     }
 
     toggleWorkDay(day) {
@@ -165,6 +166,23 @@ class NewSalonPage extends React.Component {
                 services,
                 leads,
                 regions
+            }
+        })
+    }
+
+    addOwnVariant() {
+        this.setState({
+            model: {
+                ...this.state.model,
+                programs: [...this.state.model.programs, {
+                    name: this.context.t('myVariant'),
+                    description: '',
+                    duration: 15,
+                    eroticCnt: 1,
+                    classicCnt: 1,
+                    relaxCnt: 1,
+                    enabled: false
+                }]
             }
         })
     }
@@ -309,6 +327,8 @@ class NewSalonPage extends React.Component {
                 window.ymaps.ready(initMap.bind(this))
             }
         }
+
+        window.document.body.scrollTo(0, 0)
     }
 
     setField(field, value) {
@@ -553,12 +573,12 @@ class NewSalonPage extends React.Component {
     updateWorkHours(workHours) {
         let newWorkHours = Object.assign({}, this.state.model.workHours, workHours);
 
-        if (newWorkHours.from.replace(':', '') > newWorkHours.to.replace(':', '')) {
-            let tmp = newWorkHours.to
-
-            newWorkHours.to = newWorkHours.from
-            newWorkHours.from = tmp
-        }
+        // if (newWorkHours.from.replace(':', '') > newWorkHours.to.replace(':', '')) {
+        //     let tmp = newWorkHours.to
+        //
+        //     newWorkHours.to = newWorkHours.from
+        //     newWorkHours.from = tmp
+        // }
 
         this.setState({
             model: {
@@ -700,7 +720,7 @@ class NewSalonPage extends React.Component {
                               steps={[
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillCommonInfo')}</h2>
-                                      <div bp={'grid 12 6@md'}>
+                                      <div bp={'grid 12 4@md'}>
                                           <TextInput
                                               label={t(this.state.model.kind === 'salon' ? 'salonName' : 'yourNickname')}
                                               placeholder={t(this.state.model.kind === 'salon' ? 'howYourSalonNamed' : 'enterYourWorkNickname')}
@@ -709,6 +729,7 @@ class NewSalonPage extends React.Component {
                                           <Select options={this.state.prefetched.regions} label={t('city')}
                                                   placeholder={t('inWhichCity')} value={this.state.model.region}
                                                   onUpdate={(val) => this.setField('region', val)}/>
+                                          <div bp={'hide show@md'}></div>
                                           <TextInput label={t('streetAndAddress')}
                                                      placeholder={t('salonAddress')}
                                                      value={this.state.model.address}
@@ -717,6 +738,8 @@ class NewSalonPage extends React.Component {
                                                      placeholder={t('typeYourPhoneNumber')}
                                                      value={this.state.model.phone}
                                                      onUpdate={(val) => this.setField('phone', val)}/>
+
+                                          <div bp={'hide show@md'}></div>
                                           <div>
                                               <TextArea max={500} label={t('salonDescription')}
                                                         onUpdate={(val) => this.setField('description', val)}
@@ -923,7 +946,7 @@ class NewSalonPage extends React.Component {
                                                   </Collapsible>
                                               )}
                                           </div>
-                                          <div>
+                                          <div className={'flex gap-12 column'}>
                                               {this.state.model.programs.map((program, i) => {
                                                   return program._id ? '' :
                                                       <Collapsible defaultOpen={i === 0} selectable={true} key={i}
@@ -945,7 +968,7 @@ class NewSalonPage extends React.Component {
                                                                   placeholder={t('tellAboutService')}/>
 
                                                               <RadioGroup
-                                                                  onUpdate={val => this.updatePrograms(program._id, i, 'eroticCnt', val)}
+                                                                  onUpdate={val => this.updatePrograms('', i, 'eroticCnt', val)}
                                                                   value={this.state.model.programs[i].eroticCnt}
                                                                   style={{marginTop: 12}}
                                                                   name={capitalize(t('eroticMassage')) + ' (' + t('pc') + ')'}
@@ -964,7 +987,7 @@ class NewSalonPage extends React.Component {
                                                                       }
                                                                   ]}/>
                                                               <RadioGroup
-                                                                  onUpdate={val => this.updatePrograms(program._id, i, 'classicCnt', val)}
+                                                                  onUpdate={val => this.updatePrograms('', i, 'classicCnt', val)}
                                                                   name={capitalize(t('classicMassage')) + ' (' + t('pc') + ')'}
                                                                   value={this.state.model.programs[i].classicCnt}
                                                                   options={[
@@ -982,7 +1005,7 @@ class NewSalonPage extends React.Component {
                                                                       }
                                                                   ]}/>
                                                               <RadioGroup
-                                                                  onUpdate={val => this.updatePrograms(program._id, i, 'relaxCnt', val)}
+                                                                  onUpdate={val => this.updatePrograms('', i, 'relaxCnt', val)}
                                                                   name={capitalize(t('relaxMassage')) + ' (' + t('pc') + ')'}
                                                                   value={this.state.model.programs[i].relaxCnt}
                                                                   options={[
@@ -1000,7 +1023,7 @@ class NewSalonPage extends React.Component {
                                                                       }
                                                                   ]}/>
                                                               <RadioGroup
-                                                                  onUpdate={val => this.updatePrograms(program._id, i, 'duration', val)}
+                                                                  onUpdate={val => this.updatePrograms('', i, 'duration', val)}
                                                                   name={capitalize(t('duration')) + ' (' + t('minutesShort') + ')'}
                                                                   value={this.state.model.programs[i].duration}
                                                                   options={[
@@ -1023,13 +1046,15 @@ class NewSalonPage extends React.Component {
                                                                   ]}/>
                                                           </div>
                                                           <TextInput
-                                                              onUpdate={val => this.updatePrograms(program._id, i, 'cost', val)}
+                                                              onUpdate={val => this.updatePrograms('', i, 'cost', val)}
                                                               value={this.state.model.programs[i].cost}
                                                               style={{marginBottom: 6}}
                                                               label={t('massageCost') + ' (' + t('kzt') + ')'}
                                                               placeholder={t('from')} type={'number'}/>
                                                       </Collapsible>
                                               })}
+
+                                              <Button className={css.addOwnVariantBtn} onClick={this.addOwnVariant}>{t('addOwnVariant')}</Button>
                                           </div>
                                       </div>
 
@@ -1106,7 +1131,7 @@ class NewSalonPage extends React.Component {
 
                                       <div bp={'grid 6 3@md'}>
                                           {this.state.model.photos.map((photo, i) =>
-                                              <ImageInput onUpload={url => this.setPhoto(i, url)} key={i}/>
+                                              <ImageInput url={photo} onUpload={url => this.setPhoto(i, url)} key={i}/>
                                           )}
                                           {this.state.model.photos.length < 12 &&
                                               <MockImageInput onClick={this.addPhotoInput}/>}
@@ -1169,14 +1194,16 @@ class NewSalonPage extends React.Component {
 
                                                   <div bp={'12 4@md'}>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'eyes', val)}
-                                                                  name={t('eyeColor')}
+                                                                  name={t('eyeColor')} rootBp={'grid 4'}
+                                                                  containerStyle={{gridGap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.eyes}
                                                                   options={["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"].map(i => ({
                                                                       label: i,
                                                                       value: i
                                                                   }))}/>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'bust', val)}
-                                                                  name={capitalize(t('bust'))}
+                                                                  name={capitalize(t('bust'))} rootBp={'grid 4'}
+                                                                  containerStyle={{gridGap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.bust}
                                                                   options={[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5].map(i => ({
                                                                       label: String(i),
@@ -1185,7 +1212,8 @@ class NewSalonPage extends React.Component {
                                                   </div>
                                                   <div bp={'12 4@md'}>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'hair', val)}
-                                                                  name={t('hairColor')}
+                                                                  name={t('hairColor')} rootBp={'grid 4'}
+                                                                  containerStyle={{gridGap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.hair}
                                                                   options={["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"].map(i => ({
                                                                       label: i,
@@ -1194,7 +1222,7 @@ class NewSalonPage extends React.Component {
                                                   </div>
 
                                                   {master.photos.map((photo, j) =>
-                                                      <div bp={'6 2@md'} key={j}><ImageInput
+                                                      <div bp={'6 2@md'} key={j}><ImageInput url={photo}
                                                           onUpload={url => this.setMasterPhoto(i, j, url)}/></div>
                                                   )}
                                                   {master.photos.length < 12 &&
@@ -1257,20 +1285,20 @@ class NewSalonPage extends React.Component {
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
-                                                  <TextInput disabled style={{marginBottom: 12}} label={t('vkFull')}
+                                                  {this.state.model.social.vk && <TextInput disabled style={{marginBottom: 12}} label={t('vkFull')}
                                                              placeholder={'https://vk.com/'}
-                                                             value={this.state.model.social.vk}/>
+                                                             value={this.state.model.social.vk}/>}
 
-                                                  <TextInput disabled style={{marginBottom: 12}} label={t('instagram')}
+                                                  {this.state.model.social.inst && <TextInput disabled style={{marginBottom: 12}} label={t('instagram')}
                                                              placeholder={'https://instagram.com/'}
-                                                             value={this.state.model.social.inst}/>
+                                                             value={this.state.model.social.inst}/>}
 
-                                                  <TextInput disabled style={{marginBottom: 12}} label={t('tgChannel')}
+                                                  {this.state.model.social.tgCh && <TextInput disabled style={{marginBottom: 12}} label={t('tgChannel')}
                                                              placeholder={'https://t.me/'}
-                                                             value={this.state.model.social.tgCh}/>
+                                                             value={this.state.model.social.tgCh}/>}
 
-                                                  <TextInput disabled label={t('site')} placeholder={'https://'}
-                                                             value={this.state.model.social.ws}/>
+                                                  {this.state.model.social.ws && <TextInput disabled label={t('site')} placeholder={'https://'}
+                                                             value={this.state.model.social.ws}/>}
                                               </div>
                                           </div>
 
@@ -1306,13 +1334,13 @@ class NewSalonPage extends React.Component {
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
-                                                  <TextInput disabled style={{marginBottom: 12}} label={t('tg')}
+                                                  {this.state.model.messengers.tg &&<TextInput disabled style={{marginBottom: 12}} label={t('tg')}
                                                              placeholder={'@'}
-                                                             value={this.state.model.messengers.tg}/>
+                                                             value={this.state.model.messengers.tg}/>}
 
-                                                  <TextInput disabled type={'phone'} label={t('whatsapp')}
+                                                  {this.state.model.messengers.wa && <TextInput disabled type={'phone'} label={t('whatsapp')}
                                                              placeholder={'+7'}
-                                                             value={this.state.model.messengers.wa}/>
+                                                             value={this.state.model.messengers.wa}/>}
                                               </div>
                                           </div>
 

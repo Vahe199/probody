@@ -10,7 +10,8 @@ export default class Popup extends React.Component {
     static propTypes = {
         isOpen: PropTypes.bool,
         fullSize: PropTypes.bool,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        handleRef: PropTypes.object.isRequired
     }
 
     static defaultProps = {
@@ -37,7 +38,7 @@ export default class Popup extends React.Component {
     }
 
     handleClickOutside(e) {
-        if (this.state.wrapperRef && !this.state.wrapperRef.current.contains(e.target)) {
+        if (this.state.wrapperRef && !this.state.wrapperRef.current.contains(e.target) && this.props.handleRef && !this.props.handleRef.current.contains(e.target)) {
             this.props.isOpen && this.props.onClose()
         }
     }

@@ -17,15 +17,29 @@ export default class ImageInput extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.deletePic = this.deletePic.bind(this);
     }
 
     static contextType = GlobalContext
 
     static propTypes = {
-        onUpload: PropTypes.func.isRequired
+        onUpload: PropTypes.func.isRequired,
+        url: PropTypes.string
     }
 
-   async handleChange(e) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.url !== this.props.url) {
+            this.setState({preview: this.props.url})
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.url) {
+            this.setState({preview: this.props.url})
+        }
+    }
+
+    async handleChange(e) {
         if (e.target.files && e.target.files[0]) {
             let reader = new FileReader();
             this.setState({uploaded: false});
@@ -54,6 +68,11 @@ export default class ImageInput extends React.Component {
         }
     }
 
+    deletePic() {
+        this.setState({uploaded: false, preview: ''})
+        this.props.onUpload('')
+    }
+
     render() {
         const inputId = 'image-input-' + Numbers.random(0, 99999),
             inputRef = React.createRef(),
@@ -65,6 +84,9 @@ export default class ImageInput extends React.Component {
                     {this.state.preview ? <img className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
                                                src={this.state.preview}/> : ' '}
                 </div>
+
+                {this.state.uploaded && <Button color={'tertiary'} className={css.delete} focus={false} size={'x-small'}
+                        iconLeft={'trashcan'} onClick={this.deletePic}/>}
 
                 <Button className={this.state.preview ? css.edit : css.plus} focus={false} size={'x-small'}
                         iconLeft={this.state.preview ? 'edit' : 'plus'} mapClick={inputRef}/>

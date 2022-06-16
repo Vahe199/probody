@@ -35,7 +35,7 @@ class BlogPage extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.router.query.page !== this.props.router.query.page) {
-            window.scrollTo(0, 0)
+            window.document.body.scrollTo(0, 0)
 
             this.initPageLoad()
         }

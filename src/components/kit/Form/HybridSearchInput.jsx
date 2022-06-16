@@ -58,7 +58,6 @@ class HybridSearchInput extends React.Component {
 
                     APIRequests.getNearestCity(ipCoords).then(async city => {
                         const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-                        console.log(geo)
                         const newQuery = {}
 
                         if (!this.props.router.query['region']) {

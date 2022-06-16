@@ -4,6 +4,8 @@
   display: flex;
   flex-wrap: wrap;
   user-select: none;
+  gap: 12px;
+  cursor: pointer;
   //justify-content: space-between;
   align-items: center;
 
@@ -21,7 +23,12 @@
 
 .radioItem {
   display: inline-block;
-  margin-right: 16px;
+
+  &:hover .radio {
+    @include themify() {
+      border: 1px solid t('bg-accent');
+    }
+  }
 
   span {
     padding-left: 8px;
@@ -54,7 +61,7 @@
       left: 4px;
     }
 
-    &+span {
+    & + span {
       @include themify() {
         color: t('text-main');
       }

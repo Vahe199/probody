@@ -11,7 +11,8 @@ class LanguageSelector extends React.Component {
         super(props);
 
         this.state = {
-            isPopupOpen: false
+            isPopupOpen: false,
+            handleRef: React.createRef()
         }
 
         this.togglePopup = this.togglePopup.bind(this);
@@ -22,7 +23,7 @@ class LanguageSelector extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.router.pathname !== this.props.router.pathname) {
+        if (prevProps.router.locale !== this.props.router.locale) {
             this.setState({isPopupOpen: false})
         }
     }
@@ -33,10 +34,13 @@ class LanguageSelector extends React.Component {
         const availableOptions = this.props.router.locales.filter(i => i !== locale);
 
         return <div className={css['theme--' + theme]}>
-            <div onClick={this.togglePopup} className={cnb(css.root, this.state.isPopupOpen ? css.popupOpen : '')}>
-                <span>{locale}</span>
-                <Icon name={'chevron_down'}/>
-                <Popup style={isMobile ? {} : {left: -58}} isOpen={this.state.isPopupOpen} onClose={() => this.setState({isPopupOpen: false})}>
+            <div className={cnb(css.root, this.state.isPopupOpen ? css.popupOpen : '')}>
+                <div ref={this.state.handleRef} onClick={this.togglePopup}>
+                    <span>{locale}</span>
+                    <Icon name={'chevron_down'}/>
+                </div>
+                <Popup handleRef={this.state.handleRef} style={isMobile ? {} : {left: -58}} isOpen={this.state.isPopupOpen}
+                       onClose={() => this.setState({isPopupOpen: false})}>
                     <ul className={css.list}>
                         {availableOptions.map(lang =>
                             <li key={lang} onClick={() => this.context.setLocale(lang)}>

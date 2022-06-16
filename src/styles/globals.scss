@@ -54,6 +54,7 @@ input, textarea, select {
 
 html, body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 ::selection {

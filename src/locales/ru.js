@@ -139,7 +139,7 @@ export default {
     opening: 'Открытие',
     closing: 'Закрытие',
     salonWorkDays: 'Дни работы салона',
-    roundclock: 'Круглосуточно (24/7)',
+    roundclock: 'Круглосуточно',
     mon: 'Пн',
     tue: 'Вт',
     wed: 'Ср',
@@ -220,4 +220,5 @@ export default {
     entireKZ: 'Казахстан',
     verified: 'Верифицирован',
     masters: 'Мастера',
+    addOwnVariant: 'Добавить свой вариант',
 }

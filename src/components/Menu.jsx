@@ -13,7 +13,8 @@ class Menu extends React.Component {
         super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            handleRef: React.createRef()
         }
 
         this.toggleMenu = this.toggleMenu.bind(this)
@@ -33,18 +34,20 @@ class Menu extends React.Component {
         const {t, isMobile, openModal, theme, isLoggedIn} = this.context
 
         return <div className={cnb('non-selectable', css['theme--' + theme])}>
-            <div className={css.hamburger} onClick={this.toggleMenu}><Icon name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
-            <Popup onClose={() => this.setState({isOpen: false})} style={isMobile ? {padding: 0} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
+            <div className={css.hamburger} ref={this.state.handleRef} onClick={this.toggleMenu}><Icon
+                name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
+            <Popup handleRef={this.state.handleRef} onClose={() => this.setState({isOpen: false})}
+                   style={isMobile ? {padding: 0} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>
                 <div className={css.columnFlex}>
-                <ul className={cnb(css.list, isMobile ? css.mobile : '')}>
-                    <li><Link href={'/account'}>{t('personalArea')}</Link></li>
-                    <li><Link href={'/salon/new'}>{t('addArticle')}</Link></li>
-                    <li><Link href={'/blog'}>{t('news')}</Link></li>
-                    <li><Link href={'/'}>{t('forVisitors')}</Link></li>
-                    <li><Link href={'/vacancies'}>{t('salonVacancies')}</Link></li>
-                    <li><Link href={'/'}>{t('contacts')}</Link></li>
-                    <li><Link href={'/'}>{t('aboutProject')}</Link></li>
-                </ul>
+                    <ul className={cnb(css.list, isMobile ? css.mobile : '')}>
+                        <li><Link href={'/account'}>{t('personalArea')}</Link></li>
+                        <li><Link href={'/salon/new'}>{t('addArticle')}</Link></li>
+                        <li><Link href={'/blog'}>{t('news')}</Link></li>
+                        <li><Link href={'/'}>{t('forVisitors')}</Link></li>
+                        <li><Link href={'/vacancies'}>{t('salonVacancies')}</Link></li>
+                        <li><Link href={'/'}>{t('contacts')}</Link></li>
+                        <li><Link href={'/'}>{t('aboutProject')}</Link></li>
+                    </ul>
 
                     {isMobile && !isLoggedIn && <div className={css.bottomSection}>
                         <Button className={css.btn} onClick={() => {

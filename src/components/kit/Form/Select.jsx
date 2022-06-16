@@ -14,12 +14,13 @@ export default class Select extends React.Component {
             value: '',
             label: '',
             open: false,
-            locked: false
+            locked: false,
+            handleRef: React.createRef()
         }
 
         this.toggleLock = this.toggleLock.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
-        this.openMenu = this.openMenu.bind(this)
+        this.toggleMenu = this.toggleMenu.bind(this)
     }
 
     static contextType = GlobalContext
@@ -37,15 +38,18 @@ export default class Select extends React.Component {
         onUpdate: PropTypes.func,
     }
 
-    openMenu() {
+    toggleMenu() {
         if (!this.state.locked && !this.props.disabled) {
-            this.setState({open: true})
+            this.setState({open: !this.state.open})
         }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value) {
-            this.setState({value: this.props.value, label: this.props.options.find(i => i._id === this.props.value)?.name})
+            this.setState({
+                value: this.props.value,
+                label: this.props.options.find(i => i._id === this.props.value)?.name
+            })
         }
     }
 
@@ -75,21 +79,26 @@ export default class Select extends React.Component {
     render() {
         const {theme} = this.context
 
-        return <div className={css['theme--' + theme]}><div style={Object.assign({minWidth: 150}, this.props.style)} className={cnb(this.props.className, css.inputRoot, 'non-selectable', this.props.variant === 'underline' ? css.underline : css.outlined, (this.state.locked || this.props.disabled) ? css.locked : '')}>
-            <div className={css.label}>{this.props.label}</div>
-            <div className={'flex'}>
-                <div style={{
-                    width: '100%'
-                }} onClick={this.openMenu}>{this.state.label || <span className={css.caption}>{this.props.placeholder}</span>}</div>
-                {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
-            </div>
+        return <div className={css['theme--' + theme]}>
+            <div style={Object.assign({minWidth: 150}, this.props.style)}
+                 className={cnb(this.props.className, css.inputRoot, 'non-selectable', this.props.variant === 'underline' ? css.underline : css.outlined, (this.state.locked || this.props.disabled) ? css.locked : '')}>
+                <div className={css.label}>{this.props.label}</div>
+                <div className={'flex'}>
+                    <div style={{
+                        width: '100%'
+                    }} onClick={this.toggleMenu} ref={this.state.handleRef}>{this.state.label ||
+                        <span className={css.caption}>{this.props.placeholder}</span>}</div>
+                    {this.state.locked ?
+                        <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
+                </div>
 
-            <Popup isOpen={this.state.open} onClose={() => this.setState({open: false})} style={{
-                top: 16,
-                left: -23,
-                maxHeight: 280,
-                overflowX: 'scroll'
-            }}>
+                <Popup handleRef={this.state.handleRef} isOpen={this.state.open}
+                       onClose={() => this.setState({open: false})} style={{
+                    top: 16,
+                    left: -23,
+                    maxHeight: 280,
+                    overflowX: 'scroll'
+                }}>
                     {this.props.options.map(option =>
                         <div style={{
                             minWidth: 300,
@@ -97,7 +106,8 @@ export default class Select extends React.Component {
                             marginBottom: 8
                         }} key={option._id} onClick={() => this.handleUpdate(option._id)}>{option.name}</div>
                     )}
-            </Popup>
-        </div></div>
+                </Popup>
+            </div>
+        </div>
     }
 }
