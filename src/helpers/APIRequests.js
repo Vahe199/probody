@@ -40,6 +40,13 @@ export default class APIRequests {
         })
     }
 
+    static logOut() {
+        fetch(`https://probody.kz/auth/logout`, {
+            method: 'POST',
+            headers: APIRequests.withCredentials()
+        })
+    }
+
     static getFilters() {
         return fetch(`${API_URL}/search/filter`).then(res => res.json())
     }

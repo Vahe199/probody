@@ -1,12 +1,12 @@
 import React from "react"
 import css from '../styles/menu.module.scss'
-import Icon from "./kit/Icon.jsx";
-import Popup from "./kit/Popup";
-import Link from "next/link.js";
-import {GlobalContext} from "../contexts/Global.js";
-import {withRouter} from "next/router.js";
-import Button from "./kit/Button.jsx";
-import {cnb} from "cnbuilder";
+import Icon from "./kit/Icon.jsx"
+import Popup from "./kit/Popup"
+import Link from "next/link.js"
+import {GlobalContext} from "../contexts/Global.js"
+import {withRouter} from "next/router.js"
+import Button from "./kit/Button.jsx"
+import {cnb} from "cnbuilder"
 
 class Menu extends React.Component {
     constructor(props) {
@@ -58,6 +58,10 @@ class Menu extends React.Component {
                             this.toggleMenu()
                             openModal('login')
                         }}>{t('toLogIn')}</Button>
+                    </div>}
+
+                    {isMobile && isLoggedIn && <div className={css.bottomSection}>
+                        <Button color={'tertiary'} onClick={() => openModal('logout')}>{t('logout')}</Button>
                     </div>}
                 </div>
             </Popup>

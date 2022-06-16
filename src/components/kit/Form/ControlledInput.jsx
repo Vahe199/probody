@@ -39,7 +39,6 @@ const ControlledInput = (props) => {
             onFocus(e);
         }
 
-        console.log('focus', e.target.value);
         setCursor(e.target.value.length);
     }
 

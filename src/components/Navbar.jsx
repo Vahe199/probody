@@ -7,6 +7,7 @@ import LanguageSelector from "./LanguageSelector.jsx";
 import Menu from "./Menu.jsx";
 import Link from "next/link.js";
 import HybridSearchInput from "./kit/Form/HybridSearchInput";
+import Icon from "./kit/Icon.jsx";
 
 class Navbar extends React.Component {
     render() {
@@ -38,7 +39,9 @@ class Navbar extends React.Component {
                         <span className={'cursor-pointer'}
                               onClick={() => openModal('register')}>{t('registration')}</span>
                     </div>}
-                    {isLoggedIn && <div className={'flex cursor-pointer justify-center'}><Link href={'/'}>{t('personalArea')}</Link></div>}
+                    {isLoggedIn && <div className={'flex cursor-pointer justify-center'}>
+                        <Icon name={'round_user'} className={css.personalAreaIcon} />
+                        <Link href={'/'}>{t('personalArea')}</Link></div>}
                     <Menu/>
                     <ThemeSwitcher/>
                 </nav>

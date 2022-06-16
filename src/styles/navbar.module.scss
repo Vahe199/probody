@@ -43,3 +43,11 @@
   height: 80%;
   background: #ccc;
 }
+
+.personalAreaIcon {
+  @include themify() {
+    color: t('text-caption');
+  }
+
+  margin-right: 4px;
+}

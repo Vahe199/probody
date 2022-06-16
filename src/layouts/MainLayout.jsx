@@ -18,6 +18,7 @@ import ForgotModal from "../components/modals/ForgotModal.jsx";
 import ChangedPasswordModal from "../components/modals/ChangedPasswordModal";
 import {YANDEX_APIKEY} from "../helpers/constants.js";
 import Script from "next/script.js";
+import LogoutModal from "../components/modals/LogoutModal";
 
 const translations = {
     en,
@@ -51,7 +52,7 @@ class MainLayout extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.openModal !== this.state.openModal) {
+        if (prevState.modal !== this.state.modal) {
             this.computeIsLoggedIn()
         }
     }
@@ -140,13 +141,14 @@ class MainLayout extends React.Component {
                     </div>
 
                     <Modal
-                        isMobile={this.state.isMobile && this.state.modal !== 'registered' && this.state.modal !== 'changedPassword'}
+                        isMobile={this.state.isMobile && !['registered', 'changedPassword', 'logout'].includes(this.state.modal)}
                         onUpdate={this.openModal} open={!!this.state.modal.length}>
                         {this.state.modal === 'login' && <LoginModal/>}
                         {this.state.modal === 'register' && <RegisterModal/>}
                         {this.state.modal === 'registered' && <RegisteredModal/>}
                         {this.state.modal === 'forgot' && <ForgotModal/>}
                         {this.state.modal === 'changedPassword' && <ChangedPasswordModal/>}
+                        {this.state.modal === 'logout' && <LogoutModal/>}
                     </Modal>
                 </div>
             </GlobalContext.Provider>

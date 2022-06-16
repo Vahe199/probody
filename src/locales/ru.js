@@ -221,5 +221,9 @@ export default {
     verified: 'Верифицирован',
     masters: 'Мастера',
     addOwnVariant: 'Добавить свой вариант',
-    lengthMustNotBeLessThan: 'Количество символов должно быть не менее'
+    lengthMustNotBeLessThan: 'Количество символов должно быть не менее',
+    logout: 'Выйти из профиля',
+    qLogOut: 'Выйти из аккаунта?',
+    approveLogout: 'Подтвердите выход',
+    exit: 'Выйти'
 }
