@@ -643,9 +643,11 @@ class NewSalonPage extends React.Component {
     render() {
         const {t, isMobile, theme} = this.context;
 
-        const workHours = ['08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30',
-            '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
-            '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30']
+        const workHours = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30',
+            '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+            '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+            '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30',
+            '23:00', '23:30']
             .map(i => ({
                 _id: i,
                 name: i
@@ -656,7 +658,8 @@ class NewSalonPage extends React.Component {
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} onUpdate={this.closeSuccessDialog}>
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen}
+                   onUpdate={this.closeSuccessDialog}>
                 <div className={css.modalBody}>
                     <p>{t('cool')}</p>
 
@@ -1053,7 +1056,8 @@ class NewSalonPage extends React.Component {
                                                       </Collapsible>
                                               })}
 
-                                              <Button className={css.addOwnVariantBtn} onClick={this.addOwnVariant}>{t('addOwnVariant')}</Button>
+                                              <Button className={css.addOwnVariantBtn}
+                                                      onClick={this.addOwnVariant}>{t('addOwnVariant')}</Button>
                                           </div>
                                       </div>
 
@@ -1222,7 +1226,8 @@ class NewSalonPage extends React.Component {
 
                                                   {master.photos.map((photo, j) =>
                                                       <div bp={'6 2@md'} key={j}><ImageInput url={photo}
-                                                          onUpload={url => this.setMasterPhoto(i, j, url)}/></div>
+                                                                                             onUpload={url => this.setMasterPhoto(i, j, url)}/>
+                                                      </div>
                                                   )}
                                                   {master.photos.length < 12 &&
                                                       <div bp={'6 2@md'}><MockImageInput
@@ -1284,20 +1289,26 @@ class NewSalonPage extends React.Component {
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
-                                                  {this.state.model.social.vk && <TextInput disabled style={{marginBottom: 12}} label={t('vkFull')}
-                                                             placeholder={'https://vk.com/'}
-                                                             value={this.state.model.social.vk}/>}
+                                                  {this.state.model.social.vk &&
+                                                      <TextInput disabled style={{marginBottom: 12}} label={t('vkFull')}
+                                                                 placeholder={'https://vk.com/'}
+                                                                 value={this.state.model.social.vk}/>}
 
-                                                  {this.state.model.social.inst && <TextInput disabled style={{marginBottom: 12}} label={t('instagram')}
-                                                             placeholder={'https://instagram.com/'}
-                                                             value={this.state.model.social.inst}/>}
+                                                  {this.state.model.social.inst &&
+                                                      <TextInput disabled style={{marginBottom: 12}}
+                                                                 label={t('instagram')}
+                                                                 placeholder={'https://instagram.com/'}
+                                                                 value={this.state.model.social.inst}/>}
 
-                                                  {this.state.model.social.tgCh && <TextInput disabled style={{marginBottom: 12}} label={t('tgChannel')}
-                                                             placeholder={'https://t.me/'}
-                                                             value={this.state.model.social.tgCh}/>}
+                                                  {this.state.model.social.tgCh &&
+                                                      <TextInput disabled style={{marginBottom: 12}}
+                                                                 label={t('tgChannel')}
+                                                                 placeholder={'https://t.me/'}
+                                                                 value={this.state.model.social.tgCh}/>}
 
-                                                  {this.state.model.social.ws && <TextInput disabled label={t('site')} placeholder={'https://'}
-                                                             value={this.state.model.social.ws}/>}
+                                                  {this.state.model.social.ws &&
+                                                      <TextInput disabled label={t('site')} placeholder={'https://'}
+                                                                 value={this.state.model.social.ws}/>}
                                               </div>
                                           </div>
 
@@ -1333,13 +1344,15 @@ class NewSalonPage extends React.Component {
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
-                                                  {this.state.model.messengers.tg &&<TextInput disabled style={{marginBottom: 12}} label={t('tg')}
-                                                             placeholder={'@'}
-                                                             value={this.state.model.messengers.tg}/>}
+                                                  {this.state.model.messengers.tg &&
+                                                      <TextInput disabled style={{marginBottom: 12}} label={t('tg')}
+                                                                 placeholder={'@'}
+                                                                 value={this.state.model.messengers.tg}/>}
 
-                                                  {this.state.model.messengers.wa && <TextInput disabled type={'phone'} label={t('whatsapp')}
-                                                             placeholder={'+7'}
-                                                             value={this.state.model.messengers.wa}/>}
+                                                  {this.state.model.messengers.wa &&
+                                                      <TextInput disabled type={'phone'} label={t('whatsapp')}
+                                                                 placeholder={'+7'}
+                                                                 value={this.state.model.messengers.wa}/>}
                                               </div>
                                           </div>
 
