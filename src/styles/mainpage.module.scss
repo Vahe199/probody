@@ -2,9 +2,16 @@
 @import "articlecard.module";
 
 .kindSelector {
-  padding: 16px 0 4px 16px;
+  padding: 16px 12px 4px 16px;
   border-radius: 16px;
   display: inline-block;
+  font-size: 18px;
+  width: 100%;
+  max-width: 400px;
+
+  .kindContainer {
+    justify-content: space-between;
+  }
 
   @include themify() {
     background-color: t('bg-secondlayer');

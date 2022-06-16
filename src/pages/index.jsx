@@ -118,8 +118,9 @@ class Home extends React.Component {
                 <br className={'non-selectable'}/>
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
-                    <div bp={'12 6@md'}>
-                        <RadioGroup className={css.kindSelector} name={''} value={this.state.kind}
+                    <div bp={'12 6@md'} className={'responsive-content'}>
+                        <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
+                                    value={this.state.kind}
                                     onUpdate={this.setKind} options={[
                             {
                                 label: t('all'),
@@ -135,16 +136,21 @@ class Home extends React.Component {
                             }
                         ]}/>
                     </div>
-                    <div bp={'12 6@md'}>
+                    <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
                             <span>список / карта</span>
 
-                            <Button className={css.filterButton} color={'secondary'} ref={this.state.handleRef} onClick={this.toggleFilterPopup}>
-                                <span className={css.cnt}>0</span>
-                                <Icon name={'filter'}/>
-                            </Button>
+                            <div ref={this.state.handleRef}>
+                                <Button className={css.filterButton} color={'secondary'}
+                                        onClick={this.toggleFilterPopup}>
+                                    <span className={css.cnt}>0</span>
+                                    <Icon name={'filter'}/>
+                                </Button>
+                            </div>
 
-                            <Popup handleRef={this.state.handleRef} onClose={() => this.setState({filterPopupOpen: false})} isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
+                            <Popup handleRef={this.state.handleRef}
+                                   onClose={() => this.setState({filterPopupOpen: false})}
+                                   isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
                                 filters
                             </Popup>
                         </div>
@@ -166,7 +172,8 @@ class Home extends React.Component {
                                                 <span>{t('verified')}</span>
                                             </div>}
 
-                                            <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                            <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
+                                            </Link>
                                         </div>}
                                     </div>
                                 </div>
@@ -180,7 +187,9 @@ class Home extends React.Component {
                                             </div>}
 
                                             <div bp={'grid'}>
-                                                <Link href={worker.url}><h1 bp={'7'} className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                                <Link href={worker.url}><h1 bp={'7'}
+                                                                            className={'cursor-pointer'}>{worker.name}</h1>
+                                                </Link>
 
                                                 <div bp={'5'} className="flex justify-between gap-12">
                                                     <div className={'flex'}>
@@ -201,8 +210,9 @@ class Home extends React.Component {
                     })}
                 </div>
 
-                {this.state.pageCount > 1 && <Paginator style={{marginBottom: 24}} page={this.getPage()} onChange={this.handlePageChange}
-                                                        pageCnt={this.state.pageCount}/>}
+                {this.state.pageCount > 1 &&
+                    <Paginator style={{marginBottom: 24}} page={this.getPage()} onChange={this.handlePageChange}
+                               pageCnt={this.state.pageCount}/>}
 
                 <AboutUsSection/>
             </div>

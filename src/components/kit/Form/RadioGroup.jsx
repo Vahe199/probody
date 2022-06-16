@@ -61,7 +61,7 @@ export default class RadioGroup extends React.Component {
             <div style={{marginBottom: 8}}>
                 <span className={css.caption}>{this.props.name}</span>
             </div>
-            <div bp={this.props.rootBp} style={this.props.containerStyle} className={cnb(css.root, this.props.columnView ? css.column : '')}>
+            <div bp={this.props.rootBp} style={this.props.containerStyle} className={cnb(css.root, this.props.containerClass, this.props.columnView ? css.column : '')}>
                 {Object.keys(this.props.options).map(key =>
                     <div onClick={() => this.select(this.props.options[key].value)} className={css.radioItem} key={key}>
                         <div

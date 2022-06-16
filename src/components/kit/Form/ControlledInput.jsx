@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 const ControlledInput = (props) => {
-    const {value, onChange, ...rest} = props;
+    const {value, onChange, onFocus, ...rest} = props;
     const [cursor, setCursor] = useState(null);
     const ref = useRef(null);
 
@@ -13,6 +13,12 @@ const ControlledInput = (props) => {
 
     const handleChange = async (e) => {
         if (ref.current.getAttribute('data-type') === 'phone') {
+            if (e.target.value.replace(/\D/g, '').length > 11) return;
+
+            if (!e.target.value.startsWith('+7')) {
+                e.target.value = '+7'
+            }
+
             const selectionStart = e.target.selectionStart,
                 value = e.target.value,
                 finalValue = await onChange(e)
@@ -24,7 +30,15 @@ const ControlledInput = (props) => {
         }
     };
 
-    return <input ref={ref} value={value} onChange={handleChange} {...rest} />;
+    const handleFocus = (e) => {
+        if (onFocus) {
+            onFocus(e);
+        }
+
+        setCursor(e.target.value.length);
+    }
+
+    return <input ref={ref} onFocus={handleFocus} value={value} onChange={handleChange} {...rest} />;
 };
 
 export default ControlledInput;

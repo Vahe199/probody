@@ -82,6 +82,7 @@ export default class TextInput extends React.Component {
     }
 
     async validateInput(e) {
+        console.log('blurred', this.props.type)
         if (this.props.onBlur) {
             this.props.onBlur(e)
         }
@@ -130,7 +131,7 @@ export default class TextInput extends React.Component {
     }
 
     clear() {
-        this.setState({value: ''})
+        this.setState({value: this.props.type === 'phone' ? '+7' : ''})
     }
 
     static propTypes = {
@@ -159,8 +160,7 @@ export default class TextInput extends React.Component {
             <div className={cnb(css.inputRoot, this.state.errored ? css.errored : '', this.state.success ? css.success : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                 <div className={css.label}>{this.props.label}</div>
                 <div className={'flex'}>
-                    {this.props.type === 'phone' ? <ControlledInput onBlur={this.validateInput} data-type={'phone'} value={this.state.value} autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} />
-                        : <ControlledInput onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} />}
+                    <ControlledInput onBlur={this.validateInput} type={this.state.visible ? 'text' : this.props.type} value={this.state.value} autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus} onChange={this.handleUpdate} disabled={(this.state.locked || this.props.disabled)} placeholder={this.props.placeholder} data-type={this.props.type} />
                     {this.props.type === 'password' && <Icon name={this.state.visible ? 'visible' : 'hidden'} className={css.hideIcon} onClick={this.toggleVisibility} />}
                     {this.props.type !== 'text' && !this.props.disabled && !this.state.locked ? <Icon onClick={this.clear} className={css.closeIcon} name={'close'}/> : null}
                     {this.state.locked ? <Icon onClick={this.toggleLock} className={css.editIcon} name={'edit'}/> : null}
