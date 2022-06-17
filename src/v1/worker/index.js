@@ -18,10 +18,10 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     }
 
     req.body.programs = req.body.programs.map(i => {
-       i.cost = Number(i.cost)
+        i.cost = Number(i.cost)
 
-       return i
-   });
+        return i
+    });
 
     req.body.host = req.user._id
 
@@ -45,7 +45,12 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 })
 
 router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
-    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {$group: {_id: '$target', averageRate: {$avg: "$avg"}}}]).sort({ averageRate: -1 }).limit(3)).map(item => ({[item._id]: item.averageRate}))),
+    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+            $group: {
+                _id: '$target',
+                averageRate: {$avg: "$avg"}
+            }
+        }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
         top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
 
     res.json(top3Workers)
@@ -67,9 +72,19 @@ router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) =
     }
 
     if (workerDoc.kind === 'master') {
-        res.json(await Worker.find({parent: {$exists: false}}).where('location').near({ center: { coordinates: workerDoc.location.coordinates, type: 'Point' }}).limit(3)) // TODO: set up projection
+        res.json(await Worker.find({parent: {$exists: false}}).where('location').near({
+            center: {
+                coordinates: workerDoc.location.coordinates,
+                type: 'Point'
+            }
+        }).limit(3)) // TODO: set up projection
     } else {
-        res.json(await Worker.find({slaves: {$exists: true, $ne: []}}).where('location').near({ center: { coordinates: workerDoc.location.coordinates, type: 'Point' }}).limit(3)) // TODO: set up projection
+        res.json(await Worker.find({
+            slaves: {
+                $exists: true,
+                $ne: []
+            }
+        }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3)) // TODO: set up projection
     }
 })
 
@@ -84,13 +99,24 @@ router.get('/:slug', async (req, res) => {
         }
 
         if (worker.kind === 'master') {
-            return res.json(await Worker
-                .findOne({slug: req.params.slug})
-                .populate('services', 'name')
-                .populate('leads', 'name')
-                .populate('region', 'name'))
+            return res.json({
+                worker: await Worker
+                    .findOne({slug: req.params.slug})
+                    .populate('services', 'name')
+                    .populate('leads', 'name')
+                    .populate('region', 'name')
+            })
         } else {
-            return res.json({kind: 'salon'})
+            return res.json({
+                worker: await Worker
+                    .findOne({slug: req.params.slug})
+                    .populate('services', 'name')
+                    .populate('leads', 'name')
+                    .populate('region', 'name'),
+                slaves: await Worker.find({
+                    parent: worker._id
+                })
+            })
         }
     } catch (e) {
         res.status(500).json({

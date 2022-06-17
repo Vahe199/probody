@@ -26,6 +26,10 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/region`)).json()
     }
 
+    static async getWorker(slug) {
+        return (await fetch(`${API_URL}/worker/${slug}`)).json()
+    }
+
     static async uploadPic(file, asReplacementFor = undefined) {
         const formData = new FormData();
 
@@ -191,6 +195,6 @@ export default class APIRequests {
 
     static getNearestCity(coords) {
         // return fetch(`https://api.rasp.yandex.net/v3.0/nearest_settlement/?apikey=${YANDEX_RASP_KEY}&lat=${coords[0]}&lng=${coords[1]}`).then(res => res.json()).then(res => 'Караганда')
-        return new Promise(resolve => resolve('Алматы'))
+        return new Promise(resolve => resolve('Астана'))
     }
 }

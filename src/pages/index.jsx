@@ -157,7 +157,7 @@ class Home extends React.Component {
                     </div>
 
                     {this.state.workers.map((worker, index) => {
-                        worker.url = '/worker/' + worker.slug
+                        worker.url = '/salon/' + worker.slug
 
                         return <div bp={'12'} key={index}>
                             <div bp={'grid'} className={css.workerBlock}>
