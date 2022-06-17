@@ -226,7 +226,34 @@ class Home extends React.Component {
                                             </div>
                                         </div>}
 
-                                        инфо
+                                        <div bp={'grid'}>
+                                            <div bp={'12 7@md'} className={cnb(css.padded, css.shortInfoBlock)}>
+                                                <div>
+                                                    <div>{t('address').toLowerCase()}</div>
+                                                    <div>{worker.address}</div>
+                                                </div>
+
+                                                <div>
+                                                    <div>{t('city').toLowerCase()}</div>
+                                                    <div>{worker.region.name}</div>
+                                                </div>
+
+                                                <div>
+                                                    <div>{t('reviews').toLowerCase()}</div>
+                                                    <Link href={worker.url}>
+                                                        <div className={css.linkUnderline}>4 отзыва</div>
+                                                    </Link>
+                                                </div>
+
+                                                <div bp={'hide@md'}>
+                                                    <div>звездочка 4.8</div>
+                                                    <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div bp={'4 show@md hide'}>social</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

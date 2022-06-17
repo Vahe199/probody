@@ -37,7 +37,7 @@ class LanguageSelector extends React.Component {
             <div className={cnb(css.root, this.state.isPopupOpen ? css.popupOpen : '')}>
                 <div ref={this.state.handleRef} onClick={this.togglePopup}>
                     <span>{locale}</span>
-                    <Icon name={'chevron_down'}/>
+                    <Icon color={'#FFC83A'} name={'chevron_down'}/>
                 </div>
                 <Popup handleRef={this.state.handleRef} style={isMobile ? {} : {left: -58}} isOpen={this.state.isPopupOpen}
                        onClose={() => this.setState({isPopupOpen: false})}>

@@ -19,6 +19,7 @@ import ChangedPasswordModal from "../components/modals/ChangedPasswordModal";
 import {YANDEX_APIKEY} from "../helpers/constants.js";
 import Script from "next/script.js";
 import LogoutModal from "../components/modals/LogoutModal";
+import Head from "next/head.js";
 
 const translations = {
     en,
@@ -131,7 +132,11 @@ class MainLayout extends React.Component {
     }
 
     render() {
+        // noinspection HtmlRequiredTitleElement
         return (<GlobalContext.Provider value={this.state}>
+                <Head>
+                    <meta name="viewport" content="width=device-width, user-scalable=no" />
+                </Head>
                 <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
                         strategy={'beforeInteractive'}/>
 

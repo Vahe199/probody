@@ -8,9 +8,6 @@
   cursor: pointer;
 
   i {
-    @include themify() {
-      color: t('bg-primary');
-    }
     transition: transform 150ms linear;
     width: 16px;
     height: 16px;

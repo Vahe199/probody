@@ -149,7 +149,22 @@ export default class Search {
 
         return {
             pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
-            results: await workerQuery
+            results: await workerQuery,
+            reviews: await Review.aggregate([{
+                $match: {
+                    target: {
+                        $in: searchResultsIds
+                    }
+                }
+            }, {
+                _id: '$target',
+                avg: {
+                    $avg: '$avg'
+                },
+                count: {
+                    $count: {}
+                }
+            }])
         }
     }
 }
