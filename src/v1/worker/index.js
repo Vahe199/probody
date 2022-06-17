@@ -23,9 +23,9 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
         return i
     });
 
-    req.body.host = new mongoose.mongo.ObjectId(req.user._id)
+    req.body.host = req.user._id
 
-    (new Worker(req.body)).validate(async (err) => {
+    ;(new Worker(req.body)).validate(async (err) => {
         if (err) {
             console.log(err)
             return res.status(500).json({
