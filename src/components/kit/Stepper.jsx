@@ -15,14 +15,13 @@ export default class Stepper extends React.Component {
         const {isMobile} = this.context;
 
         return <div>
-            <div style={{marginBottom: 32}}>
+            <div style={{marginBottom: isMobile ? 24 : 32}}>
                 {isMobile ? (
                     <div style={{marginTop: -40, userSelect: 'none'}}>
                         <ProgressBar mobile={true} value={(this.props.step + 1) / this.props.steps.length} />
 
-                            <h1 className={'responsive-content'} style={{marginBottom: -4, marginTop: 12}}>{this.props.title}</h1>
                         <div style={{margin: '0 16px'}}>
-                            <h1 className={'inline-block number-font'}>{this.props.step + 1}</h1> <span style={{color: '#9a9a9a'}} className={'caption'}>/ {this.props.steps.length}</span></div>
+                            <h1 className={'inline-block number-font'} style={{marginTop: 12}}>{this.props.step + 1}</h1> <span style={{color: '#9a9a9a'}} className={'caption'}>/ {this.props.steps.length}</span></div>
                     </div>
                 ) : (
                     <div bp={'grid 6'} style={{marginBottom: 16}}>

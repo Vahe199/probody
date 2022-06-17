@@ -5,6 +5,7 @@ import AuthGuard from "../../middlewares/AuthGuard.js";
 import User from "../../models/User.model.js";
 import Mail from "../../helpers/Mail.js";
 import RedisHelper from "../../helpers/RedisHelper.js";
+import Worker from "../../models/Worker.model.js";
 
 const router = express.Router()
 
@@ -83,6 +84,24 @@ router.patch('/approvemail', AuthGuard('serviceProvider'), async (req, res) => {
             error: e.message
         })
     }
+})
+
+router.get('/allowpa', AuthGuard('serviceProvider'), async (req, res) => {
+    const userWorkersCnt = await Worker.countDocuments({
+        host: req.user._id
+    })
+
+    if (userWorkersCnt > 0) {
+        return res.json(true)
+    }
+
+    const hasPendingWorker = await RedisHelper.keys('haspw:' + req.user._id)
+
+    if (hasPendingWorker.length > 0) {
+        return res.json(true)
+    }
+
+    return res.json(false)
 })
 
 router.patch('/approvemail/:code', async (req, res) => {

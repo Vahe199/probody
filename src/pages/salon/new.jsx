@@ -258,13 +258,6 @@ class NewSalonPage extends React.Component {
                     }
                 })
             }
-        } else if (step === 7) {
-            await this.setState({
-                model: {
-                    ...this.state.model,
-                    masters: [...this.state.model.masters].filter(i => i.name.length && i.characteristics.height.length && i.characteristics.weight.length && i.characteristics.age.length)
-                }
-            })
         }
 
         await this.setState({step})
@@ -337,13 +330,13 @@ class NewSalonPage extends React.Component {
         }
 
         if (step === 7) {
-            let masters = {...this.state.model.masters}
+            let masters = [...this.state.model.masters]
+                .filter(i => i.name.length && i.characteristics.height > 0 && i.characteristics.weight > 0 && i.characteristics.age > 0)
+                .map(i => {
+                    i.photos = i.photos.filter(j => j.length > 0)
 
-            masters = masters.map(i => {
-                i.photos = i.photos.filter(j => j.length > 0)
-
-                return i
-            })
+                    return i
+                })
 
             this.setState({
                 model: {
@@ -463,13 +456,6 @@ class NewSalonPage extends React.Component {
                 break;
 
             case 1:
-                if (this.state.model.leads.length < 1) {
-                    isValid = false
-                    break
-                }
-                break
-
-            case 2:
                 if (!isValidPhoneNumber(this.state.model.messengers.wa, 'KZ')) {
                     isValid = false
                     break
@@ -491,6 +477,13 @@ class NewSalonPage extends React.Component {
                 }
 
                 if (this.state.model.social.ws.length >= 1 && !/^https?:\/\//.test(this.state.model.social.ws)) {
+                    isValid = false
+                    break
+                }
+                break
+
+            case 2:
+                if (this.state.model.leads.length < 1) {
                     isValid = false
                     break
                 }
@@ -702,38 +695,42 @@ class NewSalonPage extends React.Component {
                 },
             ]}/>
             {this.state.step === -1 ? <div className={css.stepBody}>
-                <h2>{t('addingSalon')}</h2>
-                <div bp={'grid 12 4@md'}>
-                    <div onClick={() => this.setField('kind', 'salon')}
-                         className={cnb('flex cursor-pointer justify-between vertical-center', css.secondLayer)}>
-                        <div>
-                            <h4>{t('salon')}</h4>
-                            <p>{t('ifYouAreOrganization')}</p>
-                        </div>
-                        <div>
-                            <div className={css.radioItem}>
-                                <div
-                                    className={cnb(css.radio, this.state.model.kind === 'salon' ? css.checked : '')}>&nbsp;</div>
+                <h1 style={{marginBottom: 8}}>{t('addingSalon')}</h1>
+                <p>{t('chooseWorkerType')}</p>
+
+                <div className={css.aligner}>
+                    <div bp={'grid 12 4@md'} style={{width: '100%'}}>
+                        <div onClick={() => this.setField('kind', 'salon')}
+                             className={cnb('flex cursor-pointer justify-between vertical-center', css.secondLayer)}>
+                            <div>
+                                <h4>{t('salon')}</h4>
+                                <p className={css.caption}>{t('ifYouAreOrganization')}</p>
+                            </div>
+                            <div>
+                                <div className={css.radioItem}>
+                                    <div
+                                        className={cnb(css.radio, this.state.model.kind === 'salon' ? css.checked : '')}>&nbsp;</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div onClick={() => this.setField('kind', 'master')}
-                         className={cnb('flex cursor-pointer justify-between vertical-center', css.secondLayer)}>
-                        <div>
-                            <h4>{t('privateMaster')}</h4>
-                            <p>{t('ifYouArePrivateSpec')}</p>
-                        </div>
-                        <div>
-                            <div className={css.radioItem}>
-                                <div
-                                    className={cnb(css.radio, this.state.model.kind === 'master' ? css.checked : '')}>&nbsp;</div>
+                        <div onClick={() => this.setField('kind', 'master')}
+                             className={cnb('flex cursor-pointer justify-between vertical-center', css.secondLayer)}>
+                            <div>
+                                <h4>{t('privateMaster')}</h4>
+                                <p className={css.caption}>{t('ifYouArePrivateSpec')}</p>
+                            </div>
+                            <div>
+                                <div className={css.radioItem}>
+                                    <div
+                                        className={cnb(css.radio, this.state.model.kind === 'master' ? css.checked : '')}>&nbsp;</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <Button className={css.proceedBtn} color={'secondary'}
+                <Button className={css.proceedBtn} color={'secondary'} style={isMobile ? {width: '100%'} : {}}
                         onClick={() => this.stepChangeHandler(this.state.step + 1)}>
                     {t('pass')}
                     <Icon name={'arrow_right'}/>
@@ -773,49 +770,22 @@ class NewSalonPage extends React.Component {
                                           <div id={'addSalonMap'} className={css.addSalonMap}></div>
                                       </div>
 
-                                      <Button isDisabled={this.validateStep(0)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
-                                  </div>),
-                                  (<div className={css.stepBody}>
-                                      <h2>{t('whichServicesYouProvide')}</h2>
-                                      <div bp={'grid 12 4@md'} style={{gridGap: 45}}>
-                                          <div>
-                                              <h3 style={{marginBottom: 12}}>{t('services')}</h3>
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
 
-                                              {this.state.prefetched.services.map((service, index) =>
-                                                  <Checkbox style={{marginBottom: 12}} name={service.name} key={index}
-                                                            onUpdate={() => this.toggleService(service._id)}
-                                                            value={this.state.model.services.includes(service._id)}
-                                                            icon={service.icon}/>
-                                              )}
-                                          </div>
-                                          <div>
-                                              <h3>{t('massageFor')}</h3>
-
-                                              {this.state.prefetched.leads.map((lead, index) =>
-                                                  <Checkbox style={{marginBottom: 12}} name={lead.name} key={index}
-                                                            onUpdate={() => this.toggleLead(lead._id)}
-                                                            value={this.state.model.leads.includes(lead._id)}
-                                                            icon={lead.icon}/>
-                                              )}
-
-                                              <h3>{t('roomCnt')}</h3>
-
-                                              <RangeInput max={20} onUpdate={val => this.setField('rooms', val)}
-                                                          value={this.state.model.rooms}/>
-                                          </div>
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
                                       </div>
-
-                                      <Button isDisabled={this.validateStep(1)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillContactInfo')}</h2>
@@ -855,12 +825,73 @@ class NewSalonPage extends React.Component {
                                           </div>
                                       </div>
 
-                                      <Button isDisabled={this.validateStep(2)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
+
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
+                                  </div>),
+                                  (<div className={css.stepBody}>
+                                      <h2>{t('whichServicesYouProvide')}</h2>
+                                      <div bp={'grid 12 4@md'} style={{gridGap: 45}}>
+                                          <div>
+                                              <h3 style={{marginBottom: 16}}>{t('services')}</h3>
+
+                                              <div className={css.textCaption}>
+                                              {this.state.prefetched.services.map((service, index) =>
+                                                  <Checkbox style={{marginBottom: 12}} name={service.name} key={index}
+                                                            onUpdate={() => this.toggleService(service._id)}
+                                                            value={this.state.model.services.includes(service._id)}
+                                                            icon={service.icon}/>
+                                              )}
+                                              </div>
+                                          </div>
+                                          <div>
+                                              <h3 style={{marginBottom: 16}}>{t('massageFor')}</h3>
+
+                                              <div className={css.textCaption}>
+                                              {this.state.prefetched.leads.map((lead, index) =>
+                                                  <Checkbox style={{marginBottom: 12}} name={lead.name} key={index}
+                                                            onUpdate={() => this.toggleLead(lead._id)}
+                                                            value={this.state.model.leads.includes(lead._id)}
+                                                            icon={lead.icon}/>
+                                              )}
+                                              </div>
+
+                                              <h3 style={{marginBottom: 16, marginTop: 24}}>{t('roomCnt')}</h3>
+
+                                              <RangeInput max={20} onUpdate={val => this.setField('rooms', val)}
+                                                          value={this.state.model.rooms}/>
+                                          </div>
+                                      </div>
+
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
+
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
                                   </div>),
                                   (<div>
                                       <h2 style={{
@@ -1081,12 +1112,22 @@ class NewSalonPage extends React.Component {
                                           </div>
                                       </div>
 
-                                      <Button isDisabled={this.validateStep(3)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
+
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2 style={{margin: '24px 0'}}>{t('salonSchedule')}</h2>
@@ -1142,12 +1183,22 @@ class NewSalonPage extends React.Component {
                                           </div>
                                       </div>
 
-                                      <Button isDisabled={this.validateStep(4)} className={css.proceedBtn}
-                                              color={'secondary'}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
+
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2>{t('uploadSalonPhotos')}</h2>
@@ -1161,7 +1212,7 @@ class NewSalonPage extends React.Component {
                                       </div>
 
                                       <Button isDisabled={this.validateStep(5)} className={css.proceedBtn}
-                                              color={'secondary'}
+                                              color={'secondary'} style={isMobile ? {width: '100%'} : {}}
                                               onClick={() => this.stepChangeHandler(this.state.step + 1)}>
                                           {t('pass')}
                                           <Icon name={'arrow_right'}/>
@@ -1178,7 +1229,6 @@ class NewSalonPage extends React.Component {
                                                   <div bp={'12 4@md'}>
                                                       <TextInput
                                                           onUpdate={val => this.setMasterField(i, 'name', val)}
-                                                          disabled={this.state.model.kind === 'master'}
                                                           value={this.state.model.masters[i].name}
                                                           style={{marginBottom: 6}}
                                                           label={t('nickname')}
@@ -1260,17 +1310,27 @@ class NewSalonPage extends React.Component {
                                       <div className={cnb('flex wrap gap-12', css.multipleButtonContainer)}>
                                           {(this.state.model.kind === 'salon' && this.state.model.masters.length < 20) &&
                                               <Button className={css.addMasterBtn}
-                                                      color={'primary'}
+                                                      color={'primary'} style={isMobile ? {width: '100%'} : {}}
                                                       onClick={this.addAnotherMaster}>
                                                   {t('addAnotherMaster')}
                                               </Button>}
 
-                                          <Button isDisabled={this.validateStep(6)} className={css.proceedBtn}
-                                                  color={'secondary'}
-                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                              {t('pass')}
-                                              <Icon name={'arrow_right'}/>
-                                          </Button>
+                                          <div className={css.btnContainer}>
+                                              <Button className={css.backBtn}
+                                                      color={'tertiary'} style={{marginTop: 0}}
+                                                      onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                                  <Icon name={'arrow_left'}/>
+                                                  {t('back')}
+                                              </Button>
+
+                                              <Button isDisabled={this.validateStep(this.state.step)}
+                                                      className={css.proceedBtn}
+                                                      color={'secondary'}
+                                                      onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                                  {t('pass')}
+                                                  <Icon name={'arrow_right'}/>
+                                              </Button>
+                                          </div>
                                       </div>
                                   </div>),
                                   (<div className={css.stepBody}>
@@ -1341,7 +1401,7 @@ class NewSalonPage extends React.Component {
                                               <div style={{padding: 16}}>
                                                   <span className={css.caption}>{t('youDoMassage')}</span>
 
-                                                  <div className="flex wrap gap-12" style={{marginTop: 12}}>
+                                                  <div className="flex wrap gap-12" style={{marginTop: 12, marginBottom: 16}}>
                                                       {this.state.prefetched.leads.filter(i => this.state.model.leads.includes(i._id)).map((lead, i) =>
                                                           <Tag label={lead.name} icon={lead.icon} key={i}/>
                                                       )}
@@ -1534,7 +1594,7 @@ class NewSalonPage extends React.Component {
                                       </div>
 
                                       <Button className={css.proceedBtn}
-                                              color={'secondary'}
+                                              color={'secondary'} style={isMobile ? {width: '100%'} : {}}
                                               onClick={() => this.submitForm()}>
                                           {t('finish')}
                                           <Icon name={'arrow_right'}/>

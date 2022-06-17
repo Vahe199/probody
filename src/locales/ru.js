@@ -219,11 +219,13 @@ export default {
     all: 'Все',
     entireKZ: 'Казахстан',
     verified: 'Верифицирован',
+    back: 'Назад',
     masters: 'Мастера',
     addOwnVariant: 'Добавить свой вариант',
     lengthMustNotBeLessThan: 'Количество символов должно быть не менее',
     logout: 'Выйти из профиля',
     qLogOut: 'Выйти из аккаунта?',
     approveLogout: 'Подтвердите выход',
+    chooseWorkerType: 'Выберите вид анкеты для добавления',
     exit: 'Выйти'
 }

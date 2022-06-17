@@ -23,7 +23,8 @@ const BlogArticleSchema = new Schema({
   },
   text: {
     type: String,
-    required: true
+    required: true,
+    index: 'text'
   }
 }, {
   versionKey: false,

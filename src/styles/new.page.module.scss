@@ -15,6 +15,12 @@
   margin-right: 16px;
 }
 
+.aligner {
+  display: flex;
+  align-items: center;
+  min-height: 20vh;
+}
+
 .radio {
   display: inline-flex;
   align-items: center;
@@ -44,7 +50,7 @@
 
 .addOwnVariantBtn {
   margin-top: 16px;
-    width: 100%;
+  width: 100%;
 }
 
 .multipleButtonContainer {
@@ -104,13 +110,13 @@
     background: t('bg-secondlayer')
   }
 
-  &, &>ymaps {
+  &, & > ymaps {
     min-height: 300px;
     height: auto !important;
     border-radius: 32px;
     width: 100% !important;
 
-    &>ymaps, &>ymaps>ymaps {
+    & > ymaps, & > ymaps > ymaps {
       border-radius: 32px;
     }
   }
@@ -119,7 +125,7 @@
 .textAreaGrow {
   height: 100%;
 
-  &>div, textarea {
+  & > div, textarea {
     height: 100%;
   }
 }
@@ -149,7 +155,7 @@
 }
 
 .addMasterBtn {
-  min-width: 300px;
+  min-width: 33%;
 
   span {
     display: block;
@@ -159,7 +165,7 @@
 
 .proceedBtn {
   margin: 28px 0 24px 0;
-  min-width: 300px;
+  min-width: 33%;
 
   span {
     display: flex;
@@ -171,6 +177,51 @@
     width: 18px;
     height: 12px;
     margin-left: 16px;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  gap: 12px;
+  width: 40%;
+
+  & > div:last-child {
+    &, button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .btnContainer {
+    width: 100%;
+  }
+
+  .aligner {
+    min-height: 66vh !important;
+  }
+}
+
+.textCaption {
+    @include themify() {
+        color: t('text-secondlayer');
+    }
+}
+
+.backBtn {
+  margin: 28px 0 24px 0;
+  min-width: 33%;
+
+  span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  i {
+    width: 18px;
+    height: 12px;
+    margin-right: 16px;
   }
 }
 

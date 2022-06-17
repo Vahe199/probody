@@ -14,8 +14,8 @@
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
 
     @include themify() {
@@ -28,8 +28,8 @@
 
 .current {
   position: absolute;
-  top: -30px;
-  font-size: 20px;
+  top: -44px;
+  font-size: 30px;
   width: 30px;
   padding-left: 8px;
 

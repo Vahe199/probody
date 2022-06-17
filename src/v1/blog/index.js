@@ -20,7 +20,9 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:slug', async (req, res) => {
-    res.json(await BlogArticle.findOne({slug: req.params.slug}).populate('tags'))
+    const blogArticle = await BlogArticle.findOne({slug: req.params.slug}).populate('tags')
+
+    res.json(Object.assign({}, blogArticle, await BlogArticle.find({$text: {$search: blogArticle.text}}, {score: {$meta: 'textScore'}}).sort({score: {$meta: 'textScore'}}).limit(3)))
 })
 
 router.post('/', AuthGuard('admin'), async (req, res) => {
