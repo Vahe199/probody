@@ -150,23 +150,9 @@ export default class Search {
                 workerQuery.populate('region', 'name').projection('location name slug isVerified photos address social programs description phone messengers region')
             }
 
-            console.log([{
-                $match: {
-                    target: {
+            console.log({
                         $in: searchResultsIds.map(id => new mongoose.Types.ObjectId(id))
-                    }
-                }
-            }, {
-                $group: {
-                    _id: '$target',
-                    avg: {
-                        $avg: '$avg'
-                    },
-                    count: {
-                        $count: {}
-                    }
-                }
-            }])
+                    })
 
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
