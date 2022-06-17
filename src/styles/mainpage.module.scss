@@ -1,5 +1,6 @@
 @import "themes";
 @import "articlecard.module";
+@import "kit/socialblock.module";
 
 .kindSelector {
   padding: 12px 12px 4px 16px;
@@ -36,6 +37,25 @@
 
     @include themify() {
       background-color: t('bg-secondlayer');
+    }
+  }
+}
+
+.avgRating {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: fit-content;
+  font-size: 20px;
+  padding-right: 16px;
+
+  i {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+
+    @include themify() {
+      color: t('bg-primary');
     }
   }
 }
@@ -96,13 +116,13 @@
   flex-direction: column;
   gap: 16px;
 
-  &>div {
+  & > div {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 12px;
 
-    &>div:first-child {
+    & > div:first-child:not(.avgRating) {
       @include themify() {
         color: t('text-disabled');
         font-size: 12px;

@@ -85,7 +85,7 @@ class Home extends React.Component {
             console.log(workers)
 
             workers.reviews.map(review => {
-                workers[workers.findIndex(worker => worker._id === review._id)].reviews = review
+                workers.results[workers.results.findIndex(worker => worker._id === review._id)].reviews = review
             })
 
             this.setState({
@@ -224,11 +224,12 @@ class Home extends React.Component {
                                                                             className={'cursor-pointer'}>{worker.name}</h1>
                                                 </Link>
 
-                                                <div bp={'5'} className="flex justify-between gap-12">
-                                                    <div className={'flex'}>
+                                                <div bp={'5'} style={{paddingTop: 8}}
+                                                     className="flex justify-end gap-12">
+                                                    {worker.reviews ? <div className={css.avgRating}>
                                                         <Icon name={'star'}/>
-                                                        <span>{worker.rating}ср.оценка</span>
-                                                    </div>
+                                                        <span>{worker.reviews?.avg || '–'}</span>
+                                                    </div> : <div>&nbsp;</div>}
 
                                                     <Button size={'small'}>{t('onTheMap')}</Button>
                                                 </div>
@@ -247,21 +248,54 @@ class Home extends React.Component {
                                                     <div>{worker.region.name}</div>
                                                 </div>
 
-                                                <div>
+                                                {worker.reviews && <div>
                                                     <div>{t('reviews').toLowerCase()}</div>
                                                     <Link href={worker.url}>
-                                                        <div className={css.linkUnderline}>4 отзыва</div>
+                                                        <div
+                                                            className={css.linkUnderline}>{worker.reviews.count || 0} отзывов
+                                                        </div>
                                                     </Link>
-                                                </div>
+                                                </div>}
 
-                                                <div bp={'hide@md'}>
-                                                    <div>звездочка 4.8</div>
+                                                {worker.reviews && <div bp={'hide@md'}>
+                                                    {worker.reviews ? <div className={css.avgRating}>
+                                                        <Icon name={'star'}/>
+                                                        <span>{worker.reviews.avg}</span>
+                                                    </div> : <div>&nbsp;</div>}
+
                                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                                    </div>
+                                                </div>}
+                                            </div>
+
+                                            <div bp={'5 show@md hide'}>
+                                                <div className={'flex align-end justify-end fit'} style={{paddingBottom: 16, paddingRight: 16}}>
+                                                    <div style={{marginTop: 16}} className={css.socialBlock}>
+                                                        {Object.keys(worker.social).map(name =>
+                                                            <div key={name}>
+                                                                <Link href={worker.social[name]}>
+                                                                    <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
+                                                                </Link>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div bp={'4 show@md hide'}>social</div>
+                                    <div style={{marginTop: 8}} bp={'hide@md'}
+                                         className={cnb(css.cardRoot, css.padded)}>
+                                        <p className={'subtitle2'}>{t('socialMedia')}</p>
+
+                                        <div style={{marginTop: 16}} className={css.socialBlock}>
+                                            {Object.keys(worker.social).map(name =>
+                                                <div key={name}>
+                                                    <Link href={worker.social[name]}>
+                                                        <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
+                                                    </Link>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
