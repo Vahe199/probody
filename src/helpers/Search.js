@@ -2,6 +2,7 @@ import Worker from "../models/Worker.model.js"
 import Review from "../models/Review.model.js"
 import RedisHelper from "./RedisHelper.js"
 import {parsePhoneNumber} from "libphonenumber-js";
+import {Schema} from "mongoose";
 
 const BATCHSIZE = 100;
 
@@ -155,7 +156,7 @@ export default class Search {
                 reviews: await Review.aggregate([{
                     $match: {
                         target: {
-                            $in: searchResultsIds
+                            $in: searchResultsIds.map(id => new Schema.Types.ObjectId(id))
                         }
                     }
                 }, {

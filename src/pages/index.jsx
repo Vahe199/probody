@@ -82,6 +82,7 @@ class Home extends React.Component {
             if (!workers.results) {
                 return
             }
+            console.log(workers)
 
             workers.reviews.map(review => {
                 workers[workers.findIndex(worker => worker._id === review._id)].reviews = review
