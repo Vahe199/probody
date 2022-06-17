@@ -136,36 +136,41 @@ export default class Search {
     // }
 
     static async findWorker(queryString, isMapView, limit, offset) {
-        const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
-            searchResultsIds = searchResults
-                .splice(1)
-                .map(key => key.split(':')[2])
-        let workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
+        try {
+            const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
+                searchResultsIds = searchResults
+                    .splice(1)
+                    .map(key => key.split(':')[2])
+            let workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
 
-        if (isMapView) {
-            workerQuery.projection('location name slug workHours workDays isVerified messengers address')
-        } else {
-            workerQuery.populate('region', 'name').projection('location name slug isVerified photos address social programs description phone messengers region')
-        }
+            if (isMapView) {
+                workerQuery.projection('location name slug workHours workDays isVerified messengers address')
+            } else {
+                workerQuery.populate('region', 'name').projection('location name slug isVerified photos address social programs description phone messengers region')
+            }
 
-        return {
-            pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
-            results: await workerQuery,
-            reviews: await Review.aggregate([{
-                $match: {
-                    target: {
-                        $in: searchResultsIds
+            return {
+                pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
+                results: await workerQuery,
+                reviews: await Review.aggregate([{
+                    $match: {
+                        target: {
+                            $in: searchResultsIds
+                        }
                     }
-                }
-            }, {
-                _id: '$target',
-                avg: {
-                    $avg: '$avg'
-                },
-                count: {
-                    $count: {}
-                }
-            }])
+                }, {
+                    _id: '$target',
+                    avg: {
+                        $avg: '$avg'
+                    },
+                    count: {
+                        $count: {}
+                    }
+                }])
+            }
+        } catch (e) {
+            console.log(e)
+            return {}
         }
     }
 }
