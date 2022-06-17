@@ -98,7 +98,7 @@
   &>div {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
     gap: 12px;
 
     &>div:first-child {

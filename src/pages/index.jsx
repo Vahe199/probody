@@ -79,9 +79,13 @@ class Home extends React.Component {
             kind: this.state.kind,
             region: this.props.router.query['region']
         }).then(workers => {
+            workers.reviews.map(review => {
+                workers[workers.findIndex(worker => worker._id === review._id)].reviews = review
+            })
+
             this.setState({
                 pageCount: workers.pageCount,
-                workers: workers.results
+                workers: Array.isArray(workers.results) ? workers.results : []
             });
         })
     }
