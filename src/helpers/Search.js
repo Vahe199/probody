@@ -159,12 +159,14 @@ export default class Search {
                         }
                     }
                 }, {
-                    _id: '$target',
-                    avg: {
-                        $avg: '$avg'
-                    },
-                    count: {
-                        $count: {}
+                    $group: {
+                        _id: '$target',
+                        avg: {
+                            $avg: '$avg'
+                        },
+                        count: {
+                            $count: {}
+                        }
                     }
                 }])
             }
