@@ -116,8 +116,11 @@ class Home extends React.Component {
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
                 </Head>
 
-                <p className="subtitle additional-text non-selectable">{t('greet')}</p>
-                <h1>{t('qWhatToFindForYou')}</h1>
+                <div className="responsive-content">
+                    <p className="subtitle additional-text non-selectable">{t('greet')}</p>
+                    <h1>{t('qWhatToFindForYou')}</h1>
+                </div>
+
                 <br className={'non-selectable'}/>
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
@@ -142,8 +145,10 @@ class Home extends React.Component {
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
                             <div className={css.switchRoot}>
-                                <div className={!this.state.isMapView ? css.active : ''} onClick={() => this.setState({isMapView: false})}>{t('list')}</div>
-                                <div className={this.state.isMapView ? css.active : ''} onClick={() => this.setState({isMapView: true})}>{t('map')}</div>
+                                <div className={!this.state.isMapView ? css.active : ''}
+                                     onClick={() => this.setState({isMapView: false})}>{t('list')}</div>
+                                <div className={this.state.isMapView ? css.active : ''}
+                                     onClick={() => this.setState({isMapView: true})}>{t('map')}</div>
                             </div>
 
                             <div ref={this.state.handleRef}>
@@ -175,7 +180,7 @@ class Home extends React.Component {
 
                     {this.state.isMapView ? <div>
                         отображение результатов на карте
-                        </div> : this.state.workers.map((worker, index) => {
+                    </div> : this.state.workers.map((worker, index) => {
                         worker.url = '/salon/' + worker.slug
 
                         return <div bp={'12'} key={index}>
