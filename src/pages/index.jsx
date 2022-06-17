@@ -15,6 +15,8 @@ import Paginator from "../components/kit/Paginator.jsx";
 import Button from "../components/kit/Button.jsx";
 import Objects from "../helpers/Objects.js";
 import Popup from "../components/kit/Popup";
+import Numbers from "../helpers/Numbers.js";
+import ControlledInput from "../components/kit/Form/ControlledInput.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -106,6 +108,7 @@ class Home extends React.Component {
 
     render() {
         const {t, theme, isMobile} = this.context
+        const inputId = 'search-input-' + Numbers.random(0, 99999)
 
         return (
             <div className={css['theme--' + theme]}>
@@ -138,7 +141,10 @@ class Home extends React.Component {
                     </div>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
-                            <span>список / карта</span>
+                            <div className={css.switchRoot}>
+                                <div className={!this.state.isMapView ? css.active : ''} onClick={() => this.setState({isMapView: false})}>{t('list')}</div>
+                                <div className={this.state.isMapView ? css.active : ''} onClick={() => this.setState({isMapView: true})}>{t('map')}</div>
+                            </div>
 
                             <div ref={this.state.handleRef}>
                                 <Button className={css.filterButton} color={'secondary'}
@@ -156,7 +162,20 @@ class Home extends React.Component {
                         </div>
                     </div>
 
-                    {this.state.workers.map((worker, index) => {
+                    <div bp={'12 hide@md'} className={'responsive-content'}>
+                        <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
+                            <Icon name={'search'}/>
+                            <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
+                                             onKeyUp={this.handleKeyUp}
+                                             onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
+                                             placeholder={t('ssm')}/>
+                            <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                        </label>
+                    </div>
+
+                    {this.state.isMapView ? <div>
+                        отображение результатов на карте
+                        </div> : this.state.workers.map((worker, index) => {
                         worker.url = '/salon/' + worker.slug
 
                         return <div bp={'12'} key={index}>
