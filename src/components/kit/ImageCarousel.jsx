@@ -44,7 +44,7 @@ class ImageCarousel extends React.Component {
                         }} className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -height,
-                            height: height,
+                            height,
                             marginLeft: index * 100 + '%',
                             cursor: this.props.link ? 'pointer' : 'default'
                         }} key={index}>

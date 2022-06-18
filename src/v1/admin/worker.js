@@ -59,7 +59,7 @@ router.patch('/:uuid/approve', async (req, res) => {
 
         const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
 
-        await Search.addWorker('search:workers:', parentWorker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, populatedDoc.leads, populatedDoc.services, doc.programs, populatedDoc.region.name)
+        await Search.addWorker('search:worker:', parentWorker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, populatedDoc.leads, populatedDoc.services, doc.programs, populatedDoc.region.name)
         await RedisHelper.unlink(redisKey)
         await RedisHelper.unlink('haspw:' + doc.host)
 
@@ -126,7 +126,7 @@ router.patch('/:uuid/editandapprove', async (req, res) => {
             }
 
             await mongoDoc.save()
-            await Search.addWorker('search:workers:', mongoDoc._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
+            await Search.addWorker('search:worker:', mongoDoc._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
             await RedisHelper.unlink(redisKey)
             await RedisHelper.unlink('haspw:' + doc.host)
 

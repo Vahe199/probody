@@ -9,7 +9,7 @@ import Review from "../../models/Review.model.js"
 
 const router = express.Router()
 
-router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
+router.post('/', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'), async (req, res) => {
     if (req.body.location) {
         req.body.location = {
             type: "Point",

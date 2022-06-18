@@ -237,6 +237,12 @@ class NewSalonPage extends React.Component {
     }
 
     async stepChangeHandler(step) {
+        if (step === 5 && this.state.model.kind === 'master') {
+            return this.setState({
+                step: this.state.step === 4 ? 6 : 4
+            })
+        }
+
         if (step === 1) {
             if (this.state.model.messengers.wa.length === 0) {
                 await this.setState({
@@ -849,24 +855,25 @@ class NewSalonPage extends React.Component {
                                               <h3 style={{marginBottom: 16}}>{t('services')}</h3>
 
                                               <div className={css.textCaption}>
-                                              {this.state.prefetched.services.map((service, index) =>
-                                                  <Checkbox style={{marginBottom: 12}} name={service.name} key={index}
-                                                            onUpdate={() => this.toggleService(service._id)}
-                                                            value={this.state.model.services.includes(service._id)}
-                                                            icon={service.icon}/>
-                                              )}
+                                                  {this.state.prefetched.services.map((service, index) =>
+                                                      <Checkbox style={{marginBottom: 12}} name={service.name}
+                                                                key={index}
+                                                                onUpdate={() => this.toggleService(service._id)}
+                                                                value={this.state.model.services.includes(service._id)}
+                                                                icon={service.icon}/>
+                                                  )}
                                               </div>
                                           </div>
                                           <div>
                                               <h3 style={{marginBottom: 16}}>{t('massageFor')}</h3>
 
                                               <div className={css.textCaption}>
-                                              {this.state.prefetched.leads.map((lead, index) =>
-                                                  <Checkbox style={{marginBottom: 12}} name={lead.name} key={index}
-                                                            onUpdate={() => this.toggleLead(lead._id)}
-                                                            value={this.state.model.leads.includes(lead._id)}
-                                                            icon={lead.icon}/>
-                                              )}
+                                                  {this.state.prefetched.leads.map((lead, index) =>
+                                                      <Checkbox style={{marginBottom: 12}} name={lead.name} key={index}
+                                                                onUpdate={() => this.toggleLead(lead._id)}
+                                                                value={this.state.model.leads.includes(lead._id)}
+                                                                icon={lead.icon}/>
+                                                  )}
                                               </div>
 
                                               <h3 style={{marginBottom: 16, marginTop: 24}}>{t('roomCnt')}</h3>
@@ -1319,9 +1326,10 @@ class NewSalonPage extends React.Component {
 
                                       <div className={cnb('flex wrap gap-12', css.multipleButtonContainer)}>
                                           {(this.state.model.kind === 'salon' && this.state.model.masters.length < 20) &&
-                                              <div className={css.addMasterBtnContainer}><Button className={css.addMasterBtn}
-                                                      color={'primary'}
-                                                      onClick={this.addAnotherMaster}>
+                                              <div className={css.addMasterBtnContainer}><Button
+                                                  className={css.addMasterBtn}
+                                                  color={'primary'}
+                                                  onClick={this.addAnotherMaster}>
                                                   {t('addAnotherMaster')}
                                               </Button></div>}
 
@@ -1375,7 +1383,7 @@ class NewSalonPage extends React.Component {
                                           <div bp={'12 6@md'}>
                                               <div className={css.sectionHead}>
                                                   <h3>{t('socialMedia')}</h3>
-                                                  <Icon onClick={() => this.stepChangeHandler(2)}
+                                                  <Icon onClick={() => this.stepChangeHandler(1)}
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
@@ -1405,13 +1413,14 @@ class NewSalonPage extends React.Component {
                                           <div bp={'12 6@md'}>
                                               <div className={css.sectionHead}>
                                                   <h3>{t('serviceAndServices')}</h3>
-                                                  <Icon onClick={() => this.stepChangeHandler(1)}
+                                                  <Icon onClick={() => this.stepChangeHandler(2)}
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
                                                   <span className={css.caption}>{t('youDoMassage')}</span>
 
-                                                  <div className="flex wrap gap-12" style={{marginTop: 12, marginBottom: 16}}>
+                                                  <div className="flex wrap gap-12"
+                                                       style={{marginTop: 12, marginBottom: 16}}>
                                                       {this.state.prefetched.leads.filter(i => this.state.model.leads.includes(i._id)).map((lead, i) =>
                                                           <Tag label={lead.name} icon={lead.icon} key={i}/>
                                                       )}
@@ -1518,7 +1527,7 @@ class NewSalonPage extends React.Component {
                                               </div>
                                           </div>
 
-                                          <div bp={'12'}>
+                                          {this.state.model.kind === 'salon' && <div bp={'12'}>
                                               <div className={css.sectionHead}>
                                                   <h3>{t('salonPhotos')}</h3>
                                                   <Icon onClick={() => this.stepChangeHandler(5)}
@@ -1531,7 +1540,7 @@ class NewSalonPage extends React.Component {
                                                       }}>&nbsp;</div>
                                                   )}
                                               </div>
-                                          </div>
+                                          </div>}
 
                                           <div bp={'12'}>
                                               <div className={css.sectionHead}>
