@@ -143,7 +143,7 @@ export default class Search {
                     .splice(1)
                     .map(key => key.split(':')[2])
             let workerAggregation = [{
-                $match: {_id: {$in: searchResultsIds}}
+                $match: {_id: {$in: searchResultsIds.map(i => new mongoose.Types.ObjectId(i))}}
             },
                 {
                     $sort: {lastRaise: -1}
