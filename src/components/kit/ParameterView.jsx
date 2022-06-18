@@ -15,7 +15,7 @@ class ParameterView extends React.Component {
 
     render() {
         const {t} = this.context
-        return <div className={css.root} bp={'grid 4'}>
+        return <div className={css.root} bp={'grid 4 2@md'}>
             <div>
                 <div className={css.label}>{t('age')}</div>
                 <div className={css.value}>{this.props.age}&nbsp;{t('years')}</div>

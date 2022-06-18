@@ -237,5 +237,6 @@ export default {
     sendMessage: 'Написать',
     masseuses: 'Массажистки',
     programs: 'Программы',
-    nMore: 'еще %s'
+    nMore: 'еще %s',
+    schedule: 'График'
 }

@@ -9,7 +9,7 @@
 
     .caption {
       color: t('text-caption');
-      font-size: 14px;
+      font-size: 12px;
     }
 
     h2 {
@@ -49,8 +49,29 @@
   }
 }
 
+.tag::before {
+  @include themify() {
+    background-color: t('bg-primary');
+  }
+
+  content: ' ';
+  user-select: none;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  margin-bottom: 1px;
+}
+
 .vacancyInfo {
   padding: 16px;
+}
+
+@media (max-width: 480px) {
+  .btn, .btn button {
+    width: 100%;
+  }
 }
 
 .value {
@@ -63,9 +84,9 @@
 }
 
 .primaryColor {
-    @include themify() {
-        color: t('bg-primary');
-    }
+  @include themify() {
+    color: t('bg-primary');
+  }
 }
 
 .bigger {
@@ -109,7 +130,7 @@
 
 .infoCaption {
   @include themify() {
-    font-size: 14px;
-    color: t('bg-disabled');
+    font-size: 12px;
+    color: t('inactive-slide');
   }
 }

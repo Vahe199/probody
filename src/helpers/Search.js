@@ -142,17 +142,70 @@ export default class Search {
                 searchResultsIds = searchResults
                     .splice(1)
                     .map(key => key.split(':')[2])
-            let workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
+            let workerAggregation = [{
+                $match: {_id: {$in: searchResultsIds}}
+            },
+                {
+                    $sort: {lastRaise: -1}
+                }]
+            // Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
 
             if (isMapView) {
-                workerQuery.projection('kind location name slug workHours workDays isVerified messengers address')
+                workerAggregation.push({
+                    $project: {
+                        kind: 1,
+                        location: 1,
+                        name: 1,
+                        slug: 1,
+                        workHours: 1,
+                        workDays: 1,
+                        isVerified: 1,
+                        messengers: 1,
+                        address: 1
+                    }
+                })
             } else {
-                workerQuery.populate('region', 'name').projection('kind location characteristics name slug isVerified photos address social programs description phone messengers region')
+                workerAggregation.push({
+                    $project: {
+                        kind: 1,
+                        location: 1,
+                        characteristics: 1,
+                        name: 1,
+                        slug: 1,
+                        workHours: 1,
+                        workDays: 1,
+                        isVerified: 1,
+                        photos: 1,
+                        messengers: 1,
+                        address: 1,
+                        social: 1,
+                        programs: 1,
+                        description: 1,
+                        phone: 1,
+                        region: 1
+                    }
+                }, {
+                    $lookup: {
+                        from: 'regions',
+                        localField: 'region',
+                        foreignField: '_id',
+                        as: 'region'
+                    }
+                })
             }
+
+            workerAggregation.push({
+                $lookup: {
+                    from: 'workers',
+                    localField: '_id',
+                    foreignField: 'parent',
+                    as: 'masters'
+                }
+            })
 
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
-                results: await workerQuery,
+                results: await Worker.aggregate(workerAggregation),
                 reviews: await Review.aggregate([{
                     $match: {
                         target: {

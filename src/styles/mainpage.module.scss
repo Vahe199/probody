@@ -53,6 +53,11 @@
   }
 }
 
+.ellipsis {
+  max-height: 70px;
+  overflow: hidden;
+}
+
 .padded {
   padding: 16px;
 }
@@ -100,6 +105,7 @@
   width: 100%;
   max-width: 350px;
   border-radius: 24px;
+  user-select: none;
   padding: 4px;
   gap: 12px;
   margin-right: 12px;

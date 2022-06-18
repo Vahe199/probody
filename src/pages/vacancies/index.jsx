@@ -172,19 +172,19 @@ class BlogPage extends React.Component {
                                         <p>{vac.description}</p>
                                     </div>}
 
-                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('workDays')}</span>
                                         <span className={css.value}>{Dates.humanizeDuration(vac.workDays, this.props.router.locale)}</span>
                                     </div>
-                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('workHours')}</span>
                                         <span className={css.value}>{vac.workHours.from}-{vac.workHours.to}</span>
                                     </div>
-                                    <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('salaryShort')}</span>
                                         <span className={css.value}>{t('from')} {formatPrice(vac.salary)} {t('kzt')}</span>
                                     </div>
-                                    <div className={'flex justify-between non-selectable'}>
+                                    <div className={'flex justify-between align-end non-selectable'}>
                                         <span className={css.caption}>{t('city')}</span>
                                         <span className={css.value}>{vac.region.name}</span>
                                     </div>

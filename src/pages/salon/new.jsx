@@ -1267,10 +1267,10 @@ class NewSalonPage extends React.Component {
 
                                                   <div bp={'12 4@md'}>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'eyes', val)}
-                                                                  name={t('eyeColor')} rootBp={'grid 4'}
+                                                                  name={t('eyes')} rootBp={'grid 4'}
                                                                   containerStyle={{gridGap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.eyes}
-                                                                  options={["голубой", "синий", "зеленый", "карий", "серый", "черный", "желтый", "другой"].map(i => ({
+                                                                  options={["голубые", "синие", "зеленые", "карие", "серые", "черные", "желтые", "другие"].map(i => ({
                                                                       label: i,
                                                                       value: i
                                                                   }))}/>
@@ -1288,7 +1288,7 @@ class NewSalonPage extends React.Component {
                                                                   name={t('hairColor')} rootBp={'grid 4'}
                                                                   containerStyle={{gridGap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.hair}
-                                                                  options={["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другой"].map(i => ({
+                                                                  options={["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другая"].map(i => ({
                                                                       label: i,
                                                                       value: i
                                                                   }))}/>

@@ -13,6 +13,7 @@ import TextSection from "../../components/kit/TextSection.jsx";
 import InfoBlock from "../../components/kit/InfoBlock";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
+import Dates from "../../helpers/Dates.js";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -166,8 +167,8 @@ class VacancyViewPage extends React.Component {
                                         <div>{t('workExperience_' + this.state.vacancy.experience)}</div>
                                     </div>
                                     <div>
-                                        <div className={css.infoCaption}>{t('')}</div>
-                                        <div></div>
+                                        <div className={css.infoCaption}>{t('schedule')}</div>
+                                        <div>{Dates.humanizeDuration(this.state.vacancy.workDays, this.props.router.locale)}, {this.state.vacancy.workHours.from}-{this.state.vacancy.workHours.to}</div>
                                     </div>
                                 </div>
                             </InfoBlock>
@@ -177,7 +178,9 @@ class VacancyViewPage extends React.Component {
                         </div>
                     </div>
 
-                    <TextSection title={t('description')} dangerouslySetInnerHTML={{__html: this.state.vacancy.description}} />
+                    <TextSection title={t('description')}>
+                        {this.state.vacancy.description}
+                    </TextSection>
                 </div>
             </div>}
         </section>;

@@ -21,6 +21,7 @@ import {parsePhoneNumber} from "libphonenumber-js";
 import ProgramCard from "../components/kit/ProgramCard";
 import MockProgramCard from "../components/kit/MockProgramCard.jsx";
 import ParameterView from "../components/kit/ParameterView.jsx";
+import ShortMasterCard from "../components/kit/ShortMasterCard";
 
 class Home extends React.Component {
     constructor(props) {
@@ -116,8 +117,6 @@ class Home extends React.Component {
                 kind
             })
         })
-
-        this.performSearch()
     }
 
     render() {
@@ -218,7 +217,7 @@ class Home extends React.Component {
                                             <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
                                             </Link>
                                         </div> : <div className={css.padded}>
-                                            <p style={{paddingBottom: 12}}>{worker.description}</p>
+                                            <p style={{marginBottom: 12}} className={css.ellipsis}>{worker.description}</p>
 
                                             <div className={css.stretchContainer}>
                                                 <Link href={worker.url}>
@@ -314,7 +313,18 @@ class Home extends React.Component {
                                     </div>
 
                                     {worker.kind === 'salon' ? <div bp={'12 7@md'} className={css.padded}>
-                                        <h2>{t('masseuses')}</h2>
+                                        <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
+
+                                        <div className={css.invisibleScroll}>
+                                            {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
+                                                name={master.name}
+                                                pic={master.photos[0]}
+                                                photoCnt={master.photos.length}
+                                                key={i}
+                                            />)}
+                                            {worker.masters.length > 3 &&
+                                                <MockProgramCard link={worker.url} cnt={worker.programs.length - 3}/>}
+                                        </div>
                                     </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
                                         <ParameterView {...worker.characteristics} />
                                     </div>}

@@ -6,6 +6,7 @@ import Button from "./kit/Button.jsx";
 import Link from "next/link.js";
 import {DateTime} from "luxon";
 import ImageCarousel from "./kit/ImageCarousel.jsx";
+import {cnb} from "cnbuilder";
 
 export default class ArticleCard extends React.Component {
     static contextType = GlobalContext
@@ -29,12 +30,12 @@ export default class ArticleCard extends React.Component {
         return <div className={css['theme--' + theme]}>
             <div className={css.cardRoot}>
                 {!this.props.single ?
-                    <Link href={'/blog/' + this.props.slug}><img src={this.props.photos[0]} className={css.pic}/></Link>
+                    <ImageCarousel link={'/blog/' + this.props.slug} pics={this.props.photos}/>
                     : <ImageCarousel pics={this.props.photos}/>}
 
                 <div className={css.content}>
                     <div className="flex justify-between non-selectable">
-                        <span className={css.caption}>
+                        <span className={cnb(css.caption, css.tag)}>
                             Тег новости
                         </span>
                         <span className={css.caption}>
@@ -48,7 +49,7 @@ export default class ArticleCard extends React.Component {
                     {this.props.text && <p style={{marginBottom: 12}}>{this.props.text}</p>}
 
                     {!this.props.single &&
-                        <Link href={'/blog/' + this.props.slug}><Button>{t('detail')}</Button></Link>}
+                        <Link href={'/blog/' + this.props.slug}><Button className={css.btn}>{t('detail')}</Button></Link>}
                 </div>
             </div>
         </div>

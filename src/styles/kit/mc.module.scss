@@ -1,5 +1,9 @@
 .root {
-  display: inline-block;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: stretch;
+  justify-content: space-between;
 
   &.short {
     height: 220px;
