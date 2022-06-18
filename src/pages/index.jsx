@@ -20,6 +20,7 @@ import ControlledInput from "../components/kit/Form/ControlledInput.jsx";
 import {parsePhoneNumber} from "libphonenumber-js";
 import ProgramCard from "../components/kit/ProgramCard";
 import MockProgramCard from "../components/kit/MockProgramCard.jsx";
+import ParameterView from "../components/kit/ParameterView.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -311,8 +312,10 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
-                                    {worker.kind === 'salon' && <div bp={'12 7@md'} className={css.padded}>
+                                    {worker.kind === 'salon' ? <div bp={'12 7@md'} className={css.padded}>
                                         <h2>{t('masseuses')}</h2>
+                                    </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
+                                        <ParameterView {...worker.characteristics} />
                                     </div>}
 
                                     <div bp={'12 7@md'} className={css.padded}>

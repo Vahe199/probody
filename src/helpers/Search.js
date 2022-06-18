@@ -147,7 +147,7 @@ export default class Search {
             if (isMapView) {
                 workerQuery.projection('kind location name slug workHours workDays isVerified messengers address')
             } else {
-                workerQuery.populate('region', 'name').projection('kind location name slug isVerified photos address social programs description phone messengers region')
+                workerQuery.populate('region', 'name').projection('kind location characteristics name slug isVerified photos address social programs description phone messengers region')
             }
 
             return {
