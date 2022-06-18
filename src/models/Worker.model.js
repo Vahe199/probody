@@ -151,13 +151,11 @@ const WorkerSchema = new Schema({
     avgCost: {
         type: Number,
         default() {
-            const programs = this.programs.filter(program => program.cost > 0 && program.duration > 0)
+            if (this.programs.length === 0) {
+                return 0
+            }
 
-            console.log(programs)
-            console.log(programs.reduce((acc, cur) => acc + (Number(cur.cost) / Number(cur.duration) * 60), 0) / programs.length)
-            console.log(Math.round(programs.reduce((acc, cur) => acc + (Number(cur.cost) / Number(cur.duration) * 60), 0) / programs.length))
-
-            return Math.round(programs.reduce((acc, cur) => acc + (Number(cur.cost) / Number(cur.duration) * 60), 0) / programs.length)
+            return Math.round(this.programs.reduce((acc, cur) => acc + (Number(cur.cost) / Number(cur.duration) * 60), 0) / this.programs.length)
         }
     },
     rooms: {
