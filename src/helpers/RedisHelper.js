@@ -60,6 +60,7 @@ class RedisHelper {
     async hset(key, field, value) {
         await this.init();
 
+        console.log(["HSET", ...arguments].join(' '))
         return this.redisClient.sendCommand(["HSET", ...arguments]);
     }
 

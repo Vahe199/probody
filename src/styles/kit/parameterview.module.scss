@@ -1,12 +1,22 @@
+@import "../themes";
+
 .root {
   border-radius: 32px;
-  background: #f7f7f7;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+
   padding: 22px;
 }
 
 .label {
   font-size: 12px;
-  color: #9A9A9A;
+
+  @include themify() {
+    color: t('text-secondlayer');
+  }
+
   margin-bottom: 4px;
 }
 

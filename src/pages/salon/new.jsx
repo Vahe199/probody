@@ -1211,12 +1211,22 @@ class NewSalonPage extends React.Component {
                                               <MockImageInput onClick={this.addPhotoInput}/>}
                                       </div>
 
-                                      <Button isDisabled={this.validateStep(5)} className={css.proceedBtn}
-                                              color={'secondary'} style={isMobile ? {width: '100%'} : {}}
-                                              onClick={() => this.stepChangeHandler(this.state.step + 1)}>
-                                          {t('pass')}
-                                          <Icon name={'arrow_right'}/>
-                                      </Button>
+                                      <div className={css.btnContainer}>
+                                          <Button className={css.backBtn}
+                                                  color={'tertiary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step - 1)}>
+                                              <Icon name={'arrow_left'}/>
+                                              {t('back')}
+                                          </Button>
+
+                                          <Button isDisabled={this.validateStep(this.state.step)}
+                                                  className={css.proceedBtn}
+                                                  color={'secondary'}
+                                                  onClick={() => this.stepChangeHandler(this.state.step + 1)}>
+                                              {t('pass')}
+                                              <Icon name={'arrow_right'}/>
+                                          </Button>
+                                      </div>
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2>{t('addingSalonMaster')}</h2>
@@ -1309,11 +1319,11 @@ class NewSalonPage extends React.Component {
 
                                       <div className={cnb('flex wrap gap-12', css.multipleButtonContainer)}>
                                           {(this.state.model.kind === 'salon' && this.state.model.masters.length < 20) &&
-                                              <Button className={css.addMasterBtn}
-                                                      color={'primary'} style={isMobile ? {width: '100%'} : {}}
+                                              <div className={css.addMasterBtnContainer}><Button className={css.addMasterBtn}
+                                                      color={'primary'}
                                                       onClick={this.addAnotherMaster}>
                                                   {t('addAnotherMaster')}
-                                              </Button>}
+                                              </Button></div>}
 
                                           <div className={css.btnContainer}>
                                               <Button className={css.backBtn}

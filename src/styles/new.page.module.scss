@@ -154,6 +154,14 @@
   user-select: none;
 }
 
+@media (max-width: 480px) {
+  .addMasterBtnContainer {
+    &, & > div, & > div > button {
+      width: 100%;
+    }
+  }
+}
+
 .addMasterBtn {
   min-width: 33%;
 

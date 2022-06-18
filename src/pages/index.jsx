@@ -176,6 +176,10 @@ class Home extends React.Component {
                             </div>
 
                             <Popup handleRef={this.state.handleRef}
+                                   style={isMobile ? {} : {
+                                       right: 0,
+                                        top: 64,
+                                   }}
                                    onClose={() => this.setState({filterPopupOpen: false})}
                                    isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
                                 filters
@@ -275,7 +279,7 @@ class Home extends React.Component {
 
                                                 <div>
                                                     <div>{t('city').toLowerCase()}</div>
-                                                    <div>{worker.region.name}</div>
+                                                    <div>{worker.region[0].name}</div>
                                                 </div>
 
                                                 {worker.reviews && <div>
