@@ -57,7 +57,9 @@ router.patch('/:uuid/approve', async (req, res) => {
             })
         }
 
-        await Search.addWorker('search:workers:', parentWorker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
+        const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
+
+        await Search.addWorker('search:workers:', parentWorker._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.avgCost, doc.rooms, doc.description, populatedDoc.leads, populatedDoc.services, doc.programs, populatedDoc.region.name)
         await RedisHelper.unlink(redisKey)
         await RedisHelper.unlink('haspw:' + doc.host)
 
