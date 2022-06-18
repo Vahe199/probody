@@ -124,6 +124,8 @@ class Home extends React.Component {
         const {t, theme, isMobile} = this.context
         const inputId = 'search-input-' + Numbers.random(0, 99999)
 
+        const themeAccent = theme === 'dark' ? 'light' : 'dark'
+
         return (
             <div className={css['theme--' + theme]}>
                 <Head>
@@ -303,7 +305,7 @@ class Home extends React.Component {
                                                         {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
                                                                 <Link href={worker.social[name]}>
-                                                                    <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
+                                                                    <img src={'/icons/' + name + '_' + themeAccent + '.svg'} alt={t(name)}/>
                                                                 </Link>
                                                             </div>
                                                         )}

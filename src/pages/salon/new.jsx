@@ -1494,7 +1494,7 @@ class NewSalonPage extends React.Component {
                                                               <Select disabled
                                                                       value={this.state.model.workHours.to}
                                                                       label={t('closing')}
-                                                                      options={workHours.slice(1 + workHours.findIndex(i => i.name === this.state.model.workHours.from))}
+                                                                      options={workHours}
                                                                       placeholder={''}/>
                                                           </div>
 
