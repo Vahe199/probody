@@ -175,7 +175,7 @@ export default class APIRequests {
         })
     }
 
-    static searchWorkers(page = 1, query = '', filters = {}) {
+    static searchWorkers(page = 1, query = '', filters = {}, onlyCount = false) {
         if (filters.kind === 'all') {
             delete filters.kind
         }
@@ -184,7 +184,7 @@ export default class APIRequests {
             delete filters.region
         }
 
-        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}`, {
+        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}&onlyCount=${onlyCount}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

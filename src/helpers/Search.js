@@ -142,6 +142,13 @@ export default class Search {
                 searchResultsIds = searchResults
                     .splice(1)
                     .map(key => key.split(':')[2])
+
+            if (limit === 0) {
+                return {
+                    count: searchResults[0],
+                }
+            }
+
             let workerAggregation = [{
                 $match: {_id: {$in: searchResultsIds.map(i => new mongoose.Types.ObjectId(i))}}
             },

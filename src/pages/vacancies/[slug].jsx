@@ -100,12 +100,12 @@ class VacancyViewPage extends React.Component {
                                 <h2>{this.state.vacancy.title}</h2>
                             </div>
                             : <div className={cnb(css.contactContainer, css.mobile)}>
-                                <Link href={'tel:' + this.state.vacancy.phone}><Button iconLeft={'call'}>
+                                <a target="_blank" href={'tel:' + this.state.vacancy.phone}><Button iconLeft={'call'}>
                                     {t('call')}
-                                </Button></Link>
-                                <Link
+                                </Button></a>
+                                <a target="_blank"
                                     href={'https://wa.me/' + this.state.vacancy.whatsapp.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}><Button
-                                    color={'tertiary'} iconLeft={'wa_light'}>{t('write')}</Button></Link>
+                                    color={'tertiary'} iconLeft={'wa_light'}>{t('write')}</Button></a>
                             </div>}
                     </div>
                 </div>

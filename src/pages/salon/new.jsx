@@ -467,17 +467,17 @@ class NewSalonPage extends React.Component {
                     break
                 }
 
-                if (this.state.model.social.inst.length >= 1 && !/^https:\/\/instagram\.com\//.test(this.state.model.social.inst)) {
+                if (this.state.model.social.inst.length >= 1 && !/^https:\/\/(www\.)?instagram\.com\//.test(this.state.model.social.inst)) {
                     isValid = false
                     break
                 }
 
-                if (this.state.model.social.vk.length >= 1 && !/^https:\/\/vk\.com\//.test(this.state.model.social.vk)) {
+                if (this.state.model.social.vk.length >= 1 && !/^https:\/\/(www\.)?vk\.com\//.test(this.state.model.social.vk)) {
                     isValid = false
                     break
                 }
 
-                if (this.state.model.social.tgCh.length >= 1 && !/^https:\/\/t\.me\//.test(this.state.model.social.tgCh)) {
+                if (this.state.model.social.tgCh.length >= 1 && !/^https:\/\/(www\.)?t\.me\//.test(this.state.model.social.tgCh)) {
                     isValid = false
                     break
                 }

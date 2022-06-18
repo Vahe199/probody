@@ -22,9 +22,9 @@ class SocialBlock extends React.Component {
             <div className={cnb(css.socialBlock)}>
                 {Object.keys(this.props.entities).map(name =>
                     <div key={name}>
-                        <Link href={this.props.entities[name]}>
+                        <a target="_blank" href={this.props.entities[name]}>
                             <img src={'/icons/' + name + '_' + theme + '.svg'} alt={t(name)} />
-                        </Link>
+                        </a>
                     </div>
                 )}
             </div>

@@ -31,10 +31,17 @@ class Home extends React.Component {
         this.state = {
             workers: [],
             filters: {},
+            appliedFilters: {
+                leads: [],
+                messengers: [],
+                rooms: [],
+                services: [],
+            },
             isMapView: false,
             handleRef: React.createRef(),
             filterPopupOpen: false,
-            pageCount: 1
+            pageCount: 1,
+            foundCnt: 0
         }
 
         this.initPageLoad = this.initPageLoad.bind(this)
@@ -62,6 +69,15 @@ class Home extends React.Component {
     }
 
     toggleFilterPopup() {
+        if (!this.state.filterPopupOpen) {
+            APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
+                kind: this.props.router.query.kind || 'all',
+                region: this.props.router.query.region
+            }, true).then(res => {
+                console.log(res)
+            })
+        }
+
         this.setState({
             filterPopupOpen: !this.state.filterPopupOpen
         })
@@ -87,7 +103,6 @@ class Home extends React.Component {
             if (!workers.results) {
                 return
             }
-            console.log(workers)
 
             workers.reviews.map(review => {
                 workers.results[workers.results.findIndex(worker => worker._id === review._id)].reviews = review
@@ -176,13 +191,41 @@ class Home extends React.Component {
                             </div>
 
                             <Popup handleRef={this.state.handleRef}
-                                   style={isMobile ? {} : {
+                                   style={isMobile ? {
+                                       top: 0,
+                                       height: '100%',
+                                       padding: 0,
+                                   } : {
                                        right: 0,
-                                        top: 64,
+                                       top: 64
                                    }}
                                    onClose={() => this.setState({filterPopupOpen: false})}
                                    isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
-                                filters
+                                <div bp={'grid 12 4@md'}>
+                                    <div bp={'hide@md'} className={cnb(css.modalHead, css.mobile)}>
+                                        {(isMobile && this.state.step > 0) ? <div style={{marginRight: -24}}>{t('discard')}</div> : <div>&nbsp;</div>}
+
+                                        <h2>{t('filter')}</h2>
+
+                                        <Icon name={'close'} onClick={this.toggleFilterPopup}/>
+                                    </div>
+
+                                    <div>
+                                        regionmobile
+
+                                        services
+                                    </div>
+                                    <div>
+                                        messengers
+
+                                        rooms
+                                    </div>
+                                    <div>
+                                        {!isMobile && <div>price range</div>}
+
+                                        <div className={css.fullSizeBtn}><Button>{t('seeNVariants', this.state.foundCnt)}</Button></div>
+                                    </div>
+                                </div>
                             </Popup>
                         </div>
                     </div>
@@ -224,22 +267,24 @@ class Home extends React.Component {
                                             <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
                                             </Link>
                                         </div> : <div className={css.padded}>
-                                            <p style={{marginBottom: 12}} className={css.ellipsis}>{worker.description}</p>
+                                            <p style={{marginBottom: 12}}
+                                               className={css.ellipsis}>{worker.description}</p>
 
                                             <div className={css.stretchContainer}>
                                                 <Link href={worker.url}>
                                                     <Button>{t('detail')}</Button>
                                                 </Link>
-                                                <Link href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                <a target="_blank"
+                                                   href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                     <Button><Icon name={'call'}/></Button>
-                                                </Link>
-                                                <Link
-                                                    href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                                </a>
+                                                <a target="_blank"
+                                                   href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'wa_light'}/>
                                                         {t('sendMessage')}
                                                     </Button>
-                                                </Link>
+                                                </a>
                                             </div>
                                         </div>}
                                     </div>
@@ -308,9 +353,11 @@ class Home extends React.Component {
                                                     <div style={{marginTop: 16}} className={css.socialBlock}>
                                                         {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
-                                                                <Link href={worker.social[name]}>
-                                                                    <img src={'/icons/' + name + '_' + themeAccent + '.svg'} alt={t(name)}/>
-                                                                </Link>
+                                                                <a target="_blank" href={worker.social[name]}>
+                                                                    <img
+                                                                        src={'/icons/' + name + '_' + themeAccent + '.svg'}
+                                                                        alt={t(name)}/>
+                                                                </a>
                                                             </div>
                                                         )}
                                                     </div>
@@ -331,7 +378,8 @@ class Home extends React.Component {
                                                 key={i}
                                             />)}
                                             {worker.masters.length > 3 &&
-                                                <MockShortMasterCard link={worker.url} cnt={worker.masters.length - 3}/>}
+                                                <MockShortMasterCard link={worker.url}
+                                                                     cnt={worker.masters.length - 3}/>}
                                         </div>
                                     </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
                                         <ParameterView {...worker.characteristics} />
@@ -359,9 +407,9 @@ class Home extends React.Component {
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
                                             {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                 <div key={name}>
-                                                    <Link href={worker.social[name]}>
+                                                    <a target="_blank" href={worker.social[name]}>
                                                         <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             )}
                                         </div>
@@ -376,16 +424,16 @@ class Home extends React.Component {
                                             <Link href={worker.url}>
                                                 <Button>{t('detail')}</Button>
                                             </Link>
-                                            <Link href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                            <a target="_blank" href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                 <Button><Icon name={'call'}/></Button>
-                                            </Link>
-                                            <Link
-                                                href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                            </a>
+                                            <a target="_blank"
+                                               href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'wa_light'}/>
                                                     {t('sendMessage')}
                                                 </Button>
-                                            </Link>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

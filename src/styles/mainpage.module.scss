@@ -1,6 +1,7 @@
 @import "themes";
 @import "articlecard.module";
 @import "kit/socialblock.module";
+@import "kit/modal-content.module";
 
 .kindSelector {
   padding: 12px 12px 4px 16px;
@@ -40,6 +41,10 @@
       max-width: 48px;
     }
   }
+}
+
+.fullSizeBtn>div, .fullSizeBtn>div>button {
+    width: 100%;
 }
 
 .invisibleScroll {

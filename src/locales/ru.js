@@ -238,5 +238,8 @@ export default {
     masseuses: 'Массажистки',
     programs: 'Программы',
     nMore: 'еще %s',
-    schedule: 'График'
+    schedule: 'График',
+    seeNVariants: 'Cмотреть %s вариантов',
+    filter: 'Фильтр',
+    discard: 'Сбросить',
 }
