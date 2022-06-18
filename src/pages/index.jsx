@@ -30,7 +30,6 @@ class Home extends React.Component {
             workers: [],
             filters: {},
             isMapView: false,
-            kind: 'all',
             handleRef: React.createRef(),
             filterPopupOpen: false,
             pageCount: 1
@@ -80,8 +79,8 @@ class Home extends React.Component {
 
     performSearch() {
         APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
-            kind: this.state.kind,
-            region: this.props.router.query['region']
+            kind: this.props.router.query.kind || 'all',
+            region: this.props.router.query.region
         }).then(workers => {
             if (!workers.results) {
                 return
@@ -111,9 +110,11 @@ class Home extends React.Component {
         }
     }
 
-    async setKind(kind) {
-        await this.setState({
-            kind
+    setKind(kind) {
+        this.props.router.push({
+            query: Object.assign({}, this.props.router.query, {
+                kind
+            })
         })
 
         this.performSearch()
@@ -139,7 +140,7 @@ class Home extends React.Component {
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
-                                    value={this.state.kind}
+                                    value={this.props.router.query.kind || 'all'}
                                     onUpdate={this.setKind} options={[
                             {
                                 label: t('all'),
@@ -322,12 +323,14 @@ class Home extends React.Component {
                                         <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
 
                                         <div className={css.invisibleScroll}>
-                                            {worker.programs.slice(0, 3).map((program, i) => <ProgramCard link={worker.url}
-                                                                                                     key={i}
-                                                                                                     title={program.name}
-                                                                                                     duration={program.duration}
-                                                                                                     price={program.cost}/>)}
-                                            {worker.programs.length > 3 && <MockProgramCard link={worker.url} cnt={worker.programs.length - 3} />}
+                                            {worker.programs.slice(0, 3).map((program, i) => <ProgramCard
+                                                link={worker.url}
+                                                key={i}
+                                                title={program.name}
+                                                duration={program.duration}
+                                                price={program.cost}/>)}
+                                            {worker.programs.length > 3 &&
+                                                <MockProgramCard link={worker.url} cnt={worker.programs.length - 3}/>}
                                         </div>
                                     </div>
 
