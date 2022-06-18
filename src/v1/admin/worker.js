@@ -48,7 +48,7 @@ router.patch('/:uuid/approve', async (req, res) => {
                         kind: 'master',
                         name: master.name,
                         characteristics: master.characteristics,
-                        parent: doc._id,
+                        parent: parentWorker._id,
                         host: doc.host,
                         photos: master.photos
                     }

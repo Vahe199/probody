@@ -151,7 +151,8 @@ const WorkerSchema = new Schema({
     avgCost: {
         type: Number,
         default() {
-            return Math.round(this.programs.reduce((acc, cur) => acc + (cur.cost / cur.duration * 60), 0) / this.programs.length)
+            console.log(this.programs)
+            return Math.round(this.programs.reduce((acc, cur) => acc + (Number(cur.cost) / Number(cur.duration) * 60), 0) / this.programs.length)
         }
     },
     rooms: {
@@ -170,7 +171,7 @@ const WorkerSchema = new Schema({
     },
     slug: {
         type: String,
-        default() {// Привет, мир! => privet-mir-25
+        default() {// Привет, мир! => privet-mir25
             return (new CyrillicToTranslit).transform(this.name.replace(/[&\/\\#,!+()$~%.'":*?<>{}]/g, '').trim(), '-') + Numbers.random(1, 1000)
         }
     },
