@@ -7,7 +7,7 @@
   user-select: none;
 
   @include themify() {
-    background: t('text-primary');
+    background: t('text-main');
 
     &.mock {
       background: t('bg-tertiary');
@@ -23,7 +23,9 @@
   }
 
   .value {
-    color: white;
+    @include themify() {
+      color: t('text-accent');
+    }
   }
 
   i {
@@ -36,13 +38,15 @@
 }
 
 .label {
-  color: #fff;
+  @include themify() {
+    color: t('text-accent');
+  }
+
   margin-bottom: 4px;
 }
 
 .value {
   font-size: 12px;
-  color: #fff;
   margin-top: 24px;
 
   &:last-child {

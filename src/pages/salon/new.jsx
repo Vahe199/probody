@@ -331,7 +331,7 @@ class NewSalonPage extends React.Component {
 
         if (step === 7) {
             let masters = [...this.state.model.masters]
-                .filter(i => i.name.length && i.characteristics.height > 0 && i.characteristics.weight > 0 && i.characteristics.age > 0)
+                .filter(i => i.name && i.characteristics?.height > 0 && i?.characteristics.weight > 0 && i?.characteristics.age > 0)
                 .map(i => {
                     i.photos = i.photos.filter(j => j.length > 0)
 

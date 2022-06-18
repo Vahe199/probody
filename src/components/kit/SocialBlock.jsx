@@ -14,7 +14,8 @@ class SocialBlock extends React.Component {
     }
 
     render() {
-        const {t} = this.context;
+        const {t, theme} = this.context;
+        console.log(theme);
 
         return <TextSection style={{paddingBottom: 0}}>
             <h3 style={{marginBottom: 12}}>{t('social')}</h3>
@@ -22,7 +23,7 @@ class SocialBlock extends React.Component {
                 {Object.keys(this.props.entities).map(name =>
                     <div key={name}>
                         <Link href={this.props.entities[name]}>
-                            <img src={'/icons/' + name + '.svg'} alt={t(name)} />
+                            <img src={'/icons/' + name + '_' + theme + '.svg'} alt={t(name)} />
                         </Link>
                     </div>
                 )}
