@@ -1,0 +1,8 @@
+.root {
+  display: inline-block;
+
+  &.short {
+    height: 220px;
+    width: 170px;
+  }
+}

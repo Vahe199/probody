@@ -36,7 +36,7 @@ class MainLayout extends React.Component {
             theme: 'light',
             modal: '',
             isMobile: false,
-            t: key => translations[props.router.locale][key] || translations[props.router.defaultLocale][key] || key,
+            t: this.i18n.bind(this),
             setLocale: this.setLocale.bind(this),
             toggleTheme: this.toggleTheme.bind(this),
             setLoggedIn: this.setLoggedIn.bind(this),
@@ -50,6 +50,16 @@ class MainLayout extends React.Component {
 
     openModal(modal) {
         this.setState({modal})
+    }
+
+    i18n (key, ...substitutions) {
+        let translation = translations[this.props.router.locale][key] || key
+
+        substitutions.forEach(sub => {
+            translation = translation.replace(/%s/i, sub)
+        })
+
+        return translation
     }
 
     componentDidUpdate(prevProps, prevState) {

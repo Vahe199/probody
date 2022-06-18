@@ -95,6 +95,7 @@ export default {
     onTheMap: 'На карте',
     call: 'Позвонить',
     vacancyAnswerPrefill: 'Здравствуйте, пишу с сайта probody.kz касательно вакансии',
+    salonAnswerPrefill: 'Здравствуйте, пишу с сайта probody.kz касательно анкеты',
     workDays: 'Рабочие дни',
     salaryShort: 'ЗП',
     vacancy: 'Вакансия',
@@ -233,4 +234,8 @@ export default {
     map: 'Карта',
     ssm: 'Услуга, салон, мастер',
     reviews: 'Отзывы',
+    sendMessage: 'Написать',
+    masseuses: 'Массажистки',
+    programs: 'Программы',
+    nMore: 'еще %s'
 }

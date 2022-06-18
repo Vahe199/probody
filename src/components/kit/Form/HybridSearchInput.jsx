@@ -116,7 +116,7 @@ class HybridSearchInput extends React.Component {
                         <Icon name={'search'}/>
                         <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
                                          onKeyUp={this.handleKeyUp}
-                                         onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
+                                         onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value, page: 1})})}
                                          placeholder={this.props.searchPlaceholder}/>
                         <div onClick={this.clearQuery}><Icon name={'close'}/></div>
                 </label>

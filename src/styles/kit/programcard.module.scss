@@ -4,10 +4,23 @@
   border-radius: 32px;
   padding: 16px;
   width: 175px;
+  user-select: none;
 
-    @include themify() {
-      background: t('text-primary');
+  @include themify() {
+    background: t('text-primary');
+
+    &.mock {
+      background: t('bg-tertiary');
+
+      .label {
+        color: t('text-tertiary');
+      }
+
+      .value {
+        margin-top: 13px;
+      }
     }
+  }
 
   .value {
     color: white;
@@ -43,6 +56,16 @@
   }
 
   width: 22px !important;
-    height: 14px !important;
+  height: 14px !important;
   cursor: pointer;
+}
+
+.plusIcon {
+  cursor: pointer;
+  width: 24px !important;
+  height: 24px !important;
+
+  @include themify() {
+    color: t('text-tertiary') !important;
+  }
 }

@@ -32,7 +32,7 @@ const WorkerSchema = new Schema({
     },
     lastRaise: {
         type: Date,
-        default: new Date(0)
+        default: new Date
     },
     raises: {
         type: [Date],

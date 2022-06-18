@@ -17,6 +17,9 @@ import Objects from "../helpers/Objects.js";
 import Popup from "../components/kit/Popup";
 import Numbers from "../helpers/Numbers.js";
 import ControlledInput from "../components/kit/Form/ControlledInput.jsx";
+import {parsePhoneNumber} from "libphonenumber-js";
+import ProgramCard from "../components/kit/ProgramCard";
+import MockProgramCard from "../components/kit/MockProgramCard.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -181,7 +184,12 @@ class Home extends React.Component {
                             <Icon name={'search'}/>
                             <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
                                              onKeyUp={this.handleKeyUp}
-                                             onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value})})}
+                                             onChange={e => this.props.router.push({
+                                                 query: Object.assign({}, this.props.router.query, {
+                                                     search: e.target.value,
+                                                     page: 1
+                                                 })
+                                             })}
                                              placeholder={t('ssm')}/>
                             <div onClick={this.clearQuery}><Icon name={'close'}/></div>
                         </label>
@@ -198,7 +206,7 @@ class Home extends React.Component {
                                     <div className={css.cardRoot}>
                                         <ImageCarousel link={worker.url} pics={worker.photos}/>
 
-                                        {isMobile && <div className={css.padded}>
+                                        {isMobile ? <div className={css.padded}>
                                             {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
                                                 <Icon name={'round_check'} className={css.verifiedIcon}/>
 
@@ -207,6 +215,24 @@ class Home extends React.Component {
 
                                             <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
                                             </Link>
+                                        </div> : <div className={css.padded}>
+                                            <p style={{paddingBottom: 12}}>{worker.description}</p>
+
+                                            <div className={css.stretchContainer}>
+                                                <Link href={worker.url}>
+                                                    <Button>{t('detail')}</Button>
+                                                </Link>
+                                                <Link href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                    <Button><Icon name={'call'}/></Button>
+                                                </Link>
+                                                <Link
+                                                    href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                                    <Button color={'tertiary'}>
+                                                        <Icon name={'wa_light'}/>
+                                                        {t('sendMessage')}
+                                                    </Button>
+                                                </Link>
+                                            </div>
                                         </div>}
                                     </div>
                                 </div>
@@ -269,9 +295,10 @@ class Home extends React.Component {
                                             </div>
 
                                             <div bp={'5 show@md hide'}>
-                                                <div className={'flex align-end justify-end fit'} style={{paddingBottom: 16, paddingRight: 16}}>
+                                                <div className={'flex align-end justify-end fit'}
+                                                     style={{paddingBottom: 16, paddingRight: 16}}>
                                                     <div style={{marginTop: 16}} className={css.socialBlock}>
-                                                        {Object.keys(worker.social).map(name =>
+                                                        {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
                                                                 <Link href={worker.social[name]}>
                                                                     <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
@@ -284,12 +311,29 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
+                                    {worker.kind === 'salon' && <div bp={'12 7@md'} className={css.padded}>
+                                        <h2>{t('masseuses')}</h2>
+                                    </div>}
+
+                                    <div bp={'12 7@md'} className={css.padded}>
+                                        <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
+
+                                        <div className={css.invisibleScroll}>
+                                            {worker.programs.slice(0, 3).map((program, i) => <ProgramCard link={worker.url}
+                                                                                                     key={i}
+                                                                                                     title={program.name}
+                                                                                                     duration={program.duration}
+                                                                                                     price={program.cost}/>)}
+                                            {worker.programs.length > 3 && <MockProgramCard link={worker.url} cnt={worker.programs.length - 3} />}
+                                        </div>
+                                    </div>
+
                                     <div style={{marginTop: 8}} bp={'hide@md'}
                                          className={cnb(css.cardRoot, css.padded)}>
                                         <p className={'subtitle2'}>{t('socialMedia')}</p>
 
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
-                                            {Object.keys(worker.social).map(name =>
+                                            {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                 <div key={name}>
                                                     <Link href={worker.social[name]}>
                                                         <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
@@ -299,13 +343,36 @@ class Home extends React.Component {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div bp={'12 hide@md'}>
+                                    <div className={cnb(css.cardRoot, css.padded)}>
+                                        <p style={{paddingBottom: 12}}>{worker.description}</p>
+
+                                        <div className={css.stretchContainer}>
+                                            <Link href={worker.url}>
+                                                <Button>{t('detail')}</Button>
+                                            </Link>
+                                            <Link href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                <Button><Icon name={'call'}/></Button>
+                                            </Link>
+                                            <Link
+                                                href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                                <Button color={'tertiary'}>
+                                                    <Icon name={'wa_light'}/>
+                                                    {t('sendMessage')}
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     })}
                 </div>
 
                 {this.state.pageCount > 1 &&
-                    <Paginator style={{marginBottom: 24}} page={this.getPage()} onChange={this.handlePageChange}
+                    <Paginator style={{marginBottom: 24}} page={this.getPage()}
+                               onChange={this.handlePageChange}
                                pageCnt={this.state.pageCount}/>}
 
                 <AboutUsSection/>

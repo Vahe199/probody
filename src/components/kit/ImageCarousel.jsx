@@ -31,7 +31,7 @@ class ImageCarousel extends React.Component {
     render() {
         const {theme, isMobile} = this.context
 
-        const height = isMobile ? 250 : 400;
+        const height = isMobile ? 250 : 350;
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>

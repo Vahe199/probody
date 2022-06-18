@@ -18,7 +18,7 @@ export default class ProgramCard extends React.Component {
     }
 
     render() {
-        const {theme} = this.context
+        const {theme, t} = this.context
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb(css.root)}>
@@ -30,7 +30,7 @@ export default class ProgramCard extends React.Component {
                         height: 18,
                         marginRight: 2
                     }} name={'clock'}/>
-                    {this.props.duration}
+                    {this.props.duration} {t('minutesShort')}
                 </div>
                 <div className={cnb(css.value, 'flex', 'justify-between')}>
                     <div>

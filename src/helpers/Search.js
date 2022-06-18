@@ -145,9 +145,9 @@ export default class Search {
             let workerQuery = Worker.find({_id: {$in: searchResultsIds}}).sort({lastRaise: -1})
 
             if (isMapView) {
-                workerQuery.projection('location name slug workHours workDays isVerified messengers address')
+                workerQuery.projection('kind location name slug workHours workDays isVerified messengers address')
             } else {
-                workerQuery.populate('region', 'name').projection('location name slug isVerified photos address social programs description phone messengers region')
+                workerQuery.populate('region', 'name').projection('kind location name slug isVerified photos address social programs description phone messengers region')
             }
 
             return {
