@@ -203,6 +203,8 @@ export default class Search {
                 }
             })
 
+            console.log(workerAggregation)
+
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
                 results: await Worker.aggregate(workerAggregation),
