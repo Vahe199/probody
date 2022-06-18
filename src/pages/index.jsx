@@ -23,6 +23,8 @@ import MockProgramCard from "../components/kit/MockProgramCard.jsx";
 import ParameterView from "../components/kit/ParameterView.jsx";
 import ShortMasterCard from "../components/kit/ShortMasterCard";
 import MockShortMasterCard from "../components/kit/MockShortMasterCard";
+import Collapsible from "../components/kit/Collapsible";
+import Checkbox from "../components/kit/Form/Checkbox.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -69,15 +71,6 @@ class Home extends React.Component {
     }
 
     toggleFilterPopup() {
-        if (!this.state.filterPopupOpen) {
-            APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
-                kind: this.props.router.query.kind || 'all',
-                region: this.props.router.query.region
-            }, true).then(res => {
-                console.log(res)
-            })
-        }
-
         this.setState({
             filterPopupOpen: !this.state.filterPopupOpen
         })
@@ -110,7 +103,8 @@ class Home extends React.Component {
 
             this.setState({
                 pageCount: workers.pageCount,
-                workers: workers.results
+                workers: workers.results,
+                foundCnt: workers.count
             });
         })
     }
@@ -203,7 +197,8 @@ class Home extends React.Component {
                                    isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
                                 <div bp={'grid 12 4@md'}>
                                     <div bp={'hide@md'} className={cnb(css.modalHead, css.mobile)}>
-                                        {(isMobile && this.state.step > 0) ? <div style={{marginRight: -24}}>{t('discard')}</div> : <div>&nbsp;</div>}
+                                        {(isMobile && this.state.step > 0) ?
+                                            <div style={{marginRight: -24}}>{t('discard')}</div> : <div>&nbsp;</div>}
 
                                         <h2>{t('filter')}</h2>
 
@@ -213,7 +208,11 @@ class Home extends React.Component {
                                     <div>
                                         regionmobile
 
-                                        services
+                                        <Collapsible title={t('services')}>
+                                            {this.state.filters.services?.map(service =>
+                                                <Checkbox key={service._id} name={service.name} icon={service.icon} value={this.state.appliedFilters.services.includes(service.name)} onUpdate={() => this.toggleFilter('services', service.name)} />
+                                            )}
+                                        </Collapsible>
                                     </div>
                                     <div>
                                         messengers
@@ -223,7 +222,8 @@ class Home extends React.Component {
                                     <div>
                                         {!isMobile && <div>price range</div>}
 
-                                        <div className={css.fullSizeBtn}><Button>{t('seeNVariants', this.state.foundCnt)}</Button></div>
+                                        <div className={css.fullSizeBtn}>
+                                            <Button>{t('seeNVariants', this.state.foundCnt)}</Button></div>
                                     </div>
                                 </div>
                             </Popup>
@@ -274,17 +274,17 @@ class Home extends React.Component {
                                                 <Link href={worker.url}>
                                                     <Button>{t('detail')}</Button>
                                                 </Link>
-                                                <a target="_blank"
-                                                   href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                <div><a target="_blank"
+                                                        href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                     <Button><Icon name={'call'}/></Button>
-                                                </a>
-                                                <a target="_blank"
-                                                   href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                                </a></div>
+                                                <div><a target="_blank"
+                                                        href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'wa_light'}/>
                                                         {t('sendMessage')}
                                                     </Button>
-                                                </a>
+                                                </a></div>
                                             </div>
                                         </div>}
                                     </div>
@@ -424,16 +424,17 @@ class Home extends React.Component {
                                             <Link href={worker.url}>
                                                 <Button>{t('detail')}</Button>
                                             </Link>
-                                            <a target="_blank" href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                            <div><a target="_blank"
+                                                    href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                 <Button><Icon name={'call'}/></Button>
-                                            </a>
-                                            <a target="_blank"
-                                               href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
+                                            </a></div>
+                                            <div><a target="_blank"
+                                                    href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'wa_light'}/>
                                                     {t('sendMessage')}
                                                 </Button>
-                                            </a>
+                                            </a></div>
                                         </div>
                                     </div>
                                 </div>

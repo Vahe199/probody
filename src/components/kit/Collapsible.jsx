@@ -12,7 +12,8 @@ export default class Collapsible extends React.Component {
 
         this.state = {
             isOpen: false,
-            bodyRef: React.createRef()
+            bodyRef: React.createRef(),
+            checkboxRef: React.createRef()
         }
 
         this.toggle = this.toggle.bind(this);
@@ -40,20 +41,22 @@ export default class Collapsible extends React.Component {
         }
     }
 
-    toggle() {
-        this.setState({isOpen: !this.state.isOpen})
+    toggle(e) {
+        if (!this.state.checkboxRef.current?.contains(e.target)) {
+            this.setState({isOpen: !this.state.isOpen})
+        }
     }
 
     render() {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(css.head, this.props.value ? css.checked : '')}>
+            <div onClick={this.toggle} className={cnb(css.head, this.props.value ? css.checked : '')}>
                 <div className={'flex grow-1 vertical-center'}>
-                    {this.props.selectable && <Checkbox onUpdate={this.props.onUpdate} value={this.props.value} />}
-                    <span onClick={this.toggle} className={'subtitle2 fullwidth'} style={{marginLeft: 12}}>{this.props.title}</span>
+                    {this.props.selectable && <div ref={this.state.checkboxRef}><Checkbox onUpdate={this.props.onUpdate} value={this.props.value} /></div>}
+                    <span className={'subtitle2 fullwidth'} style={{marginLeft: 12}}>{this.props.title}</span>
                 </div>
-                <div onClick={this.toggle} className={'flex vertical-center'}>
+                <div className={'flex vertical-center'}>
                     <Icon className={cnb(css.chevron, this.state.isOpen ? css.open : '')} name={'chevron_down'}/>
                 </div>
             </div>
