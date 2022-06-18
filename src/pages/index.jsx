@@ -22,6 +22,7 @@ import ProgramCard from "../components/kit/ProgramCard";
 import MockProgramCard from "../components/kit/MockProgramCard.jsx";
 import ParameterView from "../components/kit/ParameterView.jsx";
 import ShortMasterCard from "../components/kit/ShortMasterCard";
+import MockShortMasterCard from "../components/kit/MockShortMasterCard";
 
 class Home extends React.Component {
     constructor(props) {
@@ -318,12 +319,13 @@ class Home extends React.Component {
                                         <div className={css.invisibleScroll}>
                                             {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
                                                 name={master.name}
+                                                link={worker.url}
                                                 pic={master.photos[0]}
                                                 photoCnt={master.photos.length}
                                                 key={i}
                                             />)}
                                             {worker.masters.length > 3 &&
-                                                <MockProgramCard link={worker.url} cnt={worker.programs.length - 3}/>}
+                                                <MockShortMasterCard link={worker.url} cnt={worker.masters.length - 3}/>}
                                         </div>
                                     </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
                                         <ParameterView {...worker.characteristics} />
