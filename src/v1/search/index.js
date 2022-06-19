@@ -83,16 +83,18 @@ router.post('/worker', async (req, res) => {
                     } else if (filterName === 'price') {
                         req.body.query += ` @avgcost:[${req.body.filters[filterName].from || 0} ${req.body.filters[filterName].to || 999999}]`
                     } else if (filterName === 'rooms') {
-                        switch (req.body.filters[filterName]) {
-                            case 'under5':
-                                req.body.query += ` @rooms:[0 5]`
-                                break
-                            case '5to10':
-                                req.body.query += ` @rooms:[5 10]`
-                                break
-                            case 'morethan10':
-                                req.body.query += ` @rooms:[10 20]`
-                                break
+                        req.body.filters[filterName].split(' ').forEach(room => {
+                            switch (room) {
+                                case '1-5':
+                                    req.body.query += ` @rooms:[0 5]`
+                                    break
+                                case '5-10':
+                                    req.body.query += ` @rooms:[5 10]`
+                                    break
+                                case '10+':
+                                    req.body.query += ` @rooms:[10 20]`
+                                    break
+                            }
                         }
                     } else {
                         req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
