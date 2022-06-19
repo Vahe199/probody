@@ -102,8 +102,13 @@
 }
 
 .ellipsis {
-  max-height: 70px;
+  max-height: calc(24px * 3);
+  line-height: 24px;
+  text-overflow: ellipsis;
   overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 
 .padded {

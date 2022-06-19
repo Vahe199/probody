@@ -2,13 +2,13 @@
 
 .root {
   background: #f7f7f7;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
 }
 
 .dayOfMonth {
   text-align: center;
-  padding: 0 12px;
+  //padding: 0 12px;
   display: flex;
   flex-direction: column;
 

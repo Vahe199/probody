@@ -20,7 +20,7 @@ class TextSection extends React.Component {
     }
 
     componentDidMount() {
-        const needsShowMoreButton = !this.state.isOpen && this.state.textRef.current?.scrollHeight <= this.state.textRef.current?.clientHeight
+        const needsShowMoreButton = this.state.textRef.current?.scrollHeight >= this.lineHeight * this.props.lines
 
         this.setState({
             needsShowMoreButton
@@ -54,7 +54,7 @@ class TextSection extends React.Component {
                 }}>
                     {this.props.children}
                 </div>
-                {this.state.needsShowMoreButton ? [] : <a className={css.showMore}
+                {this.state.needsShowMoreButton && <a className={css.showMore}
                                                           onClick={this.toggle}>{this.state.isOpen ? this.context.t('showLess') : this.context.t('showMore')}</a>}
             </section>
         </div>

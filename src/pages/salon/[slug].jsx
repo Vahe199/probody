@@ -12,6 +12,9 @@ import Link from "next/link.js";
 import {withRouter} from "next/router.js";
 import Button from "../../components/kit/Button.jsx";
 import {parsePhoneNumber} from "libphonenumber-js";
+import TextSection from "../../components/kit/TextSection.jsx";
+import WeekView from "../../components/kit/WeekView";
+import Dates from "../../helpers/Dates.js";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -87,6 +90,7 @@ class SalonView extends React.Component {
                         </div>}
                     </div>
                 </div>
+
                 <div bp={'12 7@md'}>
                     <div className={css.cardRoot}>
                         {!isMobile && <div className={css.padded}>
@@ -162,10 +166,34 @@ class SalonView extends React.Component {
                             </div>
                         </div>
                     </div>
+
+                    {this.state.salon.workHours && <div bp={'grid'} style={{marginTop: 8}} className={cnb(css.cardRoot, css.padded)}>
+                        <div bp={'12 6@md'} className={css.shortInfoBlock}>
+                            <div>
+                                <div>{t('workSchedule').toLowerCase()}</div>
+                                <div>{this.state.salon.workHours.roundclock ? t('roundclock') : this.state.salon.workHours?.from + '-' + this.state.salon.workHours?.to}</div>
+                            </div>
+
+                            <div>
+                                <div>{t('status').toLowerCase()}</div>
+                                <div>{Dates.isOpen(this.state.salon.workDays, this.state.salon.workHours) ? t('opened') : t('closed')}</div>
+                            </div>
+                        </div>
+
+                        <div bp={'12 6@md'}>
+                            <WeekView enabledDays={this.state.salon.workDays || []} />
+                        </div>
+                    </div>}
                 </div>
+
                 <div bp={'hide show@md 5'} className={cnb(css.padded, css.cardRoot)}>
-                    <p style={{marginBottom: 12}}
-                       className={css.ellipsis}>{this.state.salon.description}</p>
+                    {this.state.salon.description &&
+                        <div className={css.textSectionDecorator}>
+                            <TextSection style={{padding: 0}} lines={5}>
+                                {this.state.salon.description}
+                            </TextSection>
+                        </div>
+                    }
 
                     {this.state.salon.phone && <div className={css.stretchContainer}>
                         <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>

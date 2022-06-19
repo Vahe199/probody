@@ -244,4 +244,7 @@ export default {
     discard: 'Сбросить',
     hourPrice: 'Цена часа массажа',
     salonView: 'Просмотр анкеты',
+    status: 'Статус',
+    opened: 'Открыто',
+    closed: 'Закрыто',
 }
