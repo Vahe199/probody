@@ -14,7 +14,6 @@ export default class Search {
     }
 
     static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName, messengers) {
-        console.log(messengers)
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
             'phone', parsePhoneNumber(phone, 'KZ').number.replace('+', ''),
@@ -27,7 +26,7 @@ export default class Search {
             'massagetypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
             'rooms', String(rooms),
             'avgcost', String(avgCost),
-            'messengers', Object.keys(Objects.removeEmptyKeys(messengers)).map(m => m.name.toLowerCase()).join(','),
+            'messengers', Object.keys(Objects.removeEmptyKeys(messengers)).map(m => m.toLowerCase()).join(',').replace('wa', 'whatsapp').replace('tg', 'telegram')
         )
     }
 
