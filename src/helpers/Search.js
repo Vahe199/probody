@@ -3,6 +3,7 @@ import Review from "../models/Review.model.js"
 import RedisHelper from "./RedisHelper.js"
 import {parsePhoneNumber} from "libphonenumber-js";
 import mongoose from "mongoose";
+import Objects from "./Objects.js";
 
 const BATCHSIZE = 100;
 
@@ -12,7 +13,7 @@ export default class Search {
         // await Search.syncRegions()
     }
 
-    static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName) {
+    static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName, messengers) {
         return RedisHelper.hset(keyPrefix + workerId,
             "name", name.toLowerCase(),
             'phone', parsePhoneNumber(phone, 'KZ').number.replace('+', ''),
@@ -24,7 +25,8 @@ export default class Search {
             'leads', leads.map(l => l.name.toLowerCase()).join(','),
             'massagetypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
             'rooms', String(rooms),
-            'avgcost', String(avgCost)
+            'avgcost', String(avgCost),
+            'messengers', Object.keys(Objects.removeEmptyKeys(messengers)).map(m => m.name.toLowerCase()).join(','),
         )
     }
 
@@ -54,7 +56,8 @@ export default class Search {
                     worker.leads,
                     worker.services,
                     worker.programs,
-                    worker.region.name)
+                    worker.region.name,
+                    worker.messengers)
             }
 
             offset += BATCHSIZE
@@ -116,7 +119,8 @@ export default class Search {
                 leads: 'TEXT',
                 phone: 'TAG',
                 services: 'TEXT',
-                massagetypes: 'TEXT'
+                massagetypes: 'TEXT',
+                messengers: 'TEXT'
             })
         } catch (e) {
         }

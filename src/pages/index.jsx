@@ -152,8 +152,10 @@ class Home extends React.Component {
             services: this.props.router.query['filters[services]']?.split(',').map(i => this.state.filters.services.find(service => service._id === i)?.name).join(' '),
             leads: this.props.router.query['filters[leads]']?.split(',').map(i => this.state.filters.leads.find(lead => lead._id === i)?.name).join(' '),
 
-            priceFrom: this.props.router.query.priceFrom,
-            priceTo: this.props.router.query.priceTo
+            price: {
+                from: this.props.router.query.priceFrom,
+                to: this.props.router.query.priceTo
+            }
         }).then(workers => {
             if (!workers.results) {
                 return

@@ -16,4 +16,16 @@ export default class Objects {
         }
         return true;
     }
+
+    static removeEmptyKeys(obj) {
+        const newObj = {};
+
+        for (let key in obj) {
+            if (obj[key]) {
+                newObj[key] = obj[key];
+            }
+        }
+
+        return newObj;
+    }
 }

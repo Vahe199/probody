@@ -80,6 +80,8 @@ router.post('/worker', async (req, res) => {
                 if (req.body.filters[filterName].length) {
                     if (filterName === 'kind') {
                         req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
+                    } else if(filterName === 'price') {
+                        req.body.query += ` @avgcost:[${req.body.filters[filterName].from || 0} ${req.body.filters[filterName].to || 999999}]`
                     } else {
                         req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
                     }
