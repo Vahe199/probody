@@ -21,27 +21,29 @@ export default class ProgramCard extends React.Component {
         const {theme, t} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(css.root)}>
-                <div className={css.label}>{this.props.title}</div>
-                <div className={cnb(css.value)}>
-                    <Icon style={{
-                        marginLeft: -2,
-                        width: 18,
-                        height: 18,
-                        marginRight: 2
-                    }} name={'clock'}/>
-                    {this.props.duration} {t('minutesShort')}
-                </div>
-                <div className={cnb(css.value, 'flex', 'justify-between')}>
-                    <div>
-                        <Icon name={'kzt'}/>
-                        {formatPrice(this.props.price)}
+            <Link href={this.props.link}>
+                <div className={cnb(css.root)}>
+                    <div className={css.label}>{this.props.title}</div>
+                    <div className={cnb(css.value)}>
+                        <Icon style={{
+                            marginLeft: -2,
+                            width: 18,
+                            height: 18,
+                            marginRight: 2
+                        }} name={'clock'}/>
+                        {this.props.duration} {t('minutesShort')}
                     </div>
-                    <div>
-                        {this.props.link && <Link href={this.props.link}><Icon className={css.arrowRight} name={'arrow_right'}/></Link>}
+                    <div className={cnb(css.value, 'flex', 'justify-between')}>
+                        <div>
+                            <Icon name={'kzt'}/>
+                            {formatPrice(this.props.price)}
+                        </div>
+                        <div>
+                            <Icon className={css.arrowRight} name={'arrow_right'}/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
     }
 }

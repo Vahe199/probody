@@ -23,8 +23,11 @@ import MockProgramCard from "../components/kit/MockProgramCard.jsx";
 import ParameterView from "../components/kit/ParameterView.jsx";
 import ShortMasterCard from "../components/kit/ShortMasterCard";
 import MockShortMasterCard from "../components/kit/MockShortMasterCard";
-import Collapsible from "../components/kit/Collapsible";
 import Checkbox from "../components/kit/Form/Checkbox.jsx";
+import TransparentCollapsible from "../components/kit/TransparentCollapsible";
+import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput";
+import debounce from "../helpers/debounce";
+import Select from "../components/kit/Form/Select.jsx";
 
 class Home extends React.Component {
     constructor(props) {
@@ -33,25 +36,28 @@ class Home extends React.Component {
         this.state = {
             workers: [],
             filters: {},
-            appliedFilters: {
-                leads: [],
-                messengers: [],
-                rooms: [],
-                services: [],
-            },
-            isMapView: false,
             handleRef: React.createRef(),
             filterPopupOpen: false,
             pageCount: 1,
-            foundCnt: 0
+            foundCnt: 0,
+            regions: [],
+            myRegion: '',
+            priceRange: {
+                from: 1000,
+                to: 22000
+            }
         }
 
         this.initPageLoad = this.initPageLoad.bind(this)
         this.handlePageChange = this.handlePageChange.bind(this)
         this.setKind = this.setKind.bind(this)
-        this.performSearch = this.performSearch.bind(this)
+        this.performSearch = debounce(this.performSearch.bind(this), 500)
         this.toggleFilterPopup = this.toggleFilterPopup.bind(this)
         this.getPage = this.getPage.bind(this)
+        this.resetFilters = this.resetFilters.bind(this)
+        this.toggleFilter = this.toggleFilter.bind(this)
+        this.setPriceRange = this.setPriceRange.bind(this)
+        this.setRegion = this.setRegion.bind(this)
     }
 
     async initPageLoad() {
@@ -68,6 +74,47 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.initPageLoad()
+
+        if (this.context.isMobile) {
+            APIRequests.getRegions().then(regions => {
+                regions.unshift({
+                    name: this.context.t('entireKZ'),
+                })
+
+                this.setState({
+                    regions: regions.map(r => ({_id: r.name, name: r.name}))
+                })
+
+                if (window.ymaps.geolocation) {
+                    window.ymaps.geolocation.get({
+                        provider: 'yandex'
+                    }).then(result => {
+                        const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
+
+                        APIRequests.getNearestCity(ipCoords).then(async city => {
+                            const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
+                            const newQuery = {}
+
+                            if (!this.props.router.query['region']) {
+                                newQuery['region'] = geo
+                            }
+
+                            this.props.router.push({
+                                query: Object.assign({}, this.props.router.query, newQuery)
+                            })
+
+                            this.setState({
+                                myRegion: city
+                            })
+                        })
+                    });
+                } else {
+                    this.setState({
+                        myRegion: this.context.t('entireKZ')
+                    })
+                }
+            })
+        }
     }
 
     toggleFilterPopup() {
@@ -82,6 +129,14 @@ class Home extends React.Component {
 
             this.initPageLoad()
         }
+
+        if (!this.props.router.query.region && this.state.myRegion) {
+            this.props.router.push({
+                query: Object.assign({}, this.props.router.query, {
+                    region: this.state.myRegion,
+                })
+            })
+        }
     }
 
     getPage() {
@@ -91,7 +146,14 @@ class Home extends React.Component {
     performSearch() {
         APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
             kind: this.props.router.query.kind || 'all',
-            region: this.props.router.query.region
+            region: this.props.router.query.region,
+            rooms: this.props.router.query['filters[rooms]']?.split(',').map(i => this.state.filters.rooms.find(room => room._id === i)?.name).join(' '),
+            messengers: this.props.router.query['filters[messengers]']?.split(',').map(i => this.state.filters.messengers.find(messenger => messenger._id === i)?.name).join(' '),
+            services: this.props.router.query['filters[services]']?.split(',').map(i => this.state.filters.services.find(service => service._id === i)?.name).join(' '),
+            leads: this.props.router.query['filters[leads]']?.split(',').map(i => this.state.filters.leads.find(lead => lead._id === i)?.name).join(' '),
+
+            priceFrom: this.props.router.query.priceFrom,
+            priceTo: this.props.router.query.priceTo
         }).then(workers => {
             if (!workers.results) {
                 return
@@ -121,6 +183,38 @@ class Home extends React.Component {
         }
     }
 
+    resetFilters() {
+        const query = Object.assign({}, this.props.router.query)
+
+        delete query["filters[leads]"]
+        delete query["filters[rooms]"]
+        delete query["filters[messengers]"]
+        delete query["filters[services]"]
+
+        this.props.router.push({
+            query
+        })
+    }
+
+    toggleFilter(scope, name) {
+        const query = Object.assign({}, this.props.router.query),
+            selectedFilter = query["filters[" + scope + "]"]
+
+        if (selectedFilter) {
+            if (selectedFilter.split(',').includes(name)) {
+                query["filters[" + scope + "]"] = selectedFilter.split(',').filter(filter => filter !== name).join(',')
+            } else {
+                query["filters[" + scope + "]"] = selectedFilter + ',' + name
+            }
+        } else {
+            query["filters[" + scope + "]"] = name
+        }
+
+        this.props.router.push({
+            query
+        })
+    }
+
     setKind(kind) {
         this.props.router.push({
             query: Object.assign({}, this.props.router.query, {
@@ -129,11 +223,42 @@ class Home extends React.Component {
         })
     }
 
+    setPriceRange(from, to) {
+        if (from && from > this.props.router.query.priceTo) {
+            to = from
+        } else if (to && to < this.props.router.query.priceFrom) {
+            from = to
+        }
+
+        const priceRange = {}
+
+        if (from) {
+            priceRange.priceFrom = from
+        }
+
+        if (to) {
+            priceRange.priceTo = to
+        }
+
+        this.props.router.push({
+            query: Object.assign({}, this.props.router.query, priceRange)
+        })
+    }
+
+    setRegion(region) {
+        this.props.router.push({
+            // pathname: '/',
+            query: Object.assign({}, this.props.router.query, {
+                region,
+            })
+        })
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
-        const inputId = 'search-input-' + Numbers.random(0, 99999)
-
-        const themeAccent = theme === 'dark' ? 'light' : 'dark'
+        const inputId = 'search-input-' + Numbers.random(0, 99999),
+            selectId = 'select-' + Numbers.random(0, 99999),
+            themeAccent = theme === 'dark' ? 'light' : 'dark'
 
         return (
             <div className={css['theme--' + theme]}>
@@ -170,10 +295,12 @@ class Home extends React.Component {
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
                             <div className={css.switchRoot}>
-                                <div className={!this.state.isMapView ? css.active : ''}
-                                     onClick={() => this.setState({isMapView: false})}>{t('list')}</div>
-                                <div className={this.state.isMapView ? css.active : ''}
-                                     onClick={() => this.setState({isMapView: true})}>{t('map')}</div>
+                                <div
+                                    className={(!this.props.router.query.map || 'false' === this.props.router.query.map) ? css.active : ''}
+                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{t('list')}</div>
+                                <div
+                                    className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
+                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{t('map')}</div>
                             </div>
 
                             <div ref={this.state.handleRef}>
@@ -195,10 +322,10 @@ class Home extends React.Component {
                                    }}
                                    onClose={() => this.setState({filterPopupOpen: false})}
                                    isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
-                                <div bp={'grid 12 4@md'}>
+                                <div bp={'grid 12 4@md'} className={css.filterContainer}>
                                     <div bp={'hide@md'} className={cnb(css.modalHead, css.mobile)}>
-                                        {(isMobile && this.state.step > 0) ?
-                                            <div style={{marginRight: -24}}>{t('discard')}</div> : <div>&nbsp;</div>}
+                                        <div className={css.resetBtn} style={{marginRight: -24}}
+                                             onClick={this.resetFilters}>{t('discard')}</div>
 
                                         <h2>{t('filter')}</h2>
 
@@ -206,47 +333,125 @@ class Home extends React.Component {
                                     </div>
 
                                     <div>
-                                        regionmobile
+                                        {isMobile && <div className={css.padded}>
+                                            <div className={cnb(css.inputGroup, 'flex')} style={{width: '100%'}}
+                                                 onClick={() => window.document.getElementById(selectId).click()}>
+                                                <Icon name={'geo'}/>
+                                                {this.state.regions.length &&
+                                                    <Select className={css.customSelect} style={{width: '100%'}}
+                                                            label={''} fill
+                                                            options={this.state.regions} id={selectId}
+                                                            placeholder={t('selectRegion')}
+                                                            value={this.props.router.query.region}
+                                                            onUpdate={val => this.setRegion(val)}/>}
+                                                <div onClick={() => this.setRegion(t('entireKZ'))}><Icon
+                                                    name={'close'}/></div>
+                                            </div></div>}
 
-                                        <Collapsible title={t('services')}>
-                                            {this.state.filters.services?.map(service =>
-                                                <Checkbox key={service._id} name={service.name} icon={service.icon} value={this.state.appliedFilters.services.includes(service.name)} onUpdate={() => this.toggleFilter('services', service.name)} />
-                                            )}
-                                        </Collapsible>
+                                        <div bp={'hide@md'}>
+                                            <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
+                                                                    lock={!isMobile}>
+                                                <MultipleRangeInput step={50}
+                                                                    from={this.props.router.query.priceFrom || this.state.priceRange.from}
+                                                                    to={this.props.router.query.priceTo || this.state.priceRange.to}
+                                                                    min={this.state.priceRange.from}
+                                                                    max={this.state.priceRange.to}
+                                                                    onUpdate={this.setPriceRange}/>
+                                            </TransparentCollapsible>
+                                        </div>
+
+                                        <TransparentCollapsible title={t('services')} defaultOpen={true}
+                                                                lock={!isMobile}>
+                                            <div className={css.collapseBody}>
+                                                {this.state.filters.leads?.map(lead =>
+                                                    <Checkbox style={{marginBottom: 8}} key={lead._id} name={lead.name}
+                                                              icon={lead.icon}
+                                                              value={this.props.router.query['filters[leads]']?.includes(lead._id) || false}
+                                                              onUpdate={() => this.toggleFilter('leads', lead._id)}/>
+                                                )}
+                                                {this.state.filters.services?.map(service =>
+                                                    <Checkbox style={{marginBottom: 8}} key={service._id}
+                                                              name={service.name} icon={service.icon}
+                                                              value={this.props.router.query['filters[services]']?.includes(service._id) || false}
+                                                              onUpdate={() => this.toggleFilter('services', service._id)}/>
+                                                )}
+                                            </div>
+                                        </TransparentCollapsible>
                                     </div>
                                     <div>
-                                        messengers
+                                        <TransparentCollapsible title={t('messengers')} defaultOpen={!isMobile}
+                                                                lock={!isMobile}>
+                                            <div className={css.collapseBody}>
+                                                {this.state.filters.messengers?.map(messenger =>
+                                                    <Checkbox style={{marginBottom: 8}} key={messenger._id}
+                                                              name={messenger.name} icon={messenger.icon}
+                                                              value={this.props.router.query['filters[messengers]']?.includes(messenger._id) || false}
+                                                              onUpdate={() => this.toggleFilter('messengers', messenger._id)}/>
+                                                )}
+                                            </div>
+                                        </TransparentCollapsible>
 
-                                        rooms
+                                        <TransparentCollapsible title={t('roomCnt')} defaultOpen={!isMobile}
+                                                                lock={!isMobile}>
+                                            <div className={css.collapseBody}>
+                                                {this.state.filters.rooms?.map(room =>
+                                                    <Checkbox style={{marginBottom: 8}} key={room._id} name={room.name}
+                                                              value={this.props.router.query['filters[rooms]']?.includes(room._id) || false}
+                                                              onUpdate={() => this.toggleFilter('rooms', room._id)}/>
+                                                )}
+                                            </div>
+                                        </TransparentCollapsible>
                                     </div>
-                                    <div>
-                                        {!isMobile && <div>price range</div>}
+                                    <div bp={'hide show@md'} className={css.verticalBetween}>
+                                        <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
+                                                                lock={!isMobile}>
+                                            <MultipleRangeInput step={50}
+                                                                from={this.props.router.query.priceFrom || this.state.priceRange.from}
+                                                                to={this.props.router.query.priceTo || this.state.priceRange.to}
+                                                                min={this.state.priceRange.from}
+                                                                max={this.state.priceRange.to}
+                                                                onUpdate={this.setPriceRange}/>
+                                        </TransparentCollapsible>
 
                                         <div className={css.fullSizeBtn}>
-                                            <Button>{t('seeNVariants', this.state.foundCnt)}</Button></div>
+                                            <Button style={{marginBottom: 8}}
+                                                    onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
+
+                                            <span className={css.resetBtn}
+                                                  onClick={this.resetFilters}>{t('discard')}</span>
+                                        </div>
                                     </div>
+
+                                    {isMobile && <div className={css.bottomSection}>
+                                        <div className={css.fullSizeBtn}>
+                                            <Button style={{marginBottom: 8}}
+                                                    onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
+                                        </div>
+                                    </div>}
                                 </div>
                             </Popup>
                         </div>
                     </div>
 
-                    <div bp={'12 hide@md'} className={'responsive-content'}>
-                        <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
-                            <Icon name={'search'}/>
-                            <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
-                                             onKeyUp={this.handleKeyUp}
-                                             onChange={e => this.props.router.push({
-                                                 query: Object.assign({}, this.props.router.query, {
-                                                     search: e.target.value,
-                                                     page: 1
-                                                 })
-                                             })}
-                                             placeholder={t('ssm')}/>
-                            <div onClick={this.clearQuery}><Icon name={'close'}/></div>
-                        </label>
-                    </div>
+                    {(!this.props.router.query.map || 'false' === this.props.router.query.map) &&
+                        <div bp={'12 hide@md'} className={'responsive-content'}>
+                            <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
+                                <Icon name={'search'}/>
+                                <ControlledInput id={inputId} bp={'fill'} type="text"
+                                                 value={this.props.router.query.search}
+                                                 onKeyUp={this.handleKeyUp}
+                                                 onChange={e => this.props.router.push({
+                                                     query: Object.assign({}, this.props.router.query, {
+                                                         search: e.target.value,
+                                                         page: 1
+                                                     })
+                                                 })}
+                                                 placeholder={t('ssm')}/>
+                                <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                            </label>
+                        </div>}
 
-                    {this.state.isMapView ? <div>
+                    {(this.props.router.query.map && 'true' === this.props.router.query.map) ? <div>
                         отображение результатов на карте
                     </div> : this.state.workers.map((worker, index) => {
                         worker.url = '/salon/' + worker.slug

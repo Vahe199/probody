@@ -28,12 +28,15 @@ router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
         messengers: await Messenger.find({}),
         rooms: [
             {
-                name: '2-5'
+                _id: 'under5',
+                name: '1-5'
             },
             {
+                _id: '5to10',
                 name: '5-10'
             },
             {
+                _id: 'morethan10',
                 name: '10+'
             }
         ]

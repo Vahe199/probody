@@ -2,6 +2,8 @@
 @import "articlecard.module";
 @import "kit/socialblock.module";
 @import "kit/modal-content.module";
+@import "menu.module";
+@import "kit/forms/hybrid-search-input.module";
 
 .kindSelector {
   padding: 12px 12px 4px 16px;
@@ -19,6 +21,47 @@
     background-color: t('bg-secondlayer');
     color: t('text-secondlayer');
   }
+}
+
+.filterContainer {
+  max-height: 375px;
+  position: relative;
+
+  &>div {
+    min-width: 250px;
+  }
+}
+
+.collapseBody span {
+  @include themify() {
+    color: t('text-caption');
+  }
+}
+
+@media (max-width: 480px) {
+  .filterContainer {
+    grid-gap: 0;
+  }
+}
+
+@media (min-width: 480px) {
+  .verticalBetween {
+    display: flex !important;
+  }
+}
+
+.verticalBetween {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.resetBtn {
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .stretchContainer {

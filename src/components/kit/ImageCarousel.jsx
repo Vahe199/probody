@@ -37,16 +37,11 @@ class ImageCarousel extends React.Component {
             <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
                 <div ref={this.state.slider} className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>
-                        <div onClick={() => {
-                            if (this.props.link) {
-                                this.props.router.push(this.props.link)
-                            }
-                        }} className={css.slide} style={{
+                        <div className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -height,
                             height,
-                            marginLeft: index * 100 + '%',
-                            cursor: this.props.link ? 'pointer' : 'default'
+                            marginLeft: index * 100 + '%'
                         }} key={index}>
                             &nbsp;
                         </div>

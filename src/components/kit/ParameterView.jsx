@@ -5,12 +5,12 @@ import {GlobalContext} from "../../contexts/Global.js";
 
 class ParameterView extends React.Component {
     static propTypes = {
-        height: PropTypes.number.isRequired,
-        weight: PropTypes.number.isRequired,
+        height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        weight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         hair: PropTypes.string.isRequired,
         eyes: PropTypes.string.isRequired,
-        age: PropTypes.number.isRequired,
-        bust: PropTypes.number.isRequired
+        age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        bust: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
     }
 
     render() {

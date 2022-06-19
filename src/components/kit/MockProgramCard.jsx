@@ -18,20 +18,22 @@ export default class MockProgramCard extends React.Component {
         const {theme, t} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(css.root, css.mock)}>
-                <div className={css.label}>{t('nMore', this.props.cnt)}</div>
-                <div className={cnb(css.value)}>
-                    &nbsp;
-                </div>
-                <div className={cnb(css.value, 'flex', 'justify-between')}>
-                    <div>
+            <Link href={this.props.link}>
+                <div className={cnb(css.root, css.mock)}>
+                    <div className={css.label}>{t('nMore', this.props.cnt)}</div>
+                    <div className={cnb(css.value)}>
                         &nbsp;
                     </div>
-                    <div>
-                        <Link href={this.props.link}><Icon className={css.plusIcon} name={'plus'}/></Link>
+                    <div className={cnb(css.value, 'flex', 'justify-between')}>
+                        <div>
+                            &nbsp;
+                        </div>
+                        <div>
+                            <Icon className={css.plusIcon} name={'plus'}/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
     }
 }
