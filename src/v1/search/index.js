@@ -95,7 +95,7 @@ router.post('/worker', async (req, res) => {
                                     req.body.query += ` @rooms:[10 20]`
                                     break
                             }
-                        }
+                        })
                     } else {
                         req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
                     }
