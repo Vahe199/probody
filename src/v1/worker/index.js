@@ -174,7 +174,21 @@ router.get('/:slug', async (req, res) => {
 
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),
-            reviews: await Review.find({target: worker._id})
+            reviews: await Review.aggregate([{
+                $match: {
+                    target: worker._id
+                }
+            }, {
+                $group: {
+                    _id: '$target',
+                    avg: {
+                        $avg: '$avg'
+                    },
+                    count: {
+                        $count: {}
+                    }
+                }
+            }])
         })
     } catch (e) {
         res.status(500).json({

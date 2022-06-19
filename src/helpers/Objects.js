@@ -28,4 +28,14 @@ export default class Objects {
 
         return newObj;
     }
+
+    static isFilled(obj) {
+        for (const objKey in obj) {
+            if (obj[objKey]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

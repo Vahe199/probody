@@ -608,7 +608,7 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div style={{marginTop: 8}} bp={'hide@md'}
+                                    {Objects.isFilled(worker.social) &&<div style={{marginTop: 8}} bp={'hide@md'}
                                          className={cnb(css.cardRoot, css.padded)}>
                                         <p className={'subtitle2'}>{t('socialMedia')}</p>
 
@@ -621,7 +621,7 @@ class Home extends React.Component {
                                                 </div>
                                             )}
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
 
                                 <div bp={'12 hide@md'}>
