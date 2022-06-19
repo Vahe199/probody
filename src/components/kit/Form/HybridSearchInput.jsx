@@ -51,34 +51,34 @@ class HybridSearchInput extends React.Component {
                 regions: regions.map(r => ({_id: r.name, name: r.name}))
             })
 
-            if (window.ymaps.geolocation) {
-                window.ymaps.geolocation.get({
-                    provider: 'yandex'
-                }).then(result => {
-                    const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
-
-                    APIRequests.getNearestCity(ipCoords).then(async city => {
-                        const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-                        const newQuery = {}
-
-                        if (!this.props.router.query['region']) {
-                            newQuery['region'] = geo
-                        }
-
-                        this.props.router.push({
-                            query: Object.assign({}, this.props.router.query, newQuery)
-                        })
-
-                        this.setState({
-                            myRegion: city
-                        })
-                    })
-                });
-            } else {
+            // if (window.ymaps.geolocation) {
+            //     window.ymaps.geolocation.get({
+            //         provider: 'yandex'
+            //     }).then(result => {
+            //         const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
+            //
+            //         APIRequests.getNearestCity(ipCoords).then(async city => {
+            //             const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
+            //             const newQuery = {}
+            //
+            //             if (!this.props.router.query['region']) {
+            //                 newQuery['region'] = geo
+            //             }
+            //
+            //             this.props.router.push({
+            //                 query: Object.assign({}, this.props.router.query, newQuery)
+            //             })
+            //
+            //             this.setState({
+            //                 myRegion: city
+            //             })
+            //         })
+            //     });
+            // } else {
                 this.setState({
                     myRegion: this.context.t('entireKZ')
                 })
-            }
+            // }
         })
     }
 

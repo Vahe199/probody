@@ -4,7 +4,6 @@ import TextSection from "./TextSection.jsx";
 import {cnb} from "cnbuilder";
 import css from "../../styles/kit/socialblock.module.scss";
 import {GlobalContext} from "../../contexts/Global.js";
-import Link from "next/link.js";
 
 class SocialBlock extends React.Component {
     static propTypes = {

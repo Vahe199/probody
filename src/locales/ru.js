@@ -242,5 +242,6 @@ export default {
     seeNVariants: 'Cмотреть %s вариантов',
     filter: 'Фильтр',
     discard: 'Сбросить',
-    hourPrice: 'Цена часа массажа'
+    hourPrice: 'Цена часа массажа',
+    salonView: 'Просмотр анкеты',
 }

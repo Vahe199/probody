@@ -80,10 +80,7 @@ router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) =
         }).limit(3)) // TODO: set up projection
     } else {
         res.json(await Worker.find({
-            slaves: {
-                $exists: true,
-                $ne: []
-            }
+            kind: 'salon'
         }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3)) // TODO: set up projection
     }
 })
@@ -108,14 +105,60 @@ router.get('/:slug', async (req, res) => {
             })
         } else {
             return res.json({
-                worker: await Worker
-                    .findOne({slug: req.params.slug})
-                    .populate('services', 'name')
-                    .populate('leads', 'name')
-                    .populate('region', 'name'),
-                slaves: await Worker.find({
-                    parent: worker._id
-                })
+                // worker: await Worker
+                //     .findOne({slug: req.params.slug})
+                //     .populate('services', 'name')
+                //     .populate('leads', 'name')
+                //     .populate('region', 'name'),
+                // slaves: await Worker.find({
+                //     parent: worker._id
+                // })
+                worker: await Worker.aggregate([
+                    {
+                        $match: {
+                            slug: req.params.slug
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'workers',
+                            localField: '_id',
+                            foreignField: 'parent',
+                            as: 'masters'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'regions',
+                            localField: 'region',
+                            foreignField: '_id',
+                            as: 'region'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'services',
+                            localField: 'services',
+                            foreignField: '_id',
+                            as: 'services'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'leads',
+                            localField: 'leads',
+                            foreignField: '_id',
+                            as: 'leads'
+                        }
+                    },
+                    {
+                        $project: {
+                            region: {$arrayElemAt: ['$region', 0]},
+                            services: {$arrayElemAt: ['$services', 0]},
+                            leads: {$arrayElemAt: ['$leads', 0]},
+                        }
+                    },
+                ])
             })
         }
     } catch (e) {

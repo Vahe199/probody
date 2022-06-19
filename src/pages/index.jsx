@@ -75,46 +75,44 @@ class Home extends React.Component {
     componentDidMount() {
         this.initPageLoad()
 
-        if (this.context.isMobile) {
-            APIRequests.getRegions().then(regions => {
-                regions.unshift({
-                    name: this.context.t('entireKZ'),
-                })
-
-                this.setState({
-                    regions: regions.map(r => ({_id: r.name, name: r.name}))
-                })
-
-                if (window.ymaps.geolocation) {
-                    window.ymaps.geolocation.get({
-                        provider: 'yandex'
-                    }).then(result => {
-                        const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
-
-                        APIRequests.getNearestCity(ipCoords).then(async city => {
-                            const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-                            const newQuery = {}
-
-                            if (!this.props.router.query['region']) {
-                                newQuery['region'] = geo
-                            }
-
-                            this.props.router.push({
-                                query: Object.assign({}, this.props.router.query, newQuery)
-                            })
-
-                            this.setState({
-                                myRegion: city
-                            })
-                        })
-                    });
-                } else {
-                    this.setState({
-                        myRegion: this.context.t('entireKZ')
-                    })
-                }
+        APIRequests.getRegions().then(regions => {
+            regions.unshift({
+                name: this.context.t('entireKZ'),
             })
-        }
+
+            this.setState({
+                regions: regions.map(r => ({_id: r.name, name: r.name}))
+            })
+
+            // if (window.ymaps.geolocation) {
+            //     window.ymaps.geolocation.get({
+            //         provider: 'yandex'
+            //     }).then(result => {
+            //         const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
+            //
+            //         APIRequests.getNearestCity(ipCoords).then(async city => {
+            //             const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
+            //             const newQuery = {}
+            //
+            //             if (!this.props.router.query['region']) {
+            //                 newQuery['region'] = geo
+            //             }
+            //
+            //             this.props.router.push({
+            //                 query: Object.assign({}, this.props.router.query, newQuery)
+            //             })
+            //
+            //             this.setState({
+            //                 myRegion: city
+            //             })
+            //         })
+            //     });
+            // } else {
+            this.setState({
+                myRegion: this.context.t('entireKZ')
+            })
+            // }
+        })
     }
 
     toggleFilterPopup() {
@@ -192,6 +190,8 @@ class Home extends React.Component {
         delete query["filters[rooms]"]
         delete query["filters[messengers]"]
         delete query["filters[services]"]
+        delete query["priceFrom"]
+        delete query["priceTo"]
 
         this.props.router.push({
             query
@@ -348,7 +348,8 @@ class Home extends React.Component {
                                                             onUpdate={val => this.setRegion(val)}/>}
                                                 <div onClick={() => this.setRegion(t('entireKZ'))}><Icon
                                                     name={'close'}/></div>
-                                            </div></div>}
+                                            </div>
+                                        </div>}
 
                                         <div bp={'hide@md'}>
                                             <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
