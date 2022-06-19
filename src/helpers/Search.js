@@ -3,7 +3,6 @@ import Review from "../models/Review.model.js"
 import RedisHelper from "./RedisHelper.js"
 import {parsePhoneNumber} from "libphonenumber-js";
 import mongoose from "mongoose";
-import Objects from "./Objects.js";
 
 const BATCHSIZE = 100;
 
