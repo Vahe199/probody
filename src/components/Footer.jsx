@@ -135,7 +135,7 @@ export default class Footer extends React.Component {
                 <div style={{marginTop: 12}} bp={'grid'}>
                     <div bp={'hide@md 12'}>
                         <span className={css.caption}>{t('whatsapp')}</span>
-                        <a target="_blank" href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762) 987-87-91</h1></a>
+                        <a href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762) 987-87-91</h1></a>
                     </div>
                     <div bp={'4@md 12'}>
                         <span className={css.caption}>{t('mail')}</span>

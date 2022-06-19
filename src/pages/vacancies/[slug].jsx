@@ -100,7 +100,7 @@ class VacancyViewPage extends React.Component {
                                 <h2>{this.state.vacancy.title}</h2>
                             </div>
                             : <div className={cnb(css.contactContainer, css.mobile)}>
-                                <a target="_blank" href={'tel:' + this.state.vacancy.phone}><Button iconLeft={'call'}>
+                                <a href={'tel:' + this.state.vacancy.phone}><Button iconLeft={'call'}>
                                     {t('call')}
                                 </Button></a>
                                 <a target="_blank"

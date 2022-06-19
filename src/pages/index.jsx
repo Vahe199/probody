@@ -58,6 +58,7 @@ class Home extends React.Component {
         this.toggleFilter = this.toggleFilter.bind(this)
         this.setPriceRange = this.setPriceRange.bind(this)
         this.setRegion = this.setRegion.bind(this)
+        this.getAppliedFilterCnt = this.getAppliedFilterCnt.bind(this)
     }
 
     async initPageLoad() {
@@ -256,6 +257,19 @@ class Home extends React.Component {
         })
     }
 
+    getAppliedFilterCnt() {
+        const query = this.props.router.query
+        let cnt = 0
+
+        if (query.priceFrom?.length || query.priceTo?.length) {
+            cnt++
+        }
+
+        cnt += Object.keys(query).filter(filterName => filterName.startsWith('filters[') && query[filterName].length).length
+
+        return cnt
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
         const inputId = 'search-input-' + Numbers.random(0, 99999),
@@ -308,7 +322,8 @@ class Home extends React.Component {
                             <div ref={this.state.handleRef}>
                                 <Button className={css.filterButton} color={'secondary'}
                                         onClick={this.toggleFilterPopup}>
-                                    <span className={css.cnt}>0</span>
+                                    <span
+                                        className={css.cnt}>{Number(Boolean(this.props.router.query.priceFrom?.length || this.props.router.query.priceTo?.length)) + Object.keys(this.props.router.query).filter(filterName => filterName.startsWith('filters[') && this.props.router.query[filterName].length).length}</span>
                                     <Icon name={'filter'}/>
                                 </Button>
                             </div>
@@ -475,15 +490,16 @@ class Home extends React.Component {
                                             <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
                                             </Link>
                                         </div> : <div className={css.padded}>
-                                            <p style={{marginBottom: 12}}
-                                               className={css.ellipsis}>{worker.description}</p>
+                                            <p className="subtitle2" style={{marginBottom: 12}}>
+                                                {t('description')}
+                                            </p>
+                                            <p className={cnb(css.ellipsis, css.helperText)}>{worker.description}</p>
 
                                             <div className={css.stretchContainer}>
                                                 <Link href={worker.url}>
                                                     <Button>{t('detail')}</Button>
                                                 </Link>
-                                                <div><a target="_blank"
-                                                        href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                <div><a href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                     <Button><Icon name={'call'}/></Button>
                                                 </a></div>
                                                 <div><a target="_blank"
@@ -608,8 +624,8 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
-                                    {Objects.isFilled(worker.social) &&<div style={{marginTop: 8}} bp={'hide@md'}
-                                         className={cnb(css.cardRoot, css.padded)}>
+                                    {Objects.isFilled(worker.social) && <div style={{marginTop: 8}} bp={'hide@md'}
+                                                                             className={cnb(css.cardRoot, css.padded)}>
                                         <p className={'subtitle2'}>{t('socialMedia')}</p>
 
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
@@ -632,8 +648,7 @@ class Home extends React.Component {
                                             <Link href={worker.url}>
                                                 <Button>{t('detail')}</Button>
                                             </Link>
-                                            <div><a target="_blank"
-                                                    href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                            <div><a href={'tel:' + parsePhoneNumber(worker.phone).number}>
                                                 <Button><Icon name={'call'}/></Button>
                                             </a></div>
                                             <div><a target="_blank"

@@ -244,6 +244,15 @@
   }
 }
 
+.helperText {
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  line-height: 24px;
+  margin-bottom: 24px;
+}
+
 .filterButton {
   padding: 20px 22px;
   min-width: 120px;

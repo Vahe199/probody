@@ -52,6 +52,28 @@
   }
 }
 
+.stretchContainer {
+  display: flex;
+  gap: 4px;
+
+  & > div {
+    flex-grow: 1;
+
+    button {
+      width: 100%;
+      padding: 12px 0;
+    }
+
+    i {
+      margin-right: 4px;
+    }
+  }
+}
+
+.fullSizeBtn>div, .fullSizeBtn>div>button {
+  width: 100%;
+}
+
 .linkUnderline {
   cursor: pointer;
   font-family: Lack, sans-serif;

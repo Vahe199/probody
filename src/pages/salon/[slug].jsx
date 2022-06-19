@@ -11,6 +11,7 @@ import Icon from "../../components/kit/Icon.jsx";
 import Link from "next/link.js";
 import {withRouter} from "next/router.js";
 import Button from "../../components/kit/Button.jsx";
+import {parsePhoneNumber} from "libphonenumber-js";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -45,6 +46,7 @@ class SalonView extends React.Component {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
             this.setState({
                 salon: res.worker[0],
+                reviews: res.reviews[0]
             })
         })
     }
@@ -100,9 +102,9 @@ class SalonView extends React.Component {
 
                                 <div bp={'5'} style={{paddingTop: 8}}
                                      className="flex justify-end gap-12">
-                                    {this.state.salon.reviews ? <div className={css.avgRating}>
+                                    {this.state.reviews ? <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.salon.reviews?.avg || '–'}</span>
+                                        <span>{this.state.reviews.avg || '–'}</span>
                                     </div> : <div>&nbsp;</div>}
 
                                     <Button size={'small'}>{t('onTheMap')}</Button>
@@ -122,20 +124,20 @@ class SalonView extends React.Component {
                                     <div>{this.state.salon.region?.name}</div>
                                 </div>
 
-                                {this.state.salon.reviews && <div>
+                                {this.state.reviews && <div>
                                     <div>{t('reviews').toLowerCase()}</div>
                                     <Link href={'rr'}>
                                         <div
-                                            className={css.linkUnderline}>{this.state.salon.reviews.count || 0} отзывов
+                                            className={css.linkUnderline}>{this.state.reviews.count || 0} отзывов
                                         </div>
                                     </Link>
                                 </div>}
 
-                                {this.state.salon.reviews && <div bp={'hide@md'}>
-                                    {this.state.salon.reviews ? <div className={css.avgRating}>
+                                {this.state.reviews && <div bp={'hide@md'}>
+                                    <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.salon.reviews.avg}</span>
-                                    </div> : <div>&nbsp;</div>}
+                                        <span>{this.state.reviews.avg}</span>
+                                    </div>
 
                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                     </div>
@@ -160,6 +162,26 @@ class SalonView extends React.Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div bp={'hide show@md 5'} className={cnb(css.padded, css.cardRoot)}>
+                    <p style={{marginBottom: 12}}
+                       className={css.ellipsis}>{this.state.salon.description}</p>
+
+                    {this.state.salon.phone && <div className={css.stretchContainer}>
+                        <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                            <Button>
+                                <Icon name={'call'}/>
+                                {t('call')}
+                            </Button>
+                        </a></div>
+                        <div><a target="_blank"
+                                href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
+                            <Button color={'tertiary'}>
+                                <Icon name={'wa_light'}/>
+                                {t('sendMessage')}
+                            </Button>
+                        </a></div>
+                    </div>}
                 </div>
             </div>
         </div>

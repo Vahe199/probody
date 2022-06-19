@@ -159,7 +159,7 @@ class BlogPage extends React.Component {
                                             </div>
                                             : <div className={css.contactContainer}>
                                                 <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
-                                                <a target="_blank" href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
+                                                <a href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
                                                     {t('call')}
                                                 </Button></a>
                                             </div>}
@@ -191,7 +191,7 @@ class BlogPage extends React.Component {
 
                                     {isMobile && <div className={cnb(css.contactContainer, css.mobile)}>
                                         <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
-                                        <a target="_blank" href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
+                                        <a href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
                                             {t('call')}
                                         </Button></a>
                                     </div>}
