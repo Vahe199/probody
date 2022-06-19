@@ -19,8 +19,7 @@ class SalonView extends React.Component {
         this.state = {
             salon: {
                 photos: []
-            },
-            slaves: []
+            }
         }
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
@@ -46,7 +45,6 @@ class SalonView extends React.Component {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
             this.setState({
                 salon: res.worker,
-                slaves: res.slaves
             })
         })
     }
@@ -120,7 +118,7 @@ class SalonView extends React.Component {
 
                                     <div>
                                         <div>{t('city').toLowerCase()}</div>
-                                        <div>{this.state.salon.region[0].name}</div>
+                                        <div>{this.state.salon.region?.name}</div>
                                     </div>
 
                                     {this.state.salon.reviews && <div>
@@ -147,7 +145,7 @@ class SalonView extends React.Component {
                                     <div className={'flex align-end justify-end fit'}
                                          style={{paddingBottom: 16, paddingRight: 16}}>
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
-                                            {Object.keys(this.state.salon.social).filter(i => this.state.salon.social[i].length).map(name =>
+                                            {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
                                                 <div key={name}>
                                                     <a target="_blank" href={this.state.salon.social[name]}>
                                                         <img

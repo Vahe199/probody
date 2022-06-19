@@ -95,72 +95,84 @@ router.get('/:slug', async (req, res) => {
             })
         }
 
-        if (worker.kind === 'master') {
-            return res.json({
-                worker: await Worker
-                    .findOne({slug: req.params.slug})
-                    .populate('services', 'name')
-                    .populate('leads', 'name')
-                    .populate('region', 'name')
-            })
-        } else {
-            return res.json({
-                // worker: await Worker
-                //     .findOne({slug: req.params.slug})
-                //     .populate('services', 'name')
-                //     .populate('leads', 'name')
-                //     .populate('region', 'name'),
-                // slaves: await Worker.find({
-                //     parent: worker._id
-                // })
-                worker: await Worker.aggregate([
-                    {
-                        $match: {
-                            slug: req.params.slug
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'workers',
-                            localField: '_id',
-                            foreignField: 'parent',
-                            as: 'masters'
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'regions',
-                            localField: 'region',
-                            foreignField: '_id',
-                            as: 'region'
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'services',
-                            localField: 'services',
-                            foreignField: '_id',
-                            as: 'services'
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'leads',
-                            localField: 'leads',
-                            foreignField: '_id',
-                            as: 'leads'
-                        }
-                    },
-                    {
-                        $project: {
-                            region: {$arrayElemAt: ['$region', 0]},
-                            services: {$arrayElemAt: ['$services', 0]},
-                            leads: {$arrayElemAt: ['$leads', 0]},
-                        }
-                    },
-                ])
-            })
-        }
+        const aggregationPipeline = [
+            {
+                $match: {
+                    slug: req.params.slug
+                }
+            },
+            {
+                $lookup: {
+                    from: 'workers',
+                    localField: '_id',
+                    foreignField: 'parent',
+                    as: 'masters'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'regions',
+                    localField: 'region',
+                    foreignField: '_id',
+                    as: 'region'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'services',
+                    localField: 'services',
+                    foreignField: '_id',
+                    as: 'services'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'leads',
+                    localField: 'leads',
+                    foreignField: '_id',
+                    as: 'leads'
+                }
+            }
+        ]
+
+        // if (worker.kind === 'master') {
+        //     aggregationPipeline.push({
+        //             $project: {
+        //                 region: {$arrayElemAt: ['$region', 0]},
+        //                 services: {$arrayElemAt: ['$services', 0]},
+        //                 leads: {$arrayElemAt: ['$leads', 0]},
+        //             }
+        //         })
+        // } else {
+        aggregationPipeline.push({
+            $project: {
+                region: {$arrayElemAt: ['$region', 0]},
+                services: {$arrayElemAt: ['$services', 0]},
+                leads: {$arrayElemAt: ['$leads', 0]},
+
+                kind: 1,
+                location: 1,
+                characteristics: 1,
+                name: 1,
+                slug: 1,
+                workHours: 1,
+                workDays: 1,
+                isVerified: 1,
+                photos: 1,
+                messengers: 1,
+                address: 1,
+                social: 1,
+                programs: 1,
+                description: 1,
+                phone: 1,
+            }
+        })
+        // }
+
+        return res.json({
+            worker: await Worker.aggregate(aggregationPipeline),
+            reviews: await Review.find({target: worker._id})
+        })
     } catch (e) {
         res.status(500).json({
             message: "Internal Server Error"
