@@ -102,6 +102,9 @@ router.get('/:slug', async (req, res) => {
                 }
             },
             {
+                $limit: 1
+            },
+            {
                 $lookup: {
                     from: 'workers',
                     localField: '_id',
