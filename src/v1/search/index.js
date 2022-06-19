@@ -86,13 +86,13 @@ router.post('/worker', async (req, res) => {
                         switch (req.body.filters[filterName]) {
                             case 'under5':
                                 req.body.query += ` @rooms:[0 5]`
-break
+                                break
                             case '5to10':
                                 req.body.query += ` @rooms:[5 10]`
-break
+                                break
                             case 'morethan10':
                                 req.body.query += ` @rooms:[10 20]`
-break
+                                break
                         }
                     } else {
                         req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
