@@ -77,7 +77,7 @@ router.post('/worker', async (req, res) => {
 
         if (req.body.filters) {
             for (let filterName in req.body.filters) {
-                if (req.body.filters[filterName].length) {
+                if (typeof req.body.filters[filterName] === 'object' || req.body.filters[filterName].length) {
                     if (filterName === 'kind') {
                         req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
                     } else if (filterName === 'price') {
