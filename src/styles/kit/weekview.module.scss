@@ -1,7 +1,6 @@
 @import '../themes';
 
 .root {
-  background: #f7f7f7;
   justify-content: space-between;
   align-items: flex-end;
 }
@@ -28,7 +27,7 @@
 
 .enabled {
   @include themify() {
-    color: t('text-primary');
+    color: t('text-main');
   }
 }
 
@@ -38,21 +37,27 @@
 
 .today {
   @include themify() {
-    background: t('text-primary');
+    background: t('bg-accent');
   }
 
   border-radius: 14px;
   padding: 0 2px;
 
   span {
-    color: #E4E4E4;
+    @include themify() {
+      color: t('text-accent');
+    }
+
     padding: 8px 0 4px 0;
   }
 
   div {
-    background: #f7f7f7;
+    @include themify() {
+      background: t('bg-secondlayer');
+    }
+
     border-radius: 12px;
     margin: 2px 0;
-    padding: 0 10px;
+    padding: 4px 10px;
   }
 }
