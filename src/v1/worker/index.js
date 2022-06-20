@@ -96,8 +96,7 @@ router.get('/:slug/suggestions', async (req, res) => {
             })
         }
 
-        console.log(worker)
-        if (worker.parent.length) {
+        if (worker.parent) {
             return res.json([])
         }
 
