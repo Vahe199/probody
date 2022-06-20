@@ -327,9 +327,9 @@ class SalonView extends React.Component {
                             title: t('photo'),
                             cnt: this.state.salon.photos.length
                         },
-                        masters: this.state.kind === 'salon' && {
+                        masters: this.state.salon.kind === 'salon' && {
                             title: t('masseuses'),
-                            cnt: this.state.salon.masters.length
+                            cnt: this.state.salon.masters?.length
                         },
                         cost: {
                             title: t('serviceCost'),

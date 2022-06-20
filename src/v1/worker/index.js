@@ -203,6 +203,7 @@ router.get('/:slug', async (req, res) => {
                     programs: 1,
                     description: 1,
                     phone: 1,
+                    masters: 1,
                     avgCost: 1,
                     rooms: 1
                 }
