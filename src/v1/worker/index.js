@@ -109,13 +109,11 @@ router.get('/:slug/suggestions', async (req, res) => {
                 }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
                 top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
 
-            console.log('worker', top3Ids, top3Workers)
-
             return res.json(top3Workers)
         } else {
             return res.json(await Worker.find({
                 kind: 'salon'
-            }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).projection('name photos'))
+            }, 'name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3)
         }
     } catch (e) {
         console.log(e)
