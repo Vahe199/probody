@@ -113,7 +113,7 @@ router.get('/:slug/suggestions', async (req, res) => {
         } else {
             return res.json(await Worker.find({
                 kind: 'salon'
-            }, 'name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3)
+            }, 'name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
         }
     } catch (e) {
         console.log(e)
