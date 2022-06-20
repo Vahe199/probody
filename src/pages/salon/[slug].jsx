@@ -16,6 +16,7 @@ import TextSection from "../../components/kit/TextSection.jsx";
 import WeekView from "../../components/kit/WeekView";
 import Dates from "../../helpers/Dates.js";
 import Tag from "../../components/kit/Tag";
+import TagCard from "../../components/kit/TagCard";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -92,6 +93,32 @@ class SalonView extends React.Component {
                             <h1 className={'cursor-pointer'}>{this.state.salon.name}</h1>
                         </div>}
                     </div>
+
+                    {!isMobile && <div style={{marginTop: 8}} className={cnb(css.padded, css.cardRoot)}>
+                        {this.state.salon.description &&
+                            <div className={css.textSectionDecorator}>
+                                <TextSection style={{padding: 0}} lines={5}>
+                                    {this.state.salon.description}
+                                </TextSection>
+                            </div>
+                        }
+
+                        {this.state.salon.phone && <div className={css.stretchContainer}>
+                            <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                                <Button>
+                                    <Icon name={'call'}/>
+                                    {t('call')}
+                                </Button>
+                            </a></div>
+                            <div><a target="_blank"
+                                    href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
+                                <Button color={'tertiary'}>
+                                    <Icon name={'wa_light'}/>
+                                    {t('sendMessage')}
+                                </Button>
+                            </a></div>
+                        </div>}
+                    </div>}
                 </div>
 
                 <div bp={'12 7@md'}>
@@ -188,45 +215,29 @@ class SalonView extends React.Component {
                         </div>
                     </div>}
 
-                    <div style={{marginTop: 8}} className={cnb(css.padded)}>
-                        {this.state.salon.services &&
-                            <div>
-                                <p className="subtitle2">{t(this.state.salon.kind + 'ServiceAndServices')}</p>
+                    <div bp={'grid'} style={{marginTop: 8}}>
+                        <div bp={'12 8@md'} className={cnb(css.padded)}>
+                            {this.state.salon.services &&
+                                <div>
+                                    <p className="subtitle2" style={{marginBottom: 16}}>{t(this.state.salon.kind + 'ServiceAndServices')}</p>
 
-                                <div className="flex wrap" style={{gap: 4}}>
-                                    {this.state.salon.services.map((service, i) =>
-                                        <Tag key={i} icon={service.icon} label={service.name} />
+                                    <div className="flex wrap" style={{gap: 4}}>
+                                        {this.state.salon.leads.map((lead, i) =>
+                                            <Tag key={i} icon={lead.icon} label={lead.name} />
                                         )}
+                                        {this.state.salon.services.map((service, i) =>
+                                            <Tag key={i} icon={service.icon} label={service.name} />
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div bp={'hide show@md 5'} className={cnb(css.padded, css.cardRoot)}>
-                    {this.state.salon.description &&
-                        <div className={css.textSectionDecorator}>
-                            <TextSection style={{padding: 0}} lines={5}>
-                                {this.state.salon.description}
-                            </TextSection>
+                            }
                         </div>
-                    }
 
-                    {this.state.salon.phone && <div className={css.stretchContainer}>
-                        <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
-                            <Button>
-                                <Icon name={'call'}/>
-                                {t('call')}
-                            </Button>
-                        </a></div>
-                        <div><a target="_blank"
-                                href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
-                            <Button color={'tertiary'}>
-                                <Icon name={'wa_light'}/>
-                                {t('sendMessage')}
-                            </Button>
-                        </a></div>
-                    </div>}
+                        <div bp={'12 4@md'}>
+                            <TagCard title={t('avgCostLong')} value={this.state.salon.avgCost} dark={true} link={'fff'} />
+                            <TagCard title={t('roomCount')} value={this.state.salon.rooms} dark={true} link={'fff'} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

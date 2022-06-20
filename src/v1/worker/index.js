@@ -158,6 +158,8 @@ router.get('/:slug', async (req, res) => {
                     programs: 1,
                     description: 1,
                     phone: 1,
+                    avgCost: 1,
+                    rooms: 1
                 }
             }]
 
@@ -168,17 +170,23 @@ router.get('/:slug', async (req, res) => {
                 $match: {
                     target: worker._id
                 }
-            }, {
-                $group: {
-                    _id: '$target',
-                    avg: {
-                        $avg: '$avg'
-                    },
-                    count: {
-                        $count: {}
+            },
+                {
+                    $sort: {
+                        createdAt: -1
                     }
-                }
-            }])
+                },
+                {
+                    $group: {
+                        _id: '$target',
+                        avg: {
+                            $avg: '$avg'
+                        },
+                        count: {
+                            $count: {}
+                        }
+                    }
+                }])
         })
     } catch (e) {
         res.status(500).json({
