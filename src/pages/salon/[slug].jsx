@@ -267,7 +267,7 @@ class SalonView extends React.Component {
 
             <div bp={'grid'}>
                 {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) =>
-                    <div bp={'12 6@md'} key={index}>
+                    <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
                             <ImageCarousel pics={worker.photos}/>
 
