@@ -52,6 +52,14 @@
   }
 }
 
+.photo {
+  user-select: none;
+  border-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  cursor: zoom-in;
+}
+
 .textSectionDecorator a {
   margin-bottom: 16px;
 }

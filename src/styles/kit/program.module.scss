@@ -5,7 +5,9 @@
   padding-bottom: 10px;
 
   li {
-    color: #9A9A9A;
+    @include themify() {
+      color: t('another-text-disabled')
+    }
 
     &::before {
       content: "\2022";
@@ -29,5 +31,7 @@
 }
 
 .secondSection i {
-  color: #9A9A9A;
+  @include themify() {
+    color: t('another-text-disabled')
+  }
 }

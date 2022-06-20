@@ -17,7 +17,7 @@ export default class TagCard extends React.Component {
         ]).isRequired,
         accent: PropTypes.bool,
         dark: PropTypes.bool,
-        link: PropTypes.string
+        link: PropTypes.any
     }
 
     static defaultProps = {

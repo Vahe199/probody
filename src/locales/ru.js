@@ -253,4 +253,8 @@ export default {
     avgCostLong: 'средняя стоимость часовых программ',
     top3Masters: 'Топ 3 мастера',
     otherSalons: 'Другие салоны',
+    photo: 'Фото',
+    serviceCost: 'Стоимость услуг',
+    salon_makingMassage: 'Делают виды массажа',
+    master_makingMassage: 'Делает виды массажа',
 }

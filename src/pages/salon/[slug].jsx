@@ -19,6 +19,9 @@ import Tag from "../../components/kit/Tag";
 import TagCard from "../../components/kit/TagCard";
 import {formatPrice} from "../../helpers/String";
 import ParameterView from "../../components/kit/ParameterView.jsx";
+import ShareInSocialMedia from "../../components/ShareInSocialMedia";
+import TabPanels from "../../components/kit/TabPanels";
+import Program from "../../components/kit/Program.jsx";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -29,6 +32,7 @@ class SalonView extends React.Component {
                 photos: []
             },
             allPrograms: [],
+            reviews: [],
             suggestedWorkers: []
         }
 
@@ -70,6 +74,33 @@ class SalonView extends React.Component {
     render() {
         const {t, theme, isMobile} = this.context
         const themeAccent = theme === 'dark' ? 'light' : 'dark'
+
+        const additionalSections = {
+            photos: <div bp={'grid'}>
+                {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
+                    <div style={{
+                        backgroundImage: `url(${photo})`,
+                        height: this.state.salon.kind === 'salon' ? 230 : 350,
+                    }} bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}
+                         className={css.photo}>&nbsp;</div>
+                )}
+            </div>,
+            masters: <div bp={'grid'}>
+                masters
+            </div>,
+            cost: <div bp={'grid'}>
+                {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
+                    <div bp={'12 6@md'} key={index}>
+                        <Program title={program.name} description={program.description} price={program.cost}
+                                 duration={program.duration} classicCnt={program.classicCnt}
+                                 eroticCnt={program.eroticCnt} relaxCnt={program.relaxCnt}/>
+                    </div>
+                )}
+            </div>,
+            reviews: this.state.reviews && <div bp={'grid'}>
+                reviews
+            </div>
+        }
 
         return <div className={css['theme--' + theme]}>
             <Head>
@@ -169,7 +200,12 @@ class SalonView extends React.Component {
 
                                 {this.state.reviews && <div>
                                     <div>{t('reviews').toLowerCase()}</div>
-                                    <Link href={'rr'}>
+                                    <Link href={{
+                                        query: Object.assign({}, this.props.router.query, {
+                                            salonTab: 'reviews'
+                                        }),
+                                        hash: '#salonTab'
+                                    }}>
                                         <div
                                             className={css.linkUnderline}>{this.state.reviews.count || 0} отзывов
                                         </div>
@@ -231,6 +267,18 @@ class SalonView extends React.Component {
 
                     <div bp={'grid'} style={{marginTop: 8}}>
                         <div bp={'12 8@md'} style={{gridGap: 8}} className={cnb(css.padded)}>
+                            {this.state.salon.programs &&
+                                <div style={{marginBottom: 24}}>
+                                    <p className="subtitle2"
+                                       style={{marginBottom: 16}}>{t(this.state.salon.kind + '_makingMassage')}</p>
+
+                                    <div className="flex wrap" style={{gap: 4}}>
+                                        {this.state.salon.programs.map((massageType, i) =>
+                                            <Tag key={i} label={massageType.name}/>
+                                        )}
+                                    </div>
+                                </div>
+                            }
                             {this.state.salon.services &&
                                 <div>
                                     <p className="subtitle2"
@@ -252,17 +300,57 @@ class SalonView extends React.Component {
                             <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
                                 <TagCard title={t('avgCostLong').toLowerCase()}
                                          value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')} dark={true}
-                                         link={'fff'}/>
-                                <TagCard title={t('roomCount').toLowerCase()} value={this.state.salon.rooms} dark={true}
-                                         link={'fff'}/>
+                                         link={{
+                                             query: Object.assign({}, this.props.router.query, {
+                                                 salonTab: 'cost'
+                                             }),
+                                             hash: '#salonTab'
+                                         }}/>
+                                <TagCard title={t('roomCount').toLowerCase()} value={this.state.salon.rooms}
+                                         dark={true}
+                                         link={{
+                                             query: Object.assign({}, this.props.router.query, {
+                                                 salonTab: 'cost'
+                                             }),
+                                             hash: '#salonTab'
+                                         }}/>
                             </div>
                         </div>}
                     </div>
                 </div>
             </div>
 
+            <div bp={'grid'} style={{marginTop: 32, gridGap: 28}}>
+                <div bp={'12 8@md'}>
+                    {this.state.salon.photos && <TabPanels tabKey={'salonTab'} head={{
+                        photos: {
+                            title: t('photo'),
+                            cnt: this.state.salon.photos.length
+                        },
+                        masters: this.state.kind === 'salon' && {
+                            title: t('masseuses'),
+                            cnt: this.state.salon.masters.length
+                        },
+                        cost: {
+                            title: t('serviceCost'),
+                            cnt: this.state.salon.programs?.length
+                        },
+                        reviews: this.state.reviews && {
+                            title: t('reviews'),
+                            cnt: this.state.reviews?.length
+                        }
+                    }} body={additionalSections}/>}
+                </div>
+                <div bp={'12 4@md'}>
+                    <ShareInSocialMedia/>
+                </div>
+            </div>
+
             <div className={'responsive-content'}>
-                <h2 style={{marginBottom: 12, marginTop: 24}}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
+                <h2 style={{
+                    marginBottom: 12,
+                    marginTop: 24
+                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
             </div>
 
             <div bp={'grid'}>

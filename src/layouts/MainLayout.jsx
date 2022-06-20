@@ -73,7 +73,11 @@ class MainLayout extends React.Component {
             return
         }
 
-        this.props.router.events.on('routeChangeComplete', () => setTimeout(() => {
+        this.props.router.events.on('routeChangeComplete', (url) => setTimeout(() => {
+            if (url.startsWith('/salon/')) {
+                return
+            }
+
             window.document.body.scrollTo(0, 0)
         }, 150))
 
