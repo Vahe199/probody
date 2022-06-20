@@ -135,42 +135,30 @@ router.get('/:slug', async (req, res) => {
                     foreignField: '_id',
                     as: 'leads'
                 }
-            }
-        ]
+            },
+            {
+                $project: {
+                    region: {$arrayElemAt: ['$region', 0]},
 
-        // if (worker.kind === 'master') {
-        //     aggregationPipeline.push({
-        //             $project: {
-        //                 region: {$arrayElemAt: ['$region', 0]},
-        //                 services: {$arrayElemAt: ['$services', 0]},
-        //                 leads: {$arrayElemAt: ['$leads', 0]},
-        //             }
-        //         })
-        // } else {
-        aggregationPipeline.push({
-            $project: {
-                region: {$arrayElemAt: ['$region', 0]},
-                services: {$arrayElemAt: ['$services', 0]},
-                leads: {$arrayElemAt: ['$leads', 0]},
-
-                kind: 1,
-                location: 1,
-                characteristics: 1,
-                name: 1,
-                slug: 1,
-                workHours: 1,
-                workDays: 1,
-                isVerified: 1,
-                photos: 1,
-                messengers: 1,
-                address: 1,
-                social: 1,
-                programs: 1,
-                description: 1,
-                phone: 1,
-            }
-        })
-        // }
+                    services: 1,
+                    leads: 1,
+                    kind: 1,
+                    location: 1,
+                    characteristics: 1,
+                    name: 1,
+                    slug: 1,
+                    workHours: 1,
+                    workDays: 1,
+                    isVerified: 1,
+                    photos: 1,
+                    messengers: 1,
+                    address: 1,
+                    social: 1,
+                    programs: 1,
+                    description: 1,
+                    phone: 1,
+                }
+            }]
 
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),

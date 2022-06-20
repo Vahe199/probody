@@ -247,4 +247,6 @@ export default {
     status: 'Статус',
     opened: 'Открыто',
     closed: 'Закрыто',
+    salonServiceAndServices: 'Услуги и сервис салона',
+    masterServiceAndServices: 'Услуги и сервис мастера',
 }

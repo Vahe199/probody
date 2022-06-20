@@ -15,6 +15,7 @@ import {parsePhoneNumber} from "libphonenumber-js";
 import TextSection from "../../components/kit/TextSection.jsx";
 import WeekView from "../../components/kit/WeekView";
 import Dates from "../../helpers/Dates.js";
+import Tag from "../../components/kit/Tag";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -184,6 +185,20 @@ class SalonView extends React.Component {
                             <WeekView enabledDays={this.state.salon.workDays || []} />
                         </div>
                     </div>}
+
+                    <div style={{marginTop: 8}} className={cnb(css.padded)}>
+                        {this.state.salon.services &&
+                            <div>
+                                <p className="subtitle2">{t(this.state.salon.kind + 'ServiceAndServices')}</p>
+
+                                <div className="flex wrap" style={{gap: 4}}>
+                                    {/*{this.state.salon.services.map((service, i) =>*/}
+                                    {/*    <Tag key={i} icon={service.icon} label={service.name} enabled={true} />*/}
+                                    {/*    )}*/}
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
 
                 <div bp={'hide show@md 5'} className={cnb(css.padded, css.cardRoot)}>
