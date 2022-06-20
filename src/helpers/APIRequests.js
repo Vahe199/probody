@@ -44,6 +44,10 @@ export default class APIRequests {
         })
     }
 
+    static getSuggestedWorkers(slug) {
+        return fetch(`${API_URL}/worker/${slug}/suggestions`).then(res => res.json())
+    }
+
     static logOut() {
         fetch(`https://probody.kz/auth/logout`, {
             method: 'POST',

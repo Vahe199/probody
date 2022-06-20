@@ -251,4 +251,6 @@ export default {
     masterServiceAndServices: 'Услуги и сервис мастера',
     mapPC: 'На карте',
     avgCostLong: 'средняя стоимость часовых программ',
+    top3Masters: 'Топ 3 мастера',
+    otherSalons: 'Другие салоны',
 }

@@ -18,6 +18,7 @@ import Dates from "../../helpers/Dates.js";
 import Tag from "../../components/kit/Tag";
 import TagCard from "../../components/kit/TagCard";
 import {formatPrice} from "../../helpers/String";
+import ParameterView from "../../components/kit/ParameterView.jsx";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -27,7 +28,8 @@ class SalonView extends React.Component {
             salon: {
                 photos: []
             },
-            allPrograms: []
+            allPrograms: [],
+            suggestedWorkers: []
         }
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
@@ -55,6 +57,12 @@ class SalonView extends React.Component {
                 salon: res.worker[0],
                 reviews: res.reviews[0],
                 allPrograms: res.allPrograms
+            })
+        })
+
+        APIRequests.getSuggestedWorkers(this.props.router.query.slug).then(res => {
+            this.setState({
+                suggestedWorkers: res.workers
             })
         })
     }
@@ -198,6 +206,10 @@ class SalonView extends React.Component {
                         </div>
                     </div>
 
+                    {this.state.salon.kind === 'master' && <div style={{marginTop: 8}}>
+                        <ParameterView {...this.state.salon.characteristics} />
+                    </div>}
+
                     {this.state.salon.workHours &&
                         <div bp={'grid'} style={{marginTop: 8}} className={cnb(css.cardRoot, css.padded)}>
                             <div bp={'12 6@md'} className={css.shortInfoBlock}>
@@ -236,7 +248,7 @@ class SalonView extends React.Component {
                             }
                         </div>
 
-                        {this.state.salon.avgCost && <div bp={'12 4@md'} style={{marginTop: 16}}>
+                        {this.state.salon.avgCost && <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
                             <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
                                 <TagCard title={t('avgCostLong').toLowerCase()}
                                          value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')} dark={true}
@@ -247,6 +259,30 @@ class SalonView extends React.Component {
                         </div>}
                     </div>
                 </div>
+            </div>
+
+            <div className={'responsive-content'}>
+                <h2 style={{marginBottom: 12}}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
+            </div>
+
+            <div bp={'grid'}>
+                {this.state.suggestedWorkers.length && this.state.suggestedWorkers.map((worker, index) =>
+                    <div bp={'12 6@md'} key={index}>
+                        <div className={css.cardRoot}>
+                            <ImageCarousel pics={worker.photos}/>
+
+                            <div className={css.padded}>
+                                {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
+                                    <Icon name={'round_check'} className={css.verifiedIcon}/>
+
+                                    <span>{t('verified')}</span>
+                                </div>}
+
+                                <h1 className={'cursor-pointer'}>{worker.name}</h1>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     }

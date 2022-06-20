@@ -45,44 +45,80 @@ router.post('/', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'),
     })
 })
 
-router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
-    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
-            $group: {
-                _id: '$target',
-                averageRate: {$avg: "$avg"}
-            }
-        }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
-        top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+// router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
+//     const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+//             $group: {
+//                 _id: '$target',
+//                 averageRate: {$avg: "$avg"}
+//             }
+//         }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
+//         top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+//
+//     res.json(top3Workers)
+// })
 
-    res.json(top3Workers)
-})
+// router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) => {
+//     if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
+//         return res.status(406).json({
+//             message: 'invalidId'
+//         })
+//     }
+//
+//     const workerDoc = await Worker.findById(req.params.id, 'location')
+//
+//     if (!workerDoc) {
+//         return res.status(404).json({
+//             message: 'workerNotFound'
+//         })
+//     }
+//
+//     if (workerDoc.kind === 'master') {
+//         res.json(await Worker.find({parent: {$exists: false}}).where('location').near({
+//             center: {
+//                 coordinates: workerDoc.location.coordinates,
+//                 type: 'Point'
+//             }
+//         }).limit(3)) // TODO: set up projection
+//     } else {
+//         res.json(await Worker.find({
+//             kind: 'salon'
+//         }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3)) // TODO: set up projection
+//     }
+// })
 
-router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) => {
-    if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
-        return res.status(406).json({
-            message: 'invalidId'
+router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, res) => {
+    try {
+        const worker = await Worker.findOne({slug: req.params.slug}).projection('kind parent location')
+
+        if (!worker) {
+            return res.status(404).json({
+                message: 'workerNotFound'
+            })
+        }
+
+        if (worker.parent) {
+            return res.json([])
+        }
+
+        if (worker.kind === 'master') {
+            const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+                    $group: {
+                        _id: '$target',
+                        averageRate: {$avg: "$avg"}
+                    }
+                }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
+                top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+
+            return res.json(top3Workers)
+        } else {
+            return res.json(await Worker.find({
+                kind: 'salon'
+            }).projection('name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3))
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
         })
-    }
-
-    const workerDoc = await Worker.findById(req.params.id, 'location')
-
-    if (!workerDoc) {
-        return res.status(404).json({
-            message: 'workerNotFound'
-        })
-    }
-
-    if (workerDoc.kind === 'master') {
-        res.json(await Worker.find({parent: {$exists: false}}).where('location').near({
-            center: {
-                coordinates: workerDoc.location.coordinates,
-                type: 'Point'
-            }
-        }).limit(3)) // TODO: set up projection
-    } else {
-        res.json(await Worker.find({
-            kind: 'salon'
-        }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3)) // TODO: set up projection
     }
 })
 
