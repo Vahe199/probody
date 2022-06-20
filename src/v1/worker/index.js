@@ -88,7 +88,7 @@ router.post('/', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'),
 
 router.get('/:slug/suggestions', async (req, res) => {
     try {
-        const worker = await Worker.findOne({slug: req.params.slug.toLowerCase()}).projection('parent kind location')
+        const worker = await Worker.findOne({slug: req.params.slug.toLowerCase()}, 'parent kind location')
 
         if (!worker) {
             return res.status(404).json({
