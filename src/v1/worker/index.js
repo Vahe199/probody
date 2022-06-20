@@ -101,7 +101,12 @@ router.get('/:slug/suggestions', async (req, res) => {
         }
 
         if (worker.kind === 'master') {
-            const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+            const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {
+                targetType: 'master',
+                target: {
+                    $ne: worker._id
+                }
+            }}, {
                     $group: {
                         _id: '$target',
                         averageRate: {$avg: "$avg"}
@@ -112,7 +117,10 @@ router.get('/:slug/suggestions', async (req, res) => {
             return res.json(top3Workers)
         } else {
             return res.json(await Worker.find({
-                kind: 'salon'
+                kind: 'salon',
+                _id: {
+                    $ne: worker._id
+                }
             }, 'name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
         }
     } catch (e) {
