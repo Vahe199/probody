@@ -163,7 +163,22 @@ router.get('/:slug', async (req, res) => {
 
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),
-            allServices: await Service.find({}),
+            allServices: await Service.find({}).projection({
+                services: {
+                    $arrayToObject: {
+                        $map: {
+                            input: '$services',
+                            as: 'el',
+                            in: {
+                                "k": {
+                                    $toString: '$$el._id'
+                                },
+                                "v": "$$el"
+                            }
+                        }
+                    }
+                }
+            }),
             reviews: await Review.aggregate([{
                 $match: {
                     target: worker._id
