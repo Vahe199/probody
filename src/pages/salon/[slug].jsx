@@ -25,7 +25,7 @@ class SalonView extends React.Component {
             salon: {
                 photos: []
             },
-            allServices: []
+            allPrograms: []
         }
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
@@ -52,7 +52,7 @@ class SalonView extends React.Component {
             this.setState({
                 salon: res.worker[0],
                 reviews: res.reviews[0],
-                allServices: res.allServices
+                allPrograms: res.allPrograms
             })
         })
     }
@@ -194,8 +194,8 @@ class SalonView extends React.Component {
                                 <p className="subtitle2">{t(this.state.salon.kind + 'ServiceAndServices')}</p>
 
                                 <div className="flex wrap" style={{gap: 4}}>
-                                    {this.state.allServices.map((service, i) =>
-                                        <Tag key={i} icon={service.icon} label={service.name} enabled={true} />
+                                    {this.state.salon.services.map((service, i) =>
+                                        <Tag key={i} icon={service.icon} label={service.name} />
                                         )}
                                 </div>
                             </div>
