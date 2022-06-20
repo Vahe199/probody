@@ -6,6 +6,7 @@ import RedisHelper from "../../helpers/RedisHelper.js"
 import mongoose from "mongoose";
 import apicache from "apicache";
 import Review from "../../models/Review.model.js"
+import Service from "../../models/Service.model.js";
 
 const router = express.Router()
 
@@ -162,6 +163,7 @@ router.get('/:slug', async (req, res) => {
 
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),
+            allServices: await Service.find({}),
             reviews: await Review.aggregate([{
                 $match: {
                     target: worker._id
