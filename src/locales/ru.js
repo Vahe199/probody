@@ -249,5 +249,6 @@ export default {
     closed: 'Закрыто',
     salonServiceAndServices: 'Услуги и сервис салона',
     masterServiceAndServices: 'Услуги и сервис мастера',
-    mapPC: 'На карте'
+    mapPC: 'На карте',
+    avgCostLong: 'средняя стоимость часовых программ',
 }

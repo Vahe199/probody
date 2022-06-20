@@ -29,7 +29,7 @@ export default class TagCard extends React.Component {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(css.root, this.props.dark ? css.dark : '')}>
+            <div style={this.props.style} className={cnb(css.root, this.props.dark ? css.dark : '')}>
                 <div className={css.label}>{this.props.title}</div>
                 <div className={cnb(css.value, this.props.accent ? css.accent : '', 'flex', 'justify-between')}>
                     <div>{this.props.value}</div>

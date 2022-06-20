@@ -17,6 +17,7 @@ import WeekView from "../../components/kit/WeekView";
 import Dates from "../../helpers/Dates.js";
 import Tag from "../../components/kit/Tag";
 import TagCard from "../../components/kit/TagCard";
+import {formatPrice} from "../../helpers/String";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -197,46 +198,53 @@ class SalonView extends React.Component {
                         </div>
                     </div>
 
-                    {this.state.salon.workHours && <div bp={'grid'} style={{marginTop: 8}} className={cnb(css.cardRoot, css.padded)}>
-                        <div bp={'12 6@md'} className={css.shortInfoBlock}>
-                            <div>
-                                <div>{t('workSchedule').toLowerCase()}</div>
-                                <div>{this.state.salon.workHours.roundclock ? t('roundclock') : this.state.salon.workHours?.from + '-' + this.state.salon.workHours?.to}</div>
+                    {this.state.salon.workHours &&
+                        <div bp={'grid'} style={{marginTop: 8}} className={cnb(css.cardRoot, css.padded)}>
+                            <div bp={'12 6@md'} className={css.shortInfoBlock}>
+                                <div>
+                                    <div>{t('workSchedule').toLowerCase()}</div>
+                                    <div>{this.state.salon.workHours.roundclock ? t('roundclock') : this.state.salon.workHours?.from + '-' + this.state.salon.workHours?.to}</div>
+                                </div>
+
+                                <div>
+                                    <div>{t('status').toLowerCase()}</div>
+                                    <div>{Dates.isOpen(this.state.salon.workDays, this.state.salon.workHours) ? t('opened') : t('closed')}</div>
+                                </div>
                             </div>
 
-                            <div>
-                                <div>{t('status').toLowerCase()}</div>
-                                <div>{Dates.isOpen(this.state.salon.workDays, this.state.salon.workHours) ? t('opened') : t('closed')}</div>
+                            <div bp={'12 6@md'}>
+                                <WeekView enabledDays={this.state.salon.workDays || []}/>
                             </div>
-                        </div>
-
-                        <div bp={'12 6@md'}>
-                            <WeekView enabledDays={this.state.salon.workDays || []} />
-                        </div>
-                    </div>}
+                        </div>}
 
                     <div bp={'grid'} style={{marginTop: 8}}>
-                        <div bp={'12 8@md'} className={cnb(css.padded)}>
+                        <div bp={'12 8@md'} style={{gridGap: 8}} className={cnb(css.padded)}>
                             {this.state.salon.services &&
                                 <div>
-                                    <p className="subtitle2" style={{marginBottom: 16}}>{t(this.state.salon.kind + 'ServiceAndServices')}</p>
+                                    <p className="subtitle2"
+                                       style={{marginBottom: 16}}>{t(this.state.salon.kind + 'ServiceAndServices')}</p>
 
                                     <div className="flex wrap" style={{gap: 4}}>
                                         {this.state.salon.leads.map((lead, i) =>
-                                            <Tag key={i} icon={lead.icon} label={lead.name} />
+                                            <Tag key={i} icon={lead.icon} label={lead.name}/>
                                         )}
                                         {this.state.salon.services.map((service, i) =>
-                                            <Tag key={i} icon={service.icon} label={service.name} />
+                                            <Tag key={i} icon={service.icon} label={service.name}/>
                                         )}
                                     </div>
                                 </div>
                             }
                         </div>
 
-                        <div bp={'12 4@md'}>
-                            <TagCard title={t('avgCostLong')} value={this.state.salon.avgCost} dark={true} link={'fff'} />
-                            <TagCard title={t('roomCount')} value={this.state.salon.rooms} dark={true} link={'fff'} />
-                        </div>
+                        {this.state.salon.avgCost && <div bp={'12 4@md'} style={{marginTop: 16}}>
+                            <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
+                                <TagCard title={t('avgCostLong').toLowerCase()}
+                                         value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')} dark={true}
+                                         link={'fff'}/>
+                                <TagCard title={t('roomCount').toLowerCase()} value={this.state.salon.rooms} dark={true}
+                                         link={'fff'}/>
+                            </div>
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -5,21 +5,31 @@
   background: #f7f7f7;
   padding: 16px;
   min-width: 104px;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
 
   &.dark {
     @include themify() {
-      background: t('text-primary');
+      background: t('bg-accent');
     }
 
     .value {
-      color: white;
+      @include themify() {
+        color: t('text-accent');
+      }
     }
   }
 }
 
 .label {
   font-size: 13px;
-  color: #9A9A9A;
+
+  @include themify() {
+    color: t('another-text-disabled');
+  }
+
   margin-bottom: 4px;
 }
 

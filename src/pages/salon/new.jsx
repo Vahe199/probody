@@ -1325,7 +1325,7 @@ class NewSalonPage extends React.Component {
                                       )}
 
                                       <div className={cnb('flex wrap gap-12', css.multipleButtonContainer)}>
-                                          {(this.state.model.kind === 'salon' && this.state.model.masters.length < 20) &&
+                                          {(this.state.model.kind === 'salon' && this.state.model.masters.length < 40) &&
                                               <div className={css.addMasterBtnContainer}><Button
                                                   className={css.addMasterBtn}
                                                   color={'primary'}
