@@ -479,7 +479,13 @@ class Home extends React.Component {
                             <div bp={'grid'} className={css.workerBlock}>
                                 <div bp={'12 5@md'}>
                                     <div className={css.cardRoot}>
-                                        <ImageCarousel link={worker.url} pics={worker.photos}/>
+                                        <ImageCarousel link={{
+                                            query: Object.assign({}, this.props.router.query, {
+                                                salonTab: 'photos'
+                                            }),
+                                            hash: '#salonTab',
+                                            pathname: worker.url
+                                        }} pics={worker.photos}/>
 
                                         {isMobile ? <div className={css.padded}>
                                             {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -554,7 +560,13 @@ class Home extends React.Component {
 
                                                 {worker.reviews && <div>
                                                     <div>{t('reviews').toLowerCase()}</div>
-                                                    <Link href={worker.url}>
+                                                    <Link href={{
+                                                        query: Object.assign({}, this.props.router.query, {
+                                                            salonTab: 'reviews'
+                                                        }),
+                                                        hash: '#salonTab',
+                                                        pathname: worker.url
+                                                    }}>
                                                         <div
                                                             className={css.linkUnderline}>{worker.reviews.count || 0} отзывов
                                                         </div>
@@ -597,13 +609,25 @@ class Home extends React.Component {
                                         <div className={css.invisibleScroll}>
                                             {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
                                                 name={master.name}
-                                                link={worker.url}
+                                                link={{
+                                                    query: Object.assign({}, this.props.router.query, {
+                                                        salonTab: 'masters'
+                                                    }),
+                                                    hash: '#salonTab',
+                                                    pathname: worker.url
+                                                }}
                                                 pic={master.photos[0]}
                                                 photoCnt={master.photos.length}
                                                 key={i}
                                             />)}
                                             {worker.masters.length > 3 &&
-                                                <MockShortMasterCard link={worker.url}
+                                                <MockShortMasterCard link={{
+                                                    query: Object.assign({}, this.props.router.query, {
+                                                        salonTab: 'masters'
+                                                    }),
+                                                    hash: '#salonTab',
+                                                    pathname: worker.url
+                                                }}
                                                                      cnt={worker.masters.length - 3}/>}
                                         </div>
                                     </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
@@ -615,13 +639,25 @@ class Home extends React.Component {
 
                                         <div className={css.invisibleScroll}>
                                             {worker.programs.slice(0, 3).map((program, i) => <ProgramCard
-                                                link={worker.url}
+                                                link={{
+                                                    query: Object.assign({}, this.props.router.query, {
+                                                        salonTab: 'cost'
+                                                    }),
+                                                    hash: '#salonTab',
+                                                    pathname: worker.url
+                                                }}
                                                 key={i}
                                                 title={program.name}
                                                 duration={program.duration}
                                                 price={program.cost}/>)}
                                             {worker.programs.length > 3 &&
-                                                <MockProgramCard link={worker.url} cnt={worker.programs.length - 3}/>}
+                                                <MockProgramCard link={{
+                                                    query: Object.assign({}, this.props.router.query, {
+                                                        salonTab: 'cost'
+                                                    }),
+                                                    hash: '#salonTab',
+                                                    pathname: worker.url
+                                                }} cnt={worker.programs.length - 3}/>}
                                         </div>
                                     </div>
 

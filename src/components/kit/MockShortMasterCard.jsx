@@ -10,7 +10,7 @@ import Link from "next/link.js";
 export default class MockShortMasterCard extends React.Component {
     static propTypes = {
         cnt: PropTypes.number.isRequired,
-        link: PropTypes.string.isRequired,
+        link: PropTypes.any.isRequired,
     }
 
     static contextType = GlobalContext

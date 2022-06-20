@@ -10,7 +10,7 @@ export default class ShortMasterCard extends React.Component {
         pic: PropTypes.string.isRequired,
         photoCnt: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired
+        link: PropTypes.any.isRequired
     }
 
     static contextType = GlobalContext

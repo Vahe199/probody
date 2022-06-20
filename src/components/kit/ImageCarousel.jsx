@@ -19,7 +19,7 @@ class ImageCarousel extends React.Component {
 
     static propTypes = {
         pics: PropTypes.arrayOf(PropTypes.string).isRequired,
-        link: PropTypes.string,
+        link: PropTypes.any,
     }
 
     setSlide(index) {
