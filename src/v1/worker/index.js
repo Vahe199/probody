@@ -117,6 +117,7 @@ router.get('/:slug/suggestions', async (req, res) => {
             }).projection('name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3))
         }
     } catch (e) {
+        console.log(e)
         return res.status(500).json({
             message: 'Internal Server Error'
         })
