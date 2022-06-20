@@ -262,7 +262,7 @@ class SalonView extends React.Component {
             </div>
 
             <div className={'responsive-content'}>
-                <h2 style={{marginBottom: 12}}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
+                <h2 style={{marginBottom: 12, marginTop: 24}}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
             </div>
 
             <div bp={'grid'}>
