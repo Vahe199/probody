@@ -121,7 +121,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
                 _id: {
                     $ne: worker._id
                 }
-            }, 'name photos').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
+            }, 'name photos isVerified').where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
         }
     } catch (e) {
         console.log(e)
