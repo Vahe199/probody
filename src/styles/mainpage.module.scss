@@ -141,7 +141,7 @@
 
 .radioChecked {
   @include themify() {
-    color: t('text-main');
+    color: t('text-main') !important;
   }
 }
 
