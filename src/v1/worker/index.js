@@ -6,7 +6,7 @@ import RedisHelper from "../../helpers/RedisHelper.js"
 import mongoose from "mongoose";
 import apicache from "apicache";
 import Review from "../../models/Review.model.js"
-import DefaultProgram from "../../models/DefaultProgram.model.js.model.js";
+import DefaultProgram from "../../models/DefaultProgram.model.js";
 
 const router = express.Router()
 
