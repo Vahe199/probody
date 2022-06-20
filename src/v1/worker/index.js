@@ -141,7 +141,21 @@ router.get('/:slug', async (req, res) => {
                 $project: {
                     region: {$arrayElemAt: ['$region', 0]},
 
-                    services: 1,
+                    services: {
+                        $arrayToObject: {
+                            $map: {
+                                input: '$services',
+                                as: 'el',
+                                in: {
+                                    "k": {
+                                        $toString: '$$el._id'
+                                    },
+                                    "v": "$$el"
+                                }
+                            }
+                        }
+                    },
+
                     leads: 1,
                     kind: 1,
                     location: 1,
@@ -163,22 +177,7 @@ router.get('/:slug', async (req, res) => {
 
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),
-            allServices: await Service.find({}).projection({
-                services: {
-                    $arrayToObject: {
-                        $map: {
-                            input: '$services',
-                            as: 'el',
-                            in: {
-                                "k": {
-                                    $toString: '$$el._id'
-                                },
-                                "v": "$$el"
-                            }
-                        }
-                    }
-                }
-            }),
+            allServices: await Service.find({}),
             reviews: await Review.aggregate([{
                 $match: {
                     target: worker._id
