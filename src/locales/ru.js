@@ -230,7 +230,7 @@ export default {
     chooseWorkerType: 'Выберите вид анкеты для добавления',
     exit: 'Выйти',
     salon2: 'Анкета',
-    list: 'Список',
+    list: 'Списком',
     map: 'Карта',
     ssm: 'Услуга, салон, мастер',
     reviews: 'Отзывы',
@@ -249,4 +249,5 @@ export default {
     closed: 'Закрыто',
     salonServiceAndServices: 'Услуги и сервис салона',
     masterServiceAndServices: 'Услуги и сервис мастера',
+    mapPC: 'На карте'
 }

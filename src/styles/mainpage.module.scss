@@ -9,12 +9,19 @@
   padding: 12px 12px 4px 16px;
   border-radius: 16px;
   display: inline-block;
-  font-size: 18px;
   width: 100%;
   max-width: 400px;
 
+  font-family: Lack, sans-serif;
+
   .kindContainer {
     justify-content: space-between;
+
+    span {
+      @include themify() {
+        color: t('text-disabled');
+      }
+    }
   }
 
   @include themify() {
@@ -27,7 +34,7 @@
   max-height: 375px;
   position: relative;
 
-  &>div {
+  & > div {
     min-width: 250px;
   }
 }
@@ -86,8 +93,8 @@
   }
 }
 
-.fullSizeBtn>div, .fullSizeBtn>div>button {
-    width: 100%;
+.fullSizeBtn > div, .fullSizeBtn > div > button {
+  width: 100%;
 }
 
 .invisibleScroll {
@@ -132,6 +139,12 @@
   }
 }
 
+.radioChecked {
+  @include themify() {
+    color: t('text-main');
+  }
+}
+
 .avgRating {
   display: flex;
   justify-content: flex-end;
@@ -158,11 +171,11 @@
   cursor: pointer;
   width: 100%;
   max-width: 350px;
-  border-radius: 24px;
+  border-radius: 16px;
   user-select: none;
   padding: 4px;
   gap: 12px;
-  margin-right: 12px;
+  margin-right: 8px;
 
   @include themify() {
     background-color: t('bg-secondlayer');
@@ -171,8 +184,8 @@
 
   div {
     width: 50%;
-    border-radius: 24px;
-    padding: 16px 24px;
+    border-radius: 12px;
+    padding: 16px 20px;
     text-align: center;
 
     @include themify() {
@@ -259,9 +272,14 @@
 }
 
 .filterButton {
-  padding: 20px 22px;
-  min-width: 120px;
-  border-radius: 24px;
+  padding: 16px;
+  //min-width: 120px;
+  border-radius: 16px;
+
+  & > span {
+    display: flex;
+    align-items: center;
+  }
 
   @include themify() {
     i {
@@ -273,8 +291,8 @@
     background-color: white;
     color: #252420;
     font-family: Lato, sans-serif;
-    border-radius: 11px;
-    padding: 6px 11px;
+    border-radius: 8px;
+    padding: 6px 12px;
     margin-right: 8px;
     vertical-align: middle;
   }

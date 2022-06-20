@@ -291,8 +291,8 @@ class Home extends React.Component {
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
-                        <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
-                                    value={this.props.router.query.kind || 'all'}
+                        {(!this.props.router.query.map || this.props.router.query.map === 'false') && <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
+                                    value={this.props.router.query.kind || 'all'} checkedClassName={css.radioChecked}
                                     onUpdate={this.setKind} options={[
                             {
                                 label: t('all'),
@@ -306,7 +306,7 @@ class Home extends React.Component {
                                 label: isMobile ? t('masters') : t('privateMasters'),
                                 value: 'master'
                             }
-                        ]}/>
+                        ]}/>}
                     </div>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
@@ -316,7 +316,7 @@ class Home extends React.Component {
                                     onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{t('list')}</div>
                                 <div
                                     className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
-                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{t('map')}</div>
+                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{isMobile ? t('map') : t('mapPC')}</div>
                             </div>
 
                             <div ref={this.state.handleRef}>
@@ -324,6 +324,7 @@ class Home extends React.Component {
                                         onClick={this.toggleFilterPopup}>
                                     <span
                                         className={css.cnt}>{Number(Boolean(this.props.router.query.priceFrom?.length || this.props.router.query.priceTo?.length)) + Object.keys(this.props.router.query).filter(filterName => filterName.startsWith('filters[') && this.props.router.query[filterName].length).length}</span>
+                                    {!isMobile && <span style={{margin: '0 4px', verticalAlign: 'inherit'}}>{t('filter')}</span>}
                                     <Icon name={'filter'}/>
                                 </Button>
                             </div>

@@ -65,7 +65,7 @@ export default class RadioGroup extends React.Component {
                 {Object.keys(this.props.options).map(key =>
                     <div onClick={() => this.select(this.props.options[key].value)} className={css.radioItem} key={key}>
                         <div
-                            className={cnb(css.radio, this.props.options[key].value === this.state.value ? css.checked : '')}>&nbsp;</div>
+                            className={cnb(css.radio, this.props.options[key].value === this.state.value ? css.checked : '', this.props.checkedClassName)}>&nbsp;</div>
                         <span>{this.props.options[key].label}</span>
                     </div>
                 )}
