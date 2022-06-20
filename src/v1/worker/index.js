@@ -96,6 +96,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
             })
         }
 
+        console.log(worker, !!worker.parent.length)
         if (worker.parent.length) {
             return res.json([])
         }
