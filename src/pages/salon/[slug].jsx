@@ -178,7 +178,7 @@ class SalonView extends React.Component {
                                      className="flex justify-end gap-12">
                                     {this.state.reviews ? <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg || '–'}</span>
+                                        <span>{this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : '-'}</span>
                                     </div> : <div>&nbsp;</div>}
 
                                     <Button size={'small'}>{t('onTheMap')}</Button>
@@ -354,10 +354,12 @@ class SalonView extends React.Component {
             </div>
 
             <div bp={'grid'}>
-                {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) =>
-                    <div bp={'12 4@md'} key={index}>
+                {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
+                    worker.url = '/salon/' + worker.slug
+
+                    return <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
-                            <ImageCarousel pics={worker.photos}/>
+                            <ImageCarousel link={worker.url} pics={worker.photos}/>
 
                             <div className={css.padded}>
                                 {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -366,11 +368,11 @@ class SalonView extends React.Component {
                                     <span>{t('verified')}</span>
                                 </div>}
 
-                                <h1 className={'cursor-pointer'}>{worker.name}</h1>
+                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
                             </div>
                         </div>
                     </div>
-                )}
+                })}
             </div>
         </div>
     }

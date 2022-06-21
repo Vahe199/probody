@@ -538,7 +538,7 @@ class Home extends React.Component {
                                                      className="flex justify-end gap-12">
                                                     {worker.reviews ? <div className={css.avgRating}>
                                                         <Icon name={'star'}/>
-                                                        <span>{worker.reviews?.avg || '–'}</span>
+                                                        <span>{worker.reviews?.avg ? worker.reviews.avg.toFixed(1) : '–'}</span>
                                                     </div> : <div>&nbsp;</div>}
 
                                                     <Button size={'small'}>{t('onTheMap')}</Button>
