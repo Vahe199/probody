@@ -34,6 +34,10 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/worker/${slug}`)).json()
     }
 
+    static async getReviews(id, page = 1) {
+        return (await fetch(`${API_URL}/review/${id}?page=${page}&limit=${PAGE_SIZE}`)).json()
+    }
+
     static async uploadPic(file, asReplacementFor = undefined) {
         const formData = new FormData();
 

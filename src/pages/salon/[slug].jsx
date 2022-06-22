@@ -23,6 +23,7 @@ import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import TabPanels from "../../components/kit/TabPanels";
 import Program from "../../components/kit/Program.jsx";
 import MasterDetail from "../../components/kit/MasterDetail";
+import ReviewBlock from "../../components/ReviewBlock";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -35,10 +36,16 @@ class SalonView extends React.Component {
             allPrograms: [],
             reviews: [],
             suggestedWorkers: [],
-            top3Masters: []
+            top3Masters: [],
+            reviewList: [],
+            reviewPaginator: {
+                current: 1,
+                max: 1
+            }
         }
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
+        this.loadReviews = this.loadReviews.bind(this)
     }
 
     static contextType = GlobalContext
@@ -57,6 +64,22 @@ class SalonView extends React.Component {
         }
     }
 
+    loadReviews(workerId) {
+        if (!workerId) {
+            workerId = this.state.salon._id
+        }
+
+        APIRequests.getReviews(workerId).then(response => {
+            this.setState({
+                reviewList: response.reviews,
+                reviewPaginator: {
+                    ...this.state.reviewPaginator,
+                    max: response.pageCount
+                }
+            })
+        })
+    }
+
     fetchWorkerInfo() {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
             this.setState({
@@ -64,6 +87,8 @@ class SalonView extends React.Component {
                 reviews: res.reviews[0],
                 allPrograms: res.allPrograms
             })
+
+            this.loadReviews(res.worker[0]._id)
 
             if (res.worker[0].kind === 'master') {
                 APIRequests.top3Masters().then(top3 => {
@@ -111,8 +136,15 @@ class SalonView extends React.Component {
                     </div>
                 )}
             </div>,
-            reviews: this.state.reviews && <div bp={'grid'}>
-                reviews
+            reviews: this.state.reviewList.length > 0 && <div bp={'grid'}>
+                <div bp={'12 5@md'}>
+                    <Button>{t('addReview')}</Button>
+                </div>
+                <div bp={'12 7@md'}>
+                    {this.state.reviewList.map((review, i) =>
+                        <ReviewBlock {...review} key={i}/>
+                    )}
+                </div>
             </div>
         }
 
@@ -320,7 +352,8 @@ class SalonView extends React.Component {
                         {this.state.salon.avgCost && <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
                             <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
                                 <TagCard title={t('avgCostLong').toLowerCase()}
-                                         value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')} dark={true}
+                                         value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')}
+                                         dark={true}
                                          link={{
                                              query: Object.assign({}, this.props.router.query, {
                                                  salonTab: 'cost'
@@ -358,7 +391,7 @@ class SalonView extends React.Component {
                         },
                         reviews: this.state.reviews && {
                             title: t('reviews'),
-                            cnt: this.state.reviews?.length
+                            cnt: this.state.reviews.count
                         }
                     }} body={additionalSections}/>}
                 </div>
@@ -389,7 +422,8 @@ class SalonView extends React.Component {
                                     <span>{t('verified')}</span>
                                 </div>}
 
-                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -418,7 +452,8 @@ class SalonView extends React.Component {
                                     <span>{t('verified')}</span>
                                 </div>}
 
-                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
+                                </Link>
                             </div>
                         </div>
                     </div>
