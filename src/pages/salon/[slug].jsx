@@ -270,7 +270,7 @@ class SalonView extends React.Component {
                             </div>
                         </div>}
 
-                        <div bp={'grid'} style={{gridGap: 60}}>
+                        <div bp={'grid'} style={{gridGap: isMobile ? 16 : 60}}>
                             <div bp={'12 7@md'} className={cnb(css.padded, css.shortInfoBlock)}>
                                 <div>
                                     <div>{t('address').toLowerCase()}</div>
