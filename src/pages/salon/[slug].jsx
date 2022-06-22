@@ -34,7 +34,8 @@ class SalonView extends React.Component {
             },
             allPrograms: [],
             reviews: [],
-            suggestedWorkers: []
+            suggestedWorkers: [],
+            top3Masters: []
         }
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
@@ -63,6 +64,14 @@ class SalonView extends React.Component {
                 reviews: res.reviews[0],
                 allPrograms: res.allPrograms
             })
+
+            if (res.worker[0].kind === 'master') {
+                APIRequests.top3Masters().then(top3 => {
+                    this.setState({
+                        top3Masters: top3
+                    })
+                })
+            }
         })
 
         APIRequests.getSuggestedWorkers(this.props.router.query.slug).then(res => {
@@ -362,11 +371,40 @@ class SalonView extends React.Component {
                 <h2 style={{
                     marginBottom: 12,
                     marginTop: 24
-                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('top3Masters')}</h2>
+                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('otherMasters')}</h2>
             </div>
 
             <div bp={'grid'}>
                 {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
+                    worker.url = '/salon/' + worker.slug
+
+                    return <div bp={'12 4@md'} key={index}>
+                        <div className={css.cardRoot}>
+                            <ImageCarousel link={worker.url} pics={worker.photos}/>
+
+                            <div className={css.padded}>
+                                {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
+                                    <Icon name={'round_check'} className={css.verifiedIcon}/>
+
+                                    <span>{t('verified')}</span>
+                                </div>}
+
+                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1></Link>
+                            </div>
+                        </div>
+                    </div>
+                })}
+            </div>
+
+            {this.state.salon.kind === 'master' && <div className={'responsive-content'}>
+                <h2 style={{
+                    marginBottom: 12,
+                    marginTop: 24
+                }}>{t('top3Masters')}</h2>
+            </div>}
+
+            <div bp={'grid'}>
+                {(this.state.salon.kind === 'master' && this.state.top3Masters) && this.state.top3Masters.map((worker, index) => {
                     worker.url = '/salon/' + worker.slug
 
                     return <div bp={'12 4@md'} key={index}>

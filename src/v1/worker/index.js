@@ -45,17 +45,17 @@ router.post('/', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'),
     })
 })
 
-// router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
-//     const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
-//             $group: {
-//                 _id: '$target',
-//                 averageRate: {$avg: "$avg"}
-//             }
-//         }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
-//         top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
-//
-//     res.json(top3Workers)
-// })
+router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
+    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+            $group: {
+                _id: '$target',
+                averageRate: {$avg: "$avg"}
+            }
+        }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
+        top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+
+    res.json(top3Workers)
+})
 
 // router.get('/:id/similar', apicache.middleware('15 minutes'), async (req, res) => {
 //     if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
@@ -100,29 +100,12 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
             return res.json([])
         }
 
-        if (worker.kind === 'master') {
-            const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {
-                targetType: 'master',
-                target: {
-                    $ne: worker._id
-                }
-            }}, {
-                    $group: {
-                        _id: '$target',
-                        averageRate: {$avg: "$avg"}
-                    }
-                }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
-                top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
-
-            return res.json(top3Workers)
-        } else {
-            return res.json(await Worker.find({
-                kind: 'salon',
-                _id: {
-                    $ne: worker._id
-                }
-            }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
-        }
+        return res.json(await Worker.find({
+            kind: worker.kind,
+            _id: {
+                $ne: worker._id
+            }
+        }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
     } catch (e) {
         console.log(e)
         return res.status(500).json({

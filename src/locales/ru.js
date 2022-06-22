@@ -257,4 +257,5 @@ export default {
     serviceCost: 'Стоимость услуг',
     salon_makingMassage: 'Делают виды массажа',
     master_makingMassage: 'Делает виды массажа',
+    otherMasters: 'Другие мастера'
 }

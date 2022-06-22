@@ -18,6 +18,10 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/service`)).json()
     }
 
+    static async top3Masters() {
+        return (await fetch(`${API_URL}/worker/top3`)).json()
+    }
+
     static async getLeads() {
         return (await fetch(`${API_URL}/lead`)).json()
     }
