@@ -111,48 +111,55 @@ class SalonView extends React.Component {
         const themeAccent = theme === 'dark' ? 'light' : 'dark'
 
         const additionalSections = {
-            photos: <div bp={'grid'}>
-                {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
-                    <div style={{
-                        backgroundImage: `url(${photo})`,
-                        height: this.state.salon.kind === 'salon' ? 230 : 350,
-                    }} bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}
-                         className={css.photo}>&nbsp;</div>
-                )}
-            </div>,
-            masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
-                {this.state.salon.masters.map((master, i) =>
-                    <div bp={'6 4@md'} key={i}>
-                        <MasterDetail {...master} />
-                    </div>
-                )}
-            </div>,
-            cost: <div bp={'grid'}>
-                {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
-                    <div bp={'12 6@md'} key={index}>
-                        <Program title={program.name} description={program.description} price={program.cost}
-                                 duration={program.duration} classicCnt={program.classicCnt}
-                                 eroticCnt={program.eroticCnt} relaxCnt={program.relaxCnt}/>
-                    </div>
-                )}
-            </div>,
-            reviews: this.state.reviewList.length > 0 && <div bp={'grid'} style={{gridGap: 32}}>
-                <div bp={'12 6@md'}>
-                    <Button size={'fill'}>{t('addReview')}</Button>
-
-                    <div bp={'grid 4'} style={{gridGap: 3, marginTop: 12}}>
-                        <TagCard title={t('salonRating')} value={this.state.reviews.avg.toFixed(1)} dark={true} accent={true} />
-                        <TagCard title={t('ratings')} value={this.state.reviews.count} />
-                        <TagCard title={t('reviewCnt')} value={this.state.reviews.count} />
-                    </div>
-                </div>
-                <div bp={'12 6@md'}>
-                    {this.state.reviewList.map((review, i) =>
-                        <ReviewBlock {...review} key={i}/>
+                photos: <div bp={'grid'}>
+                    {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
+                        <div style={{
+                            backgroundImage: `url(${photo})`,
+                            height: this.state.salon.kind === 'salon' ? 230 : 350,
+                        }} bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}
+                             className={css.photo}>&nbsp;</div>
                     )}
+                </div>,
+                masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
+                    {this.state.salon.masters.map((master, i) =>
+                        <div bp={'6 4@md'} key={i}>
+                            <MasterDetail {...master} />
+                        </div>
+                    )}
+                </div>,
+                cost: <div bp={'grid'}>
+                    {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
+                        <div bp={'12 6@md'} key={index}>
+                            <Program title={program.name} description={program.description} price={program.cost}
+                                     duration={program.duration} classicCnt={program.classicCnt} link={'https://google.com'}
+                                     eroticCnt={program.eroticCnt} relaxCnt={program.relaxCnt}/>
+                        </div>
+                    )}
+                </div>,
+                reviews: this.state.reviewList.length > 0 && <div bp={'grid'} style={{gridGap: 32}}>
+                    <div bp={'12 6@md'}>
+                        <div className="fit" bp={'grid'} style={{gridGap: 12}}>
+                            <div bp={'12 last@md'}>
+                                <div bp={'grid 4'} style={{gridGap: 3}}>
+                                    <TagCard title={t('salonRating')}
+                                                           value={this.state.reviews.avg.toFixed(1)}
+                                                           dark={true}
+                                                           accent={true}/>
+                                    <TagCard title={t('ratings')} value={this.state.reviews.count}/>
+                                    <TagCard title={t('reviewCnt')} value={this.state.reviews.count}/>
+                                </div>
+                            </div>
+
+                            <div bp={'12'} style={{marginBottom: isMobile ? 0 : -28}}><Button size={'fill'}>{t('addReview')}</Button></div>
+                        </div>
+                    </div>
+                    <div bp={'12 6@md'}>
+                        {this.state.reviewList.map((review, i) =>
+                            <ReviewBlock {...review} key={i}/>
+                        )}
+                    </div>
                 </div>
-            </div>
-        },
+            },
             tabsHead = {
                 photos: {
                     title: t('photo'),
@@ -303,20 +310,20 @@ class SalonView extends React.Component {
                             <div bp={'5 show@md hide'}>
                                 <div className="flex column justify-between" style={{marginTop: 14}}>
                                     <p className={'subtitle2'} style={{marginBottom: 4}}>{t('socialMedia')}</p>
-                                <div className={'flex align-end fit'}
-                                     style={{paddingBottom: 16, paddingRight: 16}}>
-                                    <div className={css.socialBlock}>
-                                        {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
-                                            <div key={name}>
-                                                <a target="_blank" href={this.state.salon.social[name]}>
-                                                    <img
-                                                        src={'/icons/' + name + '_' + themeAccent + '.svg'}
-                                                        alt={t(name)}/>
-                                                </a>
-                                            </div>
-                                        )}
+                                    <div className={'flex align-end fit'}
+                                         style={{paddingBottom: 16, paddingRight: 16}}>
+                                        <div className={css.socialBlock}>
+                                            {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
+                                                <div key={name}>
+                                                    <a target="_blank" href={this.state.salon.social[name]}>
+                                                        <img
+                                                            src={'/icons/' + name + '_' + themeAccent + '.svg'}
+                                                            alt={t(name)}/>
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -403,14 +410,16 @@ class SalonView extends React.Component {
 
             <div bp={'grid'} style={{marginTop: 32, gridGap: 28}}>
                 <div bp={'12 8@md'}>
-                    {(this.state.salon.photos && !isMobile) && <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
+                    {(this.state.salon.photos && !isMobile) &&
+                        <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
 
-                    {isMobile && <div className={'responsive-content'}>{Object.keys(additionalSections).map((sectionName, i) =>
-                        <div key={i} style={{marginBottom: 24}}>
-                            <h2 style={{marginBottom: 18}}>{tabsHead[sectionName]?.title}</h2>
-                            {additionalSections[sectionName]}
-                        </div>
-                    )}</div>}
+                    {isMobile &&
+                        <div className={'responsive-content'}>{Object.keys(additionalSections).map((sectionName, i) =>
+                            <div key={i} style={{marginBottom: 24}}>
+                                <h2 style={{marginBottom: 18}}>{tabsHead[sectionName]?.title}</h2>
+                                {additionalSections[sectionName]}
+                            </div>
+                        )}</div>}
                 </div>
                 <div bp={'12 4@md'}>
                     <ShareInSocialMedia/>

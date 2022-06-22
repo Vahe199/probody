@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import css from '../../styles/kit/parameterview.module.scss';
 import {GlobalContext} from "../../contexts/Global.js";
+import {declination} from "../../helpers/String.js";
 
 class ParameterView extends React.Component {
     static propTypes = {
@@ -19,7 +20,7 @@ class ParameterView extends React.Component {
             <div className={css.root} bp={'grid 4 2@md'}>
                 <div>
                     <div className={css.label}>{t('age')}</div>
-                    <div className={css.value}>{this.props.age}&nbsp;{t('years')}</div>
+                    <div className={css.value}>{this.props.age}&nbsp;{declination(this.props.age, t('yearDeclination'))}</div>
                 </div>
                 <div>
                     <div className={css.label}>{t('weight')}</div>

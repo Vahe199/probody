@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import css from '../../styles/kit/masterdetail.module.scss'
 import Icon from "./Icon.jsx";
 import Link from "next/link.js";
+import {declination} from "../../helpers/String.js";
 
 class MasterDetail extends React.Component {
     static contextType = GlobalContext
@@ -35,7 +36,7 @@ class MasterDetail extends React.Component {
                         {isMobile ? <div className={'subtitle2'}>{this.props.name}</div> : <div bp={'grid 6'}>
                             <div>
                                 <div className={css.label}>{t('age')}</div>
-                                <div className={css.value}>{this.props.characteristics.age}&nbsp;{t('years')}</div>
+                                <div className={css.value}>{this.props.characteristics.age}&nbsp;{declination(this.props.characteristics.age, t('yearDeclination'))}</div>
                             </div>
                             <div>
                                 <div className={css.label}>{t('weight')}</div>
