@@ -136,11 +136,17 @@ class SalonView extends React.Component {
                     </div>
                 )}
             </div>,
-            reviews: this.state.reviewList.length > 0 && <div bp={'grid'}>
-                <div bp={'12 5@md'}>
-                    <Button>{t('addReview')}</Button>
+            reviews: this.state.reviewList.length > 0 && <div bp={'grid'} style={{gridGap: 32}}>
+                <div bp={'12 6@md'}>
+                    <Button size={'fill'}>{t('addReview')}</Button>
+
+                    <div bp={'grid 4'} style={{gridGap: 3, marginTop: 12}}>
+                        <TagCard title={t('salonRating')} value={this.state.reviews.avg.toFixed(1)} dark={true} accent={true} />
+                        <TagCard title={t('ratings')} value={this.state.reviews.count} />
+                        <TagCard title={t('reviewCnt')} value={this.state.reviews.count} />
+                    </div>
                 </div>
-                <div bp={'12 7@md'}>
+                <div bp={'12 6@md'}>
                     {this.state.reviewList.map((review, i) =>
                         <ReviewBlock {...review} key={i}/>
                     )}
@@ -268,7 +274,7 @@ class SalonView extends React.Component {
                                 {this.state.reviews && <div bp={'hide@md'}>
                                     <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg}</span>
+                                        <span>{this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : '-'}</span>
                                     </div>
 
                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>

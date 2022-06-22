@@ -1,8 +1,12 @@
 @import "../themes";
 
 .root {
-  border-radius: 32px;
-  background: #f7f7f7;
+  border-radius: 20px;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+
   padding: 16px;
   min-width: 104px;
   height: 100%;
@@ -36,7 +40,7 @@
 .value {
   @include themify() {
     font-size: 20px;
-    color: t('text-primary');
+    color: t('text-main');
 
     &.accent {
       color: t('bg-primary') !important;

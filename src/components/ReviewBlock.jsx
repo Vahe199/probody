@@ -13,7 +13,7 @@ export default class ReviewBlock extends React.Component {
         name: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         avg: PropTypes.number.isRequired,
-        createdAt: PropTypes.instanceOf(Date).isRequired,
+        createdAt: PropTypes.string.isRequired,
         service: PropTypes.number.isRequired,
         interior: PropTypes.number.isRequired,
         massage: PropTypes.number.isRequired,
@@ -24,8 +24,8 @@ export default class ReviewBlock extends React.Component {
 
         return <div className={css['theme--' + theme]}>
             <div className={css.root}>
-                <div className={cnb("flex", 'justify-between', css.gradeContainer)}>
-                    <div>
+                <div style={{gap: 20}} className={cnb("flex", css.gradeContainer)}>
+                    <div style={{marginRight: 12}}>
                         <span className={css.general}>{t('generalGrade')}</span>
                         <div className={'flex vertical-center'}>
                             <span className={css.star}><Icon name={'star'}/></span>
@@ -52,7 +52,7 @@ export default class ReviewBlock extends React.Component {
                 <div style={{marginTop: 16}} className="flex justify-between align-end">
                     <span className={css.name}>{this.props.name}</span>
                     <span
-                        className={css.date}>{DateTime.fromJSDate(this.props.createdAt).toFormat('d.MM.yyyy')}</span>
+                        className={css.date}>{DateTime.fromISO(this.props.createdAt).toFormat('d.MM.yyyy')}</span>
                 </div>
                 <div className={css.text}>
                     {this.props.text}
