@@ -210,7 +210,7 @@ class SalonView extends React.Component {
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
-                                                                       href={'https://t.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number}>
+                                                                       href={'https://t.me/' + this.state.salon.messengers.tg}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'tg_light'}/>
                                     {t('sendMessage')}

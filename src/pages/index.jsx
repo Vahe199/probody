@@ -513,9 +513,16 @@ class Home extends React.Component {
                                                         href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'wa_light'}/>
-                                                        {t('sendMessage')}
+                                                        {(isMobile && worker.messengers.tg) ? '' : t('sendMessage')}
                                                     </Button>
                                                 </a></div>
+                                                {worker.messengers.tg && <div><a target="_blank"
+                                                                                 href={'https://t.me/' + worker.messengers.tg}>
+                                                    <Button color={'tertiary'}>
+                                                        <Icon name={'tg_light'}/>
+                                                        {isMobile ? '' : t('sendMessage')}
+                                                    </Button>
+                                                </a></div>}
                                             </div>
                                         </div>}
                                     </div>
@@ -692,9 +699,16 @@ class Home extends React.Component {
                                                     href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'wa_light'}/>
-                                                    {t('sendMessage')}
+                                                    {(isMobile && worker.messengers.tg) ? '' : t('sendMessage')}
                                                 </Button>
                                             </a></div>
+                                            {worker.messengers.tg && <div><a target="_blank"
+                                                                             href={'https://t.me/' + worker.messengers.tg}>
+                                                <Button color={'tertiary'}>
+                                                    <Icon name={'tg_light'}/>
+                                                    {isMobile ? '' : t('sendMessage')}
+                                                </Button>
+                                            </a></div>}
                                         </div>
                                     </div>
                                 </div>

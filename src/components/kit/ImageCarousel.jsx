@@ -34,27 +34,30 @@ class ImageCarousel extends React.Component {
         const height = isMobile ? 250 : 350;
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
+            <div className={cnb(this.props.className, 'overflow-hidden', 'relative')} onClick={() => {
+
+            }}>
                 <div ref={this.state.slider} className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>
                         <div className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -height,
                             height,
-                            marginLeft: index * 100 + '%'
+                            marginLeft: index * 100 + '%',
+                            cursor: this.props.link ? 'cursor' : 'zoom-in'
                         }} key={index}>
                             &nbsp;
                         </div>
                     )}
                 </div>
-                <div className={css.navigation}>
+                {this.props.pics.length > 1 && <div className={css.navigation}>
                     {this.props.pics.map((image, index) =>
                         <div className={cnb(css.navigationItem, index === this.state.currentSlide ? css.current : '')} key={index}
                              onClick={() => this.setSlide(index)}>
                             &nbsp;
                         </div>
                     )}
-                </div>
+                </div>}
             </div>
         </div>
     }
