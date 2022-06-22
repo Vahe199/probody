@@ -1,0 +1,23 @@
+name: Telegram Notify
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - id: get-id
+        run: |
+          id=$(echo ${{ github.sha }} | cut -c-8)
+          echo "::set-output name=id::$id"
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            *${{ github.actor }}* pushed to *${{ github.repository }}* *[${{ github.ref_name }}]*:
+            
+            `${{ github.event.commits[0].message }}`
+            
+            See changes: [${{ steps.get-id.outputs.id }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
