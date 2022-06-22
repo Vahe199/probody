@@ -13,7 +13,7 @@ export default class ReviewBlock extends React.Component {
         name: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         avg: PropTypes.number.isRequired,
-        dateCreated: PropTypes.instanceOf(Date).isRequired,
+        createdAt: PropTypes.instanceOf(Date).isRequired,
         service: PropTypes.number.isRequired,
         interior: PropTypes.number.isRequired,
         massage: PropTypes.number.isRequired,
@@ -52,7 +52,7 @@ export default class ReviewBlock extends React.Component {
                 <div style={{marginTop: 16}} className="flex justify-between align-end">
                     <span className={css.name}>{this.props.name}</span>
                     <span
-                        className={css.date}>{DateTime.fromJSDate(this.props.dateCreated).toFormat('d.MM.yyyy')}</span>
+                        className={css.date}>{DateTime.fromJSDate(this.props.createdAt).toFormat('d.MM.yyyy')}</span>
                 </div>
                 <div className={css.text}>
                     {this.props.text}
