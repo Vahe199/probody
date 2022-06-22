@@ -104,6 +104,9 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
             kind: worker.kind,
             _id: {
                 $ne: worker._id
+            },
+            parent: {
+                $exists: false
             }
         }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
     } catch (e) {
