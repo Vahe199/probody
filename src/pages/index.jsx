@@ -679,7 +679,7 @@ class Home extends React.Component {
 
                                 <div bp={'12 hide@md'}>
                                     <div className={cnb(css.cardRoot, css.padded)}>
-                                        <p style={{paddingBottom: 12}}>{worker.description}</p>
+                                        <p className={cnb(css.ellipsis, css.helperText)} style={{marginBottom: 12}}>{worker.description}</p>
 
                                         <div className={css.stretchContainer}>
                                             <Link href={worker.url}>

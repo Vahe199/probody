@@ -22,6 +22,7 @@ import ParameterView from "../../components/kit/ParameterView.jsx";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import TabPanels from "../../components/kit/TabPanels";
 import Program from "../../components/kit/Program.jsx";
+import MasterDetail from "../../components/kit/MasterDetail";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -85,8 +86,12 @@ class SalonView extends React.Component {
                          className={css.photo}>&nbsp;</div>
                 )}
             </div>,
-            masters: <div bp={'grid'}>
-                masters
+            masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
+                {this.state.salon.masters.map((master, i) =>
+                    <div bp={'6 4@md'} key={i}>
+                        <MasterDetail {...master} />
+                    </div>
+                )}
             </div>,
             cost: <div bp={'grid'}>
                 {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
@@ -154,9 +159,16 @@ class SalonView extends React.Component {
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
-                                    {t('sendMessage')}
+                                    {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
                                 </Button>
                             </a></div>
+                            {this.state.salon.messengers.tg && <div><a target="_blank"
+                                                                       href={'https://t.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number}>
+                                <Button color={'tertiary'}>
+                                    <Icon name={'tg_light'}/>
+                                    {t('sendMessage')}
+                                </Button>
+                            </a></div>}
                         </div>}
                     </div>}
                 </div>

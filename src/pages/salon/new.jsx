@@ -279,6 +279,7 @@ class NewSalonPage extends React.Component {
 
             const mapClickHandler = async (e) => {
                 const coords = e.get('coords');
+                console.log('clicked')
 
                 if (this.state.placeMark) {
                     await this.setState({
@@ -288,7 +289,8 @@ class NewSalonPage extends React.Component {
                         }
                     });
 
-                    this.state.placeMark.geometry.setCoordinates(this.state.model.location);
+                    this.state.placeMark.geometry.setCoordinates(coords);
+                    console.log('set pm coords', coords)
                 } else {
                     const placeMark = new window.ymaps.Placemark(coords, {}, {
                         preset: 'islands#circleDotIcon',
@@ -303,6 +305,7 @@ class NewSalonPage extends React.Component {
                     });
 
                     this.state.map.geoObjects.add(placeMark);
+                    console.log('added pm', coords)
                 }
             }
 
@@ -314,8 +317,10 @@ class NewSalonPage extends React.Component {
                         controls: []
                     }, {})
 
-                    // map.events.add('touchstart', mapClickHandler.bind(this))
                     map.events.add('click', mapClickHandler.bind(this))
+                    // map.container.fitToViewport()
+// window.map = map
+                    console.log('binding click')
 
                     this.setState({
                         map

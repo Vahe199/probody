@@ -18,7 +18,7 @@ class ChangedPasswordModal extends React.Component {
 
                 <p className={'additional-text'}>{t('findYourselfSalon')}</p>
 
-                <Button style={{marginTop: 24}} size={'fill'} onClick={() => openModal('')}>{t('close')}</Button>
+                <Button style={{marginTop: 24}} size={'fill'} onClick={() => openModal('')}>{t('toMainPage')}</Button>
             </div>
         </div>);
     }
