@@ -17,7 +17,7 @@ import WeekView from "../../components/kit/WeekView";
 import Dates from "../../helpers/Dates.js";
 import Tag from "../../components/kit/Tag";
 import TagCard from "../../components/kit/TagCard";
-import {formatPrice} from "../../helpers/String";
+import {declination, formatPrice} from "../../helpers/String";
 import ParameterView from "../../components/kit/ParameterView.jsx";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import TabPanels from "../../components/kit/TabPanels";
@@ -152,7 +152,25 @@ class SalonView extends React.Component {
                     )}
                 </div>
             </div>
-        }
+        },
+            tabsHead = {
+                photos: {
+                    title: t('photo'),
+                    cnt: this.state.salon.photos.length
+                },
+                masters: this.state.salon.kind === 'salon' && {
+                    title: t('masseuses'),
+                    cnt: this.state.salon.masters?.length
+                },
+                cost: {
+                    title: t('serviceCost'),
+                    cnt: this.state.salon.programs?.length
+                },
+                reviews: this.state.reviews && {
+                    title: t('reviews'),
+                    cnt: this.state.reviews.count
+                }
+            }
 
         return <div className={css['theme--' + theme]}>
             <Head>
@@ -245,7 +263,7 @@ class SalonView extends React.Component {
                             </div>
                         </div>}
 
-                        <div bp={'grid'}>
+                        <div bp={'grid'} style={{gridGap: 60}}>
                             <div bp={'12 7@md'} className={cnb(css.padded, css.shortInfoBlock)}>
                                 <div>
                                     <div>{t('address').toLowerCase()}</div>
@@ -266,7 +284,7 @@ class SalonView extends React.Component {
                                         hash: '#salonTab'
                                     }}>
                                         <div
-                                            className={css.linkUnderline}>{this.state.reviews.count || 0} отзывов
+                                            className={css.linkUnderline}>{this.state.reviews.count || 0} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
                                         </div>
                                     </Link>
                                 </div>}
@@ -283,9 +301,11 @@ class SalonView extends React.Component {
                             </div>
 
                             <div bp={'5 show@md hide'}>
-                                <div className={'flex align-end justify-end fit'}
+                                <div className="flex column justify-between" style={{marginTop: 14}}>
+                                    <p className={'subtitle2'} style={{marginBottom: 4}}>{t('socialMedia')}</p>
+                                <div className={'flex align-end fit'}
                                      style={{paddingBottom: 16, paddingRight: 16}}>
-                                    <div style={{marginTop: 16}} className={css.socialBlock}>
+                                    <div className={css.socialBlock}>
                                         {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
                                             <div key={name}>
                                                 <a target="_blank" href={this.state.salon.social[name]}>
@@ -296,6 +316,7 @@ class SalonView extends React.Component {
                                             </div>
                                         )}
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -382,24 +403,14 @@ class SalonView extends React.Component {
 
             <div bp={'grid'} style={{marginTop: 32, gridGap: 28}}>
                 <div bp={'12 8@md'}>
-                    {this.state.salon.photos && <TabPanels tabKey={'salonTab'} head={{
-                        photos: {
-                            title: t('photo'),
-                            cnt: this.state.salon.photos.length
-                        },
-                        masters: this.state.salon.kind === 'salon' && {
-                            title: t('masseuses'),
-                            cnt: this.state.salon.masters?.length
-                        },
-                        cost: {
-                            title: t('serviceCost'),
-                            cnt: this.state.salon.programs?.length
-                        },
-                        reviews: this.state.reviews && {
-                            title: t('reviews'),
-                            cnt: this.state.reviews.count
-                        }
-                    }} body={additionalSections}/>}
+                    {(this.state.salon.photos && !isMobile) && <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
+
+                    {isMobile && <div className={'responsive-content'}>{Object.keys(additionalSections).map((sectionName, i) =>
+                        <div key={i} style={{marginBottom: 24}}>
+                            <h2 style={{marginBottom: 18}}>{tabsHead[sectionName]?.title}</h2>
+                            {additionalSections[sectionName]}
+                        </div>
+                    )}</div>}
                 </div>
                 <div bp={'12 4@md'}>
                     <ShareInSocialMedia/>

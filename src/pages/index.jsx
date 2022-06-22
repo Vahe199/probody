@@ -28,6 +28,7 @@ import TransparentCollapsible from "../components/kit/TransparentCollapsible";
 import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput";
 import debounce from "../helpers/debounce";
 import Select from "../components/kit/Form/Select.jsx";
+import {declination} from "../helpers/String.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -575,7 +576,7 @@ class Home extends React.Component {
                                                         pathname: worker.url
                                                     }}>
                                                         <div
-                                                            className={css.linkUnderline}>{worker.reviews.count || 0} отзывов
+                                                            className={css.linkUnderline}>{worker.reviews.count || 0} {declination(worker.reviews.count || 0, t('reviewDeclination'))}
                                                         </div>
                                                     </Link>
                                                 </div>}

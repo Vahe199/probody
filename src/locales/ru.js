@@ -261,5 +261,7 @@ export default {
     addReview: 'Добавить отзыв',
     salonRating: 'оценка салона',
     ratings: 'оценок',
-    reviewCnt: 'отзывов'
+    reviewCnt: 'отзывов',
+    yearDeclination: ['год', 'года', 'лет'],
+    reviewDeclination: ['отзыв', 'отзыва', 'отзывов']
 }
