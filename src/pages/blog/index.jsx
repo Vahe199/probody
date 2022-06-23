@@ -187,7 +187,7 @@ class BlogPage extends React.Component {
     }
 
     render() {
-        const {t} = this.context
+        const {t, isMobile} = this.context
 
         return <section>
             <Head>
@@ -217,13 +217,17 @@ class BlogPage extends React.Component {
                             </div>
                         )}
                     </div>
-                    {this.state.pageCount > 1 && <Paginator page={this.state.page} onChange={this.handlePageChange}
-                                                            pageCnt={this.state.pageCount}/>}
                 </div>
                 <div bp={'12 4@md'}>
+                    {(this.state.pageCount > 1 && isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
+                                                                           pageCnt={this.state.pageCount} style={{marginBottom: 16}}/>}
+
                     <ShareInSocialMedia/>
                 </div>
             </div>
+
+            {(this.state.pageCount > 1 && !isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
+                                                    pageCnt={this.state.pageCount}/>}
         </section>
     }
 }
