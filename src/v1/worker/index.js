@@ -226,6 +226,8 @@ router.get('/:slug', async (req, res) => {
                     }
                 })
 
+        console.log(aggregatedReviews)
+
         return res.json({
             worker: await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
