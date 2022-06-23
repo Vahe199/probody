@@ -642,7 +642,7 @@ class Home extends React.Component {
                                         <ParameterView {...worker.characteristics} />
                                     </div>}
 
-                                    <div bp={'12 7@md'} className={css.padded}>
+                                    <div bp={'12 7@md'} className={css.padded} style={{marginRight: 0}}>
                                         <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
 
                                         <div className={css.invisibleScroll}>

@@ -309,7 +309,7 @@ class SalonView extends React.Component {
 
                             <div bp={'5 show@md hide'}>
                                 <div className="flex column justify-between" style={{marginTop: 14}}>
-                                    <p className={'subtitle2'} style={{marginBottom: 4}}>{t('socialMedia')}</p>
+                                    <p className={'subtitle2'} style={{marginBottom: 4}}>{Object.keys(this.state.salon.social || []).some(i => this.state.salon.social[i].length) && t('socialMedia')}</p>
                                     <div className={'flex align-end fit'}
                                          style={{paddingBottom: 16, paddingRight: 16}}>
                                         <div className={css.socialBlock}>

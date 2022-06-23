@@ -20,7 +20,7 @@ class TabPanels extends React.Component {
             <div id={this.props.tabKey} className={css.head}>
                 {Object.keys(this.props.head).map((key, index) =>
                         this.props.head[key] && <div
-                            onClick={() => this.props.router.push({hash: this.props.tabKey, query: Object.assign({}, this.props.router.query, {[this.props.tabKey]: key})})}
+                            onClick={() => this.props.router.push({hash: this.props.tabKey, query: Object.assign({}, this.props.router.query, {[this.props.tabKey]: key})}, undefined, {shallow: true})}
                             key={index}
                             className={(this.props.router.query[this.props.tabKey] === key || (!this.props.router.query[this.props.tabKey] && index === 0)) ? css.enabled : ''}>
                             {this.props.head[key].cnt && <span className={css.cnt}>

@@ -195,10 +195,7 @@ router.get('/:slug', async (req, res) => {
                 }
             }]
 
-        return res.json({
-            worker: await Worker.aggregate(aggregationPipeline),
-            allPrograms: await DefaultProgram.find({}),
-            reviews: await Review.aggregate([{
+        const aggregatedReviews = await Review.aggregate([{
                 $match: {
                     target: worker._id
                 }
@@ -213,12 +210,31 @@ router.get('/:slug', async (req, res) => {
                         _id: '$target',
                         avg: {
                             $avg: '$avg'
-                        },
-                        count: {
-                            $count: {}
                         }
                     }
-                }])
+                }]),
+            reviewCount = await Review.count({
+                target: worker._id,
+                text: {
+                    $exists: true
+                }
+            }),
+            ratingCount = await Review.count({
+                    target: worker._id,
+                    text: {
+                        $exists: false
+                    }
+                })
+
+        return res.json({
+            worker: await Worker.aggregate(aggregationPipeline),
+            allPrograms: await DefaultProgram.find({}),
+            reviews: {
+                avg: aggregatedReviews.avg,
+                count: ratingCount + reviewCount,
+                reviewCount,
+                ratingCount
+            }
         })
     } catch (e) {
         res.status(500).json({
