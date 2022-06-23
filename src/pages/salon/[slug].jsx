@@ -236,7 +236,7 @@ class SalonView extends React.Component {
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
-                                    {isMobile ? '' : t('sendMessage')}
+                                    {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
@@ -430,7 +430,7 @@ class SalonView extends React.Component {
 
                     {isMobile &&
                         <div>{Object.keys(additionalSections).map((sectionName, i) =>
-                            tabsHead[sectionName] ? <div key={i} style={{marginBottom: 24}}>
+                            tabsHead[sectionName] ? <div key={i} style={{marginBottom: 4}}>
                                 <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title} defaultOpen={i === 0}>
                                     <div className={'responsive-content'} style={{marginTop: 18}}>{additionalSections[sectionName]}</div>
                                 </Collapsible>
@@ -513,7 +513,7 @@ class SalonView extends React.Component {
                         href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                     <Button color={'tertiary'}>
                         <Icon name={'wa_light'}/>
-                        {isMobile ? '' : t('sendMessage')}
+                        {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
                     </Button>
                 </a></div>
                 {this.state.salon.messengers.tg && <div><a target="_blank"
