@@ -117,4 +117,36 @@ router.post('/:reviewId/answer', AuthGuard('serviceProvider'), async (req, res) 
     }
 })
 
+router.get('/', apicache.middleware('60 minutes'), async (req, res) => {
+    try {
+        res.json({
+            avg:  await Review.aggregate([
+                {
+                    $group: {
+                        _id: 'wholeSite',
+                        avg: {
+                            $avg: '$avg'
+                        }
+                    }
+                }]),
+            reviewCnt: await Review.count({
+                text: {
+                    $exists: true
+                }
+            }),
+            ratingCnt: await Review.count({
+                text: {
+                    $exists: false
+                }
+            })
+        })
+    } catch (e) {
+        console.log(e)
+
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+})
+
 export default router

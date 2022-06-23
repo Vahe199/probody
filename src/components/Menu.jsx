@@ -34,7 +34,7 @@ class Menu extends React.Component {
         const {t, isMobile, openModal, theme, isLoggedIn} = this.context
 
         return <div className={cnb('non-selectable', css['theme--' + theme])}>
-            <div className={css.hamburger} ref={this.state.handleRef} onClick={this.toggleMenu}><Icon
+            <div className={cnb(css.hamburger, (!isMobile && this.state.isOpen) ? css.opened : '')} ref={this.state.handleRef} onClick={this.toggleMenu}><Icon
                 name={(this.state.isOpen && isMobile) ? 'close' : 'hamburger'}/></div>
             <Popup handleRef={this.state.handleRef} onClose={() => this.setState({isOpen: false})}
                    style={isMobile ? {padding: '24px 0 0 0'} : {left: -270}} fullSize={isMobile} isOpen={this.state.isOpen}>

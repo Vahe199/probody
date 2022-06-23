@@ -4,6 +4,12 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
+
+  &.opened {
+    @include themify() {
+      color: t('another-text-disabled');
+    }
+  }
 }
 
 .list {
