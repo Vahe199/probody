@@ -328,47 +328,99 @@ class Home extends React.Component {
                                     {!isMobile && <span style={{margin: '0 4px', verticalAlign: 'inherit'}}>{t('filter')}</span>}
                                     <Icon name={'filter'}/>
                                 </Button>
-                            </div>
+                                <Popup handleRef={this.state.handleRef}
+                                       style={isMobile ? {
+                                           top: 0,
+                                           height: '100%',
+                                           padding: 0,
+                                       } : {
+                                           right: 0,
+                                           top: 4
+                                       }}
+                                       onClose={() => this.setState({filterPopupOpen: false})}
+                                       isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
+                                    <div bp={'grid 12 4@md'} className={css.filterContainer}>
+                                        <div bp={'hide@md'} className={cnb(css.modalHead, css.mobile)}>
+                                            <div className={css.resetBtn} style={{marginRight: -24}}
+                                                 onClick={this.resetFilters}>{t('discard')}</div>
 
-                            <Popup handleRef={this.state.handleRef}
-                                   style={isMobile ? {
-                                       top: 0,
-                                       height: '100%',
-                                       padding: 0,
-                                   } : {
-                                       right: 0,
-                                       top: 64
-                                   }}
-                                   onClose={() => this.setState({filterPopupOpen: false})}
-                                   isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
-                                <div bp={'grid 12 4@md'} className={css.filterContainer}>
-                                    <div bp={'hide@md'} className={cnb(css.modalHead, css.mobile)}>
-                                        <div className={css.resetBtn} style={{marginRight: -24}}
-                                             onClick={this.resetFilters}>{t('discard')}</div>
+                                            <h2>{t('filter')}</h2>
 
-                                        <h2>{t('filter')}</h2>
+                                            <Icon name={'close'} onClick={this.toggleFilterPopup}/>
+                                        </div>
 
-                                        <Icon name={'close'} onClick={this.toggleFilterPopup}/>
-                                    </div>
+                                        <div>
+                                            {isMobile && <div className={css.padded}>
+                                                <div className={cnb(css.inputGroup, 'flex')} style={{width: '100%'}}
+                                                     onClick={() => window.document.getElementById(selectId).click()}>
+                                                    <Icon name={'geo'}/>
+                                                    {(this.state.regions.length && this.state.filterPopupOpen) &&
+                                                        <Select className={css.customSelect} style={{width: '100%'}}
+                                                                label={''} fill
+                                                                options={this.state.regions} id={selectId}
+                                                                placeholder={t('selectRegion')}
+                                                                value={this.props.router.query.region}
+                                                                onUpdate={val => this.setRegion(val)}/>}
+                                                    <div onClick={() => this.setRegion(t('entireKZ'))}><Icon
+                                                        name={'close'}/></div>
+                                                </div>
+                                            </div>}
 
-                                    <div>
-                                        {isMobile && <div className={css.padded}>
-                                            <div className={cnb(css.inputGroup, 'flex')} style={{width: '100%'}}
-                                                 onClick={() => window.document.getElementById(selectId).click()}>
-                                                <Icon name={'geo'}/>
-                                                {this.state.regions.length &&
-                                                    <Select className={css.customSelect} style={{width: '100%'}}
-                                                            label={''} fill
-                                                            options={this.state.regions} id={selectId}
-                                                            placeholder={t('selectRegion')}
-                                                            value={this.props.router.query.region}
-                                                            onUpdate={val => this.setRegion(val)}/>}
-                                                <div onClick={() => this.setRegion(t('entireKZ'))}><Icon
-                                                    name={'close'}/></div>
+                                            <div bp={'hide@md'}>
+                                                <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
+                                                                        lock={!isMobile}>
+                                                    <MultipleRangeInput step={50}
+                                                                        from={this.props.router.query.priceFrom || this.state.priceRange.from}
+                                                                        to={this.props.router.query.priceTo || this.state.priceRange.to}
+                                                                        min={this.state.priceRange.from}
+                                                                        max={this.state.priceRange.to}
+                                                                        onUpdate={this.setPriceRange}/>
+                                                </TransparentCollapsible>
                                             </div>
-                                        </div>}
 
-                                        <div bp={'hide@md'}>
+                                            <TransparentCollapsible title={t('services')} defaultOpen={true}
+                                                                    lock={!isMobile}>
+                                                <div className={css.collapseBody}>
+                                                    {this.state.filters.leads?.map(lead =>
+                                                        <Checkbox style={{marginBottom: 8}} key={lead._id} name={lead.name}
+                                                                  icon={lead.icon}
+                                                                  value={this.props.router.query['filters[leads]']?.includes(lead._id) || false}
+                                                                  onUpdate={() => this.toggleFilter('leads', lead._id)}/>
+                                                    )}
+                                                    {this.state.filters.services?.map(service =>
+                                                        <Checkbox style={{marginBottom: 8}} key={service._id}
+                                                                  name={service.name} icon={service.icon}
+                                                                  value={this.props.router.query['filters[services]']?.includes(service._id) || false}
+                                                                  onUpdate={() => this.toggleFilter('services', service._id)}/>
+                                                    )}
+                                                </div>
+                                            </TransparentCollapsible>
+                                        </div>
+                                        <div>
+                                            <TransparentCollapsible title={t('messengers')} defaultOpen={!isMobile}
+                                                                    lock={!isMobile}>
+                                                <div className={css.collapseBody}>
+                                                    {this.state.filters.messengers?.map(messenger =>
+                                                        <Checkbox style={{marginBottom: 8}} key={messenger._id}
+                                                                  name={messenger.name} icon={messenger.icon}
+                                                                  value={this.props.router.query['filters[messengers]']?.includes(messenger._id) || false}
+                                                                  onUpdate={() => this.toggleFilter('messengers', messenger._id)}/>
+                                                    )}
+                                                </div>
+                                            </TransparentCollapsible>
+
+                                            <TransparentCollapsible title={t('roomCnt')} defaultOpen={!isMobile}
+                                                                    lock={!isMobile}>
+                                                <div className={css.collapseBody}>
+                                                    {this.state.filters.rooms?.map(room =>
+                                                        <Checkbox style={{marginBottom: 8}} key={room._id} name={room.name}
+                                                                  value={this.props.router.query['filters[rooms]']?.includes(room._id) || false}
+                                                                  onUpdate={() => this.toggleFilter('rooms', room._id)}/>
+                                                    )}
+                                                </div>
+                                            </TransparentCollapsible>
+                                        </div>
+                                        <div bp={'hide show@md'} className={css.verticalBetween}>
                                             <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
                                                                     lock={!isMobile}>
                                                 <MultipleRangeInput step={50}
@@ -378,78 +430,25 @@ class Home extends React.Component {
                                                                     max={this.state.priceRange.to}
                                                                     onUpdate={this.setPriceRange}/>
                                             </TransparentCollapsible>
+
+                                            <div className={css.fullSizeBtn}>
+                                                <Button style={{marginBottom: 8}}
+                                                        onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
+
+                                                <span className={css.resetBtn}
+                                                      onClick={this.resetFilters}>{t('discard')}</span>
+                                            </div>
                                         </div>
 
-                                        <TransparentCollapsible title={t('services')} defaultOpen={true}
-                                                                lock={!isMobile}>
-                                            <div className={css.collapseBody}>
-                                                {this.state.filters.leads?.map(lead =>
-                                                    <Checkbox style={{marginBottom: 8}} key={lead._id} name={lead.name}
-                                                              icon={lead.icon}
-                                                              value={this.props.router.query['filters[leads]']?.includes(lead._id) || false}
-                                                              onUpdate={() => this.toggleFilter('leads', lead._id)}/>
-                                                )}
-                                                {this.state.filters.services?.map(service =>
-                                                    <Checkbox style={{marginBottom: 8}} key={service._id}
-                                                              name={service.name} icon={service.icon}
-                                                              value={this.props.router.query['filters[services]']?.includes(service._id) || false}
-                                                              onUpdate={() => this.toggleFilter('services', service._id)}/>
-                                                )}
+                                        {isMobile && <div className={css.bottomSection}>
+                                            <div className={css.fullSizeBtn}>
+                                                <Button style={{marginBottom: 8}}
+                                                        onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
                                             </div>
-                                        </TransparentCollapsible>
+                                        </div>}
                                     </div>
-                                    <div>
-                                        <TransparentCollapsible title={t('messengers')} defaultOpen={!isMobile}
-                                                                lock={!isMobile}>
-                                            <div className={css.collapseBody}>
-                                                {this.state.filters.messengers?.map(messenger =>
-                                                    <Checkbox style={{marginBottom: 8}} key={messenger._id}
-                                                              name={messenger.name} icon={messenger.icon}
-                                                              value={this.props.router.query['filters[messengers]']?.includes(messenger._id) || false}
-                                                              onUpdate={() => this.toggleFilter('messengers', messenger._id)}/>
-                                                )}
-                                            </div>
-                                        </TransparentCollapsible>
-
-                                        <TransparentCollapsible title={t('roomCnt')} defaultOpen={!isMobile}
-                                                                lock={!isMobile}>
-                                            <div className={css.collapseBody}>
-                                                {this.state.filters.rooms?.map(room =>
-                                                    <Checkbox style={{marginBottom: 8}} key={room._id} name={room.name}
-                                                              value={this.props.router.query['filters[rooms]']?.includes(room._id) || false}
-                                                              onUpdate={() => this.toggleFilter('rooms', room._id)}/>
-                                                )}
-                                            </div>
-                                        </TransparentCollapsible>
-                                    </div>
-                                    <div bp={'hide show@md'} className={css.verticalBetween}>
-                                        <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
-                                                                lock={!isMobile}>
-                                            <MultipleRangeInput step={50}
-                                                                from={this.props.router.query.priceFrom || this.state.priceRange.from}
-                                                                to={this.props.router.query.priceTo || this.state.priceRange.to}
-                                                                min={this.state.priceRange.from}
-                                                                max={this.state.priceRange.to}
-                                                                onUpdate={this.setPriceRange}/>
-                                        </TransparentCollapsible>
-
-                                        <div className={css.fullSizeBtn}>
-                                            <Button style={{marginBottom: 8}}
-                                                    onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
-
-                                            <span className={css.resetBtn}
-                                                  onClick={this.resetFilters}>{t('discard')}</span>
-                                        </div>
-                                    </div>
-
-                                    {isMobile && <div className={css.bottomSection}>
-                                        <div className={css.fullSizeBtn}>
-                                            <Button style={{marginBottom: 8}}
-                                                    onClick={this.toggleFilterPopup}>{t('seeNVariants', this.state.foundCnt)}</Button>
-                                        </div>
-                                    </div>}
-                                </div>
-                            </Popup>
+                                </Popup>
+                            </div>
                         </div>
                     </div>
 
@@ -611,7 +610,7 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
-                                    {worker.kind === 'salon' ? <div bp={'12 7@md'} className={css.padded}>
+                                    {worker.kind === 'salon' ? <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
                                         <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
 
                                         <div className={css.invisibleScroll}>
@@ -642,7 +641,7 @@ class Home extends React.Component {
                                         <ParameterView {...worker.characteristics} />
                                     </div>}
 
-                                    <div bp={'12 7@md'} className={css.padded} style={{marginRight: 0}}>
+                                    <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
                                         <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
 
                                         <div className={css.invisibleScroll}>

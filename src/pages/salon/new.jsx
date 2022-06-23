@@ -257,7 +257,7 @@ class NewSalonPage extends React.Component {
             }
 
             if (this.state.model.kind === 'master' && !this.state.model.masters[0].name.length) {
-                await this.setState({
+                this.setState({
                     model: {
                         ...this.state.model,
                         masters: [Object.assign({}, this.state.model.masters[0], {name: this.state.model.name})]
@@ -266,7 +266,7 @@ class NewSalonPage extends React.Component {
             }
         }
 
-        await this.setState({step})
+        this.setState({step})
 
         if (step === 0) {
             let userLocation

@@ -136,27 +136,30 @@ class SalonView extends React.Component {
                         </div>
                     )}
                 </div>,
-                reviews: this.state.reviewList.length > 0 && <div bp={'grid'} style={{gridGap: 32}}>
+                reviews: this.state.reviewList.length > 0 && <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
+                    <div>
                     <div bp={'12 6@md'}>
-                        <div className="fit" bp={'grid'} style={{gridGap: 12}}>
-                            <div bp={'12 last@md'}>
-                                <div bp={'grid 4'} style={{gridGap: 3}}>
-                                    <TagCard title={t('salonRating')}
-                                                           value={this.state.reviews.avg.toFixed(1)}
-                                                           dark={true}
-                                                           accent={true}/>
-                                    <TagCard title={t('ratings')} value={this.state.reviews.count}/>
-                                    <TagCard title={t('reviewCnt')} value={this.state.reviews.count}/>
+                            <div className="fit" bp={'grid'} style={{gridGap: 12}}>
+                                <div bp={'12 last@md'}>
+                                    <div bp={'grid 4'} style={{gridGap: 3}}>
+                                        <TagCard title={t('salonRating')}
+                                                 value={this.state.reviews.avg.toFixed(1)}
+                                                 dark={true}
+                                                 accent={true}/>
+                                        <TagCard title={t('ratings')} value={this.state.reviews.ratingCount}/>
+                                        <TagCard title={t('reviewCnt')} value={this.state.reviews.reviewCount}/>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div bp={'12'} style={{marginBottom: isMobile ? 0 : -28}}><Button size={'fill'}>{t('addReview')}</Button></div>
+                                <div bp={'12'} style={{marginBottom: isMobile ? 0 : -28}}><Button
+                                    size={'fill'}>{t('addReview')}</Button></div>
+                            </div>
                         </div>
-                    </div>
-                    <div bp={'12 6@md'}>
-                        {this.state.reviewList.map((review, i) =>
-                            <ReviewBlock {...review} key={i}/>
-                        )}
+                        <div bp={'12 6@md'}>
+                            {this.state.reviewList.map((review, i) =>
+                                <ReviewBlock {...review} key={i}/>
+                            )}
+                        </div>
                     </div>
                 </div>
             },
@@ -173,7 +176,7 @@ class SalonView extends React.Component {
                     title: t('serviceCost'),
                     cnt: this.state.salon.programs?.length
                 },
-                reviews: this.state.reviews && {
+                reviews: this.state.reviews.count > 0 && {
                     title: t('reviews'),
                     cnt: this.state.reviews.count
                 }
@@ -260,9 +263,9 @@ class SalonView extends React.Component {
 
                                 <div bp={'5'} style={{paddingTop: 8}}
                                      className="flex justify-end gap-12">
-                                    {this.state.reviews ? <div className={css.avgRating}>
+                                    {this.state.reviews.count > 0 ? <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : '-'}</span>
+                                        <span>{this.state.reviews.avg > 0 ? this.state.reviews.avg.toFixed(1) : '-'}</span>
                                     </div> : <div>&nbsp;</div>}
 
                                     <Button size={'small'}>{t('onTheMap')}</Button>
@@ -282,7 +285,7 @@ class SalonView extends React.Component {
                                     <div>{this.state.salon.region?.name}</div>
                                 </div>
 
-                                {this.state.reviews && <div>
+                                {this.state.reviews.count > 0 && <div>
                                     <div>{t('reviews').toLowerCase()}</div>
                                     <Link href={{
                                         query: Object.assign({}, this.props.router.query, {
@@ -291,15 +294,15 @@ class SalonView extends React.Component {
                                         hash: '#salonTab'
                                     }}>
                                         <div
-                                            className={css.linkUnderline}>{this.state.reviews.count || 0} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                                            className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
                                         </div>
                                     </Link>
                                 </div>}
 
-                                {this.state.reviews && <div bp={'hide@md'}>
+                                {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
                                     <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : '-'}</span>
+                                        <span>{this.state.reviews.avg.toFixed(1)}</span>
                                     </div>
 
                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
@@ -309,7 +312,8 @@ class SalonView extends React.Component {
 
                             <div bp={'5 show@md hide'}>
                                 <div className="flex column justify-between" style={{marginTop: 14}}>
-                                    <p className={'subtitle2'} style={{marginBottom: 4}}>{Object.keys(this.state.salon.social || []).some(i => this.state.salon.social[i].length) && t('socialMedia')}</p>
+                                    <p className={'subtitle2'}
+                                       style={{marginBottom: 4}}>{Object.keys(this.state.salon.social || []).some(i => this.state.salon.social[i].length) && t('socialMedia')}</p>
                                     <div className={'flex align-end fit'}
                                          style={{paddingBottom: 16, paddingRight: 16}}>
                                         <div className={css.socialBlock}>

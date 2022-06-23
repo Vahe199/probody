@@ -61,6 +61,10 @@ export default class TextArea extends React.Component {
     }
 
     validate(e) {
+        if (e.target.value.length === 0) {
+            return
+        }
+
         if (this.props.min && e.target.value.length < this.props.min) {
             this.setState({
                 errorMessage: this.context.t('lengthMustNotBeLessThan') + ' ' + this.props.min

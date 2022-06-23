@@ -83,9 +83,12 @@ export default class TextInput extends React.Component {
     }
 
     async validateInput(e) {
-        console.log('blurred', this.props.type)
         if (this.props.onBlur) {
             this.props.onBlur(e)
+        }
+
+        if (this.state.value.length === 0) {
+            return
         }
 
         switch (this.props.type) {
@@ -99,6 +102,10 @@ export default class TextInput extends React.Component {
                 break
 
             case 'phone':
+                if (this.state.value === '+7') {
+                    break
+                }
+
                 if (!isValidPhoneNumber(this.state.value, 'KZ')) {
                     await this.setState({errored: true, success: false, errorMsg: this.context.t('incorrectPhone')})
                 } else {
@@ -168,8 +175,8 @@ export default class TextInput extends React.Component {
                                          pattern={this.props.type === 'phone' || this.props.type === 'number' ? '\\d*' : ''}
                                          onBlur={this.validateInput}
                                          type={this.state.visible ? 'text' : this.props.type} value={this.state.value}
-                                         autoComplete={this.props.autoComplete} autoFocus={this.props.autoFocus}
-                                         onChange={this.handleUpdate}
+                                         autoComplete={this.props.autoComplete}
+                                         onChange={this.handleUpdate} autoFocus={false}
                                          disabled={(this.state.locked || this.props.disabled)}
                                          placeholder={this.props.placeholder} data-type={this.props.type}/>
                         {this.props.type === 'password' &&
