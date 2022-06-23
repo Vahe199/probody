@@ -20,6 +20,7 @@ class ImageCarousel extends React.Component {
     static propTypes = {
         pics: PropTypes.arrayOf(PropTypes.string).isRequired,
         link: PropTypes.any,
+        height: PropTypes.number
     }
 
     setSlide(index) {
@@ -30,12 +31,19 @@ class ImageCarousel extends React.Component {
 
     render() {
         const {theme, isMobile} = this.context
+        let height
 
-        const height = isMobile ? 250 : 350;
+        if (!this.props.height) {
+            height = isMobile ? 250 : 350;
+        } else {
+            height = this.props.height
+        }
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb(this.props.className, 'overflow-hidden', 'relative')} onClick={() => {
-
+                if (this.props.link) {
+                    this.props.router.push(this.props.link)
+                }
             }}>
                 <div ref={this.state.slider} className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>

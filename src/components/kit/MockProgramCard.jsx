@@ -11,7 +11,7 @@ export default class MockProgramCard extends React.Component {
 
     static propTypes = {
         cnt: PropTypes.number.isRequired,
-        link: PropTypes.string.isRequired
+        link: PropTypes.any.isRequired
     }
 
     render() {

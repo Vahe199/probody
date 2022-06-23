@@ -6,7 +6,7 @@
   justify-content: space-around;
   align-items: center;
   user-select: none;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 .bgTertiary {
@@ -26,6 +26,14 @@
     background: t('bg-secondlayer') !important;
     color: t('text-main') !important;
   }
+
+  border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 14px 20px;
+  }
 }
 
 .page {
@@ -36,8 +44,10 @@
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    border-radius: 16px;
+    border-radius: 8px;
     margin: 0 4px;
+    font-size: 20px;
+    font-weight: 600;
 
     &.current {
       background: t('secondlayer-accent-bg');

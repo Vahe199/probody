@@ -12,6 +12,7 @@
   visibility: hidden;
   position: absolute;
   z-index: 10;
+  overflow: auto;
 
   @include themify() {
     background: t('body-bg');

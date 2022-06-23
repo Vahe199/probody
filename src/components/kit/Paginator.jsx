@@ -16,31 +16,35 @@ export default class Paginator extends React.Component {
     }
 
     render() {
-        const {theme, t} = this.context
+        const {theme, t, isMobile} = this.context
 
         const pages = [];
 
-        for (let i = 1; i <= this.props.pageCnt; i++) {
-            pages.push(i);
+        if (isMobile) {
+            pages.push(1, 2, '...', this.props.pageCnt)
+        } else {
+            for (let i = 1; i <= this.props.pageCnt; i++) {
+                pages.push(i);
+            }
         }
 
         return <div className={css['theme--' + theme]} style={this.props.style}>
             <div className="flex justify-between" style={{gap: 6}}>
                 <div>
                     <Button isDisabled={this.props.page === 1} className={css.btn} onClick={() => this.props.onChange(this.props.page - 1)} color={'tertiary'}>
-                        <Icon name={'arrow_left'} style={{width: 18, height: 12, marginRight: 8}} />
-                        {t('backward')}
+                        <Icon name={'arrow_left'} style={{width: 18, height: 12, marginRight: isMobile ? 0 : 8}} />
+                        {isMobile ? '' : t('backward')}
                     </Button>
                 </div>
                 <div className={cnb(css.pageList, theme === 'dark' ? css.bgSecondlayer : css.bgTertiary)}>
                     {pages.map(page =>
-                        <div onClick={() => this.props.onChange(page)} key={page} className={cnb(css.page, page === this.props.page ? css.current : '')}>{page}</div>
+                        <div onClick={() => page !== '...' && this.props.onChange(page)} key={page} className={cnb(css.page, page === this.props.page ? css.current : '')}>{page}</div>
                     )}
                 </div>
                 <div>
                     <Button isDisabled={this.props.page === this.props.pageCnt} className={css.btn} onClick={() => this.props.onChange(this.props.page + 1)} color={'tertiary'}>
-                        {t('forward')}
-                        <Icon name={'arrow_right'} style={{width: 18, height: 12, marginLeft: 8}} />
+                        {isMobile ? '' : t('forward')}
+                        <Icon name={'arrow_right'} style={{width: 18, height: 12, marginLeft: isMobile ? 0 : 8}} />
                     </Button>
                 </div>
             </div>

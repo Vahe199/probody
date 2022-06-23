@@ -24,6 +24,7 @@ import TabPanels from "../../components/kit/TabPanels";
 import Program from "../../components/kit/Program.jsx";
 import MasterDetail from "../../components/kit/MasterDetail";
 import ReviewBlock from "../../components/ReviewBlock";
+import Collapsible from "../../components/kit/Collapsible.jsx";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -108,14 +109,15 @@ class SalonView extends React.Component {
 
     render() {
         const {t, theme, isMobile} = this.context
-        const themeAccent = theme === 'dark' ? 'light' : 'dark'
+        const themeAccent = theme === 'dark' ? 'light' : 'dark',
+            photoHeight = this.state.salon.kind === 'salon' ? (isMobile ? 230 : 250) : (isMobile ? 270 : 370)
 
         const additionalSections = {
                 photos: <div bp={'grid'}>
                     {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
                         <div style={{
                             backgroundImage: `url(${photo})`,
-                            height: this.state.salon.kind === 'salon' ? 230 : 350,
+                            height: photoHeight,
                         }} bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}
                              className={css.photo}>&nbsp;</div>
                     )}
@@ -234,7 +236,7 @@ class SalonView extends React.Component {
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
-                                    {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
+                                    {isMobile ? '' : t('sendMessage')}
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
@@ -417,12 +419,22 @@ class SalonView extends React.Component {
                     {(this.state.salon.photos && !isMobile) &&
                         <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
 
-                    {isMobile &&
-                        <div className={'responsive-content'}>{Object.keys(additionalSections).map((sectionName, i) =>
-                            <div key={i} style={{marginBottom: 24}}>
-                                <h2 style={{marginBottom: 18}}>{tabsHead[sectionName]?.title}</h2>
-                                {additionalSections[sectionName]}
+                    {(isMobile && this.state.salon.description) &&
+                            <div className={cnb(css.cardRoot, css.padded, css.textSectionDecorator)} style={{marginBottom: 24}}>
+                                <h2 style={{marginBottom: 16}}>{t('description')}</h2>
+                                <TextSection style={{padding: 0}} lines={5}>
+                                    {this.state.salon.description}
+                                </TextSection>
                             </div>
+                    }
+
+                    {isMobile &&
+                        <div>{Object.keys(additionalSections).map((sectionName, i) =>
+                            tabsHead[sectionName] ? <div key={i} style={{marginBottom: 24}}>
+                                <Collapsible count={tabsHead[sectionName]?.count} title={tabsHead[sectionName]?.title} defaultOpen={i === 0}>
+                                    <div className={'responsive-content'} style={{marginTop: 18}}>{additionalSections[sectionName]}</div>
+                                </Collapsible>
+                            </div> : ''
                         )}</div>}
                 </div>
                 <div bp={'12 4@md'}>
@@ -443,7 +455,7 @@ class SalonView extends React.Component {
 
                     return <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
-                            <ImageCarousel link={worker.url} pics={worker.photos}/>
+                            <ImageCarousel height={this.state.salon.kind === 'master' ? (isMobile ? 470 : 520) : (isMobile ? 230 : 275)} link={worker.url} pics={worker.photos}/>
 
                             <div className={css.padded}>
                                 {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -473,7 +485,7 @@ class SalonView extends React.Component {
 
                     return <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
-                            <ImageCarousel link={worker.url} pics={worker.photos}/>
+                            <ImageCarousel height={isMobile ? 470 : 520} link={worker.url} pics={worker.photos}/>
 
                             <div className={css.padded}>
                                 {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -489,6 +501,29 @@ class SalonView extends React.Component {
                     </div>
                 })}
             </div>
+
+            {(this.state.salon.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom)}>
+                <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                    <Button>
+                        <Icon name={'call'}/>
+                        {t('call')}
+                    </Button>
+                </a></div>
+                <div><a target="_blank"
+                        href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
+                    <Button color={'tertiary'}>
+                        <Icon name={'wa_light'}/>
+                        {isMobile ? '' : t('sendMessage')}
+                    </Button>
+                </a></div>
+                {this.state.salon.messengers.tg && <div><a target="_blank"
+                                                           href={'https://t.me/' + this.state.salon.messengers.tg}>
+                    <Button color={'tertiary'}>
+                        <Icon name={'tg_light'}/>
+                        {t('sendMessage')}
+                    </Button>
+                </a></div>}
+            </div>}
         </div>
     }
 }

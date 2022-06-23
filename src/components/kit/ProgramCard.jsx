@@ -14,7 +14,7 @@ export default class ProgramCard extends React.Component {
         title: PropTypes.string.isRequired,
         duration: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
-        link: PropTypes.string
+        link: PropTypes.any
     }
 
     render() {
