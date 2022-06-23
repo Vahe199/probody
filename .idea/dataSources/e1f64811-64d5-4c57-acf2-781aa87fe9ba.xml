@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="probodydb@probody.kz">
+  <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.39">
+    <root id="1">
+      <ServerVersion>5.0.9</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="probodydb">
+      <Current>1</Current>
+    </schema>
+    <table id="3" parent="2" name="articleTags"/>
+    <table id="4" parent="2" name="authorizedTokens"/>
+    <table id="5" parent="2" name="blogArticles"/>
+    <table id="6" parent="2" name="defaultPrograms"/>
+    <table id="7" parent="2" name="faq"/>
+    <table id="8" parent="2" name="faqResponse"/>
+    <table id="9" parent="2" name="leads"/>
+    <table id="10" parent="2" name="massageTypes"/>
+    <table id="11" parent="2" name="messengers"/>
+    <table id="12" parent="2" name="regions"/>
+    <table id="13" parent="2" name="reviews"/>
+    <table id="14" parent="2" name="scheduleRaises"/>
+    <table id="15" parent="2" name="services"/>
+    <table id="16" parent="2" name="users"/>
+    <table id="17" parent="2" name="vacancies"/>
+    <table id="18" parent="2" name="workers"/>
+    <column id="19" parent="4" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="20" parent="4" name="expires">
+      <DataType>ISODate|91s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="21" parent="4" name="token">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="22" parent="4" name="userId">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="23" parent="6" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="24" parent="6" name="description">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="25" parent="6" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="26" parent="7" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="27" parent="7" name="description">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="28" parent="7" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="29" parent="9" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="30" parent="9" name="icon">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="31" parent="9" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="32" parent="10" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="33" parent="10" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="34" parent="11" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="35" parent="11" name="icon">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="36" parent="11" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="37" parent="12" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="38" parent="12" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="39" parent="13" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="40" parent="13" name="avg">
+      <DataType>Double|8s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="41" parent="13" name="interior">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="42" parent="13" name="massage">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="43" parent="13" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="44" parent="13" name="service">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="45" parent="13" name="target">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="46" parent="13" name="text">
+      <DataType>String|12s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="47" parent="15" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="48" parent="15" name="icon">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="49" parent="15" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="50" parent="16" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="51" parent="16" name="approvedEmail">
+      <DataType>Boolean|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="52" parent="16" name="balance">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="53" parent="16" name="createdAt">
+      <DataType>ISODate|91s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="54" parent="16" name="email">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="55" parent="16" name="nickName">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="56" parent="16" name="password">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="57" parent="16" name="role">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="58" parent="16" name="updatedAt">
+      <DataType>ISODate|91s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="59" parent="16" name="paymentCode">
+      <DataType>String|12s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="60" parent="16" name="phone">
+      <DataType>String|12s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="61" parent="18" name="_id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="62" parent="18" name="address">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="63" parent="18" name="avgCost">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="64" parent="18" name="characteristics">
+      <DataType>Object|4999544s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="65" parent="18" name="createdAt">
+      <DataType>ISODate|91s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="66" parent="18" name="description">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="67" parent="18" name="host">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="68" parent="18" name="isVerified">
+      <DataType>Boolean|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="69" parent="18" name="massageTypes">
+      <DataType>list|4999545s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="70" parent="18" name="name">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="71" parent="18" name="parent">
+      <DataType>ObjectId|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="72" parent="18" name="phone">
+      <DataType>String|12s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="73" parent="18" name="rooms">
+      <DataType>Int32|4s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="74" parent="18" name="updatedAt">
+      <DataType>ISODate|91s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="75" parent="18" name="characteristics.age">
+      <DataType>String|12s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="76" parent="18" name="kind">
+      <DataType>String|12s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="77" parent="18" name="messengers">
+      <DataType>Object|4999544s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="78" parent="18" name="photos">
+      <DataType>Array|2003s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="79" parent="18" name="services">
+      <DataType>list|4999545s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="80" parent="18" name="workDays">
+      <DataType>list|4999545s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="81" parent="18" name="characteristics.bust">
+      <DataType>String|12s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="82" parent="18" name="lastRaise">
+      <DataType>ISODate|91s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="83" parent="18" name="messengers.tg">
+      <DataType>String|12s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="84" parent="18" name="programs">
+      <DataType>list|4999545s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="85" parent="18" name="slaves">
+      <DataType>list|4999545s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="86" parent="18" name="workHours">
+      <DataType>Object|4999544s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="87" parent="18" name="characteristics.eyes">
+      <DataType>String|12s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="88" parent="18" name="messengers.wa">
+      <DataType>String|12s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="89" parent="18" name="programs._id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="90" parent="18" name="slug">
+      <DataType>String|12s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="91" parent="18" name="workHours.from">
+      <DataType>String|12s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="92" parent="18" name="characteristics.hair">
+      <DataType>String|12s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="93" parent="18" name="leads">
+      <DataType>list|4999545s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="94" parent="18" name="programs.classicCnt">
+      <DataType>Int32|4s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="95" parent="18" name="social">
+      <DataType>Object|4999544s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="96" parent="18" name="workHours.roundclock">
+      <DataType>Boolean|12s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="97" parent="18" name="characteristics.height">
+      <DataType>String|12s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="98" parent="18" name="location">
+      <DataType>Object|4999544s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="99" parent="18" name="programs.cost">
+      <DataType>Int32|4s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="100" parent="18" name="social.inst">
+      <DataType>String|12s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="101" parent="18" name="workHours.to">
+      <DataType>String|12s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="102" parent="18" name="characteristics.show">
+      <DataType>Boolean|12s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="103" parent="18" name="location._id">
+      <DataType>ObjectId|12s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="104" parent="18" name="programs.description">
+      <DataType>String|12s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="105" parent="18" name="social.tgCh">
+      <DataType>String|12s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="106" parent="18" name="characteristics.weight">
+      <DataType>String|12s</DataType>
+      <Position>8</Position>
+    </column>
+    <column id="107" parent="18" name="location.coordinates">
+      <DataType>Array|2003s</DataType>
+      <Position>8</Position>
+    </column>
+    <column id="108" parent="18" name="programs.duration">
+      <DataType>Int32|4s</DataType>
+      <Position>8</Position>
+    </column>
+    <column id="109" parent="18" name="social.vk">
+      <DataType>String|12s</DataType>
+      <Position>8</Position>
+    </column>
+    <column id="110" parent="18" name="location.type">
+      <DataType>String|12s</DataType>
+      <Position>9</Position>
+    </column>
+    <column id="111" parent="18" name="programs.eroticCnt">
+      <DataType>Int32|4s</DataType>
+      <Position>9</Position>
+    </column>
+    <column id="112" parent="18" name="social.ws">
+      <DataType>String|12s</DataType>
+      <Position>9</Position>
+    </column>
+    <column id="113" parent="18" name="programs.name">
+      <DataType>String|12s</DataType>
+      <Position>10</Position>
+    </column>
+    <column id="114" parent="18" name="programs.relaxCnt">
+      <DataType>Int32|4s</DataType>
+      <Position>11</Position>
+    </column>
+    <column id="115" parent="18" name="raises">
+      <DataType>list|4999545s</DataType>
+      <Position>12</Position>
+    </column>
+    <column id="116" parent="18" name="region">
+      <DataType>ObjectId|12s</DataType>
+      <Position>13</Position>
+    </column>
+  </database-model>
+</dataSource>
