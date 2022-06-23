@@ -344,7 +344,7 @@ class SalonView extends React.Component {
                             <div bp={'12 6@md'} className={css.shortInfoBlock}>
                                 <div>
                                     <div>{t('workSchedule').toLowerCase()}</div>
-                                    <div>{this.state.salon.workHours.roundclock ? t('roundclock') : this.state.salon.workHours?.from + '-' + this.state.salon.workHours?.to}</div>
+                                    <div>{this.state.salon.workHours.roundclock ? t('roundclock').toLowerCase() : this.state.salon.workHours?.from + '-' + this.state.salon.workHours?.to}</div>
                                 </div>
 
                                 <div>
@@ -431,7 +431,7 @@ class SalonView extends React.Component {
                     {isMobile &&
                         <div>{Object.keys(additionalSections).map((sectionName, i) =>
                             tabsHead[sectionName] ? <div key={i} style={{marginBottom: 24}}>
-                                <Collapsible count={tabsHead[sectionName]?.count} title={tabsHead[sectionName]?.title} defaultOpen={i === 0}>
+                                <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title} defaultOpen={i === 0}>
                                     <div className={'responsive-content'} style={{marginTop: 18}}>{additionalSections[sectionName]}</div>
                                 </Collapsible>
                             </div> : ''
