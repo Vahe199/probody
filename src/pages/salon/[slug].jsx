@@ -84,7 +84,7 @@ class SalonView extends React.Component {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
             this.setState({
                 salon: res.worker[0],
-                reviews: res.reviews[0],
+                reviews: res.reviews,
                 allPrograms: res.allPrograms
             })
 

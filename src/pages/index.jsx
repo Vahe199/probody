@@ -584,7 +584,7 @@ class Home extends React.Component {
                                                 {worker.reviews && <div bp={'hide@md'}>
                                                     {worker.reviews ? <div className={css.avgRating}>
                                                         <Icon name={'star'}/>
-                                                        <span>{worker.reviews.avg}</span>
+                                                        <span>{worker.reviews?.avg ? worker.reviews.avg.toFixed(1) : '–'}</span>
                                                     </div> : <div>&nbsp;</div>}
 
                                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
