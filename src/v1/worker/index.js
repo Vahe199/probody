@@ -120,6 +120,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
 router.get('/:slug', async (req, res) => {
     try {
         const worker = await Worker.findOne({slug: req.params.slug}, "kind")
+        console.log(worker)
 
         if (!worker) {
             return res.status(404).json({
@@ -230,7 +231,7 @@ router.get('/:slug', async (req, res) => {
             worker: await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
-                avg: aggregatedReviews[0].avg,
+                avg: aggregatedReviews[0]?.avg,
                 count: ratingCount + reviewCount,
                 reviewCount,
                 ratingCount
