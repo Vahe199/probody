@@ -181,7 +181,7 @@ class BlogPage extends React.Component {
                     "updatedAt": "2022-06-07T10:22:51.952Z"
                 },
             ],
-            "pageCount": 7
+            "pageCount": 45
         })
         //fetches data from the server
     }

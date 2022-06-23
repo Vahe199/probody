@@ -2,7 +2,6 @@
 
 .pageList {
   display: flex;
-  flex-grow: 1;
   justify-content: space-around;
   align-items: center;
   user-select: none;
@@ -39,7 +38,7 @@
 .page {
   @include themify() {
     cursor: pointer;
-    width: 85%;
+    width: 50px;
     height: 85%;
     align-items: center;
     justify-content: center;
