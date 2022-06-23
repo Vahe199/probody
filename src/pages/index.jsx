@@ -195,6 +195,8 @@ class Home extends React.Component {
         delete query["priceFrom"]
         delete query["priceTo"]
 
+        query.page = 1
+
         this.props.router.push({
             query
         })
@@ -213,6 +215,8 @@ class Home extends React.Component {
         } else {
             query["filters[" + scope + "]"] = name
         }
+
+        query.page = 1
 
         this.props.router.push({
             query
