@@ -232,7 +232,7 @@ router.get('/:slug', async (req, res) => {
             worker: await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
-                avg: aggregatedReviews.avg,
+                avg: aggregatedReviews[0].avg,
                 count: ratingCount + reviewCount,
                 reviewCount,
                 ratingCount
