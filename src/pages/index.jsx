@@ -285,7 +285,7 @@ class Home extends React.Component {
 
                 <div className="responsive-content">
                     <p className="subtitle additional-text non-selectable">{t('greet')}</p>
-                    <h1>{t('qWhatToFindForYou')}</h1>
+                    <h1 className={'text-xl'}>{t('qWhatToFindForYou')}</h1>
                 </div>
 
                 <br className={'non-selectable'}/>
@@ -549,7 +549,7 @@ class Home extends React.Component {
                                                         <span>{worker.reviews?.avg ? worker.reviews.avg.toFixed(1) : '–'}</span>
                                                     </div> : <div>&nbsp;</div>}
 
-                                                    <Button size={'small'}>{t('onTheMap')}</Button>
+                                                    <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                                 </div>
                                             </div>
                                         </div>}

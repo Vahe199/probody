@@ -4,9 +4,31 @@ import {GlobalContext} from "../contexts/Global.js";
 import StatsInfoBlock from "./kit/StatsInfoBlock.jsx";
 import css from '../styles/about-us.module.scss';
 import ShareInSocialMedia from "./ShareInSocialMedia.jsx";
+import APIRequests from "../helpers/APIRequests.js";
 
 export default class AboutUsSection extends React.Component {
     static contextType = GlobalContext;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            avg: 0,
+            reviewCnt: 0,
+            ratingCnt: 0
+        }
+    }
+
+
+    componentDidMount() {
+        APIRequests.getReviewStats().then(reviews => {
+            this.setState({
+                avg: reviews.avg[0].avg,
+                ratingCnt: reviews.ratingCnt,
+                reviewCnt: reviews.reviewCnt
+            })
+        })
+    }
 
     render() {
         const {t, isMobile, theme} = this.context;
@@ -17,46 +39,46 @@ export default class AboutUsSection extends React.Component {
                     <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: 24}}>
                     </TextSection>
 
-                    <div bp={'show hide@md'} style={{marginBottom: 24}}>
+                    {isMobile && <div style={{marginBottom: 24}}>
                         <StatsInfoBlock title={t('siteStatsTitle')} stats={[
                             {
                                 title: t('avgRating'),
-                                value: '4.8',
+                                value: this.state.avg.toFixed(1),
                                 accent: true
                             },
                             {
                                 title: t('totalRatings'),
-                                value: '376'
+                                value: this.state.ratingCnt
                             },
                             {
                                 title: t('totalReviews'),
-                                value: '152'
+                                value: this.state.reviewCnt
                             }
                         ]}/>
-                    </div>
+                    </div>}
 
-                    <TextSection style={{marginTop: isMobile ? 24 : undefined}} dangerouslySetInnerHTML={{__html: t('seoText2')}}>
+                    <TextSection dangerouslySetInnerHTML={{__html: t('seoText2')}}>
                     </TextSection>
                 </div>
                 <div bp={'first@md 12 4@md'}>
-                    <div bp={'hide show@md'} style={{marginBottom: 24, display: isMobile ? undefined : 'block !important'}}>
+                    {!isMobile && <div style={{marginBottom: 24}}>
                         <StatsInfoBlock title={t('siteStatsTitle')} stats={[
                             {
                                 title: t('avgRating'),
-                                value: '4.8',
+                                value: this.state.avg.toFixed(1),
                                 accent: theme === 'light'
                             },
                             {
                                 title: t('totalRatings'),
-                                value: '376'
+                                value: this.state.ratingCnt
                             },
                             {
                                 title: t('totalReviews'),
-                                value: '152'
+                                value: this.state.reviewCnt
                             }
                         ]}/>
-                    </div>
-                    <ShareInSocialMedia />
+                    </div>}
+                    <ShareInSocialMedia/>
                 </div>
             </section>
         </div>

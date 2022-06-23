@@ -165,13 +165,19 @@
   }
 }
 
+@media (min-width: 480px) {
+  .switchRoot {
+    width: 248px !important;
+  }
+}
+
 .switchRoot {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: Lack, sans-serif;
   cursor: pointer;
   width: 100%;
-  max-width: 350px;
   border-radius: 16px;
   user-select: none;
   padding: 4px;

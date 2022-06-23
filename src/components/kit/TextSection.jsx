@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import css from '../../styles/kit/textsection.module.scss'
 import {GlobalContext} from "../../contexts/Global.js";
+import {cnb} from "cnbuilder";
 
 class TextSection extends React.Component {
     lineHeight = 24
@@ -47,7 +48,7 @@ class TextSection extends React.Component {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <section className={css.text} style={this.props.style}>
+            <section className={cnb(css.text, this.props.className)} style={this.props.style}>
                 <div dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} ref={this.state.textRef} style={{
                     lineHeight: this.lineHeight + 'px',
                     maxHeight: this.state.isOpen ? this.state.textRef.current?.scrollHeight : this.lineHeight * this.props.lines

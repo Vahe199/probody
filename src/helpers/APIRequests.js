@@ -22,6 +22,10 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/worker/top3`)).json()
     }
 
+    static async getReviewStats() {
+        return (await fetch(`${API_URL}/review`)).json()
+    }
+
     static async getLeads() {
         return (await fetch(`${API_URL}/lead`)).json()
     }
