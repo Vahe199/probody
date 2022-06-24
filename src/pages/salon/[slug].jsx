@@ -153,22 +153,22 @@ class SalonView extends React.Component {
                         </div>
                     )}
                 </div>,
-                reviews: this.state.reviewList.length > 0 && <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
+                reviews: <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
                     <div>
                         <div className="flex column" style={{gap: 12}}>
                             <div>
                                 <div bp={'grid 4'} style={{gridGap: 3}}>
                                     <TagCard title={t('salonRating')}
-                                             value={this.state.reviews.avg.toFixed(1)}
+                                             value={this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : 0}
                                              dark={true}
                                              accent={true}/>
-                                    <TagCard title={t('ratings')} value={this.state.reviews.ratingCount}/>
-                                    <TagCard title={t('reviewCnt')} value={this.state.reviews.reviewCount}/>
+                                    <TagCard title={t('ratings')} value={this.state.reviews?.ratingCount || 0}/>
+                                    <TagCard title={t('reviewCnt')} value={this.state.reviews?.reviewCount || 0}/>
                                 </div>
                             </div>
 
                             <div><Button
-                                size={'fill'}>{t('addReview')}</Button></div>
+                                size={'fill'}>{this.state.reviews.avg ? t('addReview') : t('addFirstReview')}</Button></div>
                         </div>
                     </div>
                     <div>
@@ -193,9 +193,9 @@ class SalonView extends React.Component {
                     title: t('serviceCost'),
                     cnt: this.state.salon.programs?.length
                 },
-                reviews: this.state.reviews.count > 0 && {
+                reviews: {
                     title: t('reviews'),
-                    cnt: this.state.reviews.count
+                    cnt: this.state.reviews?.count || 0
                 }
             }
 

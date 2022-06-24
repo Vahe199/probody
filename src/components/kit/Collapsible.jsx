@@ -55,7 +55,7 @@ export default class Collapsible extends React.Component {
             <div onClick={this.toggle} className={cnb(css.head, this.props.value ? css.checked : '')}>
                 <div className={'flex grow-1 vertical-center'}>
                     {this.props.selectable && <div ref={this.state.checkboxRef}><Checkbox onUpdate={this.props.onUpdate} value={this.props.value} /></div>}
-                    {this.props.count && <span className={css.cnt}>{this.props.count}</span>}
+                    {this.props.count !== undefined && <span className={css.cnt}>{this.props.count}</span>}
                     <span className={'subtitle2 fullwidth'} style={{marginLeft: 12}}>{this.props.title}</span>
                 </div>
                 <div className={'flex vertical-center'}>

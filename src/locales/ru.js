@@ -266,5 +266,6 @@ export default {
     reviewDeclination: ['отзыв', 'отзыва', 'отзывов'],
     otherSalonMasters: 'Другие массажистки салона',
     otherSalonArticles: 'Другие анкеты салона',
-    viewAllArticles: 'Смотреть все анкеты'
+    viewAllArticles: 'Смотреть все анкеты',
+    addFirstReview: 'Добавить первый отзыв'
 }

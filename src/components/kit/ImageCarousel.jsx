@@ -11,8 +11,16 @@ class ImageCarousel extends React.Component {
 
         this.state = {
             currentSlide: 0,
-            slider: React.createRef()
+            slider: React.createRef(),
+            swipe: {
+                started: false,
+                startX: 0
+            }
         }
+
+        this.swipeHandlers.tap = this.swipeHandlers.tap.bind(this)
+        this.swipeHandlers.release = this.swipeHandlers.release.bind(this)
+        this.swipeHandlers.move = this.swipeHandlers.move.bind(this)
     }
 
     static contextType = GlobalContext
@@ -27,6 +35,54 @@ class ImageCarousel extends React.Component {
         this.setState({currentSlide: index})
 
         this.state.slider.current.style.transform = `translateX(-${index * 100}%)`
+    }
+
+    swipeHandlers = {
+        tap(e) {
+            this.setState({
+                swipe: {
+                    started: true,
+                    startX: e.touches ? e.touches[0].pageX : 0
+                }
+            })
+        },
+        release() {
+            this.setState({
+                swipe: {
+                    ...this.state.swipe,
+                    started: false
+                }
+            })
+        },
+        move(e) {
+            // if (!e.movementX) {
+            //     e.movementX = (e.touches[0].pageX - this.state.swipe.startX) / 2
+            // }
+            //
+            // if (!this.state.swipe.started) {
+            //     return
+            // }
+            //
+            // let currentTransform = String(this.state.slider.current.style.transform).replace(`translateX(`, '').replace(')', '') || '0px'
+            //
+            // if (currentTransform.endsWith('%')) {
+            //     currentTransform = currentTransform.replace('%', '')
+            //     currentTransform *= this.state.slider.current.clientWidth
+            //     currentTransform /= 100
+            // } else {
+            //     currentTransform = Number(currentTransform.replace('px', ''))
+            // }
+            //
+            // const transformAmount = -(currentTransform + e.movementX)
+            //
+            // console.log(transformAmount)
+            //
+            // if (transformAmount < 0 || transformAmount > this.state.slider.current.clientWidth * (this.props.pics.length - 1)) {
+            //     return
+            // }
+            //
+            // this.state.slider.current.style.transform = `translateX(${transformAmount}px)`
+        }
     }
 
     render() {
@@ -45,9 +101,13 @@ class ImageCarousel extends React.Component {
                     this.props.router.push(this.props.link)
                 }
             }}>
-                <div ref={this.state.slider} className={css.transformTransition}>
+                <div onMouseDown={this.swipeHandlers.tap} onTouchStart={this.swipeHandlers.tap}
+                     onMouseLeave={this.swipeHandlers.release}
+                     onMouseUp={this.swipeHandlers.release} onTouchEnd={this.swipeHandlers.release}
+                     onMouseMove={this.swipeHandlers.move} onTouchMove={this.swipeHandlers.move} ref={this.state.slider}
+                     className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>
-                        <div className={css.slide} style={{
+                        <div onMouseDown={console.log} className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -height,
                             height,
@@ -60,7 +120,8 @@ class ImageCarousel extends React.Component {
                 </div>
                 {this.props.pics.length > 1 && <div className={css.navigation}>
                     {this.props.pics.map((image, index) =>
-                        <div className={cnb(css.navigationItem, index === this.state.currentSlide ? css.current : '')} key={index}
+                        <div className={cnb(css.navigationItem, index === this.state.currentSlide ? css.current : '')}
+                             key={index}
                              onClick={() => this.setSlide(index)}>
                             &nbsp;
                         </div>
