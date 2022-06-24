@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done paginator">
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/index.jsx" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added IDE files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,21 +133,9 @@
       <workItem from="1655740095131" duration="14635000" />
       <workItem from="1655902646842" duration="33185000" />
       <workItem from="1655987525243" duration="615000" />
-      <workItem from="1655990701207" duration="11580000" />
-    </task>
-    <task id="LOCAL-00216" summary="added tagcards">
-      <created>1655737385636</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1655737385636</updated>
-    </task>
-    <task id="LOCAL-00217" summary="added tagcards">
-      <created>1655737439556</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1655737439556</updated>
+      <workItem from="1655990701207" duration="12212000" />
+      <workItem from="1656004723602" duration="337000" />
+      <workItem from="1656052213810" duration="1954000" />
     </task>
     <task id="LOCAL-00218" summary="added tagcards">
       <created>1655737490739</created>
@@ -475,7 +466,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656002617528</updated>
     </task>
-    <option name="localTasksCounter" value="265" />
+    <task id="LOCAL-00265" summary="fixed blog and vacancies">
+      <created>1656003083014</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1656003083014</updated>
+    </task>
+    <task id="LOCAL-00266" summary="added IDE files">
+      <created>1656003097992</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1656003097992</updated>
+    </task>
+    <option name="localTasksCounter" value="267" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,8 +511,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="modified search back-end" />
-    <MESSAGE value="started main page" />
     <MESSAGE value="enabled search logging" />
     <MESSAGE value="added textarea errors" />
     <MESSAGE value="fixed phone input" />
@@ -531,6 +534,8 @@
     <MESSAGE value="added wa text" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="done paginator" />
-    <option name="LAST_COMMIT_MESSAGE" value="done paginator" />
+    <MESSAGE value="fixed blog and vacancies" />
+    <MESSAGE value="added IDE files" />
+    <option name="LAST_COMMIT_MESSAGE" value="added IDE files" />
   </component>
 </project>

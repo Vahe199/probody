@@ -133,31 +133,32 @@ class SalonView extends React.Component {
                     {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
                         <div bp={'12 6@md'} key={index}>
                             <Program title={program.name} description={program.description} price={program.cost}
-                                     duration={program.duration} classicCnt={program.classicCnt} link={'https://google.com'}
+                                     duration={program.duration} classicCnt={program.classicCnt}
+                                     link={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}
                                      eroticCnt={program.eroticCnt} relaxCnt={program.relaxCnt}/>
                         </div>
                     )}
                 </div>,
                 reviews: this.state.reviewList.length > 0 && <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
                     <div>
-                    <div bp={'12 6@md'}>
-                            <div className="fit" bp={'grid'} style={{gridGap: 12}}>
-                                <div bp={'12 last@md'}>
-                                    <div bp={'grid 4'} style={{gridGap: 3}}>
-                                        <TagCard title={t('salonRating')}
-                                                 value={this.state.reviews.avg.toFixed(1)}
-                                                 dark={true}
-                                                 accent={true}/>
-                                        <TagCard title={t('ratings')} value={this.state.reviews.ratingCount}/>
-                                        <TagCard title={t('reviewCnt')} value={this.state.reviews.reviewCount}/>
-                                    </div>
+                        <div className="flex column" style={{gap: 12}}>
+                            <div>
+                                <div bp={'grid 4'} style={{gridGap: 3}}>
+                                    <TagCard title={t('salonRating')}
+                                             value={this.state.reviews.avg.toFixed(1)}
+                                             dark={true}
+                                             accent={true}/>
+                                    <TagCard title={t('ratings')} value={this.state.reviews.ratingCount}/>
+                                    <TagCard title={t('reviewCnt')} value={this.state.reviews.reviewCount}/>
                                 </div>
-
-                                <div bp={'12'} style={{marginBottom: isMobile ? 0 : -28}}><Button
-                                    size={'fill'}>{t('addReview')}</Button></div>
                             </div>
+
+                            <div><Button
+                                size={'fill'}>{t('addReview')}</Button></div>
                         </div>
-                        <div bp={'12 6@md'}>
+                    </div>
+                    <div>
+                        <div className="flex column" style={{gap: 8}}>
                             {this.state.reviewList.map((review, i) =>
                                 <ReviewBlock {...review} key={i}/>
                             )}
@@ -420,19 +421,26 @@ class SalonView extends React.Component {
                         <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
 
                     {(isMobile && this.state.salon.description) &&
-                            <div className={cnb(css.cardRoot, css.padded, css.textSectionDecorator)} style={{marginBottom: 24}}>
-                                <h2 style={{marginBottom: 16}}>{t('description')}</h2>
-                                <TextSection style={{padding: 0}} lines={5}>
-                                    {this.state.salon.description}
-                                </TextSection>
-                            </div>
+                        <div className={cnb(css.cardRoot, css.padded)}
+                             style={{marginBottom: 24}}>
+                            <h2 style={{marginBottom: 16}}>{t('description')}</h2>
+                            <TextSection style={{padding: 0}} lines={5}>
+                                {this.state.salon.description}
+                            </TextSection>
+                        </div>
                     }
 
                     {isMobile &&
-                        <div>{Object.keys(additionalSections).map((sectionName, i) =>
+                        <div id={'salonTab'}>{Object.keys(additionalSections).map((sectionName, i) =>
                             tabsHead[sectionName] ? <div key={i} style={{marginBottom: 4}}>
-                                <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title} defaultOpen={i === 0}>
-                                    <div className={'responsive-content'} style={{marginTop: 18}}>{additionalSections[sectionName]}</div>
+                                <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title}
+                                             defaultOpen={i === 0}>
+                                    <div className={'responsive-content'}
+                                         style={{marginTop: 18}}>
+                                        {additionalSections[sectionName]}
+
+                                        <div className={css.divider}>&nbsp;</div>
+                                    </div>
                                 </Collapsible>
                             </div> : ''
                         )}</div>}
@@ -455,7 +463,9 @@ class SalonView extends React.Component {
 
                     return <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
-                            <ImageCarousel height={this.state.salon.kind === 'master' ? (isMobile ? 470 : 520) : (isMobile ? 230 : 275)} link={worker.url} pics={worker.photos}/>
+                            <ImageCarousel
+                                height={this.state.salon.kind === 'master' ? (isMobile ? 470 : 520) : (isMobile ? 230 : 275)}
+                                link={worker.url} pics={worker.photos}/>
 
                             <div className={css.padded}>
                                 {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>

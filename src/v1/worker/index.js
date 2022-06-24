@@ -3,7 +3,6 @@ import AuthGuard from "../../middlewares/AuthGuard.js"
 import Worker from '../../models/Worker.model.js'
 import {v4 as uuidv4} from 'uuid'
 import RedisHelper from "../../helpers/RedisHelper.js"
-import mongoose from "mongoose";
 import apicache from "apicache";
 import Review from "../../models/Review.model.js"
 import DefaultProgram from "../../models/DefaultProgram.model.js";
@@ -97,7 +96,12 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
         }
 
         if (worker.parent) {
-            return res.json([])
+            return res.json(await Worker.find({
+                parent: worker.parent,
+                slug: {
+                    $ne: req.params.slug
+                }
+            }))
         }
 
         return res.json(await Worker.find({
@@ -119,8 +123,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
 
 router.get('/:slug', async (req, res) => {
     try {
-        const worker = await Worker.findOne({slug: req.params.slug}, "kind")
-        console.log(worker)
+        const worker = await Worker.findOne({slug: req.params.slug}, "kind parent")
 
         if (!worker) {
             return res.status(404).json({
@@ -221,14 +224,30 @@ router.get('/:slug', async (req, res) => {
                 }
             }),
             ratingCount = await Review.count({
-                    target: worker._id,
-                    text: {
-                        $exists: false
-                    }
-                })
+                target: worker._id,
+                text: {
+                    $exists: false
+                }
+            })
 
         return res.json({
-            worker: await Worker.aggregate(aggregationPipeline),
+            worker: worker.parent ? await Worker.findOne({slug: req.params.slug}).populate({
+                path: 'parent',
+                populate: [
+                    {
+                        path: 'services'
+                    },
+                    {
+                        path: 'leads'
+                    },
+                    {
+                        path: 'services'
+                    },
+                    {
+                        path: 'region'
+                    }
+                ]
+            }) : await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
                 avg: aggregatedReviews[0]?.avg,
@@ -245,33 +264,33 @@ router.get('/:slug', async (req, res) => {
     }
 })
 
-router.get('/:id/slaves', async (req, res) => {
-    try {
-        if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
-            return res.status(406).json({
-                message: 'invalidId'
-            })
-        }
-
-        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ["kind", 'slaves'])
-
-        if (!worker) {
-            return res.status(404).json({
-                message: 'workerNotFound'
-            })
-        }
-
-        if (worker.kind === 'salon') {
-            return res.json(await Worker
-                .find({_id: {$in: worker.slaves}}))
-        } else {
-            return res.json(null)
-        }
-    } catch (e) {
-        res.status(500).json({
-            message: "Internal Server Error"
-        })
-    }
-})
+// router.get('/:id/slaves', async (req, res) => {
+//     try {
+//         if (!mongoose.mongo.ObjectId.isValid(req.params.id)) {
+//             return res.status(406).json({
+//                 message: 'invalidId'
+//             })
+//         }
+//
+//         const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ["kind", 'slaves'])
+//
+//         if (!worker) {
+//             return res.status(404).json({
+//                 message: 'workerNotFound'
+//             })
+//         }
+//
+//         if (worker.kind === 'salon') {
+//             return res.json(await Worker
+//                 .find({_id: {$in: worker.slaves}}))
+//         } else {
+//             return res.json(null)
+//         }
+//     } catch (e) {
+//         res.status(500).json({
+//             message: "Internal Server Error"
+//         })
+//     }
+// })
 
 export default router
