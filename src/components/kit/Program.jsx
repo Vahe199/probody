@@ -7,6 +7,7 @@ import Button from "./Button.jsx";
 import Icon from "./Icon.jsx";
 import {cnb} from "cnbuilder";
 import {formatPrice} from "../../helpers/String.js";
+import Link from "next/link.js";
 
 class Program extends React.Component {
     static propTypes = {
@@ -49,7 +50,7 @@ class Program extends React.Component {
                     </div>
                 </div>
                 <div className={css.flexEnd}>
-                    {this.props.link && <Button size={'medium'}>{t('apply')}</Button>}
+                    {this.props.link && <a href={this.props.link} target={'_blank'}><Button size={'medium'}>{t('apply')}</Button></a>}
                 </div>
             </div>
         </InfoBlock></div>

@@ -11,7 +11,7 @@ export default class StatsInfoBlock extends React.Component {
         title: PropTypes.string,
         stats: PropTypes.arrayOf(PropTypes.shape({
             title: PropTypes.string.isRequired,
-            value: PropTypes.string.isRequired,
+            value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
             accent: PropTypes.bool
         })).isRequired
     }

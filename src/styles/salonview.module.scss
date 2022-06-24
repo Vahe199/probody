@@ -116,6 +116,16 @@
   width: 100%;
 }
 
+.fullSizeBtnResponsive>div, .fullSizeBtnResponsive>div>button {
+  max-width: 250px;
+}
+
+@media (max-width: 480px) {
+  .fullSizeBtnResponsive>div, .fullSizeBtnResponsive>div>button {
+    max-width: 100%;
+  }
+}
+
 .linkUnderline {
   cursor: pointer;
   font-family: Lack, sans-serif;

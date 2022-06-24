@@ -2,6 +2,7 @@ import express from "express"
 import apicache from 'apicache'
 import Search from "../../helpers/Search.js"
 import Lead from "../../models/Lead.model.js"
+import Worker from "../../models/Worker.model.js"
 import Messenger from "../../models/Messenger.model.js"
 import Service from "../../models/Service.model.js"
 import {isValidPhoneNumber, parsePhoneNumber} from "libphonenumber-js";
@@ -22,25 +23,54 @@ const router = express.Router()
 // })
 
 router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
-    res.json({
-        leads: await Lead.find({}),
-        services: await Service.find({}),
-        messengers: await Messenger.find({}),
-        rooms: [
-            {
-                _id: 'under5',
-                name: '1-5'
-            },
-            {
-                _id: '5to10',
-                name: '5-10'
-            },
-            {
-                _id: 'morethan10',
-                name: '10+'
-            }
-        ]
-    })
+    try {
+        res.json({
+            leads: await Lead.find({}),
+            services: await Service.find({}),
+            messengers: await Messenger.find({}),
+            priceRange: (await Worker.aggregate([{
+                $match: {
+                    parent: {
+                        $exists: false
+                    }
+                }
+            }, {
+                $sort: {
+                    avgCost: 1
+                }
+            }, {
+                $group: {
+                    _id: 'priceRange',
+                    from: {
+                        $first: '$avgCost'
+                    },
+                    to: {
+                        $last: '$avgCost'
+                    }
+                }
+            }]))[0],
+            rooms: [
+                {
+                    _id: 'under5',
+                    name: '1-5'
+                },
+                {
+                    _id: '5to10',
+                    name: '5-10'
+                },
+                {
+                    _id: 'morethan10',
+                    name: '10+'
+                }
+            ]
+        })
+    } catch (e) {
+        console.log(e)
+
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
 })
 
 router.post('/worker', async (req, res) => {

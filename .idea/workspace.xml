@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added IDE files">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added salon master view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Program.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Program.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/StatsInfoBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/StatsInfoBlock.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/articlecard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/articlecard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/search/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,14 +139,7 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="2880000" />
-    </task>
-    <task id="LOCAL-00220" summary="added tagcards">
-      <created>1655737562499</created>
-      <option name="number" value="00220" />
-      <option name="presentableId" value="LOCAL-00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1655737562499</updated>
+      <workItem from="1656052213810" duration="5949000" />
     </task>
     <task id="LOCAL-00221" summary="added tagcards">
       <created>1655737619408</created>
@@ -479,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656054483466</updated>
     </task>
-    <option name="localTasksCounter" value="269" />
+    <task id="LOCAL-00269" summary="added salon master view">
+      <created>1656055160430</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1656055160430</updated>
+    </task>
+    <option name="localTasksCounter" value="270" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,7 +515,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="enabled search logging" />
     <MESSAGE value="added textarea errors" />
     <MESSAGE value="fixed phone input" />
     <MESSAGE value="added mobile logout" />
@@ -535,6 +539,7 @@
     <MESSAGE value="done paginator" />
     <MESSAGE value="fixed blog and vacancies" />
     <MESSAGE value="added IDE files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added IDE files" />
+    <MESSAGE value="added salon master view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added salon master view" />
   </component>
 </project>

@@ -264,5 +264,7 @@ export default {
     reviewCnt: 'отзывов',
     yearDeclination: ['год', 'года', 'лет'],
     reviewDeclination: ['отзыв', 'отзыва', 'отзывов'],
-    otherSalonMasters: 'Другие массажистки салона'
+    otherSalonMasters: 'Другие массажистки салона',
+    otherSalonArticles: 'Другие анкеты салона',
+    viewAllArticles: 'Смотреть все анкеты'
 }

@@ -227,9 +227,9 @@ class SalonView extends React.Component {
                                 <span>{t('verified')}</span>
                             </div>}
 
-                            {this.state.salon.parent && <div className={cnb(css.caption, 'non-selectable')}>
-                                <span>{this.state.salon.parent.name}</span>
-                            </div>}
+                            <div className={cnb(css.caption, 'non-selectable')}>
+                                <span>{this.state.salon.parent?.name}</span>
+                            </div>
 
                             <h1 className={'cursor-pointer'}>{this.state.salon.name}</h1>
                         </div>}
@@ -278,6 +278,10 @@ class SalonView extends React.Component {
                                 <span>{t('verified')}</span>
                             </div>}
 
+                            <div className={cnb(css.caption, 'non-selectable')}>
+                                <span>{this.state.salon.parent?.name}</span>
+                            </div>
+
                             <div bp={'grid'}>
                                 <h1 bp={'7'}
                                     className={'cursor-pointer'}>{this.state.salon.name}</h1>
@@ -289,7 +293,7 @@ class SalonView extends React.Component {
                                         <span>{this.state.reviews.avg > 0 ? this.state.reviews.avg.toFixed(1) : '-'}</span>
                                     </div> : <div>&nbsp;</div>}
 
-                                    <Button size={'small'}>{t('onTheMap')}</Button>
+                                    <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
                             </div>
                         </div>}
@@ -498,6 +502,10 @@ class SalonView extends React.Component {
                         </div>
                     </div>
                 })}
+
+                {this.state.salon.parent && <div bp={'12'} className={'responsive-content ' + css.fullSizeBtnResponsive}>
+                    <Button onClick={() => this.props.router.push('/salon/' + this.state.salon.parent.slug)} color={'secondary'} size={'fill'}>{isMobile ? t('otherSalonArticles') : t('viewAllArticles')}</Button>
+                </div>}
             </div>
 
             {this.state.salon.kind === 'master' && <div className={'responsive-content'}>
