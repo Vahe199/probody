@@ -158,7 +158,7 @@ class SalonView extends React.Component {
                         <div className="flex column" style={{gap: 12}}>
                             <div>
                                 <div bp={'grid 4'} style={{gridGap: 3}}>
-                                    <TagCard title={t('salonRating')}
+                                    <TagCard title={t('salonRating')} style={{minWidth: 120}}
                                              value={this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : 0}
                                              dark={true}
                                              accent={true}/>
@@ -218,7 +218,7 @@ class SalonView extends React.Component {
             <div bp={'grid'} style={{gridGap: 8}}>
                 <div bp={'12 5@md'}>
                     <div className={css.cardRoot}>
-                        <ImageCarousel pics={this.state.salon.photos}/>
+                        <ImageCarousel height={this.state.salon.kind === 'salon' ? (isMobile ? 240 : 320) : (isMobile ? 450 : 580)} pics={this.state.salon.photos}/>
 
                         {isMobile && <div className={css.padded}>
                             {this.state.salon.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -457,8 +457,7 @@ class SalonView extends React.Component {
                             tabsHead[sectionName] ? <div key={i} style={{marginBottom: 4}}>
                                 <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title}
                                              defaultOpen={i === 0}>
-                                    <div className={'responsive-content'}
-                                         style={{marginTop: 18}}>
+                                    <div style={{marginTop: 18}}>
                                         {additionalSections[sectionName]}
 
                                         <div className={css.divider}>&nbsp;</div>

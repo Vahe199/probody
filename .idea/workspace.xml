@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added salon master view">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added reviews block for unrated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,14 +133,7 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="10188000" />
-    </task>
-    <task id="LOCAL-00223" summary="added tagcards">
-      <created>1655739175889</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739175889</updated>
+      <workItem from="1656052213810" duration="11149000" />
     </task>
     <task id="LOCAL-00224" summary="added tagcards">
       <created>1655739204383</created>
@@ -480,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656058431678</updated>
     </task>
-    <option name="localTasksCounter" value="272" />
+    <task id="LOCAL-00272" summary="added reviews block for unrated">
+      <created>1656063691508</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1656063691508</updated>
+    </task>
+    <option name="localTasksCounter" value="273" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +509,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added textarea errors" />
     <MESSAGE value="fixed phone input" />
     <MESSAGE value="added mobile logout" />
     <MESSAGE value="added faq endpoints" />
@@ -536,6 +533,7 @@
     <MESSAGE value="fixed blog and vacancies" />
     <MESSAGE value="added IDE files" />
     <MESSAGE value="added salon master view" />
-    <option name="LAST_COMMIT_MESSAGE" value="added salon master view" />
+    <MESSAGE value="added reviews block for unrated" />
+    <option name="LAST_COMMIT_MESSAGE" value="added reviews block for unrated" />
   </component>
 </project>
