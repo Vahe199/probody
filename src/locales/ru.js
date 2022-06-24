@@ -263,5 +263,6 @@ export default {
     ratings: 'оценок',
     reviewCnt: 'отзывов',
     yearDeclination: ['год', 'года', 'лет'],
-    reviewDeclination: ['отзыв', 'отзыва', 'отзывов']
+    reviewDeclination: ['отзыв', 'отзыва', 'отзывов'],
+    otherSalonMasters: 'Другие массажистки салона'
 }

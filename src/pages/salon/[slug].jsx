@@ -83,13 +83,25 @@ class SalonView extends React.Component {
 
     fetchWorkerInfo() {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
+            if (res.worker[0].parent) {
+                res.worker[0].region = res.worker[0].parent.region
+                res.worker[0].leads = res.worker[0].parent.leads
+                res.worker[0].services = res.worker[0].parent.services
+                res.worker[0].workDays = res.worker[0].parent.workDays
+                res.worker[0].workHours = res.worker[0].parent.workHours
+                res.worker[0].description = res.worker[0].parent.description
+                res.worker[0].address = res.worker[0].parent.address
+                res.worker[0].programs = res.worker[0].parent.programs
+                res.worker[0].messengers = res.worker[0].parent.messengers
+                res.worker[0].phone = res.worker[0].parent.phone
+                res.worker[0].social = res.worker[0].parent.social
+            }
+
             this.setState({
                 salon: res.worker[0],
                 reviews: res.reviews,
                 allPrograms: res.allPrograms
             })
-
-            console.log(res.worker)
 
             this.loadReviews(res.worker[0]._id)
 
@@ -213,6 +225,10 @@ class SalonView extends React.Component {
                                 <Icon name={'round_check'} className={css.verifiedIcon}/>
 
                                 <span>{t('verified')}</span>
+                            </div>}
+
+                            {this.state.salon.parent && <div className={cnb(css.caption, 'non-selectable')}>
+                                <span>{this.state.salon.parent.name}</span>
                             </div>}
 
                             <h1 className={'cursor-pointer'}>{this.state.salon.name}</h1>
@@ -392,7 +408,7 @@ class SalonView extends React.Component {
                             }
                         </div>
 
-                        {this.state.salon.avgCost && <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
+                        {(this.state.salon.avgCost && !this.state.salon.parent) ? <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
                             <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
                                 <TagCard title={t('avgCostLong').toLowerCase()}
                                          value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')}
@@ -412,7 +428,7 @@ class SalonView extends React.Component {
                                              hash: '#salonTab'
                                          }}/>
                             </div>
-                        </div>}
+                        </div> : ''}
                     </div>
                 </div>
             </div>
@@ -453,10 +469,10 @@ class SalonView extends React.Component {
             </div>
 
             <div className={'responsive-content'}>
-                <h2 style={{
+                {this.state.suggestedWorkers.length > 0 && <h2 style={{
                     marginBottom: 12,
                     marginTop: 24
-                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>
+                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>}
             </div>
 
             <div bp={'grid'}>
