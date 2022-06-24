@@ -89,6 +89,8 @@ class SalonView extends React.Component {
                 allPrograms: res.allPrograms
             })
 
+            console.log(res.worker)
+
             this.loadReviews(res.worker[0]._id)
 
             if (res.worker[0].kind === 'master') {
@@ -454,7 +456,7 @@ class SalonView extends React.Component {
                 <h2 style={{
                     marginBottom: 12,
                     marginTop: 24
-                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : t('otherMasters')}</h2>
+                }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>
             </div>
 
             <div bp={'grid'}>

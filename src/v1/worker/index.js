@@ -231,7 +231,7 @@ router.get('/:slug', async (req, res) => {
             })
 
         return res.json({
-            worker: worker.parent ? await Worker.findOne({slug: req.params.slug}).populate({
+            worker: worker.parent ? [await Worker.findOne({slug: req.params.slug}).populate({
                 path: 'parent',
                 populate: [
                     {
@@ -247,7 +247,7 @@ router.get('/:slug', async (req, res) => {
                         path: 'region'
                     }
                 ]
-            }) : await Worker.aggregate(aggregationPipeline),
+            })] : await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
                 avg: aggregatedReviews[0]?.avg,
