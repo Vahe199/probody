@@ -66,7 +66,8 @@ class Home extends React.Component {
         if (Objects.isEmpty(this.state.filters)) {
             APIRequests.getFilters().then(filters => {
                 this.setState({
-                    filters
+                    filters,
+                    priceRange: filters.priceRange
                 })
             })
         }
