@@ -24,7 +24,7 @@ import ParameterView from "../components/kit/ParameterView.jsx";
 import ShortMasterCard from "../components/kit/ShortMasterCard";
 import MockShortMasterCard from "../components/kit/MockShortMasterCard";
 import Checkbox from "../components/kit/Form/Checkbox.jsx";
-import TransparentCollapsible from "../components/kit/TransparentCollapsible";
+import TransparentCollapsible from "../components/kit/Collapses/TransparentCollapsible.jsx";
 import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput";
 import debounce from "../helpers/debounce";
 import Select from "../components/kit/Form/Select.jsx";

@@ -4,7 +4,7 @@ import Stepper from "../../components/kit/Stepper.jsx";
 import css from '../../styles/new.page.module.scss';
 import TextInput from "../../components/kit/Form/TextInput.jsx";
 import Select from "../../components/kit/Form/Select.jsx";
-import Collapsible from "../../components/kit/Collapsible.jsx";
+import Collapsible from "../../components/kit/Collapses/Collapsible.jsx";
 import TextArea from "../../components/kit/Form/TextArea";
 import RadioGroup from "../../components/kit/Form/RadioGroup";
 import {capitalize} from "../../helpers/String";

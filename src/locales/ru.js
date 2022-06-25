@@ -275,5 +275,7 @@ export default {
     reviewsAndRating: 'Отзывы и рейтинг',
     addVacancy: 'Добавить вакансию',
     personalInfo: 'Личные данные',
-    creatingVacancy: 'Создание вакансии'
+    creatingVacancy: 'Создание вакансии',
+    needHelp: 'Нужна помощь?',
+    faq: 'Часто задаваемые вопросы'
 }

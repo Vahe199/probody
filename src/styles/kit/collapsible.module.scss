@@ -55,3 +55,14 @@
     color: t('text-accent');
   }
 }
+
+.divider {
+  margin: 8px 0;
+  user-select: none;
+  width: 100%;
+  height: 1px;
+
+  @include themify() {
+    background: t('line-color');
+  }
+}

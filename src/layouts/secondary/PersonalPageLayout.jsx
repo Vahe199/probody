@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import css from "../styles/accountpage.module.scss";
+import css from "../../styles/accountpage.module.scss";
 import Link from "next/link.js";
-import {GlobalContext} from "../contexts/Global.js";
+import {GlobalContext} from "../../contexts/Global.js";
 
 export default class PersonalPageLayout extends React.Component {
     static propTypes = {
@@ -13,9 +13,9 @@ export default class PersonalPageLayout extends React.Component {
     static contextType = GlobalContext
 
     render() {
-        const {t, theme} = this.context
+        const {t, theme, isMobile} = this.context
 
-        return <div className={css['theme--' + theme]} bp={'grid'}>
+        return <div className={css['theme--' + theme]} bp={'grid'} style={{gridGap: isMobile ? 0 : 48}}>
             <div bp={'4 hide show@md'}>
                 <div className={css.menu}>
                     <ul className={css.list}>
@@ -24,6 +24,7 @@ export default class PersonalPageLayout extends React.Component {
                         <li className={this.props.page === 'stats' ? css.active : ''}><Link href={'/account/stats'}>{t('stats')}</Link></li>
                         <li className={this.props.page === 'reviews' ? css.active : ''}><Link href={'/account/reviews'}>{t('reviewsAndRating')}</Link></li>
                         <li className={this.props.page === 'newvacancy' ? css.active : ''}><Link href={'/account/newvacancy'}>{t('addVacancy')}</Link></li>
+                        <li className={this.props.page === 'faq' ? css.active : ''}><Link href={'/account/faq'}>{t('needHelp')}</Link></li>
                     </ul>
                 </div>
             </div>

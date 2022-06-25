@@ -1,10 +1,10 @@
 import React from "react";
-import css from '../../styles/kit/collapsible.module.scss';
+import css from '../../../styles/kit/collapsible.module.scss';
 import PropTypes from "prop-types";
-import Icon from "./Icon.jsx";
-import Checkbox from "./Form/Checkbox";
+import Icon from "../Icon.jsx";
+import Checkbox from "../Form/Checkbox.jsx";
 import {cnb} from "cnbuilder";
-import {GlobalContext} from "../../contexts/Global.js";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class Collapsible extends React.Component {
     constructor(props) {

@@ -26,6 +26,10 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/review`)).json()
     }
 
+    static async getFAQ() {
+        return (await fetch(`${API_URL}/faq`)).json()
+    }
+
     static async getLeads() {
         return (await fetch(`${API_URL}/lead`)).json()
     }

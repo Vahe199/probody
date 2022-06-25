@@ -1,9 +1,9 @@
 import React from "react";
-import css from '../../styles/kit/collapsible.module.scss';
+import css from '../../../styles/kit/collapsible.module.scss';
 import PropTypes from "prop-types";
-import Icon from "./Icon.jsx";
+import Icon from "../Icon.jsx";
 import {cnb} from "cnbuilder";
-import {GlobalContext} from "../../contexts/Global.js";
+import {GlobalContext} from "../../../contexts/Global.js";
 
 export default class TransparentCollapsible extends React.Component {
     constructor(props) {

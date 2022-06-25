@@ -2,19 +2,46 @@ import express from 'express';
 import FAQ from "../../models/FAQ.model.js";
 import AuthGuard from "../../middlewares/AuthGuard.js";
 import FAQResponse from "../../models/FAQResponse.model.js";
+import apicache from "apicache";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    res.json(await FAQ.find({}))
+router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
+    res.json(await FAQ.aggregate([{
+        $lookup: {
+            from: 'faqResponse',
+            localField: '_id',
+            foreignField: 'faqId',
+            as: 'gotResponse',
+            pipeline: [{
+                $match: {
+                    userId: req.user._id
+                }
+            }]
+        }
+    }, {
+        $project: {
+            name: 1,
+            description: 1,
+            gotResponse: {
+                $toBool: {
+                    $ne: [{
+                        $size: '$gotResponse'
+                    },
+                        0
+                    ]
+                }
+            }
+        }
+    }]))
 })
 
-router.get('/:id/quality', async (req, res) => {
+router.get('/:id/quality', apicache.middleware('30 minutes'), async (req, res) => {
     try {
         const satisfiedCnt = await FAQResponse.countDocuments({
-            faq: req.params.id,
-            isUseful: true
-        }),
+                faq: req.params.id,
+                isUseful: true
+            }),
             allCnt = await FAQResponse.countDocuments({
                 faq: req.params.id
             })

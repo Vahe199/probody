@@ -24,7 +24,7 @@ import TabPanels from "../../components/kit/TabPanels";
 import Program from "../../components/kit/Program.jsx";
 import MasterDetail from "../../components/kit/MasterDetail";
 import ReviewBlock from "../../components/ReviewBlock";
-import Collapsible from "../../components/kit/Collapsible.jsx";
+import Collapsible from "../../components/kit/Collapses/Collapsible.jsx";
 
 class SalonView extends React.Component {
     constructor(props) {
