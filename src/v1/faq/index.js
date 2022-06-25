@@ -58,9 +58,8 @@ router.get('/:id/quality', apicache.middleware('30 minutes'), async (req, res) =
                 faqId: req.params.id
             })
 
-        console.log(satisfiedCnt, allCnt)
         res.json({
-            quality: satisfiedCnt / allCnt
+            quality: allCnt > 0 ? satisfiedCnt / allCnt : 0
         })
     } catch (error) {
         res.status(500).json({message: error.message})
