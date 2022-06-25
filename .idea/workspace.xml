@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added personal area links">
-      <change afterPath="$PROJECT_DIR$/src/components/kit/Collapses/PlusCollapsible.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/account/faq.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PersonalPageLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Collapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/Collapsible.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/TransparentCollapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/TransparentCollapsible.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/newvacancy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/newvacancy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/personal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/personal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/promotion.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/reviews.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/menu.module.scss" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixing faq backend">
       <change beforePath="$PROJECT_DIR$/src/v1/faq/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/faq/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,28 +133,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="9955000" />
-    </task>
-    <task id="LOCAL-00233" summary="added tagcards">
-      <created>1655739836778</created>
-      <option name="number" value="00233" />
-      <option name="presentableId" value="LOCAL-00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739836779</updated>
-    </task>
-    <task id="LOCAL-00234" summary="added tagcards">
-      <created>1655739930838</created>
-      <option name="number" value="00234" />
-      <option name="presentableId" value="LOCAL-00234" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739930838</updated>
-    </task>
-    <task id="LOCAL-00235" summary="done part of salon page">
-      <created>1655759448535</created>
-      <option name="number" value="00235" />
-      <option name="presentableId" value="LOCAL-00235" />
-      <option name="project" value="LOCAL" />
-      <updated>1655759448536</updated>
+      <workItem from="1656159986448" duration="10306000" />
     </task>
     <task id="LOCAL-00236" summary="done part of salon page">
       <created>1655760279038</created>
@@ -497,7 +457,28 @@
       <option name="project" value="LOCAL" />
       <updated>1656166497869</updated>
     </task>
-    <option name="localTasksCounter" value="282" />
+    <task id="LOCAL-00282" summary="added personal area links">
+      <created>1656171143569</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1656171143569</updated>
+    </task>
+    <task id="LOCAL-00283" summary="added personal area links">
+      <created>1656171276306</created>
+      <option name="number" value="00283" />
+      <option name="presentableId" value="LOCAL-00283" />
+      <option name="project" value="LOCAL" />
+      <updated>1656171276306</updated>
+    </task>
+    <task id="LOCAL-00284" summary="fixing faq backend">
+      <created>1656171319799</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1656171319799</updated>
+    </task>
+    <option name="localTasksCounter" value="285" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +509,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added new salon margins" />
     <MESSAGE value="added get worker endpoint" />
     <MESSAGE value="added mobile search" />
     <MESSAGE value="done mainpage" />
@@ -553,6 +533,7 @@
     <MESSAGE value="bug fixes" />
     <MESSAGE value="done crossplatform carousel" />
     <MESSAGE value="added personal area links" />
-    <option name="LAST_COMMIT_MESSAGE" value="added personal area links" />
+    <MESSAGE value="fixing faq backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing faq backend" />
   </component>
 </project>

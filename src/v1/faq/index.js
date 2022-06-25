@@ -7,17 +7,17 @@ import apicache from "apicache";
 const router = express.Router();
 
 router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
-    res.json(await FAQ.aggregate([{
+    res.json(req.user ? await FAQ.aggregate([{
         $lookup: {
             from: 'faqResponse',
             localField: '_id',
             foreignField: 'faqId',
             as: 'gotResponse',
-            pipeline: req.user ? [{
+            pipeline: [{
                 $match: {
                     userId: req.user._id
                 }
-            }] : []
+            }]
         }
     }, {
         $project: {
@@ -33,7 +33,7 @@ router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
                 }
             }
         }
-    }]))
+    }]) : await FAQ.find({}))
 })
 
 router.get('/:id/quality', apicache.middleware('30 minutes'), async (req, res) => {
