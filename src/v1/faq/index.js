@@ -74,6 +74,8 @@ router.post('/:id', AuthGuard('serviceProvider'), async (req, res) => {
             return res.status(400).json({message: 'You have already answered this question'})
         }
 
+        console.log(req.body)
+
         await (new FAQResponse({
             faqId: req.params.id,
             userId: req.user._id,

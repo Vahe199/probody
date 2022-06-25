@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixing faq backend">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Collapses/PlusCollapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/PlusCollapsible.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="faq">
       <change beforePath="$PROJECT_DIR$/src/pages/account/faq.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/faq.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/articlecard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/articlecard.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/faq/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/faq/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,28 +133,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="13408000" />
-    </task>
-    <task id="LOCAL-00240" summary="added masseuses">
-      <created>1655911503154</created>
-      <option name="number" value="00240" />
-      <option name="presentableId" value="LOCAL-00240" />
-      <option name="project" value="LOCAL" />
-      <updated>1655911503154</updated>
-    </task>
-    <task id="LOCAL-00241" summary="added masseuses">
-      <created>1655912243838</created>
-      <option name="number" value="00241" />
-      <option name="presentableId" value="LOCAL-00241" />
-      <option name="project" value="LOCAL" />
-      <updated>1655912243838</updated>
-    </task>
-    <task id="LOCAL-00242" summary="added masseuses">
-      <created>1655912317366</created>
-      <option name="number" value="00242" />
-      <option name="presentableId" value="LOCAL-00242" />
-      <option name="project" value="LOCAL" />
-      <updated>1655912317366</updated>
+      <workItem from="1656159986448" duration="13767000" />
     </task>
     <task id="LOCAL-00243" summary="added masseuses">
       <created>1655913838336</created>
@@ -484,7 +457,28 @@
       <option name="project" value="LOCAL" />
       <updated>1656171971256</updated>
     </task>
-    <option name="localTasksCounter" value="289" />
+    <task id="LOCAL-00289" summary="fixing faq backend">
+      <created>1656174630312</created>
+      <option name="number" value="00289" />
+      <option name="presentableId" value="LOCAL-00289" />
+      <option name="project" value="LOCAL" />
+      <updated>1656174630312</updated>
+    </task>
+    <task id="LOCAL-00290" summary="fixing faq backend">
+      <created>1656174677442</created>
+      <option name="number" value="00290" />
+      <option name="presentableId" value="LOCAL-00290" />
+      <option name="project" value="LOCAL" />
+      <updated>1656174677443</updated>
+    </task>
+    <task id="LOCAL-00291" summary="faq">
+      <created>1656174717001</created>
+      <option name="number" value="00291" />
+      <option name="presentableId" value="LOCAL-00291" />
+      <option name="project" value="LOCAL" />
+      <updated>1656174717001</updated>
+    </task>
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +509,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added get worker endpoint" />
     <MESSAGE value="added mobile search" />
     <MESSAGE value="done mainpage" />
     <MESSAGE value="done filters" />
@@ -540,6 +533,7 @@
     <MESSAGE value="done crossplatform carousel" />
     <MESSAGE value="added personal area links" />
     <MESSAGE value="fixing faq backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing faq backend" />
+    <MESSAGE value="faq" />
+    <option name="LAST_COMMIT_MESSAGE" value="faq" />
   </component>
 </project>

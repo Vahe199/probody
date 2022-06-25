@@ -20,6 +20,8 @@ class FAQ extends React.Component {
         this.state = {
             faq: []
         }
+
+        this.answerQuestion = this.answerQuestion.bind(this)
     }
 
     async componentDidMount() {
@@ -78,7 +80,7 @@ class FAQ extends React.Component {
                                     <h2>{t('wasThisAnswerUseful')}</h2>
 
                                     <p className={css.textDisabled}>
-                                        {t('nUsersThinkThatsUseful', question.quality ? question.quality.toFixed(0) : '-')}
+                                        {t('nUsersThinkThatsUseful', question.quality !== undefined ? question.quality.toFixed(0) : '-')}
                                     </p>
 
                                     <div className="flex" style={{marginTop: 24}}>
