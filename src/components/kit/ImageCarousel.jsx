@@ -4,6 +4,7 @@ import css from '../../styles/kit/imagecarousel.module.scss';
 import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../contexts/Global.js";
 import {withRouter} from "next/router.js";
+import window from "global";
 
 class ImageCarousel extends React.Component {
     constructor(props) {
@@ -45,6 +46,8 @@ class ImageCarousel extends React.Component {
                     startX: e.touches ? e.touches[0].pageX : 0
                 }
             })
+
+            window.document.body.classList.add('no-scroll')
         },
         release() {
             this.setState({
@@ -53,35 +56,66 @@ class ImageCarousel extends React.Component {
                     started: false
                 }
             })
+
+            this.state.slider.current.style.transform = `translateX(${-(this.state.currentSlide) * 100}%)`
+            window.document.body.classList.remove('no-scroll')
         },
         move(e) {
-            // if (!e.movementX) {
-            //     e.movementX = (e.touches[0].pageX - this.state.swipe.startX) / 2
-            // }
-            //
-            // if (!this.state.swipe.started) {
-            //     return
-            // }
-            //
-            // let currentTransform = String(this.state.slider.current.style.transform).replace(`translateX(`, '').replace(')', '') || '0px'
-            //
-            // if (currentTransform.endsWith('%')) {
-            //     currentTransform = currentTransform.replace('%', '')
-            //     currentTransform *= this.state.slider.current.clientWidth
-            //     currentTransform /= 100
-            // } else {
-            //     currentTransform = Number(currentTransform.replace('px', ''))
-            // }
-            //
-            // const transformAmount = -(currentTransform + e.movementX)
-            //
-            // console.log(transformAmount)
-            //
-            // if (transformAmount < 0 || transformAmount > this.state.slider.current.clientWidth * (this.props.pics.length - 1)) {
-            //     return
-            // }
-            //
-            // this.state.slider.current.style.transform = `translateX(${transformAmount}px)`
+            if (!this.state.swipe.started) {
+                return
+            }
+
+            if (e.changedTouches) {
+                e.movementX = (e.changedTouches[0].pageX - this.state.swipe.startX)
+
+                // this.setState({
+                //     swipe: {
+                //         started: true,
+                //         startX: e.changedTouches[0].pageX
+                //     }
+                // })
+            }
+
+            let currentTransform = String(this.state.slider.current.style.transform).replace(`translateX(`, '').replace(')', '') || '0px'
+
+            if (currentTransform.endsWith('%')) {
+                currentTransform = currentTransform.replace('%', '')
+                currentTransform *= this.state.slider.current.clientWidth
+                currentTransform /= 100
+            } else {
+                currentTransform = Number(currentTransform.replace('px', ''))
+            }
+
+            let transformAmount = e.movementX + currentTransform
+
+            if (transformAmount > 0 || transformAmount < -this.state.slider.current.clientWidth * (this.props.pics.length - 1)) {
+                return
+            }
+
+            const relativeTransform = this.state.slider.current.clientWidth * this.state.currentSlide + transformAmount
+
+            if (relativeTransform < this.state.slider.current.clientWidth * -0.3 && e.movementX <= 0) {
+                // console.log('swiped to next slide')
+                this.state.slider.current.style.transform = `translateX(${-(this.state.currentSlide + 1) * 100}%)`
+
+                return this.setState({
+                    swipe: {
+                        started: false
+                    },
+                    currentSlide: this.state.currentSlide + 1
+                })
+            } else if (relativeTransform > this.state.slider.current.clientWidth * 0.3 && e.movementX >= 0) {
+                console.log('swiped to prev slide')
+
+                return this.setState({
+                    swipe: {
+                        started: false
+                    },
+                    currentSlide: this.state.currentSlide - 1
+                })
+            }
+
+            this.state.slider.current.style.transform = `translateX(${transformAmount}px)`
         }
     }
 
