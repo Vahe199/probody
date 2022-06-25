@@ -17,7 +17,7 @@ router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
                 $match: {
                     userId: req.user._id
                 }
-            }] : undefined
+            }] : []
         }
     }, {
         $project: {
