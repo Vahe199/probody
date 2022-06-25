@@ -3,12 +3,25 @@ import FAQ from "../../models/FAQ.model.js";
 import AuthGuard from "../../middlewares/AuthGuard.js";
 import FAQResponse from "../../models/FAQResponse.model.js";
 import apicache from "apicache";
+import mongoose from "mongoose";
+import AuthorizedToken from "../../models/AuthorizedToken.model.js";
 
 const router = express.Router();
 
 router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
-    console.log(!!req.user)
-    res.json(req.user ? await FAQ.aggregate([{
+    let userId, token = req.get('X-Auth-Token')
+
+    if (token) {
+        const userDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
+
+        if (userDoc) {
+            userId = userDoc.userId._id
+        }
+    }
+
+    console.log(userId)
+
+    res.json(userId ? await FAQ.aggregate([{
         $lookup: {
             from: 'faqResponse',
             localField: '_id',
@@ -16,7 +29,7 @@ router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
             as: 'gotResponse',
             pipeline: [{
                 $match: {
-                    userId: req.user._id
+                    userId: new mongoose.mongo.ObjectId(userId)
                 }
             }]
         }

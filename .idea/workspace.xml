@@ -133,21 +133,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="10306000" />
-    </task>
-    <task id="LOCAL-00236" summary="done part of salon page">
-      <created>1655760279038</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1655760279038</updated>
-    </task>
-    <task id="LOCAL-00237" summary="done part of salon page">
-      <created>1655760688710</created>
-      <option name="number" value="00237" />
-      <option name="presentableId" value="LOCAL-00237" />
-      <option name="project" value="LOCAL" />
-      <updated>1655760688710</updated>
+      <workItem from="1656159986448" duration="10613000" />
     </task>
     <task id="LOCAL-00238" summary="done part of salon page">
       <created>1655837615693</created>
@@ -478,7 +464,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656171319799</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <task id="LOCAL-00285" summary="fixing faq backend">
+      <created>1656171490913</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1656171490913</updated>
+    </task>
+    <task id="LOCAL-00286" summary="fixing faq backend">
+      <created>1656171638444</created>
+      <option name="number" value="00286" />
+      <option name="presentableId" value="LOCAL-00286" />
+      <option name="project" value="LOCAL" />
+      <updated>1656171638444</updated>
+    </task>
+    <option name="localTasksCounter" value="287" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
