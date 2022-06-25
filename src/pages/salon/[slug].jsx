@@ -157,7 +157,7 @@ class SalonView extends React.Component {
                 reviews: <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
                     <div>
                         <div className="flex column" style={{gap: 12}}>
-                            <div>
+                            <div style={{order: isMobile ? 0 : 1}}>
                                 <div bp={'grid 4'} style={{gridGap: 3}}>
                                     <TagCard title={t('salonRating')} style={{minWidth: 120}}
                                              value={this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : 0}

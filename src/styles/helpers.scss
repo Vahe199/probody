@@ -75,6 +75,10 @@
   flex-direction: column;
 }
 
+.column-reverse {
+  flex-direction: column-reverse;
+}
+
 .justify-around {
   justify-content: space-around;
 }

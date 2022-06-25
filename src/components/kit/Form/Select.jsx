@@ -46,7 +46,7 @@ export default class Select extends React.Component {
     }
 
     click() {
-        console.log('click')
+        // console.log('click')
     }
 
     componentDidUpdate(prevProps) {

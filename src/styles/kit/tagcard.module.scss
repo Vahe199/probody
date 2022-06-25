@@ -24,6 +24,12 @@
         color: t('text-accent');
       }
     }
+
+    .label {
+      @include themify() {
+        color: t('another-text-disabled');
+      }
+    }
   }
 }
 
@@ -31,7 +37,7 @@
   font-size: 13px;
 
   @include themify() {
-    color: t('another-text-disabled');
+    color: t('text-disabled');
   }
 
   margin-bottom: 4px;

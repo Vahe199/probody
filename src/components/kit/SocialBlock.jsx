@@ -14,7 +14,6 @@ class SocialBlock extends React.Component {
 
     render() {
         const {t, theme} = this.context;
-        console.log(theme);
 
         return <TextSection style={{paddingBottom: 0}}>
             <h3 style={{marginBottom: 12}}>{t('social')}</h3>

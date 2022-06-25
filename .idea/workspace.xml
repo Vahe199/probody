@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="bug fixes">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done crossplatform carousel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/Select.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/Select.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,14 +139,7 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="21854000" />
-    </task>
-    <task id="LOCAL-00228" summary="added tagcards">
-      <created>1655739398061</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739398061</updated>
+      <workItem from="1656052213810" duration="24389000" />
     </task>
     <task id="LOCAL-00229" summary="added tagcards">
       <created>1655739475798</created>
@@ -478,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656140953540</updated>
     </task>
-    <option name="localTasksCounter" value="277" />
+    <task id="LOCAL-00277" summary="done crossplatform carousel">
+      <created>1656149660796</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1656149660796</updated>
+    </task>
+    <option name="localTasksCounter" value="278" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +515,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added mobile logout" />
     <MESSAGE value="added faq endpoints" />
     <MESSAGE value="added new salon margins" />
     <MESSAGE value="added get worker endpoint" />
@@ -534,6 +539,7 @@
     <MESSAGE value="added salon master view" />
     <MESSAGE value="added reviews block for unrated" />
     <MESSAGE value="bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
+    <MESSAGE value="done crossplatform carousel" />
+    <option name="LAST_COMMIT_MESSAGE" value="done crossplatform carousel" />
   </component>
 </project>

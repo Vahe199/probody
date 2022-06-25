@@ -105,7 +105,7 @@ class ImageCarousel extends React.Component {
                     currentSlide: this.state.currentSlide + 1
                 })
             } else if (relativeTransform > this.state.slider.current.clientWidth * 0.3 && e.movementX >= 0) {
-                console.log('swiped to prev slide')
+                // console.log('swiped to prev slide')
 
                 return this.setState({
                     swipe: {
@@ -141,7 +141,7 @@ class ImageCarousel extends React.Component {
                      onMouseMove={this.swipeHandlers.move} onTouchMove={this.swipeHandlers.move} ref={this.state.slider}
                      className={css.transformTransition}>
                     {this.props.pics.map((image, index) =>
-                        <div onMouseDown={console.log} className={css.slide} style={{
+                        <div className={css.slide} style={{
                             backgroundImage: `url(${this.props.pics[index]})`,
                             marginTop: index === 0 ? 0 : -height,
                             height,
