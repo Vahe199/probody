@@ -127,13 +127,14 @@ class SalonView extends React.Component {
             photoHeight = this.state.salon.kind === 'salon' ? (isMobile ? 230 : 250) : (isMobile ? 270 : 370)
 
         const additionalSections = {
-                photos: <div bp={'grid'}>
+                photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
                     {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
-                        <div style={{
-                            backgroundImage: `url(${photo})`,
-                            height: photoHeight,
-                        }} bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}
-                             className={css.photo}>&nbsp;</div>
+                        <div bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}>
+                            <div style={{
+                                backgroundImage: `url(${photo})`,
+                                height: photoHeight,
+                            }} className={css.photo}>&nbsp;</div>
+                        </div>
                     )}
                 </div>,
                 masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
@@ -218,7 +219,9 @@ class SalonView extends React.Component {
             <div bp={'grid'} style={{gridGap: 8}}>
                 <div bp={'12 5@md'}>
                     <div className={css.cardRoot}>
-                        <ImageCarousel height={this.state.salon.kind === 'salon' ? (isMobile ? 240 : 320) : (isMobile ? 450 : 580)} pics={this.state.salon.photos}/>
+                        <ImageCarousel
+                            height={this.state.salon.kind === 'salon' ? (isMobile ? 240 : 320) : (isMobile ? 450 : 580)}
+                            pics={this.state.salon.photos}/>
 
                         {isMobile && <div className={css.padded}>
                             {this.state.salon.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
@@ -412,27 +415,28 @@ class SalonView extends React.Component {
                             }
                         </div>
 
-                        {(this.state.salon.avgCost && !this.state.salon.parent) ? <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
-                            <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
-                                <TagCard title={t('avgCostLong').toLowerCase()}
-                                         value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')}
-                                         dark={true}
-                                         link={{
-                                             query: Object.assign({}, this.props.router.query, {
-                                                 salonTab: 'cost'
-                                             }),
-                                             hash: '#salonTab'
-                                         }}/>
-                                <TagCard title={t('roomCount').toLowerCase()} value={this.state.salon.rooms}
-                                         dark={true}
-                                         link={{
-                                             query: Object.assign({}, this.props.router.query, {
-                                                 salonTab: 'cost'
-                                             }),
-                                             hash: '#salonTab'
-                                         }}/>
-                            </div>
-                        </div> : ''}
+                        {(this.state.salon.avgCost && !this.state.salon.parent) ?
+                            <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
+                                <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
+                                    <TagCard title={t('avgCostLong').toLowerCase()}
+                                             value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')}
+                                             dark={true}
+                                             link={{
+                                                 query: Object.assign({}, this.props.router.query, {
+                                                     salonTab: 'cost'
+                                                 }),
+                                                 hash: '#salonTab'
+                                             }}/>
+                                    <TagCard title={t('roomCount').toLowerCase()} value={this.state.salon.rooms}
+                                             dark={true}
+                                             link={{
+                                                 query: Object.assign({}, this.props.router.query, {
+                                                     salonTab: 'cost'
+                                                 }),
+                                                 hash: '#salonTab'
+                                             }}/>
+                                </div>
+                            </div> : ''}
                     </div>
                 </div>
             </div>
@@ -457,7 +461,10 @@ class SalonView extends React.Component {
                             tabsHead[sectionName] ? <div key={i} style={{marginBottom: 4}}>
                                 <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title}
                                              defaultOpen={i === 0}>
-                                    <div style={{marginTop: 18}}>
+                                    <div style={{
+                                        marginTop: 18,
+                                        padding: (isMobile && sectionName === 'photos') ? '0 0 0 16px' : '0 16px'
+                                    }}>
                                         {additionalSections[sectionName]}
 
                                         <div className={css.divider}>&nbsp;</div>
@@ -478,7 +485,18 @@ class SalonView extends React.Component {
                 }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>}
             </div>
 
-            <div bp={'grid'}>
+            {this.state.salon.kind !== 'salon' && <div style={{paddingLeft: isMobile ? 16 : 0}} bp={isMobile ? '' : 'grid'}
+                  className={cnb(isMobile ? css.invisibleScroll : '', css.masters)}>
+                {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
+                    worker.url = '/salon/' + worker.slug
+
+                    return <div bp={'12 4@md'} key={index}>
+                        <MasterDetail name={worker.name} photos={worker.photos} slug={worker.slug} noContent={true} />
+                    </div>
+                })}
+            </div>}
+
+            {this.state.salon.kind === 'salon' && <div bp={'grid'}>
                 {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
                     worker.url = '/salon/' + worker.slug
 
@@ -501,11 +519,20 @@ class SalonView extends React.Component {
                         </div>
                     </div>
                 })}
+            </div>}
 
-                {this.state.salon.parent && <div bp={'12'} className={'responsive-content ' + css.fullSizeBtnResponsive}>
-                    <Button onClick={() => this.props.router.push('/salon/' + this.state.salon.parent.slug)} color={'secondary'} size={'fill'}>{isMobile ? t('otherSalonArticles') : t('viewAllArticles')}</Button>
+            {this.state.salon.kind !== 'salon' && <div className={'responsive-content ' + css.fullSizeBtnResponsive}>
+                    <Button onClick={() => this.props.router.push(this.state.salon.parent ? '/salon/' + this.state.salon.parent.slug : {
+                        pathname: '/',
+                        query: {
+                            ...this.props.router.query,
+                            kind: 'master'
+                        },
+                        hash: ''
+                    })}
+                            color={'secondary'}
+                            size={'fill'}>{this.state.salon.parent ? (isMobile ? t('otherSalonArticles') : t('viewAllArticles')) : t('viewAllArticles')}</Button>
                 </div>}
-            </div>
 
             {this.state.salon.kind === 'master' && <div className={'responsive-content'}>
                 <h2 style={{

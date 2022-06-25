@@ -120,6 +120,34 @@
   max-width: 250px;
 }
 
+.masters:not(.invisibleScroll)>div>div>div {
+  height: 500px;
+}
+
+.fullSizeBtnResponsive {
+  margin-top: 16px;
+}
+
+.invisibleScroll {
+  scrollbar-width: none;
+  display: flex;
+  overflow-x: scroll;
+  gap: 8px;
+  padding-right: 16px;
+
+  &>div>div {
+    width: 80vw;
+  }
+
+  &.masters>div>div {
+    width: 50vw;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
   .fullSizeBtnResponsive>div, .fullSizeBtnResponsive>div>button {
     max-width: 100%;

@@ -13,8 +13,13 @@ class MasterDetail extends React.Component {
     static propTypes = {
         photos: PropTypes.arrayOf(PropTypes.string).isRequired,
         name: PropTypes.string.isRequired,
-        characteristics: PropTypes.object.isRequired,
-        slug: PropTypes.string.isRequired
+        characteristics: PropTypes.object,
+        slug: PropTypes.string.isRequired,
+        noContent: PropTypes.bool
+    }
+
+    static defaultProps = {
+        noContent: false
     }
 
     render() {
@@ -33,7 +38,7 @@ class MasterDetail extends React.Component {
                         </div>
                     </div>
                     <div>
-                        {isMobile ? <div className={'subtitle2'}>{this.props.name}</div> : <div bp={'grid 6'}>
+                        {(isMobile || this.props.noContent) ? <div className={'subtitle2'}>{isMobile ? this.props.name : ''}</div> : <div bp={'grid 6'}>
                             <div>
                                 <div className={css.label}>{t('age')}</div>
                                 <div className={css.value}>{this.props.characteristics.age}&nbsp;{declination(this.props.characteristics.age, t('yearDeclination'))}</div>

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added reviews block for unrated">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="bug fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,28 +52,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.13.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.38&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/components/kit/Form&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "16.13.1",
+    "javascript.nodejs.core.library.typings.version": "16.11.38",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/components/kit",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/kit/Form" />
       <recent name="$PROJECT_DIR$/src/components/kit" />
+      <recent name="$PROJECT_DIR$/src/components/kit/Form" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/components/modals" />
@@ -133,14 +138,7 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="11149000" />
-    </task>
-    <task id="LOCAL-00224" summary="added tagcards">
-      <created>1655739204383</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739204383</updated>
+      <workItem from="1656052213810" duration="15238000" />
     </task>
     <task id="LOCAL-00225" summary="added tagcards">
       <created>1655739232877</created>
@@ -478,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656063691508</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL-00273" summary="bug fixes">
+      <created>1656064808889</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1656064808889</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +514,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed phone input" />
     <MESSAGE value="added mobile logout" />
     <MESSAGE value="added faq endpoints" />
     <MESSAGE value="added new salon margins" />
@@ -534,6 +538,7 @@
     <MESSAGE value="added IDE files" />
     <MESSAGE value="added salon master view" />
     <MESSAGE value="added reviews block for unrated" />
-    <option name="LAST_COMMIT_MESSAGE" value="added reviews block for unrated" />
+    <MESSAGE value="bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
   </component>
 </project>

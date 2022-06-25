@@ -101,7 +101,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
                 slug: {
                     $ne: req.params.slug
                 }
-            }))
+            }).limit(3))
         }
 
         return res.json(await Worker.find({
