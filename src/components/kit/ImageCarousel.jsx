@@ -4,7 +4,6 @@ import css from '../../styles/kit/imagecarousel.module.scss';
 import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../contexts/Global.js";
 import {withRouter} from "next/router.js";
-import window from "global";
 
 class ImageCarousel extends React.Component {
     constructor(props) {
@@ -46,8 +45,6 @@ class ImageCarousel extends React.Component {
                     startX: e.touches ? e.touches[0].pageX : 0
                 }
             })
-
-            window.document.body.classList.add('no-scroll')
         },
         release() {
             this.setState({
@@ -58,7 +55,6 @@ class ImageCarousel extends React.Component {
             })
 
             this.state.slider.current.style.transform = `translateX(${-(this.state.currentSlide) * 100}%)`
-            window.document.body.classList.remove('no-scroll')
         },
         move(e) {
             if (!this.state.swipe.started) {
