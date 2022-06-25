@@ -13,11 +13,11 @@ router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
             localField: '_id',
             foreignField: 'faqId',
             as: 'gotResponse',
-            pipeline: [{
+            pipeline: req.user ? [{
                 $match: {
                     userId: req.user._id
                 }
-            }]
+            }] : undefined
         }
     }, {
         $project: {
