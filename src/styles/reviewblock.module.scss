@@ -28,6 +28,10 @@
 }
 
 .gradeContainer {
+  &>div>div {
+    font-weight: 600;
+  }
+
   @include themify() {
     border-bottom: 1px solid t('input-border-color');
   }

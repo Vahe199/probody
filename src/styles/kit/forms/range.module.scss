@@ -15,6 +15,7 @@
   &.multiple {
     position: absolute;
     top: 16px;
+    padding-right: 2px;
 
     @include themify() {
       background: t('range');
@@ -40,6 +41,12 @@
         border-radius: 50%;
         border: 4px solid t('bg-accent');
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .range.multiple {
+    padding-right: 0;
   }
 }
 

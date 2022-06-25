@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done crossplatform carousel">
+      <change afterPath="$PROJECT_DIR$/src/components/PersonalPageLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/newvacancy.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/personal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/promotion.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/reviews.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/accountpage.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/menu.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +69,7 @@
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.13.1",
     "javascript.nodejs.core.library.typings.version": "16.11.38",
-    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/components/kit",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/pages/account",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,11 +81,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/account" />
       <recent name="$PROJECT_DIR$/src/components/kit" />
       <recent name="$PROJECT_DIR$/src/components/kit/Form" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/models" />
-      <recent name="$PROJECT_DIR$/src/components/modals" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/fonts" />
@@ -134,14 +147,8 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="25594000" />
-    </task>
-    <task id="LOCAL-00231" summary="added tagcards">
-      <created>1655739615340</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739615341</updated>
+      <workItem from="1656052213810" duration="26406000" />
+      <workItem from="1656159986448" duration="5988000" />
     </task>
     <task id="LOCAL-00232" summary="added tagcards">
       <created>1655739676839</created>
@@ -479,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656155123925</updated>
     </task>
-    <option name="localTasksCounter" value="280" />
+    <task id="LOCAL-00280" summary="done crossplatform carousel">
+      <created>1656158562882</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1656158562882</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -12,6 +12,18 @@
   }
 }
 
+.stepBack {
+  padding: 0 16px;
+  font-weight: 600;
+
+  i {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+    margin-right: 12px;
+  }
+}
+
 .list {
   min-width: 250px;
 
@@ -22,6 +34,8 @@
   li {
     font-size: 20px;
     padding: 16px 0;
+    font-weight: 600;
+    font-family: Lack, sans-serif;
 
     &:first-child {
       padding-top: 0;
@@ -32,7 +46,9 @@
     }
 
     &:not(:last-child) {
-      border-bottom: 1px solid #E4E4E4;
+      @include themify() {
+        border-bottom: 1px solid t('input-border-color');
+      }
     }
   }
 }

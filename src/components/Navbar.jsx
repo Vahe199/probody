@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                     </div>}
                     {isLoggedIn && <div className={'flex cursor-pointer justify-center'}>
                         <Icon name={'round_user'} className={css.personalAreaIcon} />
-                        <Link href={'/'}>{t('personalArea')}</Link></div>}
+                        <Link href={'/account/personal'}>{t('personalArea')}</Link></div>}
                     <Menu/>
                     <ThemeSwitcher/>
                 </nav>

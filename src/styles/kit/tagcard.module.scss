@@ -44,8 +44,10 @@
 }
 
 .value {
+  font-weight: 600;
+  font-size: 20px;
+
   @include themify() {
-    font-size: 20px;
     color: t('text-main');
 
     &.accent {

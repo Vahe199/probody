@@ -267,5 +267,13 @@ export default {
     otherSalonMasters: 'Другие массажистки салона',
     otherSalonArticles: 'Другие анкеты салона',
     viewAllArticles: 'Смотреть все анкеты',
-    addFirstReview: 'Добавить первый отзыв'
+    addFirstReview: 'Добавить первый отзыв',
+    menu: 'Меню',
+    user: 'Пользователь',
+    salonAndPromotion: 'Анкета и продвижение',
+    stats: 'Статистика',
+    reviewsAndRating: 'Отзывы и рейтинг',
+    addVacancy: 'Добавить вакансию',
+    personalInfo: 'Личные данные',
+    creatingVacancy: 'Создание вакансии'
 }
