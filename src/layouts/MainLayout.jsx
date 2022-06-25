@@ -35,7 +35,7 @@ class MainLayout extends React.Component {
             isLoggedIn: false,
             theme: 'light',
             modal: '',
-            isMobile: false,
+            isMobile: true,
             t: this.i18n.bind(this),
             setLocale: this.setLocale.bind(this),
             toggleTheme: this.toggleTheme.bind(this),
@@ -119,7 +119,6 @@ class MainLayout extends React.Component {
     }
 
     computeIsMobile() {
-        console.log(window.screen.width)
         this.setState({isMobile: window.screen.width < 768})
     }
 
