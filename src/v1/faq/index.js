@@ -58,6 +58,7 @@ router.get('/:id/quality', apicache.middleware('30 minutes'), async (req, res) =
                 faqId: req.params.id
             })
 
+        console.log(satisfiedCnt, allCnt)
         res.json({
             quality: satisfiedCnt / allCnt
         })
