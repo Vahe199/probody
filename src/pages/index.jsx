@@ -297,22 +297,24 @@ class Home extends React.Component {
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
-                        {(!this.props.router.query.map || this.props.router.query.map === 'false') && <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
-                                    value={this.props.router.query.kind || 'all'} checkedClassName={css.radioChecked}
-                                    onUpdate={this.setKind} options={[
-                            {
-                                label: t('all'),
-                                value: 'all'
-                            },
-                            {
-                                label: t('salons'),
-                                value: 'salon'
-                            },
-                            {
-                                label: isMobile ? t('masters') : t('privateMasters'),
-                                value: 'master'
-                            }
-                        ]}/>}
+                        {(!this.props.router.query.map || this.props.router.query.map === 'false') &&
+                            <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
+                                        value={this.props.router.query.kind || 'all'}
+                                        checkedClassName={css.radioChecked}
+                                        onUpdate={this.setKind} options={[
+                                {
+                                    label: t('all'),
+                                    value: 'all'
+                                },
+                                {
+                                    label: t('salons'),
+                                    value: 'salon'
+                                },
+                                {
+                                    label: isMobile ? t('masters') : t('privateMasters'),
+                                    value: 'master'
+                                }
+                            ]}/>}
                     </div>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
@@ -330,7 +332,8 @@ class Home extends React.Component {
                                         onClick={this.toggleFilterPopup}>
                                     <span
                                         className={css.cnt}>{Number(Boolean(this.props.router.query.priceFrom?.length || this.props.router.query.priceTo?.length)) + Object.keys(this.props.router.query).filter(filterName => filterName.startsWith('filters[') && this.props.router.query[filterName].length).length}</span>
-                                    {!isMobile && <span style={{margin: '0 4px', verticalAlign: 'inherit'}}>{t('filter')}</span>}
+                                    {!isMobile &&
+                                        <span style={{margin: '0 4px', verticalAlign: 'inherit'}}>{t('filter')}</span>}
                                     <Icon name={'filter'}/>
                                 </Button>
                                 <Popup handleRef={this.state.handleRef}
@@ -375,12 +378,14 @@ class Home extends React.Component {
                                             <div bp={'hide@md'}>
                                                 <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
                                                                         lock={!isMobile}>
-                                                    <MultipleRangeInput step={50}
-                                                                        from={this.props.router.query.priceFrom || this.state.priceRange.from}
-                                                                        to={this.props.router.query.priceTo || this.state.priceRange.to}
-                                                                        min={this.state.priceRange.from}
-                                                                        max={this.state.priceRange.to}
-                                                                        onUpdate={this.setPriceRange}/>
+                                                    <div className={css.collapseBody}>
+                                                        <MultipleRangeInput step={50}
+                                                                            from={this.props.router.query.priceFrom || this.state.priceRange.from}
+                                                                            to={this.props.router.query.priceTo || this.state.priceRange.to}
+                                                                            min={this.state.priceRange.from}
+                                                                            max={this.state.priceRange.to}
+                                                                            onUpdate={this.setPriceRange}/>
+                                                    </div>
                                                 </TransparentCollapsible>
                                             </div>
 
@@ -388,7 +393,8 @@ class Home extends React.Component {
                                                                     lock={!isMobile}>
                                                 <div className={css.collapseBody}>
                                                     {this.state.filters.leads?.map(lead =>
-                                                        <Checkbox style={{marginBottom: 8}} key={lead._id} name={lead.name}
+                                                        <Checkbox style={{marginBottom: 8}} key={lead._id}
+                                                                  name={lead.name}
                                                                   icon={lead.icon}
                                                                   value={this.props.router.query['filters[leads]']?.includes(lead._id) || false}
                                                                   onUpdate={() => this.toggleFilter('leads', lead._id)}/>
@@ -419,7 +425,8 @@ class Home extends React.Component {
                                                                     lock={!isMobile}>
                                                 <div className={css.collapseBody}>
                                                     {this.state.filters.rooms?.map(room =>
-                                                        <Checkbox style={{marginBottom: 8}} key={room._id} name={room.name}
+                                                        <Checkbox style={{marginBottom: 8}} key={room._id}
+                                                                  name={room.name}
                                                                   value={this.props.router.query['filters[rooms]']?.includes(room._id) || false}
                                                                   onUpdate={() => this.toggleFilter('rooms', room._id)}/>
                                                     )}
@@ -616,36 +623,37 @@ class Home extends React.Component {
                                         </div>
                                     </div>
 
-                                    {worker.kind === 'salon' ? <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
-                                        <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
+                                    {worker.kind === 'salon' ?
+                                        <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
+                                            <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
 
-                                        <div className={css.invisibleScroll}>
-                                            {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
-                                                name={master.name}
-                                                link={{
-                                                    query: Object.assign({}, this.props.router.query, {
-                                                        salonTab: 'masters'
-                                                    }),
-                                                    hash: '#salonTab',
-                                                    pathname: worker.url
-                                                }}
-                                                pic={master.photos[0]}
-                                                photoCnt={master.photos.length}
-                                                key={i}
-                                            />)}
-                                            {worker.masters.length > 3 &&
-                                                <MockShortMasterCard link={{
-                                                    query: Object.assign({}, this.props.router.query, {
-                                                        salonTab: 'masters'
-                                                    }),
-                                                    hash: '#salonTab',
-                                                    pathname: worker.url
-                                                }}
-                                                                     cnt={worker.masters.length - 3}/>}
-                                        </div>
-                                    </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
-                                        <ParameterView {...worker.characteristics} />
-                                    </div>}
+                                            <div className={css.invisibleScroll}>
+                                                {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
+                                                    name={master.name}
+                                                    link={{
+                                                        query: Object.assign({}, this.props.router.query, {
+                                                            salonTab: 'masters'
+                                                        }),
+                                                        hash: '#salonTab',
+                                                        pathname: worker.url
+                                                    }}
+                                                    pic={master.photos[0]}
+                                                    photoCnt={master.photos.length}
+                                                    key={i}
+                                                />)}
+                                                {worker.masters.length > 3 &&
+                                                    <MockShortMasterCard link={{
+                                                        query: Object.assign({}, this.props.router.query, {
+                                                            salonTab: 'masters'
+                                                        }),
+                                                        hash: '#salonTab',
+                                                        pathname: worker.url
+                                                    }}
+                                                                         cnt={worker.masters.length - 3}/>}
+                                            </div>
+                                        </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
+                                            <ParameterView {...worker.characteristics} />
+                                        </div>}
 
                                     <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
                                         <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
@@ -692,7 +700,8 @@ class Home extends React.Component {
 
                                 <div bp={'12 hide@md'}>
                                     <div className={cnb(css.cardRoot, css.padded)}>
-                                        <p className={cnb(css.ellipsis, css.helperText)} style={{marginBottom: 12}}>{worker.description}</p>
+                                        <p className={cnb(css.ellipsis, css.helperText)}
+                                           style={{marginBottom: 12}}>{worker.description}</p>
 
                                         <div className={css.stretchContainer}>
                                             <Link href={worker.url}>

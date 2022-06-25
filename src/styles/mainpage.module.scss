@@ -39,9 +39,13 @@
   }
 }
 
-.collapseBody span {
-  @include themify() {
-    color: t('text-caption');
+.collapseBody {
+  padding: 0 16px;
+
+  span {
+    @include themify() {
+      color: t('text-caption');
+    }
   }
 }
 

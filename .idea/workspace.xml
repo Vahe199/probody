@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="bug fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/collapsible.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,14 +135,7 @@
       <workItem from="1655987525243" duration="615000" />
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
-      <workItem from="1656052213810" duration="15238000" />
-    </task>
-    <task id="LOCAL-00225" summary="added tagcards">
-      <created>1655739232877</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1655739232877</updated>
+      <workItem from="1656052213810" duration="16125000" />
     </task>
     <task id="LOCAL-00226" summary="added tagcards">
       <created>1655739297678</created>
@@ -483,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656064808889</updated>
     </task>
-    <option name="localTasksCounter" value="274" />
+    <task id="LOCAL-00274" summary="bug fixes">
+      <created>1656140048825</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1656140048825</updated>
+    </task>
+    <option name="localTasksCounter" value="275" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

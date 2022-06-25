@@ -119,7 +119,8 @@ class MainLayout extends React.Component {
     }
 
     computeIsMobile() {
-        this.setState({isMobile: window.innerWidth < 768})
+        console.log(window.screen.width)
+        this.setState({isMobile: window.screen.width < 768})
     }
 
     setLocale(locale) {
