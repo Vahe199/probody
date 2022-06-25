@@ -4,12 +4,13 @@ import PersonalPageLayout from "../../layouts/secondary/PersonalPageLayout.jsx"
 import {TITLE_POSTFIX} from "../../helpers/constants.js"
 import Head from "next/head.js"
 import {GlobalContext} from "../../contexts/Global.js"
-import css from '../../styles/articlecard.module.scss'
+import css from '../../styles/faq.page.module.scss'
 import APIRequests from "../../helpers/APIRequests.js";
 import PlusCollapsible from "../../components/kit/Collapses/PlusCollapsible";
 import {cnb} from "cnbuilder";
 import Button from "../../components/kit/Button.jsx";
 import Icon from "../../components/kit/Icon.jsx";
+import TextArea from "../../components/kit/Form/TextArea";
 
 class FAQ extends React.Component {
     static contextType = GlobalContext
@@ -18,7 +19,9 @@ class FAQ extends React.Component {
         super(props);
 
         this.state = {
-            faq: []
+            faq: [],
+            offer: '',
+            textAreaVisible: false
         }
 
         this.answerQuestion = this.answerQuestion.bind(this)
@@ -49,12 +52,16 @@ class FAQ extends React.Component {
     }
 
     async answerQuestion(index, useful, text) {
+        if (this.state.offer.length < 3) {
+            return
+        }
+
         const faq = [...this.state.faq]
 
         APIRequests.answerQuestion(faq[index]._id, useful, text).then(() => {
             faq[index].gotResponse = true
 
-            this.setState({faq})
+            this.setState({faq, textAreaVisible: false})
         })
     }
 
@@ -74,19 +81,30 @@ class FAQ extends React.Component {
                     <div>
                         {this.state.faq.map((question, i) =>
                             <PlusCollapsible title={question.name} defaultOpen={i === 0} key={i} onOpen={() => this.getQuality(i)}>
-                                <p>{question.description}</p>
+                                <p className={'responsive-content'}>{question.description}</p>
 
-                                {question.gotResponse === false && <div style={{marginTop: 16, marginBottom: 12, maxWidth: 375}} className={cnb(css.cardRoot, css.padded)}>
+                                {(question.gotResponse === false && !this.state.textAreaVisible) && <div style={{marginTop: 16, marginBottom: 12, maxWidth: 375}} className={cnb(css.cardRoot, css.padded)}>
                                     <h2>{t('wasThisAnswerUseful')}</h2>
 
                                     <p className={css.textDisabled}>
                                         {t('nUsersThinkThatsUseful', question.quality !== undefined ? question.quality.toFixed(0) : '-')}
                                     </p>
 
-                                    <div className="flex" style={{marginTop: 24}}>
+                                    <div className={css.buttonLine} style={{marginTop: 24}}>
                                         <Button onClick={() => this.answerQuestion(i, true)}>{t('yes')}</Button>
-                                        <Button color={'tertiary'}>{t('no')}</Button>
-                                        <Button color={'tertiary'}><Icon name={'tg_light'} /></Button>
+                                        <Button onClick={() => this.setState({textAreaVisible: true})} color={'tertiary'}>{t('no')}</Button>
+                                        <a target={'_blank'} href={'https://t.me/nmish1995'}><Button color={'tertiary'}><Icon name={'tg_light'} /></Button></a>
+                                    </div>
+                                </div>}
+
+                                {this.state.textAreaVisible && <div style={{marginTop: 16, marginBottom: 12, maxWidth: 500}} className={cnb(css.cardRoot, css.padded)}>
+                                    <h2>{t('helpUsToImprove')}</h2>
+
+                                    <TextArea className={css.bodyBg} label={t('offer')} placeholder={t('text')} value={this.state.offer} onUpdate={val => this.setState({offer: val})} max={100} min={3} />
+
+                                    <div className={'flex'} style={{gap: 3}}>
+                                        <Button onClick={() => this.answerQuestion(i, false, this.state.offer)}>{t('submit')}</Button>
+                                        <Button onClick={() => this.setState({textAreaVisible: false})} color={'tertiary'}>{t('cancel')}</Button>
                                     </div>
                                 </div>}
                             </PlusCollapsible>

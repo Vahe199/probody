@@ -51,13 +51,19 @@ export default class PlusCollapsible extends React.Component {
                 isOpen: this.props.defaultOpen
             })
         }
+
+        if (prevProps.children[1] !== this.props.children[1] || prevProps.children[2] !== this.props.children[2]) {
+            if (this.state.isOpen) {
+                this.forceUpdate()
+            }
+        }
     }
 
     render() {
         const {theme} = this.context
 
         return <div className={css['theme--' + theme]}>
-            <div onClick={this.toggle} className={css.transparentHead} style={{padding: '12px 0'}}>
+            <div onClick={this.toggle} className={cnb(css.transparentHead, 'responsive-content')} style={{padding: '12px 0'}}>
                 <div className={'flex grow-1 vertical-center'}>
                     <span className={'subtitle2'}>{this.props.title}</span>
                 </div>

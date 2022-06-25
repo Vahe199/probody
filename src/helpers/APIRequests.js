@@ -38,7 +38,9 @@ export default class APIRequests {
 
     static async answerQuestion(id, isUseful, text) {
         return (await fetch(`${API_URL}/faq/${id}`, {
-            headers: APIRequests.withCredentials(),
+            headers: APIRequests.withCredentials({
+                'Content-Type': 'application/json'
+            }),
             method: 'POST',
             body: JSON.stringify({
                 isUseful, text

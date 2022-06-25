@@ -281,5 +281,10 @@ export default {
     wasThisAnswerUseful: 'Этот ответ был полезен для вас?',
     nUsersThinkThatsUseful: '%s% пользователей считают этот ответ полезным.',
     yes: 'Да',
-    no: 'Нет'
+    no: 'Нет',
+    helpUsToImprove: 'Помогите сделать ответы на вопросы лучше',
+    text: 'Текст',
+    offer: 'Предложение',
+    submit: 'Отправить',
+    cancel: 'Отменить'
 }
