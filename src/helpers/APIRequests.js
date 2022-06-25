@@ -32,6 +32,20 @@ export default class APIRequests {
         })).json()
     }
 
+    static async getFAQQuality(id) {
+        return (await fetch(`${API_URL}/faq/${id}/quality`)).json()
+    }
+
+    static async answerQuestion(id, isUseful, text) {
+        return (await fetch(`${API_URL}/faq/${id}`, {
+            headers: APIRequests.withCredentials(),
+            method: 'POST',
+            body: JSON.stringify({
+                isUseful, text
+            })
+        })).json()
+    }
+
     static async getLeads() {
         return (await fetch(`${API_URL}/lead`)).json()
     }

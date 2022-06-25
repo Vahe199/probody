@@ -51,11 +51,11 @@ router.get('/', async (req, res) => {
 router.get('/:id/quality', apicache.middleware('30 minutes'), async (req, res) => {
     try {
         const satisfiedCnt = await FAQResponse.countDocuments({
-                faq: req.params.id,
+                faqId: req.params.id,
                 isUseful: true
             }),
             allCnt = await FAQResponse.countDocuments({
-                faq: req.params.id
+                faqId: req.params.id
             })
 
         res.json({

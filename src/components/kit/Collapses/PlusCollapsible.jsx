@@ -38,6 +38,10 @@ export default class PlusCollapsible extends React.Component {
     }
 
     toggle() {
+        if (this.state.isOpen === false && this.props.onOpen) {
+            this.props.onOpen()
+        }
+
         this.setState({isOpen: !this.state.isOpen})
     }
 

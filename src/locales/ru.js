@@ -277,5 +277,9 @@ export default {
     personalInfo: 'Личные данные',
     creatingVacancy: 'Создание вакансии',
     needHelp: 'Нужна помощь?',
-    faq: 'Часто задаваемые вопросы'
+    faq: 'Часто задаваемые вопросы',
+    wasThisAnswerUseful: 'Этот ответ был полезен для вас?',
+    nUsersThinkThatsUseful: '%s% пользователей считают этот ответ полезным.',
+    yes: 'Да',
+    no: 'Нет'
 }

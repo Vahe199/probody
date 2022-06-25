@@ -50,6 +50,16 @@
   }
 }
 
+.padded {
+  padding: 16px;
+}
+
+.textDisabled {
+  @include themify() {
+    color: t('text-disabled');
+  }
+}
+
 .tag::before {
   @include themify() {
     background-color: t('bg-primary');
