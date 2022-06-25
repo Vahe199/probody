@@ -27,7 +27,9 @@ export default class APIRequests {
     }
 
     static async getFAQ() {
-        return (await fetch(`${API_URL}/faq`)).json()
+        return (await fetch(`${API_URL}/faq`, {
+            headers: APIRequests.withCredentials()
+        })).json()
     }
 
     static async getLeads() {

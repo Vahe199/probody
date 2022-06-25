@@ -7,6 +7,7 @@ import apicache from "apicache";
 const router = express.Router();
 
 router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
+    console.log(!!req.user)
     res.json(req.user ? await FAQ.aggregate([{
         $lookup: {
             from: 'faqResponse',
