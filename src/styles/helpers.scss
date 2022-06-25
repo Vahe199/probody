@@ -51,6 +51,11 @@
   align-items: center;
 }
 
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+}
+
 .non-selectable {
   user-select: none;
 }
