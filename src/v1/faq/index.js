@@ -8,7 +8,7 @@ import AuthorizedToken from "../../models/AuthorizedToken.model.js";
 
 const router = express.Router();
 
-router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
+router.get('/', async (req, res) => {
     let userId, token = req.get('X-Auth-Token')
 
     if (token) {
@@ -18,8 +18,6 @@ router.get('/', apicache.middleware('5 minutes'), async (req, res) => {
             userId = userDoc.userId._id
         }
     }
-
-    console.log(userId)
 
     res.json(userId ? await FAQ.aggregate([{
         $lookup: {
