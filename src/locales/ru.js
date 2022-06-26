@@ -286,5 +286,6 @@ export default {
     text: 'Текст',
     offer: 'Предложение',
     submit: 'Отправить',
-    cancel: 'Отменить'
+    cancel: 'Отменить',
+    showNSalonsMore: 'Показать еще %s анкет'
 }

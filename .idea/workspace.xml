@@ -3,32 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done faq">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Collapses/TransparentCollapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/TransparentCollapsible.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/TagCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TagCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/about-us.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/about-us.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/accountpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/accountpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/footer.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/footer.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/masterdetail.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/masterdetail.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/parameterview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/parameterview.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/programcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/programcard.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/socialblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/socialblock.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/weekview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/weekview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/icons/loading.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/refresh.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/menu.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,14 +138,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="28020000" />
-    </task>
-    <task id="LOCAL-00245" summary="added masseuses">
-      <created>1655913943387</created>
-      <option name="number" value="00245" />
-      <option name="presentableId" value="LOCAL-00245" />
-      <option name="project" value="LOCAL" />
-      <updated>1655913943388</updated>
+      <workItem from="1656159986448" duration="34050000" />
     </task>
     <task id="LOCAL-00246" summary="added tg notifier">
       <created>1655914000120</created>
@@ -504,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656177051874</updated>
     </task>
-    <option name="localTasksCounter" value="294" />
+    <task id="LOCAL-00294" summary="done faq">
+      <created>1656248556164</created>
+      <option name="number" value="00294" />
+      <option name="presentableId" value="LOCAL-00294" />
+      <option name="project" value="LOCAL" />
+      <updated>1656248556164</updated>
+    </task>
+    <option name="localTasksCounter" value="295" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

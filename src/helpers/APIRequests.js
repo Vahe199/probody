@@ -1,6 +1,9 @@
 const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
-const PAGE_SIZE = 10;
+const PAGE_SIZES = {
+    MAIN: 5,
+    REVIEWS: 3
+};
 
 export default class APIRequests {
     static async getPrograms() {
@@ -61,7 +64,7 @@ export default class APIRequests {
     }
 
     static async getReviews(id, page = 1) {
-        return (await fetch(`${API_URL}/review/${id}?page=${page}&limit=${PAGE_SIZE}`)).json()
+        return (await fetch(`${API_URL}/review/${id}?page=${page}&limit=${PAGE_SIZES.REVIEWS}`)).json()
     }
 
     static async uploadPic(file, asReplacementFor = undefined) {
@@ -222,7 +225,7 @@ export default class APIRequests {
             delete filters.region
         }
 
-        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZE}&onlyCount=${onlyCount}`, {
+        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZES.MAIN}&onlyCount=${onlyCount}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -39,13 +39,14 @@ class Home extends React.Component {
             filters: {},
             handleRef: React.createRef(),
             filterPopupOpen: false,
+            preventLoading: false,
             pageCount: 1,
             foundCnt: 0,
             regions: [],
             myRegion: '',
             priceRange: {
                 from: 1000,
-                to: 22000
+                to: 99999
             }
         }
 
@@ -60,9 +61,10 @@ class Home extends React.Component {
         this.setPriceRange = this.setPriceRange.bind(this)
         this.setRegion = this.setRegion.bind(this)
         this.getAppliedFilterCnt = this.getAppliedFilterCnt.bind(this)
+        this.loadMore = this.loadMore.bind(this)
     }
 
-    async initPageLoad() {
+    async initPageLoad(volatile = false) {
         if (Objects.isEmpty(this.state.filters)) {
             APIRequests.getFilters().then(filters => {
                 this.setState({
@@ -72,7 +74,7 @@ class Home extends React.Component {
             })
         }
 
-        this.performSearch()
+        this.performSearch(volatile)
     }
 
     componentDidMount() {
@@ -124,16 +126,20 @@ class Home extends React.Component {
         })
     }
 
-    componentDidUpdate(prevProps) {
-        if (!Objects.shallowEqual(prevProps.router.query, this.props.router.query)) {
-            window.document.body.scrollTo(0, 0)
+    componentDidUpdate(prevProps, prevState) {
+        const query = this.props.router.query
 
+        if (this.state.preventLoading) {
+            return
+        }
+
+        if (!Objects.shallowEqual(prevProps.router.query, query)) {
             this.initPageLoad()
         }
 
-        if (!this.props.router.query.region && this.state.myRegion) {
+        if (!query.region && this.state.myRegion) {
             this.props.router.push({
-                query: Object.assign({}, this.props.router.query, {
+                query: Object.assign({}, query, {
                     region: this.state.myRegion,
                 })
             })
@@ -144,7 +150,7 @@ class Home extends React.Component {
         return parseInt(this.props.router.query.page) || 1
     }
 
-    performSearch() {
+    performSearch(appendResults = false) {
         APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
             kind: this.props.router.query.kind || 'all',
             region: this.props.router.query.region,
@@ -165,6 +171,10 @@ class Home extends React.Component {
             workers.reviews.map(review => {
                 workers.results[workers.results.findIndex(worker => worker._id === review._id)].reviews = review
             })
+
+            if (appendResults) {
+                workers.results.unshift(...this.state.workers)
+            }
 
             this.setState({
                 pageCount: workers.pageCount,
@@ -263,6 +273,24 @@ class Home extends React.Component {
         })
     }
 
+    loadMore() {
+        this.setState({
+            preventLoading: true
+        }, async () => {
+            this.props.router.push({query: Object.assign({}, this.props.router.query, {page: (Number(this.props.router.query.page) || 1) + 1})}, undefined, {
+                shallow: true
+            })
+
+            await this.performSearch(true)
+
+            setTimeout(() => {
+                this.setState({
+                    preventLoading: false
+                })
+            }, 1000)
+        })
+    }
+
     getAppliedFilterCnt() {
         const query = this.props.router.query
         let cnt = 0
@@ -279,8 +307,7 @@ class Home extends React.Component {
     render() {
         const {t, theme, isMobile} = this.context
         const inputId = 'search-input-' + Numbers.random(0, 99999),
-            selectId = 'select-' + Numbers.random(0, 99999),
-            themeAccent = theme === 'dark' ? 'light' : 'dark'
+            selectId = 'select-' + Numbers.random(0, 99999)
 
         return (
             <div className={css['theme--' + theme]}>
@@ -526,8 +553,10 @@ class Home extends React.Component {
                                                 <div><a target="_blank"
                                                         href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
-                                                        <Icon style={{marginRight: worker.messengers.tg ? 0 : 10}} name={'wa_light'}/>
-                                                        <span className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
+                                                        <Icon style={{marginRight: worker.messengers.tg ? 0 : 10}}
+                                                              name={'wa_light'}/>
+                                                        <span
+                                                            className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                     </Button>
                                                 </a></div>
                                                 {worker.messengers.tg && <div><a target="_blank"
@@ -610,8 +639,9 @@ class Home extends React.Component {
                                                     <div style={{marginTop: 16}} className={css.socialBlock}>
                                                         {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
-                                                                <a target="_blank" href={worker.social[name]} className={css.img}>
-                                                                    <Icon name={name + '_' + theme} />
+                                                                <a target="_blank" href={worker.social[name]}
+                                                                   className={css.img}>
+                                                                    <Icon name={name + '_' + theme}/>
                                                                 </a>
                                                             </div>
                                                         )}
@@ -688,7 +718,7 @@ class Home extends React.Component {
                                             {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                 <div key={name}>
                                                     <a target="_blank" href={worker.social[name]} className={css.img}>
-                                                        <Icon name={name + '_' + theme} />
+                                                        <Icon name={name + '_' + theme}/>
                                                     </a>
                                                 </div>
                                             )}
@@ -711,8 +741,10 @@ class Home extends React.Component {
                                             <div><a target="_blank"
                                                     href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
-                                                    <Icon style={{marginRight: worker.messengers.tg ? 0 : 6}} name={'wa_light'}/>
-                                                    <span className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
+                                                    <Icon style={{marginRight: worker.messengers.tg ? 0 : 6}}
+                                                          name={'wa_light'}/>
+                                                    <span
+                                                        className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                 </Button>
                                             </a></div>
                                             {worker.messengers.tg && <div><a target="_blank"
@@ -727,6 +759,13 @@ class Home extends React.Component {
                             </div>
                         </div>
                     })}
+                </div>
+
+                <div className="flex justify-center">
+                {((Number(this.props.router.query.page) !== this.state.pageCount) && !this.state.preventLoading && this.state.workers.length > 0) && <Button className={css.showMoreBtn} size={'large'} onClick={this.loadMore}>
+                    <span className={'vertical-center'}>{t('showNSalonsMore', 5)}</span>
+                    <Icon name={'refresh'} />
+                </Button>}
                 </div>
 
                 {this.state.pageCount > 1 &&
