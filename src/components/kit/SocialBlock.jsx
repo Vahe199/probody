@@ -4,6 +4,7 @@ import TextSection from "./TextSection.jsx";
 import {cnb} from "cnbuilder";
 import css from "../../styles/kit/socialblock.module.scss";
 import {GlobalContext} from "../../contexts/Global.js";
+import Icon from "./Icon.jsx";
 
 class SocialBlock extends React.Component {
     static propTypes = {
@@ -20,8 +21,9 @@ class SocialBlock extends React.Component {
             <div className={cnb(css.socialBlock)}>
                 {Object.keys(this.props.entities).map(name =>
                     <div key={name}>
-                        <a target="_blank" href={this.props.entities[name]}>
-                            <img src={'/icons/' + name + '_' + theme + '.svg'} alt={t(name)} />
+                        <a target="_blank" href={this.props.entities[name]} className={css.img}>
+                            {/*<img src={'/icons/' + name + '_' + theme + '.svg'} alt={t(name)} />*/}
+                            <Icon name={name + '_' + theme} />
                         </a>
                     </div>
                 )}

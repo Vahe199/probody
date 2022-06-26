@@ -8,14 +8,14 @@ export default class Footer extends React.Component {
     static contextType = GlobalContext
 
     render() {
-        const {t, theme} = this.context;
+        const {t, theme, isMobile} = this.context;
 
         return <div className={css['theme--' + theme]}>
             <footer className={cnb('container', 'non-selectable', css.footer)}>
                 <img alt={t('siteLogo')} className={cnb('cursor-pointer', css.textLogo)} src={'/text_logo--' + theme + '.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
-                        <div bp={'grid 4@md 6'}>
+                        <div bp={'grid 4@md 6'} style={{gridGap: isMobile ? 24 : 32}}>
                             <div><Link href={'/'}>{t('cities')}</Link></div>
                             <div><Link href={'/'}>{t('contacts')}</Link></div>
                             <div><Link href={'/'}>{t('aboutProject')}</Link></div>
@@ -26,8 +26,8 @@ export default class Footer extends React.Component {
                             <div><Link href={'/salon/new'}>{t('addSalon')}</Link></div>
                         </div>
 
-                        <div bp={'hide@md'} style={{marginTop: 24}}>
-                            <Link href={'/'}><span className={cnb(css.caption, 'cursor-pointer')}>{t('privacyPolicy')}</span></Link>
+                        <div style={{marginTop: 24}}>
+                            <Link href={'/'}><span className={cnb(css.caption, 'cursor-pointer', 'lack')}>{t('privacyPolicy')}</span></Link>
                         </div>
                     </div>
                     <div bp={'hide@md 12@sm'}>
@@ -133,17 +133,24 @@ export default class Footer extends React.Component {
                 </div>
                 <div className={css.splitter}/>
                 <div style={{marginTop: 12}} bp={'grid'}>
-                    <div bp={'hide@md 12'}>
-                        <span className={css.caption}>{t('whatsapp')}</span>
-                        <a href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762) 987-87-91</h1></a>
+                    <div bp={'4 hide show@md'}>
+                        <div className={cnb(css.caption, css.allRightsReservedDesktop)}>{t('allRightsReserved')}</div>
                     </div>
-                    <div bp={'4@md 12'}>
-                        <span className={css.caption}>{t('mail')}</span>
-                        <a target="_blank" href={'mailto:support@probody.kz'}><h1 className={'cursor-pointer'} style={{marginBottom: 12}}>support@probody.kz</h1></a>
+                    <div bp={'12 8@md'}>
+                        <div bp={'grid 12 6@md'}>
+                            <div>
+                                <span className={cnb(css.caption, css.small)}>{t('mail')}</span>
+                                <a target="_blank" href={'mailto:support@probody.kz'}><h1 className={'cursor-pointer'} style={{marginBottom: 12}}>support@probody.kz</h1></a>
+                            </div>
+                            <div>
+                                <span className={cnb(css.caption, css.small)}>{t('whatsapp')}</span>
+                                <a href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762) 987-87-91</h1></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div bp={'12 hide@md'}>
                         <span className={css.caption}>{t('allRightsReserved')}</span>
-                    </div>
-                    <div bp={'8@md hide show@md'} style={{marginTop: 12}}>
-                        <Link href={'/'}><span className={cnb(css.caption, 'cursor-pointer')}>{t('privacyPolicy')}</span></Link>
                     </div>
                 </div>
             </footer>

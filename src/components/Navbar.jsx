@@ -32,16 +32,17 @@ class Navbar extends React.Component {
                         <HybridSearchInput searchPlaceholder={t('searchPlaceholder')}
                                            geoPlaceholder={t('geoPlaceholder')}/>
                     </div>
-                    <LanguageSelector/>
                     {!isLoggedIn && <div className={'flex'}>
-                        <span className={'cursor-pointer'} onClick={() => openModal('login')}>{t('toLogIn')}</span>
+                        <span className={'cursor-pointer lack'} onClick={() => openModal('login')}>{t('toLogIn')}</span>
                         <div style={{margin: '0 8px'}} className={css.rightSplitter}>&nbsp;</div>
-                        <span className={'cursor-pointer'}
+                        <span className={'cursor-pointer lack'}
                               onClick={() => openModal('register')}>{t('registration')}</span>
                     </div>}
-                    {isLoggedIn && <div className={'flex cursor-pointer justify-center'}>
+                    {isLoggedIn && <div className={'flex cursor-pointer justify-center lack'}>
                         <Icon name={'round_user'} className={css.personalAreaIcon} />
                         <Link href={'/account/personal'}>{t('personalArea')}</Link></div>}
+
+                    <LanguageSelector/>
                     <Menu/>
                     <ThemeSwitcher/>
                 </nav>

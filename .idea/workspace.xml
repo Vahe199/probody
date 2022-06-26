@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="faq">
-      <change afterPath="$PROJECT_DIR$/src/styles/faq.page.module.scss" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done faq">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Collapses/PlusCollapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/PlusCollapsible.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/faq.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/faq.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/articlecard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/articlecard.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/faq/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/faq/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Collapses/TransparentCollapsible.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Collapses/TransparentCollapsible.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/MasterDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/SocialBlock.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/TagCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TagCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/about-us.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/about-us.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/accountpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/accountpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/footer.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/footer.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/masterdetail.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/masterdetail.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/parameterview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/parameterview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/programcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/programcard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/socialblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/socialblock.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tagcard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/weekview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/weekview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/menu.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/menu.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,14 +159,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="15659000" />
-    </task>
-    <task id="LOCAL-00244" summary="added masseuses">
-      <created>1655913891998</created>
-      <option name="number" value="00244" />
-      <option name="presentableId" value="LOCAL-00244" />
-      <option name="project" value="LOCAL" />
-      <updated>1655913891998</updated>
+      <workItem from="1656159986448" duration="28020000" />
     </task>
     <task id="LOCAL-00245" summary="added masseuses">
       <created>1655913943387</created>
@@ -485,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656175040710</updated>
     </task>
-    <option name="localTasksCounter" value="293" />
+    <task id="LOCAL-00293" summary="done faq">
+      <created>1656177051874</created>
+      <option name="number" value="00293" />
+      <option name="presentableId" value="LOCAL-00293" />
+      <option name="project" value="LOCAL" />
+      <updated>1656177051874</updated>
+    </task>
+    <option name="localTasksCounter" value="294" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +535,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added mobile search" />
     <MESSAGE value="done mainpage" />
     <MESSAGE value="done filters" />
     <MESSAGE value="fixed weekview" />
@@ -541,6 +559,7 @@
     <MESSAGE value="added personal area links" />
     <MESSAGE value="fixing faq backend" />
     <MESSAGE value="faq" />
-    <option name="LAST_COMMIT_MESSAGE" value="faq" />
+    <MESSAGE value="done faq" />
+    <option name="LAST_COMMIT_MESSAGE" value="done faq" />
   </component>
 </project>

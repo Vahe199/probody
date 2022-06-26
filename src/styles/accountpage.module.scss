@@ -22,6 +22,16 @@
     padding-top: 0;
   }
 
+  &:hover {
+    @include themify() {
+      border-bottom: 1px solid t('text-main');
+
+      a {
+        color: t('text-main');
+      }
+    }
+  }
+
   &.active {
     @include themify() {
       border-bottom: 1px solid t('text-main');

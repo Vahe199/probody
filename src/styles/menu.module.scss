@@ -46,6 +46,12 @@
     }
 
     &:not(:last-child) {
+      &:hover {
+        @include themify() {
+          border-bottom: 1px solid t('text-main') !important;
+        }
+      }
+
       @include themify() {
         border-bottom: 1px solid t('input-border-color');
       }

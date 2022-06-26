@@ -61,7 +61,7 @@ export default class TransparentCollapsible extends React.Component {
         return <div className={css['theme--' + theme]}>
             <div onClick={this.toggle} className={css.transparentHead}>
                 <div className={'flex grow-1 vertical-center'}>
-                    <span>{this.props.title}</span>
+                    <span className={'subtitle2'}>{this.props.title}</span>
                 </div>
                 <div className={'flex vertical-center'}>
                     {!this.props.lock &&

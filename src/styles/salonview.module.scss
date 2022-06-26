@@ -94,13 +94,13 @@
   & > div {
     flex-grow: 1;
 
+    &:first-child i {
+      margin-right: 10px;
+    }
+
     button {
       width: 100%;
       padding: 12px 0;
-    }
-
-    i {
-      margin-right: 4px;
     }
   }
 }
@@ -151,6 +151,12 @@
 @media (max-width: 480px) {
   .fullSizeBtnResponsive>div, .fullSizeBtnResponsive>div>button {
     max-width: 100%;
+  }
+}
+
+@media (min-width: 480px) {
+  .stretchContainer i {
+    margin-right: 10px;
   }
 }
 

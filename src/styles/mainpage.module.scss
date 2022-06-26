@@ -71,6 +71,7 @@
     color: t('text-disabled');
   }
 
+  font-family: Lack, sans-serif;
   cursor: pointer;
   font-size: 14px;
 }
@@ -135,11 +136,11 @@
     display: block;
     grid-column: span 12;
     width: 80%;
-    margin: 0 auto;
+    margin: 12px auto 8px auto;
     height: 1px;
 
     @include themify() {
-      background-color: t('bg-secondlayer');
+      background-color: t('line-color');
     }
   }
 }
@@ -314,4 +315,8 @@
   vertical-align: text-top;
   height: 18px;
   margin-right: 4px;
+
+  @include themify() {
+    color: t('text-main')
+  }
 }

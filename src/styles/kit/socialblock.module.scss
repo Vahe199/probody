@@ -8,13 +8,24 @@
     cursor: pointer;
     align-items: center;
 
-    img {
+    .img {
       width: 48px;
       height: 48px;
       border: 1px solid #ccc;
       padding: 10px;
       border-radius: 16px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        width: 20px;
+        height: 20px;
+
+        @include themify() {
+          color: t('text-main') !important;
+        }
+      }
     }
   }
 }

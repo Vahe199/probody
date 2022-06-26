@@ -3,7 +3,7 @@
 .root {
   border-radius: 20px;
   padding: 16px;
-  width: 175px;
+  width: 160px;
   cursor: pointer;
   user-select: none;
 
@@ -43,7 +43,7 @@
     color: t('text-accent');
   }
 
-  margin-bottom: 4px;
+  margin-bottom: -10px;
 }
 
 .value {

@@ -2,7 +2,6 @@
 
 .socialBlock {
   display: flex;
-  justify-content: space-around;
 
   div {
     display: inline-flex;
@@ -10,17 +9,26 @@
     justify-content: center;
     align-items: center;
 
-    img {
-      width: 48px;
-      height: 48px;
+    .img {
+      padding: 16px;
+      border-radius: 18px;
+
+      i {
+        width: 20px;
+        height: 20px;
+      }
 
       @include themify() {
         border: 1px solid t('border-accent-color');
-      }
 
-      padding: 10px;
-      border-radius: 16px;
-      display: inline-block;
+        &:hover {
+          border: 1px solid t('bg-primary');
+
+          i {
+            color: t('bg-primary');
+          }
+        }
+      }
     }
   }
 }

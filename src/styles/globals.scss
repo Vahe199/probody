@@ -10,6 +10,7 @@ $heading-scale: 8;
 
 :root {
   -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
   font-family: Lato, sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -46,7 +47,7 @@ input, textarea, select {
 
   &::placeholder {
     color: #ccc;
-    font-family: Lato, sans-serif;
+    font-family: Lack, sans-serif;
     user-select: none;
   }
 }
@@ -90,10 +91,12 @@ img {
 }
 
 @for $i from 1 through 6 {
-  h#{$i} {
+  h#{$i}, .h#{$i} {
     font-family: 'Lack', sans-serif;
     margin: 0;
     user-select: none;
+    line-height: 1.2;
+    font-weight: 400;
   }
 }
 

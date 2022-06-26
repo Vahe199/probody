@@ -241,6 +241,10 @@ class SalonView extends React.Component {
                     {!isMobile && <div style={{marginTop: 8}} className={cnb(css.padded, css.cardRoot)}>
                         {this.state.salon.description &&
                             <div className={css.textSectionDecorator}>
+                                <p className="subtitle2" style={{marginBottom: 12}}>
+                                    {t('description')}
+                                </p>
+
                                 <TextSection style={{padding: 0}} lines={5}>
                                     {this.state.salon.description}
                                 </TextSection>
@@ -258,14 +262,14 @@ class SalonView extends React.Component {
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
-                                    {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
+                                    <span className={'vertical-center'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
                                                                        href={'https://t.me/' + this.state.salon.messengers.tg}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'tg_light'}/>
-                                    {t('sendMessage')}
+                                    <span className={'vertical-center'}>{t('sendMessage')}</span>
                                 </Button>
                             </a></div>}
                         </div>}
@@ -347,10 +351,8 @@ class SalonView extends React.Component {
                                         <div className={css.socialBlock}>
                                             {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
                                                 <div key={name}>
-                                                    <a target="_blank" href={this.state.salon.social[name]}>
-                                                        <img
-                                                            src={'/icons/' + name + '_' + themeAccent + '.svg'}
-                                                            alt={t(name)}/>
+                                                    <a target="_blank" href={this.state.salon.social[name]} className={css.img}>
+                                                        <Icon name={name + '_' + theme} />
                                                     </a>
                                                 </div>
                                             )}
@@ -361,12 +363,12 @@ class SalonView extends React.Component {
                         </div>
                     </div>
 
-                    {this.state.salon.kind === 'master' && <div style={{marginTop: 8}}>
+                    {this.state.salon.kind === 'master' && <div style={{marginTop: 4}}>
                         <ParameterView {...this.state.salon.characteristics} />
                     </div>}
 
                     {this.state.salon.workHours &&
-                        <div bp={'grid'} style={{marginTop: 8}} className={cnb(css.cardRoot, css.padded)}>
+                        <div bp={'grid'} style={{marginTop: 4}} className={cnb(css.cardRoot, css.padded)}>
                             <div bp={'12 6@md'} className={css.shortInfoBlock}>
                                 <div>
                                     <div>{t('workSchedule').toLowerCase()}</div>
@@ -386,20 +388,8 @@ class SalonView extends React.Component {
 
                     <div bp={'grid'} style={{marginTop: 8}}>
                         <div bp={'12 8@md'} style={{gridGap: 8}} className={cnb(css.padded)}>
-                            {this.state.salon.programs &&
-                                <div style={{marginBottom: 24}}>
-                                    <p className="subtitle2"
-                                       style={{marginBottom: 16}}>{t(this.state.salon.kind + '_makingMassage')}</p>
-
-                                    <div className="flex wrap" style={{gap: 4}}>
-                                        {this.state.salon.programs.map((massageType, i) =>
-                                            <Tag key={i} label={massageType.name}/>
-                                        )}
-                                    </div>
-                                </div>
-                            }
                             {this.state.salon.services &&
-                                <div>
+                                <div style={{marginBottom: 24}}>
                                     <p className="subtitle2"
                                        style={{marginBottom: 16}}>{t(this.state.salon.kind + 'ServiceAndServices')}</p>
 
@@ -409,6 +399,19 @@ class SalonView extends React.Component {
                                         )}
                                         {this.state.salon.services.map((service, i) =>
                                             <Tag key={i} icon={service.icon} label={service.name}/>
+                                        )}
+                                    </div>
+                                </div>
+                            }
+
+                            {this.state.salon.programs &&
+                                <div>
+                                    <p className="subtitle2"
+                                       style={{marginBottom: 16}}>{t(this.state.salon.kind + '_makingMassage')}</p>
+
+                                    <div className="flex wrap" style={{gap: 4}}>
+                                        {this.state.salon.programs.map((massageType, i) =>
+                                            <Tag key={i} label={massageType.name}/>
                                         )}
                                     </div>
                                 </div>
@@ -575,14 +578,13 @@ class SalonView extends React.Component {
                         href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                     <Button color={'tertiary'}>
                         <Icon name={'wa_light'}/>
-                        {this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
+                        {this.state.salon.messengers.tg ? '' : t('sendMessage')}
                     </Button>
                 </a></div>
                 {this.state.salon.messengers.tg && <div><a target="_blank"
                                                            href={'https://t.me/' + this.state.salon.messengers.tg}>
                     <Button color={'tertiary'}>
                         <Icon name={'tg_light'}/>
-                        {t('sendMessage')}
                     </Button>
                 </a></div>}
             </div>}

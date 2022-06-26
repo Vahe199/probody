@@ -34,12 +34,12 @@ export default class AboutUsSection extends React.Component {
         const {t, isMobile, theme} = this.context;
 
         return <div className={css['theme--' + theme]}>
-            <section className={'container'} bp={'grid'}>
+            <section className={'container'} bp={'grid'} style={{gridGap: isMobile ? 32 : 20}}>
                 <div bp={'12 8@md'}>
-                    <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: 24}}>
+                    <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: isMobile ? 32 : 8}}>
                     </TextSection>
 
-                    {isMobile && <div style={{marginBottom: 24}}>
+                    {isMobile && <div style={{marginBottom: isMobile ? 32 : 8}}>
                         <StatsInfoBlock title={t('siteStatsTitle')} stats={[
                             {
                                 title: t('avgRating'),
@@ -61,7 +61,7 @@ export default class AboutUsSection extends React.Component {
                     </TextSection>
                 </div>
                 <div bp={'first@md 12 4@md'}>
-                    {!isMobile && <div style={{marginBottom: 24}}>
+                    {!isMobile && <div style={{marginBottom: isMobile ? 32 : 8}}>
                         <StatsInfoBlock title={t('siteStatsTitle')} stats={[
                             {
                                 title: t('avgRating'),

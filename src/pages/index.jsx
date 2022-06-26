@@ -344,7 +344,8 @@ class Home extends React.Component {
                                            overflowX: 'hidden'
                                        } : {
                                            right: 0,
-                                           top: 4
+                                           top: 4,
+                                           padding: '24px 32px 32px 32px'
                                        }}
                                        onClose={() => this.setState({filterPopupOpen: false})}
                                        isOpen={this.state.filterPopupOpen} fullSize={isMobile}>
@@ -525,15 +526,14 @@ class Home extends React.Component {
                                                 <div><a target="_blank"
                                                         href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
-                                                        <Icon name={'wa_light'}/>
-                                                        {worker.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
+                                                        <Icon style={{marginRight: worker.messengers.tg ? 0 : 10}} name={'wa_light'}/>
+                                                        <span className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                     </Button>
                                                 </a></div>
                                                 {worker.messengers.tg && <div><a target="_blank"
                                                                                  href={'https://t.me/' + worker.messengers.tg}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'tg_light'}/>
-                                                        {isMobile ? '' : t('sendMessage')}
                                                     </Button>
                                                 </a></div>}
                                             </div>
@@ -610,10 +610,8 @@ class Home extends React.Component {
                                                     <div style={{marginTop: 16}} className={css.socialBlock}>
                                                         {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
-                                                                <a target="_blank" href={worker.social[name]}>
-                                                                    <img
-                                                                        src={'/icons/' + name + '_' + themeAccent + '.svg'}
-                                                                        alt={t(name)}/>
+                                                                <a target="_blank" href={worker.social[name]} className={css.img}>
+                                                                    <Icon name={name + '_' + theme} />
                                                                 </a>
                                                             </div>
                                                         )}
@@ -628,7 +626,7 @@ class Home extends React.Component {
                                             <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
 
                                             <div className={css.invisibleScroll}>
-                                                {worker.masters.slice(0, 3).map((master, i) => <ShortMasterCard
+                                                {worker.masters.slice(0, 4).map((master, i) => <ShortMasterCard
                                                     name={master.name}
                                                     link={{
                                                         query: Object.assign({}, this.props.router.query, {
@@ -641,7 +639,7 @@ class Home extends React.Component {
                                                     photoCnt={master.photos.length}
                                                     key={i}
                                                 />)}
-                                                {worker.masters.length > 3 &&
+                                                {worker.masters.length > 4 &&
                                                     <MockShortMasterCard link={{
                                                         query: Object.assign({}, this.props.router.query, {
                                                             salonTab: 'masters'
@@ -649,7 +647,7 @@ class Home extends React.Component {
                                                         hash: '#salonTab',
                                                         pathname: worker.url
                                                     }}
-                                                                         cnt={worker.masters.length - 3}/>}
+                                                                         cnt={worker.masters.length - 4}/>}
                                             </div>
                                         </div> : <div bp={'12 7@md'} style={{marginTop: 8}}>
                                             <ParameterView {...worker.characteristics} />
@@ -689,8 +687,8 @@ class Home extends React.Component {
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
                                             {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                 <div key={name}>
-                                                    <a target="_blank" href={worker.social[name]}>
-                                                        <img src={'/icons/' + name + '.svg'} alt={t(name)}/>
+                                                    <a target="_blank" href={worker.social[name]} className={css.img}>
+                                                        <Icon name={name + '_' + theme} />
                                                     </a>
                                                 </div>
                                             )}
@@ -713,15 +711,14 @@ class Home extends React.Component {
                                             <div><a target="_blank"
                                                     href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
-                                                    <Icon name={'wa_light'}/>
-                                                    {worker.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}
+                                                    <Icon style={{marginRight: worker.messengers.tg ? 0 : 6}} name={'wa_light'}/>
+                                                    <span className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                 </Button>
                                             </a></div>
                                             {worker.messengers.tg && <div><a target="_blank"
                                                                              href={'https://t.me/' + worker.messengers.tg}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'tg_light'}/>
-                                                    {isMobile ? '' : t('sendMessage')}
                                                 </Button>
                                             </a></div>}
                                         </div>

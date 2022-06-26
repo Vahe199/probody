@@ -18,6 +18,8 @@
   span {
     text-align: center;
     font-size: 12px;
+    padding-bottom: 8px;
+    font-weight: 600;
   }
 
   div {
@@ -41,7 +43,7 @@
     background: t('bg-accent');
   }
 
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 0 2px;
 
   span {
@@ -58,7 +60,10 @@
     }
 
     border-radius: 12px;
-    margin: 2px 0;
-    padding: 4px 10px;
+    margin: 3px 1px;
+    //padding: 4px 10px;
+    width: 39px;
+    height: 39px;
+    padding-top: 4px;
   }
 }
