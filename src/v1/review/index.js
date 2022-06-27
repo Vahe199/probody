@@ -66,6 +66,8 @@ router.post('/:workerId', async (req, res) => {
 
         ;(new Review(reviewData)).validate(async (err) => {
             if (err) {
+                console.log(err)
+
                 return res.status(500).json({
                     message: "Internal Server Error"
                 })
