@@ -228,7 +228,7 @@ class NewSalonPage extends React.Component {
                         age: '',
                         bust: '1',
                         hair: 'брюнетка',
-                        eyes: 'голубой'
+                        eyes: 'голубые'
                     },
                     photos: Array(5).fill('')
                 }]
@@ -926,6 +926,10 @@ class NewSalonPage extends React.Component {
                                                               name={capitalize(t('eroticMassage')) + ' (' + t('pc') + ')'}
                                                               options={[
                                                                   {
+                                                                      label: 0,
+                                                                      value: 0
+                                                                  },
+                                                                  {
                                                                       label: 1,
                                                                       value: 1
                                                                   },
@@ -944,6 +948,10 @@ class NewSalonPage extends React.Component {
                                                               value={this.state.model.programs[i].classicCnt}
                                                               options={[
                                                                   {
+                                                                      label: 0,
+                                                                      value: 0
+                                                                  },
+                                                                  {
                                                                       label: 1,
                                                                       value: 1
                                                                   },
@@ -961,6 +969,10 @@ class NewSalonPage extends React.Component {
                                                               name={capitalize(t('relaxMassage')) + ' (' + t('pc') + ')'}
                                                               value={this.state.model.programs[i].relaxCnt}
                                                               options={[
+                                                                  {
+                                                                      label: 0,
+                                                                      value: 0
+                                                                  },
                                                                   {
                                                                       label: 1,
                                                                       value: 1
@@ -1018,13 +1030,13 @@ class NewSalonPage extends React.Component {
                                                                   style={{marginBottom: 12}}
                                                                   onUpdate={val => this.updatePrograms('', i, 'name', val)}
                                                                   value={this.state.model.programs[i].name}
-                                                                  label={t('name')}
+                                                                  label={t('name')} maxLength={40}
                                                                   placeholder={t('nameYourProgram')}/>
 
                                                               <TextArea
                                                                   onUpdate={val => this.updatePrograms('', i, 'description', val)}
                                                                   value={this.state.model.programs[i].description}
-                                                                  label={t('description')}
+                                                                  label={t('description')} max={200}
                                                                   placeholder={t('tellAboutService')}/>
 
                                                               <RadioGroup
@@ -1033,6 +1045,10 @@ class NewSalonPage extends React.Component {
                                                                   style={{marginTop: 12}}
                                                                   name={capitalize(t('eroticMassage')) + ' (' + t('pc') + ')'}
                                                                   options={[
+                                                                      {
+                                                                          label: 0,
+                                                                          value: 0
+                                                                      },
                                                                       {
                                                                           label: 1,
                                                                           value: 1
@@ -1052,6 +1068,10 @@ class NewSalonPage extends React.Component {
                                                                   value={this.state.model.programs[i].classicCnt}
                                                                   options={[
                                                                       {
+                                                                          label: 0,
+                                                                          value: 0
+                                                                      },
+                                                                      {
                                                                           label: 1,
                                                                           value: 1
                                                                       },
@@ -1069,6 +1089,10 @@ class NewSalonPage extends React.Component {
                                                                   name={capitalize(t('relaxMassage')) + ' (' + t('pc') + ')'}
                                                                   value={this.state.model.programs[i].relaxCnt}
                                                                   options={[
+                                                                      {
+                                                                          label: 0,
+                                                                          value: 0
+                                                                      },
                                                                       {
                                                                           label: 1,
                                                                           value: 1

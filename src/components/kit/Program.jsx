@@ -13,11 +13,11 @@ class Program extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        duration: PropTypes.number.isRequired,
-        classicCnt: PropTypes.number.isRequired,
-        eroticCnt: PropTypes.number.isRequired,
-        relaxCnt: PropTypes.number.isRequired,
+        price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        duration: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        classicCnt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        eroticCnt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        relaxCnt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         link: PropTypes.string,
     }
 
@@ -28,9 +28,9 @@ class Program extends React.Component {
             <p className="subtitle2" style={{marginBottom: 16}}>{this.props.title}</p>
             <p style={{overflowWrap: 'anywhere'}}>{this.props.description}</p>
             <ul className={css.massageList}>
-                <li>{this.props.eroticCnt}&nbsp;{t('eroticMassage')}</li>
-                <li>{this.props.classicCnt}&nbsp;{t('classicMassage')}</li>
-                <li>{this.props.relaxCnt}&nbsp;{t('relaxMassage')}</li>
+                {this.props.eroticCnt > 0 && <li>{this.props.eroticCnt}&nbsp;{t('eroticMassage')}</li>}
+                {this.props.classicCnt > 0 && <li>{this.props.classicCnt}&nbsp;{t('classicMassage')}</li>}
+                {this.props.relaxCnt > 0 && <li>{this.props.relaxCnt}&nbsp;{t('relaxMassage')}</li>}
             </ul>
             <div style={{
                 borderBottom: '1px solid #616161',

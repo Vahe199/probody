@@ -127,19 +127,19 @@ const WorkerSchema = new Schema({
         },
         classicCnt: {
             type: Number,
-            min: 1,
+            min: 0,
             max: 3,
             required: true
         },
         eroticCnt: {
             type: Number,
-            min: 1,
+            min: 0,
             max: 3,
             required: true
         },
         relaxCnt: {
             type: Number,
-            min: 1,
+            min: 0,
             max: 3,
             required: true
         },

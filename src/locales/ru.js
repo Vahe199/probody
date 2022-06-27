@@ -80,7 +80,7 @@ export default {
     mail: 'Почта',
     pc: 'шт',
     tellAboutService: 'Расскажите об услуге',
-    massageCost: 'Стоимость массажа',
+    massageCost: 'Стоимость',
     from: 'от',
     whichMassageTypesYouProvide: 'Какие виды массажа вы делаете?',
     kzt: '₸',

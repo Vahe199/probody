@@ -65,6 +65,16 @@ export default class TextInput extends React.Component {
     async handleUpdate(e) {
         const value = this.props.type === 'phone' ? (new AsYouType('KZ')).input(e.target.value) : e.target.value
 
+        if (this.props.maxLength && e.target.value.length > this.props.maxLength) {
+            return
+        }
+
+        if (this.props.type === 'number') {
+            if (isNaN(Number(value))) {
+                return
+            }
+        }
+
         if (this.props.value === undefined) {
             await this.setState({value})
 
@@ -148,6 +158,7 @@ export default class TextInput extends React.Component {
         min: PropTypes.number,
         lock: PropTypes.bool,
         value: PropTypes.string,
+        maxLength: PropTypes.number,
         type: PropTypes.string, // text, password, email
         onUpdate: PropTypes.func,
         variant: PropTypes.string, // 'outlined' || 'underline'
@@ -174,7 +185,7 @@ export default class TextInput extends React.Component {
                         <ControlledInput id={inputId}
                                          pattern={this.props.type === 'phone' || this.props.type === 'number' ? '\\d*' : ''}
                                          onBlur={this.validateInput}
-                                         type={this.state.visible ? 'text' : this.props.type} value={this.state.value}
+                                         type={this.state.visible ? 'text' : (this.props.type === 'number' ? 'text' : this.props.type)} value={this.state.value}
                                          autoComplete={this.props.autoComplete}
                                          onChange={this.handleUpdate} autoFocus={false}
                                          disabled={(this.state.locked || this.props.disabled)}

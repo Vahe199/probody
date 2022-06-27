@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added showmore btn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/TextInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/TextInput.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/kit/Program.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Program.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Worker.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Worker.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,14 +138,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="36661000" />
-    </task>
-    <task id="LOCAL-00247" summary="fixing changes">
-      <created>1655915404783</created>
-      <option name="number" value="00247" />
-      <option name="presentableId" value="LOCAL-00247" />
-      <option name="project" value="LOCAL" />
-      <updated>1655915404783</updated>
+      <workItem from="1656159986448" duration="38497000" />
     </task>
     <task id="LOCAL-00248" summary="added tg button">
       <created>1655918337830</created>
@@ -480,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656260026759</updated>
     </task>
-    <option name="localTasksCounter" value="296" />
+    <task id="LOCAL-00296" summary="added showmore btn">
+      <created>1656321527558</created>
+      <option name="number" value="00296" />
+      <option name="presentableId" value="LOCAL-00296" />
+      <option name="project" value="LOCAL" />
+      <updated>1656321527558</updated>
+    </task>
+    <option name="localTasksCounter" value="297" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
