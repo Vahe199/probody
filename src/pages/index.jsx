@@ -524,7 +524,6 @@ class Home extends React.Component {
                                             query: Object.assign({}, this.props.router.query, {
                                                 salonTab: 'photos'
                                             }),
-                                            hash: '#salonTab',
                                             pathname: worker.url
                                         }} pics={worker.photos}/>
 

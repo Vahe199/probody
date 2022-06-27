@@ -126,11 +126,7 @@ class ImageCarousel extends React.Component {
         }
 
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(this.props.className, 'overflow-hidden', 'relative')} onClick={() => {
-                if (this.props.link) {
-                    this.props.router.push(this.props.link)
-                }
-            }}>
+            <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
                 <div onMouseDown={this.swipeHandlers.tap} onTouchStart={this.swipeHandlers.tap}
                      onMouseLeave={this.swipeHandlers.release}
                      onMouseUp={this.swipeHandlers.release} onTouchEnd={this.swipeHandlers.release}
@@ -143,7 +139,11 @@ class ImageCarousel extends React.Component {
                             height,
                             marginLeft: index * 100 + '%',
                             cursor: this.props.link ? 'cursor' : 'zoom-in'
-                        }} key={index}>
+                        }} key={index} onClick={() => {
+                            if (this.props.link) {
+                                this.props.router.push(this.props.link)
+                            }
+                        }}>
                             &nbsp;
                         </div>
                     )}

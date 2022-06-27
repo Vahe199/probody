@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added showmore btn">
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,14 +134,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="39010000" />
-    </task>
-    <task id="LOCAL-00249" summary="added mobile salon page">
-      <created>1655925863404</created>
-      <option name="number" value="00249" />
-      <option name="presentableId" value="LOCAL-00249" />
-      <option name="project" value="LOCAL" />
-      <updated>1655925863404</updated>
+      <workItem from="1656159986448" duration="39381000" />
     </task>
     <task id="LOCAL-00250" summary="added mobile salon page">
       <created>1655927552203</created>
@@ -478,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656324539182</updated>
     </task>
-    <option name="localTasksCounter" value="298" />
+    <task id="LOCAL-00298" summary="added showmore btn">
+      <created>1656325250376</created>
+      <option name="number" value="00298" />
+      <option name="presentableId" value="LOCAL-00298" />
+      <option name="project" value="LOCAL" />
+      <updated>1656325250376</updated>
+    </task>
+    <option name="localTasksCounter" value="299" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
