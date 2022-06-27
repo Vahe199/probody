@@ -26,7 +26,7 @@ class Program extends React.Component {
         // maxWidth: 425, minWidth: 350
         return <div className={css['theme--' + theme]}><InfoBlock>
             <p className="subtitle2" style={{marginBottom: 16}}>{this.props.title}</p>
-            <p>{this.props.description}</p>
+            <p style={{overflowWrap: 'anywhere'}}>{this.props.description}</p>
             <ul className={css.massageList}>
                 <li>{this.props.eroticCnt}&nbsp;{t('eroticMassage')}</li>
                 <li>{this.props.classicCnt}&nbsp;{t('classicMassage')}</li>

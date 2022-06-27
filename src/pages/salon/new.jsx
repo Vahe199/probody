@@ -156,7 +156,7 @@ class NewSalonPage extends React.Component {
                         age: '',
                         bust: '1',
                         hair: 'брюнетка',
-                        eyes: 'голубой'
+                        eyes: 'голубые'
                     },
                     photos: Array(5).fill('')
                 }]
@@ -1461,7 +1461,7 @@ class NewSalonPage extends React.Component {
                                                   <Icon onClick={() => this.stepChangeHandler(3)}
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
-                                              <div style={{padding: 16}} className={'flex wrap gap-12'}>
+                                              <div style={{padding: 16}} bp={'grid 12 4@md'}>
                                                   {this.state.model.programs.filter(i => i.enabled).map((program, i) =>
                                                       <Program key={i} title={program.name}
                                                                description={program.description}
