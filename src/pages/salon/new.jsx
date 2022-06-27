@@ -639,9 +639,13 @@ class NewSalonPage extends React.Component {
         const newModel = {...this.state.model};
 
         if (newModel.programs[index]._id === id) {
-            newModel.programs[newModel.programs.findIndex(program => program._id === id)][field] = val;
+            newModel.programs[newModel.programs.findIndex(program => program._id === id)][field] = val
         } else {
-            newModel.programs[index][field] = val;
+            newModel.programs[index][field] = val
+        }
+
+        if (newModel.programs[index].cost > 0 && newModel.programs[index].description.length > 0 && newModel.programs[index].name.length > 0) {
+            newModel.programs[index].enabled = true
         }
 
         this.setState({model: newModel})
@@ -915,7 +919,7 @@ class NewSalonPage extends React.Component {
                                                                onUpdate={(state) => this.updatePrograms(program._id, i, 'enabled', state)}
                                                                title={program.name}>
                                                       <div style={{marginTop: 12}}>
-                                                          <TextArea disabled={true}
+                                                          <TextArea disabled={true} max={200}
                                                                     value={this.state.model.programs[i].description}
                                                                     label={t('description')}
                                                                     placeholder={t('tellAboutService')}/>
