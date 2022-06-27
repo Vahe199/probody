@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added showmore btn">
-      <change beforePath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/kit/Form/StarRating.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/kit/forms/starrating.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Modal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/TextSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TextSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/account/newvacancy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/vacancies.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/modal.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/modal.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/textsection.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/new.page.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/new.page.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/review/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,14 +153,7 @@
       <workItem from="1655990701207" duration="12212000" />
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
-      <workItem from="1656159986448" duration="39381000" />
-    </task>
-    <task id="LOCAL-00250" summary="added mobile salon page">
-      <created>1655927552203</created>
-      <option name="number" value="00250" />
-      <option name="presentableId" value="LOCAL-00250" />
-      <option name="project" value="LOCAL" />
-      <updated>1655927552203</updated>
+      <workItem from="1656159986448" duration="53332000" />
     </task>
     <task id="LOCAL-00251" summary="added mobile salon page">
       <created>1655928999243</created>
@@ -479,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656325250376</updated>
     </task>
-    <option name="localTasksCounter" value="299" />
+    <task id="LOCAL-00299" summary="added showmore btn">
+      <created>1656325410901</created>
+      <option name="number" value="00299" />
+      <option name="presentableId" value="LOCAL-00299" />
+      <option name="project" value="LOCAL" />
+      <updated>1656325410901</updated>
+    </task>
+    <option name="localTasksCounter" value="300" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,5 +555,17 @@
     <MESSAGE value="done faq" />
     <MESSAGE value="added showmore btn" />
     <option name="LAST_COMMIT_MESSAGE" value="added showmore btn" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/salon/[slug].jsx</url>
+          <line>41</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

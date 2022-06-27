@@ -46,7 +46,8 @@ $themes: (
                 secondlayer-accent-text: $dark,
                 inactive-slide: $grey1,
                 range: $dark,
-                static-gray: $grey2
+                static-gray: $grey2,
+                inactive-star: $tertiary
         ),
         dark: (
                 bg-primary: $primary,
@@ -79,7 +80,8 @@ $themes: (
                 secondlayer-accent-text: $dark,
                 inactive-slide: $grey1,
                 range: $primary,
-                static-gray: $grey2
+                static-gray: $grey2,
+                inactive-star: $line
         )
 );
 

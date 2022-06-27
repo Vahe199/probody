@@ -17,7 +17,8 @@ import WeekView from "../../components/kit/WeekView";
 import Dates from "../../helpers/Dates.js";
 import Tag from "../../components/kit/Tag";
 import TagCard from "../../components/kit/TagCard";
-import {declination, formatPrice} from "../../helpers/String";
+import StarRating from "../../components/kit/Form/StarRating.jsx";
+import {capitalize, declination, formatPrice} from "../../helpers/String";
 import ParameterView from "../../components/kit/ParameterView.jsx";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import TabPanels from "../../components/kit/TabPanels";
@@ -25,6 +26,9 @@ import Program from "../../components/kit/Program.jsx";
 import MasterDetail from "../../components/kit/MasterDetail";
 import ReviewBlock from "../../components/ReviewBlock";
 import Collapsible from "../../components/kit/Collapses/Collapsible.jsx";
+import Modal from "../../components/kit/Modal";
+import TextArea from "../../components/kit/Form/TextArea";
+import TextInput from "../../components/kit/Form/TextInput";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -34,11 +38,21 @@ class SalonView extends React.Component {
             salon: {
                 photos: []
             },
+            masterLimit: 6,
+            addReviewModalOpen: false,
+            successModalOpen: false,
             allPrograms: [],
             reviews: [],
             suggestedWorkers: [],
             top3Masters: [],
             reviewList: [],
+            review: {
+                text: '',
+                name: '',
+                massage: 0,
+                interior: 0,
+                service: 0
+            },
             reviewPaginator: {
                 current: 1,
                 max: 1
@@ -47,6 +61,10 @@ class SalonView extends React.Component {
 
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
         this.loadReviews = this.loadReviews.bind(this)
+        this.showMoreMasters = this.showMoreMasters.bind(this)
+        this.setReviewModal = this.setReviewModal.bind(this)
+        this.leaveReview = this.leaveReview.bind(this)
+        this.closeSuccessModal = this.closeSuccessModal.bind(this)
     }
 
     static contextType = GlobalContext
@@ -57,6 +75,12 @@ class SalonView extends React.Component {
         }
 
         this.fetchWorkerInfo()
+    }
+
+    showMoreMasters() {
+        this.setState({
+            masterLimit: this.state.masterLimit + 3
+        })
     }
 
     componentDidUpdate(prevProps) {
@@ -121,10 +145,37 @@ class SalonView extends React.Component {
         })
     }
 
+    setReviewModal(val) {
+        this.setState({
+            addReviewModalOpen: Boolean(val)
+        })
+    }
+
+    leaveReview() {
+        APIRequests.createReview(this.state.salon._id, this.state.review.service, this.state.review.massage, this.state.review.interior, this.state.review.name, this.state.review.text)
+
+        this.setState({
+            review: {
+                text: '',
+                name: this.state.review.name,
+                massage: 0,
+                interior: 0,
+                service: 0
+            },
+            addReviewModalOpen: false,
+            successModalOpen: true
+        })
+    }
+
+    closeSuccessModal() {
+        this.setState({
+            successModalOpen: false
+        })
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
-        const themeAccent = theme === 'dark' ? 'light' : 'dark',
-            photoHeight = this.state.salon.kind === 'salon' ? (isMobile ? 230 : 250) : (isMobile ? 270 : 370)
+        const photoHeight = this.state.salon.kind === 'salon' ? (isMobile ? 230 : 250) : (isMobile ? 270 : 370)
 
         const additionalSections = {
                 photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
@@ -138,11 +189,19 @@ class SalonView extends React.Component {
                     )}
                 </div>,
                 masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
-                    {this.state.salon.masters.map((master, i) =>
+                    {this.state.salon.masters.slice(0, this.state.masterLimit).map((master, i) =>
                         <div bp={'6 4@md'} key={i}>
                             <MasterDetail {...master} />
                         </div>
                     )}
+
+                    <div bp={'12'}>
+                        {(this.state.masterLimit < this.state.salon.masters.length) &&
+                            <Button className={css.showMoreBtn} size={'large'} onClick={this.showMoreMasters}>
+                                <span className={'vertical-center'}>{t('showNMore', 3)}</span>
+                                <Icon name={'refresh'}/>
+                            </Button>}
+                    </div>
                 </div>,
                 cost: <div bp={'grid'}>
                     {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
@@ -168,8 +227,9 @@ class SalonView extends React.Component {
                                 </div>
                             </div>
 
-                            <div><Button
-                                size={'fill'}>{this.state.reviews.avg ? t('addReview') : t('addFirstReview')}</Button></div>
+                            <div><Button onClick={() => this.setReviewModal(true)}
+                                         size={'fill'}>{this.state.reviews.avg ? t('addReview') : t('addFirstReview')}</Button>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -182,10 +242,6 @@ class SalonView extends React.Component {
                 </div>
             },
             tabsHead = {
-                photos: {
-                    title: t('photo'),
-                    cnt: this.state.salon.photos.length
-                },
                 masters: this.state.salon.kind === 'salon' && {
                     title: t('masseuses'),
                     cnt: this.state.salon.masters?.length
@@ -197,6 +253,10 @@ class SalonView extends React.Component {
                 reviews: {
                     title: t('reviews'),
                     cnt: this.state.reviews?.count || 0
+                },
+                photos: {
+                    title: t('photo'),
+                    cnt: this.state.salon.photos.length
                 }
             }
 
@@ -204,6 +264,110 @@ class SalonView extends React.Component {
             <Head>
                 <title>{this.state.salon.name || t('salon2')}{TITLE_POSTFIX}</title>
             </Head>
+
+            <Modal open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
+                   useNav={isMobile}>
+                {!isMobile && <div className={cnb(css.modalHead, css.desktop)}>
+                    <h2>{t('creatingReview')}</h2>
+
+                    <Icon name={'close'} onClick={() => this.setReviewModal(false)}/>
+                </div>}
+
+                <div style={!isMobile ? {
+                    padding: '20px'
+                } : {}}>
+                    <div className="responsive-content">
+                        <h1 style={{
+                            marginTop: isMobile ? 32 : 0,
+                            marginBottom: 24
+                        }}>{t('leaveYourReview')}</h1>
+
+                        <div className={css.reviewModalContent}>
+                            <div>
+                                <p className="subtitle2">{capitalize(t('service'))}</p>
+
+                                <StarRating value={this.state.review.service} onUpdate={service => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        service
+                                    }
+                                })}/>
+                            </div>
+
+                            <div>
+                                <p className="subtitle2">{capitalize(t('massage'))}</p>
+
+                                <StarRating value={this.state.review.massage} onUpdate={massage => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        massage
+                                    }
+                                })}/>
+                            </div>
+
+                            <div>
+                                <p className="subtitle2">{capitalize(t('interior'))}</p>
+
+                                <StarRating value={this.state.review.interior} onUpdate={interior => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        interior
+                                    }
+                                })}/>
+                            </div>
+
+                            <div>
+                                <p className="subtitle2">{t('yourName')}</p>
+
+                                <TextInput label={t('whatsYourName')} placeholder={t('typeYourName')}
+                                           value={this.state.review.name} onUpdate={name => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        name
+                                    }
+                                })}/>
+                            </div>
+
+                            <div>
+                                <p className="subtitle2">{t('review')}</p>
+
+                                <TextArea label={t('reviewText')} placeholder={t('enterYourReview')} max={100}
+                                          value={this.state.review.text} onUpdate={text => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        text
+                                    }
+                                })}/>
+                            </div>
+
+                            <div style={{
+                                marginBottom: isMobile ? 24 : 0
+                            }}>
+                                <Button onClick={this.leaveReview}
+                                        isDisabled={this.state.review.service === 0 || this.state.review.massage === 0 || this.state.review.interior === 0}
+                                        size={'fill'}>
+                                    {t('leaveReview')}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.successModalOpen}
+                   onUpdate={this.closeSuccessModal}>
+                <div className={css.modalBody}>
+                    <p>{t('cool')}</p>
+
+                    <h1>{t('youPostedReview')}</h1>
+
+                    <p>{t('itWillBePublishedAfterModeration')}</p>
+
+                    <Button size={'fill'} onClick={() => this.props.router.push('/')}>{t('toMainPage')}</Button>
+
+                    <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessModal}/>
+                </div>
+            </Modal>
 
             <Breadcrumbs items={[
                 {
@@ -262,11 +426,12 @@ class SalonView extends React.Component {
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
-                                    <span className={'vertical-center'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
+                                    <span
+                                        className={'vertical-center'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
-                                                                       href={'https://t.me/' + this.state.salon.messengers.tg}>
+                                                                       href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'tg_light'}/>
                                     <span className={'vertical-center'}>{t('sendMessage')}</span>
@@ -351,8 +516,9 @@ class SalonView extends React.Component {
                                         <div className={css.socialBlock}>
                                             {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
                                                 <div key={name}>
-                                                    <a target="_blank" href={this.state.salon.social[name]} className={css.img}>
-                                                        <Icon name={name + '_' + theme} />
+                                                    <a target="_blank" href={this.state.salon.social[name]}
+                                                       className={css.img}>
+                                                        <Icon name={name + '_' + theme}/>
                                                     </a>
                                                 </div>
                                             )}
@@ -488,16 +654,18 @@ class SalonView extends React.Component {
                 }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>}
             </div>
 
-            {this.state.salon.kind !== 'salon' && <div style={{paddingLeft: isMobile ? 16 : 0}} bp={isMobile ? '' : 'grid'}
-                  className={cnb(isMobile ? css.invisibleScroll : '', css.masters)}>
-                {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
-                    worker.url = '/salon/' + worker.slug
+            {this.state.salon.kind !== 'salon' &&
+                <div style={{paddingLeft: isMobile ? 16 : 0}} bp={isMobile ? '' : 'grid'}
+                     className={cnb(isMobile ? css.invisibleScroll : '', css.masters)}>
+                    {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
+                        worker.url = '/salon/' + worker.slug
 
-                    return <div bp={'12 4@md'} key={index}>
-                        <MasterDetail name={worker.name} photos={worker.photos} slug={worker.slug} noContent={true} />
-                    </div>
-                })}
-            </div>}
+                        return <div bp={'12 4@md'} key={index}>
+                            <MasterDetail name={worker.name} photos={worker.photos} slug={worker.slug}
+                                          noContent={true}/>
+                        </div>
+                    })}
+                </div>}
 
             {this.state.salon.kind === 'salon' && <div bp={'grid'}>
                 {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
@@ -525,17 +693,23 @@ class SalonView extends React.Component {
             </div>}
 
             {this.state.salon.kind !== 'salon' && <div className={'responsive-content ' + css.fullSizeBtnResponsive}>
-                    <Button onClick={() => this.props.router.push(this.state.salon.parent ? '/salon/' + this.state.salon.parent.slug : {
-                        pathname: '/',
-                        query: {
-                            ...this.props.router.query,
-                            kind: 'master'
-                        },
-                        hash: ''
-                    })}
-                            color={'secondary'}
-                            size={'fill'}>{this.state.salon.parent ? (isMobile ? t('otherSalonArticles') : t('viewAllArticles')) : t('viewAllArticles')}</Button>
-                </div>}
+                <Button onClick={() => this.props.router.push(this.state.salon.parent ? {
+                    query: Object.assign({}, this.props.router.query, {
+                        salonTab: 'masters'
+                    }),
+                    hash: '#salonTab',
+                    pathname: '/salon/' + this.state.salon.parent.slug
+                } : {
+                    pathname: '/',
+                    query: {
+                        ...this.props.router.query,
+                        kind: 'master'
+                    },
+                    hash: ''
+                })}
+                        color={'secondary'}
+                        size={'fill'}>{this.state.salon.parent ? (isMobile ? t('otherSalonArticles') : t('viewAllArticles')) : t('viewAllArticles')}</Button>
+            </div>}
 
             {this.state.salon.kind === 'master' && <div className={'responsive-content'}>
                 <h2 style={{
@@ -582,7 +756,7 @@ class SalonView extends React.Component {
                     </Button>
                 </a></div>
                 {this.state.salon.messengers.tg && <div><a target="_blank"
-                                                           href={'https://t.me/' + this.state.salon.messengers.tg}>
+                                                           href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
                     <Button color={'tertiary'}>
                         <Icon name={'tg_light'}/>
                     </Button>

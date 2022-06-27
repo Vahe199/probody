@@ -777,7 +777,7 @@ class NewSalonPage extends React.Component {
                                                         placeholder={t('describeYourSalon')}/>
                                           </div>
 
-                                          <div id={'addSalonMap'} className={css.addSalonMap}></div>
+                                          <div id={'addSalonMap'} className={'roundedMap'}></div>
                                       </div>
 
                                       <div className={css.btnContainer}>

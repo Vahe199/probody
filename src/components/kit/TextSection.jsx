@@ -51,7 +51,8 @@ class TextSection extends React.Component {
             <section className={cnb(css.text, this.props.className)} style={this.props.style}>
                 <div dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} ref={this.state.textRef} style={{
                     lineHeight: this.lineHeight + 'px',
-                    maxHeight: this.state.isOpen ? this.state.textRef.current?.scrollHeight : this.lineHeight * this.props.lines
+                    maxHeight: this.state.isOpen ? this.state.textRef.current?.scrollHeight : this.lineHeight * this.props.lines,
+                    marginBottom: this.state.needsShowMoreButton ? 16 : 0
                 }}>
                     {this.props.children}
                 </div>

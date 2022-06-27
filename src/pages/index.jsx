@@ -559,7 +559,7 @@ class Home extends React.Component {
                                                     </Button>
                                                 </a></div>
                                                 {worker.messengers.tg && <div><a target="_blank"
-                                                                                 href={'https://t.me/' + worker.messengers.tg}>
+                                                                                 href={'https://t.me/' + worker.messengers.tg.replace('@', '')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'tg_light'}/>
                                                     </Button>
@@ -747,7 +747,7 @@ class Home extends React.Component {
                                                 </Button>
                                             </a></div>
                                             {worker.messengers.tg && <div><a target="_blank"
-                                                                             href={'https://t.me/' + worker.messengers.tg}>
+                                                                             href={'https://t.me/' + worker.messengers.tg.replace('@', '')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'tg_light'}/>
                                                 </Button>

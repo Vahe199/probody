@@ -136,7 +136,7 @@
     display: block;
     grid-column: span 12;
     width: 80%;
-    margin: 12px auto 8px auto;
+    margin: 24px auto 16px auto;
     height: 1px;
 
     @include themify() {
@@ -243,6 +243,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  justify-content: flex-end;
 
   & > div {
     display: flex;

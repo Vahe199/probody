@@ -31,11 +31,12 @@ router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
     })
 })
 
-router.post('/:workerId', AuthGuard('serviceProvider'), async (req, res) => {
+router.post('/:workerId', async (req, res) => {
     try {
         const {text,
             interior,
             massage,
+            name,
             service} = req.body
 
         if (!mongoose.mongo.ObjectId.isValid(req.params.workerId)) {
@@ -53,11 +54,10 @@ router.post('/:workerId', AuthGuard('serviceProvider'), async (req, res) => {
         }
 
         const reviewData = {
-            userId: req.user._id,
             target: req.params.workerId,
             targetType: salonDoc.kind,
-            name: req.user.nickName || 'Гость',
 
+            name,
             text,
             interior,
             massage,

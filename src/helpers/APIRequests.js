@@ -25,6 +25,22 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/worker/top3`)).json()
     }
 
+    static async createReview(salonId, service, massage, interior, name, text) {
+        if (name.length === 0) {
+            name = 'Гость'
+        }
+
+        return (await fetch(`${API_URL}/review/${salonId}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                service, massage, interior, name, text
+            })
+        })).json()
+    }
+
     static async getReviewStats() {
         return (await fetch(`${API_URL}/review`)).json()
     }

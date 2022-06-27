@@ -23,7 +23,7 @@ export default class PersonalPageLayout extends React.Component {
                         <li className={this.props.page === 'promotion' ? css.active : ''}><Link href={'/account/promotion'}>{t('salonAndPromotion')}</Link></li>
                         <li className={this.props.page === 'stats' ? css.active : ''}><Link href={'/account/stats'}>{t('stats')}</Link></li>
                         <li className={this.props.page === 'reviews' ? css.active : ''}><Link href={'/account/reviews'}>{t('reviewsAndRating')}</Link></li>
-                        <li className={this.props.page === 'newvacancy' ? css.active : ''}><Link href={'/account/newvacancy'}>{t('addVacancy')}</Link></li>
+                        <li className={this.props.page === 'vacancies' ? css.active : ''}><Link href={'/account/vacancies'}>{t('myVacancies')}</Link></li>
                         <li className={this.props.page === 'faq' ? css.active : ''}><Link href={'/account/faq'}>{t('needHelp')}</Link></li>
                     </ul>
                 </div>

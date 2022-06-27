@@ -106,23 +106,6 @@
   }
 }
 
-.addSalonMap {
-  @include themify() {
-    background: t('bg-secondlayer')
-  }
-
-  &, & > ymaps {
-    min-height: 300px;
-    height: auto !important;
-    border-radius: 32px;
-    width: 100% !important;
-
-    & > ymaps, & > ymaps > ymaps {
-      border-radius: 32px;
-    }
-  }
-}
-
 .textAreaGrow {
   height: 100%;
 

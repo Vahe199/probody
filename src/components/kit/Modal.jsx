@@ -3,13 +3,30 @@ import css from '../../styles/kit/modal.module.scss'
 import {GlobalContext} from "../../contexts/Global.js";
 import {cnb} from "cnbuilder";
 import PropTypes from "prop-types";
+import Icon from "./Icon.jsx";
 
 export default class Modal extends React.Component {
     static contextType = GlobalContext
 
     static propTypes = {
         open: PropTypes.bool.isRequired,
-        onUpdate: PropTypes.func.isRequired
+        onUpdate: PropTypes.func.isRequired,
+        isMobile: PropTypes.bool,
+        useNav: PropTypes.bool
+    }
+
+    componentDidMount() {
+        if (this.props.open) {
+            window.document.body.classList.add('no-scroll')
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.open) {
+            window.document.body.classList.add('no-scroll')
+        } else if (prevProps.open && !this.props.open) {
+            window.document.body.classList.remove('no-scroll')
+        }
     }
 
     render() {
@@ -20,11 +37,14 @@ export default class Modal extends React.Component {
                 if (e.target.classList.contains(css.overlay)) {
                     this.props.onUpdate('')
                 }
-            }} className={cnb(css.overlay, this.props.isMobile ? css.mobile : css.desktop, this.props.open ? css.visible : '')}>
-            <div style={this.props.modalStyle} className={css.modal}>
-                {this.props.children}
+            }}
+                 className={cnb(css.overlay, this.props.isMobile ? css.mobile : css.desktop, this.props.open ? css.visible : '', this.props.useNav ? css.useNav : '')}>
+                {this.props.useNav && <div className={css.closeModal} onClick={() => this.props.onUpdate(false)}><Icon name={'close'}/></div>}
+
+                <div style={this.props.modalStyle} className={css.modal}>
+                    {this.props.children}
+                </div>
             </div>
-        </div>
         </div>
     }
 }

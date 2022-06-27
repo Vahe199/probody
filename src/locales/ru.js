@@ -287,5 +287,18 @@ export default {
     offer: 'Предложение',
     submit: 'Отправить',
     cancel: 'Отменить',
-    showNSalonsMore: 'Показать еще %s анкет'
+    showNSalonsMore: 'Показать еще %s анкет',
+    showNMore: 'Показать еще %s',
+    myVacancies: 'Мои вакансии',
+    leaveYourReview: 'Оставьте свой отзыв о салоне',
+    leaveReview: 'Оставить отзыв',
+    reviewText: 'Текст отзыва',
+    enterYourReview: 'Введите Ваш отзыв',
+    review: 'Отзыв',
+    creatingReview: 'Новый отзыв',
+    yourName: 'Ваше имя',
+    typeYourName: 'Напишите свое имя',
+    whatsYourName: 'Как Вас зовут?',
+    youPostedReview: 'Вы оставили отзыв',
+    itWillBePublishedAfterModeration: 'Он будет опубликован сразу после прохождения модерации.'
 }
