@@ -173,15 +173,13 @@ export default class Search {
             if (isMapView) {
                 workerAggregation.push({
                     $project: {
-                        kind: 1,
                         location: 1,
                         name: 1,
                         slug: 1,
-                        workHours: 1,
-                        workDays: 1,
                         isVerified: 1,
                         messengers: 1,
-                        address: 1
+                        address: 1,
+                        photos: 1,
                     }
                 })
             } else {

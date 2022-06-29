@@ -324,8 +324,7 @@ class Home extends React.Component {
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
-                        {(!this.props.router.query.map || this.props.router.query.map === 'false') &&
-                            <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
+                         <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
                                         value={this.props.router.query.kind || 'all'}
                                         checkedClassName={css.radioChecked}
                                         onUpdate={this.setKind} options={[
@@ -341,7 +340,7 @@ class Home extends React.Component {
                                     label: isMobile ? t('masters') : t('privateMasters'),
                                     value: 'master'
                                 }
-                            ]}/>}
+                            ]}/>
                     </div>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
@@ -496,8 +495,7 @@ class Home extends React.Component {
                         </div>
                     </div>
 
-                    {(!this.props.router.query.map || 'false' === this.props.router.query.map) &&
-                        <div bp={'12 hide@md'} className={'responsive-content'}>
+                    <div bp={'12 hide@md'} className={'responsive-content'}>
                             <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
                                 <Icon name={'search'}/>
                                 <ControlledInput id={inputId} bp={'fill'} type="text"
@@ -512,7 +510,7 @@ class Home extends React.Component {
                                                  placeholder={t('ssm')}/>
                                 <div onClick={this.clearQuery}><Icon name={'close'}/></div>
                             </label>
-                        </div>}
+                        </div>
 
                     {(this.props.router.query.map && 'true' === this.props.router.query.map) ? <div>
                         отображение результатов на карте

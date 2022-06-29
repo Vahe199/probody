@@ -61,6 +61,7 @@ app.prepare().then(() => {
     server.use(helmet({
         contentSecurityPolicy: false,
         crossOriginEmbedderPolicy: false,
+        crossOriginResourcePolicy: false
     }))
     server.use('/v1', APIv1)
 
