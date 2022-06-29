@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added showmore btn">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed range">
+      <change afterPath="$PROJECT_DIR$/src/public/icons/dot.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/point.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/MultipleRangeInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/MultipleRangeInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/RangeInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/RangeInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/TabPanels.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/personal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/personal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,10 +78,10 @@
       <recent name="$PROJECT_DIR$/src/public/icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/components/kit/Collapses" />
       <recent name="$PROJECT_DIR$/src/layouts/secondary" />
       <recent name="$PROJECT_DIR$/src/fonts" />
-      <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/styles" />
     </key>
   </component>
@@ -140,14 +139,7 @@
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
       <workItem from="1656159986448" duration="54339000" />
-      <workItem from="1656488769525" duration="3817000" />
-    </task>
-    <task id="LOCAL-00254" summary="added mobile salon page">
-      <created>1655975316802</created>
-      <option name="number" value="00254" />
-      <option name="presentableId" value="LOCAL-00254" />
-      <option name="project" value="LOCAL" />
-      <updated>1655975316802</updated>
+      <workItem from="1656488769525" duration="7731000" />
     </task>
     <task id="LOCAL-00255" summary="added mobile salon page">
       <created>1655975577702</created>
@@ -485,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656360871256</updated>
     </task>
-    <option name="localTasksCounter" value="303" />
+    <task id="LOCAL-00303" summary="fixed range">
+      <created>1656492883222</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1656492883223</updated>
+    </task>
+    <option name="localTasksCounter" value="304" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +515,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="done filters" />
     <MESSAGE value="fixed weekview" />
     <MESSAGE value="added tagcards" />
     <MESSAGE value="done part of salon page" />
@@ -541,6 +539,7 @@
     <MESSAGE value="faq" />
     <MESSAGE value="done faq" />
     <MESSAGE value="added showmore btn" />
-    <option name="LAST_COMMIT_MESSAGE" value="added showmore btn" />
+    <MESSAGE value="fixed range" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed range" />
   </component>
 </project>

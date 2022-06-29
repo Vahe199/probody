@@ -291,7 +291,8 @@ class NewSalonPage extends React.Component {
                     this.state.placeMark.geometry.setCoordinates(coords);
                 } else {
                     const placeMark = new window.ymaps.Placemark(coords, {}, {
-                        preset: 'islands#circleDotIcon',
+                        iconImageHref: '/icons/point.svg',
+                        iconLayout: 'default#image'
                     })
 
                     await this.setState({
@@ -584,7 +585,8 @@ class NewSalonPage extends React.Component {
 
             this.setState({
                 placeMark: new window.ymaps.Placemark(coords, {}, {
-                    preset: 'islands#circleDotIcon',
+                    iconImageHref: '/icons/point.svg',
+                    iconLayout: 'default#image'
                 }),
                 model: {
                     ...this.state.model,

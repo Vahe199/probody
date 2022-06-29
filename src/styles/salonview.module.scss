@@ -80,6 +80,19 @@
   }
 }
 
+.mapMobile {
+  height: 220px;
+
+  &, & > ymaps {
+    border-radius: 32px;
+    width: 100% !important;
+
+    & > ymaps, & > ymaps > ymaps {
+      border-radius: 32px;
+    }
+  }
+}
+
 .shortInfoBlock {
   display: flex;
   flex-direction: column;

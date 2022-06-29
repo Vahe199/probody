@@ -39,6 +39,7 @@ class SalonView extends React.Component {
                 photos: []
             },
             masterLimit: 6,
+            map: undefined,
             addReviewModalOpen: false,
             successModalOpen: false,
             allPrograms: [],
@@ -111,6 +112,7 @@ class SalonView extends React.Component {
                 res.worker[0].region = res.worker[0].parent.region
                 res.worker[0].leads = res.worker[0].parent.leads
                 res.worker[0].services = res.worker[0].parent.services
+                res.worker[0].location = res.worker[0].parent.location
                 res.worker[0].workDays = res.worker[0].parent.workDays
                 res.worker[0].workHours = res.worker[0].parent.workHours
                 res.worker[0].description = res.worker[0].parent.description
@@ -136,6 +138,26 @@ class SalonView extends React.Component {
                     })
                 })
             }
+
+            const initMap = () => {
+                const map = new window.ymaps.Map('salonLocation', {
+                    center: res.worker[0].location.coordinates,
+                    zoom: 15,
+                    controls: []
+                }, {})
+
+                map.geoObjects.add(new window.ymaps.Placemark(res.worker[0].location.coordinates, {}, {
+                        iconImageHref: '/icons/point.svg',
+                        iconLayout: 'default#image'
+                    })
+                )
+
+                this.setState({
+                    map
+                })
+            }
+
+            window.ymaps.ready(initMap.bind(this))
         })
 
         APIRequests.getSuggestedWorkers(this.props.router.query.slug).then(res => {
@@ -644,6 +666,41 @@ class SalonView extends React.Component {
                 </div>
                 <div bp={'12 4@md'}>
                     <ShareInSocialMedia/>
+                </div>
+            </div>
+
+            <div bp={'hide@md'} className={css.cardRoot} style={{marginTop: 24}}>
+                <div id={'salonLocation'} className={css.mapMobile}></div>
+
+                <div className={cnb(css.shortInfoBlock)} style={{gap: 22, padding: 20}}>
+                    <div>
+                        <div>{t('address').toLowerCase()}</div>
+                        <div>{this.state.salon.address}</div>
+                    </div>
+
+                    {this.state.reviews.count > 0 && <div>
+                        <div>{t('reviews').toLowerCase()}</div>
+                        <Link href={{
+                            query: Object.assign({}, this.props.router.query, {
+                                salonTab: 'reviews'
+                            }),
+                            hash: '#salonTab'
+                        }}>
+                            <div
+                                className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                            </div>
+                        </Link>
+                    </div>}
+
+                    {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
+                        <div className={css.avgRating}>
+                            <Icon name={'star'}/>
+                            <span>{this.state.reviews.avg.toFixed(1)}</span>
+                        </div>
+
+                        <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                        </div>
+                    </div>}
                 </div>
             </div>
 
