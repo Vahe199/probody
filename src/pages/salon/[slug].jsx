@@ -157,7 +157,9 @@ class SalonView extends React.Component {
                 })
             }
 
-            window.ymaps.ready(initMap.bind(this))
+            if (!this.state.map) {
+                window.ymaps.ready(initMap.bind(this))
+            }
         })
 
         APIRequests.getSuggestedWorkers(this.props.router.query.slug).then(res => {

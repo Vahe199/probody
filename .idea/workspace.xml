@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed range">
-      <change afterPath="$PROJECT_DIR$/src/public/icons/dot.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/icons/point.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added map to salon page" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,14 +132,7 @@
       <workItem from="1656004723602" duration="337000" />
       <workItem from="1656052213810" duration="26406000" />
       <workItem from="1656159986448" duration="54339000" />
-      <workItem from="1656488769525" duration="7731000" />
-    </task>
-    <task id="LOCAL-00255" summary="added mobile salon page">
-      <created>1655975577702</created>
-      <option name="number" value="00255" />
-      <option name="presentableId" value="LOCAL-00255" />
-      <option name="project" value="LOCAL" />
-      <updated>1655975577702</updated>
+      <workItem from="1656488769525" duration="8121000" />
     </task>
     <task id="LOCAL-00256" summary="added mobile salon page">
       <created>1655975660809</created>
@@ -484,7 +470,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656492883223</updated>
     </task>
-    <option name="localTasksCounter" value="304" />
+    <task id="LOCAL-00304" summary="added map to salon page">
+      <created>1656498892650</created>
+      <option name="number" value="00304" />
+      <option name="presentableId" value="LOCAL-00304" />
+      <option name="project" value="LOCAL" />
+      <updated>1656498892650</updated>
+    </task>
+    <option name="localTasksCounter" value="305" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +508,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed weekview" />
     <MESSAGE value="added tagcards" />
     <MESSAGE value="done part of salon page" />
     <MESSAGE value="added masseuses" />
@@ -540,6 +532,7 @@
     <MESSAGE value="done faq" />
     <MESSAGE value="added showmore btn" />
     <MESSAGE value="fixed range" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed range" />
+    <MESSAGE value="added map to salon page" />
+    <option name="LAST_COMMIT_MESSAGE" value="added map to salon page" />
   </component>
 </project>
