@@ -407,7 +407,7 @@ class Home extends React.Component {
                                                 <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
                                                                         lock={!isMobile}>
                                                     <div className={css.collapseBody}>
-                                                        <MultipleRangeInput step={50}
+                                                        <MultipleRangeInput step={50} accent={true}
                                                                             from={this.props.router.query.priceFrom || this.state.priceRange.from}
                                                                             to={this.props.router.query.priceTo || this.state.priceRange.to}
                                                                             min={this.state.priceRange.from}
@@ -464,7 +464,7 @@ class Home extends React.Component {
                                         <div bp={'hide show@md'} className={css.verticalBetween}>
                                             <TransparentCollapsible title={t('hourPrice')} defaultOpen={!isMobile}
                                                                     lock={!isMobile}>
-                                                <MultipleRangeInput step={50}
+                                                <MultipleRangeInput step={50} accent={true}
                                                                     from={this.props.router.query.priceFrom || this.state.priceRange.from}
                                                                     to={this.props.router.query.priceTo || this.state.priceRange.to}
                                                                     min={this.state.priceRange.from}
