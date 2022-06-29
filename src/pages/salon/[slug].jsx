@@ -668,41 +668,41 @@ class SalonView extends React.Component {
                 </div>
                 <div bp={'12 4@md'}>
                     <ShareInSocialMedia/>
-                </div>
-            </div>
 
-            <div bp={'hide@md'} className={css.cardRoot} style={{marginTop: 24}}>
-                <div id={'salonLocation'} className={css.mapMobile}></div>
+                    <div className={css.cardRoot} style={{marginTop: 16}}>
+                        <div id={'salonLocation'} className={css.mapMobile}></div>
 
-                <div className={cnb(css.shortInfoBlock)} style={{gap: 22, padding: 20}}>
-                    <div>
-                        <div>{t('address').toLowerCase()}</div>
-                        <div>{this.state.salon.address}</div>
-                    </div>
-
-                    {this.state.reviews.count > 0 && <div>
-                        <div>{t('reviews').toLowerCase()}</div>
-                        <Link href={{
-                            query: Object.assign({}, this.props.router.query, {
-                                salonTab: 'reviews'
-                            }),
-                            hash: '#salonTab'
-                        }}>
-                            <div
-                                className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                        <div className={cnb(css.shortInfoBlock)} style={{gap: 22, padding: 20}}>
+                            <div>
+                                <div>{t('address').toLowerCase()}</div>
+                                <div>{this.state.salon.address}</div>
                             </div>
-                        </Link>
-                    </div>}
 
-                    {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
-                        <div className={css.avgRating}>
-                            <Icon name={'star'}/>
-                            <span>{this.state.reviews.avg.toFixed(1)}</span>
-                        </div>
+                            {this.state.reviews.count > 0 && <div>
+                                <div>{t('reviews').toLowerCase()}</div>
+                                <Link href={{
+                                    query: Object.assign({}, this.props.router.query, {
+                                        salonTab: 'reviews'
+                                    }),
+                                    hash: '#salonTab'
+                                }}>
+                                    <div
+                                        className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                                    </div>
+                                </Link>
+                            </div>}
 
-                        <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                            {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
+                                <div className={css.avgRating}>
+                                    <Icon name={'star'}/>
+                                    <span>{this.state.reviews.avg.toFixed(1)}</span>
+                                </div>
+
+                                <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                </div>
+                            </div>}
                         </div>
-                    </div>}
+                    </div>
                 </div>
             </div>
 

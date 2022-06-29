@@ -180,6 +180,12 @@
   }
 }
 
+.stickToBottom {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+}
+
 @media (min-width: 480px) {
   .switchRoot {
     width: 248px !important;

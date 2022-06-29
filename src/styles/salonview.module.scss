@@ -85,10 +85,12 @@
 
   &, & > ymaps {
     border-radius: 32px;
+    overflow: hidden;
     width: 100% !important;
 
     & > ymaps, & > ymaps > ymaps {
       border-radius: 32px;
+      overflow: hidden;
     }
   }
 }
