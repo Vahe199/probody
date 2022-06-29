@@ -63,6 +63,7 @@ class SalonView extends React.Component {
         this.fetchWorkerInfo = this.fetchWorkerInfo.bind(this)
         this.loadReviews = this.loadReviews.bind(this)
         this.showMoreMasters = this.showMoreMasters.bind(this)
+        this.showMoreReviews = this.showMoreReviews.bind(this)
         this.setReviewModal = this.setReviewModal.bind(this)
         this.leaveReview = this.leaveReview.bind(this)
         this.closeSuccessModal = this.closeSuccessModal.bind(this)
@@ -81,6 +82,18 @@ class SalonView extends React.Component {
     showMoreMasters() {
         this.setState({
             masterLimit: this.state.masterLimit + 3
+        })
+    }
+
+    showMoreReviews() {
+        APIRequests.getReviews(this.state.salon._id, this.state.reviewPaginator.current + 1).then(response => {
+            this.setState({
+                reviewList: [...this.state.reviewList, ...response.reviews],
+                reviewPaginator: {
+                    current: this.state.reviewPaginator.current + 1,
+                    max: response.pageCount
+                }
+            })
         })
     }
 
@@ -222,7 +235,7 @@ class SalonView extends React.Component {
                     <div bp={'12'}>
                         {(this.state.masterLimit < this.state.salon.masters.length) &&
                             <Button className={css.showMoreBtn} size={'large'} onClick={this.showMoreMasters}>
-                                <span className={'vertical-center'}>{t('showNMore', 3)}</span>
+                                <span className={'va-middle'}>{t('showNMore', 3)}</span>
                                 <Icon name={'refresh'}/>
                             </Button>}
                     </div>
@@ -261,6 +274,11 @@ class SalonView extends React.Component {
                             {this.state.reviewList.map((review, i) =>
                                 <ReviewBlock {...review} key={i}/>
                             )}
+
+                            {this.state.reviewPaginator.current < this.state.reviewPaginator.max && <Button className={css.showMoreBtn} size={'large'} style={{marginTop: 12}} onClick={this.showMoreReviews}>
+                                <span className={'va-middle'}>{t('showNMore', 3)}</span>
+                                <Icon name={'refresh'}/>
+                            </Button>}
                         </div>
                     </div>
                 </div>
@@ -292,7 +310,7 @@ class SalonView extends React.Component {
             <Modal open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
                    useNav={isMobile}>
                 {!isMobile && <div className={cnb(css.modalHead, css.desktop)}>
-                    <h2>{t('creatingReview')}</h2>
+                    <h2>{t('leaveYourReview')}</h2>
 
                     <Icon name={'close'} onClick={() => this.setReviewModal(false)}/>
                 </div>}
@@ -341,27 +359,23 @@ class SalonView extends React.Component {
                             </div>
 
                             <div>
-                                <p className="subtitle2">{t('yourName')}</p>
+                                <p className="subtitle2">{t('review')}</p>
 
-                                <TextInput label={t('whatsYourName')} placeholder={t('typeYourName')}
+                                <TextInput label={t('yourName')} placeholder={t('whatsYourName')}
                                            value={this.state.review.name} onUpdate={name => this.setState({
                                     review: {
                                         ...this.state.review,
                                         name
                                     }
                                 })}/>
-                            </div>
-
-                            <div>
-                                <p className="subtitle2">{t('review')}</p>
 
                                 <TextArea label={t('reviewText')} placeholder={t('enterYourReview')} max={100}
-                                          value={this.state.review.text} onUpdate={text => this.setState({
-                                    review: {
-                                        ...this.state.review,
-                                        text
-                                    }
-                                })}/>
+                                               value={this.state.review.text} onUpdate={text => this.setState({
+                                review: {
+                                    ...this.state.review,
+                                    text
+                                }
+                            })}/>
                             </div>
 
                             <div style={{
@@ -451,14 +465,14 @@ class SalonView extends React.Component {
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
                                     <span
-                                        className={'vertical-center'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
+                                        className={'va-middle'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
                                 </Button>
                             </a></div>
                             {this.state.salon.messengers.tg && <div><a target="_blank"
                                                                        href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'tg_light'}/>
-                                    <span className={'vertical-center'}>{t('sendMessage')}</span>
+                                    <span className={'va-middle'}>{t('sendMessage')}</span>
                                 </Button>
                             </a></div>}
                         </div>}

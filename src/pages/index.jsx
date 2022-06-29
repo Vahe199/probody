@@ -556,7 +556,7 @@ class Home extends React.Component {
                                                         <Icon style={{marginRight: worker.messengers.tg ? 0 : 10}}
                                                               name={'wa_light'}/>
                                                         <span
-                                                            className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
+                                                            className={'va-middle'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                     </Button>
                                                 </a></div>
                                                 {worker.messengers.tg && <div><a target="_blank"
@@ -744,7 +744,7 @@ class Home extends React.Component {
                                                     <Icon style={{marginRight: worker.messengers.tg ? 0 : 6}}
                                                           name={'wa_light'}/>
                                                     <span
-                                                        className={'vertical-center'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
+                                                        className={'va-middle'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                 </Button>
                                             </a></div>
                                             {worker.messengers.tg && <div><a target="_blank"
@@ -764,7 +764,7 @@ class Home extends React.Component {
                 <div className="flex justify-center">
                     {((Number(this.props.router.query.page) !== this.state.pageCount) && !this.state.preventLoading && this.state.workers.length > 0) &&
                         <Button className={css.showMoreBtn} size={'large'} onClick={this.loadMore}>
-                            <span className={'vertical-center'}>{t('showNSalonsMore', 5)}</span>
+                            <span className={'va-middle'}>{t('showNSalonsMore', 5)}</span>
                             <Icon name={'refresh'}/>
                         </Button>}
                 </div>

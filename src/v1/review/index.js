@@ -25,7 +25,7 @@ router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
     }
 
     res.json({
-        reviews: await Review.find({target: req.params.workerId}).limit(req.query.limit).skip((req.query.page - 1) * req.query.limit).sort({createdAt: -1}),
+        reviews: await Review.find({target: req.params.workerId, text: {$exists: true}}).limit(req.query.limit).skip((req.query.page - 1) * req.query.limit).sort({createdAt: -1}),
         pageCount: Math.ceil(await Review.countDocuments({target: req.params.workerId}) / req.query.limit),
         // avg: (await Review.aggregate([{$group: {_id: null, averageRate: {$avg: "$avg"}}}]))[0].averageRate
     })

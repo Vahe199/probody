@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added map to salon page desktop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/icons/vi_dark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/vi_dark.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/icons/vi_light.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/vi_light.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/search/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/review/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,14 +140,7 @@
       <workItem from="1656488769525" duration="8925000" />
       <workItem from="1656500626462" duration="1998000" />
       <workItem from="1656503962826" duration="147000" />
-      <workItem from="1656508781419" duration="6027000" />
-    </task>
-    <task id="LOCAL-00259" summary="fixed lot of bugs">
-      <created>1655996146122</created>
-      <option name="number" value="00259" />
-      <option name="presentableId" value="LOCAL-00259" />
-      <option name="project" value="LOCAL" />
-      <updated>1655996146122</updated>
+      <workItem from="1656508781419" duration="7636000" />
     </task>
     <task id="LOCAL-00260" summary="added wa text">
       <created>1655996808882</created>
@@ -487,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656510641388</updated>
     </task>
-    <option name="localTasksCounter" value="308" />
+    <task id="LOCAL-00308" summary="added map to salon page desktop">
+      <created>1656519953199</created>
+      <option name="number" value="00308" />
+      <option name="presentableId" value="LOCAL-00308" />
+      <option name="project" value="LOCAL" />
+      <updated>1656519953199</updated>
+    </task>
+    <option name="localTasksCounter" value="309" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
