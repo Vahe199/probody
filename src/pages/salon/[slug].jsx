@@ -692,7 +692,7 @@ class SalonView extends React.Component {
                                 </Link>
                             </div>}
 
-                            {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
+                            {this.state.reviews.avg > 0 && <div>
                                 <div className={css.avgRating}>
                                     <Icon name={'star'}/>
                                     <span>{this.state.reviews.avg.toFixed(1)}</span>
