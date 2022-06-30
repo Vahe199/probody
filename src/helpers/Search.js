@@ -154,7 +154,7 @@ export default class Search {
 
     static async findWorker(queryString, isMapView, limit, offset) {
         try {
-            const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, ['SORTBY', 'lastraise', 'DESC']),
+            const searchResults = await RedisHelper.ftSearch('idx:worker', queryString, limit, offset, isMapView ? [] : ['SORTBY', 'lastraise', 'DESC']),
                 searchResultsIds = searchResults
                     .splice(1)
                     .map(key => key.split(':')[2])

@@ -155,11 +155,12 @@ class Home extends React.Component {
     performSearch(appendResults = false) {
         const mapMixin = (this.props.router.query.map && this.props.router.query.map === 'true' && this.state.map) ? {
             coords: this.state.map.getCenter()
-        } : {}
+        } : {
+            region: this.props.router.query.region
+        }
 
-        APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
+        APIRequests.searchWorkers((this.props.router.query.map && this.props.router.query.map === 'true') ? 1 : this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
             kind: this.props.router.query.kind || 'all',
-            region: this.props.router.query.region,
             rooms: this.props.router.query['filters[rooms]']?.split(',').map(i => this.state.filters.rooms.find(room => room._id === i)?.name).join(' '),
             messengers: this.props.router.query['filters[messengers]']?.split(',').map(i => this.state.filters.messengers.find(messenger => messenger._id === i)?.name).join(' '),
             services: this.props.router.query['filters[services]']?.split(',').map(i => this.state.filters.services.find(service => service._id === i)?.name).join(' '),
@@ -229,11 +230,32 @@ class Home extends React.Component {
         map.geoObjects.removeAll()
 
         workers.map(worker => {
-            map.geoObjects.add(new window.ymaps.Placemark(worker.location.coordinates, {}, {
-                    iconImageHref: '/icons/dot.svg',
-                    iconLayout: 'default#image'
-                })
-            )
+            const pm = new window.ymaps.Placemark(worker.location.coordinates, {}, {
+                iconImageHref: '/icons/dot.svg',
+                iconLayout: 'default#image',
+                hideIconOnBalloonOpen: false,
+
+                balloonCloseButton: false,
+                balloonContent: 'fred',
+                balloonLayout: 'derf',
+                balloonOffset: [75, -10]
+            })
+
+            pm.events.add('mouseenter', () => {
+                if (pm.isBalloonOpen) {
+                    return
+                }
+
+                pm.options.set('iconImageHref', '/icons/point.svg')
+                pm.balloon.open()
+            })
+
+            pm.events.add('mouseleave', () => {
+                pm.options.set('iconImageHref', '/icons/dot.svg')
+                pm.balloon.close()
+            })
+
+            map.geoObjects.add(pm)
         })
     }
 
