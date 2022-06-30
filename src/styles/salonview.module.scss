@@ -15,25 +15,25 @@
 }
 
 .reviewModalContent {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  //display: flex;
+  //flex-direction: column;
+  //gap: 24px;
 
-  &>div {
+  & > div {
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
 
-    &:not(:last-child)::after {
-      width: 100%;
-      height: 1px;
-      content: ' ';
-      user-select: none;
-      display: block;
+  &.underlined > div:not(:last-child)::after {
+    width: 100%;
+    height: 1px;
+    content: ' ';
+    user-select: none;
+    display: block;
 
-      @include themify() {
-        background: t('line-color');
-      }
+    @include themify() {
+      background: t('line-color');
     }
   }
 }

@@ -40,6 +40,7 @@ class Home extends React.Component {
             handleRef: React.createRef(),
             filterPopupOpen: false,
             preventLoading: false,
+            map: undefined,
             pageCount: 1,
             foundCnt: 0,
             regions: [],
@@ -181,6 +182,32 @@ class Home extends React.Component {
                 workers: workers.results,
                 foundCnt: workers.count
             });
+
+            const initMap = () => {
+                if (this.state.map) {
+                    return
+                }
+
+                const map = new window.ymaps.Map('mapView', {
+                    center: [22, 48],
+                    zoom: 10,
+                    controls: []
+                }, {})
+
+                // map.geoObjects.add(new window.ymaps.Placemark(res.worker[0].location.coordinates, {}, {
+                //         iconImageHref: '/icons/point.svg',
+                //         iconLayout: 'default#image'
+                //     })
+                // )
+
+                this.setState({
+                    map
+                })
+            }
+
+            if (!this.state.map) {
+                window.ymaps.ready(initMap.bind(this))
+            }
         })
     }
 
@@ -315,32 +342,32 @@ class Home extends React.Component {
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
                 </Head>
 
-                <div className="responsive-content">
+                {!((this.props.router.query.map && 'true' === this.props.router.query.map) && isMobile) && <div className="responsive-content">
                     <p className="subtitle additional-text non-selectable">{t('greet')}</p>
                     <h1 className={'text-xl'}>{t('qWhatToFindForYou')}</h1>
-                </div>
 
-                <br className={'non-selectable'}/>
+                    <br className={'non-selectable'}/>
+                </div>}
 
-                <div bp={'grid'} style={{marginBottom: 24}}>
+                <div bp={'grid'} style={{gridGap: 8, marginBottom: 16}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
-                         <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
-                                        value={this.props.router.query.kind || 'all'}
-                                        checkedClassName={css.radioChecked}
-                                        onUpdate={this.setKind} options={[
-                                {
-                                    label: t('all'),
-                                    value: 'all'
-                                },
-                                {
-                                    label: t('salons'),
-                                    value: 'salon'
-                                },
-                                {
-                                    label: isMobile ? t('masters') : t('privateMasters'),
-                                    value: 'master'
-                                }
-                            ]}/>
+                        <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
+                                    value={this.props.router.query.kind || 'all'}
+                                    checkedClassName={css.radioChecked}
+                                    onUpdate={this.setKind} options={[
+                            {
+                                label: t('all'),
+                                value: 'all'
+                            },
+                            {
+                                label: t('salons'),
+                                value: 'salon'
+                            },
+                            {
+                                label: isMobile ? t('masters') : t('privateMasters'),
+                                value: 'master'
+                            }
+                        ]}/>
                     </div>
                     <div bp={'12 6@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
@@ -496,25 +523,28 @@ class Home extends React.Component {
                     </div>
 
                     <div bp={'12 hide@md'} className={'responsive-content'}>
-                            <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
-                                <Icon name={'search'}/>
-                                <ControlledInput id={inputId} bp={'fill'} type="text"
-                                                 value={this.props.router.query.search}
-                                                 onKeyUp={this.handleKeyUp}
-                                                 onChange={e => this.props.router.push({
-                                                     query: Object.assign({}, this.props.router.query, {
-                                                         search: e.target.value,
-                                                         page: 1
-                                                     })
-                                                 })}
-                                                 placeholder={t('ssm')}/>
-                                <div onClick={this.clearQuery}><Icon name={'close'}/></div>
-                            </label>
-                        </div>
+                        <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
+                            <Icon name={'search'}/>
+                            <ControlledInput id={inputId} bp={'fill'} type="text"
+                                             value={this.props.router.query.search}
+                                             onKeyUp={this.handleKeyUp}
+                                             onChange={e => this.props.router.push({
+                                                 query: Object.assign({}, this.props.router.query, {
+                                                     search: e.target.value,
+                                                     page: 1
+                                                 })
+                                             })}
+                                             placeholder={t('ssm')}/>
+                            <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                        </label>
+                    </div>
+                </div>
 
-                    {(this.props.router.query.map && 'true' === this.props.router.query.map) ? <div>
-                        отображение результатов на карте
-                    </div> : this.state.workers.map((worker, index) => {
+                <div bp={'grid'} style={{marginBottom: 24}}>
+                    <div bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}>
+                        <div id={'mapView'} className={css.mapView}></div>
+                    </div>
+                    {(!this.props.router.query.map || 'false' === this.props.router.query.map) && this.state.workers.map((worker, index) => {
                         worker.url = '/salon/' + worker.slug
 
                         return <div bp={'12'} key={index}>

@@ -153,6 +153,10 @@ class SalonView extends React.Component {
             }
 
             const initMap = () => {
+                if (this.state.map) {
+                    return
+                }
+
                 const map = new window.ymaps.Map('salonLocation', {
                     center: res.worker[0].location.coordinates,
                     zoom: 15,
@@ -275,10 +279,12 @@ class SalonView extends React.Component {
                                 <ReviewBlock {...review} key={i}/>
                             )}
 
-                            {this.state.reviewPaginator.current < this.state.reviewPaginator.max && <Button className={css.showMoreBtn} size={'large'} style={{marginTop: 12}} onClick={this.showMoreReviews}>
-                                <span className={'va-middle'}>{t('showNMore', 3)}</span>
-                                <Icon name={'refresh'}/>
-                            </Button>}
+                            {this.state.reviewPaginator.current < this.state.reviewPaginator.max &&
+                                <Button className={css.showMoreBtn} size={'large'} style={{marginTop: 12}}
+                                        onClick={this.showMoreReviews}>
+                                    <span className={'va-middle'}>{t('showNMore', 3)}</span>
+                                    <Icon name={'refresh'}/>
+                                </Button>}
                         </div>
                     </div>
                 </div>
@@ -308,7 +314,7 @@ class SalonView extends React.Component {
             </Head>
 
             <Modal open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
-                   useNav={isMobile}>
+                   useNav={isMobile} modalStyle={{maxWidth: isMobile ? '100%' : 650}}>
                 {!isMobile && <div className={cnb(css.modalHead, css.desktop)}>
                     <h2>{t('leaveYourReview')}</h2>
 
@@ -319,12 +325,12 @@ class SalonView extends React.Component {
                     padding: '20px'
                 } : {}}>
                     <div className="responsive-content">
-                        <h1 style={{
+                        {isMobile && <h1 style={{
                             marginTop: isMobile ? 32 : 0,
                             marginBottom: 24
-                        }}>{t('leaveYourReview')}</h1>
+                        }}>{t('leaveYourReview')}</h1>}
 
-                        <div className={css.reviewModalContent}>
+                        <div bp={'grid 12 4@md'} className={cnb(css.reviewModalContent, isMobile ? css.underlined : '')}>
                             <div>
                                 <p className="subtitle2">{capitalize(t('service'))}</p>
 
@@ -357,9 +363,13 @@ class SalonView extends React.Component {
                                     }
                                 })}/>
                             </div>
+                        </div>
 
+                        <div bp={'grid 12'} style={{
+                            marginTop: isMobile ? 16 : 48
+                        }} className={css.reviewModalContent}>
                             <div>
-                                <p className="subtitle2">{t('review')}</p>
+                                {isMobile && <p className="subtitle2">{t('review')}</p>}
 
                                 <TextInput label={t('yourName')} placeholder={t('whatsYourName')}
                                            value={this.state.review.name} onUpdate={name => this.setState({
@@ -370,12 +380,12 @@ class SalonView extends React.Component {
                                 })}/>
 
                                 <TextArea label={t('reviewText')} placeholder={t('enterYourReview')} max={100}
-                                               value={this.state.review.text} onUpdate={text => this.setState({
-                                review: {
-                                    ...this.state.review,
-                                    text
-                                }
-                            })}/>
+                                          value={this.state.review.text} onUpdate={text => this.setState({
+                                    review: {
+                                        ...this.state.review,
+                                        text
+                                    }
+                                })}/>
                             </div>
 
                             <div style={{
@@ -383,7 +393,7 @@ class SalonView extends React.Component {
                             }}>
                                 <Button onClick={this.leaveReview}
                                         isDisabled={this.state.review.service === 0 || this.state.review.massage === 0 || this.state.review.interior === 0}
-                                        size={'fill'}>
+                                        size={isMobile ? 'fill' : 'medium'}>
                                     {t('leaveReview')}
                                 </Button>
                             </div>
@@ -727,7 +737,8 @@ class SalonView extends React.Component {
                 }}>{this.state.salon.kind === 'salon' ? t('otherSalons') : (this.state.salon.parent ? t('otherSalonMasters') : t('otherMasters'))}</h2>}
             </div>
 
-            {this.state.salon.kind !== 'salon' &&
+            {
+                this.state.salon.kind !== 'salon' &&
                 <div style={{paddingLeft: isMobile ? 16 : 0}} bp={isMobile ? '' : 'grid'}
                      className={cnb(isMobile ? css.invisibleScroll : '', css.masters)}>
                     {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
@@ -738,58 +749,65 @@ class SalonView extends React.Component {
                                           noContent={true}/>
                         </div>
                     })}
-                </div>}
+                </div>
+            }
 
-            {this.state.salon.kind === 'salon' && <div bp={'grid'}>
-                {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
-                    worker.url = '/salon/' + worker.slug
+            {
+                this.state.salon.kind === 'salon' && <div bp={'grid'}>
+                    {this.state.suggestedWorkers.length > 0 && this.state.suggestedWorkers.map((worker, index) => {
+                        worker.url = '/salon/' + worker.slug
 
-                    return <div bp={'12 4@md'} key={index}>
-                        <div className={css.cardRoot}>
-                            <ImageCarousel
-                                height={this.state.salon.kind === 'master' ? (isMobile ? 470 : 520) : (isMobile ? 230 : 275)}
-                                link={worker.url} pics={worker.photos}/>
+                        return <div bp={'12 4@md'} key={index}>
+                            <div className={css.cardRoot}>
+                                <ImageCarousel
+                                    height={this.state.salon.kind === 'master' ? (isMobile ? 470 : 520) : (isMobile ? 230 : 275)}
+                                    link={worker.url} pics={worker.photos}/>
 
-                            <div className={css.padded}>
-                                {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
-                                    <Icon name={'round_check'} className={css.verifiedIcon}/>
+                                <div className={css.padded}>
+                                    {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
+                                        <Icon name={'round_check'} className={css.verifiedIcon}/>
 
-                                    <span>{t('verified')}</span>
-                                </div>}
+                                        <span>{t('verified')}</span>
+                                    </div>}
 
-                                <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
-                                </Link>
+                                    <Link href={worker.url}><h1 className={'cursor-pointer'}>{worker.name}</h1>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                })}
-            </div>}
+                    })}
+                </div>
+            }
 
-            {this.state.salon.kind !== 'salon' && <div className={'responsive-content ' + css.fullSizeBtnResponsive}>
-                <Button onClick={() => this.props.router.push(this.state.salon.parent ? {
-                    query: Object.assign({}, this.props.router.query, {
-                        salonTab: 'masters'
-                    }),
-                    hash: '#salonTab',
-                    pathname: '/salon/' + this.state.salon.parent.slug
-                } : {
-                    pathname: '/',
-                    query: {
-                        ...this.props.router.query,
-                        kind: 'master'
-                    },
-                    hash: ''
-                })}
-                        color={'secondary'}
-                        size={'fill'}>{this.state.salon.parent ? (isMobile ? t('otherSalonArticles') : t('viewAllArticles')) : t('viewAllArticles')}</Button>
-            </div>}
+            {
+                this.state.salon.kind !== 'salon' && <div className={'responsive-content ' + css.fullSizeBtnResponsive}>
+                    <Button onClick={() => this.props.router.push(this.state.salon.parent ? {
+                        query: Object.assign({}, this.props.router.query, {
+                            salonTab: 'masters'
+                        }),
+                        hash: '#salonTab',
+                        pathname: '/salon/' + this.state.salon.parent.slug
+                    } : {
+                        pathname: '/',
+                        query: {
+                            ...this.props.router.query,
+                            kind: 'master'
+                        },
+                        hash: ''
+                    })}
+                            color={'secondary'}
+                            size={'fill'}>{this.state.salon.parent ? (isMobile ? t('otherSalonArticles') : t('viewAllArticles')) : t('viewAllArticles')}</Button>
+                </div>
+            }
 
-            {this.state.salon.kind === 'master' && <div className={'responsive-content'}>
-                <h2 style={{
-                    marginBottom: 12,
-                    marginTop: 24
-                }}>{t('top3Masters')}</h2>
-            </div>}
+            {
+                this.state.salon.kind === 'master' && <div className={'responsive-content'}>
+                    <h2 style={{
+                        marginBottom: 12,
+                        marginTop: 24
+                    }}>{t('top3Masters')}</h2>
+                </div>
+            }
 
             <div bp={'grid'}>
                 {(this.state.salon.kind === 'master' && this.state.top3Masters) && this.state.top3Masters.map((worker, index) => {
@@ -814,27 +832,29 @@ class SalonView extends React.Component {
                 })}
             </div>
 
-            {(this.state.salon.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom)}>
-                <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
-                    <Button>
-                        <Icon name={'call'}/>
-                        {t('call')}
-                    </Button>
-                </a></div>
-                <div><a target="_blank"
-                        href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
-                    <Button color={'tertiary'}>
-                        <Icon name={'wa_light'}/>
-                        {this.state.salon.messengers.tg ? '' : t('sendMessage')}
-                    </Button>
-                </a></div>
-                {this.state.salon.messengers.tg && <div><a target="_blank"
-                                                           href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
-                    <Button color={'tertiary'}>
-                        <Icon name={'tg_light'}/>
-                    </Button>
-                </a></div>}
-            </div>}
+            {
+                (this.state.salon.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom)}>
+                    <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                        <Button>
+                            <Icon name={'call'}/>
+                            {t('call')}
+                        </Button>
+                    </a></div>
+                    <div><a target="_blank"
+                            href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
+                        <Button color={'tertiary'}>
+                            <Icon name={'wa_light'}/>
+                            {this.state.salon.messengers.tg ? '' : t('sendMessage')}
+                        </Button>
+                    </a></div>
+                    {this.state.salon.messengers.tg && <div><a target="_blank"
+                                                               href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
+                        <Button color={'tertiary'}>
+                            <Icon name={'tg_light'}/>
+                        </Button>
+                    </a></div>}
+                </div>
+            }
         </div>
     }
 }
