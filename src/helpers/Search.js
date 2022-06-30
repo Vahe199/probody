@@ -186,7 +186,8 @@ export default class Search {
                     }
                 })
             } else {
-                workerAggregation.push({
+                workerAggregation.push(
+                    {
                         $project: {
                             kind: 1,
                             location: 1,
@@ -220,7 +221,8 @@ export default class Search {
                             foreignField: 'parent',
                             as: 'masters'
                         }
-                    })
+                    }
+                )
             }
 
             return {

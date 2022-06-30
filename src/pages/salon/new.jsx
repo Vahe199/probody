@@ -292,7 +292,7 @@ class NewSalonPage extends React.Component {
                 } else {
                     const placeMark = new window.ymaps.Placemark(coords, {}, {
                         iconImageHref: '/icons/point.svg',
-                        iconLayout: 'default#image'
+                        iconLayout: 'default#image',
                     })
 
                     await this.setState({

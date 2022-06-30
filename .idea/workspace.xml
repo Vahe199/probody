@@ -4,6 +4,9 @@
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added coords to redisearch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,21 +144,7 @@
       <workItem from="1656508781419" duration="8329000" />
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
-      <workItem from="1656610820856" duration="1626000" />
-    </task>
-    <task id="LOCAL-00265" summary="fixed blog and vacancies">
-      <created>1656003083014</created>
-      <option name="number" value="00265" />
-      <option name="presentableId" value="LOCAL-00265" />
-      <option name="project" value="LOCAL" />
-      <updated>1656003083014</updated>
-    </task>
-    <task id="LOCAL-00266" summary="added IDE files">
-      <created>1656003097992</created>
-      <option name="number" value="00266" />
-      <option name="presentableId" value="LOCAL-00266" />
-      <option name="project" value="LOCAL" />
-      <updated>1656003097992</updated>
+      <workItem from="1656610820856" duration="5358000" />
     </task>
     <task id="LOCAL-00267" summary="added IDE files">
       <created>1656054245880</created>
@@ -486,7 +475,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656611364488</updated>
     </task>
-    <option name="localTasksCounter" value="314" />
+    <task id="LOCAL-00314" summary="added coords to redisearch">
+      <created>1656612450555</created>
+      <option name="number" value="00314" />
+      <option name="presentableId" value="LOCAL-00314" />
+      <option name="project" value="LOCAL" />
+      <updated>1656612450555</updated>
+    </task>
+    <task id="LOCAL-00315" summary="added coords to redisearch">
+      <created>1656612616828</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1656612616828</updated>
+    </task>
+    <option name="localTasksCounter" value="316" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

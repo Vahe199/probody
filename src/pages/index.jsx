@@ -230,15 +230,19 @@ class Home extends React.Component {
         map.geoObjects.removeAll()
 
         workers.map(worker => {
-            const pm = new window.ymaps.Placemark(worker.location.coordinates, {}, {
+            const pm = new window.ymaps.Placemark(worker.location.coordinates, {
+                // balloonContentBody: `<div style="background: red; color: #000; font-weight: bold;">${worker.name}</div>`
+            }, {
                 iconImageHref: '/icons/dot.svg',
                 iconLayout: 'default#image',
-                hideIconOnBalloonOpen: false,
+                // balloonPanelMaxMapArea: Infinity,
+                // hideIconOnBalloonOpen: false,
 
                 balloonCloseButton: false,
-                balloonContent: 'fred',
-                balloonLayout: 'derf',
-                balloonOffset: [75, -10]
+                // balloonOffset: [75, -10],
+                balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
+                    `${worker.name}`
+                )
             })
 
             pm.events.add('mouseenter', () => {
@@ -251,6 +255,7 @@ class Home extends React.Component {
             })
 
             pm.events.add('mouseleave', () => {
+                console.log('leave')
                 pm.options.set('iconImageHref', '/icons/dot.svg')
                 pm.balloon.close()
             })

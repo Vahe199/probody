@@ -165,7 +165,8 @@ class SalonView extends React.Component {
 
                 map.geoObjects.add(new window.ymaps.Placemark(res.worker[0].location.coordinates, {}, {
                         iconImageHref: '/icons/point.svg',
-                        iconLayout: 'default#image'
+                        iconLayout: 'default#image',
+                        iconImageOffset: [0, -6]
                     })
                 )
 
@@ -330,7 +331,8 @@ class SalonView extends React.Component {
                             marginBottom: 24
                         }}>{t('leaveYourReview')}</h1>}
 
-                        <div bp={'grid 12 4@md'} className={cnb(css.reviewModalContent, isMobile ? css.underlined : '')}>
+                        <div bp={'grid 12 4@md'}
+                             className={cnb(css.reviewModalContent, isMobile ? css.underlined : '')}>
                             <div>
                                 <p className="subtitle2">{capitalize(t('service'))}</p>
 
