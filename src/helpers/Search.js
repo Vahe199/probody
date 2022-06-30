@@ -187,42 +187,41 @@ export default class Search {
                 })
             } else {
                 workerAggregation.push({
-                    $project: {
-                        kind: 1,
-                        location: 1,
-                        characteristics: 1,
-                        name: 1,
-                        slug: 1,
-                        workHours: 1,
-                        workDays: 1,
-                        isVerified: 1,
-                        photos: 1,
-                        messengers: 1,
-                        address: 1,
-                        social: 1,
-                        programs: 1,
-                        description: 1,
-                        phone: 1,
-                        region: 1
-                    }
-                }, {
-                    $lookup: {
-                        from: 'regions',
-                        localField: 'region',
-                        foreignField: '_id',
-                        as: 'region'
-                    }
-                })
+                        $project: {
+                            kind: 1,
+                            location: 1,
+                            characteristics: 1,
+                            name: 1,
+                            slug: 1,
+                            workHours: 1,
+                            workDays: 1,
+                            isVerified: 1,
+                            photos: 1,
+                            messengers: 1,
+                            address: 1,
+                            social: 1,
+                            programs: 1,
+                            description: 1,
+                            phone: 1,
+                            region: 1
+                        }
+                    }, {
+                        $lookup: {
+                            from: 'regions',
+                            localField: 'region',
+                            foreignField: '_id',
+                            as: 'region'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'workers',
+                            localField: '_id',
+                            foreignField: 'parent',
+                            as: 'masters'
+                        }
+                    })
             }
-
-            workerAggregation.push({
-                $lookup: {
-                    from: 'workers',
-                    localField: '_id',
-                    foreignField: 'parent',
-                    as: 'masters'
-                }
-            })
 
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count

@@ -112,6 +112,8 @@ router.post('/worker', async (req, res) => {
                         req.body.query += ` @${filterName}:{${req.body.filters[filterName]}}`
                     } else if (filterName === 'price') {
                         req.body.query += ` @avgcost:[${req.body.filters[filterName].from || 0} ${req.body.filters[filterName].to || 999999}]`
+                    } else if (filterName === 'coords') {
+                        req.body.query += ` @location:[${req.body.filters[filterName].join(' ')} 3 km]`
                     } else if (filterName === 'rooms') {
                         req.body.filters[filterName].split(' ').forEach(room => {
                             switch (room) {
@@ -137,7 +139,7 @@ router.post('/worker', async (req, res) => {
             req.body.query = '*'
         }
 
-        res.json(await Search.findWorker(req.body.query, req.query.hasOwnProperty('mapView'), req.query.limit, (req.query.page - 1) * req.query.limit))
+        res.json(await Search.findWorker(req.body.query, Object.keys(req.body.filters).hasOwnProperty('coords'), req.query.limit, (req.query.page - 1) * req.query.limit))
     } catch (e) {
         res.status(500).json({
             message: 'Internal server error'

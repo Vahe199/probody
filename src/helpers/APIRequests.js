@@ -2,6 +2,7 @@ const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
 const PAGE_SIZES = {
     MAIN: 5,
+    MAIN_MAP: 15,
     REVIEWS: 3
 };
 
@@ -241,7 +242,7 @@ export default class APIRequests {
             delete filters.region
         }
 
-        return fetch(`${API_URL}/search/worker?page=${page}&limit=${PAGE_SIZES.MAIN}&onlyCount=${onlyCount}`, {
+        return fetch(`${API_URL}/search/worker?page=${page}&limit=${filters.coords ? PAGE_SIZES.MAIN_MAP : PAGE_SIZES.MAIN}&onlyCount=${onlyCount}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

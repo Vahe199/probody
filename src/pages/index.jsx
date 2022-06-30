@@ -63,6 +63,7 @@ class Home extends React.Component {
         this.setRegion = this.setRegion.bind(this)
         this.getAppliedFilterCnt = this.getAppliedFilterCnt.bind(this)
         this.loadMore = this.loadMore.bind(this)
+        this.addMapObjects = this.addMapObjects.bind(this)
     }
 
     async initPageLoad(volatile = false) {
@@ -152,6 +153,10 @@ class Home extends React.Component {
     }
 
     performSearch(appendResults = false) {
+        const mapMixin = (this.props.router.query.map && this.props.router.query.map === 'true' && this.state.map) ? {
+            coords: this.state.map.getCenter()
+        } : {}
+
         APIRequests.searchWorkers(this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
             kind: this.props.router.query.kind || 'all',
             region: this.props.router.query.region,
@@ -163,7 +168,8 @@ class Home extends React.Component {
             price: {
                 from: this.props.router.query.priceFrom,
                 to: this.props.router.query.priceTo
-            }
+            },
+            ...mapMixin
         }).then(workers => {
             if (!workers.results) {
                 return
@@ -189,16 +195,18 @@ class Home extends React.Component {
                 }
 
                 const map = new window.ymaps.Map('mapView', {
-                    center: [22, 48],
-                    zoom: 10,
+                    center: workers.results[0].location.coordinates,
+                    zoom: 14,
                     controls: []
                 }, {})
 
-                // map.geoObjects.add(new window.ymaps.Placemark(res.worker[0].location.coordinates, {}, {
-                //         iconImageHref: '/icons/point.svg',
-                //         iconLayout: 'default#image'
-                //     })
-                // )
+                this.addMapObjects(workers.results, map)
+
+                map.events.add('actionend', () => {
+                    this.performSearch(false)
+                })
+
+                window.map = map
 
                 this.setState({
                     map
@@ -207,7 +215,25 @@ class Home extends React.Component {
 
             if (!this.state.map) {
                 window.ymaps.ready(initMap.bind(this))
+            } else {
+                this.addMapObjects(workers.results)
             }
+        })
+    }
+
+    addMapObjects(workers, map) {
+        if (!map) {
+            map = this.state.map
+        }
+
+        map.geoObjects.removeAll()
+
+        workers.map(worker => {
+            map.geoObjects.add(new window.ymaps.Placemark(worker.location.coordinates, {}, {
+                    iconImageHref: '/icons/dot.svg',
+                    iconLayout: 'default#image'
+                })
+            )
         })
     }
 
@@ -342,12 +368,13 @@ class Home extends React.Component {
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
                 </Head>
 
-                {!((this.props.router.query.map && 'true' === this.props.router.query.map) && isMobile) && <div className="responsive-content">
-                    <p className="subtitle additional-text non-selectable">{t('greet')}</p>
-                    <h1 className={'text-xl'}>{t('qWhatToFindForYou')}</h1>
+                {!((this.props.router.query.map && 'true' === this.props.router.query.map) && isMobile) &&
+                    <div className="responsive-content">
+                        <p className="subtitle additional-text non-selectable">{t('greet')}</p>
+                        <h1 className={'text-xl'}>{t('qWhatToFindForYou')}</h1>
 
-                    <br className={'non-selectable'}/>
-                </div>}
+                        <br className={'non-selectable'}/>
+                    </div>}
 
                 <div bp={'grid'} style={{gridGap: 8, marginBottom: 16}}>
                     <div bp={'12 6@md'} className={'responsive-content'}>
@@ -541,7 +568,8 @@ class Home extends React.Component {
                 </div>
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
-                    <div bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}>
+                    <div
+                        bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}>
                         <div id={'mapView'} className={css.mapView}></div>
                     </div>
                     {(!this.props.router.query.map || 'false' === this.props.router.query.map) && this.state.workers.map((worker, index) => {

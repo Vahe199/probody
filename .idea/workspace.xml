@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added map to salon page desktop">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added coords to redisearch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/salonview.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/salonview.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/icons/dot.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/dot.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/search/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,21 +142,8 @@
       <workItem from="1656500626462" duration="1998000" />
       <workItem from="1656503962826" duration="147000" />
       <workItem from="1656508781419" duration="8329000" />
-      <workItem from="1656576771626" duration="5087000" />
-    </task>
-    <task id="LOCAL-00261" summary="added wa text">
-      <created>1655997925756</created>
-      <option name="number" value="00261" />
-      <option name="presentableId" value="LOCAL-00261" />
-      <option name="project" value="LOCAL" />
-      <updated>1655997925756</updated>
-    </task>
-    <task id="LOCAL-00262" summary="minor fixes">
-      <created>1656001007559</created>
-      <option name="number" value="00262" />
-      <option name="presentableId" value="LOCAL-00262" />
-      <option name="project" value="LOCAL" />
-      <updated>1656001007559</updated>
+      <workItem from="1656576771626" duration="6996000" />
+      <workItem from="1656587806998" duration="2519000" />
     </task>
     <task id="LOCAL-00263" summary="minor fixes">
       <created>1656001369963</created>
@@ -488,7 +474,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656521499597</updated>
     </task>
-    <option name="localTasksCounter" value="310" />
+    <task id="LOCAL-00310" summary="done desktop modal">
+      <created>1656585958813</created>
+      <option name="number" value="00310" />
+      <option name="presentableId" value="LOCAL-00310" />
+      <option name="project" value="LOCAL" />
+      <updated>1656585958813</updated>
+    </task>
+    <task id="LOCAL-00311" summary="added coords to redisearch">
+      <created>1656586158549</created>
+      <option name="number" value="00311" />
+      <option name="presentableId" value="LOCAL-00311" />
+      <option name="project" value="LOCAL" />
+      <updated>1656586158549</updated>
+    </task>
+    <option name="localTasksCounter" value="312" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,8 +519,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="done part of salon page" />
-    <MESSAGE value="added masseuses" />
     <MESSAGE value="added tg notifier" />
     <MESSAGE value="fixing changes" />
     <MESSAGE value="added tg button" />
@@ -544,6 +542,8 @@
     <MESSAGE value="fixed range" />
     <MESSAGE value="added map to salon page" />
     <MESSAGE value="added map to salon page desktop" />
-    <option name="LAST_COMMIT_MESSAGE" value="added map to salon page desktop" />
+    <MESSAGE value="done desktop modal" />
+    <MESSAGE value="added coords to redisearch" />
+    <option name="LAST_COMMIT_MESSAGE" value="added coords to redisearch" />
   </component>
 </project>
