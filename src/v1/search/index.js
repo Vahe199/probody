@@ -113,7 +113,7 @@ router.post('/worker', async (req, res) => {
                     } else if (filterName === 'price') {
                         req.body.query += ` @avgcost:[${req.body.filters[filterName].from || 0} ${req.body.filters[filterName].to || 999999}]`
                     } else if (filterName === 'coords') {
-                        req.body.query += ` @location:[${req.body.filters[filterName].join(' ')} 3 km]`
+                        req.body.query += ` @location:[${req.body.filters[filterName].join(' ')} 5 km]`
                     } else if (filterName === 'rooms') {
                         req.body.filters[filterName].split(' ').forEach(room => {
                             switch (room) {
