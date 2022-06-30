@@ -12,7 +12,7 @@ export default class Search {
         // await Search.syncRegions()
     }
 
-    static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName, messengers) {
+    static async addWorker(keyPrefix, workerId, kind, name, phone, lastRaise, avgCost, rooms, description, leads, services, massageTypes, regionName, messengers, coords) {
         let parsedMessengers = []
 
         if (messengers.tg) {
@@ -35,7 +35,8 @@ export default class Search {
             'massagetypes', massageTypes.map(m => m.name.toLowerCase()).join(','),
             'rooms', String(rooms),
             'avgcost', String(avgCost),
-            'messengers', parsedMessengers.join(',')
+            'messengers', parsedMessengers.join(','),
+            'location', coords.join(',')
         )
     }
 
@@ -66,7 +67,8 @@ export default class Search {
                     worker.services,
                     worker.programs,
                     worker.region.name,
-                    worker.messengers)
+                    worker.messengers,
+                    worker.location.coordinates)
             }
 
             offset += BATCHSIZE
@@ -129,7 +131,8 @@ export default class Search {
                 phone: 'TAG',
                 services: 'TEXT',
                 massagetypes: 'TEXT',
-                messengers: 'TEXT'
+                messengers: 'TEXT',
+                location: 'GEO'
             })
         } catch (e) {
         }
