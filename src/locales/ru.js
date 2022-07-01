@@ -291,6 +291,7 @@ export default {
     salonRating: 'оценка салона',
     ratings: 'оценок',
     reviewCnt: 'отзывов',
+    listMobile: 'Список',
     yearDeclination: ['год', 'года', 'лет'],
     reviewDeclination: ['отзыв', 'отзыва', 'отзывов'],
     otherSalonMasters: 'Другие массажистки салона',
@@ -329,5 +330,6 @@ export default {
     typeYourName: 'Напишите свое имя',
     whatsYourName: 'Как Вас зовут?',
     youPostedReview: 'Вы оставили отзыв',
-    itWillBePublishedAfterModeration: 'Он будет опубликован сразу после прохождения модерации.'
+    itWillBePublishedAfterModeration: 'Он будет опубликован сразу после прохождения модерации.',
+    searchNearMe: 'Искать рядом со мной'
 }

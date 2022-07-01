@@ -67,6 +67,7 @@ class Home extends React.Component {
         this.getAppliedFilterCnt = this.getAppliedFilterCnt.bind(this)
         this.loadMore = this.loadMore.bind(this)
         this.addMapObjects = this.addMapObjects.bind(this)
+        this.searchNearMe = this.searchNearMe.bind(this)
     }
 
     async initPageLoad(volatile = false) {
@@ -366,6 +367,12 @@ class Home extends React.Component {
         })
     }
 
+    async searchNearMe() {
+        try {
+            this.state.map.setCenter((await window.ymaps.geolocation.get()).geoObjects.position, 14)
+        } catch (e) {}
+    }
+
     loadMore() {
         this.setState({
             preventLoading: true
@@ -417,7 +424,7 @@ class Home extends React.Component {
                     </div>}
 
                 <div bp={'grid'} style={{gridGap: 8, marginBottom: 16}}>
-                    <div bp={'12 6@md'} className={'responsive-content'}>
+                    <div bp={'12 4@md'} className={'responsive-content'}>
                         <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
                                     value={this.props.router.query.kind || 'all'}
                                     checkedClassName={css.radioChecked}
@@ -436,16 +443,20 @@ class Home extends React.Component {
                             }
                         ]}/>
                     </div>
-                    <div bp={'12 6@md'} className={'responsive-content'}>
+                    <div bp={'12 8@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
-                            <div className={css.switchRoot}>
-                                <div
-                                    className={(!this.props.router.query.map || 'false' === this.props.router.query.map) ? css.active : ''}
-                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{t('list')}</div>
-                                <div
-                                    className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
-                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{isMobile ? t('map') : t('mapPC')}</div>
+                            <div bp={'hide ' + ((this.props.router.query.map && 'true' === this.props.router.query.map) ? 'show' : 'hide') + '@md'}>
+                                <Button className={css.searchNearMeBtn} onClick={this.searchNearMe}>{t('searchNearMe')}</Button>
                             </div>
+
+                                <div className={css.switchRoot}>
+                                    <div
+                                        className={(!this.props.router.query.map || 'false' === this.props.router.query.map) ? css.active : ''}
+                                        onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{isMobile ? t('listMobile') : t('list')}</div>
+                                    <div
+                                        className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
+                                        onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{isMobile ? t('map') : t('mapPC')}</div>
+                                </div>
 
                             <div ref={this.state.handleRef}>
                                 <Button className={css.filterButton} color={'secondary'}

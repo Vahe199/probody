@@ -58,7 +58,7 @@ export default class RadioGroup extends React.Component {
         const {theme} = this.context
 
         return <div style={this.props.style} className={cnb(css['theme--' + theme], this.props.className)}>
-            <div style={{marginBottom: 8}}>
+            <div style={{marginBottom: this.props.name ? 8 : 0}}>
                 <span className={css.caption}>{this.props.name}</span>
             </div>
             <div bp={this.props.rootBp} style={this.props.containerStyle} className={cnb(css.root, this.props.containerClass, this.props.columnView ? css.column : '')}>

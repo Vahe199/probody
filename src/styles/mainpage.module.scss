@@ -6,7 +6,7 @@
 @import "kit/forms/hybrid-search-input.module";
 
 .kindSelector {
-  padding: 12px 12px 4px 16px;
+  padding: 16px;
   border-radius: 16px;
   display: inline-block;
   width: 100%;
@@ -16,6 +16,10 @@
 
   .kindContainer {
     justify-content: space-between;
+
+    &>div>div {
+      margin: 0;
+    }
 
     span {
       @include themify() {
@@ -157,7 +161,7 @@
 
   .mapView {
     width: 100%;
-    height: 40vh;
+    height: 500px;
 
     &, & > ymaps {
       border-radius: 32px;
@@ -170,6 +174,12 @@
       }
     }
   }
+}
+
+.searchNearMeBtn {
+  margin-right: 20px;
+  font-size: 18px;
+  padding: 16px 29px;
 }
 
 .ellipsis {
@@ -203,7 +213,7 @@
   }
 }
 
-.radioChecked {
+.radioChecked+span {
   @include themify() {
     color: t('text-main') !important;
   }
@@ -271,7 +281,7 @@
   div {
     width: 50%;
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 12px 20px;
     text-align: center;
 
     @include themify() {
@@ -379,9 +389,15 @@
     color: #252420;
     font-family: Lato, sans-serif;
     border-radius: 8px;
-    padding: 6px 12px;
     margin-right: 8px;
     vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 12px;
+    align-items: center;
+    line-height: 1;
   }
 }
 
