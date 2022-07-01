@@ -156,9 +156,7 @@ class Home extends React.Component {
     }
 
     performSearch(appendResults = false) {
-        const mapMixin = (this.props.router.query.map && this.props.router.query.map === 'true' && this.state.map) ? {
-            coords: this.state.map.getCenter()
-        } : {
+        const mapMixin = {
             region: this.props.router.query.region
         }
 
@@ -232,8 +230,16 @@ class Home extends React.Component {
 
         map.geoObjects.removeAll()
 
-        workers.map(worker => {
-            const pm = new window.ymaps.Placemark(worker.location.coordinates, {}, {
+        const clusterer = new ymaps.Clusterer({
+                preset: 'islands#invertedVioletClusterIcons',
+                groupByCoordinates: false,
+                // clusterHideIconOnBalloonOpen: false,
+                // geoObjectHideIconOnBalloonOpen: false
+            }),
+            geoObjects = []
+
+        for (const id in workers) {
+            let pm = new window.ymaps.Placemark(workers[id], {}, {
                 iconImageHref: '/icons/dot.svg',
                 iconLayout: 'default#image',
                 // balloonPanelMaxMapArea: Infinity,
@@ -242,7 +248,7 @@ class Home extends React.Component {
                 balloonCloseButton: false,
                 balloonOffset: [75, -10],
                 balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
-                    `${worker.name}`
+                    `${id}`
                 )
             })
 
@@ -260,7 +266,14 @@ class Home extends React.Component {
                 pm.balloon.close()
             })
 
-            map.geoObjects.add(pm)
+            geoObjects.push(pm)
+        }
+
+        clusterer.add(geoObjects)
+        map.geoObjects.add(clusterer)
+
+        map.setBounds(clusterer.getBounds(), {
+            checkZoomRange: true
         })
     }
 
@@ -596,7 +609,8 @@ class Home extends React.Component {
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div
-                        bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')} className={css.mapContainer}>
+                        bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}
+                        className={css.mapContainer}>
                         <section className={css.chosenSalon}>карточка салона</section>
                         <div id={'mapView'} className={css.mapView}></div>
                     </div>
@@ -738,10 +752,15 @@ class Home extends React.Component {
                                     </div>
 
                                     {worker.kind === 'salon' ?
-                                        <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
-                                            <h2 style={{marginBottom: 12, paddingLeft: isMobile ? 16 : 0}}>{t('masseuses')}</h2>
+                                        <div bp={'12 7@md'} className={css.padded}
+                                             style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
+                                            <h2 style={{
+                                                marginBottom: 12,
+                                                paddingLeft: isMobile ? 16 : 0
+                                            }}>{t('masseuses')}</h2>
 
-                                            <div className={css.invisibleScroll} style={{paddingLeft: isMobile ? 16 : 0}}>
+                                            <div className={css.invisibleScroll}
+                                                 style={{paddingLeft: isMobile ? 16 : 0}}>
                                                 {worker.masters.slice(0, 4).map((master, i) => <ShortMasterCard
                                                     name={master.name}
                                                     link={{
@@ -769,8 +788,12 @@ class Home extends React.Component {
                                             <ParameterView {...worker.characteristics} />
                                         </div>}
 
-                                    <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
-                                        <h2 style={{marginBottom: 12, paddingLeft: isMobile ? 16 : 0}}>{t('programs')}</h2>
+                                    <div bp={'12 7@md'} className={css.padded}
+                                         style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
+                                        <h2 style={{
+                                            marginBottom: 12,
+                                            paddingLeft: isMobile ? 16 : 0
+                                        }}>{t('programs')}</h2>
 
                                         <div className={css.invisibleScroll} style={{paddingLeft: isMobile ? 16 : 0}}>
                                             {worker.programs.slice(0, 3).map((program, i) => <ProgramCard
