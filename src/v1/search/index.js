@@ -129,7 +129,7 @@ router.post('/worker', async (req, res) => {
                             }
                         })
                     } else {
-                        req.body.query += ` @${filterName}:${req.body.filters[filterName]}`
+                        req.body.query += ` @${filterName}:${req.body.filters[filterName].toLowerCase()}`
                     }
                 }
             }
