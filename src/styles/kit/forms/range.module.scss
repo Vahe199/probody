@@ -26,9 +26,15 @@
         border-color: t('range');
       }
     }
+
+    &::-moz-range-thumb {
+      @include themify() {
+        border-color: t('range');
+      }
+    }
   }
 
-  &::-webkit-slider-thumb, &::-moz-range-thumb {
+  &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 28px;
@@ -40,6 +46,21 @@
       background: t('body-bg');
         border-radius: 50%;
         border: 4px solid t('bg-accent');
+    }
+  }
+
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    pointer-events: all;
+    cursor: pointer;
+
+    @include themify() {
+      background: t('body-bg');
+      border-radius: 50%;
+      border: 4px solid t('bg-accent');
     }
   }
 }

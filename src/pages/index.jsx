@@ -1,34 +1,34 @@
 import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
-import AboutUsSection from "../components/AboutUsSection.jsx";
-import {TITLE_POSTFIX} from "../helpers/constants.js";
-import Head from "next/head.js";
+import AboutUsSection from "../components/AboutUsSection.jsx"
+import {TITLE_POSTFIX} from "../helpers/constants.js"
+import Head from "next/head.js"
 import css from '../styles/mainpage.module.scss'
-import APIRequests from "../helpers/APIRequests.js";
-import RadioGroup from "../components/kit/Form/RadioGroup";
-import ImageCarousel from "../components/kit/ImageCarousel";
-import {cnb} from "cnbuilder";
-import Icon from "../components/kit/Icon.jsx";
-import Link from "next/link.js";
-import Paginator from "../components/kit/Paginator.jsx";
-import Button from "../components/kit/Button.jsx";
-import Objects from "../helpers/Objects.js";
-import Popup from "../components/kit/Popup";
-import Numbers from "../helpers/Numbers.js";
-import ControlledInput from "../components/kit/Form/ControlledInput.jsx";
-import {parsePhoneNumber} from "libphonenumber-js";
-import ProgramCard from "../components/kit/ProgramCard";
-import MockProgramCard from "../components/kit/MockProgramCard.jsx";
-import ParameterView from "../components/kit/ParameterView.jsx";
-import ShortMasterCard from "../components/kit/ShortMasterCard";
-import MockShortMasterCard from "../components/kit/MockShortMasterCard";
-import Checkbox from "../components/kit/Form/Checkbox.jsx";
-import TransparentCollapsible from "../components/kit/Collapses/TransparentCollapsible.jsx";
-import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput";
-import debounce from "../helpers/debounce";
-import Select from "../components/kit/Form/Select.jsx";
-import {declination} from "../helpers/String.js";
+import APIRequests from "../helpers/APIRequests.js"
+import RadioGroup from "../components/kit/Form/RadioGroup"
+import ImageCarousel from "../components/kit/ImageCarousel"
+import {cnb} from "cnbuilder"
+import Icon from "../components/kit/Icon.jsx"
+import Link from "next/link.js"
+import Paginator from "../components/kit/Paginator.jsx"
+import Button from "../components/kit/Button.jsx"
+import Objects from "../helpers/Objects.js"
+import Popup from "../components/kit/Popup"
+import Numbers from "../helpers/Numbers.js"
+import ControlledInput from "../components/kit/Form/ControlledInput.jsx"
+import {parsePhoneNumber} from "libphonenumber-js"
+import ProgramCard from "../components/kit/ProgramCard"
+import MockProgramCard from "../components/kit/MockProgramCard.jsx"
+import ParameterView from "../components/kit/ParameterView.jsx"
+import ShortMasterCard from "../components/kit/ShortMasterCard"
+import MockShortMasterCard from "../components/kit/MockShortMasterCard"
+import Checkbox from "../components/kit/Form/Checkbox.jsx"
+import TransparentCollapsible from "../components/kit/Collapses/TransparentCollapsible.jsx"
+import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput"
+import debounce from "../helpers/debounce"
+import Select from "../components/kit/Form/Select.jsx"
+import {declination} from "../helpers/String.js"
 
 class Home extends React.Component {
     constructor(props) {
@@ -41,6 +41,9 @@ class Home extends React.Component {
             filterPopupOpen: false,
             preventLoading: false,
             map: undefined,
+            chosenSalonId: '',
+            preloadedSalons: {},
+
             pageCount: 1,
             foundCnt: 0,
             regions: [],
@@ -203,9 +206,9 @@ class Home extends React.Component {
 
                 this.addMapObjects(workers.results, map)
 
-                map.events.add('actionend', () => {
-                    this.performSearch(false)
-                })
+                // map.events.add('actionend', () => {
+                //     this.performSearch(false)
+                // })
 
                 window.map = map
 
@@ -230,16 +233,14 @@ class Home extends React.Component {
         map.geoObjects.removeAll()
 
         workers.map(worker => {
-            const pm = new window.ymaps.Placemark(worker.location.coordinates, {
-                // balloonContentBody: `<div style="background: red; color: #000; font-weight: bold;">${worker.name}</div>`
-            }, {
+            const pm = new window.ymaps.Placemark(worker.location.coordinates, {}, {
                 iconImageHref: '/icons/dot.svg',
                 iconLayout: 'default#image',
                 // balloonPanelMaxMapArea: Infinity,
-                // hideIconOnBalloonOpen: false,
+                hideIconOnBalloonOpen: false,
 
                 balloonCloseButton: false,
-                // balloonOffset: [75, -10],
+                balloonOffset: [75, -10],
                 balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
                     `${worker.name}`
                 )
@@ -255,7 +256,6 @@ class Home extends React.Component {
             })
 
             pm.events.add('mouseleave', () => {
-                console.log('leave')
                 pm.options.set('iconImageHref', '/icons/dot.svg')
                 pm.balloon.close()
             })
@@ -596,7 +596,8 @@ class Home extends React.Component {
 
                 <div bp={'grid'} style={{marginBottom: 24}}>
                     <div
-                        bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}>
+                        bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')} className={css.mapContainer}>
+                        <section className={css.chosenSalon}>карточка салона</section>
                         <div id={'mapView'} className={css.mapView}></div>
                     </div>
                     {(!this.props.router.query.map || 'false' === this.props.router.query.map) && this.state.workers.map((worker, index) => {

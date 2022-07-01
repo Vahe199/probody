@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed scroll">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/TextArea.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/TextArea.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/RedisHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/RedisHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,14 +145,7 @@
       <workItem from="1656508781419" duration="8329000" />
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
-      <workItem from="1656610820856" duration="10822000" />
-    </task>
-    <task id="LOCAL-00269" summary="added salon master view">
-      <created>1656055160430</created>
-      <option name="number" value="00269" />
-      <option name="presentableId" value="LOCAL-00269" />
-      <option name="project" value="LOCAL" />
-      <updated>1656055160430</updated>
+      <workItem from="1656610820856" duration="14597000" />
     </task>
     <task id="LOCAL-00270" summary="added salon master view">
       <created>1656058333235</created>
@@ -487,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656662842604</updated>
     </task>
-    <option name="localTasksCounter" value="318" />
+    <task id="LOCAL-00318" summary="fixed scroll">
+      <created>1656665083124</created>
+      <option name="number" value="00318" />
+      <option name="presentableId" value="LOCAL-00318" />
+      <option name="project" value="LOCAL" />
+      <updated>1656665083124</updated>
+    </task>
+    <option name="localTasksCounter" value="319" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
