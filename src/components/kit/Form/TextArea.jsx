@@ -99,9 +99,9 @@ export default class TextArea extends React.Component {
         const inputId = 'textarea-' + Numbers.random(0, 99999)
 
         return <label htmlFor={inputId}>
-            <div style={{paddingBottom: this.state.errorMessage ? 24 : 4}}
+            <div style={{paddingBottom: this.state.errorMessage ? 36 : 8}}
                  className={cnb(css['theme--' + theme], this.props.className)}>
-                <div
+                <div style={{marginBottom: 6}}
                     className={cnb(css.inputRoot, this.state.errorMessage.length ? css.errored : '', (this.state.locked || this.props.disabled) ? css.locked : '', this.props.variant === 'underline' ? css.underline : css.outlined)}>
                     <div className={css.label}>{this.props.label}</div>
                     <div className={'fit'}>
