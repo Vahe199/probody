@@ -237,6 +237,7 @@ export default class Search {
             const redisUnshapedResult = (await RedisHelper.ftSearchRaw('idx:worker', regionFilter, 'RETURN', '1', 'location')).splice(1)
 
             for(let i = 0; i < redisUnshapedResult.length; i += 2) {
+                console.log(redisUnshapedResult[i], redisUnshapedResult[i + 1])
                 workerLocations[redisUnshapedResult[i]] = redisUnshapedResult[i + 1].split(',').map(Number)
             }
 
