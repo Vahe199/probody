@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed scroll">
-      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed scroll" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,28 +138,7 @@
       <workItem from="1656508781419" duration="8329000" />
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
-      <workItem from="1656610820856" duration="15256000" />
-    </task>
-    <task id="LOCAL-00274" summary="bug fixes">
-      <created>1656140048825</created>
-      <option name="number" value="00274" />
-      <option name="presentableId" value="LOCAL-00274" />
-      <option name="project" value="LOCAL" />
-      <updated>1656140048825</updated>
-    </task>
-    <task id="LOCAL-00275" summary="bug fixes">
-      <created>1656140829126</created>
-      <option name="number" value="00275" />
-      <option name="presentableId" value="LOCAL-00275" />
-      <option name="project" value="LOCAL" />
-      <updated>1656140829126</updated>
-    </task>
-    <task id="LOCAL-00276" summary="bug fixes">
-      <created>1656140953540</created>
-      <option name="number" value="00276" />
-      <option name="presentableId" value="LOCAL-00276" />
-      <option name="project" value="LOCAL" />
-      <updated>1656140953540</updated>
+      <workItem from="1656610820856" duration="15587000" />
     </task>
     <task id="LOCAL-00277" summary="done crossplatform carousel">
       <created>1656149660796</created>
@@ -485,7 +462,28 @@
       <option name="project" value="LOCAL" />
       <updated>1656669724429</updated>
     </task>
-    <option name="localTasksCounter" value="323" />
+    <task id="LOCAL-00323" summary="fixed scroll">
+      <created>1656669798819</created>
+      <option name="number" value="00323" />
+      <option name="presentableId" value="LOCAL-00323" />
+      <option name="project" value="LOCAL" />
+      <updated>1656669798819</updated>
+    </task>
+    <task id="LOCAL-00324" summary="fixed scroll">
+      <created>1656670035593</created>
+      <option name="number" value="00324" />
+      <option name="presentableId" value="LOCAL-00324" />
+      <option name="project" value="LOCAL" />
+      <updated>1656670035593</updated>
+    </task>
+    <task id="LOCAL-00325" summary="fixed scroll">
+      <created>1656670065459</created>
+      <option name="number" value="00325" />
+      <option name="presentableId" value="LOCAL-00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1656670065459</updated>
+    </task>
+    <option name="localTasksCounter" value="326" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
