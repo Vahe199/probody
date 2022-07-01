@@ -204,7 +204,7 @@ class Home extends React.Component {
                     controls: []
                 }, {})
 
-                this.addMapObjects(workers.results, map)
+                this.addMapObjects(workers.workerLocations, map)
 
                 // map.events.add('actionend', () => {
                 //     this.performSearch(false)
@@ -220,7 +220,7 @@ class Home extends React.Component {
             if (!this.state.map) {
                 window.ymaps.ready(initMap.bind(this))
             } else {
-                this.addMapObjects(workers.results)
+                this.addMapObjects(workers.workerLocations)
             }
         })
     }

@@ -230,14 +230,14 @@ export default class Search {
             if (queryString.match(/@region:[\u0400-\u04FF]+/g)) {
                 regionFilter = queryString.match(/@region:[\u0400-\u04FF]+/g)[0].toLowerCase()
             } else {
-                regionFilter = 'астана'
+                regionFilter = 'алматы'
             }
 
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
                 results: await Worker.aggregate(workerAggregation),
                 count: searchResults[0],
-                workerLocations: queryString.match(/@region:[\u0400-\u04FF]+/g) ? (await RedisHelper.ftSearchRaw('idx:worker', regionFilter, 'RETURN', '1', 'location')).splice(1).filter((val, i) => (i + 1) % 2 === 0).map(val => val[1].split(',').map(Number)) : [],
+                workerLocations: (await RedisHelper.ftSearchRaw('idx:worker', regionFilter, 'RETURN', '1', 'location')).splice(1).filter((val, i) => (i + 1) % 2 === 0).map(val => val[1].split(',').map(Number)),
                 reviews: await Review.aggregate([{
                     $match: {
                         target: {
