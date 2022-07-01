@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed scroll">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/RedisHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/RedisHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/range.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,21 +140,7 @@
       <workItem from="1656508781419" duration="8329000" />
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
-      <workItem from="1656610820856" duration="14597000" />
-    </task>
-    <task id="LOCAL-00270" summary="added salon master view">
-      <created>1656058333235</created>
-      <option name="number" value="00270" />
-      <option name="presentableId" value="LOCAL-00270" />
-      <option name="project" value="LOCAL" />
-      <updated>1656058333235</updated>
-    </task>
-    <task id="LOCAL-00271" summary="added salon master view">
-      <created>1656058431678</created>
-      <option name="number" value="00271" />
-      <option name="presentableId" value="LOCAL-00271" />
-      <option name="project" value="LOCAL" />
-      <updated>1656058431678</updated>
+      <workItem from="1656610820856" duration="14912000" />
     </task>
     <task id="LOCAL-00272" summary="added reviews block for unrated">
       <created>1656063691508</created>
@@ -490,7 +471,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656665083124</updated>
     </task>
-    <option name="localTasksCounter" value="319" />
+    <task id="LOCAL-00319" summary="fixed scroll">
+      <created>1656669224957</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1656669224957</updated>
+    </task>
+    <task id="LOCAL-00320" summary="fixed scroll">
+      <created>1656669381068</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1656669381068</updated>
+    </task>
+    <option name="localTasksCounter" value="321" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

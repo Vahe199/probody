@@ -231,7 +231,7 @@ export default class Search {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
                 results: await Worker.aggregate(workerAggregation),
                 count: searchResults[0],
-                workerLocations: queryString.includes('@region:') ? (await RedisHelper.ftSearchRaw('idx:worker', queryString.match(/@region:(\w+)/g)[0], 'RETURN', '1', 'location')).splice(1).filter(i => (i + 1) % 3 === 0) : [],
+                workerLocations: queryString.includes('@region:') ? (await RedisHelper.ftSearchRaw('idx:worker', queryString.match(/@region:[\u0400-\u04FF]+/g)[0].toLowerCase(), 'RETURN', '1', 'location')).splice(1).filter(i => (i + 1) % 3 === 0) : [],
                 reviews: await Review.aggregate([{
                     $match: {
                         target: {
