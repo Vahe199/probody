@@ -225,7 +225,7 @@ export default class Search {
                 )
             }
 
-            console.log((await RedisHelper.ftSearchRaw('idx:worker', queryString.match(/@region:[\u0400-\u04FF]+/g)[0].toLowerCase(), 'RETURN', '1', 'location')))
+            console.log(queryString)
 
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
