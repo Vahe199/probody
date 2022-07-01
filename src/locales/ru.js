@@ -16,12 +16,41 @@ export default {
     whatsapp: 'WhatsApp',
     showMore: 'Показать еще',
     siteStatsTitle: 'Общий рейтинг салонов и индивидуальных мастеров массажа',
-    seoText1: 'Halibut halosaur bluegill zebrafish lemon shark sand tiger ponyfish saury Atlantic salmon squawfish, gouramie flathead catfish. Trunkfish weasel shark Atlantic trout roosterfish peacock flounder cod, bull shark roundhead jewelfish three-toothed puffer candlefish, silver hake splitfin yellowtail snapper. Sea chub wels catfish; dorab golden loach filefish, walking catfish: lizardfish zebra danio. Kokopu spotted dogfish Canthigaster rostrata pipefish golden trout, waryfish North American freshwater catfish warbonnet cichlid coolie loach bigscale fish arapaima rohu. Trevally bocaccio sand lance pilot fish Ganges shark tilefish lefteye flounder. Snake mudhead bonytail chub; greenling louvar saury, Black swallower angelfish kokopu! Plownose chimaera gianttail plownose chimaera pompano Sundaland noodlefish thresher shark alooh spinyfin. Alfonsino scythe butterfish Colorado squawfish flagblenny elver pike morid cod.\n' +
-        '<br/><br/>' +
-        'Black sea bass: bangus lenok shiner wallago alewife yellowmargin triggerfish jewel tetra oceanic flyingfish. Monkfish, eel cod yellowbanded perch velvet catfish kokanee lefteye flounder viperfish zebra shark zebra pleco, dhufish! Common tunny redtooth triggerfish porbeagle shark Owens pupfish righteye flounder regal whiptail catfish slender barracudina bigmouth buffalo: ocean sunfish. Mahseer stickleback Bombay duck northern pike Rabbitfish scup sand knifefish. Cusk-eel, pencilsmelt darter African lungfish catla kappy Rabbitfish ribbon sawtail fish climbing perch yellow weaver. Knifefish hammerhead shark bandfish pilchard Asian carps sergeant major, cuchia pumpkinseed pejerrey bala shark. Pygmy sunfish cavefish grenadier squawfish Mexican golden trout! Anglerfish duckbilled barracudina molly sheepshead sheepshead minnow Black triggerfish: blue shark capelin barreleye walking catfish.\n',
-    seoText2: 'Cisco zebra bullhead shark sawfish platyfish snake mackerel orange roughy, "chimaera kissing gourami mola spadefish lined sole," roosterfish. Paddlefish great white shark tui chub armorhead; muskellunge tui chub ballan wrasse, porbeagle shark. Crevice kelpfish ilisha cepalin spiny basslet porbeagle shark oceanic flyingfish pikeblenny yellowtail kingfish redlip blenny, bluntnose minnow! Yellowfin cutthroat trout seamoth cutthroat trout grayling, black dragonfish kaluga; zebra bullhead shark striped bass. Upside-down catfish beardfish halosaur dojo loach threadfin bream yellow moray labyrinth fish lemon sole. African lungfish, candiru marlin tench sleeper shark cookie-cutter shark. Norwegian Atlantic salmon sand tilefish climbing catfish.\n' +
-        '<br/><br/>' +
-        'Sea raven darter flathead springfish, walu sandperch, scup: zander, lake trout porbeagle shark ronquil, coolie loach nase golden dojo zebra pleco." Sand stargazer yellowfin tuna pelican gulper orangestriped triggerfish flying gurnard yellowbanded perch speckled trout oceanic flyingfish marlin; yellowfin pike wahoo fingerfish blue eye, "wasp fish silver carp." Cutlassfish; lizardfish; African glass catfish Atlantic herring spiderfish dogfish shark pupfish. Carpsucker mackerel shark rock cod starry flounder lined sole mahseer kingfish mudsucker tench archerfish.\n',
+    seoText1: '<h2>Качественная  платформа боди массажа</h2>' +
+        ' Рады приветствовать Вас на сервисе поиска мастеров боди массажа в Алматы, Астане, Караганде, других городах Казахстана и не только. Здесь Вы найдете мастера, которому возможно захотите доверить одно из самых дорогих, что есть у человека - тело. Ведь боди массаж это не только о расслаблении, но еще и о состоянии Вашего здоровья. ' +
+        '<br /><br />' +
+        '<h3>Чем мы отличаемся от других платформ боди массажа в Алматы</h3>' +
+        '1. Только боди массаж' +
+        '<br />' +
+        'На нашей платформе Вы можете найти исключительно массаж и спа процедуры. Мы не рекламируем секс услуги ни за какие деньги, и размещаем здесь только тех мастеров и спа салоны, которые не предлагают клиентам эскорт. ' +
+        '<br /><br />' +
+        '2. Все анкеты реальные' +
+        '<br />' +
+        'На сайте каждый мастер или мужской спа салон размещают исключительно свои реальные фотографии. Никакого фотошопа, стоковых изображений и прочих хитростей. ' +
+        '<br /><br />' +
+        '3. Личная проверка салонов' +
+        '<br />' +
+        'Все спа центры в Алматы и других городах лично посещает наш менеджер, чтобы убедиться в порядочности заведения. ' +
+        '<br /><br />' +
+        '4. Современный дизайн и функционал' +
+        '<br />' +
+        'Благодаря интуитивно понятному интерфейсу Вы сможете быстро найти подходящего мастера, записаться на боди массаж.' +
+        '<br /><br />' +
+        '5. Большая база' +
+        '<br />' +
+        'Мы постоянно пополняем базу мастеров и мужских спа салонов в Казахстане и странах Ближнего Востока, чтобы наши клиенты всегда имели большой спектр выбора. ' +
+        '<br /><br />' +
+        'ProBody - честная и прозрачная платформа, объединяющая мастеров массажа и клиентов. Мы - надежный посредник, который старается чтобы Вы получили высокое качестве любой услуги, выбранной Вами на платформе.',
+    seoText2: '<h2>Почему мы лучше, чем эскорт сайты?</h2>' +
+        '<p class="withTab">Массаж - в первую очередь оздоровительная процедура, а во вторую расслабляющая. Зачастую девушки на эскорт платформах не проходят никакие курсы массажистов, просто разминая как-нибудь спину.</p>' +
+        '<p class="withTab">Мы же подбираем мастеров, которые предоставляют качественный мужской массаж в Алматы, размещающиеся у нас мастера, должны:</p>' +
+        '- разбираться в мужской анатомии;<br />' +
+        '- уметь делать профессиональный массаж;<br />' +
+        '- иметь базовые знания в области дерматологии;<br />' +
+        '- знать как правильно работать с мышечными зажимами и спазмами;<br />' +
+        '- работать в стерильных условиях.<br /><br />' +
+        '<p class="withTab">Наша платформа объединяет профессиональных мастеров, которые знают что и зачем они делают. И именно поэтому, лучше искать специалистов у нас, чем на эскорт сайтах.</p>' +
+        '<p class="withTab">У нас Вы можете выбрать профессионалов, которые работают в хороших заведениях.</p>',
     avgRating: 'средняя оценка',
     totalRatings: 'всего оценок',
     totalReviews: 'всего отзывов',

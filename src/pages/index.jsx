@@ -737,10 +737,10 @@ class Home extends React.Component {
                                     </div>
 
                                     {worker.kind === 'salon' ?
-                                        <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
-                                            <h2 style={{marginBottom: 12}}>{t('masseuses')}</h2>
+                                        <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
+                                            <h2 style={{marginBottom: 12, paddingLeft: isMobile ? 16 : 0}}>{t('masseuses')}</h2>
 
-                                            <div className={css.invisibleScroll}>
+                                            <div className={css.invisibleScroll} style={{paddingLeft: isMobile ? 16 : 0}}>
                                                 {worker.masters.slice(0, 4).map((master, i) => <ShortMasterCard
                                                     name={master.name}
                                                     link={{
@@ -768,10 +768,10 @@ class Home extends React.Component {
                                             <ParameterView {...worker.characteristics} />
                                         </div>}
 
-                                    <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0}}>
-                                        <h2 style={{marginBottom: 12}}>{t('programs')}</h2>
+                                    <div bp={'12 7@md'} className={css.padded} style={{paddingRight: 0, paddingLeft: isMobile ? 0 : 16}}>
+                                        <h2 style={{marginBottom: 12, paddingLeft: isMobile ? 16 : 0}}>{t('programs')}</h2>
 
-                                        <div className={css.invisibleScroll}>
+                                        <div className={css.invisibleScroll} style={{paddingLeft: isMobile ? 16 : 0}}>
                                             {worker.programs.slice(0, 3).map((program, i) => <ProgramCard
                                                 link={{
                                                     query: Object.assign({}, this.props.router.query, {

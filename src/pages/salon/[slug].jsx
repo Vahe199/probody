@@ -682,7 +682,7 @@ class SalonView extends React.Component {
                                              defaultOpen={i === 0}>
                                     <div style={{
                                         marginTop: 18,
-                                        padding: (isMobile && sectionName === 'photos') ? '0 0 0 16px' : '0 16px'
+                                        padding: (isMobile && sectionName === 'photos') ? 0 : '0 16px'
                                     }}>
                                         {additionalSections[sectionName]}
 

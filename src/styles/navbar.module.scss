@@ -32,7 +32,7 @@
       @include themify() {
         background-color: t('line-color');
       }
-      margin: 24px 24px 0 24px;
+      margin: 16px 16px 0 16px;
     }
   }
 }
@@ -50,4 +50,10 @@
   }
 
   margin-right: 4px;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 16px 0;
+  }
 }

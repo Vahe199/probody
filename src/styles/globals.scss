@@ -36,6 +36,13 @@ $heading-scale: 8;
   }
 }
 
+p.withTab::before {
+  display: inline-block;
+  content: ' ';
+  user-select: none;
+  width: 16px;
+}
+
 input, textarea, select {
   border: none;
   min-width: 0;
