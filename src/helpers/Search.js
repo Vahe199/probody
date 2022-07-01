@@ -225,7 +225,8 @@ export default class Search {
                 )
             }
 
-            let regionFilter = ''
+            let regionFilter = '',
+                workerLocations = {}
 
             if (queryString.match(/@region:[\u0400-\u04FF]+/g)) {
                 regionFilter = queryString.match(/@region:[\u0400-\u04FF]+/g)[0].toLowerCase()
@@ -233,11 +234,17 @@ export default class Search {
                 regionFilter = 'алматы'
             }
 
+            const redisUnshapedResult = (await RedisHelper.ftSearchRaw('idx:worker', regionFilter, 'RETURN', '1', 'location')).splice(1)
+
+            for(let i = 0; i < redisUnshapedResult.length; i += 2) {
+                workerLocations[redisUnshapedResult[i]] = redisUnshapedResult[i + 1].split(',').map(Number)
+            }
+
             return {
                 pageCount: Math.ceil(searchResults[0] / limit), //searchResults[0] is total count
                 results: await Worker.aggregate(workerAggregation),
                 count: searchResults[0],
-                workerLocations: (await RedisHelper.ftSearchRaw('idx:worker', regionFilter, 'RETURN', '1', 'location')).splice(1).filter((val, i) => (i + 1) % 2 === 0).map(val => val[1].split(',').map(Number)),
+                workerLocations,
                 reviews: await Review.aggregate([{
                     $match: {
                         target: {
