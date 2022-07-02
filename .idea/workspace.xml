@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed scroll">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added &quot;search near me&quot; btn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/RadioGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/RadioGroup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,14 +145,7 @@
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
       <workItem from="1656610820856" duration="18447000" />
-      <workItem from="1656705357956" duration="3109000" />
-    </task>
-    <task id="LOCAL-00287" summary="fixing faq backend">
-      <created>1656171798500</created>
-      <option name="number" value="00287" />
-      <option name="presentableId" value="LOCAL-00287" />
-      <option name="project" value="LOCAL" />
-      <updated>1656171798500</updated>
+      <workItem from="1656705357956" duration="5544000" />
     </task>
     <task id="LOCAL-00288" summary="fixing faq backend">
       <created>1656171971256</created>
@@ -490,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656674471156</updated>
     </task>
-    <option name="localTasksCounter" value="336" />
+    <task id="LOCAL-00336" summary="added &quot;search near me&quot; btn">
+      <created>1656709109303</created>
+      <option name="number" value="00336" />
+      <option name="presentableId" value="LOCAL-00336" />
+      <option name="project" value="LOCAL" />
+      <updated>1656709109303</updated>
+    </task>
+    <option name="localTasksCounter" value="337" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +521,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing changes" />
     <MESSAGE value="added tg button" />
     <MESSAGE value="added mobile salon page" />
     <MESSAGE value="fixed autofocus" />
@@ -546,6 +545,7 @@
     <MESSAGE value="done desktop modal" />
     <MESSAGE value="added coords to redisearch" />
     <MESSAGE value="fixed scroll" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed scroll" />
+    <MESSAGE value="added &quot;search near me&quot; btn" />
+    <option name="LAST_COMMIT_MESSAGE" value="added &quot;search near me&quot; btn" />
   </component>
 </project>

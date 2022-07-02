@@ -262,6 +262,10 @@ class Home extends React.Component {
                 pm.balloon.open()
             })
 
+            pm.events.add('click', () => {
+                this.chooseSalonOnMap(id)
+            })
+
             pm.events.add('mouseleave', () => {
                 pm.options.set('iconImageHref', '/icons/dot.svg')
                 pm.balloon.close()
@@ -275,6 +279,23 @@ class Home extends React.Component {
 
         map.setBounds(clusterer.getBounds(), {
             checkZoomRange: true
+        })
+    }
+
+    chooseSalonOnMap(salonId) {
+        if (this.state.preloadedSalons[salonId]) {
+            return this.setState({
+                chosenSalonId: salonId
+            })
+        }
+
+        APIRequests.getMapWorker(salonId).then(salon => {
+            this.setState({
+                preloadedSalons: {
+                    ...this.state.preloadedSalons,
+                    [salonId]: salon
+                }
+            })
         })
     }
 
@@ -370,7 +391,8 @@ class Home extends React.Component {
     async searchNearMe() {
         try {
             this.state.map.setCenter((await window.ymaps.geolocation.get()).geoObjects.position, 14)
-        } catch (e) {}
+        } catch (e) {
+        }
     }
 
     loadMore() {
@@ -445,18 +467,20 @@ class Home extends React.Component {
                     </div>
                     <div bp={'12 8@md'} className={'responsive-content'}>
                         <div className="flex fit justify-end">
-                            <div bp={'hide ' + ((this.props.router.query.map && 'true' === this.props.router.query.map) ? 'show' : 'hide') + '@md'}>
-                                <Button className={css.searchNearMeBtn} onClick={this.searchNearMe}>{t('searchNearMe')}</Button>
+                            <div
+                                bp={'hide ' + ((this.props.router.query.map && 'true' === this.props.router.query.map) ? 'show' : 'hide') + '@md'}>
+                                <Button className={css.searchNearMeBtn}
+                                        onClick={this.searchNearMe}>{t('searchNearMe')}</Button>
                             </div>
 
-                                <div className={css.switchRoot}>
-                                    <div
-                                        className={(!this.props.router.query.map || 'false' === this.props.router.query.map) ? css.active : ''}
-                                        onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{isMobile ? t('listMobile') : t('list')}</div>
-                                    <div
-                                        className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
-                                        onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{isMobile ? t('map') : t('mapPC')}</div>
-                                </div>
+                            <div className={css.switchRoot}>
+                                <div
+                                    className={(!this.props.router.query.map || 'false' === this.props.router.query.map) ? css.active : ''}
+                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: false})})}>{isMobile ? t('listMobile') : t('list')}</div>
+                                <div
+                                    className={(this.props.router.query.map && 'true' === this.props.router.query.map) ? css.active : ''}
+                                    onClick={() => this.props.router.push({query: Object.assign({}, this.props.router.query, {map: true})})}>{isMobile ? t('map') : t('mapPC')}</div>
+                            </div>
 
                             <div ref={this.state.handleRef}>
                                 <Button className={css.filterButton} color={'secondary'}
@@ -622,7 +646,20 @@ class Home extends React.Component {
                     <div
                         bp={cnb('12', (this.props.router.query.map && 'true' === this.props.router.query.map) ? '' : 'hide')}
                         className={css.mapContainer}>
-                        <section className={css.chosenSalon}>карточка салона</section>
+
+                        {(() => {
+                            const chosenSalon = this.state.preloadedSalons[this.state.chosenSalonId]
+
+                            return chosenSalon && <section className={css.chosenSalon}>
+                                <ImageCarousel link={{
+                                    query: Object.assign({}, this.props.router.query, {
+                                        salonTab: 'photos'
+                                    }),
+                                    pathname: '/salon/' + chosenSalon.slug
+                                }} pics={chosenSalon.photos}/>
+                            </section>
+                        })()}
+
                         <div id={'mapView'} className={css.mapView}></div>
                     </div>
                     {(!this.props.router.query.map || 'false' === this.props.router.query.map) && this.state.workers.map((worker, index) => {
