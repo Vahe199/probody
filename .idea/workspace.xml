@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added &quot;search near me&quot; btn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/ShortMasterCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ShortMasterCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,35 +144,7 @@
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
       <workItem from="1656610820856" duration="18447000" />
-      <workItem from="1656705357956" duration="14942000" />
-    </task>
-    <task id="LOCAL-00294" summary="done faq">
-      <created>1656248556164</created>
-      <option name="number" value="00294" />
-      <option name="presentableId" value="LOCAL-00294" />
-      <option name="project" value="LOCAL" />
-      <updated>1656248556164</updated>
-    </task>
-    <task id="LOCAL-00295" summary="added showmore btn">
-      <created>1656260026759</created>
-      <option name="number" value="00295" />
-      <option name="presentableId" value="LOCAL-00295" />
-      <option name="project" value="LOCAL" />
-      <updated>1656260026759</updated>
-    </task>
-    <task id="LOCAL-00296" summary="added showmore btn">
-      <created>1656321527558</created>
-      <option name="number" value="00296" />
-      <option name="presentableId" value="LOCAL-00296" />
-      <option name="project" value="LOCAL" />
-      <updated>1656321527558</updated>
-    </task>
-    <task id="LOCAL-00297" summary="added showmore btn">
-      <created>1656324539182</created>
-      <option name="number" value="00297" />
-      <option name="presentableId" value="LOCAL-00297" />
-      <option name="project" value="LOCAL" />
-      <updated>1656324539182</updated>
+      <workItem from="1656705357956" duration="17119000" />
     </task>
     <task id="LOCAL-00298" summary="added showmore btn">
       <created>1656325250376</created>
@@ -491,7 +461,35 @@
       <option name="project" value="LOCAL" />
       <updated>1656750656768</updated>
     </task>
-    <option name="localTasksCounter" value="343" />
+    <task id="LOCAL-00343" summary="added &quot;search near me&quot; btn">
+      <created>1656758057971</created>
+      <option name="number" value="00343" />
+      <option name="presentableId" value="LOCAL-00343" />
+      <option name="project" value="LOCAL" />
+      <updated>1656758057971</updated>
+    </task>
+    <task id="LOCAL-00344" summary="added &quot;search near me&quot; btn">
+      <created>1656758139766</created>
+      <option name="number" value="00344" />
+      <option name="presentableId" value="LOCAL-00344" />
+      <option name="project" value="LOCAL" />
+      <updated>1656758139767</updated>
+    </task>
+    <task id="LOCAL-00345" summary="added &quot;search near me&quot; btn">
+      <created>1656758189103</created>
+      <option name="number" value="00345" />
+      <option name="presentableId" value="LOCAL-00345" />
+      <option name="project" value="LOCAL" />
+      <updated>1656758189103</updated>
+    </task>
+    <task id="LOCAL-00346" summary="added &quot;search near me&quot; btn">
+      <created>1656758269502</created>
+      <option name="number" value="00346" />
+      <option name="presentableId" value="LOCAL-00346" />
+      <option name="project" value="LOCAL" />
+      <updated>1656758269502</updated>
+    </task>
+    <option name="localTasksCounter" value="347" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -131,6 +131,7 @@ export default {
     vacancies: 'Вакансии',
     mainPage: 'Главная',
     record: 'Запись',
+    open: 'Открыть',
     workHours: 'Часы работы',
     address: 'Адрес',
     salon: 'Салон',

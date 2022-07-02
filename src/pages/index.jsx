@@ -400,7 +400,7 @@ class Home extends React.Component {
 
     async searchNearMe() {
         try {
-            this.state.map.panTo((await window.ymaps.geolocation.get()).geoObjects.position, 14)
+            this.state.map.panTo((await window.ymaps.geolocation.get()).geoObjects.position)
         } catch (e) {
         }
     }
@@ -670,36 +670,58 @@ class Home extends React.Component {
                                     }} pics={chosenSalon.worker.photos} height={240}/>
                                 </div>
                                 <div className={css.content}>
-<div className="flex justify-between">
-    <div>
-        {chosenSalon.worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
-            <Icon name={'round_check'} className={css.verifiedIcon}/>
+                                    <div className="flex justify-between">
+                                        <div>
+                                            {chosenSalon.worker.isVerified &&
+                                                <div className={cnb(css.caption, 'non-selectable')}>
+                                                    <Icon name={'round_check'} className={css.verifiedIcon}/>
 
-            <span>{t('verified')}</span>
-        </div>}
+                                                    <span>{t('verified')}</span>
+                                                </div>}
 
-        <p className="subtitle2">{chosenSalon.worker.name}</p>
+                                            <p className="subtitle2">{chosenSalon.worker.name}</p>
 
-        <p style={{marginTop: 16}}>{chosenSalon.worker.address}</p>
+                                            <p style={{marginTop: 16}}>{chosenSalon.worker.address}</p>
 
-        {chosenSalon.review && <div className="flex" style={{gap: 24}}>
-            <div className={css.avgRating}>
-                <Icon name={'star'}/>
-                <span>{chosenSalon.review.avg.toFixed(1)}</span>
-            </div>
+                                            {chosenSalon.review[0] && <div className={css.reviewSection}>
+                                                <div>
+                                                    <Icon name={'star'}/>
+                                                    <span>{chosenSalon.review[0].avg.toFixed(1)}</span>
+                                                </div>
 
-            <div className={css.avgRating}>
-                <Icon name={'star'}/>
-                <span>{chosenSalon.review.avg.toFixed(1)}</span>
-            </div>
-        </div>}
-    </div>
-    <div>
-        <Icon name={'close'} className={css.closeIcon} onClick={() => this.setState({
-            chosenSalonId: ''
-        })} />
-    </div>
-</div>
+                                                <div>
+                                                    {chosenSalon.review[0].count} {declination(chosenSalon.review[0].count, t('reviewDeclination'))}
+                                                </div>
+                                            </div>}
+                                        </div>
+                                        <div>
+                                            <Icon name={'close'} className={css.closeIcon}
+                                                  onClick={() => this.setState({
+                                                      chosenSalonId: ''
+                                                  })}/>
+                                        </div>
+                                    </div>
+
+                                    <div className={css.buttonLayout}>
+                                        <div><a href={'tel:' + parsePhoneNumber(chosenSalon.worker.phone).number}>
+                                            <Button><Icon name={'call'}/></Button>
+                                        </a></div>
+                                        <div><a target="_blank"
+                                                href={'https://wa.me/' + parsePhoneNumber(chosenSalon.worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + chosenSalon.worker.name + '"')}>
+                                            <Button color={'tertiary'}>
+                                                <Icon name={'wa_light'}/>
+                                            </Button>
+                                        </a></div>
+                                        {chosenSalon.worker.messengers.tg && <div><a target="_blank"
+                                                                         href={'https://t.me/' + chosenSalon.worker.messengers.tg.replace('@', '')}>
+                                            <Button color={'tertiary'}>
+                                                <Icon name={'tg_light'}/>
+                                            </Button>
+                                        </a></div>}
+                                        <Link href={'/salon/' + chosenSalon.worker.slug}>
+                                            <Button color={'tertiary'}>{t('open')}</Button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </section>
                         })()}
