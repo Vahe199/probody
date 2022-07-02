@@ -41,6 +41,7 @@ class Home extends React.Component {
             filterPopupOpen: false,
             preventLoading: false,
             map: undefined,
+            workerLocations: {},
             chosenSalonId: '',
             preloadedSalons: {},
 
@@ -189,7 +190,8 @@ class Home extends React.Component {
             this.setState({
                 pageCount: workers.pageCount,
                 workers: workers.results,
-                foundCnt: workers.count
+                foundCnt: workers.count,
+                workerLocations: workers.workerLocations
             });
 
             const initMap = () => {
@@ -238,7 +240,7 @@ class Home extends React.Component {
                     size: [40, 40],
                     offset: [-20, -20]
                 }],
-            clusterNumbers: [1000]
+                clusterNumbers: [1000]
                 // clusterHideIconOnBalloonOpen: false,
                 // geoObjectHideIconOnBalloonOpen: false
             }),
@@ -293,6 +295,8 @@ class Home extends React.Component {
                 chosenSalonId: salonId
             })
         }
+
+        this.state.map.panTo(this.state.workerLocations[salonId])
 
         APIRequests.getMapWorker(salonId).then(salon => {
             this.setState({
@@ -396,7 +400,7 @@ class Home extends React.Component {
 
     async searchNearMe() {
         try {
-            this.state.map.setCenter((await window.ymaps.geolocation.get()).geoObjects.position, 14)
+            this.state.map.panTo((await window.ymaps.geolocation.get()).geoObjects.position, 14)
         } catch (e) {
         }
     }
@@ -657,12 +661,46 @@ class Home extends React.Component {
                             const chosenSalon = this.state.preloadedSalons[this.state.chosenSalonId]
 
                             return chosenSalon && <section className={css.chosenSalon}>
-                                <ImageCarousel link={{
-                                    query: Object.assign({}, this.props.router.query, {
-                                        salonTab: 'photos'
-                                    }),
-                                    pathname: '/salon/' + chosenSalon.worker.slug
-                                }} pics={chosenSalon.worker.photos}/>
+                                <div bp={'hide show@md'}>
+                                    <ImageCarousel link={{
+                                        query: Object.assign({}, this.props.router.query, {
+                                            salonTab: 'photos'
+                                        }),
+                                        pathname: '/salon/' + chosenSalon.worker.slug
+                                    }} pics={chosenSalon.worker.photos} height={240}/>
+                                </div>
+                                <div className={css.content}>
+<div className="flex justify-between">
+    <div>
+        {chosenSalon.worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
+            <Icon name={'round_check'} className={css.verifiedIcon}/>
+
+            <span>{t('verified')}</span>
+        </div>}
+
+        <p className="subtitle2">{chosenSalon.worker.name}</p>
+
+        <p style={{marginTop: 16}}>{chosenSalon.worker.address}</p>
+
+        {chosenSalon.review && <div className="flex" style={{gap: 24}}>
+            <div className={css.avgRating}>
+                <Icon name={'star'}/>
+                <span>{chosenSalon.review.avg.toFixed(1)}</span>
+            </div>
+
+            <div className={css.avgRating}>
+                <Icon name={'star'}/>
+                <span>{chosenSalon.review.avg.toFixed(1)}</span>
+            </div>
+        </div>}
+    </div>
+    <div>
+        <Icon name={'close'} className={css.closeIcon} onClick={() => this.setState({
+            chosenSalonId: ''
+        })} />
+    </div>
+</div>
+                                </div>
                             </section>
                         })()}
 

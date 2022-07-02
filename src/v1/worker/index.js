@@ -283,7 +283,7 @@ router.get('/:id/map', async (req, res) => {
 
         return res.json({
             worker,
-            reviews: await Review.aggregate([{
+            review: await Review.aggregate([{
                 $match: {
                     target: worker._id
                 }

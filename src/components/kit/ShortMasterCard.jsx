@@ -20,7 +20,7 @@ export default class ShortMasterCard extends React.Component {
 
         return <div className={css['theme--' + theme]}><Link href={this.props.link}>
             <div
-                style={{backgroundImage: 'linear-gradient(25deg, #181818 0%, #ffffffff 30%, #ffffffff 70%, #181818 100%), url(' + this.props.pic + ')'}}
+                style={{backgroundImage: 'linear-gradient(25deg, #181818 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, #181818 100%), url(' + this.props.pic + ')'}}
                 className={css.root}>
             <span style={{alignSelf: 'flex-end'}}>
                 <Icon name={'pic'}/>

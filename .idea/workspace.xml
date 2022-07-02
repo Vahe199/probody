@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added &quot;search near me&quot; btn">
-      <change afterPath="$PROJECT_DIR$/src/public/icons/cluster.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/RadioGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/RadioGroup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/ShortMasterCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ShortMasterCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,14 +146,7 @@
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
       <workItem from="1656610820856" duration="18447000" />
-      <workItem from="1656705357956" duration="8885000" />
-    </task>
-    <task id="LOCAL-00293" summary="done faq">
-      <created>1656177051874</created>
-      <option name="number" value="00293" />
-      <option name="presentableId" value="LOCAL-00293" />
-      <option name="project" value="LOCAL" />
-      <updated>1656177051874</updated>
+      <workItem from="1656705357956" duration="14942000" />
     </task>
     <task id="LOCAL-00294" summary="done faq">
       <created>1656248556164</created>
@@ -490,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656746933962</updated>
     </task>
-    <option name="localTasksCounter" value="342" />
+    <task id="LOCAL-00342" summary="added &quot;search near me&quot; btn">
+      <created>1656750656768</created>
+      <option name="number" value="00342" />
+      <option name="presentableId" value="LOCAL-00342" />
+      <option name="project" value="LOCAL" />
+      <updated>1656750656768</updated>
+    </task>
+    <option name="localTasksCounter" value="343" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
