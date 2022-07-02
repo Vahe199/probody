@@ -297,7 +297,7 @@ router.get('/:id/map', async (req, res) => {
                         $count: {}
                     }
                 }
-            }])
+            }])[0]
         })
     } catch (e) {
         res.status(500).json({
