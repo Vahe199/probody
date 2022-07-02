@@ -297,7 +297,7 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
                         $count: {}
                     }
                 }
-            }]))[0]
+            }]))
         })
     } catch (e) {
         res.status(500).json({
