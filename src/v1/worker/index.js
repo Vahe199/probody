@@ -283,7 +283,7 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
 
         return res.json({
             worker,
-            review: await Review.aggregate([{
+            review: (await Review.aggregate([{
                 $match: {
                     target: worker._id
                 }
@@ -297,7 +297,7 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
                         $count: {}
                     }
                 }
-            }])
+            }]))[0]
         })
     } catch (e) {
         res.status(500).json({
