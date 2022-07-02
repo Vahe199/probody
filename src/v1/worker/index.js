@@ -281,7 +281,8 @@ router.get('/:id/map', async (req, res) => {
             })
         }
 
-        return res.json(Object.assign({}, worker, {
+        return res.json({
+            worker,
             reviews: await Review.aggregate([{
                 $match: {
                     target: worker._id
@@ -297,7 +298,7 @@ router.get('/:id/map', async (req, res) => {
                     }
                 }
             }])[0]
-        }))
+        })
     } catch (e) {
         res.status(500).json({
             message: "Internal Server Error"
