@@ -232,8 +232,13 @@ class Home extends React.Component {
         map.geoObjects.removeAll()
 
         const clusterer = new ymaps.Clusterer({
-                preset: 'islands#invertedVioletClusterIcons',
                 groupByCoordinates: false,
+                clusterIcons: [{
+                    href: '/icons/cluster.svg',
+                    size: [40, 40],
+                    offset: [-20, -20]
+                }],
+            clusterNumbers: [1000]
                 // clusterHideIconOnBalloonOpen: false,
                 // geoObjectHideIconOnBalloonOpen: false
             }),
@@ -294,7 +299,8 @@ class Home extends React.Component {
                 preloadedSalons: {
                     ...this.state.preloadedSalons,
                     [salonId]: salon
-                }
+                },
+                chosenSalonId: salonId
             })
         })
     }
@@ -655,8 +661,8 @@ class Home extends React.Component {
                                     query: Object.assign({}, this.props.router.query, {
                                         salonTab: 'photos'
                                     }),
-                                    pathname: '/salon/' + chosenSalon.slug
-                                }} pics={chosenSalon.photos}/>
+                                    pathname: '/salon/' + chosenSalon.worker.slug
+                                }} pics={chosenSalon.worker.photos}/>
                             </section>
                         })()}
 
@@ -919,14 +925,14 @@ class Home extends React.Component {
                 </div>
 
                 <div className="flex justify-center">
-                    {((Number(this.props.router.query.page) !== this.state.pageCount) && !this.state.preventLoading && this.state.workers.length > 0) &&
+                    {((Number(this.props.router.query.page) !== this.state.pageCount) && !this.state.preventLoading && this.state.workers.length > 0 && (!this.props.router.query.map || 'false' === this.props.router.query.map)) &&
                         <Button className={css.showMoreBtn} size={'large'} onClick={this.loadMore}>
                             <span className={'va-middle'}>{t('showNSalonsMore', 5)}</span>
                             <Icon name={'refresh'}/>
                         </Button>}
                 </div>
 
-                {(this.state.pageCount > 1 && !this.state.mapView) &&
+                {(this.state.pageCount > 1 && (!this.props.router.query.map || 'false' === this.props.router.query.map)) &&
                     <Paginator style={{marginBottom: 24}} page={this.getPage()}
                                onChange={this.handlePageChange}
                                pageCnt={this.state.pageCount}/>}
