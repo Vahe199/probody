@@ -332,5 +332,12 @@ export default {
     whatsYourName: 'Как Вас зовут?',
     youPostedReview: 'Вы оставили отзыв',
     itWillBePublishedAfterModeration: 'Он будет опубликован сразу после прохождения модерации.',
-    searchNearMe: 'Искать рядом со мной'
+    searchNearMe: 'Искать рядом со мной',
+    schedule_flexible: 'Гибкий',
+    schedule_period: 'Сменный',
+    schedule_contract: 'Договорной',
+    schedule_constant: 'Полный',
+    employment_full: 'Полная занятость',
+    employment_part: 'Частичная занятость',
+    employment_temp: 'Временная занятость',
 }

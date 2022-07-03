@@ -42,6 +42,11 @@ const VacancySchema = new Schema({
     },
     employment: {
         type: [String],
+        enum: ['full', 'part', 'temp'],
+        required: true
+    },
+    workSchedule: {
+        type: [String],
         enum: ['flexible', 'period', 'contract', 'constant'],
         required: true
     },
