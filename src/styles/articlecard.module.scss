@@ -66,12 +66,12 @@
 }
 
 .vacancyInfo {
-  padding: 16px;
+  padding: 20px;
 }
 
 @media (max-width: 480px) {
-  .btn, .btn button {
-    width: 100%;
+  .contactContainer {
+    padding: 28px 0 0 0 !important;
   }
 }
 
@@ -117,10 +117,14 @@
 
 .contactContainer {
   display: flex;
-  padding: 12px 8px;
+  padding: 20px;
   gap: 8px;
 
-  &.mobile>* {
+  .btn, .btn button {
+    width: 100%;
+  }
+
+  &>div, &>a {
     width: 50%;
 
     button {

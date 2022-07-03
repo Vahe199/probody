@@ -8,11 +8,9 @@ import css from "../../styles/articlecard.module.scss";
 import Link from "next/link.js";
 import Button from "../../components/kit/Button.jsx";
 import {cnb} from "cnbuilder";
-import Dates from "../../helpers/Dates.js";
 import {formatPrice} from "../../helpers/String.js";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
-import APIRequests from "../../helpers/APIRequests.js";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -114,7 +112,7 @@ class BlogPage extends React.Component {
                     <div style={{marginBottom: 12}}>
                         {!Objects.isEmpty(this.state.vacancies) && this.state.vacancies.map((vac, index) =>
                             <div className={css.vacancyCard} bp={'grid'} key={index}>
-                                <div bp={'12 5@md'}>
+                                <div bp={'12 6@md'}>
                                     <div className={css.cardRoot} style={{background: 'unset'}}>
                                         <Link href={'/vacancies/' + vac.slug}><img style={isMobile ? {} : {height: 'unset'}} src={vac.pic}
                                                                               className={css.pic}/></Link>
@@ -135,7 +133,7 @@ class BlogPage extends React.Component {
                                             </div>}
                                     </div>
                                 </div>
-                                <div bp={'12 7@md'} className={cnb(css.cardRoot, css.vacancyInfo)}>
+                                <div bp={'12 6@md'} className={cnb(css.cardRoot, css.vacancyInfo)}>
                                     {!isMobile && <div className={css.content} style={{padding: 0, marginBottom: 12}}>
                                         <p className={css.caption}>{vac.salonTitle}</p>
                                         <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
