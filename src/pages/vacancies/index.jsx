@@ -12,6 +12,7 @@ import Dates from "../../helpers/Dates.js";
 import {formatPrice} from "../../helpers/String.js";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
+import APIRequests from "../../helpers/APIRequests.js";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -59,72 +60,22 @@ class BlogPage extends React.Component {
         })
 
         await this.setState({
-            vacancies: [
+            "vacancies": [
                 {
-                    "_id": "629f26fb379f441955fb448e",
-                    "salonTitle": "Салон красоты в г. Алматы",
-                    "title": "Spikefish southern grayling cutthroat trout",
-                    "photos": [
-                        "https://images.ukrsalon.com.ua/files/1/1558/1369622/original/20120814155054.jpg",
-                        'https://img.championat.com/s/735x490/news/big/q/j/massazh-kotoryj-umenshit-vashi-formy-vy-prosto-lezhite-i-hudeete_1564681008234562299.jpg',
-                        'https://stamina.center/ru/wp-content/uploads/sites/2/2019/10/Stamina-likuvalnyj-masazh-01.jpg'
-                    ],
-                    "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish.\n" +
-                        "<br />" +
-                        "Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish threespine stickleback Cornish Spaktailed Bream. Pollock, cavefish pink salmon Sacramento blackfish king of herring. Goosefish parrotfish Colorado squawfish dealfish man-of-war fish, longfin escolar Celebes rainbowfish ghost flathead soldierfish zebra lionfish dogfish smoothtongue driftfish, pencilsmelt soldierfish porcupinefish wahoo Pacific argentine. Deep sea bonefish pikehead butterflyfish redmouth whalefish oilfish fire bar danio.",
-                    "slug": "Derf808",
-                    "salonAddress": "г. Алматы, ул. Карачаевская, д. 1",
-                    "phone": "+770770770707",
-                    "workDays": [
-                        "mon",
-                        "tue",
-                        "wed",
-                        "thu",
-                    ],
-                    "workHours": {
-                        "from": '9:30',
-                        "to": '18:00',
-                    },
+                    "_id": "62c186edba8ab7ee259f91b2",
+                    "salary": 75000,
+                    "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish. Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish",
+                    "title": "Салон 'Body Life' ищет мастеров боди массажа",
+                    "phone": "+7 777 777 7777",
+                    "salonTitle": "Body Life",
                     "region": {
-                        "name": "Алматы",
+                        "_id": "62a4ac186e4061e6bb32536b",
+                        "name": "Туркестан"
                     },
-                    "salary": 100000,
-                    "createdAt": "2022-06-07T10:22:51.952Z",
-                    "updatedAt": "2022-06-07T10:22:51.952Z"
-                },
-                {
-                    "_id": "629f26fb379f441955fb448e",
-                    "salonTitle": "Салон красоты в г. Алматы",
-                    "title": "Spikefish southern grayling cutthroat trout",
-                    "photos": [
-                        "https://img.championat.com/s/735x490/news/big/d/l/tehnika-tochechnogo-massazha-dlja-pohudenija_15905066501829841550.jpg",
-                        'https://novaya.com.ua/wp-content/uploads/2021/09/massazh-spiny-1.jpg'
-                    ],
-                    "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish.\n" +
-                        "<br />" +
-                        "Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish threespine stickleback Cornish Spaktailed Bream. Pollock, cavefish pink salmon Sacramento blackfish king of herring. Goosefish parrotfish Colorado squawfish dealfish man-of-war fish, longfin escolar Celebes rainbowfish ghost flathead soldierfish zebra lionfish dogfish smoothtongue driftfish, pencilsmelt soldierfish porcupinefish wahoo Pacific argentine. Deep sea bonefish pikehead butterflyfish redmouth whalefish oilfish fire bar danio.",
-                    "slug": "Derf808",
-                    "salonAddress": "г. Алматы, ул. Карачаевская, д. 1",
-                    "phone": "+770770770707",
-                    "workDays": [
-                        "mon",
-                        "tue",
-                        "wed",
-                        "thu",
-                    ],
-                    "region": {
-                        "name": "Алматы",
-                    },
-                    "workHours": {
-                        "from": '10:00',
-                        "to": '23:00',
-                    },
-                    "salary": 200000,
-                    "createdAt": "2022-06-07T10:22:51.952Z",
-                    "updatedAt": "2022-06-07T10:22:51.952Z"
+                    "slug": "Body-Life284"
                 }
             ],
-            "pageCount": 7
+            "pageCount": 1
         })
         //fetches data from the server
     }
