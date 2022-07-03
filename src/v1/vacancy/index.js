@@ -31,6 +31,7 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     try {
         (new Vacancy(req.body)).validate(async (err) => {
             if (err) {
+                console.log(err)
                 return res.status(500).json({
                     message: "Internal Server Error"
                 })

@@ -31,7 +31,7 @@ const VacancySchema = new Schema({
     },
     withdrawalPeriod: {
         type: String,
-        enum: ['cash', 'card', 'other'],
+        enum: ['daily', 'weekly', 'monthly'],
     },
     phone: {
         type: String,
@@ -65,7 +65,8 @@ const VacancySchema = new Schema({
     },
     region: {
         type: Schema.Types.ObjectId,
-        ref: "Region"
+        ref: "Region",
+        required: true
     }
 }, {
     versionKey: false,
