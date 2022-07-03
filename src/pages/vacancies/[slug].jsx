@@ -2,18 +2,16 @@ import {withRouter} from "next/router.js";
 import React from "react";
 import {GlobalContext} from "../../contexts/Global.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs";
-import css from "../../styles/articlecard.module.scss";
-import Link from "next/link.js";
+import css from "../../styles/vacancypage.module.scss";
 import Button from "../../components/kit/Button.jsx";
 import ImageCarousel from "../../components/kit/ImageCarousel";
 import {cnb} from "cnbuilder";
-import Icon from "../../components/kit/Icon.jsx";
 import {formatPrice} from "../../helpers/String.js";
-import TextSection from "../../components/kit/TextSection.jsx";
 import InfoBlock from "../../components/kit/InfoBlock";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
-import Dates from "../../helpers/Dates.js";
+import Tag from "../../components/kit/Tag";
+import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -31,40 +29,35 @@ class VacancyViewPage extends React.Component {
         //fetch vacancy with id {this.props.router.query.slug}
         this.setState({
             vacancy: {
-                "_id": "629f26fb379f441955fb448e",
-                "salonTitle": "Салон красоты в г. Алматы",
-                "title": "Spikefish southern grayling cutthroat trout",
-                "photos": [
-                    "https://img.championat.com/s/735x490/news/big/d/l/tehnika-tochechnogo-massazha-dlja-pohudenija_15905066501829841550.jpg",
-                    'https://novaya.com.ua/wp-content/uploads/2021/09/massazh-spiny-1.jpg'
+                "_id": "62c186edba8ab7ee259f91b2",
+                "host": "62a716414546a8b318001ddf",
+                "salary": 75000,
+                "experience": "nomatter",
+                "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish. Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish",
+                "title": "Салон 'Body Life' ищет мастеров боди массажа",
+                "withdrawalType": ["card"],
+                "withdrawalPeriod": "daily",
+                "phone": "+7 777 777 7777",
+                "whatsapp": "+7 777 777 7777",
+                "employment": [
+                    "full",
+                    "part"
                 ],
-                "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish.\n" +
-                    "<br />" +
-                    "Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish threespine stickleback Cornish Spaktailed Bream. Pollock, cavefish pink salmon Sacramento blackfish king of herring. Goosefish parrotfish Colorado squawfish dealfish man-of-war fish, longfin escolar Celebes rainbowfish ghost flathead soldierfish zebra lionfish dogfish smoothtongue driftfish, pencilsmelt soldierfish porcupinefish wahoo Pacific argentine. Deep sea bonefish pikehead butterflyfish redmouth whalefish oilfish fire bar danio.",
-                "slug": "Derf808",
-                "salonAddress": "г. Алматы, ул. Карачаевская, д. 1",
-                "phone": "+770770770707",
-                "whatsapp": "+770770770707",
-                "workDays": [
-                    "mon",
-                    "tue",
-                    "wed",
-                    "thu",
-                ],
+                "salonTitle": "Body Life",
+                "salonAddress": "ул. Гоголя, 12",
+                "pic": "https://img.championat.com/s/735x490/news/big/d/l/tehnika-tochechnogo-massazha-dlja-pohudenija_15905066501829841550.jpg",
                 "region": {
-                    "name": "Алматы",
+                    "_id": "62a4ac186e4061e6bb32536b",
+                    "name": "Туркестан"
                 },
-                "workHours": {
-                    "from": '10:00',
-                    "to": '23:00',
-                },
-                "withdrawalType": "cash",
-                "experience": '6mon',
-                "salary": 200000,
-                "createdAt": "2022-06-07T10:22:51.952Z",
-                "updatedAt": "2022-06-07T10:22:51.952Z"
-            },
-            avgRating: 4.8,
+                "slug": "Body-Life284",
+                "createdAt": "2022-07-03T12:09:17.795Z",
+                "updatedAt": "2022-07-03T12:09:17.795Z",
+                "workSchedule": [
+                    "contract",
+                    "flexible"
+                ]
+            }
         })
     }
 
@@ -93,7 +86,7 @@ class VacancyViewPage extends React.Component {
             {this.state.vacancy.title && <div bp={'grid'}>
                 <div bp={'12 5@md'}>
                     <div className={css.cardRoot}>
-                        <ImageCarousel pics={this.state.vacancy.photos}/>
+                        <ImageCarousel pics={[this.state.vacancy.pic]}/>
                         {isMobile
                             ? <div className={css.content} style={{padding: 12}}>
                                 <p className={css.caption}>{this.state.vacancy.salonTitle}</p>
@@ -104,26 +97,30 @@ class VacancyViewPage extends React.Component {
                                     {t('call')}
                                 </Button></a>
                                 <a target="_blank"
-                                    href={'https://wa.me/' + this.state.vacancy.whatsapp.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}><Button
+                                   href={'https://wa.me/' + this.state.vacancy.whatsapp.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}><Button
                                     color={'tertiary'} iconLeft={'wa_light'}>{t('write')}</Button></a>
                             </div>}
+                    </div>
+
+                    <div className={css.cardRoot} style={{marginTop: 4, padding: 20}} bp={'hide@md'}>
+                        <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
+                            <span className={css.caption}>{t('city')}</span>
+                            <span className={css.value}>{this.state.vacancy.region.name}</span>
+                        </div>
+                        <div style={{marginBottom: 12}} className={'flex justify-between non-selectable'}>
+                            <span className={css.caption}>{t('address')}</span>
+                            <span className={css.value}>{this.state.vacancy.salonAddress}</span>
+                        </div>
+                        <div className={'flex justify-between non-selectable'}>
+                            <span className={css.caption}>{t('salon')}</span>
+                            <span className={css.value}>{this.state.vacancy.salonTitle}</span>
+                        </div>
                     </div>
                 </div>
                 <div bp={'12 7@md'}>
                     {!isMobile && <div className={css.cardRoot}>
                         <div className={css.content}>
-                            <div bp={'grid'} style={{marginBottom: 16}}>
-                                <h2 bp={'6'}>{this.state.vacancy.title}</h2>
-                                <div bp={'1'} className={'non-selectable'}>&nbsp;</div>
-                                <div bp={'5'} className={'flex vertical-center justify-end'}>
-                                    <div>
-                                        <span className={css.primaryColor}><Icon name={'star'}/></span>
-                                        <span className={css.bigger}>{this.state.avgRating}</span>
-                                    </div>
-
-                                    <Button size={'small'}>{t('onTheMap')}</Button>
-                                </div>
-                            </div>
+                            <h2 style={{marginBottom: 30, marginTop: 10}}>{this.state.vacancy.title}</h2>
 
                             <div bp={'grid'}>
                                 <div bp={'6'}>
@@ -150,37 +147,66 @@ class VacancyViewPage extends React.Component {
                         </div>
                     </div>}
 
-                    <div bp={'grid 12 6@md'} style={{margin: '16px 0'}}>
-                        <div>
+                    <div bp={'grid'} style={{margin: '16px 0', gap: 20}}>
+                        <div bp={'12 3@md'}>
                             <InfoBlock>
-                                <div bp={'grid 6'}>
-                                    <div>
-                                        <div className={css.infoCaption}>{t('salaryShort')}</div>
-                                        <div>{t('from')} {formatPrice(this.state.vacancy.salary)} {t('kzt')}</div>
+                                <div bp={'grid'} style={{gap: 24}}>
+                                    <div bp={'12'}>
+                                        <div className={css.infoCaption} style={{marginBottom: 8}}>{t('salary')}</div>
+                                        <div
+                                            className={'bold'}>{t('from')} {formatPrice(this.state.vacancy.salary)} {t('kzt')}</div>
                                     </div>
-                                    <div>
-                                        <div className={css.infoCaption}>{t('withdrawal')}</div>
-                                        <div>{t('withdrawal_' + this.state.vacancy.withdrawalType)}</div>
+                                    <div bp={'6 12@md'}>
+                                        <div className={css.infoCaption}>{t('withdrawalType')}</div>
+                                        <div>
+                                            <Tag label={t('withdrawal_' + this.state.vacancy.withdrawalType)}
+                                                 className={css.secondLayerTag}/>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div className={css.infoCaption}>{t('workExperience')}</div>
-                                        <div>{t('workExperience_' + this.state.vacancy.experience)}</div>
-                                    </div>
-                                    <div>
-                                        <div className={css.infoCaption}>{t('schedule')}</div>
-                                        <div>{Dates.humanizeDuration(this.state.vacancy.workDays, this.props.router.locale)}, {this.state.vacancy.workHours.from}-{this.state.vacancy.workHours.to}</div>
+                                    <div bp={'6 12@md'}>
+                                        <div className={css.infoCaption}>{t('withdrawalPeriod')}</div>
+                                        <div>
+                                            <Tag label={t('withdrawalPeriod_' + this.state.vacancy.withdrawalPeriod)}
+                                                 className={css.secondLayerTag}/>
+                                        </div>
                                     </div>
                                 </div>
                             </InfoBlock>
                         </div>
-                        <div>
-                            <h3>{t('employment')}</h3>
+                        <div bp={'12 9@md'} className={'responsive-content'}>
+                            <div className={css.bottomLine}>
+                                <p className="subtitle2">{t('employment')}</p>
+                                <div>
+                                    {this.state.vacancy.employment.map((employment, i) =>
+                                        <Tag label={t('employment_' + employment)} key={i}/>
+                                    )}
+                                </div>
+                            </div>
+                            <div className={css.bottomLine}>
+                                <p className="subtitle2">{t('workSchedule')}</p>
+                                <div className="flex">
+                                    {this.state.vacancy.workSchedule.map((schedule, i) =>
+                                        <Tag label={t('schedule_' + schedule)} key={i}/>
+                                    )}
+                                </div>
+                            </div>
+                            <div className={css.bottomLine}>
+                                <p className="subtitle2">{t('withdrawalType')}</p>
+                                <div className="flex">
+                                    {this.state.vacancy.withdrawalType.map((type, i) =>
+                                        <Tag label={t('withdrawal_' + type)} key={i}/>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <TextSection title={t('description')}>
+                    <div className={css.cardRoot} style={{padding: 20}}>
+                        <p className="subtitle2" style={{marginBottom: 16}}>{t('description')}</p>
                         {this.state.vacancy.description}
-                    </TextSection>
+                    </div>
+
+                    <ShareInSocialMedia thin={true} style={{marginTop: 12}}/>
                 </div>
             </div>}
         </section>;

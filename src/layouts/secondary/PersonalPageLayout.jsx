@@ -15,7 +15,7 @@ export default class PersonalPageLayout extends React.Component {
     render() {
         const {t, theme, isMobile} = this.context
 
-        return <div className={css['theme--' + theme]} bp={'grid'} style={{gridGap: isMobile ? 0 : 48}}>
+        return <div className={css['theme--' + theme]} bp={'grid'} style={{gap: isMobile ? 0 : 48}}>
             <div bp={'4 hide show@md'}>
                 <div className={css.menu}>
                     <ul className={css.list}>

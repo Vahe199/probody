@@ -801,7 +801,7 @@ class NewSalonPage extends React.Component {
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillContactInfo')}</h2>
-                                      <div bp={'grid 12 4@md'} style={{gridGap: 45}}>
+                                      <div bp={'grid 12 4@md'} style={{gap: 45}}>
                                           <div>
                                               <h3 style={{marginBottom: 12}}>{t('socialMedia')}</h3>
 
@@ -856,7 +856,7 @@ class NewSalonPage extends React.Component {
                                   </div>),
                                   (<div className={css.stepBody}>
                                       <h2>{t('whichServicesYouProvide')}</h2>
-                                      <div bp={'grid 12 4@md'} style={{gridGap: 45}}>
+                                      <div bp={'grid 12 4@md'} style={{gap: 45}}>
                                           <div>
                                               <h3 style={{marginBottom: 16}}>{t('services')}</h3>
 
@@ -913,7 +913,7 @@ class NewSalonPage extends React.Component {
                                           padding: isMobile ? '0 16px' : 0
                                       }}>{t('whichMassageTypesYouProvide')}</h2>
 
-                                      <div bp={'grid 12 6@md'} style={{gridGap: 30}}>
+                                      <div bp={'grid 12 6@md'} style={{gap: 30}}>
                                           <div className={'flex gap-12 column'}>
                                               {this.state.model.programs.filter(i => i._id).map((program, i) =>
                                                   <Collapsible defaultOpen={i === 0} selectable={true} key={i}
@@ -1169,7 +1169,7 @@ class NewSalonPage extends React.Component {
                                   (<div className={css.stepBody}>
                                       <h2 style={{margin: '24px 0'}}>{t('salonSchedule')}</h2>
 
-                                      <div bp={'grid 12 6@md'} style={{gridGap: 45}}>
+                                      <div bp={'grid 12 6@md'} style={{gap: 45}}>
                                           <div>
                                               <h3 style={{marginBottom: 12}}>{t('workTime')}</h3>
                                               <div className="flex gap-12">
@@ -1272,7 +1272,7 @@ class NewSalonPage extends React.Component {
                                           <div key={i}>
                                               <h3 style={{margin: '12px 0'}}>{t('masterCharacteristics')}</h3>
 
-                                              <div bp={'grid'} style={{gridGap: 24}}>
+                                              <div bp={'grid'} style={{gap: 24}}>
                                                   <div bp={'12 4@md'}>
                                                       <TextInput
                                                           onUpdate={val => this.setMasterField(i, 'name', val)}
@@ -1315,7 +1315,7 @@ class NewSalonPage extends React.Component {
                                                   <div bp={'12 4@md'}>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'eyes', val)}
                                                                   name={t('eyes')} rootBp={'grid 4'}
-                                                                  containerStyle={{gridGap: 0}}
+                                                                  containerStyle={{gap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.eyes}
                                                                   options={["голубые", "синие", "зеленые", "карие", "серые", "черные", "желтые", "другие"].map(i => ({
                                                                       label: i,
@@ -1323,7 +1323,7 @@ class NewSalonPage extends React.Component {
                                                                   }))}/>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'bust', val)}
                                                                   name={capitalize(t('bust'))} rootBp={'grid 4'}
-                                                                  containerStyle={{gridGap: 0}}
+                                                                  containerStyle={{gap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.bust}
                                                                   options={[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5].map(i => ({
                                                                       label: String(i),
@@ -1333,7 +1333,7 @@ class NewSalonPage extends React.Component {
                                                   <div bp={'12 4@md'}>
                                                       <RadioGroup onUpdate={val => this.setMasterParam(i, 'hair', val)}
                                                                   name={t('hairColor')} rootBp={'grid 4'}
-                                                                  containerStyle={{gridGap: 0}}
+                                                                  containerStyle={{gap: 0}}
                                                                   value={this.state.model.masters[i].characteristics.hair}
                                                                   options={["брюнетка", "блондинка", "седая", "русая", "рыжая", "шатенка", "другая"].map(i => ({
                                                                       label: i,
@@ -1384,7 +1384,7 @@ class NewSalonPage extends React.Component {
                                   (<div className={css.stepBody}>
                                       <h2>{t('checkDataCorrectness')}</h2>
 
-                                      <div bp={'grid'} style={{gridGap: 32}}>
+                                      <div bp={'grid'} style={{gap: 32}}>
                                           <div bp={'12 6@md'}>
                                               <div className={css.sectionHead}>
                                                   <h3>{t('commonInfo')}</h3>
@@ -1510,7 +1510,7 @@ class NewSalonPage extends React.Component {
                                                         className={css.editIcon} name={'edit'}/>
                                               </div>
                                               <div style={{padding: 16}}>
-                                                  <div bp={'grid'} style={{gridGap: 24}}>
+                                                  <div bp={'grid'} style={{gap: 24}}>
                                                       <div bp={'12 3@md'}>
                                                           <p style={{marginBottom: 12}}>{t('workDays')}</p>
 
@@ -1581,7 +1581,7 @@ class NewSalonPage extends React.Component {
                                               <div style={{padding: 16}}>
                                                   {this.state.model.masters.map((master, i) =>
                                                       <div key={i} className={css.finalMasterCard}>
-                                                          <div bp={'grid 12 6@md'} style={{gridGap: '8px 32px'}}>
+                                                          <div bp={'grid 12 6@md'} style={{gap: '8px 32px'}}>
 
                                                               <TextInput
                                                                   disabled={this.state.model}

@@ -34,7 +34,7 @@ export default class AboutUsSection extends React.Component {
         const {t, isMobile, theme} = this.context;
 
         return <div className={css['theme--' + theme]}>
-            <section className={'container'} bp={'grid'} style={{gridGap: isMobile ? 32 : 20}}>
+            <section className={'container'} bp={'grid'} style={{gap: isMobile ? 32 : 20}}>
                 <div bp={'12 8@md'}>
                     <TextSection dangerouslySetInnerHTML={{__html: t('seoText1')}} style={{marginBottom: isMobile ? 32 : 8}}>
                     </TextSection>

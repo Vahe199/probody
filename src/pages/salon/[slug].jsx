@@ -230,7 +230,7 @@ class SalonView extends React.Component {
                         </div>
                     )}
                 </div>,
-                masters: this.state.salon.masters && <div bp={'grid'} style={{gridGap: isMobile ? 5 : 12}}>
+                masters: this.state.salon.masters && <div bp={'grid'} style={{gap: isMobile ? 5 : 12}}>
                     {this.state.salon.masters.slice(0, this.state.masterLimit).map((master, i) =>
                         <div bp={'6 4@md'} key={i}>
                             <MasterDetail {...master} />
@@ -255,11 +255,11 @@ class SalonView extends React.Component {
                         </div>
                     )}
                 </div>,
-                reviews: <div bp={'grid 12 6@md'} style={{gridGap: 32}}>
+                reviews: <div bp={'grid 12 6@md'} style={{gap: 32}}>
                     <div>
                         <div className="flex column" style={{gap: 12}}>
                             <div style={{order: isMobile ? 0 : 1}}>
-                                <div bp={'grid 4'} style={{gridGap: 3}}>
+                                <div bp={'grid 4'} style={{gap: 3}}>
                                     <TagCard title={t('salonRating')} style={{minWidth: 120}}
                                              value={this.state.reviews.avg ? this.state.reviews.avg.toFixed(1) : 0}
                                              dark={true}
@@ -430,7 +430,7 @@ class SalonView extends React.Component {
                 },
             ]}/>
 
-            <div bp={'grid'} style={{gridGap: 8}}>
+            <div bp={'grid'} style={{gap: 8}}>
                 <div bp={'12 5@md'}>
                     <div className={css.cardRoot}>
                         <ImageCarousel
@@ -520,7 +520,7 @@ class SalonView extends React.Component {
                             </div>
                         </div>}
 
-                        <div bp={'grid'} style={{gridGap: isMobile ? 16 : 60}}>
+                        <div bp={'grid'} style={{gap: isMobile ? 16 : 60}}>
                             <div bp={'12 7@md'} className={cnb(css.padded, css.shortInfoBlock)}>
                                 <div>
                                     <div>{t('address').toLowerCase()}</div>
@@ -603,7 +603,7 @@ class SalonView extends React.Component {
                         </div>}
 
                     <div bp={'grid'} style={{marginTop: 8}}>
-                        <div bp={'12 8@md'} style={{gridGap: 8}} className={cnb(css.padded)}>
+                        <div bp={'12 8@md'} style={{gap: 8}} className={cnb(css.padded)}>
                             {this.state.salon.services &&
                                 <div style={{marginBottom: 24}}>
                                     <p className="subtitle2"
@@ -636,7 +636,7 @@ class SalonView extends React.Component {
 
                         {(this.state.salon.avgCost && !this.state.salon.parent) ?
                             <div bp={'12 4@md'} style={{marginTop: isMobile ? 0 : 16}}>
-                                <div bp={'grid 6 12@md'} style={{gridGap: 8}} className={'responsive-content'}>
+                                <div bp={'grid 6 12@md'} style={{gap: 8}} className={'responsive-content'}>
                                     <TagCard title={t('avgCostLong').toLowerCase()}
                                              value={formatPrice(this.state.salon.avgCost) + ' ' + t('kzt')}
                                              dark={true}
@@ -660,7 +660,7 @@ class SalonView extends React.Component {
                 </div>
             </div>
 
-            <div bp={'grid'} style={{marginTop: 32, gridGap: 28}}>
+            <div bp={'grid'} style={{marginTop: 32, gap: 28}}>
                 <div bp={'12 8@md'}>
                     {(this.state.salon.photos && !isMobile) &&
                         <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}

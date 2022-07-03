@@ -37,4 +37,14 @@
   .mbOnDesktop {
     margin-bottom: 24px;
   }
+
+  .socialRoot_thin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .socialRoot_thin h3 {
+    margin-bottom: 0 !important;
+  }
 }

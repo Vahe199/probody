@@ -455,7 +455,7 @@ class Home extends React.Component {
                         <br className={'non-selectable'}/>
                     </div>}
 
-                <div bp={'grid'} style={{gridGap: 8, marginBottom: 16}}>
+                <div bp={'grid'} style={{gap: 8, marginBottom: 16}}>
                     <div bp={'12 4@md'} className={'responsive-content'}>
                         <RadioGroup containerClass={css.kindContainer} className={css.kindSelector} name={''}
                                     value={this.props.router.query.kind || 'all'}

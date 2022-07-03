@@ -15,7 +15,7 @@ export default class Footer extends React.Component {
                 <img alt={t('siteLogo')} className={cnb('cursor-pointer', css.textLogo)} src={'/text_logo--' + theme + '.svg'}/>
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
-                        <div bp={'grid 4@md 6'} style={{gridGap: isMobile ? 24 : 32}}>
+                        <div bp={'grid 4@md 6'} style={{gap: isMobile ? 24 : 32}}>
                             <div><Link href={'/'}>{t('cities')}</Link></div>
                             <div><Link href={'/'}>{t('contacts')}</Link></div>
                             <div><Link href={'/'}>{t('aboutProject')}</Link></div>

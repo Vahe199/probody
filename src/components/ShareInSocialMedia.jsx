@@ -4,15 +4,24 @@ import css from "../styles/about-us.module.scss";
 import InfoBlock from "./kit/InfoBlock.jsx";
 import {GlobalContext} from "../contexts/Global.js";
 import Icon from "./kit/Icon.jsx";
+import PropTypes from "prop-types";
 
 export default class ShareInSocialMedia extends React.Component {
     static contextType = GlobalContext
 
-    render() {
-        const {t, theme} = this.context;
+    static propTypes = {
+        thin: PropTypes.bool
+    }
 
-        return <InfoBlock>
-            <div className={css['theme--' + theme]}>
+    static defaultProps = {
+        thin: false
+    }
+
+    render() {
+        const {t, theme, isMobile} = this.context;
+
+        return <InfoBlock style={Object.assign({}, this.props.style, (this.props.thin && !isMobile) ? {padding: 20} : {})}>
+            <div className={cnb(css['theme--' + theme], css['socialRoot' + (this.props.thin ? '_thin' : '')])}>
                 <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
                 <div className={cnb(css.socialBlock)}>
                     <div>

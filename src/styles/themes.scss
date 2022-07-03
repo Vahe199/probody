@@ -47,7 +47,8 @@ $themes: (
                 inactive-slide: $grey1,
                 range: $dark,
                 static-gray: $grey2,
-                inactive-star: $tertiary
+                inactive-star: $tertiary,
+                tag-secondlayer: $line
         ),
         dark: (
                 bg-primary: $primary,
@@ -81,7 +82,8 @@ $themes: (
                 inactive-slide: $grey1,
                 range: $primary,
                 static-gray: $grey2,
-                inactive-star: $line
+                inactive-star: $line,
+                tag-secondlayer: $white2
         )
 );
 

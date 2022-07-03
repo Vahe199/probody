@@ -26,7 +26,7 @@ const VacancySchema = new Schema({
         required: true
     },
     withdrawalType: {
-        type: String,
+        type: [String],
         enum: ['cash', 'card', 'other'],
     },
     withdrawalPeriod: {
