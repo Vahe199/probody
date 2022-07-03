@@ -138,8 +138,8 @@ class BlogPage extends React.Component {
             </Head>
 
             <div className={'responsive-content'}>
-                <p className="caption">{t('gladToSeeYouHere')}</p>
-                <h1>{t('welcomeToOurAnnouncementBoard')}</h1>
+                <p className={'additional-text'}>{t('gladToSeeYouHere')}</p>
+                <h1 className={'text-xl'}>{t('welcomeToOurAnnouncementBoard')}</h1>
             </div>
             <div style={{marginTop: 32, gridGap: 8}} bp={'grid'}>
                 <div bp={'12 8@md'}>
@@ -148,7 +148,7 @@ class BlogPage extends React.Component {
                             <div className={css.vacancyCard} bp={'grid'} key={index}>
                                 <div bp={'12 5@md'}>
                                     <div className={css.cardRoot}>
-                                        <Link href={'/vacancies/' + vac.slug}><img style={!isMobile ? {height: 'unset'} : {}} src={vac.photos[0]}
+                                        <Link href={'/vacancies/' + vac.slug}><img style={!isMobile ? {height: 'unset'} : {}} src={vac.pic}
                                                                               className={css.pic}/></Link>
 
                                         {isMobile

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added &quot;search near me&quot; btn">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done map salon card">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Vacancy.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Vacancy.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,14 +144,8 @@
       <workItem from="1656576771626" duration="6996000" />
       <workItem from="1656587806998" duration="5088000" />
       <workItem from="1656610820856" duration="18447000" />
-      <workItem from="1656705357956" duration="17119000" />
-    </task>
-    <task id="LOCAL-00298" summary="added showmore btn">
-      <created>1656325250376</created>
-      <option name="number" value="00298" />
-      <option name="presentableId" value="LOCAL-00298" />
-      <option name="project" value="LOCAL" />
-      <updated>1656325250376</updated>
+      <workItem from="1656705357956" duration="17705000" />
+      <workItem from="1656844318850" duration="2755000" />
     </task>
     <task id="LOCAL-00299" summary="added showmore btn">
       <created>1656325410901</created>
@@ -489,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656758269502</updated>
     </task>
-    <option name="localTasksCounter" value="347" />
+    <task id="LOCAL-00347" summary="done map salon card">
+      <created>1656760391971</created>
+      <option name="number" value="00347" />
+      <option name="presentableId" value="LOCAL-00347" />
+      <option name="project" value="LOCAL" />
+      <updated>1656760391971</updated>
+    </task>
+    <option name="localTasksCounter" value="348" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -520,7 +521,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added tg button" />
     <MESSAGE value="added mobile salon page" />
     <MESSAGE value="fixed autofocus" />
     <MESSAGE value="fixed lot of bugs" />
@@ -545,6 +545,7 @@
     <MESSAGE value="added coords to redisearch" />
     <MESSAGE value="fixed scroll" />
     <MESSAGE value="added &quot;search near me&quot; btn" />
-    <option name="LAST_COMMIT_MESSAGE" value="added &quot;search near me&quot; btn" />
+    <MESSAGE value="done map salon card" />
+    <option name="LAST_COMMIT_MESSAGE" value="done map salon card" />
   </component>
 </project>

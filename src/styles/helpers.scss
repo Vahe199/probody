@@ -1,9 +1,13 @@
+@import "themes";
+
 .va-middle {
   vertical-align: middle;
 }
 
 .additional-text {
-  color: #9A9A9A;
+  @include themify() {
+    color: t('text-disabled');
+  }
 }
 
 .flex {

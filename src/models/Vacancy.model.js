@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import Point from "./Point.schema.js";
 import CyrillicToTranslit from "cyrillic-to-translit-js";
 import Numbers from "../helpers/Numbers.js";
 
@@ -13,13 +12,10 @@ const VacancySchema = new Schema({
         type: Number,
         required: true
     },
-    employment: {
-        type: [String],
-        enum: ['full', 'part', 'secondary'],
-    },
     experience: {
         type: String,
-        enum: ['none', '3mon', '6mon', '12mon', 'more']
+        enum: ['no', 'yes', 'nomatter'],
+        required: true
     },
     description: {
         type: String,
@@ -31,18 +27,11 @@ const VacancySchema = new Schema({
     },
     withdrawalType: {
         type: String,
-        enum: ['cash', 'card', 'both'],
+        enum: ['cash', 'card', 'other'],
     },
-    workHours: {
-        from: {
-            type: String
-        },
-        to: {
-            type: String
-        },
-        isOther: {
-            type: Boolean
-        }
+    withdrawalPeriod: {
+        type: String,
+        enum: ['cash', 'card', 'other'],
     },
     phone: {
         type: String,
@@ -51,10 +40,10 @@ const VacancySchema = new Schema({
     whatsapp: {
         type: String,
     },
-    workDays: {
+    employment: {
         type: [String],
-        enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
-        default: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+        enum: ['flexible', 'period', 'contract', 'constant'],
+        required: true
     },
     salonTitle: {
         type: String,
@@ -64,13 +53,9 @@ const VacancySchema = new Schema({
         type: String,
         required: true
     },
-    photos: {
-      type: [String],
+    pic: {
+      type: String,
       required: true
-    },
-    salonLocation: {
-        type: Point,
-        required: true
     },
     slug: {
         type: String,

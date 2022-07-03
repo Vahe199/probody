@@ -22,6 +22,12 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
+    req.body = Object.assign({}, req.body, {
+        host: req.user._id
+    })
+
+    console.log(req.body)
+
     try {
         (new Vacancy(req.body)).validate(async (err) => {
             if (err) {
