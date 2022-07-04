@@ -12,7 +12,15 @@ export default class Modal extends React.Component {
         open: PropTypes.bool.isRequired,
         onUpdate: PropTypes.func.isRequired,
         isMobile: PropTypes.bool,
-        useNav: PropTypes.bool
+        useNav: PropTypes.bool,
+        desktopWidth: PropTypes.number
+    }
+
+    static defaultProps = {
+        open: false,
+        isMobile: true,
+        useNav: false,
+        desktopWidth: 450
     }
 
     componentDidMount() {
@@ -30,7 +38,7 @@ export default class Modal extends React.Component {
     }
 
     render() {
-        const {theme} = this.context
+        const {theme, isMobile} = this.context
 
         return <div className={css['theme--' + theme]}>
             <div onClick={(e) => {
@@ -41,7 +49,7 @@ export default class Modal extends React.Component {
                  className={cnb(css.overlay, this.props.isMobile ? css.mobile : css.desktop, this.props.open ? css.visible : '', this.props.useNav ? css.useNav : '')}>
                 {this.props.useNav && <div className={css.closeModal} onClick={() => this.props.onUpdate(false)}><Icon name={'close'}/></div>}
 
-                <div style={this.props.modalStyle} className={css.modal}>
+                <div style={Object.assign(!isMobile ? {maxWidth: this.props.desktopWidth} : {}, this.props.modalStyle)} className={css.modal}>
                     {this.props.children}
                 </div>
             </div>

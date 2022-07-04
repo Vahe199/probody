@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import css from "../../styles/accountpage.module.scss";
 import Link from "next/link.js";
 import {GlobalContext} from "../../contexts/Global.js";
+import Button from "../../components/kit/Button.jsx";
 
 export default class PersonalPageLayout extends React.Component {
     static propTypes = {
@@ -13,7 +14,7 @@ export default class PersonalPageLayout extends React.Component {
     static contextType = GlobalContext
 
     render() {
-        const {t, theme, isMobile} = this.context
+        const {t, theme, isMobile, openModal} = this.context
 
         return <div className={css['theme--' + theme]} bp={'grid'} style={{gap: isMobile ? 0 : 48}}>
             <div bp={'4 hide show@md'}>
@@ -26,6 +27,10 @@ export default class PersonalPageLayout extends React.Component {
                         <li className={this.props.page === 'vacancies' ? css.active : ''}><Link href={'/account/vacancies'}>{t('myVacancies')}</Link></li>
                         <li className={this.props.page === 'faq' ? css.active : ''}><Link href={'/account/faq'}>{t('needHelp')}</Link></li>
                     </ul>
+
+                    <div className={css.stretchBtn} style={{marginTop: 32}}>
+                    <Button color={'tertiary'} onClick={() => openModal('logout')}>{t('logout')}</Button>
+                    </div>
                 </div>
             </div>
             <div bp={'12 8@md'}>

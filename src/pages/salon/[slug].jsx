@@ -314,7 +314,7 @@ class SalonView extends React.Component {
                 <title>{this.state.salon.name || t('salon2')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
+            <Modal desktopWidth={500} open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
                    useNav={isMobile} modalStyle={{maxWidth: isMobile ? '100%' : 650}}>
                 {!isMobile && <div className={cnb(css.modalHead, css.desktop)}>
                     <h2>{t('leaveYourReview')}</h2>
