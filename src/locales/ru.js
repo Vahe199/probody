@@ -306,6 +306,7 @@ export default {
     stats: 'Статистика',
     reviewsAndRating: 'Отзывы и рейтинг',
     addVacancy: 'Добавить вакансию',
+    salonReviews: 'Отзывы о салоне',
     personalInfo: 'Личные данные',
     creatingVacancy: 'Создание вакансии',
     needHelp: 'Нужна помощь?',
@@ -344,5 +345,11 @@ export default {
     business: 'занятость',
     withdrawalPeriod_daily: 'Ежедневно',
     withdrawalPeriod_weekly: 'Еженедельно',
-    withdrawalPeriod_monthly: 'Ежемесячно'
+    withdrawalPeriod_monthly: 'Ежемесячно',
+    profile_personal: 'Пользователь',
+    profile_promotion: 'Анкета и продвижение',
+    profile_stats: 'Статистика',
+    profile_reviews: 'Отзывы и рейтинг',
+    profile_vacancies: 'Мои вакансии',
+    profile_faq: 'Нужна помощь?',
 }
