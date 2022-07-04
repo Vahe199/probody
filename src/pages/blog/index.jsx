@@ -77,7 +77,7 @@ class BlogPage extends React.Component {
                 }
             ],
             tags: [
-                'Мужская энергия', 'fred', 'derf', 'ferd', 'dref'
+                'Мужская энергия', 'Другой тег'
             ],
             "pageCount": 12
         })
