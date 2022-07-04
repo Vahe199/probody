@@ -48,7 +48,8 @@ $themes: (
                 range: $dark,
                 static-gray: $grey2,
                 inactive-star: $tertiary,
-                tag-secondlayer: $line
+                tag-secondlayer: $line,
+                thirdlayer-bg: $tertiary
         ),
         dark: (
                 bg-primary: $primary,
@@ -83,7 +84,8 @@ $themes: (
                 range: $primary,
                 static-gray: $grey2,
                 inactive-star: $line,
-                tag-secondlayer: $white2
+                tag-secondlayer: $white2,
+                thirdlayer-bg: $disabled
         )
 );
 

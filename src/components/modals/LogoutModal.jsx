@@ -18,6 +18,7 @@ class LogoutModal extends React.Component {
     logOut() {
         UserHelper.logOut()
         this.context.openModal('')
+        this.props.router.push('/')
     }
 
     render() {

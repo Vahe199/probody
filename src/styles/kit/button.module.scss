@@ -52,6 +52,17 @@
     }
 }
 
+.thirdlayer {
+    @include themify() {
+        background: t('thirdlayer-bg');
+        color: t('text-main');
+
+        &:not(.non-focusable):focus {
+            box-shadow: 0 0 0 4px inset t('bg-secondary');
+        }
+    }
+}
+
 .success {
     @include themify() {
         background: t('bg-success');

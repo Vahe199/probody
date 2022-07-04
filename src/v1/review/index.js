@@ -31,6 +31,14 @@ router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
     })
 })
 
+router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'), async (req, res) => {
+    const salons = await Worker.find({host: req.user._id})
+
+    res.json({
+        reviews: await Review.find({target: {$in: salons.map(s => s._id)}}).sort({createdAt: -1}),
+    })
+})
+
 router.post('/:workerId', async (req, res) => {
     try {
         const {text,

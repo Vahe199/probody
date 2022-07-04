@@ -15,7 +15,7 @@ class Button extends React.Component {
     static contextType = GlobalContext
 
     static propTypes = {
-        color: PropTypes.string, // primary | secondary | tertiary | success | danger
+        color: PropTypes.string, // primary | secondary | tertiary | success | danger | thirdlayer
         iconLeft: PropTypes.string,
         iconRight: PropTypes.string,
         size: PropTypes.string, // small | medium | large | fill

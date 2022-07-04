@@ -29,7 +29,7 @@ export default class PersonalPageLayout extends React.Component {
                     </ul>
 
                     <div className={css.stretchBtn} style={{marginTop: 32}}>
-                    <Button color={'tertiary'} onClick={() => openModal('logout')}>{t('logout')}</Button>
+                    <Button color={'thirdlayer'} onClick={() => openModal('logout')}>{t('logout')}</Button>
                     </div>
                 </div>
             </div>

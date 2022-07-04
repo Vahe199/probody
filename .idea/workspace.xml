@@ -3,11 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added tags">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Modal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Button.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modals/LogoutModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modals/LogoutModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/accountpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/accountpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/modal.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/modal.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/account/personal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/personal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/account/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/reviews.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/button.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/button.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/review/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,14 +153,7 @@
       <workItem from="1656705357956" duration="17705000" />
       <workItem from="1656844318850" duration="10000000" />
       <workItem from="1656856944830" duration="1905000" />
-      <workItem from="1656926870044" duration="5090000" />
-    </task>
-    <task id="LOCAL-00308" summary="added map to salon page desktop">
-      <created>1656519953199</created>
-      <option name="number" value="00308" />
-      <option name="presentableId" value="LOCAL-00308" />
-      <option name="project" value="LOCAL" />
-      <updated>1656519953199</updated>
+      <workItem from="1656926870044" duration="8856000" />
     </task>
     <task id="LOCAL-00309" summary="added map to salon page desktop">
       <created>1656521499597</created>
@@ -494,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656931306576</updated>
     </task>
-    <option name="localTasksCounter" value="357" />
+    <task id="LOCAL-00357" summary="added tags">
+      <created>1656932076900</created>
+      <option name="number" value="00357" />
+      <option name="presentableId" value="LOCAL-00357" />
+      <option name="project" value="LOCAL" />
+      <updated>1656932076900</updated>
+    </task>
+    <option name="localTasksCounter" value="358" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

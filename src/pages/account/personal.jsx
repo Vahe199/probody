@@ -4,7 +4,6 @@ import PersonalPageLayout from "../../layouts/secondary/PersonalPageLayout.jsx"
 import {TITLE_POSTFIX} from "../../helpers/constants.js"
 import Head from "next/head.js"
 import {GlobalContext} from "../../contexts/Global.js"
-import RangeInput from "../../components/kit/Form/RangeInput";
 
 class PersonalInfoPage extends React.Component {
     static contextType = GlobalContext
@@ -26,7 +25,7 @@ class PersonalInfoPage extends React.Component {
             </Head>
 
             <PersonalPageLayout page={'personal'}>
-                <RangeInput value={this.state.val} max={100} min={0} onUpdate={val => this.setState({val})} />
+                personal info
             </PersonalPageLayout>
         </>
     }

@@ -42,6 +42,10 @@ export default class APIRequests {
         })).json()
     }
 
+    static async getReviewsByUser() {
+        return (await fetch(`${API_URL}/review/my`)).json()
+    }
+
     static async getMapWorker(workerId) {
         return (await fetch(`${API_URL}/worker/${workerId}/map`)).json()
     }
