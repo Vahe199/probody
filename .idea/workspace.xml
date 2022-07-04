@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="done vacancies">
-      <change afterPath="$PROJECT_DIR$/src/components/kit/ToggleTag.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ArticleCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArticleCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added tags">
       <change beforePath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/tag.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,21 +144,7 @@
       <workItem from="1656705357956" duration="17705000" />
       <workItem from="1656844318850" duration="10000000" />
       <workItem from="1656856944830" duration="1905000" />
-      <workItem from="1656926870044" duration="4079000" />
-    </task>
-    <task id="LOCAL-00305" summary="added map to salon page">
-      <created>1656499140722</created>
-      <option name="number" value="00305" />
-      <option name="presentableId" value="LOCAL-00305" />
-      <option name="project" value="LOCAL" />
-      <updated>1656499140722</updated>
-    </task>
-    <task id="LOCAL-00306" summary="added map to salon page desktop">
-      <created>1656510549824</created>
-      <option name="number" value="00306" />
-      <option name="presentableId" value="LOCAL-00306" />
-      <option name="project" value="LOCAL" />
-      <updated>1656510549824</updated>
+      <workItem from="1656926870044" duration="4402000" />
     </task>
     <task id="LOCAL-00307" summary="added map to salon page desktop">
       <created>1656510641388</created>
@@ -497,7 +475,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656858785060</updated>
     </task>
-    <option name="localTasksCounter" value="354" />
+    <task id="LOCAL-00354" summary="added tags">
+      <created>1656931086738</created>
+      <option name="number" value="00354" />
+      <option name="presentableId" value="LOCAL-00354" />
+      <option name="project" value="LOCAL" />
+      <updated>1656931086738</updated>
+    </task>
+    <task id="LOCAL-00355" summary="added tags">
+      <created>1656931190341</created>
+      <option name="number" value="00355" />
+      <option name="presentableId" value="LOCAL-00355" />
+      <option name="project" value="LOCAL" />
+      <updated>1656931190341</updated>
+    </task>
+    <option name="localTasksCounter" value="356" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +520,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed autofocus" />
     <MESSAGE value="fixed lot of bugs" />
     <MESSAGE value="added wa text" />
     <MESSAGE value="minor fixes" />
@@ -553,6 +544,7 @@
     <MESSAGE value="added &quot;search near me&quot; btn" />
     <MESSAGE value="done map salon card" />
     <MESSAGE value="done vacancies" />
-    <option name="LAST_COMMIT_MESSAGE" value="done vacancies" />
+    <MESSAGE value="added tags" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tags" />
   </component>
 </project>

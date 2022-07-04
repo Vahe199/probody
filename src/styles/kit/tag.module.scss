@@ -30,6 +30,7 @@
 
 .toggleable {
   cursor: pointer;
+  font-size: 16px;
 
   &.disabled {
     @include themify() {
