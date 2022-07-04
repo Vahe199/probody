@@ -9,6 +9,14 @@ import RedisHelper from "../../helpers/RedisHelper.js";
 
 const router = express.Router()
 
+router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'), async (req, res) => {
+    const salons = await Worker.find({host: req.user._id})
+
+    res.json({
+        reviews: await Review.find({target: {$in: salons.map(s => s._id)}}).sort({createdAt: -1}),
+    })
+})
+
 router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
     if (!mongoose.mongo.ObjectId.isValid(req.params.workerId)) {
         return res.status(406).json({
@@ -28,14 +36,6 @@ router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
         reviews: await Review.find({target: req.params.workerId, text: {$exists: true}}).limit(req.query.limit).skip((req.query.page - 1) * req.query.limit).sort({createdAt: -1}),
         pageCount: Math.ceil(await Review.countDocuments({target: req.params.workerId}) / req.query.limit),
         // avg: (await Review.aggregate([{$group: {_id: null, averageRate: {$avg: "$avg"}}}]))[0].averageRate
-    })
-})
-
-router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'), async (req, res) => {
-    const salons = await Worker.find({host: req.user._id})
-
-    res.json({
-        reviews: await Review.find({target: {$in: salons.map(s => s._id)}}).sort({createdAt: -1}),
     })
 })
 
