@@ -12,6 +12,8 @@ import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
 import Tag from "../../components/kit/Tag";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
+import {parsePhoneNumber} from "libphonenumber-js";
+import Icon from "../../components/kit/Icon.jsx";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -209,6 +211,24 @@ class VacancyViewPage extends React.Component {
                     <ShareInSocialMedia thin={true} style={{marginTop: 12}}/>
                 </div>
             </div>}
+
+            {
+                (this.state.vacancy.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom, 'fullwidth')}>
+                    <div><a href={'tel:' + parsePhoneNumber(this.state.vacancy.phone).number}>
+                        <Button>
+                            <Icon name={'call'}/>
+                            {t('call')}
+                        </Button>
+                    </a></div>
+                    <div><a target="_blank"
+                            href={'https://wa.me/' + parsePhoneNumber(this.state.vacancy.whatsapp).number.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}>
+                        <Button color={'tertiary'}>
+                            <Icon name={'wa_light'}/>
+                            {t('sendMessage')}
+                        </Button>
+                    </a></div>
+                </div>
+            }
         </section>;
     }
 }

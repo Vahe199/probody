@@ -17,6 +17,7 @@ export default class ArticleCard extends React.Component {
         text: PropTypes.string,
         slug: PropTypes.string.isRequired,
         single: PropTypes.bool,
+        tag: PropTypes.string,
         createdAt: PropTypes.string.isRequired,
     }
 
@@ -30,13 +31,13 @@ export default class ArticleCard extends React.Component {
         return <div className={css['theme--' + theme]}>
             <div className={css.cardRoot}>
                 {!this.props.single ?
-                    <ImageCarousel link={'/blog/' + this.props.slug} pics={this.props.photos}/>
+                    <ImageCarousel height={260} link={'/blog/' + this.props.slug} pics={this.props.photos}/>
                     : <ImageCarousel pics={this.props.photos}/>}
 
                 <div className={css.content}>
                     <div className="flex justify-between non-selectable">
                         <span className={cnb(css.caption, css.tag)}>
-                            Тег новости
+                            {this.props.tag}
                         </span>
                         <span className={css.caption}>
                             {DateTime.fromISO(this.props.createdAt).toFormat('d MMM, y')}

@@ -36,6 +36,12 @@ $heading-scale: 8;
   }
 }
 
+.stickToBottom {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+}
+
 p.withTab::before {
   display: inline-block;
   content: ' ';
