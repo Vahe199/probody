@@ -120,7 +120,7 @@ class BlogArticlePage extends React.Component {
                     </div>
                 </div>
                 <div bp={'12 4@md'}>
-                    <ShareInSocialMedia/>
+                    <ShareInSocialMedia url={window.location.origin + window.location.pathname}/>
                 </div>
             </div>
         </section>;

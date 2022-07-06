@@ -78,7 +78,7 @@ export default class AboutUsSection extends React.Component {
                             }
                         ]}/>
                     </div>}
-                    <ShareInSocialMedia/>
+                    <ShareInSocialMedia url={'https://probody.kz'} />
                 </div>
             </section>
         </div>

@@ -328,6 +328,7 @@ export default {
     reviewText: 'Текст отзыва',
     enterYourReview: 'Введите Ваш отзыв',
     review: 'Отзыв',
+    loading: 'Загрузка...',
     creatingReview: 'Новый отзыв',
     yourName: 'Ваше имя',
     typeYourName: 'Напишите свое имя',

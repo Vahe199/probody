@@ -29,6 +29,20 @@ const VacancySchema = new Schema({
         type: [String],
         enum: ['cash', 'card', 'other'],
     },
+    social: {
+        inst: {
+            type: String
+        },
+        vk: {
+            type: String
+        },
+        ws: {
+            type: String
+        },
+        tgCh: {
+            type: String
+        }
+    },
     withdrawalPeriod: {
         type: String,
         enum: ['daily', 'weekly', 'monthly'],

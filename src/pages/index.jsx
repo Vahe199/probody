@@ -69,6 +69,7 @@ class Home extends React.Component {
         this.loadMore = this.loadMore.bind(this)
         this.addMapObjects = this.addMapObjects.bind(this)
         this.searchNearMe = this.searchNearMe.bind(this)
+        this.getShortSalonInfo = this.getShortSalonInfo.bind(this)
     }
 
     async initPageLoad(volatile = false) {
@@ -247,32 +248,43 @@ class Home extends React.Component {
             geoObjects = []
 
         for (const id in workers) {
-            let pm = new window.ymaps.Placemark(workers[id], {iconImageHref: '/icons/dot.svg'}, {
+            let pm = new window.ymaps.Placemark(workers[id], {}, {
                 // iconLayout: window.ymaps.templateLayoutFactory.createClass(
-                //     `<div style="cursor: pointer"><img src="{{properties.iconImageHref}}" alt="dot">{{properties.iconContent}}</div>`
-                // )
+                //     `<img src="{{properties.iconImageHref}}" alt="dot"><span style="color: rebeccapurple">{{properties.iconContent}}</span>`
+                // ),
+                iconImageHref: '/icons/dot.svg',
+                iconImageSize: [24, 24],
+                iconImageOffset: [-5, -5],
+                iconContentOffset: [35, 10],
                 iconLayout: 'default#imageWithContent'
-                // balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
-                //     `${id}`
-                // )
             })
 
-            pm.events.add('mouseenter', () => {
-                pm.properties.set('iconImageHref', '/pointWithBody.svg')
-                pm.properties.set('iconContent', 'pointWithBody')
-                // pm.options.set('iconImageSize', [180, 60])
-                // pm.options.set('iconContentOffset', [35, 10])
-                // pm.options.set('iconImageOffset', [180, 60])
+            pm.events.add('mouseenter', async () => {
+                if (map.state.get('hasFocus')) {
+                    return
+                }
+
+                pm.options.set('iconImageHref', '/pointWithBody.svg')
+                pm.properties.set('iconContent', this.context.t('loading'))
+                pm.properties.set('iconContent', await this.getShortSalonInfo(id))
+                pm.options.set('iconImageSize', [212, 60])
+                pm.options.set('iconImageOffset', [-7, -37])
             })
 
             pm.events.add('click', () => {
+                map.state.set('hasFocus', true)
                 this.chooseSalonOnMap(id)
             })
 
             pm.events.add('mouseleave', () => {
-                // pm.options.set('iconImageHref', '/icons/dot.svg')
-                // pm.properties.set('iconContent', '')
-                // pm.options.set('iconImageSize', [40, 40])
+                if (map.state.get('hasFocus')) {
+                    return
+                }
+
+                pm.options.set('iconImageHref', '/icons/dot.svg')
+                pm.properties.set('iconContent', '')
+                pm.options.set('iconImageSize', [24, 24])
+                pm.options.set('iconImageOffset', [-5, -5])
             })
 
             geoObjects.push(pm)
@@ -317,6 +329,23 @@ class Home extends React.Component {
                 })
             })
         }
+    }
+
+    async getShortSalonInfo(id) {
+        if (this.state.preloadedSalons[id]) {
+            return this.state.preloadedSalons[id].worker.name
+        }
+
+        const salon = await APIRequests.getMapWorker(id)
+
+        this.setState({
+            preloadedSalons: {
+                ...this.state.preloadedSalons,
+                [id]: salon
+            }
+        })
+
+        return salon.worker.name
     }
 
     resetFilters() {
@@ -694,9 +723,13 @@ class Home extends React.Component {
                                         </div>
                                         <div>
                                             <Icon name={'close'} className={css.closeIcon}
-                                                  onClick={() => this.setState({
-                                                      chosenSalonId: ''
-                                                  })}/>
+                                                  onClick={() => {
+                                                      this.state.map.state.set('hasFocus', false)
+                                                      // console.log(this.state.map.geoObjects.get(0).getGeoObjects())
+                                                      this.setState({
+                                                          chosenSalonId: ''
+                                                      })
+                                                  }}/>
                                         </div>
                                     </div>
 
@@ -711,7 +744,7 @@ class Home extends React.Component {
                                             </Button>
                                         </a></div>
                                         {chosenSalon.worker.messengers.tg && <div><a target="_blank"
-                                                                         href={'https://t.me/' + chosenSalon.worker.messengers.tg.replace('@', '')}>
+                                                                                     href={'https://t.me/' + chosenSalon.worker.messengers.tg.replace('@', '')}>
                                             <Button color={'tertiary'}>
                                                 <Icon name={'tg_light'}/>
                                             </Button>

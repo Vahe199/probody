@@ -13,6 +13,10 @@
       padding: 16px;
       border-radius: 18px;
 
+      @include themify() {
+        color: t('body-bg');
+      }
+
       i {
         width: 20px;
         height: 20px;

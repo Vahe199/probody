@@ -57,9 +57,10 @@ export default class ImageInput extends React.Component {
 
                         this.setState({uploaded: true, preview: newImageURL});
                         this.props.onUpload(newImageURL);
+                    } else {
+                        this.setState({uploaded: false, preview: ''})
                     }
                 })
-
             } catch (e) {
                 this.setState({uploaded: false, preview: ''})
             }
@@ -86,14 +87,14 @@ export default class ImageInput extends React.Component {
                 </div>
             </label>
 
-                {this.state.uploaded && <Button color={'tertiary'} className={css.delete} focus={false} size={'x-small'}
-                        iconLeft={'trashcan'} onClick={this.deletePic}/>}
+            {this.state.uploaded && <Button color={'tertiary'} className={css.delete} focus={false} size={'x-small'}
+                                            iconLeft={'trashcan'} onClick={this.deletePic}/>}
 
-                <Button className={this.state.preview ? css.edit : css.plus} focus={false} size={'x-small'}
-                        iconLeft={this.state.preview ? 'edit' : 'plus'} mapClick={inputRef}/>
+            <Button className={this.state.preview ? css.edit : css.plus} focus={false} size={'x-small'}
+                    iconLeft={this.state.preview ? 'edit' : 'plus'} mapClick={inputRef}/>
 
-                <input accept="image/png, image/jpg, image/jpeg" onChange={this.handleChange} ref={inputRef} type='file'
-                       id={inputId} className={'d-none'}/>
+            <input accept="image/png, image/jpg, image/jpeg" onChange={this.handleChange} ref={inputRef} type='file'
+                   id={inputId} className={'d-none'}/>
         </div>
     }
 }

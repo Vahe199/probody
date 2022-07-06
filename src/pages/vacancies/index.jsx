@@ -11,6 +11,7 @@ import {cnb} from "cnbuilder";
 import {formatPrice} from "../../helpers/String.js";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
+import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -103,6 +104,17 @@ class BlogPage extends React.Component {
                 <title>{t('vacancies')}{TITLE_POSTFIX}</title>
             </Head>
 
+            <Breadcrumbs items={[
+                {
+                    name: t('mainPage'),
+                    href: '/',
+                },
+                {
+                    name: t('vacancies'),
+                    href: '/vacancies',
+                }
+            ]}/>
+
             <div className={'responsive-content'}>
                 <p className={'additional-text'}>{t('gladToSeeYouHere')}</p>
                 <h1 className={'text-xl'}>{t('welcomeToOurAnnouncementBoard')}</h1>
@@ -172,7 +184,7 @@ class BlogPage extends React.Component {
                     {(this.state.pageCount > 1 && isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
                                                                           pageCnt={this.state.pageCount} style={{marginBottom: 16}}/>}
 
-                    <ShareInSocialMedia/>
+                    <ShareInSocialMedia url={'https://probody.kz'}/>
                 </div>
             </div>
 

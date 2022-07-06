@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added tags">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/pointWithBody.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/reviews.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutUsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShareInSocialMedia.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/ImageInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/ImageInput.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Vacancy.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Vacancy.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/about-us.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/about-us.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/imageinput.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/imageinput.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,14 +161,7 @@
       <workItem from="1656856944830" duration="1905000" />
       <workItem from="1656926870044" duration="10389000" />
       <workItem from="1656957085475" duration="4527000" />
-      <workItem from="1657093459731" duration="1571000" />
-    </task>
-    <task id="LOCAL-00312" summary="added coords to redisearch">
-      <created>1656590486302</created>
-      <option name="number" value="00312" />
-      <option name="presentableId" value="LOCAL-00312" />
-      <option name="project" value="LOCAL" />
-      <updated>1656590486303</updated>
+      <workItem from="1657093459731" duration="8844000" />
     </task>
     <task id="LOCAL-00313" summary="added coords to redisearch">
       <created>1656611364487</created>
@@ -498,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656941099801</updated>
     </task>
-    <option name="localTasksCounter" value="361" />
+    <task id="LOCAL-00361" summary="added tags">
+      <created>1657096607119</created>
+      <option name="number" value="00361" />
+      <option name="presentableId" value="LOCAL-00361" />
+      <option name="project" value="LOCAL" />
+      <updated>1657096607119</updated>
+    </task>
+    <option name="localTasksCounter" value="362" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -142,7 +142,7 @@ class BlogPage extends React.Component {
                     {(this.state.pageCount > 1 && isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
                                                                            pageCnt={this.state.pageCount} style={{marginBottom: 16}}/>}
 
-                    <ShareInSocialMedia/>
+                    <ShareInSocialMedia url={'https://probody.kz'}/>
                 </div>
             </div>
 

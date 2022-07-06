@@ -52,6 +52,10 @@ class VacancyViewPage extends React.Component {
                     "_id": "62a4ac186e4061e6bb32536b",
                     "name": "Туркестан"
                 },
+                social: {
+                    inst: 'https://instagram.com/fred',
+                    tg: 'https://t.me/fred'
+                },
                 "slug": "Body-Life284",
                 "createdAt": "2022-07-03T12:09:17.795Z",
                 "updatedAt": "2022-07-03T12:09:17.795Z",
@@ -143,7 +147,20 @@ class VacancyViewPage extends React.Component {
                                 <div bp={'1'} className={'non-selectable'}>&nbsp;</div>
 
                                 <div bp={'5'}>
-                                    <h3>{t('socialMedia')}</h3>
+                                    <h3 style={{marginBottom: 4}}>{Object.keys(this.state.vacancy.social || []).some(i => this.state.vacancy.social[i].length) && t('socialMedia')}</h3>
+                                    <div className={'flex align-start fit'}
+                                         style={{paddingBottom: 20, paddingRight: 20}}>
+                                        <div className={css.socialBlock}>
+                                            {Object.keys(this.state.vacancy.social || []).filter(i => this.state.vacancy.social[i].length).map(name =>
+                                                <div key={name}>
+                                                    <a target="_blank" href={this.state.vacancy.social[name]}
+                                                       className={css.img}>
+                                                        <Icon name={name + '_' + theme}/>
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -208,12 +225,14 @@ class VacancyViewPage extends React.Component {
                         {this.state.vacancy.description}
                     </div>
 
-                    <ShareInSocialMedia thin={true} style={{marginTop: 12}}/>
+                    <ShareInSocialMedia thin={true} style={{marginTop: 12}}
+                                        url={window.location.origin + window.location.pathname}/>
                 </div>
             </div>}
 
             {
-                (this.state.vacancy.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom, 'fullwidth')}>
+                (this.state.vacancy.phone && isMobile) &&
+                <div className={cnb(css.stretchContainer, css.stickToBottom, 'fullwidth')}>
                     <div><a href={'tel:' + parsePhoneNumber(this.state.vacancy.phone).number}>
                         <Button>
                             <Icon name={'call'}/>

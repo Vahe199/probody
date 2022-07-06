@@ -10,55 +10,64 @@ export default class ShareInSocialMedia extends React.Component {
     static contextType = GlobalContext
 
     static propTypes = {
-        thin: PropTypes.bool
+        thin: PropTypes.bool,
+        url: PropTypes.string
     }
 
     static defaultProps = {
-        thin: false
+        thin: false,
+        url: 'https://probody.kz'
     }
 
     render() {
         const {t, theme, isMobile} = this.context;
 
-        return <InfoBlock style={Object.assign({}, this.props.style, (this.props.thin && !isMobile) ? {padding: 20} : {})}>
+        return <InfoBlock
+            style={Object.assign({}, this.props.style, (this.props.thin && !isMobile) ? {padding: 20} : {})}>
             <div className={cnb(css['theme--' + theme], css['socialRoot' + (this.props.thin ? '_thin' : '')])}>
                 <h3 style={{marginBottom: 12}}>{t('shareInSocial')}</h3>
                 <div className={cnb(css.socialBlock)}>
                     <div>
-                        {/*<img src={"/icons/vk_" + theme + ".svg"} alt={t('vk')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'vk_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`https://vk.com/share.php?url=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'vk_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        {/*<img src={"/icons/fb_" + theme + ".svg"} alt={t('fb')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'fb_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`https://www.facebook.com/sharer/sharer.php?u=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'fb_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        {/*<img src={"/icons/ok_" + theme + ".svg"} alt={t('ok')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'ok_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`https://connect.ok.ru/offer?url=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'ok_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        {/*<img src={"/icons/vi_" + theme + ".svg"} alt={t('vi')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'vi_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`viber://forward?text=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'vi_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        {/*<img src={"/icons/wa_" + theme + ".svg"} alt={t('wa')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'wa_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`https://api.whatsapp.com/send?text=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'wa_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        {/*<img src={"/icons/tg_" + theme + ".svg"} alt={t('tg')}/>*/}
-                        <div className={css.img}>
-                            <Icon name={'tg_' + theme} />
-                        </div>
+                        <a target={'_blank'} href={`https://t.me/share/url?url=${this.props.url}`}>
+                            <div className={css.img}>
+                                <Icon name={'tg_' + theme}/>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
