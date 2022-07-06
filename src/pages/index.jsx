@@ -247,26 +247,22 @@ class Home extends React.Component {
             geoObjects = []
 
         for (const id in workers) {
-            let pm = new window.ymaps.Placemark(workers[id], {}, {
-                iconImageHref: '/icons/dot.svg',
-                iconLayout: 'default#image',
-                // balloonPanelMaxMapArea: Infinity,
-                hideIconOnBalloonOpen: false,
-
-                balloonCloseButton: false,
-                balloonOffset: [75, -10],
-                balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
-                    `${id}`
-                )
+            let pm = new window.ymaps.Placemark(workers[id], {iconImageHref: '/icons/dot.svg'}, {
+                // iconLayout: window.ymaps.templateLayoutFactory.createClass(
+                //     `<div style="cursor: pointer"><img src="{{properties.iconImageHref}}" alt="dot">{{properties.iconContent}}</div>`
+                // )
+                iconLayout: 'default#imageWithContent'
+                // balloonContentLayout: window.ymaps.templateLayoutFactory.createClass(
+                //     `${id}`
+                // )
             })
 
             pm.events.add('mouseenter', () => {
-                if (pm.isBalloonOpen) {
-                    return
-                }
-
-                pm.options.set('iconImageHref', '/icons/point.svg')
-                pm.balloon.open()
+                pm.properties.set('iconImageHref', '/pointWithBody.svg')
+                pm.properties.set('iconContent', 'pointWithBody')
+                // pm.options.set('iconImageSize', [180, 60])
+                // pm.options.set('iconContentOffset', [35, 10])
+                // pm.options.set('iconImageOffset', [180, 60])
             })
 
             pm.events.add('click', () => {
@@ -274,8 +270,9 @@ class Home extends React.Component {
             })
 
             pm.events.add('mouseleave', () => {
-                pm.options.set('iconImageHref', '/icons/dot.svg')
-                pm.balloon.close()
+                // pm.options.set('iconImageHref', '/icons/dot.svg')
+                // pm.properties.set('iconContent', '')
+                // pm.options.set('iconImageSize', [40, 40])
             })
 
             geoObjects.push(pm)
@@ -284,6 +281,7 @@ class Home extends React.Component {
         clusterer.add(geoObjects)
         map.geoObjects.add(clusterer)
 
+        console.log(clusterer)
         map.setBounds(clusterer.getBounds(), {
             checkZoomRange: true
         })

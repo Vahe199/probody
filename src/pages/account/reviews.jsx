@@ -37,12 +37,15 @@ class ReviewPage extends React.Component {
             </Head>
 
             <PersonalPageLayout page={'reviews'}>
-                <h1 className={css.salonReviews}>{t('salonReviews')} <span className={css.reviewCnt}>{this.state.reviews.length}</span></h1>
+                <div className="responsive-content">
+                    <h1 className={css.salonReviews}>{t('reviews')} <span
+                        className={css.reviewCnt}>{this.state.reviews.length}</span></h1>
 
-                <div bp={'grid 12 6@md'} style={{gap: isMobile ? 8 : 16}}>
-                    {this.state.reviews.map((review, i) =>
-                        <ReviewBlock {...review} key={i} />
-                    )}
+                    <div bp={'grid 12 6@md'} style={{gap: isMobile ? 8 : 16}}>
+                        {this.state.reviews.map((review, i) =>
+                            <ReviewBlock {...review} key={i}/>
+                        )}
+                    </div>
                 </div>
             </PersonalPageLayout>
         </div>

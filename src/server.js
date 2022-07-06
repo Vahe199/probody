@@ -13,6 +13,7 @@ import Search from "./helpers/Search.js"
 import path from "path"
 import AuthGuard from "./middlewares/AuthGuard.js";
 import fs from "fs";
+import compression from 'compression'
 import RedisHelper from "./helpers/RedisHelper.js";
 
 const port = parseInt(process.env.PORT)
@@ -57,6 +58,7 @@ app.prepare().then(() => {
     const server = express()
 
     server.use(bodyParser.json());
+    server.use(compression())
     server.use(cookieParser())
     server.use(helmet({
         contentSecurityPolicy: false,

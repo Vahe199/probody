@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added tags">
-      <change afterPath="$PROJECT_DIR$/src/styles/pages/reviews.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/pointWithBody.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/secondary/PersonalPageLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/account/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/reviews.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/breadcrumbs.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/breadcrumbs.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.13.1",
-    "javascript.nodejs.core.library.typings.version": "16.11.38",
+    "javascript.nodejs.core.library.typings.version": "16.11.43",
     "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/components/kit",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
@@ -79,11 +80,11 @@
       <recent name="$PROJECT_DIR$/src/components/kit/Form" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/components/kit/Collapses" />
       <recent name="$PROJECT_DIR$/src/layouts/secondary" />
       <recent name="$PROJECT_DIR$/src/fonts" />
-      <recent name="$PROJECT_DIR$/src/styles" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -150,14 +151,9 @@
       <workItem from="1656705357956" duration="17705000" />
       <workItem from="1656844318850" duration="10000000" />
       <workItem from="1656856944830" duration="1905000" />
-      <workItem from="1656926870044" duration="9794000" />
-    </task>
-    <task id="LOCAL-00311" summary="added coords to redisearch">
-      <created>1656586158549</created>
-      <option name="number" value="00311" />
-      <option name="presentableId" value="LOCAL-00311" />
-      <option name="project" value="LOCAL" />
-      <updated>1656586158549</updated>
+      <workItem from="1656926870044" duration="10389000" />
+      <workItem from="1656957085475" duration="4527000" />
+      <workItem from="1657093459731" duration="1571000" />
     </task>
     <task id="LOCAL-00312" summary="added coords to redisearch">
       <created>1656590486302</created>
@@ -495,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656939956906</updated>
     </task>
-    <option name="localTasksCounter" value="360" />
+    <task id="LOCAL-00360" summary="added tags">
+      <created>1656941099801</created>
+      <option name="number" value="00360" />
+      <option name="presentableId" value="LOCAL-00360" />
+      <option name="project" value="LOCAL" />
+      <updated>1656941099801</updated>
+    </task>
+    <option name="localTasksCounter" value="361" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
