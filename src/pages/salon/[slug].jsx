@@ -693,7 +693,7 @@ class SalonView extends React.Component {
                         )}</div>}
                 </div>
                 <div bp={'12 4@md'}>
-                    <ShareInSocialMedia url={window.location.origin + window.location.pathname}/>
+                    <ShareInSocialMedia url={'https://probody.kz/salon/' + this.state.salon.slug}/>
 
                     <div className={css.cardRoot} style={{marginTop: 16}}>
                         <div id={'salonLocation'} className={css.mapMobile}></div>

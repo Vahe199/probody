@@ -226,7 +226,7 @@ class VacancyViewPage extends React.Component {
                     </div>
 
                     <ShareInSocialMedia thin={true} style={{marginTop: 12}}
-                                        url={window.location.origin + window.location.pathname}/>
+                                        url={'https://probody.kz/vacancies/' + this.state.vacancy.slug}/>
                 </div>
             </div>}
 
