@@ -206,7 +206,7 @@ class Home extends React.Component {
                     controls: []
                 }, {})
 
-                this.addMapObjects(workers.workerLocations, map)
+                this.addMapObjects(workers.workerLocations, map, workers.results[0].region[0].center)
 
                 // map.events.add('actionend', () => {
                 //     this.performSearch(false)
@@ -222,12 +222,12 @@ class Home extends React.Component {
             if (!this.state.map) {
                 window.ymaps.ready(initMap.bind(this))
             } else {
-                this.addMapObjects(workers.workerLocations)
+                this.addMapObjects(workers.workerLocations, undefined, workers.results[0].region[0].center)
             }
         })
     }
 
-    addMapObjects(workers, map) {
+    addMapObjects(workers, map, center) {
         if (!map) {
             map = this.state.map
         }
@@ -293,10 +293,7 @@ class Home extends React.Component {
         clusterer.add(geoObjects)
         map.geoObjects.add(clusterer)
 
-        console.log(clusterer)
-        map.setBounds(clusterer.getBounds(), {
-            checkZoomRange: true
-        })
+        map.setCenter(center, 12)
     }
 
     chooseSalonOnMap(salonId) {

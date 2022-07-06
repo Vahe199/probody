@@ -357,6 +357,10 @@ class NewSalonPage extends React.Component {
     }
 
     setField(field, value) {
+        if (field === 'region') {
+            this.state.map.setCenter(this.state.prefetched.regions.find(i => i._id === value).center, 12)
+        }
+
         this.setState({
             model: {
                 ...this.state.model,
