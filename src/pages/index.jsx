@@ -74,7 +74,6 @@ class Home extends React.Component {
         this.toggleFilter = this.toggleFilter.bind(this)
         this.setPriceRange = this.setPriceRange.bind(this)
         this.setRegion = this.setRegion.bind(this)
-        this.getAppliedFilterCnt = this.getAppliedFilterCnt.bind(this)
         this.loadMore = this.loadMore.bind(this)
         this.addMapObjects = this.addMapObjects.bind(this)
         this.searchNearMe = this.searchNearMe.bind(this)
@@ -400,13 +399,17 @@ class Home extends React.Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.lastQuery !== this.context.query) {
             this.performSearch()
 
             if (this.context.query === ' ') {
                 return this.context.setQuery('')
             }
+        }
+
+        if (this.props.router.query.page !== prevProps.router.query.page) {
+            this.performSearch()
         }
 
         this.lastQuery = this.context.query
@@ -428,19 +431,6 @@ class Home extends React.Component {
                 })
             }, 1000)
         })
-    }
-
-    getAppliedFilterCnt() {
-        const query = this.props.router.query
-        let cnt = 0
-
-        if (query.priceFrom?.length || query.priceTo?.length) {
-            cnt++
-        }
-
-        cnt += Object.keys(query).filter(filterName => filterName.startsWith('filters[') && query[filterName].length).length
-
-        return cnt
     }
 
     lastQuery = ''
@@ -560,9 +550,9 @@ class Home extends React.Component {
                                                                     label={''} fill
                                                                     options={this.state.regions} id={selectId}
                                                                     placeholder={t('selectRegion')}
-                                                                    value={this.props.router.query.region}
+                                                                    value={this.state.myRegion}
                                                                     onUpdate={val => this.setRegion(val)}/>}
-                                                        <div onClick={() => this.setRegion(t('entireKZ'))}><Icon
+                                                        <div onClick={() => this.setRegion('Алматы')}><Icon
                                                             name={'close'}/></div>
                                                     </div>
                                                 </div>}
@@ -663,16 +653,10 @@ class Home extends React.Component {
                         <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
                             <Icon name={'search'}/>
                             <ControlledInput id={inputId} bp={'fill'} type="text"
-                                             value={this.props.router.query.search}
-                                             onKeyUp={this.handleKeyUp}
-                                             onChange={e => this.props.router.push({
-                                                 query: Object.assign({}, this.props.router.query, {
-                                                     search: e.target.value,
-                                                     page: 1
-                                                 })
-                                             })}
+                                             value={this.context.query}
+                                             onChange={e => this.context.setQuery(e.target.value)}
                                              placeholder={t('ssm')}/>
-                            <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                            <div onClick={() => this.context.setQuery('')}><Icon name={'close'}/></div>
                         </label>
                     </div>
                 </div>

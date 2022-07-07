@@ -12,6 +12,7 @@ import {formatPrice} from "../../helpers/String.js";
 import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
+import ImageCarousel from "../../components/kit/ImageCarousel";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -126,7 +127,7 @@ class BlogPage extends React.Component {
                             <div className={css.vacancyCard} bp={'grid'} key={index}>
                                 <div bp={'12 6@md'}>
                                     <div className={css.cardRoot} style={{background: 'unset'}}>
-                                        <Link href={'/vacancies/' + vac.slug}><img style={isMobile ? {} : {height: 'unset'}} src={vac.pic}
+                                        <Link href={'/vacancies/' + vac.slug}><ImageCarousel pics={[vac.pic]} style={isMobile ? {} : {height: 'unset'}}
                                                                               className={css.pic}/></Link>
                                     </div>
 

@@ -8,6 +8,7 @@ import Menu from "./Menu.jsx";
 import Link from "next/link.js";
 import HybridSearchInput from "./kit/Form/HybridSearchInput";
 import Icon from "./kit/Icon.jsx";
+import Image from "next/image";
 
 class Navbar extends React.Component {
     render() {
@@ -17,7 +18,7 @@ class Navbar extends React.Component {
             {this.context.isMobile ?
                 <nav style={{justifyContent: 'space-around'}} className={cnb(css.navbar, css.mobile)} bp={'flex'}>
                     <ThemeSwitcher/>
-                    <Link href={'/'}><img className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
+                    <Link href={'/'}><Image width={130} height={15} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
                                           alt={'logo'}/></Link>
                     <div className={'flex'}>
                         <LanguageSelector/>
@@ -26,7 +27,7 @@ class Navbar extends React.Component {
                 </nav>
                 :
                 <nav className={cnb('container', css.navbar, css.pc, 'non-selectable')} bp={'grid'}>
-                    <Link href={'/'}><img className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
+                    <Link href={'/'}><Image width={174} height={20} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
                                           alt={'logo'}/></Link>
                     <div bp={'fill'} style={{margin: '0 16px'}}>
                         <HybridSearchInput searchPlaceholder={t('searchPlaceholder')}

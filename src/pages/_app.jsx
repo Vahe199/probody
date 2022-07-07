@@ -20,4 +20,4 @@ class ProbodyApp extends React.Component {
     }
 }
 
-export default ProbodyApp
+export default React.memo(ProbodyApp)

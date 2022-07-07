@@ -138,7 +138,7 @@ class ImageCarousel extends React.Component {
                             marginTop: index === 0 ? 0 : -height,
                             height,
                             marginLeft: index * 100 + '%',
-                            cursor: this.props.link ? 'cursor' : 'zoom-in'
+                            cursor: this.props.link ? 'pointer' : 'zoom-in'
                         }} key={index} onClick={() => {
                             if (this.props.link) {
                                 this.props.router.push(this.props.link)
