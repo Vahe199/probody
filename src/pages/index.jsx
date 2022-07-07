@@ -408,7 +408,7 @@ class Home extends React.Component {
             }
         }
 
-        if (this.props.router.query.page !== prevProps.router.query.page) {
+        if (this.props.router.query.page !== prevProps.router.query.page && !this.state.preventLoading) {
             this.performSearch()
         }
 
@@ -419,9 +419,7 @@ class Home extends React.Component {
         this.setState({
             preventLoading: true
         }, async () => {
-            this.props.router.push({query: Object.assign({}, this.props.router.query, {page: (Number(this.props.router.query.page) || 1) + 1})}, undefined, {
-                shallow: true
-            })
+            this.props.router.push({query: {page: (Number(this.props.router.query.page) || 1) + 1}}, undefined, {shallow: true})
 
             await this.performSearch(true)
 
