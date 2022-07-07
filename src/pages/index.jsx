@@ -29,6 +29,7 @@ import MultipleRangeInput from "../components/kit/Form/MultipleRangeInput"
 import debounce from "../helpers/debounce"
 import Select from "../components/kit/Form/Select.jsx"
 import {declination} from "../helpers/String.js"
+import UserHelper from "../helpers/UserHelper.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -78,6 +79,7 @@ class Home extends React.Component {
         this.addMapObjects = this.addMapObjects.bind(this)
         this.searchNearMe = this.searchNearMe.bind(this)
         this.getShortSalonInfo = this.getShortSalonInfo.bind(this)
+        this.initRegionSelect = this.initRegionSelect.bind(this)
     }
 
     async initPageLoad(volatile = false) {
@@ -95,45 +97,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.initPageLoad()
-
-        APIRequests.getRegions().then(regions => {
-            regions.unshift({
-                name: this.context.t('entireKZ'),
-            })
-
-            this.setState({
-                regions: regions.map(r => ({_id: r.name, name: r.name}))
-            })
-
-            // if (window.ymaps.geolocation) {
-            //     window.ymaps.geolocation.get({
-            //         provider: 'yandex'
-            //     }).then(result => {
-            //         const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
-            //
-            //         APIRequests.getNearestCity(ipCoords).then(async city => {
-            //             const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-            //             const newQuery = {}
-            //
-            //             if (!this.props.router.query['region']) {
-            //                 newQuery['region'] = geo
-            //             }
-            //
-            //             this.props.router.push({
-            //                 query: Object.assign({}, this.props.router.query, newQuery)
-            //             })
-            //
-            //             this.setState({
-            //                 myRegion: city
-            //             })
-            //         })
-            //     });
-            // } else {
-            this.setState({
-                myRegion: this.context.t('entireKZ')
-            })
-            // }
-        })
+        this.initRegionSelect()
     }
 
     toggleFilterPopup() {
@@ -146,36 +110,12 @@ class Home extends React.Component {
         })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        const query = this.props.router.query
-
-        if (this.state.preventLoading) {
-            return
-        }
-
-        if (!Objects.shallowEqual(prevProps.router.query, query)) {
-            this.initPageLoad()
-        }
-
-        if (!query.region && this.state.myRegion) {
-            this.props.router.push({
-                query: Object.assign({}, query, {
-                    region: this.state.myRegion,
-                })
-            })
-        }
-    }
-
     getPage() {
         return parseInt(this.props.router.query.page) || 1
     }
 
     performSearch(appendResults = false, onlyCount = false) {
-        const mapMixin = {
-            region: this.props.router.query.region
-        }
-
-        APIRequests.searchWorkers(this.state.isMapView ? 1 : this.getPage(), this.props.router.query.search ? this.props.router.query.search.trim() : '', {
+        APIRequests.searchWorkers(this.state.isMapView ? 1 : this.getPage(), this.context.query.trim(), {
             kind: this.state.kind,
             rooms: this.state.appliedFilters.rooms.map(i => this.state.filters.rooms.find(room => room._id === i)?.name).join(' '),
             messengers: this.state.appliedFilters.messengers.map(i => this.state.filters.messengers.find(messenger => messenger._id === i)?.name).join(' '),
@@ -183,7 +123,7 @@ class Home extends React.Component {
             leads: this.state.appliedFilters.leads.map(i => this.state.filters.leads.find(lead => lead._id === i)?.name).join(' '),
 
             price: this.state.appliedFilters.price,
-            ...mapMixin
+            region: UserHelper.currentRegion()?.name
         }, onlyCount).then(workers => {
             if (onlyCount) {
                 return this.setState({
@@ -210,18 +150,26 @@ class Home extends React.Component {
                 workerLocations: workers.workerLocations
             });
 
+            let center
+
+            if (workers.results[0]) {
+                center = workers.results[0].location.coordinates
+            } else {
+                center = UserHelper.currentRegion()?.center
+            }
+
             const initMap = () => {
                 if (this.state.map) {
                     return
                 }
 
                 const map = new window.ymaps.Map('mapView', {
-                    center: workers.results[0].location.coordinates,
+                    center,
                     zoom: 14,
                     controls: []
                 }, {})
 
-                this.addMapObjects(workers.workerLocations, map, workers.results[0].region[0].center)
+                this.addMapObjects(workers.workerLocations, map, center)
 
                 this.setState({
                     map
@@ -231,7 +179,7 @@ class Home extends React.Component {
             if (!this.state.map) {
                 window.ymaps.ready(initMap.bind(this))
             } else {
-                this.addMapObjects(workers.workerLocations, undefined, workers.results[0].region[0].center)
+                this.addMapObjects(workers.workerLocations, undefined, center)
             }
         })
     }
@@ -325,6 +273,10 @@ class Home extends React.Component {
         })
     }
 
+    UNSAFE_componentWillReceiveProps() {
+        this.initRegionSelect()
+    }
+
     handlePageChange(page) {
         if (page !== this.getPage()
             && page > 0
@@ -413,12 +365,13 @@ class Home extends React.Component {
     }
 
     setRegion(region) {
-        this.props.router.push({
-            // pathname: '/',
-            query: Object.assign({}, this.props.router.query, {
-                region,
-            })
+        this.setState({
+            myRegion: region
         })
+
+        UserHelper.setRegion(region)
+
+        this.initPageLoad()
     }
 
     async searchNearMe() {
@@ -429,6 +382,34 @@ class Home extends React.Component {
             // this.state.map.setZoom(15)
         } catch (e) {
         }
+    }
+
+    initRegionSelect() {
+        if (this.state.regions.length) {
+            return
+        }
+
+        const regions = UserHelper.regions(),
+            myRegion = UserHelper.currentRegion()?.name
+
+        if (regions) {
+            this.setState({
+                regions: regions.map(r => ({_id: r.name, name: r.name})),
+                myRegion
+            })
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.lastQuery !== this.context.query) {
+            this.performSearch()
+
+            if (this.context.query === ' ') {
+                return this.context.setQuery('')
+            }
+        }
+
+        this.lastQuery = this.context.query
     }
 
     loadMore() {
@@ -461,6 +442,8 @@ class Home extends React.Component {
 
         return cnt
     }
+
+    lastQuery = ''
 
     render() {
         const {t, theme, isMobile} = this.context

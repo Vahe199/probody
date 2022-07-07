@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added tags">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="cleaned up url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/HybridSearchInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/HybridSearchInput.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/Global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/Global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/UserHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/UserHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,14 +152,9 @@
       <workItem from="1656926870044" duration="10389000" />
       <workItem from="1656957085475" duration="4527000" />
       <workItem from="1657093459731" duration="9643000" />
-      <workItem from="1657133090928" duration="10038000" />
-    </task>
-    <task id="LOCAL-00316" summary="added coords to redisearch">
-      <created>1656616468507</created>
-      <option name="number" value="00316" />
-      <option name="presentableId" value="LOCAL-00316" />
-      <option name="project" value="LOCAL" />
-      <updated>1656616468507</updated>
+      <workItem from="1657133090928" duration="14810000" />
+      <workItem from="1657197346585" duration="1726000" />
+      <workItem from="1657199774308" duration="1399000" />
     </task>
     <task id="LOCAL-00317" summary="fixed scroll">
       <created>1656662842604</created>
@@ -494,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657139033182</updated>
     </task>
-    <option name="localTasksCounter" value="365" />
+    <task id="LOCAL-00365" summary="cleaned up url">
+      <created>1657183905960</created>
+      <option name="number" value="00365" />
+      <option name="presentableId" value="LOCAL-00365" />
+      <option name="project" value="LOCAL" />
+      <updated>1657183905960</updated>
+    </task>
+    <option name="localTasksCounter" value="366" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +530,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed lot of bugs" />
     <MESSAGE value="added wa text" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="done paginator" />
@@ -550,6 +554,7 @@
     <MESSAGE value="done map salon card" />
     <MESSAGE value="done vacancies" />
     <MESSAGE value="added tags" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tags" />
+    <MESSAGE value="cleaned up url" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up url" />
   </component>
 </project>

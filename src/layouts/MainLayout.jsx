@@ -20,6 +20,7 @@ import {YANDEX_APIKEY} from "../helpers/constants.js";
 import Script from "next/script.js";
 import LogoutModal from "../components/modals/LogoutModal";
 import Head from "next/head.js";
+import APIRequests from "../helpers/APIRequests.js";
 
 const translations = {
     en,
@@ -34,10 +35,12 @@ class MainLayout extends React.Component {
         this.state = {
             isLoggedIn: false,
             theme: 'light',
+            query: '',
             modal: '',
             isMobile: true,
             t: this.i18n.bind(this),
             setLocale: this.setLocale.bind(this),
+            setQuery: query => this.setState({query}),
             toggleTheme: this.toggleTheme.bind(this),
             setLoggedIn: this.setLoggedIn.bind(this),
             openModal: this.openModal.bind(this),
@@ -73,6 +76,15 @@ class MainLayout extends React.Component {
             return
         }
 
+        if (!window.localStorage.getItem('regions')) {
+            APIRequests.getRegions().then(regions => {
+                window.localStorage.setItem('regions', JSON.stringify(regions))
+
+                //TODO: get nearest city
+                window.localStorage.setItem('currentRegion', JSON.stringify(regions[0]))
+            })
+        }
+
         this.props.router.events.on('routeChangeComplete', (url, options) => setTimeout(() => {
             if (options.shallow) {
                 return
@@ -85,7 +97,8 @@ class MainLayout extends React.Component {
 
         if (storedTheme) {
             this.setState({theme: storedTheme})
-        } /*else {
+        }
+        /*else {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 this.setState({
                     theme: 'dark'

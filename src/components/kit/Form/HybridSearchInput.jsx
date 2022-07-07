@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../../contexts/Global.js";
 import Select from "./Select";
-import APIRequests from "../../../helpers/APIRequests.js";
 import {withRouter} from "next/router.js";
 import ControlledInput from "./ControlledInput.jsx";
 import Numbers from "../../../helpers/Numbers.js";
+import UserHelper from "../../../helpers/UserHelper.js";
 
 class HybridSearchInput extends React.Component {
     static contextType = GlobalContext
@@ -28,85 +28,56 @@ class HybridSearchInput extends React.Component {
 
         this.setRegion = this.setRegion.bind(this)
         this.handleKeyUp = this.handleKeyUp.bind(this)
+        this.initRegionSelect = this.initRegionSelect.bind(this)
         this.clearQuery = this.clearQuery.bind(this)
     }
 
-    componentDidUpdate() {
-        if (!this.props.router.query.region && this.state.myRegion) {
-            this.props.router.push({
-                query: Object.assign({}, this.props.router.query, {
-                    region: this.state.myRegion,
-                })
+    UNSAFE_componentWillReceiveProps() {
+        this.initRegionSelect()
+    }
+
+    componentDidMount() {
+        this.initRegionSelect()
+    }
+
+    setRegion(region) {
+        this.setState({
+            myRegion: region
+        })
+
+        UserHelper.setRegion(region)
+
+        this.context.setQuery(this.context.query + ' ')
+    }
+
+    initRegionSelect() {
+        if (this.state.regions.length) {
+            return
+        }
+
+        const regions = UserHelper.regions(),
+            myRegion = UserHelper.currentRegion()?.name
+
+        if (regions) {
+            this.setState({
+                regions: regions.map(r => ({_id: r.name, name: r.name})),
+                myRegion
             })
         }
     }
 
-    componentDidMount() {
-        APIRequests.getRegions().then(regions => {
-            regions.unshift({
-                name: this.context.t('entireKZ'),
-            })
-
-            this.setState({
-                regions: regions.map(r => ({_id: r.name, name: r.name}))
-            })
-
-            // if (window.ymaps.geolocation) {
-            //     window.ymaps.geolocation.get({
-            //         provider: 'yandex'
-            //     }).then(result => {
-            //         const ipCoords = result.geoObjects.get(0).geometry.getCoordinates()
-            //
-            //         APIRequests.getNearestCity(ipCoords).then(async city => {
-            //             const geo = this.props.router.query['region'] || (regions.findIndex(r => r.name === city) > -1 ? city : this.context.t('entireKZ'))
-            //             const newQuery = {}
-            //
-            //             if (!this.props.router.query['region']) {
-            //                 newQuery['region'] = geo
-            //             }
-            //
-            //             this.props.router.push({
-            //                 query: Object.assign({}, this.props.router.query, newQuery)
-            //             })
-            //
-            //             this.setState({
-            //                 myRegion: city
-            //             })
-            //         })
-            //     });
-            // } else {
-                this.setState({
-                    myRegion: this.context.t('entireKZ')
-                })
-            // }
-        })
-    }
-
-    async setRegion(region) {
-        this.props.router.push({
-            // pathname: '/',
-            query: Object.assign({}, this.props.router.query, {
-                region,
-            })
-        })
-    }
-
     async clearQuery() {
-        this.props.router.push({
-            query: Object.assign({}, this.props.router.query, {
-                search: '',
-            })
-        })
+        this.context.setQuery('')
     }
 
     handleKeyUp(e) {
         if (e.key === 'Enter') {
-            this.props.router.push({pathname: '/', query: this.props.router.query})
+            this.props.router.push('/')
         }
     }
 
     render() {
-        const {theme, t} = this.context;
+        const {theme, query, setQuery} = this.context;
         const inputId = 'text-input-' + Numbers.random(0, 99999),
             selectId = 'select-' + Numbers.random(0, 99999)
 
@@ -114,9 +85,9 @@ class HybridSearchInput extends React.Component {
             <div className={cnb('flex', css.root)}>
                 <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup} style={{paddingLeft: 16}}>
                         <Icon name={'search'}/>
-                        <ControlledInput id={inputId} bp={'fill'} type="text" value={this.props.router.query.search}
+                        <ControlledInput id={inputId} bp={'fill'} type="text" value={query}
                                          onKeyUp={this.handleKeyUp}
-                                         onChange={e => this.props.router.push({query: Object.assign({}, this.props.router.query, {search: e.target.value, page: 1})})}
+                                         onChange={e => setQuery(e.target.value)}
                                          placeholder={this.props.searchPlaceholder}/>
                         <div onClick={this.clearQuery}><Icon name={'close'}/></div>
                 </label>
@@ -125,9 +96,9 @@ class HybridSearchInput extends React.Component {
                         <Icon name={'geo'}/>
                         {this.state.regions.length &&
                             <Select className={css.customSelect} label={''} options={this.state.regions} id={selectId}
-                                    placeholder={this.props.geoPlaceholder} value={this.props.router.query.region}
+                                    placeholder={this.props.geoPlaceholder} value={this.state.myRegion}
                                     onUpdate={val => this.setRegion(val)}/>}
-                        <div onClick={() => this.setRegion(t('entireKZ'))}><Icon name={'close'}/></div>
+                        <div onClick={() => this.setRegion('Алматы')}><Icon name={'close'}/></div>
                 </div>
             </div>
         </div>

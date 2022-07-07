@@ -8,5 +8,7 @@ export const GlobalContext = React.createContext({
     setLocale: Function.prototype,
     toggleTheme: Function.prototype,
     setLoggedIn: Function.prototype,
+    setQuery: Function.prototype,
     openModal: Function.prototype,
+    query: '',
 });
