@@ -314,11 +314,7 @@ class Home extends React.Component {
                 rooms: [],
                 price: {}
             }
-        })
-
-        this.props.router.push({
-            query: {}
-        })
+        }, () => this.performSearch(false, true))
     }
 
     toggleFilter(scope, name) {
