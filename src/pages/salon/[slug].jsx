@@ -220,16 +220,6 @@ class SalonView extends React.Component {
         const photoHeight = this.state.salon.kind === 'salon' ? (isMobile ? 230 : 250) : (isMobile ? 270 : 370)
 
         const additionalSections = {
-                photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
-                    {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
-                        <div bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}>
-                            <div style={{
-                                backgroundImage: `url(${photo})`,
-                                height: photoHeight,
-                            }} className={css.photo}>&nbsp;</div>
-                        </div>
-                    )}
-                </div>,
                 masters: this.state.salon.masters && <div bp={'grid'} style={{gap: isMobile ? 5 : 12}}>
                     {this.state.salon.masters.slice(0, this.state.masterLimit).map((master, i) =>
                         <div bp={'6 4@md'} key={i}>
@@ -288,6 +278,16 @@ class SalonView extends React.Component {
                                 </Button>}
                         </div>
                     </div>
+                </div>,
+                photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
+                    {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
+                        <div bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}>
+                            <div style={{
+                                backgroundImage: `url(${photo})`,
+                                height: photoHeight,
+                            }} className={css.photo}>&nbsp;</div>
+                        </div>
+                    )}
                 </div>
             },
             tabsHead = {
