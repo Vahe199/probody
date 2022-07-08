@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="cleaned up url">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="fixed load n more btn">
+      <change afterPath="$PROJECT_DIR$/src/helpers/PlaceMark.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/HybridSearchInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/HybridSearchInput.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/mainpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/mainpage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,21 +158,8 @@
       <workItem from="1657093459731" duration="9643000" />
       <workItem from="1657133090928" duration="14810000" />
       <workItem from="1657197346585" duration="1726000" />
-      <workItem from="1657199774308" duration="4620000" />
-    </task>
-    <task id="LOCAL-00319" summary="fixed scroll">
-      <created>1656669224957</created>
-      <option name="number" value="00319" />
-      <option name="presentableId" value="LOCAL-00319" />
-      <option name="project" value="LOCAL" />
-      <updated>1656669224957</updated>
-    </task>
-    <task id="LOCAL-00320" summary="fixed scroll">
-      <created>1656669381068</created>
-      <option name="number" value="00320" />
-      <option name="presentableId" value="LOCAL-00320" />
-      <option name="project" value="LOCAL" />
-      <updated>1656669381068</updated>
+      <workItem from="1657199774308" duration="8991000" />
+      <workItem from="1657281829965" duration="4402000" />
     </task>
     <task id="LOCAL-00321" summary="fixed scroll">
       <created>1656669652760</created>
@@ -494,7 +490,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657207004981</updated>
     </task>
-    <option name="localTasksCounter" value="368" />
+    <task id="LOCAL-00368" summary="fixed load n more btn">
+      <created>1657207372551</created>
+      <option name="number" value="00368" />
+      <option name="presentableId" value="LOCAL-00368" />
+      <option name="project" value="LOCAL" />
+      <updated>1657207372551</updated>
+    </task>
+    <task id="LOCAL-00369" summary="fixed load n more btn">
+      <created>1657207478931</created>
+      <option name="number" value="00369" />
+      <option name="presentableId" value="LOCAL-00369" />
+      <option name="project" value="LOCAL" />
+      <updated>1657207478931</updated>
+    </task>
+    <option name="localTasksCounter" value="370" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +535,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added wa text" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="done paginator" />
     <MESSAGE value="fixed blog and vacancies" />
@@ -550,6 +559,7 @@
     <MESSAGE value="done vacancies" />
     <MESSAGE value="added tags" />
     <MESSAGE value="cleaned up url" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up url" />
+    <MESSAGE value="fixed load n more btn" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed load n more btn" />
   </component>
 </project>

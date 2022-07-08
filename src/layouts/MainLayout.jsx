@@ -40,7 +40,17 @@ class MainLayout extends React.Component {
             isMobile: true,
             t: this.i18n.bind(this),
             setLocale: this.setLocale.bind(this),
-            setQuery: query => this.setState({query}),
+            setQuery: query => {
+                if (this.props.router.pathname === '/' && parseInt(this.props.router.query.page) > 1) {
+                    this.props.router.push({
+                        query: {
+                            page: 1
+                        }
+                    })
+                }
+
+                this.setState({query})
+            },
             toggleTheme: this.toggleTheme.bind(this),
             setLoggedIn: this.setLoggedIn.bind(this),
             openModal: this.openModal.bind(this),

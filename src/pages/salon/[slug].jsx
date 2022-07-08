@@ -314,7 +314,8 @@ class SalonView extends React.Component {
                 <title>{this.state.salon.name || t('salon2')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal desktopWidth={500} open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal} isMobile={isMobile}
+            <Modal desktopWidth={500} open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal}
+                   isMobile={isMobile}
                    useNav={isMobile} modalStyle={{maxWidth: isMobile ? '100%' : 650}}>
                 {!isMobile && <div className={cnb(css.modalHead, css.desktop)}>
                     <h2>{t('leaveYourReview')}</h2>
@@ -704,7 +705,7 @@ class SalonView extends React.Component {
                                 <div>{this.state.salon.address}</div>
                             </div>
 
-                            {this.state.reviews.count > 0 && <div>
+                            <div>
                                 <div>{t('reviews').toLowerCase()}</div>
                                 <Link href={{
                                     query: Object.assign({}, this.props.router.query, {
@@ -716,17 +717,17 @@ class SalonView extends React.Component {
                                         className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
                                     </div>
                                 </Link>
-                            </div>}
+                            </div>
 
-                            {this.state.reviews.avg > 0 && <div>
+                            <div>
                                 <div className={css.avgRating}>
                                     <Icon name={'star'}/>
-                                    <span>{this.state.reviews.avg.toFixed(1)}</span>
+                                    <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                 </div>
 
                                 <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
-                            </div>}
+                            </div>
                         </div>
                     </div>
                 </div>

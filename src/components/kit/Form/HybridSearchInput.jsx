@@ -24,12 +24,13 @@ class HybridSearchInput extends React.Component {
         this.state = {
             regions: [],
             myRegion: '',
+            inputId: 'text-input-' + Numbers.random(0, 99999),
+            selectId: 'select-' + Numbers.random(0, 99999),
         }
 
         this.setRegion = this.setRegion.bind(this)
         this.handleKeyUp = this.handleKeyUp.bind(this)
         this.initRegionSelect = this.initRegionSelect.bind(this)
-        this.clearQuery = this.clearQuery.bind(this)
     }
 
     UNSAFE_componentWillReceiveProps() {
@@ -66,10 +67,6 @@ class HybridSearchInput extends React.Component {
         }
     }
 
-    async clearQuery() {
-        this.context.setQuery('')
-    }
-
     handleKeyUp(e) {
         if (e.key === 'Enter') {
             this.props.router.push('/')
@@ -78,8 +75,7 @@ class HybridSearchInput extends React.Component {
 
     render() {
         const {theme, query, setQuery} = this.context;
-        const inputId = 'text-input-' + Numbers.random(0, 99999),
-            selectId = 'select-' + Numbers.random(0, 99999)
+        const {inputId, selectId} = this.state
 
         return <div className={css['theme--' + theme]}>
             <div className={cnb('flex', css.root)}>
@@ -89,7 +85,7 @@ class HybridSearchInput extends React.Component {
                                          onKeyUp={this.handleKeyUp}
                                          onChange={e => setQuery(e.target.value)}
                                          placeholder={this.props.searchPlaceholder}/>
-                        <div onClick={this.clearQuery}><Icon name={'close'}/></div>
+                        <div onClick={() => setQuery('')}><Icon name={'close'}/></div>
                 </label>
                 <div className={css.rightSplitter}>&nbsp;</div>
                 <div className={cnb(css.inputGroup, 'flex')} style={{paddingRight: 16}} onClick={() => window.document.getElementById(selectId).click()}>

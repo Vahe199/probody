@@ -30,8 +30,11 @@ import debounce from "../helpers/debounce"
 import Select from "../components/kit/Form/Select.jsx"
 import {declination} from "../helpers/String.js"
 import UserHelper from "../helpers/UserHelper.js";
+import PlaceMark from '../helpers/PlaceMark.js'
 
 class Home extends React.Component {
+    static contextType = GlobalContext
+
     constructor(props) {
         super(props);
 
@@ -62,7 +65,9 @@ class Home extends React.Component {
             priceRange: {
                 from: 1000,
                 to: 99999
-            }
+            },
+            inputId: 'text-input-' + Numbers.random(0, 99999),
+            selectId: 'select-' + Numbers.random(0, 99999),
         }
 
         this.initPageLoad = this.initPageLoad.bind(this)
@@ -189,6 +194,7 @@ class Home extends React.Component {
         }
 
         map.geoObjects.removeAll()
+        console.log(map.events.removeAll)
 
         const clusterer = new ymaps.Clusterer({
                 groupByCoordinates: false,
@@ -220,15 +226,17 @@ class Home extends React.Component {
                     return
                 }
 
-                pm.options.set('iconImageHref', '/pointWithBody.svg')
-                pm.properties.set('iconContent', this.context.t('loading'))
-                pm.properties.set('iconContent', await this.getShortSalonInfo(id))
-                pm.options.set('iconImageSize', [212, 60])
-                pm.options.set('iconImageOffset', [-7, -37])
+                PlaceMark(pm).open(this.context.t, this.getShortSalonInfo(id))
             })
 
             pm.events.add('click', () => {
-                map.state.set('hasFocus', true)
+                if (map.state.get('hasFocus')) {
+                    map.geoObjects.get(0).getGeoObjects().forEach(pm => PlaceMark(pm).close())
+                    PlaceMark(pm).open(this.context.t, this.getShortSalonInfo(id))
+                } else {
+                    map.state.set('hasFocus', true)
+                }
+
                 this.chooseSalonOnMap(id)
             })
 
@@ -237,10 +245,7 @@ class Home extends React.Component {
                     return
                 }
 
-                pm.options.set('iconImageHref', '/icons/dot.svg')
-                pm.properties.set('iconContent', '')
-                pm.options.set('iconImageSize', [24, 24])
-                pm.options.set('iconImageOffset', [-5, -5])
+                PlaceMark(pm).close()
             })
 
             geoObjects.push(pm)
@@ -250,6 +255,14 @@ class Home extends React.Component {
         map.geoObjects.add(clusterer)
 
         map.setCenter(center, 13)
+        map.events.add('click', () => {
+            map.geoObjects.get(0).getGeoObjects().forEach(pm => PlaceMark(pm).close())
+            map.state.set('hasFocus', false)
+
+            this.setState({
+                chosenSalonId: ''
+            })
+        })
     }
 
     chooseSalonOnMap(salonId) {
@@ -430,9 +443,8 @@ class Home extends React.Component {
     lastQuery = ''
 
     render() {
-        const {t, theme, isMobile} = this.context
-        const inputId = 'search-input-' + Numbers.random(0, 99999),
-            selectId = 'select-' + Numbers.random(0, 99999)
+        const {t, theme, isMobile, query, setQuery} = this.context
+        const {inputId, selectId} = this.state
 
         return (
             <div className={css['theme--' + theme]}>
@@ -647,10 +659,10 @@ class Home extends React.Component {
                         <label htmlFor={inputId} bp={'fill flex'} className={css.inputGroup}>
                             <Icon name={'search'}/>
                             <ControlledInput id={inputId} bp={'fill'} type="text"
-                                             value={this.context.query}
-                                             onChange={e => this.context.setQuery(e.target.value)}
+                                             value={query}
+                                             onChange={e => setQuery(e.target.value)}
                                              placeholder={t('ssm')}/>
-                            <div onClick={() => this.context.setQuery('')}><Icon name={'close'}/></div>
+                            <div onClick={() => setQuery('')}><Icon name={'close'}/></div>
                         </label>
                     </div>
                 </div>
@@ -697,7 +709,9 @@ class Home extends React.Component {
                                             <Icon name={'close'} className={css.closeIcon}
                                                   onClick={() => {
                                                       this.state.map.state.set('hasFocus', false)
-                                                      // console.log(this.state.map.geoObjects.get(0).getGeoObjects())
+
+                                                      this.state.map.geoObjects.get(0).getGeoObjects().forEach(pm => PlaceMark(pm).close())
+
                                                       this.setState({
                                                           chosenSalonId: ''
                                                       })
@@ -1000,7 +1014,5 @@ class Home extends React.Component {
         );
     }
 }
-
-Home.contextType = GlobalContext
 
 export default withRouter(Home);

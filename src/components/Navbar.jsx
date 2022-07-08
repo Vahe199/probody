@@ -2,13 +2,13 @@ import React from "react"
 import {GlobalContext} from "../contexts/Global"
 import css from '../styles/navbar.module.scss'
 import ThemeSwitcher from "./ThemeSwitcher.jsx";
-import {cnb} from "cnbuilder";
-import LanguageSelector from "./LanguageSelector.jsx";
-import Menu from "./Menu.jsx";
-import Link from "next/link.js";
-import HybridSearchInput from "./kit/Form/HybridSearchInput";
-import Icon from "./kit/Icon.jsx";
-import Image from "next/image";
+import {cnb} from "cnbuilder"
+import LanguageSelector from "./LanguageSelector.jsx"
+import Menu from "./Menu.jsx"
+import Link from "next/link.js"
+import HybridSearchInput from "./kit/Form/HybridSearchInput"
+import Icon from "./kit/Icon.jsx"
+import Image from "next/image"
 
 class Navbar extends React.Component {
     render() {
