@@ -383,11 +383,27 @@ class Home extends React.Component {
 
     async searchNearMe() {
         try {
-            this.state.map.panTo((await window.ymaps.geolocation.get()).geoObjects.position, {
-                checkZoomRange: true
-            })
-            // this.state.map.setZoom(15)
+            const usersLocation = (await window.ymaps.geolocation.get()).geoObjects.position,
+                circle = new ymaps.Circle([
+                    usersLocation,
+                    5000
+                ], {}, {
+                    fillColor: "#ffc83a40",
+                    strokeColor: "#ffc83ad1",
+                    strokeWidth: 3
+                })
+
+            if (this.state.map.state.get('locationCircleAdded')) {
+                this.state.map.panTo(usersLocation, {
+                    checkZoomRange: true
+                })
+            } else {
+                this.state.map.geoObjects.add(circle)
+                this.state.map.state.set('locationCircleAdded', true)
+                this.state.map.setBounds(circle.geometry.getBounds())
+            }
         } catch (e) {
+            console.log(e)
         }
     }
 
