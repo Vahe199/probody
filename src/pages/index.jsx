@@ -84,6 +84,7 @@ class Home extends React.Component {
         this.searchNearMe = this.searchNearMe.bind(this)
         this.getShortSalonInfo = this.getShortSalonInfo.bind(this)
         this.initRegionSelect = this.initRegionSelect.bind(this)
+        this.viewSalonOnTheMap = this.viewSalonOnTheMap.bind(this)
     }
 
     async initPageLoad(volatile = false) {
@@ -100,6 +101,10 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        if (this.props.router.query.onTheMap) {
+            this.viewSalonOnTheMap(this.props.router.query.onTheMap)
+        }
+
         this.initPageLoad()
         this.initRegionSelect()
     }
@@ -390,7 +395,8 @@ class Home extends React.Component {
                 ], {}, {
                     fillColor: "#ffc83a40",
                     strokeColor: "#ffc83ad1",
-                    strokeWidth: 3
+                    strokeWidth: 3,
+                    cursor: 'default'
                 })
 
             if (this.state.map.state.get('locationCircleAdded')) {
@@ -423,7 +429,29 @@ class Home extends React.Component {
         }
     }
 
+    viewSalonOnTheMap(salonId) {
+        window.document.body.scrollTo(0, 0)
+
+        APIRequests.getMapWorker(salonId).then(salon => {
+            this.setState({
+                preloadedSalons: {
+                    ...this.state.preloadedSalons,
+                    [salonId]: salon
+                },
+                chosenSalonId: salonId,
+                isMapView: true
+            }, () => {
+                this.props.router.push({query: {}})
+                //TODO panTo and open pm
+            })
+        })
+    }
+
     componentDidUpdate(prevProps) {
+        if (this.props.router.query.onTheMap && this.props.router.query.onTheMap !== prevProps.router.query.onTheMap) {
+            this.viewSalonOnTheMap(this.props.router.query.onTheMap)
+        }
+
         if (this.lastQuery !== this.context.query) {
             this.performSearch()
 
@@ -831,7 +859,7 @@ class Home extends React.Component {
                                                         <span>{(worker.reviews?.avg || 0).toFixed(1)}</span>
                                                     </div>
 
-                                                    <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                                    <Button size={'small'} onClick={() => this.viewSalonOnTheMap(worker._id)}>{t('onTheMap').toLowerCase()}</Button>
                                                 </div>
                                             </div>
                                         </div>}
@@ -863,15 +891,15 @@ class Home extends React.Component {
                                                     </Link>
                                                 </div>
 
-                                                {worker.reviews && <div bp={'hide@md'}>
-                                                    {worker.reviews ? <div className={css.avgRating}>
+                                                <div bp={'hide@md'}>
+                                                    <div className={css.avgRating}>
                                                         <Icon name={'star'}/>
-                                                        <span>{worker.reviews?.avg ? worker.reviews.avg.toFixed(1) : '–'}</span>
-                                                    </div> : <div>&nbsp;</div>}
-
-                                                    <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                                        <span>{(worker.reviews?.avg || 0).toFixed(1)}</span>
                                                     </div>
-                                                </div>}
+
+                                                    <div><Button size={'small'} onClick={() => this.viewSalonOnTheMap(worker._id)}>{t('onTheMap').toLowerCase()}</Button>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div bp={'5 show@md hide'}>

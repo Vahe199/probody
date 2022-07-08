@@ -170,6 +170,13 @@ class SalonView extends React.Component {
                     })
                 )
 
+                map.events.add('click', () => this.props.router.push({
+                    pathname: '/',
+                    query: {
+                        onTheMap: this.state.salon._id
+                    }
+                }))
+
                 this.setState({
                     map
                 })
@@ -516,7 +523,12 @@ class SalonView extends React.Component {
                                         <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                     </div>
 
-                                    <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                    <Button size={'small'} onClick={() => this.props.router.push({
+                                        pathname: '/',
+                                        query: {
+                                            onTheMap: this.state.salon._id
+                                        }
+                                    })}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
                             </div>
                         </div>}
@@ -553,7 +565,12 @@ class SalonView extends React.Component {
                                         <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                     </div>
 
-                                    <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                    <div><Button size={'small'} onClick={() => this.props.router.push({
+                                        pathname: '/',
+                                        query: {
+                                            onTheMap: this.state.salon._id
+                                        }
+                                    })}>{t('onTheMap').toLowerCase()}</Button>
                                     </div>
                                 </div>
                             </div>
@@ -725,7 +742,12 @@ class SalonView extends React.Component {
                                     <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                 </div>
 
-                                <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
+                                <div><Button size={'small'} onClick={() => this.props.router.push({
+                                    pathname: '/',
+                                    query: {
+                                        onTheMap: this.state.salon._id
+                                    }
+                                })}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
                             </div>
                         </div>
