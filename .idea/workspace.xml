@@ -4,8 +4,6 @@
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added user location circle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_reset.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,14 +151,7 @@
       <workItem from="1657133090928" duration="14810000" />
       <workItem from="1657197346585" duration="1726000" />
       <workItem from="1657199774308" duration="8991000" />
-      <workItem from="1657281829965" duration="11019000" />
-    </task>
-    <task id="LOCAL-00324" summary="fixed scroll">
-      <created>1656670035593</created>
-      <option name="number" value="00324" />
-      <option name="presentableId" value="LOCAL-00324" />
-      <option name="project" value="LOCAL" />
-      <updated>1656670035593</updated>
+      <workItem from="1657281829965" duration="11758000" />
     </task>
     <task id="LOCAL-00325" summary="fixed scroll">
       <created>1656670065459</created>
@@ -498,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657294160531</updated>
     </task>
-    <option name="localTasksCounter" value="373" />
+    <task id="LOCAL-00373" summary="added user location circle">
+      <created>1657297777285</created>
+      <option name="number" value="00373" />
+      <option name="presentableId" value="LOCAL-00373" />
+      <option name="project" value="LOCAL" />
+      <updated>1657297777285</updated>
+    </task>
+    <option name="localTasksCounter" value="374" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

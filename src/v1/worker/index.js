@@ -273,7 +273,7 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
             })
         }
 
-        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ['photos', 'slug', 'isVerified', 'name', 'messengers', 'phone', 'address'])
+        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ['photos', 'slug', 'isVerified', 'name', 'messengers', 'phone', 'address', 'location'])
 
         if (!worker) {
             return res.status(404).json({

@@ -442,7 +442,17 @@ class Home extends React.Component {
                 isMapView: true
             }, () => {
                 this.props.router.push({query: {}})
-                //TODO panTo and open pm
+
+                const modifyMap = () => {
+                    console.log(salon)
+                    //TODO panTo and open pm
+                }
+
+                if (this.state.map) {
+                    modifyMap()
+                } else {
+                    window.ymaps.ready(() => setTimeout(modifyMap, 500))
+                }
             })
         })
     }
