@@ -194,7 +194,6 @@ class Home extends React.Component {
         }
 
         map.geoObjects.removeAll()
-        console.log(map.events.removeAll)
 
         const clusterer = new ymaps.Clusterer({
                 groupByCoordinates: false,
@@ -694,16 +693,16 @@ class Home extends React.Component {
 
                                             <p style={{marginTop: 16}}>{chosenSalon.worker.address}</p>
 
-                                            {chosenSalon.review[0] && <div className={css.reviewSection}>
+                                            <div className={css.reviewSection}>
                                                 <div>
                                                     <Icon name={'star'}/>
-                                                    <span>{chosenSalon.review[0].avg.toFixed(1)}</span>
+                                                    <span>{(chosenSalon.review[0]?.avg || 0).toFixed(1)}</span>
                                                 </div>
 
                                                 <div>
-                                                    {chosenSalon.review[0].count} {declination(chosenSalon.review[0].count, t('reviewDeclination'))}
+                                                    {(chosenSalon.review[0]?.count || 0)} {declination((chosenSalon.review[0]?.count || 0), t('reviewDeclination'))}
                                                 </div>
-                                            </div>}
+                                            </div>
                                         </div>
                                         <div>
                                             <Icon name={'close'} className={css.closeIcon}
@@ -809,12 +808,12 @@ class Home extends React.Component {
                                                                             className={'cursor-pointer'}>{worker.name}</h1>
                                                 </Link>
 
-                                                <div bp={'5'} style={{paddingTop: 8}}
+                                                <div bp={'5'}
                                                      className="flex justify-end gap-12">
-                                                    {worker.reviews ? <div className={css.avgRating}>
+                                                    <div className={css.avgRating}>
                                                         <Icon name={'star'}/>
-                                                        <span>{worker.reviews?.avg ? worker.reviews.avg.toFixed(1) : '–'}</span>
-                                                    </div> : <div>&nbsp;</div>}
+                                                        <span>{(worker.reviews?.avg || 0).toFixed(1)}</span>
+                                                    </div>
 
                                                     <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                                 </div>
@@ -833,7 +832,7 @@ class Home extends React.Component {
                                                     <div>{worker.region[0].name}</div>
                                                 </div>
 
-                                                {worker.reviews && <div>
+                                                <div>
                                                     <div>{t('reviews').toLowerCase()}</div>
                                                     <Link href={{
                                                         query: Object.assign({}, this.props.router.query, {
@@ -843,10 +842,10 @@ class Home extends React.Component {
                                                         pathname: worker.url
                                                     }}>
                                                         <div
-                                                            className={css.linkUnderline}>{worker.reviews.count || 0} {declination(worker.reviews.count || 0, t('reviewDeclination'))}
+                                                            className={css.linkUnderline}>{worker.reviews?.count || 0} {declination(worker.reviews?.count || 0, t('reviewDeclination'))}
                                                         </div>
                                                     </Link>
-                                                </div>}
+                                                </div>
 
                                                 {worker.reviews && <div bp={'hide@md'}>
                                                     {worker.reviews ? <div className={css.avgRating}>

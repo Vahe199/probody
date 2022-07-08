@@ -511,10 +511,10 @@ class SalonView extends React.Component {
 
                                 <div bp={'5'} style={{paddingTop: 8}}
                                      className="flex justify-end gap-12">
-                                    {this.state.reviews.count > 0 ? <div className={css.avgRating}>
+                                    <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg > 0 ? this.state.reviews.avg.toFixed(1) : '-'}</span>
-                                    </div> : <div>&nbsp;</div>}
+                                        <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
+                                    </div>
 
                                     <Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
@@ -533,7 +533,7 @@ class SalonView extends React.Component {
                                     <div>{this.state.salon.region?.name}</div>
                                 </div>
 
-                                {this.state.reviews.count > 0 && <div>
+                                <div>
                                     <div>{t('reviews').toLowerCase()}</div>
                                     <Link href={{
                                         query: Object.assign({}, this.props.router.query, {
@@ -542,20 +542,20 @@ class SalonView extends React.Component {
                                         hash: '#salonTab'
                                     }}>
                                         <div
-                                            className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                                            className={css.linkUnderline}>{(this.state.reviews.count || 0)} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
                                         </div>
                                     </Link>
-                                </div>}
+                                </div>
 
-                                {this.state.reviews.avg > 0 && <div bp={'hide@md'}>
+                                <div bp={'hide@md'}>
                                     <div className={css.avgRating}>
                                         <Icon name={'star'}/>
-                                        <span>{this.state.reviews.avg.toFixed(1)}</span>
+                                        <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                     </div>
 
                                     <div><Button size={'small'}>{t('onTheMap').toLowerCase()}</Button>
                                     </div>
-                                </div>}
+                                </div>
                             </div>
 
                             <div bp={'5 show@md hide'}>
@@ -714,7 +714,7 @@ class SalonView extends React.Component {
                                     hash: '#salonTab'
                                 }}>
                                     <div
-                                        className={css.linkUnderline}>{this.state.reviews.count} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
+                                        className={css.linkUnderline}>{(this.state.reviews.count || 0)} {declination(this.state.reviews.count || 0, t('reviewDeclination'))}
                                     </div>
                                 </Link>
                             </div>
