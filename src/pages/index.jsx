@@ -214,15 +214,17 @@ class Home extends React.Component {
             geoObjects = []
 
         for (const id in workers) {
-            let pm = new window.ymaps.Placemark(workers[id], {}, {
-                // iconLayout: window.ymaps.templateLayoutFactory.createClass(
-                //     `<img src="{{properties.iconImageHref}}" alt="dot"><span style="color: rebeccapurple">{{properties.iconContent}}</span>`
-                // ),
+            let pm = new window.ymaps.Placemark(workers[id], {
+                iconImageHref: '/icons/dot.svg'
+            }, {
+                iconLayout: window.ymaps.templateLayoutFactory.createClass(
+                    `<div style="cursor: pointer"><img src="{{properties.iconImageHref}}" alt="dot"><span style="color: darkred">{{properties.iconContent}}</span></div>`
+                ),
                 iconImageHref: '/icons/dot.svg',
                 iconImageSize: [24, 24],
                 iconImageOffset: [-5, -5],
                 iconContentOffset: [35, 10],
-                iconLayout: 'default#imageWithContent'
+                // iconLayout: 'default#imageWithContent'
             })
 
             pm.events.add('mouseenter', async () => {
