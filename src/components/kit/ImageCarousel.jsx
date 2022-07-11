@@ -11,6 +11,7 @@ class ImageCarousel extends React.Component {
 
         this.state = {
             currentSlide: 0,
+            fullscreen: false,
             slider: React.createRef(),
             swipe: {
                 started: false,
@@ -115,6 +116,14 @@ class ImageCarousel extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.fullscreen) {
+            window.document.body.classList.add('no-scroll')
+        } else if (prevState.fullscreen && !this.state.fullscreen) {
+            window.document.body.classList.remove('no-scroll')
+        }
+    }
+
     render() {
         const {theme, isMobile} = this.context
         let height
@@ -125,38 +134,54 @@ class ImageCarousel extends React.Component {
             height = this.props.height
         }
 
+        if (this.state.fullscreen) {
+            height = isMobile ? '50vh' : '60vh'
+        }
+
         return <div className={css['theme--' + theme]}>
-            <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
-                <div onMouseDown={this.swipeHandlers.tap} onTouchStart={this.swipeHandlers.tap}
-                     onMouseLeave={this.swipeHandlers.release}
-                     onMouseUp={this.swipeHandlers.release} onTouchEnd={this.swipeHandlers.release}
-                     onMouseMove={this.swipeHandlers.move} onTouchMove={this.swipeHandlers.move} ref={this.state.slider}
-                     className={css.transformTransition}>
-                    {this.props.pics.map((image, index) =>
-                        <div className={css.slide} style={{
-                            backgroundImage: `url(${this.props.pics[index]})`,
-                            marginTop: index === 0 ? 0 : -height,
-                            height,
-                            marginLeft: index * 100 + '%',
-                            cursor: this.props.link ? 'pointer' : 'zoom-in'
-                        }} key={index} onClick={() => {
-                            if (this.props.link) {
-                                this.props.router.push(this.props.link)
-                            }
-                        }}>
-                            &nbsp;
-                        </div>
-                    )}
+            <div onClick={(e) => {
+                if (e.target.classList.contains(css.backdrop)) {
+                    this.setState({fullscreen: false})
+                }
+            }} className={cnb(css.backdrop, this.state.fullscreen ? css.visible : '')}></div>
+
+            <div className={cnb(css.modal, this.state.fullscreen ? css.visible : '')}>
+                <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
+                    <div onMouseDown={this.swipeHandlers.tap} onTouchStart={this.swipeHandlers.tap}
+                         onMouseLeave={this.swipeHandlers.release}
+                         onMouseUp={this.swipeHandlers.release} onTouchEnd={this.swipeHandlers.release}
+                         onMouseMove={this.swipeHandlers.move} onTouchMove={this.swipeHandlers.move}
+                         ref={this.state.slider}
+                         className={css.transformTransition}>
+                        {this.props.pics.map((image, index) =>
+                            <div className={css.slide} style={{
+                                backgroundImage: `url(${this.props.pics[index]})`,
+                                marginTop: index === 0 ? 0 : (typeof height === 'string' ? '-' + height : -height),
+                                ...(this.state.fullscreen ? {} : {height}),
+                                marginLeft: index * 100 + '%',
+                                cursor: this.props.link ? 'pointer' : (this.state.fullscreen ? 'default' : 'zoom-in')
+                            }} key={index} onClick={() => {
+                                if (this.props.link) {
+                                    return this.props.router.push(this.props.link)
+                                }
+
+                                this.setState({fullscreen: true})
+                            }}>
+                                &nbsp;
+                            </div>
+                        )}
+                    </div>
+                    {this.props.pics.length > 1 && <div className={css.navigation}>
+                        {this.props.pics.map((image, index) =>
+                            <div
+                                className={cnb(css.navigationItem, index === this.state.currentSlide ? css.current : '')}
+                                key={index}
+                                onClick={() => this.setSlide(index)}>
+                                &nbsp;
+                            </div>
+                        )}
+                    </div>}
                 </div>
-                {this.props.pics.length > 1 && <div className={css.navigation}>
-                    {this.props.pics.map((image, index) =>
-                        <div className={cnb(css.navigationItem, index === this.state.currentSlide ? css.current : '')}
-                             key={index}
-                             onClick={() => this.setSlide(index)}>
-                            &nbsp;
-                        </div>
-                    )}
-                </div>}
             </div>
         </div>
     }

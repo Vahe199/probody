@@ -78,11 +78,11 @@ router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
 //                 coordinates: workerDoc.location.coordinates,
 //                 type: 'Point'
 //             }
-//         }).limit(3)) // TODO: set up projection
+//         }).limit(3))
 //     } else {
 //         res.json(await Worker.find({
 //             kind: 'salon'
-//         }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3)) // TODO: set up projection
+//         }).where('location').near({center: {coordinates: workerDoc.location.coordinates, type: 'Point'}}).limit(3))
 //     }
 // })
 
