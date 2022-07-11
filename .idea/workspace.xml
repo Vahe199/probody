@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added user location circle">
+      <change afterPath="$PROJECT_DIR$/src/public/icons/dot_empty.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/PlaceMark.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/PlaceMark.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/icons/dot.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/dot.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/pointWithBody.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,28 +51,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.13.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.43&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/components/kit&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "16.13.1",
+    "javascript.nodejs.core.library.typings.version": "16.11.43",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public/icons",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/kit" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
+      <recent name="$PROJECT_DIR$/src/components/kit" />
       <recent name="$PROJECT_DIR$/src/components/kit/Collapses" />
       <recent name="$PROJECT_DIR$/src/pages/account" />
       <recent name="$PROJECT_DIR$/src/components/kit/Form" />
@@ -151,21 +155,7 @@
       <workItem from="1657133090928" duration="14810000" />
       <workItem from="1657197346585" duration="1726000" />
       <workItem from="1657199774308" duration="8991000" />
-      <workItem from="1657281829965" duration="11758000" />
-    </task>
-    <task id="LOCAL-00325" summary="fixed scroll">
-      <created>1656670065459</created>
-      <option name="number" value="00325" />
-      <option name="presentableId" value="LOCAL-00325" />
-      <option name="project" value="LOCAL" />
-      <updated>1656670065459</updated>
-    </task>
-    <task id="LOCAL-00326" summary="fixed scroll">
-      <created>1656670137495</created>
-      <option name="number" value="00326" />
-      <option name="presentableId" value="LOCAL-00326" />
-      <option name="project" value="LOCAL" />
-      <updated>1656670137495</updated>
+      <workItem from="1657281829965" duration="20319000" />
     </task>
     <task id="LOCAL-00327" summary="fixed scroll">
       <created>1656670338240</created>
@@ -496,7 +486,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657297777285</updated>
     </task>
-    <option name="localTasksCounter" value="374" />
+    <task id="LOCAL-00374" summary="added user location circle">
+      <created>1657298473814</created>
+      <option name="number" value="00374" />
+      <option name="presentableId" value="LOCAL-00374" />
+      <option name="project" value="LOCAL" />
+      <updated>1657298473815</updated>
+    </task>
+    <task id="LOCAL-00375" summary="added user location circle">
+      <created>1657298627483</created>
+      <option name="number" value="00375" />
+      <option name="presentableId" value="LOCAL-00375" />
+      <option name="project" value="LOCAL" />
+      <updated>1657298627483</updated>
+    </task>
+    <option name="localTasksCounter" value="376" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

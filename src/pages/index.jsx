@@ -214,18 +214,15 @@ class Home extends React.Component {
             geoObjects = []
 
         for (const id in workers) {
-            let pm = new window.ymaps.Placemark(workers[id], {
-                iconImageHref: '/icons/dot.svg'
-            }, {
-                iconLayout: window.ymaps.templateLayoutFactory.createClass(
-                    `<div style="cursor: pointer"><img src="{{properties.iconImageHref}}" alt="dot"><span style="color: darkred">{{properties.iconContent}}</span></div>`
-                ),
+            let pm = new window.ymaps.Placemark(workers[id], {}, {
+                iconLayout: 'default#imageWithContent',
                 iconImageHref: '/icons/dot.svg',
                 iconImageSize: [24, 24],
                 iconImageOffset: [-5, -5],
-                iconContentOffset: [35, 10],
-                // iconLayout: 'default#imageWithContent'
+                iconContentOffset: [0, -25]
             })
+
+            pm.options.set('salonId', id)
 
             pm.events.add('mouseenter', async () => {
                 if (map.state.get('hasFocus')) {
@@ -258,9 +255,10 @@ class Home extends React.Component {
         }
 
         clusterer.add(geoObjects)
-        map.geoObjects.add(clusterer)
 
+        map.geoObjects.add(clusterer)
         map.setCenter(center, 13)
+
         map.events.add('click', () => {
             map.geoObjects.get(0).getGeoObjects().forEach(pm => PlaceMark(pm).close())
             map.state.set('hasFocus', false)
@@ -272,6 +270,8 @@ class Home extends React.Component {
     }
 
     chooseSalonOnMap(salonId) {
+        // PlaceMark(this.state.map.geoObjects.get(0).getGeoObjects().find(i => i.options.get('salonId') === salonId)).setActive()
+
         if (this.state.preloadedSalons[salonId]) {
             return this.setState({
                 chosenSalonId: salonId
@@ -309,7 +309,7 @@ class Home extends React.Component {
 
     async getShortSalonInfo(id) {
         if (this.state.preloadedSalons[id]) {
-            return this.state.preloadedSalons[id].worker.name
+            return this.state.preloadedSalons[id]
         }
 
         const salon = await APIRequests.getMapWorker(id)
@@ -321,7 +321,7 @@ class Home extends React.Component {
             }
         })
 
-        return salon.worker.name
+        return salon
     }
 
     resetFilters() {
