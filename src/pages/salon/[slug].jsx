@@ -289,10 +289,7 @@ class SalonView extends React.Component {
                 photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
                     {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
                         <div bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}>
-                            <div style={{
-                                backgroundImage: `url(${photo})`,
-                                height: photoHeight,
-                            }} className={css.photo}>&nbsp;</div>
+                            <ImageCarousel pics={[photo]} key={index} height={photoHeight} />
                         </div>
                     )}
                 </div>
