@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added user location circle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/ImageCarousel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,21 +150,7 @@
       <workItem from="1657133090928" duration="14810000" />
       <workItem from="1657197346585" duration="1726000" />
       <workItem from="1657199774308" duration="8991000" />
-      <workItem from="1657281829965" duration="24409000" />
-    </task>
-    <task id="LOCAL-00329" summary="fixed scroll">
-      <created>1656670715942</created>
-      <option name="number" value="00329" />
-      <option name="presentableId" value="LOCAL-00329" />
-      <option name="project" value="LOCAL" />
-      <updated>1656670715942</updated>
-    </task>
-    <task id="LOCAL-00330" summary="fixed scroll">
-      <created>1656673035473</created>
-      <option name="number" value="00330" />
-      <option name="presentableId" value="LOCAL-00330" />
-      <option name="project" value="LOCAL" />
-      <updated>1656673035473</updated>
+      <workItem from="1657281829965" duration="25165000" />
     </task>
     <task id="LOCAL-00331" summary="fixed scroll">
       <created>1656673408089</created>
@@ -499,7 +481,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657543983323</updated>
     </task>
-    <option name="localTasksCounter" value="378" />
+    <task id="LOCAL-00378" summary="added user location circle">
+      <created>1657547426165</created>
+      <option name="number" value="00378" />
+      <option name="presentableId" value="LOCAL-00378" />
+      <option name="project" value="LOCAL" />
+      <updated>1657547426165</updated>
+    </task>
+    <task id="LOCAL-00379" summary="added user location circle">
+      <created>1657547656427</created>
+      <option name="number" value="00379" />
+      <option name="presentableId" value="LOCAL-00379" />
+      <option name="project" value="LOCAL" />
+      <updated>1657547656427</updated>
+    </task>
+    <option name="localTasksCounter" value="380" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
