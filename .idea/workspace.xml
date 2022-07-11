@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added user location circle">
-      <change afterPath="$PROJECT_DIR$/src/public/icons/dot_empty.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/PlaceMark.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/PlaceMark.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/icons/dot.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/dot.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/pointWithBody.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,14 +150,7 @@
       <workItem from="1657133090928" duration="14810000" />
       <workItem from="1657197346585" duration="1726000" />
       <workItem from="1657199774308" duration="8991000" />
-      <workItem from="1657281829965" duration="20319000" />
-    </task>
-    <task id="LOCAL-00327" summary="fixed scroll">
-      <created>1656670338240</created>
-      <option name="number" value="00327" />
-      <option name="presentableId" value="LOCAL-00327" />
-      <option name="project" value="LOCAL" />
-      <updated>1656670338241</updated>
+      <workItem from="1657281829965" duration="20963000" />
     </task>
     <task id="LOCAL-00328" summary="fixed scroll">
       <created>1656670456615</created>
@@ -500,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657298627483</updated>
     </task>
-    <option name="localTasksCounter" value="376" />
+    <task id="LOCAL-00376" summary="added user location circle">
+      <created>1657538935962</created>
+      <option name="number" value="00376" />
+      <option name="presentableId" value="LOCAL-00376" />
+      <option name="project" value="LOCAL" />
+      <updated>1657538935962</updated>
+    </task>
+    <option name="localTasksCounter" value="377" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

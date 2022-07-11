@@ -60,7 +60,7 @@ export default function PlaceMark(pm) {
         },
 
         setActive() {
-            console.log(pm.options.get('iconContentLayout'))
+            // console.log(pm.options.get('iconContentLayout'))
             // pm.options.set('iconContentLayout', ')
         }
     }

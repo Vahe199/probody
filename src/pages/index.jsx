@@ -446,8 +446,10 @@ class Home extends React.Component {
                 this.props.router.push({query: {}})
 
                 const modifyMap = () => {
-                    console.log(salon)
                     //TODO panTo and open pm
+                    PlaceMark(this.state.map.geoObjects.get(0).getGeoObjects().find(i => i.options.get('salonId') === salonId)).open(this.context.t, new Promise(resolve => resolve(salon)))
+                    this.state.map.setCenter(salon.worker.location.coordinates, 15)
+                    this.state.map.state.set('hasFocus', true)
                 }
 
                 if (this.state.map) {
