@@ -8,7 +8,7 @@ import TextInput from "../../components/kit/Form/TextInput";
 import Button from "../../components/kit/Button.jsx";
 import APIRequests from "../../helpers/APIRequests.js";
 import {formatIncompletePhoneNumber} from "libphonenumber-js";
-import css from "../../styles/new.page.module.scss";
+import css from "../../styles/registeredmodal.module.scss";
 import Icon from "../../components/kit/Icon.jsx";
 import Modal from "../../components/kit/Modal.jsx";
 import Select from "../../components/kit/Form/Select";
@@ -83,29 +83,33 @@ class PersonalInfoPage extends React.Component {
                 <title>{t('personalInfo')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.successDialogOpen}
+            <Modal open={this.state.successDialogOpen} isMobile={false}
                    onUpdate={this.closeSuccessDialog}>
-                <div className={css.modalBody}>
-                    <p>{t('cool')}</p>
+                <div>
+                    <div className={css.modalBody}>
+                        <p>{t('cool')}</p>
 
-                    <h1>{t('salonSentToModeration')}</h1>
+                        <h1>{t('infoSaved')}</h1>
 
-                    <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('toMainPage')}</Button>
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
 
-                    <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                        <p style={{marginTop: 16}}>{t('continueUsingSite')}</p>
+                    </div>
                 </div>
             </Modal>
 
-            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.emailVerificationDialogOpen}
-                   onUpdate={this.closeSuccessDialog}>
-                <div className={css.modalBody}>
-                    <p>{t('cool')}</p>
+            <Modal open={this.state.emailVerificationDialogOpen} isMobile={false}
+                   onUpdate={this.closeEmailDialog}>
+                <div>
+                    <div className={css.modalBody}>
+                        <p>{t('cool')}</p>
 
-                    <h1>{t('salonSentToModeration')}</h1>
+                        <h1>{t('sentActivationEmail')}</h1>
 
-                    <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('toMainPage')}</Button>
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeEmailDialog}/>
 
-                    <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                        <p style={{marginTop: 16}}>{t('checkYourInbox')}</p>
+                    </div>
                 </div>
             </Modal>
 
@@ -116,7 +120,6 @@ class PersonalInfoPage extends React.Component {
                     <TextInput value={this.state.personalInfo.paymentCode} label={t('login')} placeholder={''}
                                disabled/>
                     <Select value={this.state.personalInfo.internalRole} onUpdate={internalRole => {
-                        console.log(internalRole)
                         this.setState({
                             personalInfo: {
                                 ...this.state.personalInfo,
@@ -140,7 +143,7 @@ class PersonalInfoPage extends React.Component {
                             _id: 'master',
                             name: t('role_master')
                         }
-                    ]} placeholder={t('chooseFromList')} />
+                    ]} placeholder={t('chooseFromList')}/>
                     <TextInput value={formatIncompletePhoneNumber(this.state.personalInfo.phone || '', 'KZ')} disabled
                                label={t('phone')} placeholder={''}/>
                     <TextInput value={this.state.personalInfo.email} type={'email'} onUpdate={email => {
@@ -163,7 +166,11 @@ class PersonalInfoPage extends React.Component {
                             })
                         } else {
                             this.setState({
-                                emailVerificationDialogOpen: true
+                                emailVerificationDialogOpen: true,
+                                staleData: {
+                                    ...this.state.staleData,
+                                    email: this.state.personalInfo.email
+                                }
                             })
                         }
                     }}>{t('save')}</Button>

@@ -687,7 +687,7 @@ class NewSalonPage extends React.Component {
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen}
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} isMobile={false}
                    onUpdate={this.closeSuccessDialog}>
                 <div className={css.modalBody}>
                     <p>{t('cool')}</p>
