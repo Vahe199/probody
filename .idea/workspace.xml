@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added user location circle">
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/articlecard.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/articlecard.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/vacancypage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,14 +155,7 @@
       <workItem from="1657197346585" duration="1726000" />
       <workItem from="1657199774308" duration="8991000" />
       <workItem from="1657281829965" duration="25746000" />
-      <workItem from="1657614980513" duration="475000" />
-    </task>
-    <task id="LOCAL-00332" summary="fixed scroll">
-      <created>1656673462698</created>
-      <option name="number" value="00332" />
-      <option name="presentableId" value="LOCAL-00332" />
-      <option name="project" value="LOCAL" />
-      <updated>1656673462698</updated>
+      <workItem from="1657614980513" duration="784000" />
     </task>
     <task id="LOCAL-00333" summary="fixed scroll">
       <created>1656673491329</created>
@@ -497,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657548422957</updated>
     </task>
-    <option name="localTasksCounter" value="381" />
+    <task id="LOCAL-00381" summary="added social block on mobile">
+      <created>1657615766121</created>
+      <option name="number" value="00381" />
+      <option name="presentableId" value="LOCAL-00381" />
+      <option name="project" value="LOCAL" />
+      <updated>1657615766122</updated>
+    </task>
+    <option name="localTasksCounter" value="382" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +531,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="done paginator" />
     <MESSAGE value="fixed blog and vacancies" />
     <MESSAGE value="added IDE files" />
     <MESSAGE value="added salon master view" />
@@ -553,6 +555,7 @@
     <MESSAGE value="cleaned up url" />
     <MESSAGE value="fixed load n more btn" />
     <MESSAGE value="added user location circle" />
-    <option name="LAST_COMMIT_MESSAGE" value="added user location circle" />
+    <MESSAGE value="added social block on mobile" />
+    <option name="LAST_COMMIT_MESSAGE" value="added social block on mobile" />
   </component>
 </project>

@@ -127,7 +127,7 @@ class BlogPage extends React.Component {
                             <div className={css.vacancyCard} bp={'grid'} key={index}>
                                 <div bp={'12 6@md'}>
                                     <div className={css.cardRoot} style={{background: 'unset'}}>
-                                        <Link href={'/vacancies/' + vac.slug}><ImageCarousel pics={[vac.pic]} style={isMobile ? {} : {height: 'unset'}}
+                                        <Link href={'/vacancies/' + vac.slug}><ImageCarousel pics={[vac.pic]} link={'/vacancies/' + vac.slug} style={isMobile ? {} : {height: 'unset'}}
                                                                               className={css.pic}/></Link>
                                     </div>
 
