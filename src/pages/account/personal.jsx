@@ -22,16 +22,21 @@ class PersonalInfoPage extends React.Component {
         this.state = {
             personalInfo: {},
             staleData: {},
-            successDialogOpen: false
+            successDialogOpen: false,
+            emailVerificationDialogOpen: false
         }
 
         this.saveInfo = this.saveInfo.bind(this)
         this.verifyEmail = this.verifyEmail.bind(this)
         this.closeSuccessDialog = this.closeSuccessDialog.bind(this)
+        this.closeEmailDialog = this.closeEmailDialog.bind(this)
     }
 
     componentDidMount() {
         APIRequests.getMe().then(personalInfo => {
+            if (!personalInfo.internalRole) {
+                personalInfo.internalRole = ''
+            }
             this.setState({personalInfo, staleData: personalInfo})
         })
     }
@@ -47,6 +52,12 @@ class PersonalInfoPage extends React.Component {
     closeSuccessDialog() {
         this.setState({
             successDialogOpen: false
+        })
+    }
+
+    closeEmailDialog() {
+        this.setState({
+            emailVerificationDialogOpen: false
         })
     }
 
@@ -72,7 +83,20 @@ class PersonalInfoPage extends React.Component {
                 <title>{t('personalInfo')}{TITLE_POSTFIX}</title>
             </Head>
 
-            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen}
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.successDialogOpen}
+                   onUpdate={this.closeSuccessDialog}>
+                <div className={css.modalBody}>
+                    <p>{t('cool')}</p>
+
+                    <h1>{t('salonSentToModeration')}</h1>
+
+                    <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('toMainPage')}</Button>
+
+                    <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                </div>
+            </Modal>
+
+            <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.emailVerificationDialogOpen}
                    onUpdate={this.closeSuccessDialog}>
                 <div className={css.modalBody}>
                     <p>{t('cool')}</p>
@@ -92,6 +116,7 @@ class PersonalInfoPage extends React.Component {
                     <TextInput value={this.state.personalInfo.paymentCode} label={t('login')} placeholder={''}
                                disabled/>
                     <Select value={this.state.personalInfo.internalRole} onUpdate={internalRole => {
+                        console.log(internalRole)
                         this.setState({
                             personalInfo: {
                                 ...this.state.personalInfo,
@@ -131,6 +156,16 @@ class PersonalInfoPage extends React.Component {
                     <Button style={{width: 335}} color={'secondary'} onClick={() => {
                         this.saveInfo('email')
                         this.saveInfo('internalRole')
+
+                        if (this.state.staleData.email === this.state.personalInfo.email) {
+                            this.setState({
+                                successDialogOpen: true
+                            })
+                        } else {
+                            this.setState({
+                                emailVerificationDialogOpen: true
+                            })
+                        }
                     }}>{t('save')}</Button>
                 </div>
             </PersonalPageLayout>

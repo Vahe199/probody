@@ -6,7 +6,7 @@ export async function updateUser(req, res, next) {
     req.validation = []
 
     if (field) { //проверяем наличие ключа
-        if (!['avatar', 'nickName', 'email'].includes(field)) {//проверяем на валидность ключ
+        if (!['avatar', 'nickName', 'email', 'internalRole'].includes(field)) {//проверяем на валидность ключ
             req.validation.push({text: 'invalidField', field: 'field'})
         } else {//ключ правильный, проверяем на валидность значение
             switch (field) {
