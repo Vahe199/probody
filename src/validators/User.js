@@ -29,6 +29,13 @@ export async function updateUser(req, res, next) {
                         req.validation.push({text: 'invalidValue', field})
                         break
                     }
+                    break
+
+                case 'internalRole':
+                    if (!['admin', 'owner', 'manager', 'master'].includes(value)) {
+                        req.validation.push({text: 'invalidValue', field})
+                        break
+                    }
             }
         }
     } else {

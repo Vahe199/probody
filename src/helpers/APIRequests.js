@@ -18,8 +18,37 @@ export default class APIRequests {
         }
     }
 
+    static withJSON(headers) {
+        return {
+            'Content-Type': 'application/json',
+            ...headers
+        }
+    }
+
     static async getServices() {
         return (await fetch(`${API_URL}/service`)).json()
+    }
+
+    static async verifyEmail() {
+        return ((await fetch(`${API_URL}/user/approvemail`, {
+            method: 'PATCH',
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
+            body: JSON.stringify({field, value})
+        })).json())
+    }
+
+    static async getMe() {
+        return ((await fetch(`${API_URL}/user/me`, {
+            headers: APIRequests.withCredentials()
+        })).json())
+    }
+
+    static async updateAccountInfo(field, value) {
+        return ((await fetch(`${API_URL}/user`, {
+            method: 'PATCH',
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
+            body: JSON.stringify({field, value})
+        })).json())
     }
 
     static async top3Masters() {
@@ -32,9 +61,7 @@ export default class APIRequests {
         }
 
         return (await fetch(`${API_URL}/review/${salonId}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             method: 'POST',
             body: JSON.stringify({
                 service, massage, interior, name, text
@@ -68,9 +95,7 @@ export default class APIRequests {
 
     static async answerQuestion(id, isUseful, text) {
         return (await fetch(`${API_URL}/faq/${id}`, {
-            headers: APIRequests.withCredentials({
-                'Content-Type': 'application/json'
-            }),
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
             method: 'POST',
             body: JSON.stringify({
                 isUseful, text
@@ -126,9 +151,7 @@ export default class APIRequests {
     static async logIn(phone, password) {
         return (await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 password
@@ -139,9 +162,7 @@ export default class APIRequests {
     static async signUp(phone) {
         return fetch(`${API_URL}/auth/register`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone
             })
@@ -151,9 +172,7 @@ export default class APIRequests {
     static async changePassword(phone, code, password) {
         return fetch(`${API_URL}/auth/update-password`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 code,
@@ -165,9 +184,7 @@ export default class APIRequests {
     static async requestPasswordReset(phone) {
         return fetch(`${API_URL}/auth/request-reset`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone
             })
@@ -177,9 +194,7 @@ export default class APIRequests {
     static async verifyCode(phone, code) {
         return fetch(`${API_URL}/auth/checkcode`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 code
@@ -190,9 +205,7 @@ export default class APIRequests {
     static async verifyResetCode(phone, code) {
         return fetch(`${API_URL}/auth/checkcode/reset`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 code
@@ -203,9 +216,7 @@ export default class APIRequests {
     static async approveAccount(phone, code, password) {
         return fetch(`${API_URL}/auth/approve`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 code,
@@ -217,9 +228,7 @@ export default class APIRequests {
     static resendCode(phone, target) {
         return fetch(`${API_URL}/auth/resend-sms`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({
                 phone,
                 target
@@ -236,9 +245,7 @@ export default class APIRequests {
 
         return fetch(`${API_URL}/worker`, {
             method: 'POST',
-            headers: APIRequests.withCredentials({
-                'Content-Type': 'application/json'
-            }),
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
             body: JSON.stringify(model)
         })
     }
@@ -254,9 +261,7 @@ export default class APIRequests {
 
         return fetch(`${API_URL}/search/worker?page=${page}&limit=${filters.coords ? PAGE_SIZES.MAIN_MAP : PAGE_SIZES.MAIN}&onlyCount=${onlyCount}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: APIRequests.withJSON(),
             body: JSON.stringify({query, filters})
         }).then(res => res.json())
     }

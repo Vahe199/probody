@@ -11,24 +11,31 @@ const router = express.Router()
 
 router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
     const {
-        nickName,
-        avatar,
         reffCode,
         balance,
         paymentCode,
-        role,
         email,
-        phone
+        phone,
+        approvedEmail,
+        internalRole
     } = req.user;//req.user это объект, который пришел из AuthGuard
 
+    let verificationStatus
+
+    if (approvedEmail) {
+        verificationStatus = 'verified'
+    } else {
+        //TODO get from redis
+        verificationStatus = 'notverified'
+    }
+
     res.json({
-        nickName,
-        avatar,
         balance,
         paymentCode,
-        role,
         email,
         reffCode,
+        internalRole,
+        verificationStatus,
         phone//это все нужно для того, чтоб не светить пароль в ответе
     })
 });

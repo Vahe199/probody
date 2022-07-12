@@ -126,24 +126,29 @@ class BlogPage extends React.Component {
                         {!Objects.isEmpty(this.state.vacancies) && this.state.vacancies.map((vac, index) =>
                             <div className={css.vacancyCard} bp={'grid'} key={index}>
                                 <div bp={'12 6@md'}>
-                                    <div className={css.cardRoot} style={{background: 'unset'}}>
-                                        <Link href={'/vacancies/' + vac.slug}><ImageCarousel pics={[vac.pic]} link={'/vacancies/' + vac.slug} style={isMobile ? {} : {height: 'unset'}}
-                                                                              className={css.pic}/></Link>
-                                    </div>
+                                    <div className={isMobile ? css.cardRoot : ''}>
+                                        <div className={css.cardRoot} style={{background: 'unset'}}>
+                                            <Link href={'/vacancies/' + vac.slug}><ImageCarousel pics={[vac.pic]}
+                                                                                                 link={'/vacancies/' + vac.slug}
+                                                                                                 style={isMobile ? {} : {height: 'unset'}}
+                                                                                                 className={css.pic}/></Link>
+                                        </div>
 
-                                    <div className={css.cardRoot}>
-                                        {isMobile
-                                            ? <div className={css.content}>
-                                                <p className={css.caption}>{vac.salonTitle}</p>
-                                                <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
-                                                <p>{vac.description}</p>
-                                            </div>
-                                            : <div className={css.contactContainer}>
-                                                <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
-                                                <a href={'tel:' + vac.phone}><Button color={'tertiary'} iconLeft={'call'}>
-                                                    {t('call')}
-                                                </Button></a>
-                                            </div>}
+                                        <div className={css.cardRoot}>
+                                            {isMobile
+                                                ? <div className={css.content}>
+                                                    <p className={css.caption}>{vac.salonTitle}</p>
+                                                    <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
+                                                    <p>{vac.description}</p>
+                                                </div>
+                                                : <div className={css.contactContainer}>
+                                                    <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
+                                                    <a href={'tel:' + vac.phone}><Button color={'tertiary'}
+                                                                                         iconLeft={'call'}>
+                                                        {t('call')}
+                                                    </Button></a>
+                                                </div>}
+                                        </div>
                                     </div>
                                 </div>
                                 <div bp={'12 6@md'} className={cnb(css.cardRoot, css.vacancyInfo)}>
@@ -153,17 +158,23 @@ class BlogPage extends React.Component {
                                         <p>{vac.description}</p>
                                     </div>}
 
-                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}}
+                                         className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('salary')}</span>
-                                        <span className={css.value}>{t('from')} {formatPrice(vac.salary)} {t('kzt')}</span>
+                                        <span
+                                            className={css.value}>{t('from')} {formatPrice(vac.salary)} {t('kzt')}</span>
                                     </div>
-                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}}
+                                         className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('schedule')}</span>
-                                        <span className={css.value}>{vac.workSchedule.map(i => t('schedule_' + i)).join(', ')}</span>
+                                        <span
+                                            className={css.value}>{vac.workSchedule.map(i => t('schedule_' + i)).join(', ')}</span>
                                     </div>
-                                    <div style={{marginBottom: 12}} className={'flex align-end justify-between non-selectable'}>
+                                    <div style={{marginBottom: 12}}
+                                         className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('employment')}</span>
-                                        <span className={css.value}>{vac.employment.map(i => t('employment_' + i)).join(', ')} {t('business')}</span>
+                                        <span
+                                            className={css.value}>{vac.employment.map(i => t('employment_' + i)).join(', ')} {t('business')}</span>
                                     </div>
                                     <div className={'flex justify-between align-end non-selectable'}>
                                         <span className={css.caption}>{t('city')}</span>
@@ -182,15 +193,17 @@ class BlogPage extends React.Component {
                     </div>
                 </div>
                 <div bp={'12 4@md'}>
-                    {(this.state.pageCount > 1 && isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
-                                                                          pageCnt={this.state.pageCount} style={{marginBottom: 16}}/>}
+                    {(this.state.pageCount > 1 && isMobile) &&
+                        <Paginator page={this.state.page} onChange={this.handlePageChange}
+                                   pageCnt={this.state.pageCount} style={{marginBottom: 16}}/>}
 
                     <ShareInSocialMedia url={'https://probody.kz'}/>
                 </div>
             </div>
 
-            {(this.state.pageCount > 1 && !isMobile) && <Paginator page={this.state.page} onChange={this.handlePageChange}
-                                                                   pageCnt={this.state.pageCount}/>}
+            {(this.state.pageCount > 1 && !isMobile) &&
+                <Paginator page={this.state.page} onChange={this.handlePageChange}
+                           pageCnt={this.state.pageCount}/>}
         </section>
     }
 }

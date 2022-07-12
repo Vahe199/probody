@@ -185,7 +185,7 @@ export default class TextInput extends React.Component {
                         <ControlledInput id={inputId}
                                          pattern={this.props.type === 'phone' || this.props.type === 'number' ? '\\d*' : ''}
                                          onBlur={this.validateInput}
-                                         type={this.state.visible ? 'text' : (this.props.type === 'number' ? 'text' : this.props.type)} value={this.state.value}
+                                         type={(this.state.visible || this.props.type === 'email') ? 'text' : (this.props.type === 'number' ? 'text' : this.props.type)} value={this.state.value}
                                          autoComplete={this.props.autoComplete}
                                          onChange={this.handleUpdate} autoFocus={false}
                                          disabled={(this.state.locked || this.props.disabled)}

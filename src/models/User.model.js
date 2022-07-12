@@ -16,9 +16,13 @@ const UserSchema = new Schema({
     type: String,
     default: ''
   },
-  nickName: {
+  // nickName: {
+  //   type: String,
+  //   default: ''
+  // },
+  internalRole: {
     type: String,
-    default: ''
+    enum: ['admin', 'owner', 'manager', 'master']
   },
   balance: {
     type: Number,
