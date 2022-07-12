@@ -14,6 +14,7 @@ import Tag from "../../components/kit/Tag";
 import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import {parsePhoneNumber} from "libphonenumber-js";
 import Icon from "../../components/kit/Icon.jsx";
+import Objects from "../../helpers/Objects.js";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -117,12 +118,24 @@ class VacancyViewPage extends React.Component {
                             <span className={css.caption}>{t('address')}</span>
                             <span className={css.value}>{this.state.vacancy.salonAddress}</span>
                         </div>
-                        <div className={'flex justify-between non-selectable'}>
-                            <span className={css.caption}>{t('salon')}</span>
-                            <span className={css.value}>{this.state.vacancy.salonTitle}</span>
-                        </div>
                     </div>
+
+                    {Objects.isFilled(this.state.vacancy.social) && <div style={{marginTop: 4}} bp={'hide@md'}
+                                                                       className={cnb(css.cardRoot, css.padded)}>
+                        <p className={'subtitle2'}>{t('socialMedia')}</p>
+
+                        <div style={{marginTop: 16}} className={css.socialBlock}>
+                            {Object.keys(this.state.vacancy.social).filter(i => this.state.vacancy.social[i].length).map(name =>
+                                <div key={name}>
+                                    <a target="_blank" href={this.state.vacancy.social[name]} className={css.img}>
+                                        <Icon name={name + '_' + theme}/>
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </div>}
                 </div>
+
                 <div bp={'12 7@md'}>
                     {!isMobile && <div className={css.cardRoot}>
                         <div className={css.content}>

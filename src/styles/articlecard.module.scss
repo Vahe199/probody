@@ -77,7 +77,7 @@
 
 .value {
   @include themify() {
-    font-size: 18px;
+    font-size: 17px;
     text-align: right;
     max-width: 75%;
     color: t('text-main');

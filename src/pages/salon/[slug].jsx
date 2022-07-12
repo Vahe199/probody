@@ -29,6 +29,7 @@ import Collapsible from "../../components/kit/Collapses/Collapsible.jsx";
 import Modal from "../../components/kit/Modal";
 import TextArea from "../../components/kit/Form/TextArea";
 import TextInput from "../../components/kit/Form/TextInput";
+import Objects from "../../helpers/Objects.js";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -616,6 +617,21 @@ class SalonView extends React.Component {
                                 <WeekView enabledDays={this.state.salon.workDays || []}/>
                             </div>
                         </div>}
+
+                    {Objects.isFilled(this.state.salon.social) && <div style={{marginTop: 4}} bp={'hide@md'}
+                                                                       className={cnb(css.cardRoot, css.padded)}>
+                        <p className={'subtitle2'}>{t('socialMedia')}</p>
+
+                        <div style={{marginTop: 16}} className={css.socialBlock}>
+                            {Object.keys(this.state.salon.social).filter(i => this.state.salon.social[i].length).map(name =>
+                                <div key={name}>
+                                    <a target="_blank" href={this.state.salon.social[name]} className={css.img}>
+                                        <Icon name={name + '_' + theme}/>
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </div>}
 
                     <div bp={'grid'} style={{marginTop: 8}}>
                         <div bp={'12 8@md'} style={{gap: 8}} className={cnb(css.padded)}>
