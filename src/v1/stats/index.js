@@ -6,8 +6,12 @@ const router = express.Router()
 
 router.put('/:salonId/views', async (req, res) => {
     try {
+        const currentDay = new Date()
+        currentDay.setHours(0, 0, 0, 0)
+
         await Stats.updateOne({
-                salon: req.params.salonId
+                salon: req.params.salonId,
+                date: currentDay
             }, {
                 $inc: {
                     [`counters.views`]: 1
@@ -31,8 +35,12 @@ router.put('/:salonId/views', async (req, res) => {
 
 router.put('/:salonId/:field', async (req, res) => {
     try {
+        const currentDay = new Date()
+        currentDay.setHours(0, 0, 0, 0)
+
         await Stats.updateOne({
-                salon: req.params.salonId
+                salon: req.params.salonId,
+                date: currentDay
             }, {
                 $inc: {
                     [`counters.actions.${req.params.field}`]: 1
@@ -56,7 +64,7 @@ router.put('/:salonId/:field', async (req, res) => {
 
 router.get('/:salonId', AuthGuard('serviceProvider'), async (req, res) => {
     try {
-
+        //TODO get stats for period
     } catch (e) {
         console.log(e)
 

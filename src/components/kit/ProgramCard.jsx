@@ -14,7 +14,8 @@ export default class ProgramCard extends React.Component {
         title: PropTypes.string.isRequired,
         duration: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
-        link: PropTypes.any
+        link: PropTypes.any,
+        onClick: PropTypes.func
     }
 
     render() {
@@ -22,7 +23,7 @@ export default class ProgramCard extends React.Component {
 
         return <div className={css['theme--' + theme]}>
             <Link href={this.props.link}>
-                <div className={cnb(css.root)}>
+                <div className={cnb(css.root)} onClick={() => this.props.onClick && this.props.onClick()}>
                     <div className={css.label}>{this.props.title}</div>
                     <div className={cnb(css.value)}>
                         <Icon style={{

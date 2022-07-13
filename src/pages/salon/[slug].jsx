@@ -68,6 +68,7 @@ class SalonView extends React.Component {
         this.setReviewModal = this.setReviewModal.bind(this)
         this.leaveReview = this.leaveReview.bind(this)
         this.closeSuccessModal = this.closeSuccessModal.bind(this)
+        this.incrementStats = this.incrementStats.bind(this)
     }
 
     static contextType = GlobalContext
@@ -120,6 +121,10 @@ class SalonView extends React.Component {
         })
     }
 
+    incrementStats(field) {
+        APIRequests.incrementStats(this.state.salon.parent ? this.state.salon.parent._id : this.state.salon._id, field)
+    }
+
     fetchWorkerInfo() {
         APIRequests.getWorker(this.props.router.query.slug).then(res => {
             if (res.worker[0].parent) {
@@ -135,6 +140,11 @@ class SalonView extends React.Component {
                 res.worker[0].messengers = res.worker[0].parent.messengers
                 res.worker[0].phone = res.worker[0].parent.phone
                 res.worker[0].social = res.worker[0].parent.social
+            }
+
+            if (!this.state.salon._id) {
+                //increment stats for parent if it is master
+                APIRequests.incrementStats(res.worker[0].parent ? res.worker[0].parent._id : res.worker[0]._id, 'views')
             }
 
             this.setState({
@@ -171,12 +181,15 @@ class SalonView extends React.Component {
                     })
                 )
 
-                map.events.add('click', () => this.props.router.push({
-                    pathname: '/',
-                    query: {
-                        onTheMap: this.state.salon._id
-                    }
-                }))
+                map.events.add('click', () => {
+                    this.incrementStats('mapClicks')
+                    this.props.router.push({
+                        pathname: '/',
+                        query: {
+                            onTheMap: this.state.salon._id
+                        }
+                    })
+                })
 
                 this.setState({
                     map
@@ -243,17 +256,17 @@ class SalonView extends React.Component {
                             </Button>}
                     </div>
                 </div>,
-                cost: <div bp={'grid'}>
+                price: <div bp={'grid'}>
                     {this.state.salon.programs && this.state.salon.programs.map((program, index) =>
                         <div bp={'12 6@md'} key={index}>
                             <Program title={program.name} description={program.description} price={program.cost}
-                                     duration={program.duration} classicCnt={program.classicCnt}
+                                     duration={program.duration} classicCnt={program.classicCnt} onClick={() => this.incrementStats('messengerClicks')}
                                      link={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}
                                      eroticCnt={program.eroticCnt} relaxCnt={program.relaxCnt}/>
                         </div>
                     )}
                 </div>,
-                reviews: <div bp={'grid 12 6@md'} style={{gap: 32}}>
+                review: <div bp={'grid 12 6@md'} style={{gap: 32}}>
                     <div>
                         <div className="flex column" style={{gap: 12}}>
                             <div style={{order: isMobile ? 0 : 1}}>
@@ -287,7 +300,7 @@ class SalonView extends React.Component {
                         </div>
                     </div>
                 </div>,
-                photos: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
+                photo: <div bp={isMobile ? '' : 'grid'} className={isMobile ? css.invisibleScroll : ''}>
                     {this.state.salon.photos && this.state.salon.photos.map((photo, index) =>
                         <div bp={this.state.salon.kind === 'salon' ? '12 6@md' : '6 4@md'} key={index}>
                             <ImageCarousel pics={[photo]} key={index} height={photoHeight} />
@@ -300,15 +313,15 @@ class SalonView extends React.Component {
                     title: t('masseuses'),
                     cnt: this.state.salon.masters?.length
                 },
-                cost: {
+                price: {
                     title: t('serviceCost'),
                     cnt: this.state.salon.programs?.length
                 },
-                reviews: {
+                review: {
                     title: t('reviews'),
                     cnt: this.state.reviews?.count || 0
                 },
-                photos: {
+                photo: {
                     title: t('photo'),
                     cnt: this.state.salon.photos.length
                 }
@@ -472,13 +485,13 @@ class SalonView extends React.Component {
                         }
 
                         {this.state.salon.phone && <div className={css.stretchContainer}>
-                            <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                            <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number} onClick={() => this.incrementStats('phoneClicks')}>
                                 <Button>
                                     <Icon name={'call'}/>
                                     {t('call')}
                                 </Button>
                             </a></div>
-                            <div><a target="_blank"
+                            <div><a target="_blank" onClick={() => this.incrementStats('messengerClicks')}
                                     href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'wa_light'}/>
@@ -486,7 +499,7 @@ class SalonView extends React.Component {
                                         className={'va-middle'}>{this.state.salon.messengers.tg ? (isMobile ? '' : t('sendMessage')) : t('sendMessage')}</span>
                                 </Button>
                             </a></div>
-                            {this.state.salon.messengers.tg && <div><a target="_blank"
+                            {this.state.salon.messengers.tg && <div><a target="_blank" onClick={() => this.incrementStats('messengerClicks')}
                                                                        href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
                                 <Button color={'tertiary'}>
                                     <Icon name={'tg_light'}/>
@@ -521,12 +534,15 @@ class SalonView extends React.Component {
                                         <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                     </div>
 
-                                    <Button size={'small'} onClick={() => this.props.router.push({
-                                        pathname: '/',
-                                        query: {
-                                            onTheMap: this.state.salon._id
-                                        }
-                                    })}>{t('onTheMap').toLowerCase()}</Button>
+                                    <Button size={'small'} onClick={() => {
+                                        this.incrementStats('mapClicks')
+                                        this.props.router.push({
+                                            pathname: '/',
+                                            query: {
+                                                onTheMap: this.state.salon._id
+                                            }
+                                        })
+                                    }}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
                             </div>
                         </div>}
@@ -563,12 +579,15 @@ class SalonView extends React.Component {
                                         <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                     </div>
 
-                                    <div><Button size={'small'} onClick={() => this.props.router.push({
-                                        pathname: '/',
-                                        query: {
-                                            onTheMap: this.state.salon._id
-                                        }
-                                    })}>{t('onTheMap').toLowerCase()}</Button>
+                                    <div><Button size={'small'} onClick={() => {
+                                        this.incrementStats('mapClicks')
+                                        this.props.router.push({
+                                            pathname: '/',
+                                            query: {
+                                                onTheMap: this.state.salon._id
+                                            }
+                                        })
+                                    }}>{t('onTheMap').toLowerCase()}</Button>
                                     </div>
                                 </div>
                             </div>
@@ -583,7 +602,7 @@ class SalonView extends React.Component {
                                             {Object.keys(this.state.salon.social || []).filter(i => this.state.salon.social[i].length).map(name =>
                                                 <div key={name}>
                                                     <a target="_blank" href={this.state.salon.social[name]}
-                                                       className={css.img}>
+                                                       className={css.img} onClick={() => this.incrementStats(name === 'ws' ? 'websiteClicks' : 'socialClicks')}>
                                                         <Icon name={name + '_' + theme}/>
                                                     </a>
                                                 </div>
@@ -625,7 +644,7 @@ class SalonView extends React.Component {
                         <div style={{marginTop: 16}} className={css.socialBlock}>
                             {Object.keys(this.state.salon.social).filter(i => this.state.salon.social[i].length).map(name =>
                                 <div key={name}>
-                                    <a target="_blank" href={this.state.salon.social[name]} className={css.img}>
+                                    <a target="_blank" href={this.state.salon.social[name]} className={css.img} onClick={() => this.incrementStats(name === 'ws' ? 'websiteClicks' : 'socialClicks')}>
                                         <Icon name={name + '_' + theme}/>
                                     </a>
                                 </div>
@@ -694,7 +713,7 @@ class SalonView extends React.Component {
             <div bp={'grid'} style={{marginTop: 32, gap: 28}}>
                 <div bp={'12 8@md'}>
                     {(this.state.salon.photos && !isMobile) &&
-                        <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections}/>}
+                        <TabPanels tabKey={'salonTab'} head={tabsHead} body={additionalSections} onChoose={name => this.incrementStats(name + 'Clicks')}/>}
 
                     {(isMobile && this.state.salon.description) &&
                         <div className={cnb(css.cardRoot, css.padded)}
@@ -710,7 +729,7 @@ class SalonView extends React.Component {
                         <div id={'salonTab'}>{Object.keys(additionalSections).map((sectionName, i) =>
                             tabsHead[sectionName] ? <div key={i} style={{marginBottom: 4}}>
                                 <Collapsible count={tabsHead[sectionName]?.cnt} title={tabsHead[sectionName]?.title}
-                                             defaultOpen={i === 0}>
+                                             defaultOpen={i === 0} onOpen={() => this.incrementStats(sectionName + 'Clicks')}>
                                     <div style={{
                                         marginTop: 18,
                                         padding: (isMobile && sectionName === 'photos') ? 0 : '0 16px'
@@ -724,7 +743,7 @@ class SalonView extends React.Component {
                         )}</div>}
                 </div>
                 <div bp={'12 4@md'}>
-                    <ShareInSocialMedia url={'https://probody.kz/salon/' + this.state.salon.slug}/>
+                    <ShareInSocialMedia url={'https://probody.kz/salon/' + this.state.salon.slug} onClick={() => this.incrementStats('shareClicks')}/>
 
                     <div className={css.cardRoot} style={{marginTop: 16}}>
                         <div id={'salonLocation'} className={css.mapMobile}></div>
@@ -755,12 +774,15 @@ class SalonView extends React.Component {
                                     <span>{(this.state.reviews.avg || 0).toFixed(1)}</span>
                                 </div>
 
-                                <div><Button size={'small'} onClick={() => this.props.router.push({
-                                    pathname: '/',
-                                    query: {
-                                        onTheMap: this.state.salon._id
-                                    }
-                                })}>{t('onTheMap').toLowerCase()}</Button>
+                                <div><Button size={'small'} onClick={() => {
+                                    this.incrementStats('mapClicks')
+                                    this.props.router.push({
+                                        pathname: '/',
+                                        query: {
+                                            onTheMap: this.state.salon._id
+                                        }
+                                    })
+                                }}>{t('onTheMap').toLowerCase()}</Button>
                                 </div>
                             </div>
                         </div>
@@ -872,20 +894,20 @@ class SalonView extends React.Component {
 
             {
                 (this.state.salon.phone && isMobile) && <div className={cnb(css.stretchContainer, css.stickToBottom)}>
-                    <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number}>
+                    <div><a href={'tel:' + parsePhoneNumber(this.state.salon.phone).number} onClick={() => this.incrementStats('phoneClicks')}>
                         <Button>
                             <Icon name={'call'}/>
                             {t('call')}
                         </Button>
                     </a></div>
-                    <div><a target="_blank"
+                    <div><a target="_blank" onClick={() => this.incrementStats('messengerClicks')}
                             href={'https://wa.me/' + parsePhoneNumber(this.state.salon.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + this.state.salon.name + '"')}>
                         <Button color={'tertiary'}>
                             <Icon name={'wa_light'}/>
                             {this.state.salon.messengers.tg ? '' : t('sendMessage')}
                         </Button>
                     </a></div>
-                    {this.state.salon.messengers.tg && <div><a target="_blank"
+                    {this.state.salon.messengers.tg && <div><a target="_blank" onClick={() => this.incrementStats('messengerClicks')}
                                                                href={'https://t.me/' + this.state.salon.messengers.tg.replace('@', '')}>
                         <Button color={'tertiary'}>
                             <Icon name={'tg_light'}/>

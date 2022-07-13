@@ -51,10 +51,20 @@ const StatsSchema = new Schema({
                 default: 0
             }
         }
+    },
+    date: {
+        type: Date,
+        default() {
+            const datetime = new Date()
+
+            datetime.setHours(0, 0, 0, 0)
+
+            return datetime
+        }
     }
 }, {
     versionKey: false,
-    timestamps: true
+    timestamps: false
 });
 
 export default mongoose.model('Stats', StatsSchema, 'stats')

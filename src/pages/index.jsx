@@ -432,6 +432,7 @@ class Home extends React.Component {
     }
 
     viewSalonOnTheMap(salonId) {
+        APIRequests.incrementStats(salonId, 'mapClicks')
         window.document.body.scrollTo(0, 0)
 
         APIRequests.getMapWorker(salonId).then(salon => {
@@ -776,16 +777,16 @@ class Home extends React.Component {
                                     </div>
 
                                     <div className={css.buttonLayout}>
-                                        <div><a href={'tel:' + parsePhoneNumber(chosenSalon.worker.phone).number}>
+                                        <div><a href={'tel:' + parsePhoneNumber(chosenSalon.worker.phone).number} onClick={() => APIRequests.incrementStats(chosenSalon.worker._id, 'phoneClicks')}>
                                             <Button><Icon name={'call'}/></Button>
                                         </a></div>
-                                        <div><a target="_blank"
+                                        <div><a target="_blank" onClick={() => APIRequests.incrementStats(chosenSalon.worker._id, 'messengerClicks')}
                                                 href={'https://wa.me/' + parsePhoneNumber(chosenSalon.worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + chosenSalon.worker.name + '"')}>
                                             <Button color={'tertiary'}>
                                                 <Icon name={'wa_light'}/>
                                             </Button>
                                         </a></div>
-                                        {chosenSalon.worker.messengers.tg && <div><a target="_blank"
+                                        {chosenSalon.worker.messengers.tg && <div><a target="_blank" onClick={() => APIRequests.incrementStats(chosenSalon.worker._id, 'messengerClicks')}
                                                                                      href={'https://t.me/' + chosenSalon.worker.messengers.tg.replace('@', '')}>
                                             <Button color={'tertiary'}>
                                                 <Icon name={'tg_light'}/>
@@ -829,10 +830,10 @@ class Home extends React.Component {
                                                 <Link href={worker.url}>
                                                     <Button>{t('detail')}</Button>
                                                 </Link>
-                                                <div><a href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                                <div><a href={'tel:' + parsePhoneNumber(worker.phone).number} onClick={() => APIRequests.incrementStats(worker._id, 'phoneClicks')}>
                                                     <Button><Icon name={'call'}/></Button>
                                                 </a></div>
-                                                <div><a target="_blank"
+                                                <div><a target="_blank" onClick={() => APIRequests.incrementStats(worker._id, 'messengerClicks')}
                                                         href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon style={{marginRight: worker.messengers.tg ? 0 : 10}}
@@ -841,7 +842,7 @@ class Home extends React.Component {
                                                             className={'va-middle'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                     </Button>
                                                 </a></div>
-                                                {worker.messengers.tg && <div><a target="_blank"
+                                                {worker.messengers.tg && <div><a target="_blank" onClick={() => APIRequests.incrementStats(worker._id, 'messengerClicks')}
                                                                                  href={'https://t.me/' + worker.messengers.tg.replace('@', '')}>
                                                     <Button color={'tertiary'}>
                                                         <Icon name={'tg_light'}/>
@@ -893,12 +894,12 @@ class Home extends React.Component {
                                                     <div>{t('reviews').toLowerCase()}</div>
                                                     <Link href={{
                                                         query: Object.assign({}, this.props.router.query, {
-                                                            salonTab: 'reviews'
+                                                            salonTab: 'review'
                                                         }),
                                                         hash: '#salonTab',
                                                         pathname: worker.url
                                                     }}>
-                                                        <div
+                                                        <div onClick={() => APIRequests.incrementStats(worker._id, 'reviewClicks')}
                                                             className={css.linkUnderline}>{worker.reviews?.count || 0} {declination(worker.reviews?.count || 0, t('reviewDeclination'))}
                                                         </div>
                                                     </Link>
@@ -922,7 +923,7 @@ class Home extends React.Component {
                                                         {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                             <div key={name}>
                                                                 <a target="_blank" href={worker.social[name]}
-                                                                   className={css.img}>
+                                                                   className={css.img} onClick={() => APIRequests.incrementStats(worker._id, name === 'ws' ? 'websiteClicks' : 'socialClicks')}>
                                                                     <Icon name={name + '_' + theme}/>
                                                                 </a>
                                                             </div>
@@ -978,10 +979,10 @@ class Home extends React.Component {
                                         }}>{t('programs')}</h2>
 
                                         <div className={css.invisibleScroll} style={{paddingLeft: isMobile ? 16 : 0}}>
-                                            {worker.programs.slice(0, 3).map((program, i) => <ProgramCard
+                                            {worker.programs.slice(0, 3).map((program, i) => <ProgramCard onClick={() => APIRequests.incrementStats(worker._id, 'priceClicks')}
                                                 link={{
                                                     query: Object.assign({}, this.props.router.query, {
-                                                        salonTab: 'cost'
+                                                        salonTab: 'price'
                                                     }),
                                                     hash: '#salonTab',
                                                     pathname: worker.url
@@ -993,11 +994,11 @@ class Home extends React.Component {
                                             {worker.programs.length > 3 &&
                                                 <MockProgramCard link={{
                                                     query: Object.assign({}, this.props.router.query, {
-                                                        salonTab: 'cost'
+                                                        salonTab: 'price'
                                                     }),
                                                     hash: '#salonTab',
                                                     pathname: worker.url
-                                                }} cnt={worker.programs.length - 3}/>}
+                                                }} cnt={worker.programs.length - 3} onClick={() => APIRequests.incrementStats(worker._id, 'priceClicks')}/>}
                                         </div>
                                     </div>
 
@@ -1008,7 +1009,7 @@ class Home extends React.Component {
                                         <div style={{marginTop: 16}} className={css.socialBlock}>
                                             {Object.keys(worker.social).filter(i => worker.social[i].length).map(name =>
                                                 <div key={name}>
-                                                    <a target="_blank" href={worker.social[name]} className={css.img}>
+                                                    <a target="_blank" href={worker.social[name]} className={css.img} onClick={() => APIRequests.incrementStats(worker._id, name === 'ws' ? 'websiteClicks' : 'socialClicks')}>
                                                         <Icon name={name + '_' + theme}/>
                                                     </a>
                                                 </div>
@@ -1026,10 +1027,10 @@ class Home extends React.Component {
                                             <Link href={worker.url}>
                                                 <Button>{t('detail')}</Button>
                                             </Link>
-                                            <div><a href={'tel:' + parsePhoneNumber(worker.phone).number}>
+                                            <div><a href={'tel:' + parsePhoneNumber(worker.phone).number} onClick={() => APIRequests.incrementStats(worker._id, 'phoneClicks')}>
                                                 <Button><Icon name={'call'}/></Button>
                                             </a></div>
-                                            <div><a target="_blank"
+                                            <div><a target="_blank" onClick={() => APIRequests.incrementStats(worker._id, 'messengerClicks')}
                                                     href={'https://wa.me/' + parsePhoneNumber(worker.messengers.wa).number.replace('+', '') + '?text=' + encodeURIComponent(t('salonAnswerPrefill') + ' "' + worker.name + '"')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon style={{marginRight: worker.messengers.tg ? 0 : 6}}
@@ -1038,7 +1039,7 @@ class Home extends React.Component {
                                                         className={'va-middle'}>{worker.messengers.tg ? '' : t('sendMessage')}</span>
                                                 </Button>
                                             </a></div>
-                                            {worker.messengers.tg && <div><a target="_blank"
+                                            {worker.messengers.tg && <div><a target="_blank" onClick={() => APIRequests.incrementStats(worker._id, 'messengerClicks')}
                                                                              href={'https://t.me/' + worker.messengers.tg.replace('@', '')}>
                                                 <Button color={'tertiary'}>
                                                     <Icon name={'tg_light'}/>

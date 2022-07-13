@@ -11,7 +11,8 @@ export default class MockProgramCard extends React.Component {
 
     static propTypes = {
         cnt: PropTypes.number.isRequired,
-        link: PropTypes.any.isRequired
+        link: PropTypes.any.isRequired,
+        onClick: PropTypes.func
     }
 
     render() {
@@ -19,7 +20,7 @@ export default class MockProgramCard extends React.Component {
 
         return <div className={css['theme--' + theme]}>
             <Link href={this.props.link}>
-                <div className={cnb(css.root, css.mock)}>
+                <div className={cnb(css.root, css.mock)} onClick={() => this.props.onClick && this.props.onClick()}>
                     <div className={css.label}>{t('nMore', this.props.cnt)}</div>
                     <div className={cnb(css.value)}>
                         &nbsp;

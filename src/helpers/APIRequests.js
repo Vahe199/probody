@@ -37,6 +37,12 @@ export default class APIRequests {
         })).json())
     }
 
+    static incrementStats(salonId, field) {
+        return fetch(`${API_URL}/stats/${salonId}/${field}`, {
+            method: 'PUT',
+        })
+    }
+
     static async getMe() {
         return ((await fetch(`${API_URL}/user/me`, {
             headers: APIRequests.withCredentials()

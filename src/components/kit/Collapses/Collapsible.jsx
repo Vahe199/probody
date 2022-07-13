@@ -24,6 +24,7 @@ export default class Collapsible extends React.Component {
         title: PropTypes.string.isRequired,
         defaultOpen: PropTypes.bool,
         value: PropTypes.bool,
+        onOpen: PropTypes.func,
         onUpdate: PropTypes.func,
         count: PropTypes.number
     }
@@ -44,6 +45,10 @@ export default class Collapsible extends React.Component {
 
     toggle(e) {
         if (!this.state.checkboxRef.current?.contains(e.target)) {
+            if (this.props.onOpen && !this.state.isOpen) {
+                this.props.onOpen()
+            }
+
             this.setState({isOpen: !this.state.isOpen})
         }
     }
