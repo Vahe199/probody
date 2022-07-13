@@ -4,6 +4,31 @@ import Stats from "../../models/Stats.model.js";
 
 const router = express.Router()
 
+router.put('/:salonId/views', async (req, res) => {
+    try {
+        await Stats.updateOne({
+                salon: req.params.salonId
+            }, {
+                $inc: {
+                    [`counters.views`]: 1
+                }
+            },
+            {
+                upsert: true
+            }
+        )
+
+        res.status(202).send('ok')
+    } catch (e) {
+        console.log(e)
+
+        res.status(500).json({
+            type: 'Error',
+            message: 'Internal Server Error'
+        })
+    }
+})
+
 router.put('/:salonId/:field', async (req, res) => {
     try {
         await Stats.updateOne({
