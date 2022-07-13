@@ -7,16 +7,16 @@ const router = express.Router()
 router.put('/:salonId/:field', async (req, res) => {
     try {
         await Stats.updateOne({
-            salon: req.params.salonId
-        }, {
-            $inc: {
-                counters: {
-                    actions: {
-                        [req.params.field]: 1
-                    }
+                salon: req.params.salonId
+            }, {
+                $inc: {
+                    [`counters.actions.${req.params.field}`]: 1
                 }
+            },
+            {
+                upsert: true
             }
-        }, {upsert: true})
+        )
 
         res.status(202).send('ok')
     } catch (e) {
