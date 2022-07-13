@@ -16,7 +16,7 @@ router.put('/:salonId/:field', async (req, res) => {
                     }
                 }
             }
-        })
+        }, {upsert: true})
 
         res.status(202).send('ok')
     } catch (e) {
