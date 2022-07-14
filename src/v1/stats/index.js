@@ -64,7 +64,15 @@ router.put('/:salonId/:field', async (req, res) => {
 
 router.get('/:salonId', AuthGuard('serviceProvider'), async (req, res) => {
     try {
-        //TODO get stats for period
+        res.json({
+            data: await Stats.find({
+                salon: req.params.salonId,
+                date: {
+                    $gte: req.query.from,
+                    $lte: req.query.to
+                }
+            })
+        })
     } catch (e) {
         console.log(e)
 

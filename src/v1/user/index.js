@@ -59,7 +59,7 @@ router.patch('/', AuthGuard('serviceProvider'), userValidators.updateUser, async
                 await Promise.all(approvalKeys.forEach(async key => await RedisHelper.unlink(key)))
             }
 
-            await mailer.addRecipient(email).send()
+            await mailer.addRecipient(value).send()
 
             await RedisHelper.set(redisKey, '')
             await RedisHelper.expire(redisKey, 30 * 60)//30 minutes
