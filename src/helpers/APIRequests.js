@@ -52,7 +52,7 @@ export default class APIRequests {
     }
 
     static getStatsForNearestNDays(days) {
-        return APIRequests.getStatsForPeriod(DateTime.now().minus({days}).toMillis(), DateTime.now().plus({days}).toMillis())
+        return APIRequests.getStatsForPeriod(DateTime.now().minus({days}).toMillis(), DateTime.now().toMillis())
     }
 
     static async getMe() {

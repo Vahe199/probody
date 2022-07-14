@@ -72,7 +72,6 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
             }
         }, '_id')
 
-        console.log(salon._id, new Date(Number(req.query.from)), new Date(Number(req.query.to)))
         res.json({
             data: await Stats.find({
                 salon: salon._id,

@@ -372,4 +372,15 @@ export default {
     role_manager: 'Менеджер салона',
     role_admin: 'Администратор салона',
     role_master: 'Мастер салона',
+    pageViews: 'Переходы на страницу',
+    actionsOnPage: 'Действия на странице',
+    callsAndPhoneViews: 'Звонки и просмотр телефона',
+    mapClicks: 'Клики на адрес',
+    websiteClicks: 'Переходы на сайт',
+    messengerClicks: 'Клики на мессенджеры',
+    socialClicks: 'Клики на соц.сети',
+    priceViews: 'Просмотр цен',
+    photoViews: 'Просмотр фото',
+    reviewClicks: 'Просмотр отзывов',
+    shareClicks: 'Поделились ссылкой'
 }

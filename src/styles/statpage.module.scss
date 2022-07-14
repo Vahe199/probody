@@ -10,3 +10,51 @@
     background: t('bg-secondlayer');
   }
 }
+
+.legendItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 12px;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+
+  &, & div {
+    line-height: 1;
+  }
+
+  & > div:first-child {
+    & > span:first-child {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      margin-right: 7px;
+      vertical-align: middle;
+      border-radius: 4px;
+    }
+
+    & > span:last-child {
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+
+  &>div:last-child {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.chartContainer {
+  gap: 52px;
+  margin: 30px 0;
+  padding: 0 20px;
+}
+
+@media (max-width: 480px) {
+  .chartContainer {
+    gap: 20px;
+  }
+}
