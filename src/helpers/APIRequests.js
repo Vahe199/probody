@@ -45,14 +45,14 @@ export default class APIRequests {
         })
     }
 
-    static getStatsForPeriod(from, to) {
-        return fetch(`${API_URL}/stats?from=${from}&to=${to}`, {
+    static async getStatsForPeriod(from, to) {
+        return (await fetch(`${API_URL}/stats?from=${from}&to=${to}`, {
             headers: APIRequests.withCredentials(),
-        })
+        })).json()
     }
 
     static getStatsForNearestNDays(days) {
-        return APIRequests.getStatsForPeriod(DateTime.now().minus({days}).toJSDate(), DateTime.now().plus({days}).toJSDate())
+        return APIRequests.getStatsForPeriod(DateTime.now().minus({days}).toMillis(), DateTime.now().plus({days}).toMillis())
     }
 
     static async getMe() {
