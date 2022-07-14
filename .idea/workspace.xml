@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/statpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/statpage.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/stats/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/stats/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Program.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Program.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,14 +164,9 @@
       <workItem from="1657787915098" duration="1946000" />
       <workItem from="1657792515461" duration="932000" />
       <workItem from="1657805407869" duration="4667000" />
-      <workItem from="1657810560275" duration="5928000" />
-    </task>
-    <task id="LOCAL-00346" summary="added &quot;search near me&quot; btn">
-      <created>1656758269502</created>
-      <option name="number" value="00346" />
-      <option name="presentableId" value="LOCAL-00346" />
-      <option name="project" value="LOCAL" />
-      <updated>1656758269502</updated>
+      <workItem from="1657810560275" duration="6671000" />
+      <workItem from="1657828775925" duration="880000" />
+      <workItem from="1657830199170" duration="772000" />
     </task>
     <task id="LOCAL-00347" summary="done map salon card">
       <created>1656760391971</created>
@@ -511,7 +504,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657806197954</updated>
     </task>
-    <option name="localTasksCounter" value="395" />
+    <task id="LOCAL-00395" summary="added social block on mobile">
+      <created>1657816585004</created>
+      <option name="number" value="00395" />
+      <option name="presentableId" value="LOCAL-00395" />
+      <option name="project" value="LOCAL" />
+      <updated>1657816585004</updated>
+    </task>
+    <option name="localTasksCounter" value="396" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

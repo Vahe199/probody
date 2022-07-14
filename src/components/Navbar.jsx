@@ -18,8 +18,10 @@ class Navbar extends React.Component {
             {this.context.isMobile ?
                 <nav style={{justifyContent: 'space-around'}} className={cnb(css.navbar, css.mobile)} bp={'flex'}>
                     <ThemeSwitcher/>
-                    <Link href={'/'}><Image width={130} height={15} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
-                                          alt={'logo'}/></Link>
+                    <span onClick={() => {
+                        document.location.pathname === '/' && document.location.reload()
+                    }}><Link href={'/'}><Image width={130} height={15} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
+                                          alt={'logo'}/></Link></span>
                     <div className={'flex'}>
                         <LanguageSelector/>
                         <div style={{marginLeft: 8}}><Menu/></div>
@@ -27,8 +29,10 @@ class Navbar extends React.Component {
                 </nav>
                 :
                 <nav className={cnb('container', css.navbar, css.pc, 'non-selectable')} bp={'grid'}>
-                    <Link href={'/'}><Image width={174} height={20} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
-                                          alt={'logo'}/></Link>
+                     <span onClick={() => {
+                         document.location.pathname === '/' && document.location.reload()
+                     }}><Link href={'/'}><Image width={174} height={20} className={'cursor-pointer'} src={'/text_logo--' + theme + '.svg'}
+                                                alt={'logo'}/></Link></span>
                     <div bp={'fill'} style={{margin: '0 16px'}}>
                         <HybridSearchInput searchPlaceholder={t('searchPlaceholder')}
                                            geoPlaceholder={t('geoPlaceholder')}/>

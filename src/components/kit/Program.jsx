@@ -50,7 +50,7 @@ class Program extends React.Component {
                     </div>
                 </div>
                 <div className={css.flexEnd}>
-                    {this.props.link && <a href={this.props.link} target={'_blank'}><Button size={'medium'}>{t('apply')}</Button></a>}
+                    {this.props.link && <a href={this.props.link} target={'_blank'} onClick={this.props.onClick}><Button size={'medium'}>{t('apply')}</Button></a>}
                 </div>
             </div>
         </InfoBlock></div>

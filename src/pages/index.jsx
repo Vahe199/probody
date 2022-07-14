@@ -747,7 +747,7 @@ class Home extends React.Component {
                                                     <span>{t('verified')}</span>
                                                 </div>}
 
-                                            <p className="subtitle2">{chosenSalon.worker.name}</p>
+                                            <Link href={'/salon/' + chosenSalon.worker.slug}><p className="subtitle2">{chosenSalon.worker.name}</p></Link>
 
                                             <p style={{marginTop: 16}}>{chosenSalon.worker.address}</p>
 
