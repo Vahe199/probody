@@ -174,8 +174,8 @@ class MainLayout extends React.Component {
                 <Head>
                     <meta name="viewport" content="width=device-width, user-scalable=no" />
                 </Head>
-                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                        strategy={'beforeInteractive'}/>
+                {/*<Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}*/}
+                {/*        strategy={'beforeInteractive'}/>*/}
 
                 <div className={'theme--' + this.state.theme}>
                     <div className={'body'}>

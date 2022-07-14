@@ -1,0 +1,12 @@
+@import "themes";
+
+.slHeader {
+  padding: 20px;
+  font-family: Lack, sans-serif;
+  font-size: 17px;
+  border-radius: 20px;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+}

@@ -1,3 +1,5 @@
+import {DateTime} from "luxon";
+
 const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
 const PAGE_SIZES = {
@@ -41,6 +43,16 @@ export default class APIRequests {
         return fetch(`${API_URL}/stats/${salonId}/${field}`, {
             method: 'PUT',
         })
+    }
+
+    static getStatsForPeriod(from, to) {
+        return fetch(`${API_URL}/stats?from=${from}&to=${to}`, {
+            headers: APIRequests.withCredentials(),
+        })
+    }
+
+    static getStatsForNearestNDays(days) {
+        return APIRequests.getStatsForPeriod(DateTime.now().minus({days}).toJSDate(), DateTime.now().plus({days}).toJSDate())
     }
 
     static async getMe() {

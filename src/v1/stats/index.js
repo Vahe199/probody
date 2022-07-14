@@ -1,6 +1,7 @@
 import express from "express";
 import AuthGuard from "../../middlewares/AuthGuard.js";
 import Stats from "../../models/Stats.model.js";
+import Worker from "../../models/Worker.model.js";
 
 const router = express.Router()
 
@@ -62,11 +63,18 @@ router.put('/:salonId/:field', async (req, res) => {
     }
 })
 
-router.get('/:salonId', AuthGuard('serviceProvider'), async (req, res) => {
+router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
     try {
+        const salon = await Worker.findOne({
+            host: req.user._id,
+            parent: {
+                $exists: false
+            }
+        }, '_id')
+
         res.json({
             data: await Stats.find({
-                salon: req.params.salonId,
+                salon: salon._id,
                 date: {
                     $gte: req.query.from,
                     $lte: req.query.to
