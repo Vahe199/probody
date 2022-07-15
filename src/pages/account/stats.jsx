@@ -5,25 +5,35 @@ import {TITLE_POSTFIX} from "../../helpers/constants.js"
 import Head from "next/head.js"
 import css from '../../styles/statpage.module.scss'
 import {GlobalContext} from "../../contexts/Global.js"
-import {CategoryScale, Chart, LinearScale, LineController, LineElement, PointElement} from 'chart.js'
+import {
+    ArcElement,
+    CategoryScale,
+    Chart,
+    LinearScale,
+    LineController,
+    LineElement,
+    DoughnutController,
+    PointElement, BarController, BarElement
+} from 'chart.js'
 import APIRequests from "../../helpers/APIRequests.js";
 import {DateTime} from "luxon";
 
-Chart.register(LineController, CategoryScale, LinearScale, PointElement, LineElement)
+Chart.register(LineController, BarController, BarElement, DoughnutController, ArcElement, CategoryScale, LinearScale, PointElement, LineElement)
 
 const catColors = {
-    views: '#99D46B',
-    actions: '#4795FF',
-    phone: '#99D46B',
-    map: '#4795FF',
-    website: '#E976A4',
-    whatsapp: '#F6BE34',
-    social: '#F6783E',
-    price: '#99D46B',
-    photo: '#CCCCCC',
-    review: '#e0565c',
-    share: '#7FC5FD'
-}
+        views: '#99D46B',
+        actions: '#4795FF',
+        phone: '#4d903d',
+        map: '#4795FF',
+        website: '#E976A4',
+        whatsapp: '#F6BE34',
+        social: '#F6783E',
+        price: '#99D46B',
+        photo: '#CCCCCC',
+        review: '#e0565c',
+        share: '#7FC5FD'
+    },
+    GRAPH_TENSION = 0.3
 
 class StatsPage extends React.Component {
     static contextType = GlobalContext
@@ -67,51 +77,78 @@ class StatsPage extends React.Component {
             }
 
             const aggregatedStatistics = {
-                views: stats.reduce((acc, item) => acc + item.counters.views, 0),
-                phoneViews: stats.reduce((acc, item) => acc + item.counters.actions.phoneClicks, 0),
-                mapClicks: stats.reduce((acc, item) => acc + item.counters.actions.mapClicks, 0),
-                websiteClicks: stats.reduce((acc, item) => acc + item.counters.actions.websiteClicks, 0),
-                socialClicks: stats.reduce((acc, item) => acc + item.counters.actions.socialClicks, 0),
-                reviewClicks: stats.reduce((acc, item) => acc + item.counters.actions.reviewClicks, 0),
-                shareClicks: stats.reduce((acc, item) => acc + item.counters.actions.shareClicks, 0),
-                messengerClicks: stats.reduce((acc, item) => acc + item.counters.actions.messengerClicks, 0),
-                photoViews: stats.reduce((acc, item) => acc + item.counters.actions.photoClicks, 0),
-                priceViews: stats.reduce((acc, item) => acc + item.counters.actions.priceClicks, 0),
-            },
+                    views: stats.reduce((acc, item) => acc + item.counters.views, 0),
+                    phoneViews: stats.reduce((acc, item) => acc + item.counters.actions.phoneClicks, 0),
+                    mapClicks: stats.reduce((acc, item) => acc + item.counters.actions.mapClicks, 0),
+                    websiteClicks: stats.reduce((acc, item) => acc + item.counters.actions.websiteClicks, 0),
+                    socialClicks: stats.reduce((acc, item) => acc + item.counters.actions.socialClicks, 0),
+                    reviewClicks: stats.reduce((acc, item) => acc + item.counters.actions.reviewClicks, 0),
+                    shareClicks: stats.reduce((acc, item) => acc + item.counters.actions.shareClicks, 0),
+                    messengerClicks: stats.reduce((acc, item) => acc + item.counters.actions.messengerClicks, 0),
+                    photoViews: stats.reduce((acc, item) => acc + item.counters.actions.photoClicks, 0),
+                    priceViews: stats.reduce((acc, item) => acc + item.counters.actions.priceClicks, 0),
+                },
                 sum = Object.values(aggregatedStatistics).reduce((acc, item) => acc + item, 0)
 
             aggregatedStatistics.sum = sum
             aggregatedStatistics.actions = sum - aggregatedStatistics.views
 
             const labels = stats.map(i => DateTime.fromISO(i.date).toFormat('d.MM'))
-            console.log(labels)
-            window.stats = stats
 
             this.setState({
                 statistics: aggregatedStatistics,
                 charts: {
                     lastMonthActions: {
                         ...this.state.charts.lastMonthActions,
-                        // chart: new Chart(this.state.charts.lastMonthActions.container.current.getContext('2d'), {
-                        //     type: 'line',
-                        //     responsive: true,
-                        //     data: {
-                        //         labels,
-                        //         datasets: [{
-                        //             label: 'Views',
-                        //             data: stats.map(i => i.counters.views),
-                        //             fill: false,
-                        //             borderColor: catColors.views,
-                        //             tension: 0.1
-                        //         }]
-                        //     }
-                        // })
+                        chart: new Chart(this.state.charts.lastMonthActions.container.current.getContext('2d'), {
+                            type: 'doughnut',
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            },
+                            data: {
+                                labels: [
+                                    'reviewClicks',
+                                    'mapClicks',
+                                    'phoneViews',
+                                    'photoViews',
+                                    'messengerClicks',
+                                    'priceViews',
+                                    'shareClicks',
+                                    'socialClicks'
+                                ],
+                                datasets: [{
+                                    data: [
+                                        aggregatedStatistics.reviewClicks,
+                                        aggregatedStatistics.mapClicks,
+                                        aggregatedStatistics.phoneViews,
+                                        aggregatedStatistics.photoViews,
+                                        aggregatedStatistics.messengerClicks,
+                                        aggregatedStatistics.priceViews,
+                                        aggregatedStatistics.shareClicks,
+                                        aggregatedStatistics.socialClicks
+                                    ],
+                                    backgroundColor: [catColors.review,
+                                        catColors.map,
+                                        catColors.phone,
+                                        catColors.photo,
+                                        catColors.whatsapp,
+                                        catColors.price,
+                                        catColors.share,
+                                        catColors.social],
+                                    borderWidth: 0
+                                }]
+                            }
+                        })
                     },
                     viewsAndActions: {
                         ...this.state.charts.viewsAndActions,
                         chart: new Chart(this.state.charts.viewsAndActions.container.current.getContext('2d'), {
                             type: 'line',
-                            responsive: true,
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            },
                             data: {
                                 labels,
                                 datasets: [{
@@ -119,22 +156,99 @@ class StatsPage extends React.Component {
                                     data: stats.map(i => i.counters.views),
                                     fill: false,
                                     borderColor: catColors.views,
-                                    tension: 0.1
-                                }]
+                                    tension: GRAPH_TENSION
+                                },
+                                    {
+                                        label: 'Actions',
+                                        data: stats.map(i => Object.values(i.counters.actions).reduce((acc, i) => acc + i, 0)),
+                                        fill: false,
+                                        borderColor: catColors.actions,
+                                        tension: GRAPH_TENSION
+                                    }]
                             }
                         })
                     },
                     companyActions: {
                         ...this.state.charts.companyActions,
-                        // chart: new Chart(this.state.charts.companyActions.container.current.getContext('2d'), {
-                        //     type: 'bar'
-                        // })
+                        chart: new Chart(this.state.charts.companyActions.container.current.getContext('2d'), {
+                            type: 'bar',
+                            data: {
+                                labels,
+                                datasets: [
+                                    {
+                                        label: 'Phone clicks',
+                                        data: stats.map(i => i.counters.actions.phoneClicks),
+                                        backgroundColor: catColors.phone
+                                    },
+                                    {
+                                        label: 'Map clicks',
+                                        data: stats.map(i => i.counters.actions.mapClicks),
+                                        backgroundColor: catColors.map
+                                    },
+                                    {
+                                        label: 'Website clicks',
+                                        data: stats.map(i => i.counters.actions.websiteClicks),
+                                        backgroundColor: catColors.website
+                                    },
+                                    {
+                                        label: 'Messenger clicks',
+                                        data: stats.map(i => i.counters.actions.messengerClicks),
+                                        backgroundColor: catColors.whatsapp
+                                    },
+                                    {
+                                        label: 'Social clicks',
+                                        data: stats.map(i => i.counters.actions.socialClicks),
+                                        backgroundColor: catColors.social
+                                    },
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    x: {
+                                        stacked: true,
+                                    },
+                                    y: {
+                                        stacked: true
+                                    }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        })
                     },
                     sectionClicks: {
                         ...this.state.charts.sectionClicks,
-                        // chart: new Chart(this.state.charts.sectionClicks.container.current.getContext('2d'), {
-                        //     type: 'bar'
-                        // })
+                        chart: new Chart(this.state.charts.sectionClicks.container.current.getContext('2d'), {
+                            type: 'line',
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            },
+                            data: {
+                                labels,
+                                datasets: [{
+                                    label: 'Price clicks',
+                                    data: stats.map(i => i.counters.actions.priceClicks),
+                                    fill: false,
+                                    borderColor: catColors.price,
+                                    tension: GRAPH_TENSION
+                                },
+                                    {
+                                        label: 'Photo clicks',
+                                        data: stats.map(i => i.counters.actions.photoClicks),
+                                        fill: false,
+                                        borderColor: catColors.photo,
+                                        tension: GRAPH_TENSION
+                                    },
+                                    {
+                                        label: 'Review clicks',
+                                        data: stats.map(i => i.counters.actions.reviewClicks),
+                                        fill: false,
+                                        borderColor: catColors.review,
+                                        tension: GRAPH_TENSION
+                                    }]
+                            }
+                        })
                     }
                 }
             })
@@ -174,8 +288,9 @@ class StatsPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <canvas height={240} width={350} bp="12 6@md"
-                            ref={this.state.charts.viewsAndActions.container}></canvas>
+                    <div bp="12 6@md" className={css.chart}>
+                        <canvas ref={this.state.charts.viewsAndActions.container}></canvas>
+                    </div>
                 </div>
 
                 <div className={css.slHeader}>{t('statCompanyActions')}</div>
@@ -224,7 +339,9 @@ class StatsPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <canvas bp="12 6@md" ref={this.state.charts.companyActions.container}></canvas>
+                    <div bp="12 6@md" className={css.chart}>
+                        <canvas ref={this.state.charts.companyActions.container}></canvas>
+                    </div>
                 </div>
 
                 <div className={css.slHeader}>{t('statSectionClicks')}</div>
@@ -257,7 +374,9 @@ class StatsPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <canvas bp="12 6@md" ref={this.state.charts.sectionClicks.container}></canvas>
+                    <div bp="12 6@md" className={css.chart}>
+                        <canvas ref={this.state.charts.sectionClicks.container}></canvas>
+                    </div>
                 </div>
 
                 <div className={css.slHeader}>{t('statActionsLastMonth')}</div>
@@ -270,7 +389,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.review}}>&nbsp;</span>
                                     <span>{t('reviewClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.reviewClicks / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.reviewClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -278,7 +397,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.social}}>&nbsp;</span>
                                     <span>{t('socialClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.socialClicks / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.socialClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -286,7 +405,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.price}}>&nbsp;</span>
                                     <span>{t('priceViews')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.priceViews / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.priceViews / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -294,7 +413,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.phone}}>&nbsp;</span>
                                     <span>{t('callsAndPhoneViews')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.phoneViews / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.phoneViews / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -302,7 +421,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.photo}}>&nbsp;</span>
                                     <span>{t('photoViews')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.photoViews / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.photoViews / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -310,7 +429,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.website}}>&nbsp;</span>
                                     <span>{t('websiteClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.websiteClicks / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.websiteClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -318,7 +437,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.share}}>&nbsp;</span>
                                     <span>{t('shareClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.shareClicks / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.shareClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -326,11 +445,13 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.map}}>&nbsp;</span>
                                     <span>{t('mapClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.mapClicks / Math.max(this.state.statistics.actions, 1)) * 100}%</div>
+                                <div>{Math.round(this.state.statistics.mapClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
                         </div>
                     </div>
-                    <canvas bp="12 6@md" ref={this.state.charts.lastMonthActions.container}></canvas>
+                    <div bp="12 6@md" className={css.chart} style={{height: 350}}>
+                        <canvas ref={this.state.charts.lastMonthActions.container}></canvas>
+                    </div>
                 </div>
             </PersonalPageLayout>
         </div>
