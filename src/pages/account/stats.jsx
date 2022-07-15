@@ -59,7 +59,10 @@ class StatsPage extends React.Component {
         APIRequests.getStatsForNearestNDays(30).then(stats => {
             stats = stats.data
 
-            if (this.state.charts.viewsAndActions.chart) {
+            if (this.state.charts.sectionClicks.chart ||
+                this.state.charts.viewsAndActions.chart ||
+                this.state.charts.companyActions.chart ||
+                this.state.charts.lastMonthActions.chart) {
                 return
             }
 

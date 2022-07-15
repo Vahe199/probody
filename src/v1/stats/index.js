@@ -72,14 +72,35 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
             }
         }, '_id')
 
-        res.json({
-            data: await Stats.find({
+        if (Number(req.query.from) > Number(req.query.to)) {
+            return
+        }
+
+        let currentDay = Number(req.query.from),
+            stats = await Stats.find({
                 salon: salon._id,
                 date: {
                     $gte: new Date(Number(req.query.from)),
                     $lte: new Date(Number(req.query.to))
                 }
             })
+
+        while (true) {
+            if (currentDay > Number(req.query.to)) {
+                break
+            }
+
+            //{"counters":{"actions":{"mapClicks":0,"messengerClicks":0,"phoneClicks":0,"photoClicks":0,"priceClicks":0,"reviewClicks":0,"shareClicks":0,"socialClicks":0,"websiteClicks":0},"views":0},"_id":"62d01ea755374e6646cc05bb","date":"2022-07-14T00:00:00.000Z","salon":"62aded50a98de316b5e05219"}
+            if (!stats.find(i => +new Date(i.date) === currentDay)) {
+                stats.unshift({"counters":{"actions":{"mapClicks":0,"messengerClicks":0,"phoneClicks":0,"photoClicks":0,"priceClicks":0,"reviewClicks":0,"shareClicks":0,"socialClicks":0,"websiteClicks":0},"views":0},"date":(new Date(currentDay)).toISOString(),"salon":"62aded50a98de316b5e05219"})
+            }
+
+            //+1 day
+            currentDay += 86400000
+        }
+
+        res.json({
+            data: stats
         })
     } catch (e) {
         console.log(e)
