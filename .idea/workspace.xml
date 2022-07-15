@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/statpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/statpage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,14 +170,7 @@
       <workItem from="1657897931244" duration="275000" />
       <workItem from="1657898302012" duration="1387000" />
       <workItem from="1657904254337" duration="329000" />
-      <workItem from="1657907607641" duration="4853000" />
-    </task>
-    <task id="LOCAL-00353" summary="done vacancies">
-      <created>1656858785060</created>
-      <option name="number" value="00353" />
-      <option name="presentableId" value="LOCAL-00353" />
-      <option name="project" value="LOCAL" />
-      <updated>1656858785060</updated>
+      <workItem from="1657907607641" duration="6133000" />
     </task>
     <task id="LOCAL-00354" summary="added tags">
       <created>1656931086738</created>
@@ -517,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657904574969</updated>
     </task>
-    <option name="localTasksCounter" value="402" />
+    <task id="LOCAL-00402" summary="added social block on mobile">
+      <created>1657912486967</created>
+      <option name="number" value="00402" />
+      <option name="presentableId" value="LOCAL-00402" />
+      <option name="project" value="LOCAL" />
+      <updated>1657912486969</updated>
+    </task>
+    <option name="localTasksCounter" value="403" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

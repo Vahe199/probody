@@ -122,6 +122,7 @@ class SalonView extends React.Component {
     }
 
     incrementStats(field) {
+        console.log('increment', field)
         APIRequests.incrementStats(this.state.salon.parent ? this.state.salon.parent._id : this.state.salon._id, field)
     }
 
@@ -692,7 +693,7 @@ class SalonView extends React.Component {
                                              dark={true}
                                              link={{
                                                  query: Object.assign({}, this.props.router.query, {
-                                                     salonTab: 'cost'
+                                                     salonTab: 'price'
                                                  }),
                                                  hash: '#salonTab'
                                              }}/>
@@ -700,7 +701,7 @@ class SalonView extends React.Component {
                                              dark={true}
                                              link={{
                                                  query: Object.assign({}, this.props.router.query, {
-                                                     salonTab: 'cost'
+                                                     salonTab: 'price'
                                                  }),
                                                  hash: '#salonTab'
                                              }}/>
