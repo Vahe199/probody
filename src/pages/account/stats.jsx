@@ -13,12 +13,12 @@ import {
     LineController,
     LineElement,
     DoughnutController,
-    PointElement, BarController, BarElement
+    PointElement, BarController, BarElement, Tooltip
 } from 'chart.js'
 import APIRequests from "../../helpers/APIRequests.js";
 import {DateTime} from "luxon";
 
-Chart.register(LineController, BarController, BarElement, DoughnutController, ArcElement, CategoryScale, LinearScale, PointElement, LineElement)
+Chart.register(LineController, BarController, BarElement, DoughnutController, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 
 const catColors = {
         views: '#99D46B',
@@ -93,7 +93,8 @@ class StatsPage extends React.Component {
             aggregatedStatistics.sum = sum
             aggregatedStatistics.actions = sum - aggregatedStatistics.views
 
-            const labels = stats.map(i => DateTime.fromISO(i.date).toFormat('d.MM'))
+            const labels = stats.map(i => DateTime.fromISO(i.date).toFormat('d.MM')),
+                {t} = this.context
 
             this.setState({
                 statistics: aggregatedStatistics,
@@ -104,18 +105,18 @@ class StatsPage extends React.Component {
                             type: 'doughnut',
                             options: {
                                 responsive: true,
-                                maintainAspectRatio: false
+                                maintainAspectRatio: false,
                             },
                             data: {
                                 labels: [
-                                    'reviewClicks',
-                                    'mapClicks',
-                                    'phoneViews',
-                                    'photoViews',
-                                    'messengerClicks',
-                                    'priceViews',
-                                    'shareClicks',
-                                    'socialClicks'
+                                    t('reviewClicks'),
+                                    t('mapClicks'),
+                                    t('callsAndPhoneViews'),
+                                    t('photoViews'),
+                                    t('messengerClicks'),
+                                    t('priceViews'),
+                                    t('shareClicks'),
+                                    t('socialClicks')
                                 ],
                                 datasets: [{
                                     data: [
@@ -147,21 +148,28 @@ class StatsPage extends React.Component {
                             type: 'line',
                             options: {
                                 responsive: true,
-                                maintainAspectRatio: false
+                                maintainAspectRatio: false,
+
+                                interaction: {
+                                    intersect: false,
+                                    mode: 'index',
+                                },
                             },
                             data: {
                                 labels,
                                 datasets: [{
-                                    label: 'Views',
+                                    label: t('pageViews'),
                                     data: stats.map(i => i.counters.views),
                                     fill: false,
+                                    backgroundColor: catColors.views,
                                     borderColor: catColors.views,
                                     tension: GRAPH_TENSION
                                 },
                                     {
-                                        label: 'Actions',
+                                        label: t('actionsOnPage'),
                                         data: stats.map(i => Object.values(i.counters.actions).reduce((acc, i) => acc + i, 0)),
                                         fill: false,
+                                        backgroundColor: catColors.actions,
                                         borderColor: catColors.actions,
                                         tension: GRAPH_TENSION
                                     }]
@@ -176,27 +184,27 @@ class StatsPage extends React.Component {
                                 labels,
                                 datasets: [
                                     {
-                                        label: 'Phone clicks',
+                                        label: t('callsAndPhoneViews'),
                                         data: stats.map(i => i.counters.actions.phoneClicks),
                                         backgroundColor: catColors.phone
                                     },
                                     {
-                                        label: 'Map clicks',
+                                        label: t('mapClicks'),
                                         data: stats.map(i => i.counters.actions.mapClicks),
                                         backgroundColor: catColors.map
                                     },
                                     {
-                                        label: 'Website clicks',
+                                        label: t('websiteClicks'),
                                         data: stats.map(i => i.counters.actions.websiteClicks),
                                         backgroundColor: catColors.website
                                     },
                                     {
-                                        label: 'Messenger clicks',
+                                        label: t('messengerClicks'),
                                         data: stats.map(i => i.counters.actions.messengerClicks),
                                         backgroundColor: catColors.whatsapp
                                     },
                                     {
-                                        label: 'Social clicks',
+                                        label: t('socialClicks'),
                                         data: stats.map(i => i.counters.actions.socialClicks),
                                         backgroundColor: catColors.social
                                     },
@@ -211,6 +219,11 @@ class StatsPage extends React.Component {
                                         stacked: true
                                     }
                                 },
+
+                                interaction: {
+                                    intersect: false,
+                                    mode: 'index',
+                                },
                                 responsive: true,
                                 maintainAspectRatio: false
                             }
@@ -222,29 +235,37 @@ class StatsPage extends React.Component {
                             type: 'line',
                             options: {
                                 responsive: true,
-                                maintainAspectRatio: false
+                                maintainAspectRatio: false,
+
+                                interaction: {
+                                    intersect: false,
+                                    mode: 'index',
+                                },
                             },
                             data: {
                                 labels,
                                 datasets: [{
-                                    label: 'Price clicks',
+                                    label: t('priceViews'),
                                     data: stats.map(i => i.counters.actions.priceClicks),
                                     fill: false,
                                     borderColor: catColors.price,
+                                    backgroundColor: catColors.price,
                                     tension: GRAPH_TENSION
                                 },
                                     {
-                                        label: 'Photo clicks',
+                                        label: t('photoViews'),
                                         data: stats.map(i => i.counters.actions.photoClicks),
                                         fill: false,
                                         borderColor: catColors.photo,
+                                        backgroundColor: catColors.photo,
                                         tension: GRAPH_TENSION
                                     },
                                     {
-                                        label: 'Review clicks',
+                                        label: t('reviewClicks'),
                                         data: stats.map(i => i.counters.actions.reviewClicks),
                                         fill: false,
                                         borderColor: catColors.review,
+                                        backgroundColor: catColors.review,
                                         tension: GRAPH_TENSION
                                     }]
                             }
