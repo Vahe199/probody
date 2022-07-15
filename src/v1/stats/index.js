@@ -103,7 +103,7 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
         }
 
         res.json({
-            data: stats.sort((a, b) => +new Date(a.date) > +new Date(b.date))
+            data: stats.sort((a, b) => +new Date(a.date) - +new Date(b.date))
         })
     } catch (e) {
         console.log(e)
