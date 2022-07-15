@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/stats/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/stats/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,14 +162,7 @@
       <workItem from="1657828775925" duration="880000" />
       <workItem from="1657830199170" duration="917000" />
       <workItem from="1657875258817" duration="29000" />
-      <workItem from="1657881129131" duration="659000" />
-    </task>
-    <task id="LOCAL-00348" summary="done map salon card">
-      <created>1656848219610</created>
-      <option name="number" value="00348" />
-      <option name="presentableId" value="LOCAL-00348" />
-      <option name="project" value="LOCAL" />
-      <updated>1656848219610</updated>
+      <workItem from="1657881129131" duration="969000" />
     </task>
     <task id="LOCAL-00349" summary="done map salon card">
       <created>1656850069640</created>
@@ -511,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657830974543</updated>
     </task>
-    <option name="localTasksCounter" value="397" />
+    <task id="LOCAL-00397" summary="added social block on mobile">
+      <created>1657881847274</created>
+      <option name="number" value="00397" />
+      <option name="presentableId" value="LOCAL-00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1657881847274</updated>
+    </task>
+    <option name="localTasksCounter" value="398" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

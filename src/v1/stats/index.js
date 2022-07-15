@@ -76,7 +76,7 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
             return
         }
 
-        let currentDay = Number(req.query.from),
+        let currentDay = new Date(Number(req.query.from)),
             stats = await Stats.find({
                 salon: salon._id,
                 date: {
@@ -85,6 +85,9 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
                 }
             })
 
+        currentDay.setHours(0, 0, 0, 0)
+        currentDay = +currentDay
+
         while (true) {
             if (currentDay > Number(req.query.to)) {
                 break
@@ -92,7 +95,7 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
 
             //{"counters":{"actions":{"mapClicks":0,"messengerClicks":0,"phoneClicks":0,"photoClicks":0,"priceClicks":0,"reviewClicks":0,"shareClicks":0,"socialClicks":0,"websiteClicks":0},"views":0},"_id":"62d01ea755374e6646cc05bb","date":"2022-07-14T00:00:00.000Z","salon":"62aded50a98de316b5e05219"}
             if (!stats.find(i => +new Date(i.date) === currentDay)) {
-                stats.unshift({"counters":{"actions":{"mapClicks":0,"messengerClicks":0,"phoneClicks":0,"photoClicks":0,"priceClicks":0,"reviewClicks":0,"shareClicks":0,"socialClicks":0,"websiteClicks":0},"views":0},"date":(new Date(currentDay)).toISOString(),"salon":"62aded50a98de316b5e05219"})
+                stats.push({"counters":{"actions":{"mapClicks":0,"messengerClicks":0,"phoneClicks":0,"photoClicks":0,"priceClicks":0,"reviewClicks":0,"shareClicks":0,"socialClicks":0,"websiteClicks":0},"views":0},"date":(new Date(currentDay)).toISOString(),"salon":"62aded50a98de316b5e05219"})
             }
 
             //+1 day
@@ -100,7 +103,7 @@ router.get('/', AuthGuard('serviceProvider'), async (req, res) => {
         }
 
         res.json({
-            data: stats
+            data: stats.sort((a, b) => +new Date(a.date) > +new Date(b.date))
         })
     } catch (e) {
         console.log(e)
