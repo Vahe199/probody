@@ -297,6 +297,14 @@ class StatsPage extends React.Component {
                                         external: customLineTooltip
                                     }
                                 },
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            minRotation: 0,
+                                            maxRotation: 0
+                                        }
+                                    }
+                                }
                             },
                             data: {
                                 labels,
@@ -357,6 +365,10 @@ class StatsPage extends React.Component {
                                 scales: {
                                     x: {
                                         stacked: true,
+                                        ticks: {
+                                            minRotation: 0,
+                                            maxRotation: 0
+                                        }
                                     },
                                     y: {
                                         stacked: true
@@ -398,6 +410,15 @@ class StatsPage extends React.Component {
                                         external: customLineTooltip
                                     }
                                 },
+
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            minRotation: 0,
+                                            maxRotation: 0
+                                        }
+                                    }
+                                }
                             },
                             data: {
                                 labels,
