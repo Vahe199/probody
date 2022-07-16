@@ -345,6 +345,7 @@ export default {
     yourEMail: 'Ваша электронная почта',
     creatingReview: 'Новый отзыв',
     yourName: 'Ваше имя',
+    edit: 'Редактировать',
     typeYourName: 'Напишите свое имя',
     whatsYourName: 'Как Вас зовут?',
     youPostedReview: 'Вы оставили отзыв',

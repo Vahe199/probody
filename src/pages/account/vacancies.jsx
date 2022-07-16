@@ -1,11 +1,10 @@
 import React from "react"
-import {withRouter} from "next/router"
 import {TITLE_POSTFIX} from "../../helpers/constants.js"
 import Head from "next/head.js"
 import {GlobalContext} from "../../contexts/Global.js"
 import PersonalPageLayout from "../../layouts/secondary/PersonalPageLayout.jsx"
-import Button from "../../components/kit/Button.jsx";
-import APIRequests from "../../helpers/APIRequests.js";
+import VacancyList from "../../components/vacancies/VacancyList";
+import VacancyEditor from "../../components/vacancies/VacancyEditor.jsx";
 
 class MyVacanciesPage extends React.Component {
     static contextType = GlobalContext
@@ -14,14 +13,9 @@ class MyVacanciesPage extends React.Component {
         super(props);
 
         this.state = {
-            vacancies: []
+            view: 'vacancylist',
+            setView: name => this.setState({view: name})
         }
-    }
-
-    componentDidMount() {
-        APIRequests.getMyVacancies().then(vacancies => {
-            this.setState({vacancies: vacancies || []})
-        })
     }
 
     render() {
@@ -33,16 +27,10 @@ class MyVacanciesPage extends React.Component {
             </Head>
 
             <PersonalPageLayout page={'vacancies'}>
-                <div className="flex justify-between responsive-content">
-                    <h1 className={'bigger inline-flex items-center'}>{t('myVacancies')}</h1>
-
-                    <Button iconLeft={'plus'}>
-                        {t('addVacancy')}
-                    </Button>
-                </div>
+                {this.state.view === 'vacancylist' ? <VacancyList setView={this.state.setView} /> : <VacancyEditor setView={this.state.setView} />}
             </PersonalPageLayout>
         </>
     }
 }
 
-export default withRouter(MyVacanciesPage)
+export default MyVacanciesPage

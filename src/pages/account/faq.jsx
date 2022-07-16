@@ -76,7 +76,7 @@ class FAQ extends React.Component {
 
             <PersonalPageLayout page={'faq'}>
                 <div>
-                    <p style={{marginBottom: 32}} className={'text-xl lack responsive-content'}>{t('needHelp')}</p>
+                    <h1 style={{marginBottom: 32}} className={'bigger lack responsive-content'}>{t('needHelp')}</h1>
 
                     <div>
                         {this.state.faq.map((question, i) =>

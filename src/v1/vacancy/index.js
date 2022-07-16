@@ -51,7 +51,7 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 })
 
 router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
-    res.json(await Vacancy.find({host: req.user._id}))
+    res.json(await Vacancy.find({host: req.user._id}).populate('region'))
 })
 
 router.get('/:slug', async (req, res) => {
