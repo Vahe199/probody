@@ -49,6 +49,8 @@ export default class VacancyEditor extends React.Component {
 
         this.updateProp = this.updateProp.bind(this)
         this.initRegionSelect = this.initRegionSelect.bind(this)
+        this.toggleCheckbox = this.toggleCheckbox.bind(this)
+        this.updateSocial = this.updateSocial.bind(this)
     }
 
     componentDidMount() {
@@ -70,6 +72,15 @@ export default class VacancyEditor extends React.Component {
         this.initRegionSelect()
     }
 
+    toggleCheckbox(name, value) {
+        this.setState({
+            vacancy: {
+                ...this.state.vacancy,
+                [name]: this.state.vacancy[name].includes(value) ? this.state.vacancy[name].filter(i => i !== value) : [...this.state.vacancy[name], value]
+            }
+        })
+    }
+
     initRegionSelect() {
         if (this.state.regions.length) {
             return
@@ -89,6 +100,18 @@ export default class VacancyEditor extends React.Component {
             vacancy: {
                 ...this.state.vacancy,
                 [name]: value
+            }
+        })
+    }
+
+    updateSocial(name, value) {
+        this.setState({
+            vacancy: {
+                ...this.state.vacancy,
+                social: {
+                    ...this.state.vacancy.social,
+                    [name]: value
+                }
             }
         })
     }

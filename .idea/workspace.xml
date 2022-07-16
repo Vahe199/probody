@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Form/ImageInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Form/ImageInput.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Vacancy.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Vacancy.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/vacancies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/vacancies.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/imageinput.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/imageinput.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/personal.vacancy.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/personal.vacancy.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,14 +171,7 @@
       <workItem from="1657898302012" duration="1387000" />
       <workItem from="1657904254337" duration="329000" />
       <workItem from="1657907607641" duration="13632000" />
-      <workItem from="1657973832520" duration="13928000" />
-    </task>
-    <task id="LOCAL-00362" summary="added tags">
-      <created>1657112166141</created>
-      <option name="number" value="00362" />
-      <option name="presentableId" value="LOCAL-00362" />
-      <option name="project" value="LOCAL" />
-      <updated>1657112166141</updated>
+      <workItem from="1657973832520" duration="14505000" />
     </task>
     <task id="LOCAL-00363" summary="added tags">
       <created>1657112339787</created>
@@ -526,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657980220071</updated>
     </task>
-    <option name="localTasksCounter" value="411" />
+    <task id="LOCAL-00411" summary="added social block on mobile">
+      <created>1657988905846</created>
+      <option name="number" value="00411" />
+      <option name="presentableId" value="LOCAL-00411" />
+      <option name="project" value="LOCAL" />
+      <updated>1657988905846</updated>
+    </task>
+    <option name="localTasksCounter" value="412" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
