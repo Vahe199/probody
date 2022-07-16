@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change beforePath="$PROJECT_DIR$/src/pages/account/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/stats.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/statpage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/statpage.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,14 +172,7 @@
       <workItem from="1657897931244" duration="275000" />
       <workItem from="1657898302012" duration="1387000" />
       <workItem from="1657904254337" duration="329000" />
-      <workItem from="1657907607641" duration="6133000" />
-    </task>
-    <task id="LOCAL-00354" summary="added tags">
-      <created>1656931086738</created>
-      <option name="number" value="00354" />
-      <option name="presentableId" value="LOCAL-00354" />
-      <option name="project" value="LOCAL" />
-      <updated>1656931086738</updated>
+      <workItem from="1657907607641" duration="8460000" />
     </task>
     <task id="LOCAL-00355" summary="added tags">
       <created>1656931190341</created>
@@ -515,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657912486969</updated>
     </task>
-    <option name="localTasksCounter" value="403" />
+    <task id="LOCAL-00403" summary="added social block on mobile">
+      <created>1657913772832</created>
+      <option name="number" value="00403" />
+      <option name="presentableId" value="LOCAL-00403" />
+      <option name="project" value="LOCAL" />
+      <updated>1657913772832</updated>
+    </task>
+    <option name="localTasksCounter" value="404" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

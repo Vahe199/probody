@@ -122,7 +122,6 @@ class SalonView extends React.Component {
     }
 
     incrementStats(field) {
-        console.log('increment', field)
         APIRequests.incrementStats(this.state.salon.parent ? this.state.salon.parent._id : this.state.salon._id, field)
     }
 

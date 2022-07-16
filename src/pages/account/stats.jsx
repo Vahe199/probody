@@ -34,7 +34,7 @@ const catColors = {
         share: '#7FC5FD'
     },
     GRAPH_TENSION = 0.3,
-    customTooltip = (context) => {
+    customLineTooltip = (context) => {
         // Tooltip Element
         const {chart, tooltip} = context;
         const getOrCreateTooltip = (chart) => {
@@ -92,6 +92,66 @@ const catColors = {
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = positionX + tooltip.caretX + 'px';
         tooltipEl.style.top = positionY + 'px';
+    },
+    customTooltip = (context) => {
+        // Tooltip Element
+        const {chart, tooltip} = context;
+        const getOrCreateTooltip = (chart) => {
+            let tooltipEl = chart.canvas.parentNode.querySelector('div');
+
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+                tooltipEl.classList.add(css.tooltipLine)
+                tooltipEl.style.opacity = 1;
+                tooltipEl.style.background = 'transparent';
+
+                const sectionRoot = document.createElement('div'),
+                    section = document.createElement('section');
+
+                // sectionRoot.classList.add(css.tooltipContainer)
+                section.classList.add(css.tooltip, css.withoutLine)
+
+                sectionRoot.appendChild(section)
+
+                tooltipEl.appendChild(sectionRoot);
+                chart.canvas.parentNode.appendChild(tooltipEl);
+            }
+
+            return tooltipEl;
+        };
+
+        const tooltipEl = getOrCreateTooltip(chart);
+
+        // Hide if no tooltip
+        if (tooltip.opacity === 0) {
+            tooltipEl.style.opacity = 0;
+            return;
+        }
+
+        // Set Text
+        if (tooltip.body) {
+            const titleLines = tooltip.title || [];
+
+            const section = tooltipEl.querySelector('section');
+
+            // Remove old children
+            while (section.firstChild) {
+                section.firstChild.remove();
+            }
+
+            // Add new children
+            const text = document.createElement('p')
+
+            text.innerText = titleLines[0]
+            section.appendChild(text);
+        }
+
+        const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
+
+        // Display, position, and set styles for font
+        tooltipEl.style.opacity = 1;
+        tooltipEl.style.left = positionX + tooltip.caretX + 'px';
+        tooltipEl.style.top = positionY + tooltip.caretY + 'px';
     }
 
 class StatsPage extends React.Component {
@@ -217,7 +277,7 @@ class StatsPage extends React.Component {
                                     tooltip: {
                                         enabled: false,
                                         position: 'nearest',
-                                        external: customTooltip
+                                        external: customLineTooltip
                                     }
                                 },
                             },
@@ -285,10 +345,16 @@ class StatsPage extends React.Component {
                                         stacked: true
                                     }
                                 },
+                                plugins: {
+                                    tooltip: {
+                                        enabled: false,
+                                        external: customTooltip
+                                    }
+                                },
 
                                 interaction: {
                                     intersect: false,
-                                    mode: 'index',
+                                    mode: 'nearest',
                                 },
                                 responsive: true,
                                 maintainAspectRatio: false
@@ -312,7 +378,7 @@ class StatsPage extends React.Component {
                                     tooltip: {
                                         enabled: false,
                                         position: 'nearest',
-                                        external: customTooltip
+                                        external: customLineTooltip
                                     }
                                 },
                             },
