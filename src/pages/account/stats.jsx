@@ -152,6 +152,66 @@ const catColors = {
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = positionX + tooltip.caretX + 'px';
         tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+    },
+    doughnutContent = (context) => {
+        // Tooltip Element
+        const {chart, tooltip} = context;
+        const getOrCreateTooltip = (chart) => {
+            let tooltipEl = chart.canvas.parentNode.querySelector('div');
+
+            if (!tooltipEl) {
+                tooltipEl = document.createElement('div');
+
+                const section = document.createElement('section');
+
+                tooltipEl.classList.add(css.doughnutContentContainer)
+                section.classList.add(css.doughnutTooltip)
+
+                tooltipEl.appendChild(section);
+                chart.canvas.parentNode.appendChild(tooltipEl);
+            }
+
+            return tooltipEl;
+        };
+
+        const tooltipEl = getOrCreateTooltip(chart);
+
+        // Hide if no tooltip
+        if (tooltip.opacity === 0) {
+            tooltipEl.style.opacity = 0;
+            return;
+        }
+
+        // Set Text
+        const section = tooltipEl.querySelector('section');
+
+        // Remove old children
+        while (section.firstChild) {
+            section.firstChild.remove();
+        }
+
+        // Add new children
+        const textContainer = document.createElement('div'),
+            percentage = document.createElement('div'),
+            title = document.createElement('div')
+
+        textContainer.style.textAlign = 'center'
+        percentage.classList.add(css.percentageText)
+        title.classList.add(css.captionTitle)
+
+        percentage.innerText = Math.round(tooltip.dataPoints[0].raw / tooltip.dataPoints[0].dataset.data.reduce((acc, i) => acc + i, 0) * 100) + '%'
+        title.innerText = tooltip.dataPoints[0].label
+
+        textContainer.appendChild(percentage);
+        textContainer.appendChild(title);
+        section.appendChild(textContainer);
+
+        const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
+
+        // Display, position, and set styles for font
+        tooltipEl.style.opacity = 1;
+        tooltipEl.style.left = positionX + 95 + 'px';
+        tooltipEl.style.top = positionY + 140 + 'px';
     }
 
 class StatsPage extends React.Component {
@@ -218,49 +278,6 @@ class StatsPage extends React.Component {
             this.setState({
                 statistics: aggregatedStatistics,
                 charts: {
-                    lastMonthActions: {
-                        ...this.state.charts.lastMonthActions,
-                        chart: new Chart(this.state.charts.lastMonthActions.container.current.getContext('2d'), {
-                            type: 'doughnut',
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                            },
-                            data: {
-                                labels: [
-                                    t('reviewClicks'),
-                                    t('mapClicks'),
-                                    t('callsAndPhoneViews'),
-                                    t('photoViews'),
-                                    t('messengerClicks'),
-                                    t('priceViews'),
-                                    t('shareClicks'),
-                                    t('socialClicks')
-                                ],
-                                datasets: [{
-                                    data: [
-                                        aggregatedStatistics.reviewClicks,
-                                        aggregatedStatistics.mapClicks,
-                                        aggregatedStatistics.phoneViews,
-                                        aggregatedStatistics.photoViews,
-                                        aggregatedStatistics.messengerClicks,
-                                        aggregatedStatistics.priceViews,
-                                        aggregatedStatistics.shareClicks,
-                                        aggregatedStatistics.socialClicks
-                                    ],
-                                    backgroundColor: [catColors.review,
-                                        catColors.map,
-                                        catColors.phone,
-                                        catColors.photo,
-                                        catColors.whatsapp,
-                                        catColors.price,
-                                        catColors.share,
-                                        catColors.social],
-                                    borderWidth: 0
-                                }]
-                            }
-                        })
-                    },
                     viewsAndActions: {
                         ...this.state.charts.viewsAndActions,
                         chart: new Chart(this.state.charts.viewsAndActions.container.current.getContext('2d'), {
@@ -408,6 +425,57 @@ class StatsPage extends React.Component {
                                         backgroundColor: catColors.review,
                                         tension: GRAPH_TENSION
                                     }]
+                            }
+                        })
+                    },
+                    lastMonthActions: {
+                        ...this.state.charts.lastMonthActions,
+                        chart: new Chart(this.state.charts.lastMonthActions.container.current.getContext('2d'), {
+                            type: 'doughnut',
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                cutout: '55%',
+
+                                plugins: {
+                                    tooltip: {
+                                        enabled: false,
+                                        external: doughnutContent
+                                    }
+                                }
+                            },
+                            data: {
+                                labels: [
+                                    t('reviewClicks'),
+                                    t('mapClicks'),
+                                    t('callsAndPhoneViews'),
+                                    t('photoViews'),
+                                    t('messengerClicks'),
+                                    t('priceViews'),
+                                    t('shareClicks'),
+                                    t('socialClicks')
+                                ],
+                                datasets: [{
+                                    data: [
+                                        aggregatedStatistics.reviewClicks,
+                                        aggregatedStatistics.mapClicks,
+                                        aggregatedStatistics.phoneViews,
+                                        aggregatedStatistics.photoViews,
+                                        aggregatedStatistics.messengerClicks,
+                                        aggregatedStatistics.priceViews,
+                                        aggregatedStatistics.shareClicks,
+                                        aggregatedStatistics.socialClicks
+                                    ],
+                                    backgroundColor: [catColors.review,
+                                        catColors.map,
+                                        catColors.phone,
+                                        catColors.photo,
+                                        catColors.whatsapp,
+                                        catColors.price,
+                                        catColors.share,
+                                        catColors.social],
+                                    borderWidth: 0
+                                }]
                             }
                         })
                     }
