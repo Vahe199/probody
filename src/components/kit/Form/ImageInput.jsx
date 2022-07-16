@@ -83,7 +83,7 @@ export default class ImageInput extends React.Component {
         return <div className={cnb(css['theme--' + theme], 'grid', 'relative')}>
             <label className={'inline-block'} htmlFor={inputId}>
                 <div className={css.root}>
-                    {this.state.preview ? <Image height={220} className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
+                    {this.state.preview ? <img height={220} className={cnb(css.thumb, this.state.uploaded ? '' : css.uploading)}
                                                src={this.state.preview}/> : ' '}
                 </div>
             </label>

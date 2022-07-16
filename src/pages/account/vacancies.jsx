@@ -14,7 +14,8 @@ class MyVacanciesPage extends React.Component {
 
         this.state = {
             view: 'vacancylist',
-            setView: name => this.setState({view: name})
+            editingVacancy: '',
+            setView: (name, editingVacancy = undefined) => this.setState({view: name, editingVacancy})
         }
     }
 
@@ -27,7 +28,7 @@ class MyVacanciesPage extends React.Component {
             </Head>
 
             <PersonalPageLayout page={'vacancies'}>
-                {this.state.view === 'vacancylist' ? <VacancyList setView={this.state.setView} /> : <VacancyEditor setView={this.state.setView} />}
+                {this.state.view === 'vacancylist' ? <VacancyList setView={this.state.setView} /> : <VacancyEditor editingVacancy={this.state.editingVacancy} setView={this.state.setView} />}
             </PersonalPageLayout>
         </>
     }

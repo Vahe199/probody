@@ -44,7 +44,7 @@ const VacancySchema = new Schema({
         }
     },
     withdrawalPeriod: {
-        type: String,
+        type: [String],
         enum: ['daily', 'weekly', 'monthly'],
     },
     phone: {

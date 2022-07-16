@@ -22,7 +22,7 @@ export default class VacancyList extends React.Component {
 
     componentDidMount() {
         APIRequests.getMyVacancies().then(vacancies => {
-            this.setState({vacancies: [...vacancies, ...vacancies, ...vacancies] || []})
+            this.setState({vacancies: vacancies || []})
         })
     }
 
@@ -33,7 +33,7 @@ export default class VacancyList extends React.Component {
             <div className="flex justify-between responsive-content">
                 <h1 className={'bigger inline-flex items-center'}>{t('myVacancies')}</h1>
 
-                <Button iconLeft={'plus'} onClick={() => this.props.setView('vacancyview')}>
+                <Button iconLeft={'plus'} onClick={() => this.props.setView('vacancyview', '')}>
                     {t('addVacancy')}
                 </Button>
             </div>
@@ -58,7 +58,7 @@ export default class VacancyList extends React.Component {
                                             <p>{vac.description}</p>
                                         </div>
                                         : <div className={css.actionContainer}>
-                                            <Button iconLeft={'edit'}>{t('edit')}</Button>
+                                            <Button iconLeft={'edit'} onClick={() => this.props.setView('vacancyview', vac.slug)}>{t('edit')}</Button>
                                             <Button color={'thirdlayer'}>
                                                 <Icon name={'trashcan_alt'} />
                                             </Button>
@@ -96,8 +96,11 @@ export default class VacancyList extends React.Component {
                                 <span className={css.value}>{vac.region.name}</span>
                             </div>
 
-                            {isMobile && <div className={cnb(css.contactContainer, css.mobile)}>
-                                contact
+                            {isMobile && <div className={css.actionContainer} style={{padding: '20px 0 0 0'}}>
+                                <Button iconLeft={'edit'} onClick={() => this.props.setView('vacancyview', vac.slug)}>{t('edit')}</Button>
+                                <Button color={'thirdlayer'}>
+                                    <Icon name={'trashcan_alt'} />
+                                </Button>
                             </div>}
                         </div>
                     </div>

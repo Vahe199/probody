@@ -237,6 +237,10 @@ export default class APIRequests {
         })
     }
 
+    static async getVacancy(slug) {
+        return (await fetch(`${API_URL}/vacancy/${slug}`)).json()
+    }
+
     static async approveAccount(phone, code, password) {
         return fetch(`${API_URL}/auth/approve`, {
             method: 'PATCH',

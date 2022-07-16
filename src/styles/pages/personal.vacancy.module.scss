@@ -23,6 +23,22 @@
       background: t('line-color');
     }
   }
+
+  &.dense>div:not(:last-child)::after {
+    margin-top: 20px;
+  }
+}
+
+.arrowBack {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  i {
+    margin-right: 12px;
+    width: 16px;
+    height: 15px;
+  }
 }
 
 .actionContainer {
