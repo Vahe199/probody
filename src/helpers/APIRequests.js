@@ -13,6 +13,12 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/program`)).json()
     }
 
+    static async getMyVacancies() {
+        return (await fetch(`${API_URL}/vacancy/me`, {
+            headers: APIRequests.withCredentials()
+        })).json()
+    }
+
     static withCredentials(headers) {
         return {
             'X-Auth-Token': localStorage.getItem('authToken'),

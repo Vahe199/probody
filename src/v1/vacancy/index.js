@@ -54,4 +54,8 @@ router.get('/:slug', async (req, res) => {
     res.json(await Vacancy.findOne({slug: req.params.slug}))
 })
 
+router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
+    res.json(await Vacancy.findOne({host: req.user._id}))
+})
+
 export default router;
