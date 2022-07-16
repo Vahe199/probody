@@ -20,7 +20,7 @@ class MyVacanciesPage extends React.Component {
 
     componentDidMount() {
         APIRequests.getMyVacancies().then(vacancies => {
-            this.setState({vacancies})
+            this.setState({vacancies: vacancies || []})
         })
     }
 
