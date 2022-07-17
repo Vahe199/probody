@@ -99,6 +99,8 @@ export default class VacancyEditor extends React.Component {
                     }
                 }
 
+                vacancy.region = vacancy.region._id
+
                 this.setState({vacancy})
             })
         }

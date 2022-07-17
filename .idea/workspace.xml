@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/src/v1/vacancy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/vacancy/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,14 +172,7 @@
       <workItem from="1657904254337" duration="329000" />
       <workItem from="1657907607641" duration="13632000" />
       <workItem from="1657973832520" duration="14877000" />
-      <workItem from="1658053416870" duration="8626000" />
-    </task>
-    <task id="LOCAL-00365" summary="cleaned up url">
-      <created>1657183905960</created>
-      <option name="number" value="00365" />
-      <option name="presentableId" value="LOCAL-00365" />
-      <option name="project" value="LOCAL" />
-      <updated>1657183905960</updated>
+      <workItem from="1658053416870" duration="8964000" />
     </task>
     <task id="LOCAL-00366" summary="cleaned up url">
       <created>1657203825911</created>
@@ -517,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658066662163</updated>
     </task>
-    <option name="localTasksCounter" value="414" />
+    <task id="LOCAL-00414" summary="added social block on mobile">
+      <created>1658067270349</created>
+      <option name="number" value="00414" />
+      <option name="presentableId" value="LOCAL-00414" />
+      <option name="project" value="LOCAL" />
+      <updated>1658067270349</updated>
+    </task>
+    <option name="localTasksCounter" value="415" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

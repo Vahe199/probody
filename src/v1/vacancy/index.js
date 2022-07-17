@@ -51,7 +51,7 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 })
 
 router.patch('/:slug', AuthGuard('serviceProvider'), async (req, res) => {
-    if (req.body.host !== req.user._id) {
+    if (req.body.host !== String(req.user._id)) {
         res.status(403).send('forbidden')
     }
 
