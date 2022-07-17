@@ -15,6 +15,7 @@ import ShareInSocialMedia from "../../components/ShareInSocialMedia";
 import {parsePhoneNumber} from "libphonenumber-js";
 import Icon from "../../components/kit/Icon.jsx";
 import Objects from "../../helpers/Objects.js";
+import APIRequests from "../../helpers/APIRequests.js";
 
 class VacancyViewPage extends React.Component {
     static contextType = GlobalContext
@@ -23,48 +24,14 @@ class VacancyViewPage extends React.Component {
         super(props);
 
         this.state = {
-            vacancy: {},
-            avgRating: 4.8,
+            vacancy: {}
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //fetch vacancy with id {this.props.router.query.slug}
         this.setState({
-            vacancy: {
-                "_id": "62c186edba8ab7ee259f91b2",
-                "host": "62a716414546a8b318001ddf",
-                "salary": 75000,
-                "experience": "nomatter",
-                "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish. Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish",
-                "title": "Салон 'Body Life' ищет мастеров боди массажа",
-                "withdrawalType": ["card"],
-                "withdrawalPeriod": "daily",
-                "phone": "+7 777 777 7777",
-                "whatsapp": "+7 777 777 7777",
-                "employment": [
-                    "full",
-                    "part"
-                ],
-                "salonTitle": "Body Life",
-                "salonAddress": "ул. Гоголя, 12",
-                "pic": "https://img.championat.com/s/735x490/news/big/d/l/tehnika-tochechnogo-massazha-dlja-pohudenija_15905066501829841550.jpg",
-                "region": {
-                    "_id": "62a4ac186e4061e6bb32536b",
-                    "name": "Туркестан"
-                },
-                social: {
-                    inst: 'https://instagram.com/fred',
-                    tg: 'https://t.me/fred'
-                },
-                "slug": "Body-Life284",
-                "createdAt": "2022-07-03T12:09:17.795Z",
-                "updatedAt": "2022-07-03T12:09:17.795Z",
-                "workSchedule": [
-                    "contract",
-                    "flexible"
-                ]
-            }
+            vacancy: await APIRequests.getVacancy(this.props.router.query.slug)
         })
     }
 
@@ -189,16 +156,18 @@ class VacancyViewPage extends React.Component {
                                             className={'bold'}>{t('from')} {formatPrice(this.state.vacancy.salary)} {t('kzt')}</div>
                                     </div>
                                     <div bp={'6 12@md'}>
-                                        <div className={css.infoCaption}>{t('withdrawalType')}</div>
+                                        <div className={css.infoCaption}>{t('withdrawalPeriod')}</div>
                                         <div>
-                                            <Tag label={t('withdrawal_' + this.state.vacancy.withdrawalType)}
-                                                 className={css.secondLayerTag}/>
+                                            {this.state.vacancy.withdrawalPeriod.map((period, i) =>
+                                                <Tag label={t('withdrawalPeriod_' + period)} key={i}
+                                                     className={css.secondLayerTag}/>
+                                            )}
                                         </div>
                                     </div>
                                     <div bp={'6 12@md'}>
-                                        <div className={css.infoCaption}>{t('withdrawalPeriod')}</div>
+                                        <div className={css.infoCaption}>{t('workExperience')}</div>
                                         <div>
-                                            <Tag label={t('withdrawalPeriod_' + this.state.vacancy.withdrawalPeriod)}
+                                            <Tag label={t('workExperience_' + this.state.vacancy.experience)}
                                                  className={css.secondLayerTag}/>
                                         </div>
                                     </div>

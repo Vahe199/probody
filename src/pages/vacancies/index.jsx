@@ -13,6 +13,7 @@ import Head from "next/head.js";
 import {TITLE_POSTFIX} from "../../helpers/constants.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
 import ImageCarousel from "../../components/kit/ImageCarousel";
+import APIRequests from "../../helpers/APIRequests.js";
 
 class BlogPage extends React.Component {
     static contextType = GlobalContext
@@ -55,46 +56,13 @@ class BlogPage extends React.Component {
     }
 
     async initPageLoad() {
-        await this.setState({
-            page: Number(this.props.router.query.page) || 1
-        })
+        const vacResponse = await APIRequests.getVacancies(Number(this.props.router.query.page) || 1)
 
-        await this.setState({
-            "vacancies": [
-                {
-                    "_id": "62c186edba8ab7ee259f91b2",
-                    "host": "62a716414546a8b318001ddf",
-                    "salary": 75000,
-                    "experience": "nomatter",
-                    "description": "Jellynose fish snook tiger shovelnose catfish; Pacific saury whitetip reef shark snake mudhead. Rock bass bristlemouth plunderfish yellow tang mudsucker hardhead catfish rough scad. Neon tetra, queen parrotfish lenok Pacific herring combtooth blenny blue eye blackchin duckbill cobbler! Black bass, Oriental loach slender snipe eel Norwegian Atlantic salmon porbeagle shark handfish buri! Flagblenny marlin saber-toothed blenny electric eel yellow perch, flathead smooth dogfish! Flagtail African lungfish trumpeter livebearer pickerel flat loach Australian prowfish. Garden eel luderick jewfish ghost carp Kafue pike Rasbora electric knifefish firefish, cod. Frogmouth catfish, baikal oilfish candlefish baikal oilfish sind danio dogfish redtooth triggerfish emperor. Coolie loach lumpsucker trumpeter swordtail tidewater goby South American darter. Whitebait, inconnu North American darter greeneye; tapetail Indian mul. Píntano rock cod electric catfish. Sea devil sturgeon whalefish yellow bass ricefish barreleye Black angelfish squawfish",
-                    "title": "Салон 'Body Life' ищет мастеров боди массажа",
-                    "withdrawalType": "card",
-                    "withdrawalPeriod": "daily",
-                    "phone": "+7 777 777 7777",
-                    "whatsapp": "+7 777 777 7777",
-                    "employment": [
-                        "full",
-                        "part"
-                    ],
-                    "salonTitle": "Body Life",
-                    "salonAddress": "ул. Гоголя, 12",
-                    "pic": "https://img.championat.com/s/735x490/news/big/d/l/tehnika-tochechnogo-massazha-dlja-pohudenija_15905066501829841550.jpg",
-                    "region": {
-                        "_id": "62a4ac186e4061e6bb32536b",
-                        "name": "Туркестан"
-                    },
-                    "slug": "Body-Life284",
-                    "createdAt": "2022-07-03T12:09:17.795Z",
-                    "updatedAt": "2022-07-03T12:09:17.795Z",
-                    "workSchedule": [
-                        "contract",
-                        "flexible"
-                    ]
-                }
-            ],
-            "pageCount": 1
+        this.setState({
+            page: Number(this.props.router.query.page) || 1,
+            vacancies: vacResponse.vacancies,
+            pageCount: vacResponse.pageCount
         })
-        //fetches data from the server
     }
 
     render() {

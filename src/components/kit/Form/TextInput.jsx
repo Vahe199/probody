@@ -157,7 +157,7 @@ export default class TextInput extends React.Component {
         max: PropTypes.number,
         min: PropTypes.number,
         lock: PropTypes.bool,
-        value: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         maxLength: PropTypes.number,
         type: PropTypes.string, // text, password, email
         onUpdate: PropTypes.func,

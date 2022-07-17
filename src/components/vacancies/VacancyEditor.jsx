@@ -13,6 +13,8 @@ import Numbers from "../../helpers/Numbers.js";
 import UserHelper from "../../helpers/UserHelper.js";
 import Checkbox from "../kit/Form/Checkbox";
 import RadioGroup from "../kit/Form/RadioGroup";
+import {isValidPhoneNumber} from "libphonenumber-js";
+import Modal from "../kit/Modal.jsx";
 
 export default class VacancyEditor extends React.Component {
     static contextType = GlobalContext
@@ -43,7 +45,32 @@ export default class VacancyEditor extends React.Component {
                     ws: '',
                 }
             },
+            // errors: {
+            //     salary: '',
+            //     experience: "",
+            //     description: "",
+            //     title: "",
+            //     withdrawalType: '',
+            //     withdrawalPeriod: '',
+            //     phone: "",
+            //     whatsapp: "",
+            //     employment: '',
+            //     salonTitle: "",
+            //     salonAddress: "",
+            //     pic: "",
+            //     region: "",
+            //     workSchedule: '',
+            //     social: {
+            //         inst: '',
+            //         vk: '',
+            //         tgCh: '',
+            //         ws: '',
+            //     }
+            // },
             regions: [],
+            createdDialogOpen: false,
+            savedDialogOpen: false,
+            myRegion: {},
             selectId: 'select-' + Numbers.random(0, 99999),
         }
 
@@ -51,6 +78,13 @@ export default class VacancyEditor extends React.Component {
         this.initRegionSelect = this.initRegionSelect.bind(this)
         this.toggleCheckbox = this.toggleCheckbox.bind(this)
         this.updateSocial = this.updateSocial.bind(this)
+        this.canSubmit = this.canSubmit.bind(this)
+        this.submit = this.submit.bind(this)
+        this.closeSuccessDialog = this.closeSuccessDialog.bind(this)
+    }
+
+    closeSuccessDialog() {
+        this.props.setView('vacancylist', '')
     }
 
     componentDidMount() {
@@ -86,11 +120,17 @@ export default class VacancyEditor extends React.Component {
             return
         }
 
-        const regions = UserHelper.regions()
+        const regions = UserHelper.regions(),
+            myRegion = UserHelper.currentRegion()
 
         if (regions) {
             this.setState({
-                regions
+                regions,
+                myRegion,
+                vacancy: {
+                    ...this.state.vacancy,
+                    region: this.props.editingVacancy ? this.state.vacancy.region : myRegion._id
+                }
             })
         }
     }
@@ -116,10 +156,135 @@ export default class VacancyEditor extends React.Component {
         })
     }
 
+    canSubmit() {
+        if (this.state.vacancy.title.length < 3) {
+            return false
+        }
+
+        if (this.state.vacancy.description.length < 20) {
+            return false
+        }
+
+        if (this.state.vacancy.pic.length < 1) {
+            return false
+        }
+
+        if (this.state.vacancy.salonTitle.length < 3) {
+            return false
+        }
+
+        if (this.state.vacancy.salonAddress.length < 3) {
+            return false
+        }
+
+        if (this.state.vacancy.region.length < 1) {
+            return false
+        }
+
+        if (!isValidPhoneNumber(this.state.vacancy.phone, 'KZ')) {
+            return false
+        }
+
+        if (!isValidPhoneNumber(this.state.vacancy.whatsapp, 'KZ')) {
+            return false
+        }
+
+        if (this.state.vacancy.social.inst.length >= 1 && !/^https:\/\/(www\.)?instagram\.com\//.test(this.state.vacancy.social.inst)) {
+            return false
+        }
+
+        if (this.state.vacancy.social.vk.length >= 1 && !/^https:\/\/(www\.)?vk\.com\//.test(this.state.vacancy.social.vk)) {
+            return false
+        }
+
+        if (this.state.vacancy.social.tgCh.length >= 1 && !/^https:\/\/(www\.)?t\.me\//.test(this.state.vacancy.social.tgCh)) {
+            return false
+        }
+
+        if (this.state.vacancy.social.ws.length >= 1 && !/^https?:\/\//.test(this.state.vacancy.social.ws)) {
+            return false
+        }
+
+        if (Number(this.state.vacancy.salary) < 1) {
+            return false
+        }
+
+        if (this.state.vacancy.employment.length < 1) {
+            return false
+        }
+
+        if (this.state.vacancy.workSchedule.length < 1) {
+            return false
+        }
+
+        if (this.state.vacancy.withdrawalType.length < 1) {
+            return false
+        }
+
+        if (this.state.vacancy.withdrawalPeriod.length < 1) {
+            return false
+        }
+
+        // noinspection RedundantIfStatementJS
+        if (this.state.vacancy.experience.length < 1) {
+            return false
+        }
+
+        return true
+    }
+
+    async submit() {
+        if (this.props.editingVacancy) {
+            await APIRequests.updateVacancy(this.props.editingVacancy, this.state.vacancy)
+            this.setState({
+                savedDialogOpen: true
+            })
+        } else {
+            await APIRequests.createVacancy(this.state.vacancy)
+            this.setState({
+                createdDialogOpen: true
+            })
+        }
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
 
         return <div className={css['theme--' + theme]}>
+            <Modal open={this.state.createdDialogOpen} isMobile={false} desktopWidth={375}
+                   onUpdate={this.closeSuccessDialog}>
+                <div>
+                    <div className={css.modalBody}>
+                        <p>{t('cool')}</p>
+
+                        <h1>{t('youCreatedVacancy')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('itWillAppearAfterModeration')}</p>
+
+                        <Button size={'fill'}>{t('returnToPA')}</Button>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.savedDialogOpen} isMobile={false}
+                   onUpdate={this.closeSuccessDialog}>
+                <div>
+                    <div className={css.modalBody}>
+                        <p>{t('cool')}</p>
+
+                        <h1>{t('youEditedVacancy')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('itWillAppearAfterModeration')}</p>
+
+                        <Button size={'fill'}>{t('returnToPA')}</Button>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                    </div>
+                </div>
+            </Modal>
+
             <div className="responsive-content" bp={'grid'}>
                 <div bp={'12 3@md'} className={css.arrowBack} onClick={() => this.props.setView('vacancylist', '')}>
                     <Icon name={'arrow_left'}/>
@@ -162,7 +327,7 @@ export default class VacancyEditor extends React.Component {
 
                             {this.state.regions.length &&
                                 <Select label={t('city')} options={this.state.regions} id={this.state.selectId}
-                                        placeholder={t('chooseCity')} value={this.state.regions.find(i => i._id === this.state.vacancy.region)?._id}
+                                        placeholder={t('chooseCity')} value={this.state.regions.find(i => i._id === this.state.vacancy.region)?._id || this.state.myRegion._id}
                                         onUpdate={val => this.updateProp('region', val)}/>}
                         </div>
                         <div>
@@ -262,7 +427,7 @@ export default class VacancyEditor extends React.Component {
             </div>
 
             <div style={{maxWidth: 350, marginTop: 32}} className={'responsive-content'}>
-                <Button size={'fill'}>{this.props.editingVacancy ? t('saveVacancy') : t('addVacancy')}</Button>
+                <Button size={'fill'} onClick={this.submit} isDisabled={!this.canSubmit()}>{this.props.editingVacancy ? t('saveVacancy') : t('addVacancy')}</Button>
             </div>
         </div>
     }
