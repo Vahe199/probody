@@ -1,6 +1,7 @@
 import RedisHelper from "../../helpers/RedisHelper.js";
 import express from "express";
 import Vacancy from "../../models/Vacancy.model.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -40,7 +41,7 @@ router.patch('/:uuid/approve', async (req, res) => {
 
         if (doc._id) {
             console.log({_id: doc._id}, JSON.stringify({$set: doc}, undefined, 4))
-            Vacancy.updateOne({_id: doc._id}, {$set: doc})
+            Vacancy.updateOne({_id: new mongoose.Types.ObjectId(doc._id)}, {$set: doc})
         } else {
             await (new Vacancy(doc)).save()
         }
