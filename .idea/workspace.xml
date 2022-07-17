@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,14 +170,7 @@
       <workItem from="1657904254337" duration="329000" />
       <workItem from="1657907607641" duration="13632000" />
       <workItem from="1657973832520" duration="14877000" />
-      <workItem from="1658053416870" duration="13613000" />
-    </task>
-    <task id="LOCAL-00371" summary="fixed load n more btn">
-      <created>1657292660576</created>
-      <option name="number" value="00371" />
-      <option name="presentableId" value="LOCAL-00371" />
-      <option name="project" value="LOCAL" />
-      <updated>1657292660576</updated>
+      <workItem from="1658053416870" duration="13963000" />
     </task>
     <task id="LOCAL-00372" summary="added user location circle">
       <created>1657294160531</created>
@@ -521,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658073599992</updated>
     </task>
-    <option name="localTasksCounter" value="420" />
+    <task id="LOCAL-00420" summary="added social block on mobile">
+      <created>1658074829903</created>
+      <option name="number" value="00420" />
+      <option name="presentableId" value="LOCAL-00420" />
+      <option name="project" value="LOCAL" />
+      <updated>1658074829903</updated>
+    </task>
+    <option name="localTasksCounter" value="421" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

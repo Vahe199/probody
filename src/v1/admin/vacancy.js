@@ -40,8 +40,12 @@ router.patch('/:uuid/approve', async (req, res) => {
         }
 
         if (doc._id) {
-            console.log({_id: new mongoose.Types.ObjectId(doc._id)}, JSON.stringify(doc, undefined, 2))
-            Vacancy.updateOne({_id: new mongoose.Types.ObjectId(doc._id)}, doc)
+            const docId = doc._id
+
+            delete doc._id
+            delete doc.host
+
+            Vacancy.updateOne({_id: docId}, doc)
         } else {
             await (new Vacancy(doc)).save()
         }
