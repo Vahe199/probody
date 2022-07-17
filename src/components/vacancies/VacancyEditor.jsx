@@ -263,7 +263,7 @@ export default class VacancyEditor extends React.Component {
 
                         <p style={{paddingTop: 16}}>{t('itWillAppearAfterModeration')}</p>
 
-                        <Button size={'fill'}>{t('returnToPA')}</Button>
+                        <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('returnToPA')}</Button>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
                     </div>
@@ -280,7 +280,7 @@ export default class VacancyEditor extends React.Component {
 
                         <p style={{paddingTop: 16}}>{t('itWillAppearAfterModeration')}</p>
 
-                        <Button size={'fill'}>{t('returnToPA')}</Button>
+                        <Button size={'fill'} onClick={this.closeSuccessDialog}>{t('returnToPA')}</Button>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
                     </div>
