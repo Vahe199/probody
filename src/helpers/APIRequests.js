@@ -27,6 +27,13 @@ export default class APIRequests {
         }
     }
 
+    static async deleteVacancy(slug) {
+        return (await fetch(`${API_URL}/vacancy/${slug}`, {
+            headers: APIRequests.withCredentials(),
+            method: 'DELETE'
+        }))
+    }
+
     static withJSON(headers) {
         return {
             'Content-Type': 'application/json',

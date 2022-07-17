@@ -56,6 +56,8 @@ router.delete('/:slug', AuthGuard('serviceProvider'), async (req, res) => {
              host: req.user._id,
              slug: req.params.slug.toLowerCase()
          })
+
+        res.send('ok')
     } catch (e) {
         res.status(500).json({message: e.message})
     }

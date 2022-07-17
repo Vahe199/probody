@@ -270,7 +270,7 @@ export default class VacancyEditor extends React.Component {
                 </div>
             </Modal>
 
-            <Modal open={this.state.savedDialogOpen} isMobile={false}
+            <Modal open={this.state.savedDialogOpen} isMobile={false} desktopWidth={375}
                    onUpdate={this.closeSuccessDialog}>
                 <div>
                     <div className={css.modalBody}>
