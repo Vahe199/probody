@@ -39,10 +39,12 @@ router.patch('/:uuid/approve', async (req, res) => {
         }
 
         if (doc._id) {
+            console.log({_id: doc._id}, JSON.stringify({$set: doc}, undefined, 4))
             Vacancy.updateOne({_id: doc._id}, {$set: doc})
+        } else {
+            await (new Vacancy(doc)).save()
         }
 
-        const vacancyId = doc._id || await (new Vacancy(doc)).save()
         await RedisHelper.unlink(redisKey)
 
         res.status(202).json({

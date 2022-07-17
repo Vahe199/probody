@@ -26,10 +26,27 @@ class VacancyViewPage extends React.Component {
         this.state = {
             vacancy: {}
         }
+
+        this.loadVacancy = this.loadVacancy.bind(this)
     }
 
-    async componentDidMount() {
-        //fetch vacancy with id {this.props.router.query.slug}
+    componentDidMount() {
+        if (!this.props.router.query.slug) {
+            return
+        }
+
+        this.loadVacancy()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.router.query.slug === this.props.router.query.slug) {
+            return
+        }
+
+        this.loadVacancy()
+    }
+
+    async loadVacancy() {
         this.setState({
             vacancy: await APIRequests.getVacancy(this.props.router.query.slug)
         })

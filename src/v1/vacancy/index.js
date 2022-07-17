@@ -50,6 +50,17 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     }
 })
 
+router.delete('/:slug', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+         await Vacancy.deleteOne({
+             host: req.user._id,
+             slug: req.params.slug.toLowerCase()
+         })
+    } catch (e) {
+        res.status(500).json({message: e.message})
+    }
+})
+
 router.patch('/:slug', AuthGuard('serviceProvider'), async (req, res) => {
     if (req.body.host !== String(req.user._id)) {
         res.status(403).send('forbidden')
