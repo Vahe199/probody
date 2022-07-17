@@ -50,30 +50,28 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     }
 })
 
-router.patch('/:id', AuthGuard('serviceProvider'), async (req, res) => {
-    // req.body = Object.assign({}, req.body, {
-    //     host: req.user._id
-    // })
-
-    console.log(req.body)
+router.patch('/:slug', AuthGuard('serviceProvider'), async (req, res) => {
+    if (req.body.host !== req.user._id) {
+        res.status(403).send('forbidden')
+    }
 
     try {
-        // (new Vacancy(req.body)).validate(async (err) => {
-        //     if (err) {
-        //         console.log(err)
-        //         return res.status(500).json({
-        //             message: "Internal Server Error"
-        //         })
-        //     }
-        //
-        //     const redisKey = 'pending:check:vacancy:' + uuidv4()
-        //
-        //     await RedisHelper.set(redisKey, JSON.stringify(req.body))
-        //
-        //     res.status(202).json({
-        //         message: "createdVacancy"
-        //     })
-        // })
+        (new Vacancy(req.body)).validate(async (err) => {
+            if (err) {
+                console.log(err)
+                return res.status(500).json({
+                    message: "Internal Server Error"
+                })
+            }
+
+            const redisKey = 'pending:check:vacancy:' + uuidv4()
+
+            await RedisHelper.set(redisKey, JSON.stringify(req.body))
+
+            res.status(202).json({
+                message: "createdVacancy"
+            })
+        })
     } catch (e) {
         res.status(500).json({message: e.message})
     }
