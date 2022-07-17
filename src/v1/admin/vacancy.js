@@ -45,7 +45,7 @@ router.patch('/:uuid/approve', async (req, res) => {
             delete doc._id
             delete doc.host
 
-            Vacancy.updateOne({_id: docId}, doc)
+            await Vacancy.updateOne({_id: docId}, doc)
         } else {
             await (new Vacancy(doc)).save()
         }
