@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change afterPath="$PROJECT_DIR$/src/public/regions/актау.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/актобе.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/алматы.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/астана.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/атырау.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/караганда.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/семей.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/туркестан.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/regions/шымкент.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/cities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/cities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/cities.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/cities.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +66,7 @@
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.13.1",
     "javascript.nodejs.core.library.typings.version": "16.11.43",
-    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/pages",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,11 +78,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/components/vacancies" />
-      <recent name="$PROJECT_DIR$/src/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/public" />
@@ -81,7 +92,7 @@
       <recent name="$PROJECT_DIR$/src/fonts" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.server">
+  <component name="RunManager" selected="npm.frontdev">
     <list>
       <item itemvalue="Node.js.server" />
       <item itemvalue="npm.frontdev" />
@@ -184,14 +195,7 @@
       <workItem from="1658136509452" duration="1680000" />
       <workItem from="1658138670770" duration="2708000" />
       <workItem from="1658141710408" duration="7945000" />
-      <workItem from="1658149845939" duration="9598000" />
-    </task>
-    <task id="LOCAL-00384" summary="added social block on mobile">
-      <created>1657632272822</created>
-      <option name="number" value="00384" />
-      <option name="presentableId" value="LOCAL-00384" />
-      <option name="project" value="LOCAL" />
-      <updated>1657632272822</updated>
+      <workItem from="1658149845939" duration="11178000" />
     </task>
     <task id="LOCAL-00385" summary="added social block on mobile">
       <created>1657634131611</created>
@@ -529,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658160922390</updated>
     </task>
-    <option name="localTasksCounter" value="433" />
+    <task id="LOCAL-00433" summary="added social block on mobile">
+      <created>1658161692679</created>
+      <option name="number" value="00433" />
+      <option name="presentableId" value="LOCAL-00433" />
+      <option name="project" value="LOCAL" />
+      <updated>1658161692679</updated>
+    </task>
+    <option name="localTasksCounter" value="434" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

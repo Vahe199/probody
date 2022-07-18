@@ -47,8 +47,8 @@ export default class ContactPage extends React.Component {
 
                 <div bp={'grid 12 4@md'} style={{gap: isMobile ? 16 : 32}}>
                     {this.state.regions.map((region, i) =>
-                        <div key={i} className={css.city}>
-                            <h1>{t('region_' + city.name)}</h1>
+                        <div key={i} className={css.city} style={{backgroundImage: 'linear-gradient(#252420b5, #252420b5), url("/regions/' + region.name.toLowerCase() + '.jpg")'}}>
+                            <h1>{t('region_' + region.name)}</h1>
 
                             <div>
                                 <div>

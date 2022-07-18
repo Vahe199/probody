@@ -1,3 +1,5 @@
+// noinspection JSNonASCIINames,NonAsciiCharacters
+
 export default {
     onlyMature: 'Для лиц старше 18 лет',
     noIntim: 'Не публикуем анкеты с интим-услугами, только объявления об эротическом массаже',
@@ -509,5 +511,14 @@ export default {
     priceViews: 'Просмотр цен',
     photoViews: 'Просмотр фото',
     reviewClicks: 'Просмотр отзывов',
-    shareClicks: 'Поделились ссылкой'
+    shareClicks: 'Поделились ссылкой',
+    region_Алматы: 'Алматы',
+    region_Астана: 'Астана (Нур-Султан)',
+    region_Шымкент: 'Шымкент',
+    region_Караганда: 'Караганда',
+    region_Атырау: 'Атырау',
+    region_Актау: 'Актау',
+    region_Актобе: 'Актобе',
+    region_Туркестан: 'Туркестан',
+    region_Семей: 'Семей'
 }
