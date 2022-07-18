@@ -686,10 +686,10 @@ class NewSalonPage extends React.Component {
         return <div className={css['theme--' + theme]}>
             <Head>
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
-
-                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                        strategy={'beforeInteractive'}/>
             </Head>
+
+            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                    strategy={'beforeInteractive'}/>
 
             <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} isMobile={false}
                    onUpdate={this.closeSuccessDialog}>

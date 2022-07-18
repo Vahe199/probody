@@ -331,10 +331,10 @@ class SalonView extends React.Component {
         return <div className={css['theme--' + theme]}>
             <Head>
                 <title>{this.state.salon.name || t('salon2')}{TITLE_POSTFIX}</title>
-
-                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                        strategy={'beforeInteractive'}/>
             </Head>
+
+            <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                    strategy={'beforeInteractive'}/>
 
             <Modal desktopWidth={500} open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal}
                    isMobile={isMobile}

@@ -508,10 +508,10 @@ class Home extends React.Component {
             <div className={css['theme--' + theme]}>
                 <Head>
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
-
-                    <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                            strategy={'beforeInteractive'}/>
                 </Head>
+
+                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                        strategy={'beforeInteractive'}/>
 
                 {!(this.state.isMapView && isMobile) &&
                     <div className="responsive-content">
