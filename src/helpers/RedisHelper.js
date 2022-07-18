@@ -117,7 +117,7 @@ class RedisHelper {
         await this.init();
 
         return this.redisClient.sendCommand([
-                'FT.SEARCH',
+                'FT.AGGREGATE',
                 ...arguments
             ]
         );

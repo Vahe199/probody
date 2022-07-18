@@ -143,14 +143,18 @@ export default class Search {
 
     static async getRegionInfo() {
         const allRegions = await Region.find({}, 'name'),
-            aggregateResults = await RedisHelper.ftAggregate('idx:worker', '*', 'GROUPBY', '2', '@kind', '@region', 'REDUCE', 'count', '0', 'as', 'cnt'),
+            aggregateResults = (await RedisHelper.ftAggregate('idx:worker', '*', 'GROUPBY', '2', '@kind', '@region', 'REDUCE', 'count', '0', 'as', 'cnt')).splice(1),
             cityInfos = allRegions.map(regionDoc => ({
                 name: regionDoc.name,
                 salonCnt: 0,
                 privateMasterCnt: 0
             }))
 
-        return {aggregateResults, cityInfos}
+        aggregateResults.map(rawRedisResult => {
+            cityInfos[cityInfos.findIndex(i => i.name.toLowerCase() === rawRedisResult[3])][rawRedisResult[1] === 'master' ? 'privateMasterCnt' : 'salonCnt'] = Number(rawRedisResult[5])
+        })
+
+        return cityInfos
     }
 
     static async findWorker(queryString, isMapView, limit, offset) {

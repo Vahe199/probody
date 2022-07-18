@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change afterPath="$PROJECT_DIR$/src/styles/cities.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/RedisHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/RedisHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/cities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/cities.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/search/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +80,12 @@
       <recent name="$PROJECT_DIR$/src/layouts/secondary" />
       <recent name="$PROJECT_DIR$/src/fonts" />
     </key>
+  </component>
+  <component name="RunManager" selected="Node.js.server">
+    <list>
+      <item itemvalue="Node.js.server" />
+      <item itemvalue="npm.frontdev" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -184,14 +184,7 @@
       <workItem from="1658136509452" duration="1680000" />
       <workItem from="1658138670770" duration="2708000" />
       <workItem from="1658141710408" duration="7945000" />
-      <workItem from="1658149845939" duration="9082000" />
-    </task>
-    <task id="LOCAL-00383" summary="added social block on mobile">
-      <created>1657631406538</created>
-      <option name="number" value="00383" />
-      <option name="presentableId" value="LOCAL-00383" />
-      <option name="project" value="LOCAL" />
-      <updated>1657631406538</updated>
+      <workItem from="1658149845939" duration="9598000" />
     </task>
     <task id="LOCAL-00384" summary="added social block on mobile">
       <created>1657632272822</created>
@@ -529,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658157844416</updated>
     </task>
-    <option name="localTasksCounter" value="432" />
+    <task id="LOCAL-00432" summary="added social block on mobile">
+      <created>1658160922390</created>
+      <option name="number" value="00432" />
+      <option name="presentableId" value="LOCAL-00432" />
+      <option name="project" value="LOCAL" />
+      <updated>1658160922390</updated>
+    </task>
+    <option name="localTasksCounter" value="433" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
