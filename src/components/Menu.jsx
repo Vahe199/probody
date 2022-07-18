@@ -60,7 +60,7 @@ class Menu extends React.Component {
                         <li><Link href={'/blog'}>{t('news')}</Link></li>
                         <li><Link href={'/'}>{t('forVisitors')}</Link></li>
                         <li><Link href={'/vacancies'}>{t('salonVacancies')}</Link></li>
-                        <li><Link href={'/contacts'}>{t('contacts')}</Link></li>
+                        <li><Link href={'/contact'}>{t('contacts')}</Link></li>
                         <li><Link href={'/'}>{t('aboutProject')}</Link></li>
                     </ul>}
 
