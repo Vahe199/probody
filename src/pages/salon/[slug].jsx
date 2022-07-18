@@ -1,6 +1,6 @@
 import React from "react";
 import APIRequests from "../../helpers/APIRequests.js";
-import {TITLE_POSTFIX} from "../../helpers/constants.js";
+import {TITLE_POSTFIX, YANDEX_APIKEY} from "../../helpers/constants.js";
 import Head from "next/head.js";
 import {GlobalContext} from "../../contexts/Global.js";
 import Breadcrumbs from "../../components/kit/Breadcrumbs.jsx";
@@ -30,6 +30,7 @@ import Modal from "../../components/kit/Modal";
 import TextArea from "../../components/kit/Form/TextArea";
 import TextInput from "../../components/kit/Form/TextInput";
 import Objects from "../../helpers/Objects.js";
+import Script from "next/script.js";
 
 class SalonView extends React.Component {
     constructor(props) {
@@ -330,6 +331,9 @@ class SalonView extends React.Component {
         return <div className={css['theme--' + theme]}>
             <Head>
                 <title>{this.state.salon.name || t('salon2')}{TITLE_POSTFIX}</title>
+
+                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                        strategy={'beforeInteractive'}/>
             </Head>
 
             <Modal desktopWidth={500} open={this.state.addReviewModalOpen} onUpdate={this.setReviewModal}

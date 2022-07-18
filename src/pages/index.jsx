@@ -2,7 +2,7 @@ import React from "react"
 import {withRouter} from "next/router.js"
 import {GlobalContext} from "../contexts/Global.js"
 import AboutUsSection from "../components/AboutUsSection.jsx"
-import {TITLE_POSTFIX} from "../helpers/constants.js"
+import {TITLE_POSTFIX, YANDEX_APIKEY} from "../helpers/constants.js"
 import Head from "next/head.js"
 import css from '../styles/mainpage.module.scss'
 import APIRequests from "../helpers/APIRequests.js"
@@ -31,6 +31,7 @@ import Select from "../components/kit/Form/Select.jsx"
 import {declination} from "../helpers/String.js"
 import UserHelper from "../helpers/UserHelper.js";
 import PlaceMark from '../helpers/PlaceMark.js'
+import Script from "next/script.js";
 
 class Home extends React.Component {
     static contextType = GlobalContext
@@ -507,6 +508,9 @@ class Home extends React.Component {
             <div className={css['theme--' + theme]}>
                 <Head>
                     <title>{t('mainPage')}{TITLE_POSTFIX}</title>
+
+                    <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                            strategy={'beforeInteractive'}/>
                 </Head>
 
                 {!(this.state.isMapView && isMobile) &&

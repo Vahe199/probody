@@ -175,8 +175,6 @@ class MainLayout extends React.Component {
                     <meta name="viewport" content="width=device-width, user-scalable=no" />
                 </Head>
                 <noscript><div><img src="https://mc.yandex.ru/watch/89600055" style={{position: 'absolute', left: -9999}} alt="" /></div></noscript>
-                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
-                        strategy={'beforeInteractive'}/>
                 <Script src={'/ym.js'} strategy={'lazyOnload'} />
 
                 <div className={'theme--' + this.state.theme}>

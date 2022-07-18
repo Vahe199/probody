@@ -21,9 +21,10 @@ import MockImageInput from "../../components/kit/Form/MockImageInput";
 import Tag from "../../components/kit/Tag";
 import Program from "../../components/kit/Program.jsx";
 import Head from "next/head.js";
-import {TITLE_POSTFIX} from "../../helpers/constants.js";
+import {TITLE_POSTFIX, YANDEX_APIKEY} from "../../helpers/constants.js";
 import Modal from "../../components/kit/Modal";
 import {withRouter} from "next/router.js";
+import Script from "next/script.js";
 
 class NewSalonPage extends React.Component {
     static contextType = GlobalContext
@@ -685,6 +686,9 @@ class NewSalonPage extends React.Component {
         return <div className={css['theme--' + theme]}>
             <Head>
                 <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
+
+                <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
+                        strategy={'beforeInteractive'}/>
             </Head>
 
             <Modal modalStyle={{maxWidth: 380, position: 'relative'}} open={this.state.dialogOpen} isMobile={false}
