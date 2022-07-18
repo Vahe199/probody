@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change afterPath="$PROJECT_DIR$/src/components/ContactUs.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/contact.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/ym.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/InfoBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/InfoBlock.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/Breadcrumbs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Breadcrumbs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/privacypolicy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/privacypolicy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/pp.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/pp.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/hybrid-search-input.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/hybrid-search-input.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,14 +185,8 @@
       <workItem from="1658133127560" duration="1811000" />
       <workItem from="1658136509452" duration="1680000" />
       <workItem from="1658138670770" duration="2708000" />
-      <workItem from="1658141710408" duration="6378000" />
-    </task>
-    <task id="LOCAL-00375" summary="added user location circle">
-      <created>1657298627483</created>
-      <option name="number" value="00375" />
-      <option name="presentableId" value="LOCAL-00375" />
-      <option name="project" value="LOCAL" />
-      <updated>1657298627483</updated>
+      <workItem from="1658141710408" duration="7945000" />
+      <workItem from="1658149845939" duration="2086000" />
     </task>
     <task id="LOCAL-00376" summary="added user location circle">
       <created>1657538935962</created>
@@ -525,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658144141805</updated>
     </task>
-    <option name="localTasksCounter" value="424" />
+    <task id="LOCAL-00424" summary="added social block on mobile">
+      <created>1658148473717</created>
+      <option name="number" value="00424" />
+      <option name="presentableId" value="LOCAL-00424" />
+      <option name="project" value="LOCAL" />
+      <updated>1658148473717</updated>
+    </task>
+    <option name="localTasksCounter" value="425" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

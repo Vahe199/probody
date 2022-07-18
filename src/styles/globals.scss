@@ -36,6 +36,12 @@ $heading-scale: 8;
   }
 }
 
+.text-disabled {
+  @include themify() {
+    color: t('text-disabled');
+  }
+}
+
 .stickToBottom {
   position: sticky;
   bottom: 0;
@@ -79,7 +85,7 @@ input, textarea, select {
 
   &::placeholder {
     color: #ccc;
-    font-family: Lack, sans-serif;
+    //font-family: Lack, sans-serif;
     user-select: none;
   }
 }
