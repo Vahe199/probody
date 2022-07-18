@@ -114,9 +114,9 @@ class PersonalInfoPage extends React.Component {
             </Modal>
 
             <PersonalPageLayout page={'personal'}>
-                <h1 className={'bigger'} style={{marginBottom: 32}}>{t('profile')}</h1>
+                <h1 className={'bigger responsive-content'} style={{marginBottom: 32}}>{t('profile')}</h1>
 
-                <div className="flex column gap-12" style={{maxWidth: 400}}>
+                <div className="flex column gap-12 responsive-content" style={{maxWidth: 400}}>
                     <TextInput value={this.state.personalInfo.paymentCode} label={t('login')} placeholder={''}
                                disabled/>
                     <Select value={this.state.personalInfo.internalRole} onUpdate={internalRole => {

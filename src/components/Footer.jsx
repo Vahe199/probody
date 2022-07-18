@@ -31,7 +31,7 @@ export default class Footer extends React.Component {
                         </div>
 
                         <div style={{marginTop: 24}}>
-                            <Link href={'/'}><span
+                            <Link href={'/privacypolicy'}><span
                                 className={cnb(css.caption, 'cursor-pointer', 'lack')}>{t('privacyPolicy')}</span></Link>
                         </div>
                     </div>
