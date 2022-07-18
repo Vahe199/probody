@@ -27,6 +27,10 @@ export default class APIRequests {
         }
     }
 
+    static async getRegionInfo() {
+        return (await fetch(`${API_URL}/search/region`)).json()
+    }
+
     static async deleteVacancy(slug) {
         return (await fetch(`${API_URL}/vacancy/${slug}`, {
             headers: APIRequests.withCredentials(),

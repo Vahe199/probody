@@ -240,6 +240,7 @@ export default {
     writeToWA: 'Напишите в WhatsApp',
     writeToEmail: 'Напишите нам на почту',
     youCanFindAnswer: 'Вы можете найти ответ на свой вопрос на странице самых частых вопросов по работе сервиса',
+    wePresentDifferentSalons: 'На нашей платформе представлены салоны и мастера из разных городов',
     delete: 'Удалить',
     youEditedVacancy: 'Вы обновили вакансию',
     salonSentToModeration: 'Анкета отправлена на модерацию',

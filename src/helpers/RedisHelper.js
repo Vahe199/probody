@@ -113,6 +113,16 @@ class RedisHelper {
         );
     }
 
+    async ftAggregate() {
+        await this.init();
+
+        return this.redisClient.sendCommand([
+                'FT.SEARCH',
+                ...arguments
+            ]
+        );
+    }
+
     async createIndex(name, prefix, schema) {
         await this.init();
 

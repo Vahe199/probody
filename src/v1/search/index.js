@@ -9,18 +9,9 @@ import {isValidPhoneNumber, parsePhoneNumber} from "libphonenumber-js"
 
 const router = express.Router()
 
-// router.post('/region', async (req, res) => {
-//     if (!req.body.query || req.body.query.length < 3) {
-//         return res.status(422).json({
-//             message: 'invalidQueryLength'
-//         })
-//     }
-//
-//     res.json(await Search.findRegion(req.body.query + '*', 7, 0))
-// })
-// router.get('/region', apicache.middleware('15 minutes'), async (req, res) => {
-//     res.json(await Region.find({}))
-// })
+router.get('/region', apicache.middleware('15 minutes'), async (req, res) => {
+    res.json(await Search.getRegionInfo())
+})
 
 router.get('/filter', apicache.middleware('15 minutes'), async (req, res) => {
     try {

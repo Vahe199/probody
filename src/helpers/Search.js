@@ -3,6 +3,7 @@ import Review from "../models/Review.model.js"
 import RedisHelper from "./RedisHelper.js"
 import {parsePhoneNumber} from "libphonenumber-js";
 import mongoose from "mongoose";
+import Region from "../models/Region.model.js";
 
 const BATCHSIZE = 100;
 
@@ -140,17 +141,17 @@ export default class Search {
         console.log('Created worker index')
     }
 
-    // static async findRegion(queryString, limit, offset) {
-    //     const searchResults = await RedisHelper.ftSearch('idx:region', queryString, limit, offset),
-    //         searchResultsIds = searchResults
-    //             .splice(1)
-    //             .map(key => key.split(':')[2])
-    //
-    //     return {
-    //         count: searchResults[0],
-    //         results: await Region.find({_id: {$in: searchResultsIds}})
-    //     }
-    // }
+    static async getRegionInfo() {
+        const allRegions = await Region.find({}, 'name'),
+            aggregateResults = await RedisHelper.ftAggregate('idx:worker', '*', 'GROUPBY', '2', '@kind', '@region', 'REDUCE', 'count', '0', 'as', 'cnt'),
+            cityInfos = allRegions.map(regionDoc => ({
+                name: regionDoc.name,
+                salonCnt: 0,
+                privateMasterCnt: 0
+            }))
+
+        return {aggregateResults, cityInfos}
+    }
 
     static async findWorker(queryString, isMapView, limit, offset) {
         try {

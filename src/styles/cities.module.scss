@@ -1,0 +1,20 @@
+.city {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 212px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  &>div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .city {
+    height: 184px;
+  }
+}
