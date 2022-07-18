@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change afterPath="$PROJECT_DIR$/src/models/SupportTicket.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/contactus.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v1/support/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ContactUs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactUs.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Button.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/kit/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/Modal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/account/faq.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/faq.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/button.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/button.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/support/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/support/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,21 +177,7 @@
       <workItem from="1658136509452" duration="1680000" />
       <workItem from="1658138670770" duration="2708000" />
       <workItem from="1658141710408" duration="7945000" />
-      <workItem from="1658149845939" duration="4727000" />
-    </task>
-    <task id="LOCAL-00377" summary="added user location circle">
-      <created>1657543983323</created>
-      <option name="number" value="00377" />
-      <option name="presentableId" value="LOCAL-00377" />
-      <option name="project" value="LOCAL" />
-      <updated>1657543983323</updated>
-    </task>
-    <task id="LOCAL-00378" summary="added user location circle">
-      <created>1657547426165</created>
-      <option name="number" value="00378" />
-      <option name="presentableId" value="LOCAL-00378" />
-      <option name="project" value="LOCAL" />
-      <updated>1657547426165</updated>
+      <workItem from="1658149845939" duration="5101000" />
     </task>
     <task id="LOCAL-00379" summary="added user location circle">
       <created>1657547656427</created>
@@ -535,7 +508,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658153619036</updated>
     </task>
-    <option name="localTasksCounter" value="426" />
+    <task id="LOCAL-00426" summary="added social block on mobile">
+      <created>1658156272644</created>
+      <option name="number" value="00426" />
+      <option name="presentableId" value="LOCAL-00426" />
+      <option name="project" value="LOCAL" />
+      <updated>1658156272644</updated>
+    </task>
+    <task id="LOCAL-00427" summary="added social block on mobile">
+      <created>1658156532345</created>
+      <option name="number" value="00427" />
+      <option name="presentableId" value="LOCAL-00427" />
+      <option name="project" value="LOCAL" />
+      <updated>1658156532345</updated>
+    </task>
+    <option name="localTasksCounter" value="428" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
