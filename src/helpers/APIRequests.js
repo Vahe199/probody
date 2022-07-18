@@ -49,7 +49,7 @@ export default class APIRequests {
         return fetch(`${API_URL}/support`, {
             method: 'POST',
             headers: APIRequests.withJSON(),
-            body: {phone, messageText}
+            body: JSON.stringify({phone, messageText})
         })
     }
 
