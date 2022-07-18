@@ -20,7 +20,7 @@ export default class Footer extends React.Component {
                 <div bp={'grid'}>
                     <div bp={'8@md 12@sm'}>
                         <div bp={'grid 4@md 6'} style={{gap: isMobile ? 24 : 32}}>
-                            <div><Link href={'/'}>{t('cities')}</Link></div>
+                            <div><Link href={'/cities'}>{t('cities')}</Link></div>
                             <div><Link href={'/contact'}>{t('contacts')}</Link></div>
                             <div><Link href={'/'}>{t('aboutProject')}</Link></div>
                             <div><Link href={'/'}>{t('visitors')}</Link></div>
