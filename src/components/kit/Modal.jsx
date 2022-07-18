@@ -29,6 +29,12 @@ export default class Modal extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        if (this.props.open) {
+            window.document.body.classList.remove('no-scroll')
+        }
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.open) {
             window.document.body.classList.add('no-scroll')

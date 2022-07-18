@@ -45,13 +45,13 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/service`)).json()
     }
 
-    // static async verifyEmail() {
-    //     return ((await fetch(`${API_URL}/user/approvemail`, {
-    //         method: 'PATCH',
-    //         headers: APIRequests.withJSON(APIRequests.withCredentials()),
-    //         body: JSON.stringify({field, value})
-    //     })).json())
-    // }
+    static async leaveSupportMessage(phone, messageText) {
+        return fetch(`${API_URL}/support`, {
+            method: 'POST',
+            headers: APIRequests.withJSON(),
+            body: {phone, messageText}
+        })
+    }
 
     static incrementStats(salonId, field) {
         return fetch(`${API_URL}/stats/${salonId}/${field}`, {

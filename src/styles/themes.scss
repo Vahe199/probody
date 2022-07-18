@@ -49,7 +49,8 @@ $themes: (
                 static-gray: $grey2,
                 inactive-star: $tertiary,
                 tag-secondlayer: $line,
-                thirdlayer-bg: $tertiary
+                thirdlayer-bg: $tertiary,
+                bg-onTheDark: $line
         ),
         dark: (
                 bg-primary: $primary,
@@ -85,7 +86,8 @@ $themes: (
                 static-gray: $grey2,
                 inactive-star: $line,
                 tag-secondlayer: $grey2,
-                thirdlayer-bg: $disabled
+                thirdlayer-bg: $disabled,
+                bg-onTheDark: $tertiary
         )
 );
 

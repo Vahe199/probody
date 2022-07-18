@@ -52,7 +52,7 @@ class FAQ extends React.Component {
     }
 
     async answerQuestion(index, useful, text) {
-        if (this.state.offer.length < 3) {
+        if (!useful && this.state.offer.length < 3) {
             return
         }
 

@@ -1,4 +1,5 @@
 import express from "express"
+import AuthGuard from "../middlewares/AuthGuard.js"
 import AuthRouter from "./auth/index.js"
 import WorkerRouter from "./worker/index.js"
 import AdminRouter from "./admin/index.js"
@@ -13,7 +14,7 @@ import ServiceRouter from "./service/index.js"
 import RegionRouter from "./region/index.js"
 import FAQRouter from './faq/index.js'
 import StatsRouter from './stats/index.js'
-import AuthGuard from "../middlewares/AuthGuard.js"
+import SupportRouter from "./support/index.js";
 
 const router = express.Router()
 
@@ -31,5 +32,6 @@ router.use('/region', RegionRouter)
 router.use('/vacancy', VacancyRouter)
 router.use('/blog', BlogRouter)
 router.use('/stats', StatsRouter)
+router.use('/support', SupportRouter)
 
 export default router

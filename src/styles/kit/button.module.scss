@@ -30,6 +30,17 @@
     }
 }
 
+.onTheDark {
+    @include themify() {
+        background: t('bg-onTheDark');
+        color: t('body-bg');
+
+        &:not(.non-focusable):focus {
+            box-shadow: 0 0 0 4px inset t('bg-secondlayer');
+        }
+    }
+}
+
 .secondary {
     @include themify() {
         background: t('bg-secondary');
