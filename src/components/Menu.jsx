@@ -61,7 +61,7 @@ class Menu extends React.Component {
                         <li><Link href={'/'}>{t('forVisitors')}</Link></li>
                         <li><Link href={'/vacancies'}>{t('salonVacancies')}</Link></li>
                         <li><Link href={'/contact'}>{t('contacts')}</Link></li>
-                        <li><Link href={'/'}>{t('aboutProject')}</Link></li>
+                        <li><Link href={'/about'}>{t('aboutProject')}</Link></li>
                     </ul>}
 
                     {(this.state.accountView && isMobile) && <>

@@ -128,3 +128,13 @@ h1.bigger {
 .align-end {
   align-items: flex-end;
 }
+
+.smallOnMobile {
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  .smallOnMobile {
+    font-size: 14px;
+  }
+}

@@ -75,11 +75,11 @@ class ContactUs extends React.Component {
                 </div>
             </Modal>
 
-            <div bp={'grid'} className={cnb('responsive-content', css['theme--' + theme])}>
+            <div bp={'grid'} className={cnb('responsive-content', css['theme--' + theme])} style={{gap: isMobile ? '64px 0' : 16}}>
                 <div bp={'12 8@md'} style={{maxWidth: isMobile ? 'unset' : "calc(100% - 135px)"}}>
                     <h1 className={'text-xl'}
                         style={{marginBottom: 12}}>{this.props.single ? t('wellBeHappyToHearYou') : t('ifYouHaveQuestions')}</h1>
-                    <p style={{marginBottom: 32}} className={'text-disabled'}>{t('pleaseSelectMessageChannel')}</p>
+                    <p style={{marginBottom: 32}} className={'text-disabled smallOnMobile'}>{t('pleaseSelectMessageChannel')}</p>
 
                     <InfoBlock style={{padding: isMobile ? 20 : 40}}>
                         <div bp={'grid 12 6@md'} style={{gap: isMobile ? '24px 0' : '28px 55px'}}>
@@ -112,7 +112,7 @@ class ContactUs extends React.Component {
                 </div>
                 <div bp={'12 4@md'}>
                     <h2 className="subtitle2" style={{marginBottom: 8}}>{t('rapidConnection')}</h2>
-                    <p className={'text-disabled'} style={{marginBottom: 16}}>{t('wellContactYou')}</p>
+                    <p className={'text-disabled smallOnMobile'} style={{marginBottom: 16}}>{t('wellContactYou')}</p>
                     <TextInput style={{marginBottom: 12}} label={t('yourPhoneNumber')} placeholder={''} type={'phone'}
                                value={this.state.phone} onUpdate={phone => this.setState({phone})}/>
                     <TextArea label={t('message')} max={200} placeholder={t('enterMessageText')} type={'phone'}

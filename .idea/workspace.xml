@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/about.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus1.feature.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus1.feature.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus2.feature.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus2.feature.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus3.feature.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus3.feature.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus4.feature.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/illustrations/aboutus4.feature.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/pages/about.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ContactUs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactUs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +70,7 @@
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.13.1",
     "javascript.nodejs.core.library.typings.version": "16.11.43",
-    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public/illustrations",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,18 +82,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/public" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/components/vacancies" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/public" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/components/kit/Collapses" />
       <recent name="$PROJECT_DIR$/src/layouts/secondary" />
-      <recent name="$PROJECT_DIR$/src/fonts" />
     </key>
   </component>
   <component name="RunManager" selected="npm.frontdev">
@@ -183,14 +199,11 @@
       <workItem from="1658136509452" duration="1680000" />
       <workItem from="1658138670770" duration="2708000" />
       <workItem from="1658141710408" duration="7945000" />
-      <workItem from="1658149845939" duration="11527000" />
-    </task>
-    <task id="LOCAL-00386" summary="added social block on mobile">
-      <created>1657708347328</created>
-      <option name="number" value="00386" />
-      <option name="presentableId" value="LOCAL-00386" />
-      <option name="project" value="LOCAL" />
-      <updated>1657708347329</updated>
+      <workItem from="1658149845939" duration="11878000" />
+      <workItem from="1658163889341" duration="134000" />
+      <workItem from="1658221545601" duration="487000" />
+      <workItem from="1658222367631" duration="171000" />
+      <workItem from="1658222684955" duration="4836000" />
     </task>
     <task id="LOCAL-00387" summary="added social block on mobile">
       <created>1657708491574</created>
@@ -528,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658163387554</updated>
     </task>
-    <option name="localTasksCounter" value="435" />
+    <task id="LOCAL-00435" summary="added social block on mobile">
+      <created>1658163560283</created>
+      <option name="number" value="00435" />
+      <option name="presentableId" value="LOCAL-00435" />
+      <option name="project" value="LOCAL" />
+      <updated>1658163560283</updated>
+    </task>
+    <option name="localTasksCounter" value="436" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
