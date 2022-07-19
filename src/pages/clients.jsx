@@ -7,6 +7,9 @@ import Link from "next/link.js";
 import Button from "../components/kit/Button.jsx";
 import InfoTabPanels from "../components/InfoTabPanels.jsx";
 import {withRouter} from "next/router.js";
+import Head from "next/head.js";
+import {TITLE_POSTFIX} from "../helpers/constants.js";
+import Breadcrumbs from "../components/kit/Breadcrumbs.jsx";
 
 class ClientsPage extends React.Component {
     static contextType = GlobalContext
@@ -15,6 +18,16 @@ class ClientsPage extends React.Component {
         const {t, isMobile, theme} = this.context
 
         return <div className={css['theme--' + theme]}>
+            <Head>
+                <title>{t('forVisitors')}{TITLE_POSTFIX}</title>
+            </Head>
+
+            <Breadcrumbs items={[{
+                name: t('mainPage'), href: '/',
+            }, {
+                name: t('forVisitors'), href: '/clients',
+            }]}/>
+
             <div bp={'grid'} className={'responsive-content'} style={{marginTop: isMobile ? 16 : 48}}>
                 <div bp={'12 5@md'}>
                     <h1 className={'text-xl'}>{t('findUniqueSalons')}</h1>
