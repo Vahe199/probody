@@ -210,8 +210,8 @@ const catColors = {
 
         // Display, position, and set styles for font
         tooltipEl.style.opacity = 1;
-        tooltipEl.style.left = positionX + 95 + 'px';
-        tooltipEl.style.top = positionY + 140 + 'px';
+        tooltipEl.style.left = positionX + 95 + (window.screen.width < 480 ? 32 : 0) + 'px';
+        tooltipEl.style.top = positionY + 95 + 'px';
     }
 
 class StatsPage extends React.Component {

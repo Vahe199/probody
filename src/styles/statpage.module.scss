@@ -23,6 +23,9 @@
   height: 155px;
   position: absolute;
   transition: opacity .15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .percentageText {
     font-weight: 600;
