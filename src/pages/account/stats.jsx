@@ -21,17 +21,17 @@ import {DateTime} from "luxon";
 Chart.register(LineController, BarController, BarElement, DoughnutController, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 
 const catColors = {
-        views: '#99D46B',
-        actions: '#4795FF',
-        phone: '#4d903d',
-        map: '#4795FF',
-        website: '#E976A4',
-        whatsapp: '#F6BE34',
-        social: '#F6783E',
-        price: '#99D46B',
-        photo: '#CCCCCC',
-        review: '#e0565c',
-        share: '#7FC5FD'
+        views: '#3086F2',
+        actions: '#88D23E',
+        phone: '#88D23E',
+        map: '#8463E3',
+        website: '#4D8FF1',
+        messengers: '#73E2F1',
+        social: '#FAA526',
+        price: '#FCCC21',
+        photo: '#FFE793',
+        review: '#FA6026',
+        share: '#FF956D'
     },
     GRAPH_TENSION = 0.3,
     customLineTooltip = (context) => {
@@ -352,7 +352,7 @@ class StatsPage extends React.Component {
                                     {
                                         label: t('messengerClicks'),
                                         data: stats.map(i => i.counters.actions.messengerClicks),
-                                        backgroundColor: catColors.whatsapp
+                                        backgroundColor: catColors.messengers
                                     },
                                     {
                                         label: t('socialClicks'),
@@ -491,7 +491,7 @@ class StatsPage extends React.Component {
                                         catColors.map,
                                         catColors.phone,
                                         catColors.photo,
-                                        catColors.whatsapp,
+                                        catColors.messengers,
                                         catColors.price,
                                         catColors.share,
                                         catColors.social],
@@ -574,7 +574,7 @@ class StatsPage extends React.Component {
 
                             <div className={css.legendItem}>
                                 <div>
-                                    <span style={{background: catColors.whatsapp}}>&nbsp;</span>
+                                    <span style={{background: catColors.messengers}}>&nbsp;</span>
                                     <span>{t('messengerClicks')}</span>
                                 </div>
                                 <div>{this.state.statistics.messengerClicks}</div>
@@ -664,6 +664,14 @@ class StatsPage extends React.Component {
                                     <span>{t('callsAndPhoneViews')}</span>
                                 </div>
                                 <div>{Math.round(this.state.statistics.phoneViews / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
+                            </div>
+
+                            <div className={css.legendItem}>
+                                <div>
+                                    <span style={{background: catColors.messengers}}>&nbsp;</span>
+                                    <span>{t('messengerClicks')}</span>
+                                </div>
+                                <div>{Math.round(this.state.statistics.messengerClicks / Math.max(this.state.statistics.messengerClicks, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
