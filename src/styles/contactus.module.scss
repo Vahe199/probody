@@ -11,12 +11,13 @@
     }
   }
 
-  a {
+  a, p {
     @include themify() {
       color: t('body-bg');
     }
 
     font-size: 28px;
+    cursor: pointer;
     text-decoration: none;
   }
 }

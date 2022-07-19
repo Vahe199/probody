@@ -183,8 +183,8 @@ export default class Footer extends React.Component {
                             </div>
                             <div>
                                 <span className={cnb(css.caption, css.small)}>{t('whatsapp')}</span>
-                                <a href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762)
-                                    987-87-91</h1></a>
+                                <Link href={'tel:+77629878791'}><h1 className={'number-font cursor-pointer'}>+7 (762)
+                                    987-87-91</h1></Link>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import Icon from "./kit/Icon.jsx";
 import Modal from "./kit/Modal.jsx";
 import {withRouter} from "next/router.js";
 import {cnb} from "cnbuilder";
+import Link from "next/link.js";
 
 class ContactUs extends React.Component {
     static contextType = GlobalContext
@@ -85,7 +86,7 @@ class ContactUs extends React.Component {
                         <div bp={'grid 12 6@md'} style={{gap: isMobile ? '24px 0' : '28px 55px'}}>
                             <div className={css.contactBlock}>
                                 <div className={css.caption}>{t('callUs')}</div>
-                                <a href="tel:+77629878791">+7 (762) 987-87-91</a>
+                                <Link href={'tel:+77629878791'}><p>+7 (762) 987-87-91</p></Link>
                             </div>
 
                             <div className={css.contactBlock}>

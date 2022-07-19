@@ -4,6 +4,7 @@ import ContactUs from "../components/ContactUs.jsx";
 import {GlobalContext} from "../contexts/Global.js";
 import Button from "../components/kit/Button.jsx";
 import {cnb} from "cnbuilder";
+import Link from "next/link.js";
 
 export default class AboutUsPage extends React.Component {
     static contextType = GlobalContext
@@ -16,7 +17,7 @@ export default class AboutUsPage extends React.Component {
                 <div bp={'12 5@md'}>
                     <h1 className={'text-xl'}>{t('whoWeAre')}</h1>
                     <p className={cnb(css.caption, css.jumbotronText, 'smallOnMobile')}>{t('seachNewClients')}</p>
-                    <Button size={'large'}>{t('chooseServices')}</Button>
+                    <Link href='/'><Button size={'large'}>{t('chooseServices')}</Button></Link>
                 </div>
 
                 <div bp={'12 7@md'} className={css.img1}>
