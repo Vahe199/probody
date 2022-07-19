@@ -17,19 +17,20 @@ import {
 } from 'chart.js'
 import APIRequests from "../../helpers/APIRequests.js";
 import {DateTime} from "luxon";
+import {cnb} from "cnbuilder";
 
 Chart.register(LineController, BarController, BarElement, DoughnutController, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 
 const catColors = {
         views: '#3086F2',
         actions: '#88D23E',
-        phone: '#88D23E',
+        phone: '#73E2F1',
         map: '#8463E3',
         website: '#4D8FF1',
-        messengers: '#73E2F1',
+        messengers: '#FFE793',
         social: '#FAA526',
         price: '#FCCC21',
-        photo: '#FFE793',
+        photo: '#88D23E',
         review: '#FA6026',
         share: '#FF956D'
     },
@@ -210,8 +211,11 @@ const catColors = {
 
         // Display, position, and set styles for font
         tooltipEl.style.opacity = 1;
-        tooltipEl.style.left = positionX + 95 + (window.screen.width < 480 ? 32 : 0) + 'px';
-        tooltipEl.style.top = positionY + 95 + 'px';
+        tooltipEl.style.left = '29%'
+        tooltipEl.style.top = '27%'
+        // tooltipEl.style.left = (window.screen.width < 480 ? (window.screen.width - 280) : positionX + 95) + 'px';
+        // tooltipEl.style.top = positionY + 95 + 'px';
+
     }
 
 class StatsPage extends React.Component {
@@ -671,7 +675,7 @@ class StatsPage extends React.Component {
                                     <span style={{background: catColors.messengers}}>&nbsp;</span>
                                     <span>{t('messengerClicks')}</span>
                                 </div>
-                                <div>{Math.round(this.state.statistics.messengerClicks / Math.max(this.state.statistics.messengerClicks, 1) * 100)}%</div>
+                                <div>{Math.round(this.state.statistics.messengerClicks / Math.max(this.state.statistics.actions, 1) * 100)}%</div>
                             </div>
 
                             <div className={css.legendItem}>
@@ -707,7 +711,7 @@ class StatsPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div bp="12 6@md" className={css.chart} style={{height: 350}}>
+                    <div bp="12 6@md" className={cnb(css.chart, 'relative')} style={{height: 350}}>
                         <canvas ref={this.state.charts.lastMonthActions.container}></canvas>
                     </div>
                 </div>

@@ -1,1 +1,26 @@
-@import "about.module";
+@import "../themes";
+
+.img1 {
+  background: url("/illustrations/clients.svg") no-repeat center/contain;
+  width: 100%;
+  user-select: none;
+  min-height: 205px;
+}
+
+.caption {
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  &.jumbotronText {
+    margin-top: 20px;
+    margin-bottom: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .caption.jumbotronText {
+    margin-top: 12px;
+    margin-bottom: 24px;
+  }
+}
