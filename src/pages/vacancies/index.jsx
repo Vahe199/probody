@@ -142,7 +142,7 @@ class BlogPage extends React.Component {
                                          className={'flex align-end justify-between non-selectable'}>
                                         <span className={css.caption}>{t('employment')}</span>
                                         <span
-                                            className={css.value}>{vac.employment.map(i => t('employment_' + i)).join(', ')} {t('business')}</span>
+                                            className={css.value}>{vac.employment.map(i => t('employment_' + i)).join(', ')}}</span>
                                     </div>
                                     <div className={'flex justify-between align-end non-selectable'}>
                                         <span className={css.caption}>{t('city')}</span>

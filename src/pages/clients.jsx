@@ -56,7 +56,7 @@ class ClientsPage extends React.Component {
                     },
                     {
                         pic: '/illustrations/clients.tab3.svg',
-                        title: t('discoverSalons'),
+                        title: t('letYourselfThink'),
                         shortTitle: t('discoverSalons'),
                         text: t('discoverSalonsDescr')
                     },

@@ -119,15 +119,15 @@ class ClientsPage extends React.Component {
                     },
                     {
                         pic: '/illustrations/providers.tab2.svg',
-                        title: t('weDeclineEscort'),
+                        title: t('tellAboutYourself'),
                         shortTitle: t('fillSalonInfo'),
                         text: t('declineEscortDescr')
                     },
                     {
                         pic: '/illustrations/providers.tab3.svg',
-                        title: t('weDeclineEscort'),
-                        shortTitle: t('raiseSalon'),
-                        text: t('declineEscortDescr')
+                        title: t('advertYourself'),
+                        shortTitle: t('goFurther'),
+                        text: t('goFurtherDescr')
                     }
                 ]}/>
             </div>
