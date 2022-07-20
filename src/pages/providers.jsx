@@ -82,6 +82,10 @@ class ClientsPage extends React.Component {
                                     <span>{t('instagram')}</span>
                                 </li>
                                 <li>
+                                    <Icon name={'youtube'} />
+                                    <span>{t('youtube')}</span>
+                                </li>
+                                <li>
                                     <Icon name={'google'} />
                                     <span>{t('google')}</span>
                                 </li>

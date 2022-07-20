@@ -6,11 +6,15 @@ import {GlobalContext} from "../contexts/Global.js";
 import {cnb} from "cnbuilder";
 import Icon from "./kit/Icon.jsx";
 import {capitalize} from "../helpers/String.js";
+import Select from "./kit/Form/Select";
+import TextArea from "./kit/Form/TextArea";
+import Button from "./kit/Button.jsx";
 
 export default class ExtendedReviewBlock extends React.Component {
     static contextType = GlobalContext
 
     static propTypes = {
+        _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         avg: PropTypes.number.isRequired,
@@ -19,7 +23,17 @@ export default class ExtendedReviewBlock extends React.Component {
         interior: PropTypes.number.isRequired,
         massage: PropTypes.number.isRequired,
         targetType: PropTypes.oneOf(['master', 'salon']).isRequired,
-        targetName: PropTypes.string.isRequired
+        targetName: PropTypes.string.isRequired,
+        onSubmit: PropTypes.func.isRequired
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            complain: 'doNotComplain',
+            answer: ''
+        }
     }
 
     render() {
@@ -65,10 +79,46 @@ export default class ExtendedReviewBlock extends React.Component {
 
                 <div className={cnb(css.withSpacer, 'flex', 'justify-between')} style={{padding: '16px 0'}}>
                     <b>{t('review')}</b>
-                    <b>{t('for' + capitalize(this.props.targetType))}{this.props.targetType === 'master' && ' ' + this.props.targetName}</b>
+                    <b>{t('for' + capitalize(this.props.targetType))}{this.props.targetType === 'master' && ' ' + this.props.target.name}</b>
                 </div>
 
-                <div style={{marginTop: 16}}></div>
+                <div style={{marginTop: 16, gap: '16px 0'}} className={'flex column'}>
+                    <b>{t('reviewActions')}</b>
+                    <Select label={t('complain')} value={this.state.complain} options={[
+                        {
+                            _id: 'doNotComplain',
+                            name: t('doNotComplain')
+                        },
+                        {
+                            _id: 'noSuchClient',
+                            name: t('noSuchClient')
+                        },
+                        {
+                            _id: 'insultInReview',
+                            name: t('insultInReview')
+                        },
+                        {
+                            _id: 'wrongFacts',
+                            name: t('wrongFacts')
+                        },
+                        {
+                            _id: 'formerEmployee',
+                            name: t('formerEmployee')
+                        },
+                        {
+                            _id: 'clientDeclined',
+                            name: t('clientDeclined')
+                        },
+                        {
+                            _id: 'ruinedOtherRules',
+                            name: t('ruinedOtherRules')
+                        }
+                    ]} placeholder={t('chooseReason')} onUpdate={complain => this.setState({complain})} />
+
+                    <TextArea style={{paddingBottom: 0}} label={t('reviewAnswer')} placeholder={t('answerReview')} max={100} value={this.state.answer} onUpdate={answer => this.setState({answer})} />
+
+                    <Button size={'fill'} onClick={() => this.props.onSubmit(this.props._id, this.state)}>{t('toAnswerReview')}</Button>
+                </div>
             </div>
         </div>
     }

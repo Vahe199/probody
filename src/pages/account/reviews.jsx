@@ -7,6 +7,8 @@ import {GlobalContext} from "../../contexts/Global.js"
 import APIRequests from "../../helpers/APIRequests.js"
 import css from '../../styles/pages/reviews.module.scss'
 import ExtendedReviewBlock from "../../components/ExtendedReviewBlock";
+import Icon from "../../components/kit/Icon.jsx";
+import Modal from "../../components/kit/Modal.jsx";
 
 class ReviewPage extends React.Component {
     static contextType = GlobalContext
@@ -15,8 +17,12 @@ class ReviewPage extends React.Component {
         super(props);
 
         this.state = {
-            reviews: []
+            reviews: [],
+            successDialogOpen: false
         }
+
+        this.onReviewAnswer = this.onReviewAnswer.bind(this)
+        this.closeSuccessDialog = this.closeSuccessDialog.bind(this)
     }
 
 
@@ -28,6 +34,30 @@ class ReviewPage extends React.Component {
         })
     }
 
+    onReviewAnswer(reviewId, dto) {
+        if (!dto.answer.length) {
+            return
+        }
+
+        APIRequests.answerReview(reviewId, dto).then(() => {
+            APIRequests.getReviewsByUser().then(res => {
+                this.setState({
+                    reviews: res.reviews
+                })
+            })
+
+            this.setState({
+                successDialogOpen: true
+            })
+        })
+    }
+
+    closeSuccessDialog() {
+        this.setState({
+            successDialogOpen: false
+        })
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
 
@@ -36,6 +66,21 @@ class ReviewPage extends React.Component {
                 <title>{t('reviewsAndRating')}{TITLE_POSTFIX}</title>
             </Head>
 
+            <Modal open={this.state.successDialogOpen} isMobile={false} desktopWidth={375}
+                   onUpdate={this.closeSuccessDialog}>
+                <div>
+                    <div className={css.modalBody}>
+                        <p>{t('cool')}</p>
+
+                        <h1>{t('youAnsweredToReview')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('itRaisesYourLoyality')}</p>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeSuccessDialog}/>
+                    </div>
+                </div>
+            </Modal>
+
             <PersonalPageLayout page={'reviews'}>
                 <div className="responsive-content">
                     <h1 className={css.salonReviews}>{t('reviews')} <span
@@ -43,7 +88,7 @@ class ReviewPage extends React.Component {
 
                     <div bp={'grid 12 6@md'} style={{gap: isMobile ? 8 : 16}}>
                         {this.state.reviews.map((review, i) =>
-                            <ExtendedReviewBlock {...review} targetType={'master'} key={i}/>
+                            <ExtendedReviewBlock onSubmit={this.onReviewAnswer} {...review} key={i}/>
                         )}
                     </div>
                 </div>

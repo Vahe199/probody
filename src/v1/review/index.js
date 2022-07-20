@@ -96,9 +96,9 @@ router.post('/:workerId', async (req, res) => {
     }
 })
 
-router.post('/:reviewId/answer', AuthGuard('serviceProvider'), async (req, res) => {
+router.patch('/:reviewId/answer', AuthGuard('serviceProvider'), async (req, res) => {
     try {
-        const {text} = req.body
+        const {answer, complain} = req.body
 
         if (!mongoose.mongo.ObjectId.isValid(req.params.reviewId)) {
             return res.status(406).json({
@@ -114,7 +114,8 @@ router.post('/:reviewId/answer', AuthGuard('serviceProvider'), async (req, res) 
             })
         }
 
-        reviewDoc.answer = text
+        reviewDoc.answer = answer
+        reviewDoc.complain = complain
         await reviewDoc.save()
 
         res.status(202).json({

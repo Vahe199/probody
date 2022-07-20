@@ -57,6 +57,14 @@ export default class APIRequests {
         })
     }
 
+    static async answerReview(reviewId, dto) {
+        return fetch(`${API_URL}/review/${reviewId}/answer`, {
+            method: 'PATCH',
+            headers: APIRequests.withCredentials(APIRequests.withJSON()),
+            body: JSON.stringify(dto)
+        })
+    }
+
     static incrementStats(salonId, field) {
         return fetch(`${API_URL}/stats/${salonId}/${field}`, {
             method: 'PUT',

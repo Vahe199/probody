@@ -27,6 +27,10 @@ const ReviewSchema = new Schema({
     answer: {
         type: String
     },
+    complain: {
+        type: String,
+        enum: ['doNotComplain', 'noSuchClient', 'insultInReview', 'wrongFacts', 'formerEmployee', 'clientDeclined', 'ruinedOtherRules']
+    },
     interior: {
         type: Number,
         min: 1,

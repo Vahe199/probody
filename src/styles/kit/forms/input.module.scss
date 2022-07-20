@@ -2,6 +2,8 @@
 
 .inputRoot {
   @include themify() {
+    background: t('body-bg');
+
     &.outlined {
       border-radius: 16px;
       border: 1px solid t('input-border-color');
