@@ -26,6 +26,10 @@
   position: relative;
 }
 
+.keepFormat {
+  white-space: break-spaces;
+}
+
 .bold, strong {
   font-weight: 600;
 }

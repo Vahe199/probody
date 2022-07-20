@@ -221,7 +221,7 @@ class VacancyViewPage extends React.Component {
 
                     <div className={css.cardRoot} style={{padding: 20}}>
                         <p className="subtitle2" style={{marginBottom: 16}}>{t('description')}</p>
-                        {this.state.vacancy.description}
+                        <p className={'keepFormat'}>{this.state.vacancy.description}</p>
                     </div>
 
                     <ShareInSocialMedia thin={true} style={{marginTop: 12}}

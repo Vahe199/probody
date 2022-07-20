@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change afterPath="$PROJECT_DIR$/src/pages/providers.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.feature1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.feature2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.feature3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.tab1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.tab2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers.tab3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/illustrations/providers2.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Menu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Menu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/clients.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/clients.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/pages/clients.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/clients.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,9 +76,9 @@
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/public" />
-      <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/components/kit/Collapses" />
       <recent name="$PROJECT_DIR$/src/layouts/secondary" />
     </key>
@@ -203,14 +192,7 @@
       <workItem from="1658222367631" duration="171000" />
       <workItem from="1658222684955" duration="13056000" />
       <workItem from="1658240862483" duration="5567000" />
-      <workItem from="1658247430679" duration="4155000" />
-    </task>
-    <task id="LOCAL-00393" summary="added social block on mobile">
-      <created>1657806138002</created>
-      <option name="number" value="00393" />
-      <option name="presentableId" value="LOCAL-00393" />
-      <option name="project" value="LOCAL" />
-      <updated>1657806138002</updated>
+      <workItem from="1658247430679" duration="5283000" />
     </task>
     <task id="LOCAL-00394" summary="added social block on mobile">
       <created>1657806197954</created>
@@ -548,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658244341553</updated>
     </task>
-    <option name="localTasksCounter" value="442" />
+    <task id="LOCAL-00442" summary="added social block on mobile">
+      <created>1658251853390</created>
+      <option name="number" value="00442" />
+      <option name="presentableId" value="LOCAL-00442" />
+      <option name="project" value="LOCAL" />
+      <updated>1658251853390</updated>
+    </task>
+    <option name="localTasksCounter" value="443" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

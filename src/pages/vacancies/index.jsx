@@ -107,7 +107,7 @@ class BlogPage extends React.Component {
                                                 ? <div className={css.content}>
                                                     <p className={css.caption}>{vac.salonTitle}</p>
                                                     <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
-                                                    <p>{vac.description}</p>
+                                                    <p className={'keepFormat'}>{vac.description}</p>
                                                 </div>
                                                 : <div className={css.contactContainer}>
                                                     <Link href={'/vacancies/' + vac.slug}><Button>{t('detail')}</Button></Link>
@@ -123,7 +123,7 @@ class BlogPage extends React.Component {
                                     {!isMobile && <div className={css.content} style={{padding: 0, marginBottom: 12}}>
                                         <p className={css.caption}>{vac.salonTitle}</p>
                                         <Link href={'/vacancies/' + vac.slug}><h2>{vac.title}</h2></Link>
-                                        <p>{vac.description}</p>
+                                        <p className={'keepFormat'}>{vac.description}</p>
                                     </div>}
 
                                     <div style={{marginBottom: 12}}

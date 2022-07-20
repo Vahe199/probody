@@ -483,7 +483,7 @@ class SalonView extends React.Component {
                                 </p>
 
                                 <TextSection style={{padding: 0}} lines={5}>
-                                    {this.state.salon.description}
+                                    <p className="keepFormat">{this.state.salon.description}</p>
                                 </TextSection>
                             </div>
                         }
@@ -724,7 +724,7 @@ class SalonView extends React.Component {
                              style={{marginBottom: 24}}>
                             <h2 style={{marginBottom: 16}}>{t('description')}</h2>
                             <TextSection style={{padding: 0}} lines={5}>
-                                {this.state.salon.description}
+                                <p className="keepFormat">{this.state.salon.description}</p>
                             </TextSection>
                         </div>
                     }
