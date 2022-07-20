@@ -75,6 +75,17 @@ export default class ExtendedReviewBlock extends React.Component {
 
                 <div className={cnb(css.withSpacer, css.text)} style={{paddingBottom: this.props.text ? 16 : 0}}>
                     {this.props.text}
+
+                    {this.props.answer && <div className={css.answer}>
+                        <div style={{marginTop: 16}} className="flex justify-between align-end">
+                            <span className={css.name}>{this.props.target.name}</span>
+                            <span
+                                className={css.date}>{DateTime.fromISO(this.props.updatedAt).toFormat('d.MM.yyyy')}</span>
+                        </div>
+                        <div className={css.text}>
+                            {this.props.answer}
+                        </div>
+                    </div>}
                 </div>
 
                 <div className={cnb(css.withSpacer, 'flex', 'justify-between')} style={{padding: '16px 0'}}>
@@ -82,7 +93,7 @@ export default class ExtendedReviewBlock extends React.Component {
                     <b>{t('for' + capitalize(this.props.targetType))}{this.props.targetType === 'master' && ' ' + this.props.target.name}</b>
                 </div>
 
-                <div style={{marginTop: 16, gap: '16px 0'}} className={'flex column'}>
+                {!this.props.answer && <div style={{marginTop: 16, gap: '16px 0'}} className={'flex column'}>
                     <b>{t('reviewActions')}</b>
                     <Select label={t('complain')} value={this.state.complain} options={[
                         {
@@ -118,7 +129,7 @@ export default class ExtendedReviewBlock extends React.Component {
                     <TextArea style={{paddingBottom: 0}} label={t('reviewAnswer')} placeholder={t('answerReview')} max={100} value={this.state.answer} onUpdate={answer => this.setState({answer})} />
 
                     <Button size={'fill'} onClick={() => this.props.onSubmit(this.props._id, this.state)}>{t('toAnswerReview')}</Button>
-                </div>
+                </div>}
             </div>
         </div>
     }

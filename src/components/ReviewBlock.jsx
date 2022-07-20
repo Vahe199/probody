@@ -57,7 +57,7 @@ export default class ReviewBlock extends React.Component {
                 <div className={css.text}>
                     {this.props.text}
                 </div>
-                <div className={css.answer}>
+                {this.props.answer && <div className={css.answer}>
                     <div style={{marginTop: 16}} className="flex justify-between align-end">
                         <span className={css.name}>{this.props.target.name}</span>
                         <span
@@ -66,7 +66,7 @@ export default class ReviewBlock extends React.Component {
                     <div className={css.text}>
                         {this.props.answer}
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     }

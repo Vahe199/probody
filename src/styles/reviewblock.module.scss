@@ -13,6 +13,10 @@
 .name {
   font-size: 20px;
   font-family: Lack, sans-serif;
+
+  @include themify() {
+    color: t('text-main');
+  }
 }
 
 .text {
@@ -30,6 +34,14 @@
 .withSpacer {
   @include themify() {
     border-bottom: 1px solid t('line-color');
+  }
+}
+
+.answer {
+  padding-left: 20px;
+
+  @include themify() {
+    border-left: 1px solid t('line-color');
   }
 }
 
