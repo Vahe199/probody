@@ -57,6 +57,16 @@ export default class ReviewBlock extends React.Component {
                 <div className={css.text}>
                     {this.props.text}
                 </div>
+                <div className={css.answer}>
+                    <div style={{marginTop: 16}} className="flex justify-between align-end">
+                        <span className={css.name}>{this.props.target.name}</span>
+                        <span
+                            className={css.date}>{DateTime.fromISO(this.props.updatedAt).toFormat('d.MM.yyyy')}</span>
+                    </div>
+                    <div className={css.text}>
+                        {this.props.answer}
+                    </div>
+                </div>
             </div>
         </div>
     }
