@@ -6,7 +6,7 @@ import Head from "next/head.js"
 import {GlobalContext} from "../../contexts/Global.js"
 import APIRequests from "../../helpers/APIRequests.js"
 import css from '../../styles/pages/reviews.module.scss'
-import ReviewBlock from "../../components/ReviewBlock";
+import ExtendedReviewBlock from "../../components/ExtendedReviewBlock";
 
 class ReviewPage extends React.Component {
     static contextType = GlobalContext
@@ -43,7 +43,7 @@ class ReviewPage extends React.Component {
 
                     <div bp={'grid 12 6@md'} style={{gap: isMobile ? 8 : 16}}>
                         {this.state.reviews.map((review, i) =>
-                            <ReviewBlock {...review} key={i}/>
+                            <ExtendedReviewBlock {...review} targetType={'master'} key={i}/>
                         )}
                     </div>
                 </div>

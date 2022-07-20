@@ -39,10 +39,10 @@ export default class InfoTabPanels extends React.Component {
                 <div className={css.invisibleScroll}>
                     {this.props.tabs.map((tab, i) =>
                         <div key={i} className={css.mobileTab}>
-                            <strong>{activeTab.shortTitle}</strong>
-                            <div className={css.mobilePic} style={{backgroundImage: `url('${activeTab.pic}')`}}>&nbsp;</div>
-                            <strong>{activeTab.title}</strong>
-                            <p style={{margin: '17px 0 48px 0'}}>{activeTab.text}</p>
+                            <strong>{tab.shortTitle}</strong>
+                            <div className={css.mobilePic} style={{backgroundImage: `url('${tab.pic}')`}}>&nbsp;</div>
+                            <strong>{tab.title}</strong>
+                            <p style={{margin: '17px 0 48px 0'}}>{tab.text}</p>
                             <Button onClick={this.props.onActionClick} size={'fill'}>{this.props.buttonText}</Button>
                         </div>
                     )}

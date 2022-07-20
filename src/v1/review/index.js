@@ -13,7 +13,7 @@ router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes')
     const salons = await Worker.find({host: req.user._id})
 
     res.json({
-        reviews: await Review.find({target: {$in: salons.map(s => s._id)}}).sort({createdAt: -1}),
+        reviews: await Review.find({target: {$in: salons.map(s => s._id)}}).populate('target', 'name').sort({createdAt: -1}),
     })
 })
 

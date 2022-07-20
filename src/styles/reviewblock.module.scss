@@ -27,13 +27,19 @@
     font-size: 12px;
 }
 
+.withSpacer {
+  @include themify() {
+    border-bottom: 1px solid t('line-color');
+  }
+}
+
 .gradeContainer {
   &>div>div {
     font-weight: 600;
   }
 
   @include themify() {
-    border-bottom: 1px solid t('input-border-color');
+    border-bottom: 1px solid t('line-color');
   }
 
   padding-bottom: 12px;
