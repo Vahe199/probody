@@ -9,7 +9,7 @@ import RedisHelper from "../../helpers/RedisHelper.js";
 
 const router = express.Router()
 
-router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes'), async (req, res) => {
+router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
     const salons = await Worker.find({host: req.user._id})
 
     res.json({
@@ -17,7 +17,7 @@ router.get('/me', AuthGuard('serviceProvider'), apicache.middleware('5 minutes')
     })
 })
 
-router.get('/:workerId', async (req, res) => {
+router.get('/:workerId', apicache.middleware('5 minutes'), async (req, res) => {
     if (!mongoose.mongo.ObjectId.isValid(req.params.workerId)) {
         return res.status(406).json({
             message: 'invalidId'
