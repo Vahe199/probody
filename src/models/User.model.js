@@ -16,10 +16,6 @@ const UserSchema = new Schema({
     type: String,
     default: ''
   },
-  // nickName: {
-  //   type: String,
-  //   default: ''
-  // },
   internalRole: {
     type: String,
     enum: ['admin', 'owner', 'manager', 'master']
@@ -40,6 +36,12 @@ const UserSchema = new Schema({
   approvedEmail: {
     type: Boolean,
     default: false
+  },
+  subscriptionTo: {
+    type: Date,
+    default() {
+      return new Date(0)
+    }
   }
 }, {
   versionKey: false,

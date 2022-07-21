@@ -11,7 +11,7 @@
 }
 
 .name {
-  font-size: 20px;
+  //font-size: 20px;
   font-family: Lack, sans-serif;
 
   @include themify() {
@@ -25,10 +25,15 @@
   }
 
   margin-top: 8px;
+  font-size: 14px;
 }
 
 .date {
     font-size: 12px;
+
+  @include themify() {
+    color: t('text-main');
+  }
 }
 
 .withSpacer {
@@ -39,6 +44,7 @@
 
 .answer {
   padding-left: 20px;
+  font-size: 14px;
 
   @include themify() {
     border-left: 1px solid t('line-color');

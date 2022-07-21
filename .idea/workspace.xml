@@ -3,10 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vacancies/VacancyList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ExtendedReviewBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExtendedReviewBlock.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/kz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/kz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/clients.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/clients.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,31 +54,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.13.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.43&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/public/icons&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "javascript.nodejs.core.library.configured.version": "16.13.1",
+    "javascript.nodejs.core.library.typings.version": "16.11.43",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/models",
+    "list.type.of.created.stylesheet": "SCSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/pages" />
-      <recent name="$PROJECT_DIR$/src/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/public/icons" />
@@ -200,14 +204,8 @@
       <workItem from="1658319941574" duration="1313000" />
       <workItem from="1658325225367" duration="50000" />
       <workItem from="1658326647559" duration="1576000" />
-      <workItem from="1658328464527" duration="325000" />
-    </task>
-    <task id="LOCAL-00400" summary="added social block on mobile">
-      <created>1657891464653</created>
-      <option name="number" value="00400" />
-      <option name="presentableId" value="LOCAL-00400" />
-      <option name="project" value="LOCAL" />
-      <updated>1657891464653</updated>
+      <workItem from="1658328464527" duration="668000" />
+      <workItem from="1658339638196" duration="5762000" />
     </task>
     <task id="LOCAL-00401" summary="added social block on mobile">
       <created>1657904574969</created>
@@ -545,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658320655328</updated>
     </task>
-    <option name="localTasksCounter" value="449" />
+    <task id="LOCAL-00449" summary="added social block on mobile">
+      <created>1658328996940</created>
+      <option name="number" value="00449" />
+      <option name="presentableId" value="LOCAL-00449" />
+      <option name="project" value="LOCAL" />
+      <updated>1658328996940</updated>
+    </task>
+    <option name="localTasksCounter" value="450" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -88,8 +88,8 @@ class VacancyViewPage extends React.Component {
                                     {t('call')}
                                 </Button></a>
                                 <a target="_blank"
-                                   href={'https://wa.me/' + this.state.vacancy.whatsapp.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}><Button
-                                    color={'tertiary'} iconLeft={'wa_light'}>{t('write')}</Button></a>
+                                   href={'https://wa.me/' + parsePhoneNumber(this.state.vacancy.whatsapp).number.replace('+', '') + '?text=' + encodeURIComponent(t('vacancyAnswerPrefill') + ' "' + this.state.vacancy.title + '"')}><Button
+                                    color={'tertiary'} iconLeft={'wa_light'}>{t('sendMessage')}</Button></a>
                             </div>}
                     </div>
 

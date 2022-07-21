@@ -6,6 +6,7 @@ import User from "../../models/User.model.js";
 import Mail from "../../helpers/Mail.js";
 import RedisHelper from "../../helpers/RedisHelper.js";
 import Worker from "../../models/Worker.model.js";
+import {DateTime} from "luxon";
 
 const router = express.Router()
 
@@ -17,7 +18,8 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         email,
         phone,
         approvedEmail,
-        internalRole
+        internalRole,
+        subscriptionTo
     } = req.user;//req.user это объект, который пришел из AuthGuard
 
     let verificationStatus
@@ -36,9 +38,43 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         reffCode,
         internalRole,
         verificationStatus,
+        subscriptionTo,
         phone//это все нужно для того, чтоб не светить пароль в ответе
     })
 });
+
+router.put('/subscription', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const {_id: userId, subscriptionTo, balance} = req.user
+
+        if (balance < Number(process.env.SUBSCRIPTION_COST)) {
+            return res.status(402).json({
+                message: 'notEnoughMoney'
+            })
+        }
+
+        if (+subscriptionTo > DateTime.now().plus({days: 30}).toMillis()) {
+            return res.status(425).json({
+                message: 'alreadyBought'
+            })
+        }
+
+        await User.updateOne({_id: userId}, {
+            $set: {
+                balance: balance - Number(process.env.SUBSCRIPTION_COST),
+                subscriptionTo: DateTime.now().plus({days: 30}).toJSDate()
+            }
+        })
+
+        res.status(202).json({
+            message: 'updatedUser'
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e.message
+        })
+    }
+})
 
 router.patch('/', AuthGuard('serviceProvider'), userValidators.updateUser, async (req, res) => {
     const {field, value} = req.body

@@ -126,7 +126,7 @@ export default class ExtendedReviewBlock extends React.Component {
                         }
                     ]} placeholder={t('chooseReason')} onUpdate={complain => this.setState({complain})} />
 
-                    <TextArea style={{paddingBottom: 0}} label={t('reviewAnswer')} placeholder={t('answerReview')} max={100} value={this.state.answer} onUpdate={answer => this.setState({answer})} />
+                    <TextArea style={{paddingBottom: 0}} label={t('reviewAnswer')} placeholder={t('answerReview')} max={200} value={this.state.answer} onUpdate={answer => this.setState({answer})} />
 
                     <Button size={'fill'} onClick={() => this.props.onSubmit(this.props._id, this.state)}>{t('toAnswerReview')}</Button>
                 </div>}
