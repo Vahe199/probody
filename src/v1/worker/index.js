@@ -46,6 +46,17 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
     })
 })
 
+router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const mySalon = await Worker.findOne({host: req.user._id, parent: {$exists: false}}).populate('region'),
+            position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
+    } catch (e) {
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+})
+
 router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
     const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master', parent: {$exists: false}}}, {
             $group: {
@@ -309,17 +320,6 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
                 }
             }]))
         })
-    } catch (e) {
-        res.status(500).json({
-            message: "Internal Server Error"
-        })
-    }
-})
-
-router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
-    try {
-        const mySalon = await Worker.findOne({host: req.user._id, parent: {$exists: false}}).populate('region'),
-            position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
     } catch (e) {
         res.status(500).json({
             message: "Internal Server Error"
