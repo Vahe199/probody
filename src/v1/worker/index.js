@@ -52,7 +52,7 @@ router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
                 averageRate: {$avg: "$avg"}
             }
         }]).sort({averageRate: -1}).limit(3)).map(item => ({[item._id]: item.averageRate}))),
-        top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}})
+        top3Workers = await Worker.find({_id: {$in: Object.keys(top3Ids)}}).populate('host', 'subscriptionTo')
 
     res.json(top3Workers)
 })
@@ -102,7 +102,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
                 slug: {
                     $ne: req.params.slug
                 }
-            }).limit(3))
+            }).populate('host', 'subscriptionTo').limit(3))
         }
 
         return res.json(await Worker.find({
@@ -113,7 +113,7 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
             parent: {
                 $exists: false
             }
-        }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).exec())
+        }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).populate('host', 'subscriptionTo').exec())
     } catch (e) {
         console.log(e)
         return res.status(500).json({
@@ -174,8 +174,17 @@ router.get('/:slug', apicache.middleware('5 minutes'), async (req, res) => {
                 }
             },
             {
+                $lookup: {
+                    from: 'users',
+                    localField: 'host',
+                    foreignField: '_id',
+                    as: 'host'
+                }
+            },
+            {
                 $project: {
                     region: {$arrayElemAt: ['$region', 0]},
+                    'host.subscriptionTo': 1,
 
                     services: 1,
                     leads: 1,
@@ -248,7 +257,7 @@ router.get('/:slug', apicache.middleware('5 minutes'), async (req, res) => {
                         path: 'region'
                     }
                 ]
-            })] : await Worker.aggregate(aggregationPipeline),
+            }).populate('host', 'subscriptionTo')] : await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
                 avg: aggregatedReviews[0]?.avg,
@@ -273,7 +282,7 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
             })
         }
 
-        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ['photos', 'slug', 'isVerified', 'name', 'messengers', 'phone', 'address', 'location'])
+        const worker = await Worker.findOne({_id: new mongoose.mongo.ObjectId(req.params.id)}, ['photos', 'slug', 'isVerified', 'name', 'messengers', 'phone', 'address', 'location']).populate('host', 'subscriptionTo')
 
         if (!worker) {
             return res.status(404).json({
