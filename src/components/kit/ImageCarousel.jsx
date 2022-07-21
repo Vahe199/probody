@@ -4,6 +4,7 @@ import css from '../../styles/kit/imagecarousel.module.scss';
 import {cnb} from "cnbuilder";
 import {GlobalContext} from "../../contexts/Global.js";
 import {withRouter} from "next/router.js";
+import Icon from "./Icon.jsx";
 
 class ImageCarousel extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class ImageCarousel extends React.Component {
     static propTypes = {
         pics: PropTypes.arrayOf(PropTypes.string).isRequired,
         link: PropTypes.any,
-        height: PropTypes.number
+        height: PropTypes.number,
+        isPRO: PropTypes.bool
     }
 
     setSlide(index) {
@@ -125,7 +127,7 @@ class ImageCarousel extends React.Component {
     }
 
     render() {
-        const {theme, isMobile} = this.context
+        const {theme, isMobile, t} = this.context
         let height
 
         if (!this.props.height) {
@@ -147,6 +149,11 @@ class ImageCarousel extends React.Component {
 
             <div className={cnb(css.modal, this.state.fullscreen ? css.visible : '')}>
                 <div className={cnb(this.props.className, 'overflow-hidden', 'relative')}>
+                    {this.props.isPRO && <div className={css.proLabel}>
+                        <Icon name={'pro'} />
+                        <span>{t('pro')}</span>
+                    </div>}
+
                     <div onMouseDown={this.swipeHandlers.tap} onTouchStart={this.swipeHandlers.tap}
                          onMouseLeave={this.swipeHandlers.release}
                          onMouseUp={this.swipeHandlers.release} onTouchEnd={this.swipeHandlers.release}

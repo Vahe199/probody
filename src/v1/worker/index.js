@@ -46,7 +46,7 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 })
 
 router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
-    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master'}}, {
+    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master', parent: {$exists: false}}}, {
             $group: {
                 _id: '$target',
                 averageRate: {$avg: "$avg"}
@@ -241,7 +241,7 @@ router.get('/:slug', apicache.middleware('5 minutes'), async (req, res) => {
             })
 
         return res.json({
-            worker: worker.parent ? [await Worker.findOne({slug: req.params.slug}).populate({
+            worker: worker.parent ? [await Worker.findOne({slug: req.params.slug}).populate('host', 'subscriptionTo').populate({
                 path: 'parent',
                 populate: [
                     {
@@ -257,7 +257,7 @@ router.get('/:slug', apicache.middleware('5 minutes'), async (req, res) => {
                         path: 'region'
                     }
                 ]
-            }).populate('host', 'subscriptionTo')] : await Worker.aggregate(aggregationPipeline),
+            })] : await Worker.aggregate(aggregationPipeline),
             allPrograms: await DefaultProgram.find({}),
             reviews: {
                 avg: aggregatedReviews[0]?.avg,

@@ -28,6 +28,29 @@
   align-items: center;
 }
 
+.proLabel {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  padding: 4px 7px 4px 7px;
+  z-index: 3;
+  border-radius: 8px;
+
+  span {
+    margin-left: 6px;
+    font-weight: 600;
+  }
+
+  i {
+    vertical-align: top;
+  }
+
+  @include themify() {
+    background: t('bg-accent');
+    color: t('bg-primary')
+  }
+}
+
 .navigationItem {
   @include themify() {
     width: 10px;

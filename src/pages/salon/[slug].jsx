@@ -38,7 +38,8 @@ class SalonView extends React.Component {
 
         this.state = {
             salon: {
-                photos: []
+                photos: [],
+                host: [{}]
             },
             masterLimit: 6,
             map: undefined,
@@ -142,6 +143,8 @@ class SalonView extends React.Component {
                 res.worker[0].phone = res.worker[0].parent.phone
                 res.worker[0].social = res.worker[0].parent.social
             }
+
+            console.log(res.worker[0])
 
             if (!this.state.salon._id) {
                 //increment stats for parent if it is master
@@ -456,7 +459,7 @@ class SalonView extends React.Component {
             <div bp={'grid'} style={{gap: 8}}>
                 <div bp={'12 5@md'}>
                     <div className={css.cardRoot}>
-                        <ImageCarousel
+                        <ImageCarousel isPRO={+new Date(this.state.salon.host[0].subscriptionTo) > +new Date}
                             height={this.state.salon.kind === 'salon' ? (isMobile ? 240 : 320) : (isMobile ? 450 : 580)}
                             pics={this.state.salon.photos}/>
 
@@ -879,7 +882,7 @@ class SalonView extends React.Component {
 
                     return <div bp={'12 4@md'} key={index}>
                         <div className={css.cardRoot}>
-                            <ImageCarousel height={isMobile ? 470 : 520} link={worker.url} pics={worker.photos}/>
+                            <ImageCarousel isPRO={+new Date(worker.host.subscriptionTo) > +new Date} height={isMobile ? 470 : 520} link={worker.url} pics={worker.photos}/>
 
                             <div className={css.padded}>
                                 {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>
