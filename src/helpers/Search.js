@@ -202,22 +202,6 @@ export default class Search {
             } else {
                 workerAggregation.push(
                     {
-                        $lookup: {
-                            from: 'regions',
-                            localField: 'region',
-                            foreignField: '_id',
-                            as: 'region'
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: 'workers',
-                            localField: '_id',
-                            foreignField: 'parent',
-                            as: 'masters'
-                        }
-                    },
-                    {
                         $project: {
                             'host.subscriptionTo': 1,
                             kind: 1,
@@ -236,6 +220,22 @@ export default class Search {
                             description: 1,
                             phone: 1,
                             region: 1
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'regions',
+                            localField: 'region',
+                            foreignField: '_id',
+                            as: 'region'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'workers',
+                            localField: '_id',
+                            foreignField: 'parent',
+                            as: 'masters'
                         }
                     }
                 )

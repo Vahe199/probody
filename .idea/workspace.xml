@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,14 +195,7 @@
       <workItem from="1658325225367" duration="50000" />
       <workItem from="1658326647559" duration="1576000" />
       <workItem from="1658328464527" duration="668000" />
-      <workItem from="1658339638196" duration="7345000" />
-    </task>
-    <task id="LOCAL-00403" summary="added social block on mobile">
-      <created>1657913772832</created>
-      <option name="number" value="00403" />
-      <option name="presentableId" value="LOCAL-00403" />
-      <option name="project" value="LOCAL" />
-      <updated>1657913772832</updated>
+      <workItem from="1658339638196" duration="7653000" />
     </task>
     <task id="LOCAL-00404" summary="added social block on mobile">
       <created>1657956106120</created>
@@ -543,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658392770130</updated>
     </task>
-    <option name="localTasksCounter" value="452" />
+    <task id="LOCAL-00452" summary="added social block on mobile">
+      <created>1658394254147</created>
+      <option name="number" value="00452" />
+      <option name="presentableId" value="LOCAL-00452" />
+      <option name="project" value="LOCAL" />
+      <updated>1658394254147</updated>
+    </task>
+    <option name="localTasksCounter" value="453" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
