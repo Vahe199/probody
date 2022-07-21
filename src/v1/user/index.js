@@ -53,7 +53,7 @@ router.put('/subscription', AuthGuard('serviceProvider'), async (req, res) => {
             })
         }
 
-        if (+subscriptionTo > DateTime.now().plus({days: 30}).toMillis()) {
+        if (+subscriptionTo > +new Date) {
             return res.status(425).json({
                 message: 'alreadyBought'
             })

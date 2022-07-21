@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ExtendedReviewBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExtendedReviewBlock.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/kz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/kz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vacancies/[slug].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/reviewblock.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,14 +195,7 @@
       <workItem from="1658325225367" duration="50000" />
       <workItem from="1658326647559" duration="1576000" />
       <workItem from="1658328464527" duration="668000" />
-      <workItem from="1658339638196" duration="5762000" />
-    </task>
-    <task id="LOCAL-00401" summary="added social block on mobile">
-      <created>1657904574969</created>
-      <option name="number" value="00401" />
-      <option name="presentableId" value="LOCAL-00401" />
-      <option name="project" value="LOCAL" />
-      <updated>1657904574969</updated>
+      <workItem from="1658339638196" duration="6072000" />
     </task>
     <task id="LOCAL-00402" summary="added social block on mobile">
       <created>1657912486967</created>
@@ -550,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658328996940</updated>
     </task>
-    <option name="localTasksCounter" value="450" />
+    <task id="LOCAL-00450" summary="added social block on mobile">
+      <created>1658392428063</created>
+      <option name="number" value="00450" />
+      <option name="presentableId" value="LOCAL-00450" />
+      <option name="project" value="LOCAL" />
+      <updated>1658392428063</updated>
+    </task>
+    <option name="localTasksCounter" value="451" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
