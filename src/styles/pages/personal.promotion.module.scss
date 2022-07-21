@@ -52,7 +52,57 @@
   }
 }
 
+.goPro {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 16px;
+  align-items: center;
+  padding: 11px 10px;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+
+  div {
+    display: inline-flex;
+    gap: 8px;
+
+    p {
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+  }
+
+  &.pro div {
+    padding: 4px 5px;
+    align-items: flex-end;
+  }
+
+  &:not(.pro) {
+    img {
+      filter: grayscale(1);
+      opacity: .7;
+    }
+  }
+
+  &>span {
+    padding: 4px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    height: fit-content;
+
+    @include themify() {
+      color: t('another-text-disabled');
+    }
+  }
+}
+
 .proHint {
+  line-height: 16px;
+  margin-top: 12px;
+  display: flex;
+
   i {
     width: 14px;
     height: 14px;

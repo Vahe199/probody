@@ -8,6 +8,7 @@ import {cnb} from "cnbuilder";
 import InfoBlock from "../kit/InfoBlock";
 import {formatPrice} from "../../helpers/String";
 import Button from "../kit/Button.jsx";
+import {DateTime} from "luxon";
 
 export default class Promotion extends React.Component {
     static contextType = GlobalContext
@@ -16,8 +17,7 @@ export default class Promotion extends React.Component {
         super(props);
 
         this.state = {
-            mySalon: {
-            },
+            mySalon: {},
             personalInfo: {}
         }
     }
@@ -41,6 +41,7 @@ export default class Promotion extends React.Component {
 
     render() {
         const {t, theme, isMobile} = this.context
+        const isPro = +new Date(this.state.personalInfo.subscriptionTo) > +new Date
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
             <div bp={'grid'} style={{marginBottom: 24}}>
@@ -62,33 +63,44 @@ export default class Promotion extends React.Component {
             </div>
 
             <div bp={'grid'} style={{gap: isMobile ? '20px 0' : '0 29px'}}>
-                <div bp={'12 7@md'} className={'flex'} style={{gap: 4}}>
+                <div bp={'12 7@md'}>
+                    <div className={'flex'} style={{gap: 4}}>
                     <div style={{flexGrow: 1}}>
-                    <InfoBlock className={css.personalInfoBlock}>
-                        <div className={'flex justify-between'}>
-                            <div>
-                                <Icon name={'wallet'} />
-                                {t('balance')}
+                        <InfoBlock className={css.personalInfoBlock}>
+                            <div className={'flex justify-between'}>
+                                <div>
+                                    <Icon name={'wallet'}/>
+                                    {t('balance')}
+                                </div>
+                                <Button size={'small'}><Icon name={'plus'}/></Button>
                             </div>
-                            <Button size={'small'}><Icon name={'plus'} /></Button>
-                        </div>
-                        <h2>{formatPrice(this.state.personalInfo.balance || 0)} {t('kzt')}</h2>
-                    </InfoBlock>
+                            <h2 className={'number-font'}>{formatPrice(this.state.personalInfo.balance || 0)} {t('kzt')}</h2>
+                        </InfoBlock>
                     </div>
 
                     <InfoBlock className={css.personalInfoBlock}>
                         <div className={'flex justify-between'}>
                             <div>
-                                <Icon style={{width: 20, height: 20}} name={'position'} />
+                                <Icon style={{width: 20, height: 20}} name={'position'}/>
                                 {t('salonPosition')}
                             </div>
                         </div>
-                        <h2>{this.state.mySalon.position || '-'}</h2>
+                        <h2 className={'number-font'}>{this.state.mySalon.position || '-'}</h2>
                     </InfoBlock>
+                    </div>
                 </div>
-                <div bp={'12 5@md first last@md'} className={css.proHint}>
-                    <Icon name={'warning'} />
-                    <span>{+new Date(this.state.personalInfo.subscriptionTo) > +new Date ? t('activeProInfo') : t('ifYouGoPro')}</span>
+                <div bp={'12 5@md first last@md'}>
+                    <div className={cnb(css.goPro, isPro ? css.pro : '')}>
+                        <div>
+                            <img src={'/icons/pro_fill.svg'} width={24} height={24} />
+                            <p className={'subtitle2'}>{t(isPro ? 'pro' : 'standard')}</p>
+                        </div>
+                        {isPro ? <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> : <Button color={'secondary'} size={'small'}>{t('goPro')}</Button>}
+                    </div>
+                    <div className={css.proHint}>
+                        <div><Icon name={'warning'}/></div>
+                        <span>{isPro ? t('activeProInfo') : t('ifYouGoPro')}</span>
+                    </div>
                 </div>
             </div>
         </div>

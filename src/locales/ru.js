@@ -442,7 +442,7 @@ export default {
     reviewActions: 'Действия с отзывом',
     toVacancies: 'К вакансиям',
     addingVacancy: 'Добавление вакансии',
-    toSalon: 'В анкету',
+    toSalon: 'К анкете',
     editingVacancy: 'Редактирование вакансии',
     loading: 'Загрузка...',
     yourEMail: 'Ваша электронная почта',
