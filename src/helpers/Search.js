@@ -44,7 +44,7 @@ export default class Search {
     static async getSalonPosition(salonId, regionName) {
         const searchResults = await RedisHelper.ftSearch('idx:worker', '@region:' + regionName, '9999', '0', ['SORTBY', 'lastraise', 'DESC'])
 
-        return searchResults.splice(1).findIndex(i => i.replace('search:worker:', '') === String(salonId))
+        return searchResults.splice(1).findIndex(i => i.replace('search:worker:', '') === String(salonId)) + 1
     }
 
     static async syncWorkers() {

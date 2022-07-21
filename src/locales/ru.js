@@ -632,5 +632,7 @@ export default {
     youHavePlannedRaise: 'Вы запланировали продвижение анкеты',
     toDate: 'на',
     youCanceledRaise: 'Вы удалили продвижение',
-    unChargedFor: 'на счет начислены'
+    unChargedFor: 'на счет начислены',
+
+    activeProInfo: 'В вашей анкете размещен соответствующий знак PRO, а также предоставлена скидка 20% на продвижение'
 }

@@ -24,6 +24,54 @@
   }
 }
 
+.personalInfoBlock {
+  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:last-child {
+    height: 100%;
+  }
+
+  &>div>div:first-child {
+    i {
+      width: 17px;
+      height: 19px;
+      margin-right: 12px;
+      vertical-align: text-bottom;
+    }
+
+    @include themify() {
+      color: t('input-border-color');
+    }
+  }
+
+  button {
+    padding: 5px;
+  }
+}
+
+.proHint {
+  i {
+    width: 14px;
+    height: 14px;
+    margin-right: 9px;
+
+    @include themify() {
+      color: t('bg-primary');
+    }
+  }
+
+  span {
+    font-size: 12px;
+
+    @include themify() {
+      color: t('text-disabled');
+    }
+  }
+}
+
 @media (max-width: 480px) {
   .editSalonLink {
     font-size: 14px;

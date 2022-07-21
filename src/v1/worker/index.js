@@ -48,10 +48,13 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
 
 router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
     try {
-        const mySalon = await Worker.findOne({host: req.user._id, parent: {$exists: false}}).populate('region'),
+        const mySalon = await Worker.findOne({
+                host: req.user._id,
+                parent: {$exists: false}
+            }, 'region slug raises').populate('region'),
             position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
 
-        res.json({position})
+        res.json({position, raises: mySalon.raises, slug: mySalon.slug})
     } catch (e) {
         console.log(e)
         res.status(500).json({
@@ -61,7 +64,12 @@ router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
 })
 
 router.get('/top3', apicache.middleware('15 minutes'), async (req, res) => {
-    const top3Ids = Object.assign({}, ...(await Review.aggregate([{$match: {targetType: 'master', parent: {$exists: false}}}, {
+    const top3Ids = Object.assign({}, ...(await Review.aggregate([{
+            $match: {
+                targetType: 'master',
+                parent: {$exists: false}
+            }
+        }, {
             $group: {
                 _id: '$target',
                 averageRate: {$avg: "$avg"}
@@ -128,7 +136,12 @@ router.get('/:slug/suggestions', apicache.middleware('15 minutes'), async (req, 
             parent: {
                 $exists: false
             }
-        }).where('location').near({center: {coordinates: worker.location.coordinates, type: 'Point'}}).limit(3).populate('host', 'subscriptionTo').exec())
+        }).where('location').near({
+            center: {
+                coordinates: worker.location.coordinates,
+                type: 'Point'
+            }
+        }).limit(3).populate('host', 'subscriptionTo').exec())
     } catch (e) {
         console.log(e)
         return res.status(500).json({

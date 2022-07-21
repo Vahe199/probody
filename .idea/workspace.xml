@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/kit/InfoBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/kit/InfoBlock.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,21 +204,7 @@
       <workItem from="1658326647559" duration="1576000" />
       <workItem from="1658328464527" duration="668000" />
       <workItem from="1658339638196" duration="11749000" />
-      <workItem from="1658405549598" duration="4591000" />
-    </task>
-    <task id="LOCAL-00412" summary="added social block on mobile">
-      <created>1657989399289</created>
-      <option name="number" value="00412" />
-      <option name="presentableId" value="LOCAL-00412" />
-      <option name="project" value="LOCAL" />
-      <updated>1657989399289</updated>
-    </task>
-    <task id="LOCAL-00413" summary="added social block on mobile">
-      <created>1658066662162</created>
-      <option name="number" value="00413" />
-      <option name="presentableId" value="LOCAL-00413" />
-      <option name="project" value="LOCAL" />
-      <updated>1658066662163</updated>
+      <workItem from="1658405549598" duration="7237000" />
     </task>
     <task id="LOCAL-00414" summary="added social block on mobile">
       <created>1658067270349</created>
@@ -543,7 +535,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658410152099</updated>
     </task>
-    <option name="localTasksCounter" value="461" />
+    <task id="LOCAL-00461" summary="added social block on mobile">
+      <created>1658410230590</created>
+      <option name="number" value="00461" />
+      <option name="presentableId" value="LOCAL-00461" />
+      <option name="project" value="LOCAL" />
+      <updated>1658410230590</updated>
+    </task>
+    <task id="LOCAL-00462" summary="added social block on mobile">
+      <created>1658410272652</created>
+      <option name="number" value="00462" />
+      <option name="presentableId" value="LOCAL-00462" />
+      <option name="project" value="LOCAL" />
+      <updated>1658410272653</updated>
+    </task>
+    <option name="localTasksCounter" value="463" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
