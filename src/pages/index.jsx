@@ -738,7 +738,7 @@ class Home extends React.Component {
 
                             return chosenSalon && <section className={css.chosenSalon}>
                                 <div bp={'hide show@md'}>
-                                    <ImageCarousel link={'/salon/' + chosenSalon.worker.slug}
+                                    <ImageCarousel link={'/salon/' + chosenSalon.worker.slug} isPRO={+new Date(chosenSalon.worker.host.subscriptionTo) > +new Date}
                                                    pics={chosenSalon.worker.photos} height={240}/>
                                 </div>
                                 <div className={css.content}>
@@ -813,7 +813,7 @@ class Home extends React.Component {
                             <div bp={'grid'} className={css.workerBlock}>
                                 <div bp={'12 5@md'}>
                                     <div className={css.cardRoot}>
-                                        <ImageCarousel link={worker.url} pics={worker.photos}/>
+                                        <ImageCarousel link={worker.url} pics={worker.photos} isPRO={+new Date(worker.host[0].subscriptionTo) > +new Date} />
 
                                         {isMobile ? <div className={css.padded}>
                                             {worker.isVerified && <div className={cnb(css.caption, 'non-selectable')}>

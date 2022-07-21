@@ -144,7 +144,9 @@ class SalonView extends React.Component {
                 res.worker[0].social = res.worker[0].parent.social
             }
 
-            console.log(res.worker[0])
+            if (!Array.isArray(res.worker[0].host)) {
+                res.worker[0].host = [res.worker[0].host]
+            }
 
             if (!this.state.salon._id) {
                 //increment stats for parent if it is master
