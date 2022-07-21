@@ -7,6 +7,7 @@ import apicache from "apicache";
 import Review from "../../models/Review.model.js"
 import DefaultProgram from "../../models/DefaultProgram.model.js";
 import mongoose from "mongoose";
+import Search from "../../helpers/Search.js";
 
 const router = express.Router()
 
@@ -308,6 +309,17 @@ router.get('/:id/map', apicache.middleware('5 minutes'), async (req, res) => {
                 }
             }]))
         })
+    } catch (e) {
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+})
+
+router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const mySalon = await Worker.findOne({host: req.user._id, parent: {$exists: false}}).populate('region'),
+            position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
     } catch (e) {
         res.status(500).json({
             message: "Internal Server Error"

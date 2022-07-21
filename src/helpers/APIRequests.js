@@ -31,11 +31,17 @@ export default class APIRequests {
         return (await fetch(`${API_URL}/search/region`)).json()
     }
 
+    static async getMySalonInfo() {
+        return (await fetch(`${API_URL}/worker/mine`, {
+            headers: APIRequests.withCredentials(),
+        })).json()
+    }
+
     static async deleteVacancy(slug) {
-        return (await fetch(`${API_URL}/vacancy/${slug}`, {
+        return fetch(`${API_URL}/vacancy/${slug}`, {
             headers: APIRequests.withCredentials(),
             method: 'DELETE'
-        }))
+        })
     }
 
     static withJSON(headers) {

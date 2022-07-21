@@ -41,6 +41,12 @@ export default class Search {
         )
     }
 
+    static async getSalonPosition(salonId, regionName) {
+        const searchResults = await RedisHelper.ftSearch('idx:worker', '@region:' + regionName, '0', '0', ['SORTBY', 'lastraise', 'DESC'])
+
+        console.log(searchResults)
+    }
+
     static async syncWorkers() {
         const PREFIX = "search:worker:"
         let workerCount = await Worker.count({parent: {$exists: false}}),

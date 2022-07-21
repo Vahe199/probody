@@ -2,8 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/[slug].jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/promotion/RaiseArchive.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/arrow_right_square.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/cash_color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/google_color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/inst_color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/position.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/pro_fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/tg_color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/wallet.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/warning.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/yandex_color.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/yt_color.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/account/promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/account/promotion.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/icons/edit.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/edit.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +73,7 @@
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.13.1",
     "javascript.nodejs.core.library.typings.version": "16.11.43",
-    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/models",
+    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public/icons",
     "list.type.of.created.stylesheet": "SCSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,8 +85,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
+      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/pages" />
@@ -198,14 +216,8 @@
       <workItem from="1658325225367" duration="50000" />
       <workItem from="1658326647559" duration="1576000" />
       <workItem from="1658328464527" duration="668000" />
-      <workItem from="1658339638196" duration="11188000" />
-    </task>
-    <task id="LOCAL-00406" summary="added social block on mobile">
-      <created>1657961635609</created>
-      <option name="number" value="00406" />
-      <option name="presentableId" value="LOCAL-00406" />
-      <option name="project" value="LOCAL" />
-      <updated>1657961635609</updated>
+      <workItem from="1658339638196" duration="11749000" />
+      <workItem from="1658405549598" duration="3157000" />
     </task>
     <task id="LOCAL-00407" summary="added social block on mobile">
       <created>1657961770499</created>
@@ -543,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658397574349</updated>
     </task>
-    <option name="localTasksCounter" value="455" />
+    <task id="LOCAL-00455" summary="added social block on mobile">
+      <created>1658398175187</created>
+      <option name="number" value="00455" />
+      <option name="presentableId" value="LOCAL-00455" />
+      <option name="project" value="LOCAL" />
+      <updated>1658398175187</updated>
+    </task>
+    <option name="localTasksCounter" value="456" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

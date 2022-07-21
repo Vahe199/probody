@@ -3,8 +3,8 @@ import {TITLE_POSTFIX} from "../../helpers/constants.js"
 import Head from "next/head.js"
 import {GlobalContext} from "../../contexts/Global.js"
 import PersonalPageLayout from "../../layouts/secondary/PersonalPageLayout.jsx"
-import css from "../../styles/pages/personal.promotion.module.scss";
-import Icon from "../../components/kit/Icon.jsx";
+import RaiseArchive from "../../components/promotion/RaiseArchive.jsx";
+import Promotion from "../../components/promotion/Promotion.jsx";
 
 class PromotionPage extends React.Component {
     static contextType = GlobalContext
@@ -13,6 +13,8 @@ class PromotionPage extends React.Component {
         super(props);
 
         this.state = {
+            view: 'main',
+            setView: (name = undefined) => this.setState({view: name})
         }
     }
 
@@ -25,15 +27,7 @@ class PromotionPage extends React.Component {
             </Head>
 
             <PersonalPageLayout page={'promotion'}>
-                <div className="flex justify-between responsive-content">
-                    <h1 className={'bigger inline-flex items-center lineheight-1'}>{t('salonArticle')}</h1>
-
-                    <p className={css.editSalonLink}>
-                        {t('editSalon')}
-
-                        <Icon name={'edit'}/>
-                    </p>
-                </div>
+                {this.state.view === 'main' ? <Promotion setView={this.state.setView} /> : <RaiseArchive setView={this.state.setView} />}
             </PersonalPageLayout>
         </>
     }
