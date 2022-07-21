@@ -50,7 +50,10 @@ router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
     try {
         const mySalon = await Worker.findOne({host: req.user._id, parent: {$exists: false}}).populate('region'),
             position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
+
+        res.json({position})
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             message: "Internal Server Error"
         })
