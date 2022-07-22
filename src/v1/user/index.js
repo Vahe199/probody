@@ -131,10 +131,7 @@ router.delete('/raise', AuthGuard('serviceProvider'), async (req, res) => {
             raiseDate = req.body.raiseDate,
             isPro = +subscriptionTo > +new Date,
             CALCULATED_RAISE_PRICE = Number(process.env.RAISE_PRICE) * (1 - Number(isPro) * Number(process.env.DISCOUNT_AMOUNT)),
-            filteredRaises = mySalon.raises.filter(raise => {
-                console.log(raise, raiseDate, typeof raise, typeof raiseDate)
-                return raise !== raiseDate
-            })
+            filteredRaises = mySalon.raises.filter(raise => +raise !== DateTime.fromISO(raiseDate).toMillis())
 
         if (filteredRaises.length === mySalon.raises.length) {
             return res.status(404).json({message: 'Raise not found'})
