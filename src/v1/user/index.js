@@ -7,6 +7,7 @@ import Mail from "../../helpers/Mail.js";
 import RedisHelper from "../../helpers/RedisHelper.js";
 import Worker from "../../models/Worker.model.js";
 import {DateTime} from "luxon";
+import {DISCOUNT_AMOUNT, RAISE_PRICE} from "../../helpers/constants.js";
 
 const router = express.Router()
 
@@ -78,19 +79,34 @@ router.put('/subscription', AuthGuard('serviceProvider'), async (req, res) => {
 
 router.post('/raise', AuthGuard('serviceProvider'), async (req, res) => {
     try {
-        const mySalon = await Worker.findOne({
-            host: req.user._id,
-            parent: {$exists: false}
-        }, 'lastRaise raises'),
-            raiseDate = new Date
+        const {_id: userId, subscriptionTo, balance} = req.user,
+            mySalon = await Worker.findOne({
+                host: req.user._id,
+                parent: {$exists: false}
+            }, 'lastRaise raises'),
+            raiseDate = new Date,
+            isPro = +subscriptionTo > +new Date,
+            CALCULATED_RAISE_PRICE = Number(process.env.RAISE_PRICE) * (1 - Number(isPro) * Number(process.env.DISCOUNT_AMOUNT))
 
-        if (+new Date(mySalon.lastRaise) < DateTime.now().plus({minutes: 5})) {
+        if (balance < CALCULATED_RAISE_PRICE) {
+            return res.status(402).json({
+                message: 'notEnoughMoney'
+            })
+        }
+
+        if (DateTime.fromJSDate(mySalon.lastRaise).plus({minutes: 5}) > raiseDate) {
             return res.status(425).json({message: 'Too Early'})
         }
 
         mySalon.lastRaise = raiseDate
         mySalon.raises.push(raiseDate)
         mySalon.markModified('raises')
+
+        await User.updateOne({_id: userId}, {
+            $set: {
+                balance: balance - CALCULATED_RAISE_PRICE
+            }
+        })
 
         await mySalon.save()
 
@@ -108,10 +124,25 @@ router.put('/raise', AuthGuard('serviceProvider'), async (req, res) => {
                 host: req.user._id,
                 parent: {$exists: false}
             }, 'raises'),
-            raiseDate = new Date(req.body.raiseDate)
+            raiseDate = new Date(req.body.raiseDate),
+            {_id: userId, subscriptionTo, balance} = req.user,
+            isPro = +subscriptionTo > +new Date,
+            CALCULATED_RAISE_PRICE = Number(process.env.RAISE_PRICE) * (1 - Number(isPro) * Number(process.env.DISCOUNT_AMOUNT))
+
+        if (balance < CALCULATED_RAISE_PRICE) {
+            return res.status(402).json({
+                message: 'notEnoughMoney'
+            })
+        }
 
         mySalon.raises.push(raiseDate)
         mySalon.markModified('raises')
+
+        await User.updateOne({_id: userId}, {
+            $set: {
+                balance: balance - CALCULATED_RAISE_PRICE
+            }
+        })
 
         await mySalon.save()
 

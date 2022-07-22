@@ -27,9 +27,26 @@ export default class APIRequests {
         }
     }
 
-    static async buySubcription() {
+    static async buySubscription() {
         return fetch(`${API_URL}/user/subscription`, {
             headers: APIRequests.withCredentials(),
+            method: 'PUT'
+        })
+    }
+
+    static async raiseSalon() {
+        return fetch(`${API_URL}/user/raise`, {
+            headers: APIRequests.withCredentials(),
+            method: 'POST'
+        })
+    }
+
+    static async planRaise(raiseDate) {
+        return fetch(`${API_URL}/user/raise`, {
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
+            body: JSON.stringify({
+                raiseDate
+            }),
             method: 'PUT'
         })
     }

@@ -28,7 +28,10 @@ export default class Promotion extends React.Component {
         }
 
         this.closeModal = this.closeModal.bind(this)
-        this.buySubcription = this.buySubcription.bind(this)
+        this.buySubscription = this.buySubscription.bind(this)
+        this.getSalonInfo = this.getSalonInfo.bind(this)
+        this.getMe = this.getMe.bind(this)
+        this.raiseSalon = this.raiseSalon.bind(this)
     }
 
     componentDidMount() {
@@ -52,8 +55,8 @@ export default class Promotion extends React.Component {
         this.setState({modal: ''})
     }
 
-    buySubcription() {
-        APIRequests.buySubcription().then(res => {
+    buySubscription() {
+        APIRequests.buySubscription().then(res => {
             if (res.status === 402) {
                 this.setState({
                     modal: 'notEnoughMoney'
@@ -67,12 +70,32 @@ export default class Promotion extends React.Component {
         })
     }
 
+    raiseSalon() {
+        APIRequests.raiseSalon().then(res => {
+            if (res.status === 402) {
+                this.setState({
+                    modal: 'notEnoughMoney'
+                })
+            } else if (res.status === 425) {
+                this.setState({
+                    modal: ''
+                })
+            } else if (res.ok) {
+                this.getMe()
+                this.setState({
+                    modal: 'salonRaised'
+                })
+            }
+        })
+    }
+
     render() {
         const {t, theme, isMobile} = this.context,
             currentDate = +new Date,
             isPro = +new Date(this.state.personalInfo.subscriptionTo) > currentDate,
             plannedRaises = this.state.mySalon.raises.map(i => +new Date(i) > currentDate),
-            pastRaises = this.state.mySalon.raises.map(i => +new Date(i) < currentDate)
+            pastRaises = this.state.mySalon.raises.map(i => +new Date(i) < currentDate),
+            CALCULATED_RAISE_PRICE = RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT)
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
             <Modal open={this.state.modal === 'goPRO'} isMobile={false} desktopWidth={450}
@@ -116,7 +139,7 @@ export default class Promotion extends React.Component {
                         <h2 className={'number-font'}>1 {t('month')} (30 {t('days')})</h2>
 
                         <div className={'flex growAll'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
-                            <Button onClick={this.buySubcription} size={'fill'}>{t('goPro')}</Button>
+                            <Button onClick={this.buySubscription} size={'fill'}>{t('goPro')}</Button>
                             <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
                         </div>
                     </div>
@@ -155,6 +178,46 @@ export default class Promotion extends React.Component {
                         </div>
 
                         <h2 className={'number-font'}>{DateTime.now().plus({days: 30}).toFormat('dd.MM.yyyy')}</h2>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'raisingSalon'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('raisingSalon')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('yourSalonWillBeRaised')}</p>
+
+                        <div className={'flex items-center'} style={{gap: 8, marginTop: 28}}>
+                            <img src={'/icons/cash_color.svg'} width={20} height={20}/>
+                            {t('cost')}
+                            {isPro && <img src={'/icons/discount_tag.svg'} width={41} height={28}/>}
+                        </div>
+
+                        <div className="flex align-end lineheight-1" style={{gap: 9, marginTop: 10}}>
+                            <h2 className={'number-font lineheight-1'}>{formatPrice(RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT))}{t('kzt')}</h2>
+                            <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
+                        </div>
+
+                        <div className={'flex growFirst'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
+                            <Button onClick={this.raiseSalon} size={'fill'}>{t('raise')}</Button>
+                            <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'salonRaised'} isMobile={false} desktopWidth={350}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('youHaveRaisedSalon')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('youAreFirst')}<br />{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -281,11 +344,11 @@ export default class Promotion extends React.Component {
 
                         <div className="flex justify-between align-end" style={{marginTop: 18}}>
                             <div className="flex align-end" style={{gap: 9, lineHeight: '26px'}}>
-                                <h2 className={'number-font'}>{formatPrice(RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT))}{t('kzt')}</h2>
+                                <h2 className={'number-font'}>{formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</h2>
                                 <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
                             </div>
 
-                            <Button size={'small'}>{t('raise')}</Button>
+                            <Button size={'small'} onClick={() => this.setState({modal: 'raisingSalon'})}>{t('raise')}</Button>
                         </div>
                     </div> : <div>
                         <div className={'outlined'}>
