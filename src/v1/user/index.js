@@ -8,6 +8,7 @@ import RedisHelper from "../../helpers/RedisHelper.js";
 import Worker from "../../models/Worker.model.js";
 import {DateTime} from "luxon";
 import {DISCOUNT_AMOUNT, RAISE_PRICE} from "../../helpers/constants.js";
+import Search from "../../helpers/Search.js";
 
 const router = express.Router()
 
@@ -101,6 +102,8 @@ router.post('/raise', AuthGuard('serviceProvider'), async (req, res) => {
         mySalon.lastRaise = raiseDate
         mySalon.raises.push(raiseDate)
         mySalon.markModified('raises')
+
+        await Search.setLastRaise(mySalon._id, raiseDate)
 
         await User.updateOne({_id: userId}, {
             $set: {
