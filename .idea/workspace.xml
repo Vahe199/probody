@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
-      <change afterPath="$PROJECT_DIR$/src/public/icons/calendar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/icons/discount.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/icons/discount_tag.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/icons/pro_full.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/public/icons/replenish.svg" afterDir="false" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/icons/yt_color.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/yt_color.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/button.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/button.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,14 +207,7 @@
       <workItem from="1658415154133" duration="1532000" />
       <workItem from="1658477656282" duration="1287000" />
       <workItem from="1658480369012" duration="1321000" />
-      <workItem from="1658484177540" duration="3683000" />
-    </task>
-    <task id="LOCAL-00416" summary="added social block on mobile">
-      <created>1658071620691</created>
-      <option name="number" value="00416" />
-      <option name="presentableId" value="LOCAL-00416" />
-      <option name="project" value="LOCAL" />
-      <updated>1658071620691</updated>
+      <workItem from="1658484177540" duration="5002000" />
     </task>
     <task id="LOCAL-00417" summary="added social block on mobile">
       <created>1658073307556</created>
@@ -560,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658416293928</updated>
     </task>
-    <option name="localTasksCounter" value="465" />
+    <task id="LOCAL-00465" summary="added modals">
+      <created>1658488141354</created>
+      <option name="number" value="00465" />
+      <option name="presentableId" value="LOCAL-00465" />
+      <option name="project" value="LOCAL" />
+      <updated>1658488141354</updated>
+    </task>
+    <option name="localTasksCounter" value="466" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +583,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixed blog and vacancies" />
     <MESSAGE value="added IDE files" />
     <MESSAGE value="added salon master view" />
     <MESSAGE value="added reviews block for unrated" />
@@ -616,6 +607,7 @@
     <MESSAGE value="fixed load n more btn" />
     <MESSAGE value="added user location circle" />
     <MESSAGE value="added social block on mobile" />
-    <option name="LAST_COMMIT_MESSAGE" value="added social block on mobile" />
+    <MESSAGE value="added modals" />
+    <option name="LAST_COMMIT_MESSAGE" value="added modals" />
   </component>
 </project>

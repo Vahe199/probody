@@ -135,6 +135,20 @@
   }
 }
 
+.cnt {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 8px;
+  border-radius: 8px;
+  line-height: 1;
+  margin-left: 8px;
+
+  @include themify() {
+    color: t('text-disabled');
+    background: t('bg-secondlayer');
+  }
+}
+
 .notEnoughMoney {
   padding: 12px 10px;
   border-radius: 8px;

@@ -19,7 +19,9 @@ export default class Promotion extends React.Component {
         super(props);
 
         this.state = {
-            mySalon: {},
+            mySalon: {
+                raises: []
+            },
             personalInfo: {},
             modal: ''
         }
@@ -82,27 +84,28 @@ export default class Promotion extends React.Component {
                         <p style={{marginBottom: 20}} className="subtitle2">{t('pros')}</p>
 
                         <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 16}}>
-                            <img src={'/icons/pro_full.svg'} width={75} height={32} />
+                            <img src={'/icons/pro_full.svg'} width={75} height={32}/>
                             {t('iconInProfile')}
                         </div>
 
                         <div className={'flex items-center tag-secondlayer'} style={{gap: 8}}>
-                            <img src={'/icons/discount.svg'} width={20} height={20} />
+                            <img src={'/icons/discount.svg'} width={20} height={20}/>
                             {t('raiseDiscount')}
-                            <img src={'/icons/discount_tag.svg'} width={41} height={28} />
+                            <img src={'/icons/discount_tag.svg'} width={41} height={28}/>
                         </div>
 
                         <div className={css.spacer}></div>
 
                         <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 12}}>
-                            <img src={'/icons/cash_color.svg'} width={24} height={24} />
+                            <img src={'/icons/cash_color.svg'} width={24} height={24}/>
                             {t('cost')}
                         </div>
 
                         <h2 className={'number-font'}>{formatPrice(SUBSCRIPTION_PRICE)}{t('kzt')}</h2>
 
-                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginTop: 22, marginBottom: 12}}>
-                            <img src={'/icons/calendar.svg'} width={24} height={24} />
+                        <div className={'flex items-center tag-secondlayer'}
+                             style={{gap: 8, marginTop: 22, marginBottom: 12}}>
+                            <img src={'/icons/calendar.svg'} width={24} height={24}/>
                             {t('duration')}
                         </div>
 
@@ -129,20 +132,21 @@ export default class Promotion extends React.Component {
                         <p style={{marginBottom: 20}} className="subtitle2">{t('activated')}</p>
 
                         <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 16}}>
-                            <img src={'/icons/pro_full.svg'} width={75} height={32} />
+                            <img src={'/icons/pro_full.svg'} width={75} height={32}/>
                             {t('iconInProfile')}
                         </div>
 
                         <div className={'flex items-center tag-secondlayer'} style={{gap: 8}}>
-                            <img src={'/icons/discount.svg'} width={20} height={20} />
+                            <img src={'/icons/discount.svg'} width={20} height={20}/>
                             {t('raiseDiscount')}
-                            <img src={'/icons/discount_tag.svg'} width={41} height={28} />
+                            <img src={'/icons/discount_tag.svg'} width={41} height={28}/>
                         </div>
 
                         <div className={css.spacer}></div>
 
-                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginTop: 22, marginBottom: 12}}>
-                            <img src={'/icons/calendar.svg'} width={24} height={24} />
+                        <div className={'flex items-center tag-secondlayer'}
+                             style={{gap: 8, marginTop: 22, marginBottom: 12}}>
+                            <img src={'/icons/calendar.svg'} width={24} height={24}/>
                             {t('activeTo')}
                         </div>
 
@@ -158,7 +162,7 @@ export default class Promotion extends React.Component {
                 <div>
                     <div className={css.modalBody}>
                         <div className={css.notEnoughMoney}>
-                            <Icon name={'replenish'} />
+                            <Icon name={'replenish'}/>
                             {t('notEnoughFunds')}
                         </div>
 
@@ -167,7 +171,8 @@ export default class Promotion extends React.Component {
                         <p style={{paddingTop: 16}}>{t('pleaseReplenishBalance')}</p>
 
                         <div className={'flex growAll'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
-                            <Button onClick={() => this.setState({modal: 'replenishBalance'})} size={'fill'}>{t('replenishBalance')}</Button>
+                            <Button onClick={() => this.setState({modal: 'replenishBalance'})}
+                                    size={'fill'}>{t('replenishBalance')}</Button>
                             <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
                         </div>
                     </div>
@@ -195,41 +200,81 @@ export default class Promotion extends React.Component {
             <div bp={'grid'} style={{gap: isMobile ? '20px 0' : '0 29px'}}>
                 <div bp={'12 7@md'}>
                     <div className={'flex'} style={{gap: 4}}>
-                    <div style={{flexGrow: 1}}>
+                        <div style={{flexGrow: 1}}>
+                            <InfoBlock className={css.personalInfoBlock}>
+                                <div className={'flex justify-between'}>
+                                    <div>
+                                        <Icon name={'wallet'}/>
+                                        {t('balance')}
+                                    </div>
+                                    <Button size={'small'}
+                                            onClick={() => this.setState({modal: 'replenishBalance'})}><Icon
+                                        name={'plus'}/></Button>
+                                </div>
+                                <h2 className={'number-font'}>{formatPrice(this.state.personalInfo.balance || 0)} {t('kzt')}</h2>
+                            </InfoBlock>
+                        </div>
+
                         <InfoBlock className={css.personalInfoBlock}>
                             <div className={'flex justify-between'}>
                                 <div>
-                                    <Icon name={'wallet'}/>
-                                    {t('balance')}
+                                    <Icon style={{width: 20, height: 20}} name={'position'}/>
+                                    {t('salonPosition')}
                                 </div>
-                                <Button size={'small'} onClick={() => this.setState({modal: 'replenishBalance'})}><Icon name={'plus'}/></Button>
                             </div>
-                            <h2 className={'number-font'}>{formatPrice(this.state.personalInfo.balance || 0)} {t('kzt')}</h2>
+                            <h2 className={'number-font'}>{this.state.mySalon.position || '-'}</h2>
                         </InfoBlock>
-                    </div>
-
-                    <InfoBlock className={css.personalInfoBlock}>
-                        <div className={'flex justify-between'}>
-                            <div>
-                                <Icon style={{width: 20, height: 20}} name={'position'}/>
-                                {t('salonPosition')}
-                            </div>
-                        </div>
-                        <h2 className={'number-font'}>{this.state.mySalon.position || '-'}</h2>
-                    </InfoBlock>
                     </div>
                 </div>
                 <div bp={'12 5@md first last@md'}>
                     <div className={cnb(css.goPro, isPro ? css.pro : '')}>
                         <div>
-                            <img src={'/icons/pro_fill.svg'} width={24} height={24} />
+                            <img src={'/icons/pro_fill.svg'} width={24} height={24}/>
                             <p className={'subtitle2'}>{t(isPro ? 'pro' : 'standard')}</p>
                         </div>
-                        {isPro ? <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> : <Button onClick={() => this.setState({modal: 'goPRO'})} color={'secondary'} size={'small'}>{t('goPro')}</Button>}
+                        {isPro ?
+                            <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> :
+                            <Button onClick={() => this.setState({modal: 'goPRO'})} color={'secondary'}
+                                    size={'small'}>{t('goPro')}</Button>}
                     </div>
                     <div className={css.proHint}>
                         <div><Icon name={'warning'}/></div>
                         <span>{isPro ? t('activeProInfo') : t('ifYouGoPro')}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div bp={'grid'} style={{gap: isMobile ? '20px 0' : '0 29px', marginTop: 48}}>
+                <div bp={'12 7@md'}>
+                    <div className={'flex justify-between items-center'}>
+                        <h1 className="bigger">{t('promotion')}</h1>
+
+                        <p className={css.editSalonLink}>
+                            <span style={{padding: '0 8px'}}>{t('archive')}</span>
+
+                            <span className={css.cnt}>{this.state.mySalon.raises.length}</span>
+                        </p>
+                    </div>
+                </div>
+                <div bp={'12 5@md'}>
+                    <div className={'slCard'}>
+                        <p className="subtitle2" style={{marginBottom: 24}}>{t('stayWithUs')}</p>
+
+                        <div className={'flex column gap-12'}>
+                            <div>– {t('guestStreamFrom')}&nbsp;
+                                <div className={'inline-flex wrap gap-12'} style={{marginLeft: 14}}>
+                                    <img src={'/icons/tg_color.svg'} width={14} height={14}/>
+                                    <img src={'/icons/inst_color.svg'} width={14} height={14}/>
+                                    <img src={'/icons/yt_color.svg'} width={14} height={14}/>
+                                    <img src={'/icons/google_color.svg'} width={14} height={14}/>
+                                    <img src={'/icons/yandex_color.svg'} width={14} height={14}/>
+                                </div>
+                            </div>
+
+                            <div>– {t('ourContextAds')}</div>
+
+                            <div>– {t('trueStatistics')}</div>
+                        </div>
                     </div>
                 </div>
             </div>

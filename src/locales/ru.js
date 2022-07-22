@@ -638,5 +638,7 @@ export default {
     replenishBalance: 'Пополнить баланс',
     notEnoughMoney: 'Недостаточно средств на балансе для оплаты услуги',
     pleaseReplenishBalance: 'Пополните баланс удобным для Вас способом',
-    notEnoughFunds: 'Недостаточно средств'
+    notEnoughFunds: 'Недостаточно средств',
+    promotion: 'Продвижение',
+    stayWithUs: 'Размещайтесь у нас'
 }

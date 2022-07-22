@@ -16,6 +16,15 @@
   }
 }
 
+.slCard {
+  border-radius: 32px;
+  padding: 20px;
+
+  @include themify() {
+    background: t('bg-secondlayer');
+  }
+}
+
 .flex {
   display: flex;
 }
