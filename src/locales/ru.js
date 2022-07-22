@@ -641,5 +641,7 @@ export default {
     notEnoughFunds: 'Недостаточно средств',
     promotion: 'Продвижение',
     stayWithUs: 'Размещайтесь у нас',
-    planned: 'Запланировано'
+    planned: 'Запланировано',
+    doYouWantToCancelRaise: 'Вы действительно хотите удалить продвижение?',
+    weWillReturnMoney: 'После нажатия на кнопку отмена на ваш счет вернется полная стоимость услуги'
 }

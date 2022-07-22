@@ -33,6 +33,7 @@ export default class Promotion extends React.Component {
         this.getSalonInfo = this.getSalonInfo.bind(this)
         this.getMe = this.getMe.bind(this)
         this.raiseSalon = this.raiseSalon.bind(this)
+        this.cancelRaise = this.cancelRaise.bind(this)
     }
 
     componentDidMount() {
@@ -88,6 +89,16 @@ export default class Promotion extends React.Component {
                     modal: 'salonRaised'
                 })
             }
+        })
+    }
+
+    cancelRaise() {
+        APIRequests.cancelRaise(this.state.raiseToDelete).then(() => {
+            this.getSalonInfo()
+            this.getMe()
+            this.setState({
+                model: 'raiseCanceled'
+            })
         })
     }
 
@@ -179,7 +190,7 @@ export default class Promotion extends React.Component {
                             {t('activeTo')}
                         </div>
 
-                        <h2 className={'number-font'}>{DateTime.now().plus({days: 30}).toFormat('dd.MM.yyyy')}</h2>
+                        <h2 className={'number-font'}>{DateTime.now().plus({days: 30}).toFormat('d.MM.yyyy')}</h2>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -209,6 +220,44 @@ export default class Promotion extends React.Component {
                             <Button onClick={this.raiseSalon} size={'fill'}>{t('raise')}</Button>
                             <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
                         </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'cancelingRaise'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('doYouWantToCancelRaise')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('weWillReturnMoney')}</p>
+
+                        <div className={'flex items-center'} style={{gap: 8, marginTop: 28}}>
+                            <img src={'/icons/calendar.svg'} width={20} height={20}/>
+                            {t('date')}
+                        </div>
+
+                        <div className="flex align-end lineheight-1" style={{gap: 9, marginTop: 10}}>
+                            <h2 className={'number-font lineheight-1'}>{DateTime.fromISO(this.state.raiseToDelete).toFormat('d MMMM, EEEE, H:mm')}</h2>
+                        </div>
+
+                        <div className={'flex growFirst'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
+                            <Button onClick={this.closeModal} size={'fill'}>{t('cancel')}</Button>
+                            <Button onClick={this.cancelRaise} size={'fill'} color={'tertiary'}>{t('delete')}</Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'raiseCanceled'} isMobile={false} desktopWidth={350}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('youCanceledRaise')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}</p>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
                 </div>
             </Modal>
@@ -302,7 +351,7 @@ export default class Promotion extends React.Component {
                             <p className={'subtitle2'}>{t(isPro ? 'pro' : 'standard')}</p>
                         </div>
                         {isPro ?
-                            <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> :
+                            <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('d.MM.yyyy')}</span> :
                             <Button onClick={() => this.setState({modal: 'goPRO'})} color={'secondary'}
                                     size={'small'}>{t('goPro')}</Button>}
                     </div>
@@ -403,10 +452,10 @@ export default class Promotion extends React.Component {
                             const dt = DateTime.fromISO(raise)
 
                             return <div bp={'grid'} className={'outlined'} key={i}>
-                                <div bp={'4'}>{dt.toFormat('dd.MM.yyyy')}</div>
-                                <div bp={'4'}>{dt.toFormat('HH:mm')}</div>
+                                <div bp={'4'}>{dt.toFormat('d.MM.yyyy')}</div>
+                                <div bp={'4'}>{dt.toFormat('H:mm')}</div>
                                 <div bp={'4'} className={'flex justify-end'}><img style={{cursor: "pointer"}} onClick={() => this.setState({
-                                    modal: 'deletingRaise',
+                                    modal: 'cancelingRaise',
                                     raiseToDelete: raise
                                 })} src={'/icons/trashcan_alt.svg'} width={24} height={24} /></div>
                             </div>

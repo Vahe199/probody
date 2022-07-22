@@ -41,6 +41,14 @@ export default class APIRequests {
         })
     }
 
+    static async cancelRaise(raiseDate) {
+        return fetch(`${API_URL}/user/raise`, {
+            headers: APIRequests.withJSON(APIRequests.withCredentials()),
+            body: JSON.stringify({raiseDate}),
+            method: 'DELETE'
+        })
+    }
+
     static async planRaise(raiseDate) {
         return fetch(`${API_URL}/user/raise`, {
             headers: APIRequests.withJSON(APIRequests.withCredentials()),

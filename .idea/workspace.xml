@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals" />
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -200,14 +205,7 @@
       <workItem from="1658415154133" duration="1532000" />
       <workItem from="1658477656282" duration="1287000" />
       <workItem from="1658480369012" duration="1321000" />
-      <workItem from="1658484177540" duration="14978000" />
-    </task>
-    <task id="LOCAL-00426" summary="added social block on mobile">
-      <created>1658156272644</created>
-      <option name="number" value="00426" />
-      <option name="presentableId" value="LOCAL-00426" />
-      <option name="project" value="LOCAL" />
-      <updated>1658156272644</updated>
+      <workItem from="1658484177540" duration="17076000" />
     </task>
     <task id="LOCAL-00427" summary="added social block on mobile">
       <created>1658156532345</created>
@@ -545,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658502181094</updated>
     </task>
-    <option name="localTasksCounter" value="475" />
+    <task id="LOCAL-00475" summary="added modals">
+      <created>1658502307283</created>
+      <option name="number" value="00475" />
+      <option name="presentableId" value="LOCAL-00475" />
+      <option name="project" value="LOCAL" />
+      <updated>1658502307283</updated>
+    </task>
+    <option name="localTasksCounter" value="476" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
