@@ -97,7 +97,7 @@ export default class Promotion extends React.Component {
             this.getSalonInfo()
             this.getMe()
             this.setState({
-                model: 'raiseCanceled'
+                modal: 'raiseCanceled'
             })
         })
     }

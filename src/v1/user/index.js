@@ -137,6 +137,7 @@ router.delete('/raise', AuthGuard('serviceProvider'), async (req, res) => {
             return res.status(404).json({message: 'Raise not found'})
         }
 
+        console.log(mySalon.raises, filteredRaises)
         mySalon.raises = filteredRaises
         mySalon.markModified('raises')
 
