@@ -255,7 +255,7 @@ export default class Promotion extends React.Component {
                     <div className={css.modalBody}>
                         <h1>{t('youCanceledRaise')}</h1>
 
-                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}</p>
+                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}<br/>{t('unchargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -451,7 +451,7 @@ export default class Promotion extends React.Component {
                         {plannedRaises.map((raise, i) => {
                             const dt = DateTime.fromISO(raise)
 
-                            return <div bp={'grid'} className={'outlined'} key={i}>
+                            return <div bp={'grid'} className={'outlined'} key={i} style={{marginBottom: 8}}>
                                 <div bp={'4'}>{dt.toFormat('d.MM.yyyy')}</div>
                                 <div bp={'4'}>{dt.toFormat('H:mm')}</div>
                                 <div bp={'4'} className={'flex justify-end'}><img style={{cursor: "pointer"}} onClick={() => this.setState({
