@@ -54,6 +54,7 @@ router.get('/mine', AuthGuard('serviceProvider'), async (req, res) => {
             }, 'region slug raises').populate('region'),
             position = await Search.getSalonPosition(mySalon._id, mySalon.region.name.toLowerCase())
 
+        console.log({position})
         res.json({position, raises: mySalon.raises, slug: mySalon.slug})
     } catch (e) {
         console.log(e)

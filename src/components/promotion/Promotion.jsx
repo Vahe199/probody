@@ -82,6 +82,7 @@ export default class Promotion extends React.Component {
                 })
             } else if (res.ok) {
                 this.getMe()
+                this.getSalonInfo()
                 this.setState({
                     modal: 'salonRaised'
                 })
