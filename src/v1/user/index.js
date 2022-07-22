@@ -121,6 +121,41 @@ router.post('/raise', AuthGuard('serviceProvider'), async (req, res) => {
     }
 })
 
+router.delete('/raise', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const {_id: userId, subscriptionTo, balance} = req.user,
+            mySalon = await Worker.findOne({
+                host: req.user._id,
+                parent: {$exists: false}
+            }, 'raises'),
+            raiseDate = req.body.raiseDate,
+            isPro = +subscriptionTo > +new Date,
+            CALCULATED_RAISE_PRICE = Number(process.env.RAISE_PRICE) * (1 - Number(isPro) * Number(process.env.DISCOUNT_AMOUNT)),
+            filteredRaises = mySalon.raises.filter(raise => DateTime.fromJSDate(raise).toUTC() !== raiseDate)
+
+        if (filteredRaises.length === mySalon.raises) {
+            return res.status(404).json({message: 'Raise not found'})
+        }
+
+        mySalon.raises = filteredRaises
+        mySalon.markModified('raises')
+
+        await User.updateOne({_id: userId}, {
+            $set: {
+                balance: balance + CALCULATED_RAISE_PRICE
+            }
+        })
+
+        await mySalon.save()
+
+        return res.json({message: 'Raise canceled'})
+    } catch (e) {
+        res.status(500).json({
+            error: e.message
+        })
+    }
+})
+
 router.put('/raise', AuthGuard('serviceProvider'), async (req, res) => {
     try {
         const mySalon = await Worker.findOne({

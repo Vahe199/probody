@@ -640,5 +640,6 @@ export default {
     pleaseReplenishBalance: 'Пополните баланс удобным для Вас способом',
     notEnoughFunds: 'Недостаточно средств',
     promotion: 'Продвижение',
-    stayWithUs: 'Размещайтесь у нас'
+    stayWithUs: 'Размещайтесь у нас',
+    planned: 'Запланировано'
 }

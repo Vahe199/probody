@@ -155,6 +155,22 @@
   }
 }
 
+.arrowBack {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  @include themify() {
+    color: t('text-disabled');
+  }
+
+  i {
+    margin-right: 12px;
+    width: 16px;
+    height: 15px;
+  }
+}
+
 .cnt {
   font-size: 12px;
   font-weight: 600;

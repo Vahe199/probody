@@ -23,6 +23,7 @@ export default class Promotion extends React.Component {
                 raises: []
             },
             personalInfo: {},
+            raiseToDelete: undefined,
             modal: '',
             activeTab: 'otr'
         }
@@ -317,11 +318,11 @@ export default class Promotion extends React.Component {
                     <div className={'flex justify-between items-center'}>
                         <h1 className="bigger">{t('promotion')}</h1>
 
-                        <p className={css.editSalonLink}>
+                        {pastRaises.length > 0 && <p className={css.editSalonLink} onClick={() => this.props.setView('archive')}>
                             <span style={{padding: '0 8px'}}>{t('archive')}</span>
 
                             <span className={css.cnt}>{pastRaises.length}</span>
-                        </p>
+                        </p>}
                     </div>
 
                     <div className={css.tabsHead} style={{marginTop: 28}}>
@@ -393,11 +394,23 @@ export default class Promotion extends React.Component {
                     </div>
 
                     {(this.state.activeTab === 'plan' && plannedRaises.length > 0) && <div style={{marginTop: 32}}>
-                        <p className="subtitle2">{t('plannedTo')}</p>
-                        <div bp={'grid'} style={{padding: 20}} className={'text-disabled'}>
+                        <p className="subtitle2">{t('planned')}</p>
+                        <div bp={'grid'} style={{padding: '20px 20px 10px 20px'}} className={'text-disabled'}>
                             <div bp={'4'}><b>{t('date')}</b></div>
                             <div bp={'8'}><b>{t('time')}</b></div>
                         </div>
+                        {plannedRaises.map((raise, i) => {
+                            const dt = DateTime.fromISO(raise)
+
+                            return <div bp={'grid'} className={'outlined'} key={i}>
+                                <div bp={'4'}>{dt.toFormat('dd.MM.yyyy')}</div>
+                                <div bp={'4'}>{dt.toFormat('HH:mm')}</div>
+                                <div bp={'4'} className={'flex justify-end'}><img style={{cursor: "pointer"}} onClick={() => this.setState({
+                                    modal: 'deletingRaise',
+                                    raiseToDelete: raise
+                                })} src={'/icons/trashcan_alt.svg'} width={24} height={24} /></div>
+                            </div>
+                        })}
                     </div>}
                 </div>
             </div>
