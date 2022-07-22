@@ -133,11 +133,12 @@ router.delete('/raise', AuthGuard('serviceProvider'), async (req, res) => {
             CALCULATED_RAISE_PRICE = Number(process.env.RAISE_PRICE) * (1 - Number(isPro) * Number(process.env.DISCOUNT_AMOUNT)),
             filteredRaises = mySalon.raises.filter(raise => DateTime.fromJSDate(raise).toUTC() !== raiseDate)
 
-        if (filteredRaises.length === mySalon.raises) {
+        console.log(raiseDate, mySalon.raises)
+
+        if (filteredRaises.length === mySalon.raises.length) {
             return res.status(404).json({message: 'Raise not found'})
         }
 
-        console.log(mySalon.raises, filteredRaises)
         mySalon.raises = filteredRaises
         mySalon.markModified('raises')
 
