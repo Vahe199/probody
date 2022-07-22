@@ -76,6 +76,53 @@ router.put('/subscription', AuthGuard('serviceProvider'), async (req, res) => {
     }
 })
 
+router.post('/raise', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const mySalon = await Worker.findOne({
+            host: req.user._id,
+            parent: {$exists: false}
+        }, 'lastRaise raises'),
+            raiseDate = new Date
+
+        if (+new Date(mySalon.lastRaise) < DateTime.now().plus({minutes: 5})) {
+            return res.status(425).json({message: 'Too Early'})
+        }
+
+        mySalon.lastRaise = raiseDate
+        mySalon.raises.push(raiseDate)
+        mySalon.markModified('raises')
+
+        await mySalon.save()
+
+        return res.json({message: 'Raised salon'})
+    } catch (e) {
+        res.status(500).json({
+            error: e.message
+        })
+    }
+})
+
+router.put('/raise', AuthGuard('serviceProvider'), async (req, res) => {
+    try {
+        const mySalon = await Worker.findOne({
+                host: req.user._id,
+                parent: {$exists: false}
+            }, 'raises'),
+            raiseDate = new Date(req.body.raiseDate)
+
+        mySalon.raises.push(raiseDate)
+        mySalon.markModified('raises')
+
+        await mySalon.save()
+
+        return res.json({message: 'Planned raise'})
+    } catch (e) {
+        res.status(500).json({
+            error: e.message
+        })
+    }
+})
+
 router.patch('/', AuthGuard('serviceProvider'), userValidators.updateUser, async (req, res) => {
     const {field, value} = req.body
     const {email, _id: userId} = req.user

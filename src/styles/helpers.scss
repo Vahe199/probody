@@ -16,6 +16,15 @@
   }
 }
 
+.outlined {
+  padding: 20px;
+  border-radius: 16px;
+
+  @include themify() {
+    border: 1px solid t('line-color');
+  }
+}
+
 .slCard {
   border-radius: 32px;
   padding: 20px;

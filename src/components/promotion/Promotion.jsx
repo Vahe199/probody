@@ -10,7 +10,7 @@ import {formatPrice} from "../../helpers/String";
 import Button from "../kit/Button.jsx";
 import {DateTime} from "luxon";
 import Modal from "../kit/Modal.jsx";
-import {SUBSCRIPTION_PRICE} from "../../helpers/constants.js";
+import {DISCOUNT_AMOUNT, RAISE_PRICE, SUBSCRIPTION_PRICE} from "../../helpers/constants.js";
 
 export default class Promotion extends React.Component {
     static contextType = GlobalContext
@@ -23,7 +23,8 @@ export default class Promotion extends React.Component {
                 raises: []
             },
             personalInfo: {},
-            modal: ''
+            modal: '',
+            activeTab: 'otr'
         }
 
         this.closeModal = this.closeModal.bind(this)
@@ -67,8 +68,11 @@ export default class Promotion extends React.Component {
     }
 
     render() {
-        const {t, theme, isMobile} = this.context
-        const isPro = +new Date(this.state.personalInfo.subscriptionTo) > +new Date
+        const {t, theme, isMobile} = this.context,
+            currentDate = +new Date,
+            isPro = +new Date(this.state.personalInfo.subscriptionTo) > currentDate,
+            plannedRaises = this.state.mySalon.raises.map(i => +new Date(i) > currentDate),
+            pastRaises = this.state.mySalon.raises.map(i => +new Date(i) < currentDate)
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
             <Modal open={this.state.modal === 'goPRO'} isMobile={false} desktopWidth={450}
@@ -198,7 +202,7 @@ export default class Promotion extends React.Component {
             </div>
 
             <div bp={'grid'} style={{gap: isMobile ? '20px 0' : '0 29px'}}>
-                <div bp={'12 7@md'}>
+                <div bp={'12 6@md'}>
                     <div className={'flex'} style={{gap: 4}}>
                         <div style={{flexGrow: 1}}>
                             <InfoBlock className={css.personalInfoBlock}>
@@ -226,7 +230,7 @@ export default class Promotion extends React.Component {
                         </InfoBlock>
                     </div>
                 </div>
-                <div bp={'12 5@md first last@md'}>
+                <div bp={'12 6@md first last@md'}>
                     <div className={cnb(css.goPro, isPro ? css.pro : '')}>
                         <div>
                             <img src={'/icons/pro_fill.svg'} width={24} height={24}/>
@@ -245,18 +249,65 @@ export default class Promotion extends React.Component {
             </div>
 
             <div bp={'grid'} style={{gap: isMobile ? '20px 0' : '0 29px', marginTop: 48}}>
-                <div bp={'12 7@md'}>
+                <div bp={'12 6@md'}>
                     <div className={'flex justify-between items-center'}>
                         <h1 className="bigger">{t('promotion')}</h1>
 
                         <p className={css.editSalonLink}>
                             <span style={{padding: '0 8px'}}>{t('archive')}</span>
 
-                            <span className={css.cnt}>{this.state.mySalon.raises.length}</span>
+                            <span className={css.cnt}>{pastRaises.length}</span>
                         </p>
                     </div>
+
+                    <div className={css.tabsHead} style={{marginTop: 28}}>
+                            <span className={this.state.activeTab === 'otr' ? css.active : ''}
+                                  onClick={() => this.setState({activeTab: 'otr'})}>{t('singleRaise')}</span>
+                        <span className={this.state.activeTab === 'plan' ? css.active : ''}
+                              onClick={() => this.setState({activeTab: 'plan'})}>{t('plan')}<span className={cnb(css.cnt, this.state.activeTab === 'plan' ? css.active : '')}>{plannedRaises.length}</span></span>
+                    </div>
+
+                    <div className={css.spacer} style={{margin: '9px 0 16px 0'}}></div>
+
+                    {this.state.activeTab === 'otr' ? <div className={'outlined'}>
+                        <div className="flex justify-between">
+                            <div className="flex" style={{gap: 9}}>
+                                <img src="/icons/cash_color.svg" height={24} width={24} />
+                                <span>{t('singleRaiseCost')}</span>
+                            </div>
+
+                            <img src="/icons/discount_tag.svg" width={41} height={28} />
+                        </div>
+
+                        <div className="flex justify-between align-end" style={{marginTop: 18}}>
+                            <div className="flex align-end" style={{gap: 9, lineHeight: '26px'}}>
+                                <h2 className={'number-font'}>{formatPrice(RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT))}{t('kzt')}</h2>
+                                <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
+                            </div>
+
+                            <Button size={'small'}>{t('raise')}</Button>
+                        </div>
+                    </div> : <div>
+                        <div className={'outlined'}>
+                            <div className="flex justify-between">
+                                <div className="flex" style={{gap: 9}}>
+                                    <img src="/icons/cash_color.svg" height={24} width={24} />
+                                    <span>{t('singleRaiseCost')}</span>
+                                </div>
+
+                                <img src="/icons/discount_tag.svg" width={41} height={28} />
+                            </div>
+
+                            <div className="flex justify-between align-end" style={{marginTop: 18}}>
+                                <div className="flex align-end" style={{gap: 9, lineHeight: '26px'}}>
+                                    <h2 className={'number-font'}>{formatPrice(RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT))}{t('kzt')}</h2>
+                                    <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
-                <div bp={'12 5@md'}>
+                <div bp={'12 6@md'}>
                     <div className={'slCard'}>
                         <p className="subtitle2" style={{marginBottom: 24}}>{t('stayWithUs')}</p>
 
@@ -276,6 +327,14 @@ export default class Promotion extends React.Component {
                             <div>– {t('trueStatistics')}</div>
                         </div>
                     </div>
+
+                    {(this.state.activeTab === 'plan' && plannedRaises.length > 0) && <div style={{marginTop: 32}}>
+                        <p className="subtitle2">{t('plannedTo')}</p>
+                        <div bp={'grid'} style={{padding: 20}} className={'text-disabled'}>
+                            <div bp={'4'}><b>{t('date')}</b></div>
+                            <div bp={'8'}><b>{t('time')}</b></div>
+                        </div>
+                    </div>}
                 </div>
             </div>
         </div>

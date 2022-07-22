@@ -15,6 +15,7 @@ import AuthGuard from "./middlewares/AuthGuard.js";
 import fs from "fs";
 import compression from 'compression'
 import RedisHelper from "./helpers/RedisHelper.js";
+import RaiseHelper from "./helpers/RaiseHelper.js";
 
 const port = parseInt(process.env.PORT)
 const dev = process.env.NODE_ENV !== 'production'
@@ -81,6 +82,8 @@ app.prepare().then(() => {
     server.all('*', (req, res) => {
         return handle(req, res)
     })
+
+    RaiseHelper.runPlanner()
 
     server.listen(port, () => {
         console.log(`> Ready on http://localhost:${port}`)
