@@ -93,8 +93,8 @@ export default class Promotion extends React.Component {
         const {t, theme, isMobile} = this.context,
             currentDate = +new Date,
             isPro = +new Date(this.state.personalInfo.subscriptionTo) > currentDate,
-            plannedRaises = this.state.mySalon.raises.map(i => +new Date(i) > currentDate),
-            pastRaises = this.state.mySalon.raises.map(i => +new Date(i) < currentDate),
+            plannedRaises = this.state.mySalon.raises.filter(i => +new Date(i) > currentDate),
+            pastRaises = this.state.mySalon.raises.filter(i => +new Date(i) < currentDate),
             CALCULATED_RAISE_PRICE = RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT)
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
