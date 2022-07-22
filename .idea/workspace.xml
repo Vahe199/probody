@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added social block on mobile">
+      <change afterPath="$PROJECT_DIR$/src/public/icons/calendar.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/discount.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/discount_tag.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/pro_full.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/icons/replenish.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/icons/pro_fill.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/icons/pro_fill.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/helpers.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/helpers.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/button.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/button.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/pages/personal.promotion.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/themes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/themes.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,14 +212,10 @@
       <workItem from="1658328464527" duration="668000" />
       <workItem from="1658339638196" duration="11749000" />
       <workItem from="1658405549598" duration="9393000" />
-      <workItem from="1658415154133" duration="658000" />
-    </task>
-    <task id="LOCAL-00415" summary="added social block on mobile">
-      <created>1658067584234</created>
-      <option name="number" value="00415" />
-      <option name="presentableId" value="LOCAL-00415" />
-      <option name="project" value="LOCAL" />
-      <updated>1658067584234</updated>
+      <workItem from="1658415154133" duration="1532000" />
+      <workItem from="1658477656282" duration="1287000" />
+      <workItem from="1658480369012" duration="1321000" />
+      <workItem from="1658484177540" duration="3683000" />
     </task>
     <task id="LOCAL-00416" summary="added social block on mobile">
       <created>1658071620691</created>
@@ -548,7 +553,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658413152439</updated>
     </task>
-    <option name="localTasksCounter" value="464" />
+    <task id="LOCAL-00464" summary="added social block on mobile">
+      <created>1658416293928</created>
+      <option name="number" value="00464" />
+      <option name="presentableId" value="LOCAL-00464" />
+      <option name="project" value="LOCAL" />
+      <updated>1658416293928</updated>
+    </task>
+    <option name="localTasksCounter" value="465" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

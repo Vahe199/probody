@@ -9,6 +9,8 @@ import InfoBlock from "../kit/InfoBlock";
 import {formatPrice} from "../../helpers/String";
 import Button from "../kit/Button.jsx";
 import {DateTime} from "luxon";
+import Modal from "../kit/Modal.jsx";
+import {SUBSCRIPTION_PRICE} from "../../helpers/constants.js";
 
 export default class Promotion extends React.Component {
     static contextType = GlobalContext
@@ -18,8 +20,12 @@ export default class Promotion extends React.Component {
 
         this.state = {
             mySalon: {},
-            personalInfo: {}
+            personalInfo: {},
+            modal: ''
         }
+
+        this.closeModal = this.closeModal.bind(this)
+        this.buySubcription = this.buySubcription.bind(this)
     }
 
     componentDidMount() {
@@ -39,11 +45,135 @@ export default class Promotion extends React.Component {
         })
     }
 
+    closeModal() {
+        this.setState({modal: ''})
+    }
+
+    buySubcription() {
+        APIRequests.buySubcription().then(res => {
+            if (res.status === 402) {
+                this.setState({
+                    modal: 'notEnoughMoney'
+                })
+            } else if (res.ok) {
+                this.getMe()
+                this.setState({
+                    modal: 'subscriptionBought'
+                })
+            }
+        })
+    }
+
     render() {
         const {t, theme, isMobile} = this.context
         const isPro = +new Date(this.state.personalInfo.subscriptionTo) > +new Date
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
+            <Modal open={this.state.modal === 'goPRO'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('goingPro')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('attractMore')}</p>
+
+                        <div className={css.spacer}></div>
+
+                        <p style={{marginBottom: 20}} className="subtitle2">{t('pros')}</p>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 16}}>
+                            <img src={'/icons/pro_full.svg'} width={75} height={32} />
+                            {t('iconInProfile')}
+                        </div>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8}}>
+                            <img src={'/icons/discount.svg'} width={20} height={20} />
+                            {t('raiseDiscount')}
+                            <img src={'/icons/discount_tag.svg'} width={41} height={28} />
+                        </div>
+
+                        <div className={css.spacer}></div>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 12}}>
+                            <img src={'/icons/cash_color.svg'} width={24} height={24} />
+                            {t('cost')}
+                        </div>
+
+                        <h2 className={'number-font'}>{formatPrice(SUBSCRIPTION_PRICE)}{t('kzt')}</h2>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginTop: 22, marginBottom: 12}}>
+                            <img src={'/icons/calendar.svg'} width={24} height={24} />
+                            {t('duration')}
+                        </div>
+
+                        <h2 className={'number-font'}>1 {t('month')} (30 {t('days')})</h2>
+
+                        <div className={'flex growAll'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
+                            <Button onClick={this.buySubcription} size={'fill'}>{t('goPro')}</Button>
+                            <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'subscriptionBought'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('youGonePro')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('chargedFor')} {formatPrice(SUBSCRIPTION_PRICE)}{t('kzt')}</p>
+
+                        <div className={css.spacer}></div>
+
+                        <p style={{marginBottom: 20}} className="subtitle2">{t('activated')}</p>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginBottom: 16}}>
+                            <img src={'/icons/pro_full.svg'} width={75} height={32} />
+                            {t('iconInProfile')}
+                        </div>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8}}>
+                            <img src={'/icons/discount.svg'} width={20} height={20} />
+                            {t('raiseDiscount')}
+                            <img src={'/icons/discount_tag.svg'} width={41} height={28} />
+                        </div>
+
+                        <div className={css.spacer}></div>
+
+                        <div className={'flex items-center tag-secondlayer'} style={{gap: 8, marginTop: 22, marginBottom: 12}}>
+                            <img src={'/icons/calendar.svg'} width={24} height={24} />
+                            {t('activeTo')}
+                        </div>
+
+                        <h2 className={'number-font'}>{DateTime.now().plus({days: 30}).toFormat('dd.MM.yyyy')}</h2>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'notEnoughMoney'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <div className={css.notEnoughMoney}>
+                            <Icon name={'replenish'} />
+                            {t('notEnoughFunds')}
+                        </div>
+
+                        <h1>{t('notEnoughMoney')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('pleaseReplenishBalance')}</p>
+
+                        <div className={'flex growAll'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
+                            <Button onClick={() => this.setState({modal: 'replenishBalance'})} size={'fill'}>{t('replenishBalance')}</Button>
+                            <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
             <div bp={'grid'} style={{marginBottom: 24}}>
                 <h1 bp={'12 4@md'} className={'bigger inline-flex items-center lineheight-1'}>{t('salonArticle')}</h1>
 
@@ -72,7 +202,7 @@ export default class Promotion extends React.Component {
                                     <Icon name={'wallet'}/>
                                     {t('balance')}
                                 </div>
-                                <Button size={'small'}><Icon name={'plus'}/></Button>
+                                <Button size={'small'} onClick={() => this.setState({modal: 'replenishBalance'})}><Icon name={'plus'}/></Button>
                             </div>
                             <h2 className={'number-font'}>{formatPrice(this.state.personalInfo.balance || 0)} {t('kzt')}</h2>
                         </InfoBlock>
@@ -95,7 +225,7 @@ export default class Promotion extends React.Component {
                             <img src={'/icons/pro_fill.svg'} width={24} height={24} />
                             <p className={'subtitle2'}>{t(isPro ? 'pro' : 'standard')}</p>
                         </div>
-                        {isPro ? <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> : <Button color={'secondary'} size={'small'}>{t('goPro')}</Button>}
+                        {isPro ? <span>{t('activeTo')} {DateTime.fromISO(this.state.personalInfo.subscriptionTo).toFormat('dd.MM.yyyy')}</span> : <Button onClick={() => this.setState({modal: 'goPRO'})} color={'secondary'} size={'small'}>{t('goPro')}</Button>}
                     </div>
                     <div className={css.proHint}>
                         <div><Icon name={'warning'}/></div>

@@ -10,6 +10,12 @@
   }
 }
 
+.tag-secondlayer {
+  @include themify() {
+    color: t('tag-secondlayer');
+  }
+}
+
 .flex {
   display: flex;
 }
@@ -32,6 +38,10 @@
 
 .growAll>div {
   flex-grow: 1;
+
+  button {
+    padding: 14px 0;
+  }
 }
 
 .bold, strong, b {

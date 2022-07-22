@@ -27,6 +27,13 @@ export default class APIRequests {
         }
     }
 
+    static async buySubcription() {
+        return fetch(`${API_URL}/user/subscription`, {
+            headers: APIRequests.withCredentials(),
+            method: 'PUT'
+        })
+    }
+
     static async getRegionInfo() {
         return (await fetch(`${API_URL}/search/region`)).json()
     }

@@ -8,7 +8,7 @@ $disabled2: #b9b9b9;
 $grey2: #ccc;
 $line: #454543;
 $grey3: #5a5a5a;
-$danger: #FF5252;
+$danger: #F9703C;
 $success: #6FCF97;
 $tertiary: #e4e4e4;
 $secondary: #000;
@@ -50,7 +50,7 @@ $themes: (
                 inactive-star: $tertiary,
                 tag-secondlayer: $line,
                 thirdlayer-bg: $tertiary,
-                bg-onTheDark: $line
+                bg-onTheDark: $line,
         ),
         dark: (
                 bg-primary: $primary,
