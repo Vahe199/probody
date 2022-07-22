@@ -140,11 +140,13 @@ router.delete('/raise', AuthGuard('serviceProvider'), async (req, res) => {
         mySalon.raises = filteredRaises
         mySalon.markModified('raises')
 
-        await User.updateOne({_id: userId}, {
-            $set: {
-                balance: balance + CALCULATED_RAISE_PRICE
-            }
-        })
+        if (+new Date(raiseDate) > +new Date) {
+            await User.updateOne({_id: userId}, {
+                $set: {
+                    balance: balance + CALCULATED_RAISE_PRICE
+                }
+            })
+        }
 
         await mySalon.save()
 
