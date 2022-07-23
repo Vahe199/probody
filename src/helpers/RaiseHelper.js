@@ -26,7 +26,28 @@ export default class RaiseHelper {
             }
         ])
 
-        console.log(JSON.stringify(paidSalons, null, 2))
+        // paidSalons = [
+        //     {
+        //         "_id": "62aded50a98de316b5e05219",
+        //         "lastRaise": "2022-07-22T16:03:26.262Z",
+        //         "raises": [
+        //             "2022-08-23T00:00:00.000Z",
+        //             "2022-07-23T00:00:00.000Z",
+        //             "2021-07-23T00:00:00.000Z"
+        //         ]
+        //     }
+        // ]
+
+        for (const salonKey in paidSalons) {
+            const lastRaiseTS = +new Date(paidSalons[salonKey].lastRaise),
+                pendingRaises = paidSalons[salonKey].raises
+                    .sort((a, b) => +new Date(a) - +new Date(b))
+                    .filter(i => +new Date(i) > lastRaiseTS)
+
+            if (pendingRaises.length) {
+                await Worker.updateOne({_id: paidSalons[salonKey]._id}, {$set: {lastRaise: new Date(pendingRaises[0])}})
+            }
+        }
 
         return setTimeout(RaiseHelper.planner, CHECK_INTERVAL)
     }
