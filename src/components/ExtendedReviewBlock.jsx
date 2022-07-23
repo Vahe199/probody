@@ -16,7 +16,7 @@ export default class ExtendedReviewBlock extends React.Component {
     static propTypes = {
         _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
+        text: PropTypes.string,
         avg: PropTypes.number.isRequired,
         createdAt: PropTypes.string.isRequired,
         service: PropTypes.number.isRequired,

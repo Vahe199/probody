@@ -32,7 +32,7 @@ export default class PersonalPageLayout extends React.Component {
             </div>
 
             <div className={css['theme--' + theme]} bp={'grid'} style={{gap: isMobile ? 0 : 48}}>
-                <div bp={'4 hide show@md'}>
+                <div bp={'4 hide show@md'} className={'relative'}>
                     <div className={css.menu}>
                         <ul className={css.list}>
                             <li className={this.props.page === 'personal' ? css.active : ''}><Link href={'/account/personal'}>{t('user')}</Link></li>
