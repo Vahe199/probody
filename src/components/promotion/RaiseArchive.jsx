@@ -6,6 +6,7 @@ import APIRequests from "../../helpers/APIRequests.js";
 import {DateTime} from "luxon";
 import Modal from "../kit/Modal.jsx";
 import Button from "../kit/Button.jsx";
+import {cnb} from "cnbuilder";
 
 export default class RaiseArchive extends React.Component {
     static contextType = GlobalContext
@@ -52,7 +53,7 @@ export default class RaiseArchive extends React.Component {
     render() {
         const {t, theme, isMobile} = this.context
 
-        return <div className={css['theme--' + theme]}>
+        return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
             <Modal open={this.state.modal === 'deletingRaise'} isMobile={false} desktopWidth={450}
                    onUpdate={this.closeModal}>
                 <div>

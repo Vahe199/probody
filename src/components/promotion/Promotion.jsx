@@ -11,6 +11,8 @@ import Button from "../kit/Button.jsx";
 import {DateTime} from "luxon";
 import Modal from "../kit/Modal.jsx";
 import {DISCOUNT_AMOUNT, RAISE_PRICE, SUBSCRIPTION_PRICE} from "../../helpers/constants.js";
+import Select from "../kit/Form/Select";
+import Calendar from "../kit/Calendar";
 
 export default class Promotion extends React.Component {
     static contextType = GlobalContext
@@ -25,7 +27,12 @@ export default class Promotion extends React.Component {
             personalInfo: {},
             raiseToDelete: undefined,
             modal: '',
-            activeTab: 'otr'
+            activeTab: 'otr',
+            planningRaiseToDate: new Date,
+            planningRaise: {
+                time: '18:00',
+                date: DateTime.now().plus({days: 3}).toJSDate()
+            },
         }
 
         this.closeModal = this.closeModal.bind(this)
@@ -108,7 +115,16 @@ export default class Promotion extends React.Component {
             isPro = +new Date(this.state.personalInfo.subscriptionTo) > currentDate,
             plannedRaises = this.state.mySalon.raises.filter(i => +new Date(i) > currentDate),
             pastRaises = this.state.mySalon.raises.filter(i => +new Date(i) < currentDate),
-            CALCULATED_RAISE_PRICE = RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT)
+            CALCULATED_RAISE_PRICE = RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT),
+            raiseTimeOptions = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30',
+                '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+                '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+                '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30',
+                '23:00', '23:30']
+                .map(i => ({
+                    _id: i,
+                    name: i
+                }))
 
         return <div className={cnb(css['theme--' + theme], 'responsive-content')}>
             <Modal open={this.state.modal === 'goPRO'} isMobile={false} desktopWidth={450}
@@ -249,6 +265,42 @@ export default class Promotion extends React.Component {
                 </div>
             </Modal>
 
+            <Modal open={this.state.modal === 'planningRaise'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('planningRaise')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('raiseWillBePlanned')}</p>
+
+                        <div className={'flex items-center'} style={{gap: 8, marginTop: 28}}>
+                            <img src={'/icons/calendar.svg'} width={20} height={20}/>
+                            {t('date')}
+                        </div>
+
+                        <div className="flex align-end lineheight-1" style={{gap: 9, marginTop: 10}}>
+                            <h2 className={'number-font lineheight-1'}>{DateTime.fromISO(this.state.planningRaiseToDate).toFormat('d MMMM, EEEE, H:mm')}</h2>
+                        </div>
+
+                        <div className={'flex items-center'} style={{gap: 8, marginTop: 28}}>
+                            <img src={'/icons/cash_color.svg'} width={20} height={20}/>
+                            {t('cost')}
+                            {isPro && <img src={'/icons/discount_tag.svg'} width={41} height={28}/>}
+                        </div>
+
+                        <div className="flex align-end lineheight-1" style={{gap: 9, marginTop: 10}}>
+                            <h2 className={'number-font lineheight-1'}>{formatPrice(RAISE_PRICE * (1 - Number(isPro) * DISCOUNT_AMOUNT))}{t('kzt')}</h2>
+                            <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
+                        </div>
+
+                        <div className={'flex growFirst'} style={{marginTop: isMobile ? 8 : 16, gap: 3}}>
+                            <Button onClick={this.planRaise} size={'fill'}>{t('plan')}</Button>
+                            <Button onClick={this.closeModal} size={'fill'} color={'tertiary'}>{t('cancel')}</Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+
             <Modal open={this.state.modal === 'raiseCanceled'} isMobile={false} desktopWidth={350}
                    onUpdate={this.closeModal}>
                 <div>
@@ -256,6 +308,30 @@ export default class Promotion extends React.Component {
                         <h1>{t('youCanceledRaise')}</h1>
 
                         <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}<br/>{t('unchargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'plannedRaise'} isMobile={false} desktopWidth={350}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>{t('youHavePlannedRaise')}</h1>
+
+                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.planningRaiseToDate).toFormat('d.MM.yyyy, H:mm')}<br/>{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
+
+                        <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal open={this.state.modal === 'replenishBalance'} isMobile={false} desktopWidth={450}
+                   onUpdate={this.closeModal}>
+                <div>
+                    <div className={css.modalBody}>
+                        <h1>Пополнение баланса</h1>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -419,6 +495,31 @@ export default class Promotion extends React.Component {
                                 </div>
                             </div>
                         </div>
+
+                        <p className="subtitle2" style={{marginTop: 32, marginBottom: 20}}>{t('chooseTimeAndDate')}</p>
+
+                        <Select label={t('raiseTime')} onUpdate={time => {
+                            this.setState({
+                                planningRaise: {
+                                    ...this.state.planningRaise,
+                                    time
+                                }
+                            })
+                        }} value={this.state.planningRaise.time} options={raiseTimeOptions} placeholder={''} />
+                        <div style={{marginTop: 12, marginBottom: 32}}>
+                            <Calendar value={this.state.planningRaise.date} onUpdate={date => {
+                                this.setState({
+                                    planningRaise: {
+                                        ...this.state.planningRaise,
+                                        date
+                                    }
+                                })
+                            }} />
+                        </div>
+
+                        <Button size={'fill'} onClick={() => this.setState({
+                            modal: 'planningRaise'
+                        })}>{t('plan')}</Button>
                     </div>}
                 </div>
                 <div bp={'12 6@md'}>

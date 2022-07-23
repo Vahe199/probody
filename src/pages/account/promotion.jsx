@@ -14,7 +14,11 @@ class PromotionPage extends React.Component {
 
         this.state = {
             view: 'main',
-            setView: (name = undefined) => this.setState({view: name})
+            setView: (view = undefined) => {
+                this.setState({view}, () => {
+                    window.scrollTo(0, 0)
+                })
+            }
         }
     }
 

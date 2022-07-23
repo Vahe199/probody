@@ -15,7 +15,11 @@ class MyVacanciesPage extends React.Component {
         this.state = {
             view: 'vacancylist',
             editingVacancy: '',
-            setView: (name, editingVacancy = undefined) => this.setState({view: name, editingVacancy})
+            setView: (name, editingVacancy = undefined) => {
+                this.setState({view: name, editingVacancy}, () => {
+                    window.scrollTo(0, 0)
+                })
+            }
         }
     }
 

@@ -19,6 +19,7 @@
 .outlined {
   padding: 20px;
   border-radius: 16px;
+  transition: none;
 
   @include themify() {
     border: 1px solid t('line-color');
@@ -32,6 +33,10 @@
   @include themify() {
     background: t('bg-secondlayer');
   }
+}
+
+.fw-normal {
+  font-weight: 400;
 }
 
 .flex {
