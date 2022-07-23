@@ -1,4 +1,5 @@
 import Worker from '../models/Worker.model.js'
+import Search from "./Search.js";
 
 const CHECK_INTERVAL = 1000 * 60
 
@@ -42,10 +43,11 @@ export default class RaiseHelper {
             const lastRaiseTS = +new Date(paidSalons[salonKey].lastRaise),
                 pendingRaises = paidSalons[salonKey].raises
                     .sort((a, b) => +new Date(a) - +new Date(b))
-                    .filter(i => +new Date(i) > lastRaiseTS)
+                    .filter(i => (+new Date(i) > lastRaiseTS) && (+new Date(i) < +new Date))
 
             if (pendingRaises.length) {
                 await Worker.updateOne({_id: paidSalons[salonKey]._id}, {$set: {lastRaise: new Date(pendingRaises[0])}})
+                await Search.setLastRaise(paidSalons[salonKey]._id, +new Date(pendingRaises[0]))
             }
         }
 
