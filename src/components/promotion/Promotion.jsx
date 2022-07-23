@@ -31,7 +31,7 @@ export default class Promotion extends React.Component {
             planningRaiseToDate: new Date,
             planningRaise: {
                 time: '18:00',
-                date: DateTime.now().plus({days: 3}).toJSDate()
+                date: new Date
             },
         }
 
@@ -41,6 +41,7 @@ export default class Promotion extends React.Component {
         this.getMe = this.getMe.bind(this)
         this.raiseSalon = this.raiseSalon.bind(this)
         this.cancelRaise = this.cancelRaise.bind(this)
+        this.planRaise = this.planRaise.bind(this)
     }
 
     componentDidMount() {
@@ -74,6 +75,22 @@ export default class Promotion extends React.Component {
                 this.getMe()
                 this.setState({
                     modal: 'subscriptionBought'
+                })
+            }
+        })
+    }
+
+    planRaise() {
+        APIRequests.planRaise(this.state.planningRaiseToDate).then(res => {
+            if (res.status === 402) {
+                this.setState({
+                    modal: 'notEnoughMoney'
+                })
+            } else if (res.ok) {
+                this.getMe()
+                this.getSalonInfo()
+                this.setState({
+                    modal: 'plannedRaise'
                 })
             }
         })
@@ -279,7 +296,7 @@ export default class Promotion extends React.Component {
                         </div>
 
                         <div className="flex align-end lineheight-1" style={{gap: 9, marginTop: 10}}>
-                            <h2 className={'number-font lineheight-1'}>{DateTime.fromISO(this.state.planningRaiseToDate).toFormat('d MMMM, EEEE, H:mm')}</h2>
+                            <h2 className={'number-font lineheight-1'}>{DateTime.fromJSDate(this.state.planningRaiseToDate).toFormat('d MMMM, EEEE, H:mm')}</h2>
                         </div>
 
                         <div className={'flex items-center'} style={{gap: 8, marginTop: 28}}>
@@ -307,7 +324,8 @@ export default class Promotion extends React.Component {
                     <div className={css.modalBody}>
                         <h1>{t('youCanceledRaise')}</h1>
 
-                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}<br/>{t('unchargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
+                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.raiseToDelete).toFormat('d.MM.yyyy, H:mm')}<br/>{t('unChargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}
+                        </p>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -320,7 +338,8 @@ export default class Promotion extends React.Component {
                     <div className={css.modalBody}>
                         <h1>{t('youHavePlannedRaise')}</h1>
 
-                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromISO(this.state.planningRaiseToDate).toFormat('d.MM.yyyy, H:mm')}<br/>{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
+                        <p style={{paddingTop: 16}}>{t('toDate')} {DateTime.fromJSDate(this.state.planningRaiseToDate).toFormat('d.MM.yyyy, H:mm')}<br/>{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}
+                        </p>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -344,7 +363,8 @@ export default class Promotion extends React.Component {
                     <div className={css.modalBody}>
                         <h1>{t('youHaveRaisedSalon')}</h1>
 
-                        <p style={{paddingTop: 16}}>{t('youAreFirst')}<br />{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}</p>
+                        <p style={{paddingTop: 16}}>{t('youAreFirst')}<br/>{t('chargedFor')} {formatPrice(CALCULATED_RAISE_PRICE)}{t('kzt')}
+                        </p>
 
                         <Icon name={'close'} className={css.modalClose} onClick={this.closeModal}/>
                     </div>
@@ -443,18 +463,20 @@ export default class Promotion extends React.Component {
                     <div className={'flex justify-between items-center'}>
                         <h1 className="bigger">{t('promotion')}</h1>
 
-                        {pastRaises.length > 0 && <p className={css.editSalonLink} onClick={() => this.props.setView('archive')}>
-                            <span style={{padding: '0 8px'}}>{t('archive')}</span>
+                        {pastRaises.length > 0 &&
+                            <p className={css.editSalonLink} onClick={() => this.props.setView('archive')}>
+                                <span style={{padding: '0 8px'}}>{t('archive')}</span>
 
-                            <span className={css.cnt}>{pastRaises.length}</span>
-                        </p>}
+                                <span className={css.cnt}>{pastRaises.length}</span>
+                            </p>}
                     </div>
 
                     <div className={css.tabsHead} style={{marginTop: 28}}>
                             <span className={this.state.activeTab === 'otr' ? css.active : ''}
                                   onClick={() => this.setState({activeTab: 'otr'})}>{t('singleRaise')}</span>
                         <span className={this.state.activeTab === 'plan' ? css.active : ''}
-                              onClick={() => this.setState({activeTab: 'plan'})}>{t('plan')}<span className={cnb(css.cnt, this.state.activeTab === 'plan' ? css.active : '')}>{plannedRaises.length}</span></span>
+                              onClick={() => this.setState({activeTab: 'plan'})}>{t('plan')}<span
+                            className={cnb(css.cnt, this.state.activeTab === 'plan' ? css.active : '')}>{plannedRaises.length}</span></span>
                     </div>
 
                     <div className={css.spacer} style={{margin: '9px 0 16px 0'}}></div>
@@ -462,11 +484,11 @@ export default class Promotion extends React.Component {
                     {this.state.activeTab === 'otr' ? <div className={'outlined'}>
                         <div className="flex justify-between">
                             <div className="flex" style={{gap: 9}}>
-                                <img src="/icons/cash_color.svg" height={24} width={24} />
+                                <img src="/icons/cash_color.svg" height={24} width={24}/>
                                 <span>{t('singleRaiseCost')}</span>
                             </div>
 
-                            <img src="/icons/discount_tag.svg" width={41} height={28} />
+                            <img src="/icons/discount_tag.svg" width={41} height={28}/>
                         </div>
 
                         <div className="flex justify-between align-end" style={{marginTop: 18}}>
@@ -475,17 +497,18 @@ export default class Promotion extends React.Component {
                                 <span className={css.oldPrice}>{isPro && RAISE_PRICE + t('kzt')}</span>
                             </div>
 
-                            <Button size={'small'} onClick={() => this.setState({modal: 'raisingSalon'})}>{t('raise')}</Button>
+                            <Button size={'small'}
+                                    onClick={() => this.setState({modal: 'raisingSalon'})}>{t('raise')}</Button>
                         </div>
                     </div> : <div>
                         <div className={'outlined'}>
                             <div className="flex justify-between">
                                 <div className="flex" style={{gap: 9}}>
-                                    <img src="/icons/cash_color.svg" height={24} width={24} />
+                                    <img src="/icons/cash_color.svg" height={24} width={24}/>
                                     <span>{t('singleRaiseCost')}</span>
                                 </div>
 
-                                <img src="/icons/discount_tag.svg" width={41} height={28} />
+                                <img src="/icons/discount_tag.svg" width={41} height={28}/>
                             </div>
 
                             <div className="flex justify-between align-end" style={{marginTop: 18}}>
@@ -498,27 +521,32 @@ export default class Promotion extends React.Component {
 
                         <p className="subtitle2" style={{marginTop: 32, marginBottom: 20}}>{t('chooseTimeAndDate')}</p>
 
-                        <Select label={t('raiseTime')} onUpdate={time => {
+                        <Calendar value={this.state.planningRaise.date} onUpdate={date => {
                             this.setState({
                                 planningRaise: {
                                     ...this.state.planningRaise,
-                                    time
+                                    date
                                 }
                             })
-                        }} value={this.state.planningRaise.time} options={raiseTimeOptions} placeholder={''} />
+                        }}/>
+
                         <div style={{marginTop: 12, marginBottom: 32}}>
-                            <Calendar value={this.state.planningRaise.date} onUpdate={date => {
+                            <Select label={t('raiseTime')} onUpdate={time => {
                                 this.setState({
                                     planningRaise: {
                                         ...this.state.planningRaise,
-                                        date
+                                        time
                                     }
                                 })
-                            }} />
+                            }} value={this.state.planningRaise.time} options={raiseTimeOptions} placeholder={''}/>
                         </div>
 
                         <Button size={'fill'} onClick={() => this.setState({
-                            modal: 'planningRaise'
+                            modal: 'planningRaise',
+                            planningRaiseToDate: DateTime.fromJSDate(this.state.planningRaise.date).startOf('day').plus({
+                                hours: Number(this.state.planningRaise.time.split(':')[0]),
+                                minutes: Number(this.state.planningRaise.time.split(':')[1]),
+                            }).toJSDate()
                         })}>{t('plan')}</Button>
                     </div>}
                 </div>
@@ -555,10 +583,12 @@ export default class Promotion extends React.Component {
                             return <div bp={'grid'} className={'outlined'} key={i} style={{marginBottom: 8}}>
                                 <div bp={'4'}>{dt.toFormat('d.MM.yyyy')}</div>
                                 <div bp={'4'}>{dt.toFormat('H:mm')}</div>
-                                <div bp={'4'} className={'flex justify-end'}><img style={{cursor: "pointer"}} onClick={() => this.setState({
-                                    modal: 'cancelingRaise',
-                                    raiseToDelete: raise
-                                })} src={'/icons/trashcan_alt.svg'} width={24} height={24} /></div>
+                                <div bp={'4'} className={'flex justify-end'}><img style={{cursor: "pointer"}}
+                                                                                  onClick={() => this.setState({
+                                                                                      modal: 'cancelingRaise',
+                                                                                      raiseToDelete: raise
+                                                                                  })} src={'/icons/trashcan_alt.svg'}
+                                                                                  width={24} height={24}/></div>
                             </div>
                         })}
                     </div>}

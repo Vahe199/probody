@@ -119,9 +119,11 @@ export default class Calendar extends React.Component {
 
                 <table className={css.tableRoot}>
                     <thead>
-                    {weekDays.map((day, i) =>
-                        <th key={i}>{day}</th>
-                    )}
+                    <tr>
+                        {weekDays.map((day, i) =>
+                            <th key={i}>{day}</th>
+                        )}
+                    </tr>
                     </thead>
                     <tbody>
                     {weekRows.map((week, i) =>

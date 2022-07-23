@@ -46,7 +46,7 @@
   }
 
   @include themify() {
-    background: t('bg-accent');
+    background: #252420;
     color: t('bg-primary')
   }
 }
