@@ -14,6 +14,7 @@ services:
       - redis
     ports:
       - "4119:4119"
+      - "6498:6498"
     restart: unless-stopped
 
   redis:
