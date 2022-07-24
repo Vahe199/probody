@@ -11,8 +11,6 @@ export default class AdminLoginPage extends React.Component {
         };
     }
 
-    static layout = 'Admin';
-
     render() {
         return <div>
             <h1>Admin Login</h1>
