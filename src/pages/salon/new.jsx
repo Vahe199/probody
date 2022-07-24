@@ -102,6 +102,7 @@ class NewSalonPage extends React.Component {
         this.openSuccessDialog = this.openSuccessDialog.bind(this);
         this.closeSuccessDialog = this.closeSuccessDialog.bind(this);
         this.addOwnVariant = this.addOwnVariant.bind(this);
+        this.loadSalonToEdit = this.loadSalonToEdit.bind(this)
     }
 
     toggleWorkDay(day) {
@@ -167,7 +168,7 @@ class NewSalonPage extends React.Component {
                 leads,
                 regions
             }
-        })
+        }, () => this.props.router.query.edit && this.loadSalonToEdit(this.props.router.query.edit))
     }
 
     addOwnVariant() {
@@ -558,6 +559,53 @@ class NewSalonPage extends React.Component {
         })
     }
 
+    loadSalonToEdit(slug) {
+        APIRequests.getWorker(slug).then(res => {
+            // console.log(res)
+            // console.log(this.state.model)
+
+            if (res.worker[0].kind === 'salon') {
+                for (const masterKey in res.worker[0].masters) {
+                    for (const characteristicsKey in res.worker[0].masters[masterKey].characteristics) {
+                        res.worker[0].masters[masterKey].characteristics[characteristicsKey] = String(res.worker[0].characteristics[characteristicsKey])
+                    }
+                }
+            }
+
+            this.setState({
+                model: {
+                    ...res.worker[0],
+                    region: res.worker[0].region._id,
+                    services: res.worker[0].services.map(i => i._id),
+                    leads: res.worker[0].leads.map(i => i._id),
+                    masters: res.worker[0].kind === 'salon' ? res.worker[0].masters : [{
+                        name: res.worker[0].name,
+                        characteristics: (() => {
+                            const mappedCharacteristics = {}
+
+                            for (const characteristicsKey in res.worker[0].characteristics) {
+                                mappedCharacteristics[characteristicsKey] = String(res.worker[0].characteristics[characteristicsKey])
+                            }
+
+                            return mappedCharacteristics
+                        })(),
+                        photos: res.worker[0].photos
+                    }],
+                    programs: this.state.model.programs.map(i => {
+                        const enabledProgram = res.worker[0].programs.find(j => j._id === i._id)
+
+                        if (enabledProgram) {
+                            enabledProgram.enabled = true
+                        }
+
+                        return enabledProgram || i
+                    })
+                },
+                step: 7
+            })
+        })
+    }
+
     setSocialMedia(socialMedia, val) {
         this.setState({
             model: {
@@ -602,19 +650,10 @@ class NewSalonPage extends React.Component {
     }
 
     updateWorkHours(workHours) {
-        let newWorkHours = Object.assign({}, this.state.model.workHours, workHours);
-
-        // if (newWorkHours.from.replace(':', '') > newWorkHours.to.replace(':', '')) {
-        //     let tmp = newWorkHours.to
-        //
-        //     newWorkHours.to = newWorkHours.from
-        //     newWorkHours.from = tmp
-        // }
-
         this.setState({
             model: {
                 ...this.state.model,
-                workHours: newWorkHours
+                workHours: Object.assign({}, this.state.model.workHours, workHours)
             }
         })
     }
@@ -663,7 +702,13 @@ class NewSalonPage extends React.Component {
 
         model.programs = model.programs.filter(i => i.enabled)
 
-        const res = await APIRequests.createWorker(model)
+        let res
+
+        if (this.props.router.query.edit) {
+            res = await APIRequests.editWorker(this.props.router.query.edit, model)
+        } else {
+            res = await APIRequests.createWorker(model)
+        }
 
         if (res.ok) {
             this.openSuccessDialog()
@@ -681,11 +726,12 @@ class NewSalonPage extends React.Component {
             .map(i => ({
                 _id: i,
                 name: i
-            }))
+            })),
+            isEditing = !!this.props.router.query.edit
 
         return <div className={css['theme--' + theme]}>
             <Head>
-                <title>{t('addingSalon')}{TITLE_POSTFIX}</title>
+                <title>{isEditing ? t('editingSalon') : t('addingSalon')}{TITLE_POSTFIX}</title>
             </Head>
 
             <Script src={'https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=' + YANDEX_APIKEY}
@@ -710,12 +756,12 @@ class NewSalonPage extends React.Component {
                     href: '/',
                 },
                 {
-                    name: t('addingSalon'),
+                    name: isEditing ? t('editingSalon') : t('addingSalon'),
                     href: '/salon/new',
                 },
             ]}/>
             {this.state.step === -1 ? <div className={css.stepBody}>
-                <h1 style={{marginBottom: 8}}>{t('addingSalon')}</h1>
+                <h1 style={{marginBottom: 8}}>{isEditing ? t('editingSalon') : t('addingSalon')}</h1>
                 <p>{t('chooseWorkerType')}</p>
 
                 <div className={css.aligner}>
@@ -755,7 +801,7 @@ class NewSalonPage extends React.Component {
                     {t('pass')}
                     <Icon name={'arrow_right'}/>
                 </Button>
-            </div> : <Stepper step={this.state.step} title={t('addingSalon')}
+            </div> : <Stepper step={this.state.step} title={isEditing ? t('editingSalon') : t('addingSalon')}
                               steps={[
                                   (<div className={css.stepBody}>
                                       <h2>{t('fillCommonInfo')}</h2>
@@ -792,7 +838,7 @@ class NewSalonPage extends React.Component {
 
                                       <div className={css.btnContainer}>
                                           <Button className={css.backBtn}
-                                                  color={'tertiary'}
+                                                  color={'tertiary'} isDisabled={isEditing}
                                                   onClick={() => this.stepChangeHandler(this.state.step - 1)}>
                                               <Icon name={'arrow_left'}/>
                                               {t('back')}

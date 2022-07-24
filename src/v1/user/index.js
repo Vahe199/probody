@@ -7,7 +7,6 @@ import Mail from "../../helpers/Mail.js";
 import RedisHelper from "../../helpers/RedisHelper.js";
 import Worker from "../../models/Worker.model.js";
 import {DateTime} from "luxon";
-import {DISCOUNT_AMOUNT, RAISE_PRICE} from "../../helpers/constants.js";
 import Search from "../../helpers/Search.js";
 
 const router = express.Router()

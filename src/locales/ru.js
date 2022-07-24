@@ -644,5 +644,6 @@ export default {
     planned: 'Запланировано',
     doYouWantToCancelRaise: 'Вы действительно хотите удалить продвижение?',
     weWillReturnMoney: 'После нажатия на кнопку отмена на ваш счет вернется полная стоимость услуги',
-    chooseTimeAndDate: 'Выберите время и дату'
+    chooseTimeAndDate: 'Выберите время и дату',
+    editingSalon: 'Редактирование анкеты'
 }

@@ -4,10 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
   user-select: none;
 
-  &:hover .checkbox:not(.checked) {
+  &:hover:not(.disabled) .checkbox:not(.checked) {
     @include themify() {
       border: 1px solid t('bg-accent');
     }
@@ -22,7 +21,10 @@
   }
 
   &.disabled {
-    cursor: default;
+    &, .checkbox {
+      cursor: default;
+    }
+
     opacity: .8;
 
     .checkbox.checked {

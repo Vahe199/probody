@@ -40,7 +40,20 @@ router.patch('/:uuid/approve', async (req, res) => {
             })
         }
 
-        const parentWorker = await (new Worker(doc)).save()
+        let parentWorker
+
+        if (doc._id) {
+            const docId = doc._id
+
+            delete doc._id
+            delete doc.host
+
+            parentWorker = await Worker.findByIdAndUpdate(docId, doc)
+
+            await Worker.deleteMany({ host: parentWorker._id })
+        } else {
+            parentWorker = await (new Worker(doc)).save()
+        }
 
         if (doc.kind === 'salon') {
             doc.masters.forEach(master => {

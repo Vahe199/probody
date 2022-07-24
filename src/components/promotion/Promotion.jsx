@@ -397,11 +397,11 @@ export default class Promotion extends React.Component {
                 <h1 bp={'12 4@md'} className={'bigger inline-flex items-center lineheight-1'}>{t('salonArticle')}</h1>
 
                 <div bp={'12 8@md'} className={'flex gap-12 justify-' + (isMobile ? 'start' : 'end')}>
-                    <p className={css.editSalonLink}>
+                    <Link href={'/salon/new?edit=' + this.state.mySalon.slug}><p className={css.editSalonLink}>
                         <Icon name={'edit'}/>
 
                         {t('editSalon')}
-                    </p>
+                    </p></Link>
 
                     <Link href={'/salon/' + this.state.mySalon.slug}><p className={css.editSalonLink}>
                         <Icon name={'arrow_right_square'}/>

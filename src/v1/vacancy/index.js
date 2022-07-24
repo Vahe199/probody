@@ -26,7 +26,11 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
         host: req.user._id
     })
 
-    console.log(req.body)
+    if (req.body._id) {
+        if (await Vacancy.countDocuments({_id: req.body._id, host: req.user._id}) === 0) {
+            return res.status(404).json({message: 'Not found'})
+        }
+    }
 
     try {
         (new Vacancy(req.body)).validate(async (err) => {

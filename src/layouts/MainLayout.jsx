@@ -16,7 +16,6 @@ import RegisteredModal from "../components/modals/RegisteredModal.jsx";
 import UserHelper from "../helpers/UserHelper.js";
 import ForgotModal from "../components/modals/ForgotModal.jsx";
 import ChangedPasswordModal from "../components/modals/ChangedPasswordModal";
-import {YANDEX_APIKEY} from "../helpers/constants.js";
 import Script from "next/script.js";
 import LogoutModal from "../components/modals/LogoutModal";
 import Head from "next/head.js";
@@ -174,8 +173,9 @@ class MainLayout extends React.Component {
                 <Head>
                     <meta name="viewport" content="width=device-width, user-scalable=no" />
                 </Head>
-                <noscript><div><img src="https://mc.yandex.ru/watch/89600055" style={{position: 'absolute', left: -9999}} alt="" /></div></noscript>
                 <Script src={'/ym.js'} strategy={'lazyOnload'} />
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-SMPEM6H94D" strategy={'lazyOnload'} />
+                <Script src={'/gtag.js'} strategy={'lazyOnload'} />
 
                 <div className={'theme--' + this.state.theme}>
                     <div className={'body'}>

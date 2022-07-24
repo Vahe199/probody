@@ -12,6 +12,12 @@ import Search from "../../helpers/Search.js";
 const router = express.Router()
 
 router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
+    if (req.body._id) {
+        if (await Worker.countDocuments({_id: req.body._id, host: req.user._id}) === 0) {
+            return res.status(404).json({message: 'Not found'})
+        }
+    }
+
     if (req.body.location) {
         req.body.location = {
             type: "Point",
