@@ -2,11 +2,9 @@ import '../styles/globals.scss'
 import React from "react"
 
 import MainLayout from "../layouts/MainLayout.jsx";
-import AdminLayout from "../layouts/AdminLayout.jsx";
 
 const layouts = {
-    Main: MainLayout,
-    Admin: AdminLayout
+    Main: MainLayout
 }
 
 class ProbodyApp extends React.Component {
