@@ -578,6 +578,7 @@ class NewSalonPage extends React.Component {
                     region: res.worker[0].region._id,
                     services: res.worker[0].services.map(i => i._id),
                     leads: res.worker[0].leads.map(i => i._id),
+                    location: res.worker[0].location.coordinates,
                     masters: res.worker[0].kind === 'salon' ? res.worker[0].masters : [{
                         name: res.worker[0].name,
                         characteristics: (() => {
@@ -702,13 +703,7 @@ class NewSalonPage extends React.Component {
 
         model.programs = model.programs.filter(i => i.enabled)
 
-        let res
-
-        if (this.props.router.query.edit) {
-            res = await APIRequests.editWorker(this.props.router.query.edit, model)
-        } else {
-            res = await APIRequests.createWorker(model)
-        }
+        const res = await APIRequests.createWorker(model)
 
         if (res.ok) {
             this.openSuccessDialog()

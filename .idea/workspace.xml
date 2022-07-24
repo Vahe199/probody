@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change afterPath="$PROJECT_DIR$/src/public/gtag.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/promotion/Promotion.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/MainLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/ru.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/salon/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/salon/new.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/forms/checkbox.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/forms/checkbox.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/vacancy/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/vacancy/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,14 +204,7 @@
       <workItem from="1658477656282" duration="1287000" />
       <workItem from="1658480369012" duration="1321000" />
       <workItem from="1658484177540" duration="19356000" />
-      <workItem from="1658558069930" duration="19886000" />
-    </task>
-    <task id="LOCAL-00439" summary="added social block on mobile">
-      <created>1658236793702</created>
-      <option name="number" value="00439" />
-      <option name="presentableId" value="LOCAL-00439" />
-      <option name="project" value="LOCAL" />
-      <updated>1658236793702</updated>
+      <workItem from="1658558069930" duration="20869000" />
     </task>
     <task id="LOCAL-00440" summary="added social block on mobile">
       <created>1658243578340</created>
@@ -558,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658573324040</updated>
     </task>
-    <option name="localTasksCounter" value="488" />
+    <task id="LOCAL-00488" summary="added modals">
+      <created>1658655842632</created>
+      <option name="number" value="00488" />
+      <option name="presentableId" value="LOCAL-00488" />
+      <option name="project" value="LOCAL" />
+      <updated>1658655842632</updated>
+    </task>
+    <option name="localTasksCounter" value="489" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
