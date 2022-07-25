@@ -13,7 +13,7 @@ export default class AdminLoginPage extends React.Component {
 
     render() {
         return <div>
-            <h1>Admin Login</h1>
+            <button className={'btn btn-accent-violet'}>Admin Login</button>
         </div>
     }
 }
