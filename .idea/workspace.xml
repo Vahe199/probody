@@ -2,129 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/index.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/alert.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/base-component.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/collapse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/dom/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/dom/event-handler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/dom/manipulator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/dom/selector-engine.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/dropdown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/offcanvas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/popover.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/scrollspy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/tab.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/toast.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/tooltip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/backdrop.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/component-functions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/focustrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/sanitizer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/scrollbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/swipe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/js/src/util/template-factory.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_accordion.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_alert.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_badge.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_breadcrumb.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_button-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_card.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_carousel.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_close.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_containers.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_dropdown.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_functions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_helpers.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_images.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_list-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_maps.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_modal.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_nav.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_navbar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_offcanvas.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_pagination.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_placeholders.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_popover.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_progress.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_reboot.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_root.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_spinners.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_tables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_toasts.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_tooltip.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_transitions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_type.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_utilities.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/bootstrap-grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/bootstrap-reboot.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/bootstrap-utilities.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/bootstrap.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_floating-labels.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_form-check.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_form-control.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_form-range.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_form-select.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_form-text.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_input-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_labels.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/forms/_validation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_clearfix.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_color-bg.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_colored-links.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_position.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_ratio.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_stacks.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_stretched-link.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_text-truncation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_visually-hidden.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/helpers/_vr.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_alert.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_backdrop.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_banner.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_border-radius.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_box-shadow.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_breakpoints.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_caret.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_clearfix.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_color-scheme.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_container.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_deprecate.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_gradients.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_grid.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_image.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_list-group.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_lists.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_pagination.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_reset-text.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_resize.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_table-variants.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_text-truncate.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_transition.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_utilities.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/mixins/_visually-hidden.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/utilities/_api.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/vendor/_rfs.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/avatar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/heart.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/logo.full.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/en.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,14 +205,7 @@
       <workItem from="1658480369012" duration="1321000" />
       <workItem from="1658484177540" duration="19356000" />
       <workItem from="1658558069930" duration="26161000" />
-      <workItem from="1658736759591" duration="5961000" />
-    </task>
-    <task id="LOCAL-00445" summary="added social block on mobile">
-      <created>1658315045042</created>
-      <option name="number" value="00445" />
-      <option name="presentableId" value="LOCAL-00445" />
-      <option name="project" value="LOCAL" />
-      <updated>1658315045042</updated>
+      <workItem from="1658736759591" duration="6780000" />
     </task>
     <task id="LOCAL-00446" summary="added social block on mobile">
       <created>1658318653700</created>
@@ -672,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658663459762</updated>
     </task>
-    <option name="localTasksCounter" value="494" />
+    <task id="LOCAL-00494" summary="added modals">
+      <created>1658742945030</created>
+      <option name="number" value="00494" />
+      <option name="presentableId" value="LOCAL-00494" />
+      <option name="project" value="LOCAL" />
+      <updated>1658742945031</updated>
+    </task>
+    <option name="localTasksCounter" value="495" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
