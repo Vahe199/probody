@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import UserHelper from "../helpers/UserHelper";
 import {useRouter} from "next/router";
-import APIRequests from "../../helpers/APIRequests";
+import APIRequests from "../helpers/APIRequests";
 
 export default function AdminLoginPage() {
     const router = useRouter()

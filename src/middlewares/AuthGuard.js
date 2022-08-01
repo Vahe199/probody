@@ -7,22 +7,33 @@ export default function AuthGuard(allowedRole /* serviceProvider | admin-front *
                 message: 'Unauthorized'
             })
         }
+
+        let tokenDoc
+
         switch (allowedRole) {
             case 'serviceProvider':
-                const userDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
+                tokenDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
 
-                if (!userDoc) {
+                if (!tokenDoc) {
                     return res.status(401).json({
                         message: 'Unauthorized'
                     })
                 }
 
-                req.user = userDoc.userId
+                req.user = tokenDoc.userId
                 break
 
-            case 'admin':
-                // TODO: check if user is admin-front
-                break;
+            case 'notClient':
+                tokenDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
+
+                if (!tokenDoc || tokenDoc.userId.role === 'serviceProvider') {
+                    return res.status(401).json({
+                        message: 'Unauthorized'
+                    })
+                }
+
+                req.user = tokenDoc.userId
+                break
 
             default:
                 return res.status(500).json({
