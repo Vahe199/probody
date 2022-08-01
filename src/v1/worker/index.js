@@ -71,10 +71,6 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
             })
         }
 
-        const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
-
-        await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
-
         res.status(202).json({
             message: "createdWorker"
         })

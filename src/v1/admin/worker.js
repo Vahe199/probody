@@ -1,7 +1,5 @@
-import RedisHelper from "../../helpers/RedisHelper.js";
 import Worker from "../../models/Worker.model.js";
 import Search from "../../helpers/Search.js";
-import Region from "../../models/Region.model.js";
 import express from "express";
 
 const router = express.Router();
@@ -32,29 +30,29 @@ const router = express.Router();
 //     }
 // }
 router.post('/search', async (req, res) => {
-    //     const PAGE_SIZE = 20
-//     let query = ''
-//
-//     if (searchPromocodesDto.query) {
-//         query = searchPromocodesDto.query
-//         delete searchPromocodesDto.query
-//     }
-//
-//     const selector = Object.assign({}, searchPromocodesDto, {
-//         $or: [
-//             {
-//                 code: new RegExp(query, "i")
-//             },
-//             {
-//                 comment: new RegExp(query, "i")
-//             }
-//         ]
-//     })
-//
-//     return {
-//         results: await this.promocodeModel.find(selector).populate('userId').limit(PAGE_SIZE).skip((page - 1) * PAGE_SIZE).sort({[sortBy]: sortDir === 'ASC' ? 1 : -1}),
-//         pageCount: Math.ceil(await this.promocodeModel.countDocuments(selector) / PAGE_SIZE)
-//     }
+        const PAGE_SIZE = 10
+    let query = ''
+
+    if (req.body.query) {
+        query = req.body.query
+        delete req.body.query
+    }
+
+    const selector = Object.assign({}, req.body, {
+        $or: [
+            {
+                code: new RegExp(query, "i")
+            },
+            {
+                comment: new RegExp(query, "i")
+            }
+        ]
+    })
+
+    return {
+        results: await Worker.find(selector).populate('region parent host').limit(PAGE_SIZE).skip((Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE).sort({[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}),
+        pageCount: Math.ceil(await Worker.countDocuments(selector) / PAGE_SIZE)
+    }
 })
 
 // router.get('/:uuid/view', async (req, res) => {
