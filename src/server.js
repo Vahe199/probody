@@ -49,11 +49,11 @@ await Search.createIndexes()
 
 const pwKeys = await RedisHelper.keys('pending:check:worker:*')
 
-pwKeys.map(async key => {
-    const doc = JSON.parse(await RedisHelper.get(key))
-
-    RedisHelper.set('haspw:' + doc.host, '')
-})
+// pwKeys.map(async key => {
+//     const doc = JSON.parse(await RedisHelper.get(key))
+//
+//     RedisHelper.set('haspw:' + doc.host, '')
+// })
 
 app.prepare().then(() => {
     const server = express()

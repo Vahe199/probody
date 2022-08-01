@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
+      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/UserHelper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Worker.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Worker.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,31 +66,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "javascript.nodejs.core.library.configured.version": "16.13.1",
-    "javascript.nodejs.core.library.typings.version": "16.11.43",
-    "last_opened_file_path": "/Users/mike/PhpstormProjects/probody/src/public/icons",
-    "list.type.of.created.stylesheet": "SCSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.13.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.43&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/admin-front/pages&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mike/Library/Application Support/JetBrains/Toolbox/apps/PhpStorm/ch-0/221.5591.58/PhpStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/admin-front/pages" />
+      <recent name="$PROJECT_DIR$/src/admin-front/helpers" />
+      <recent name="$PROJECT_DIR$/src/uploads" />
       <recent name="$PROJECT_DIR$/src/public/icons" />
       <recent name="$PROJECT_DIR$/src/admin-front/bs" />
-      <recent name="$PROJECT_DIR$/src/admin-front/pages" />
-      <recent name="$PROJECT_DIR$/src/admin-front" />
-      <recent name="$PROJECT_DIR$/src/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/admin-front/public/icons" />
@@ -206,13 +226,10 @@
       <workItem from="1658484177540" duration="19356000" />
       <workItem from="1658558069930" duration="26161000" />
       <workItem from="1658736759591" duration="6780000" />
-    </task>
-    <task id="LOCAL-00446" summary="added social block on mobile">
-      <created>1658318653700</created>
-      <option name="number" value="00446" />
-      <option name="presentableId" value="LOCAL-00446" />
-      <option name="project" value="LOCAL" />
-      <updated>1658318653700</updated>
+      <workItem from="1659203592403" duration="2162000" />
+      <workItem from="1659343327777" duration="1345000" />
+      <workItem from="1659347854075" duration="2651000" />
+      <workItem from="1659355507131" duration="2231000" />
     </task>
     <task id="LOCAL-00447" summary="added social block on mobile">
       <created>1658320542172</created>
@@ -550,7 +567,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658742945031</updated>
     </task>
-    <option name="localTasksCounter" value="495" />
+    <task id="LOCAL-00495" summary="added modals">
+      <created>1659203800333</created>
+      <option name="number" value="00495" />
+      <option name="presentableId" value="LOCAL-00495" />
+      <option name="project" value="LOCAL" />
+      <updated>1659203800333</updated>
+    </task>
+    <option name="localTasksCounter" value="496" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

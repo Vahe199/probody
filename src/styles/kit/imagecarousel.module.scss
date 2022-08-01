@@ -10,9 +10,13 @@
   width: 100%;
   user-select: none;
   border-radius: 32px;
-  background-size: cover;
-  background-position: 50% 30%;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
+
+  @include themify() {
+    background-color: t('body-bg');
+  }
 }
 
 .navigation {

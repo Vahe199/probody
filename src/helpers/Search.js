@@ -55,12 +55,13 @@ export default class Search {
     }
 
     static async syncWorkers() {
-        const PREFIX = "search:worker:"
-        let workerCount = await Worker.count({parent: {$exists: false}}),
+        const PREFIX = "search:worker:",
+            searchWorkerSelector = {parent: {$exists: false}, paused: false, approvalState: 'approved'}
+        let workerCount = await Worker.count(searchWorkerSelector),
             offset = 0
 
         while (offset < workerCount) {
-            let workers = await Worker.find({parent: {$exists: false}})
+            let workers = await Worker.find(searchWorkerSelector)
                 .populate('services', 'name')
                 .populate('leads', 'name')
                 .populate('region', 'name')

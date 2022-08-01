@@ -1,15 +1,20 @@
 import '../styles/globals.scss'
-import React from "react"
+import React, {useEffect, useState} from "react"
 import AdminLayout from "../layouts/AdminLayout";
+import UserHelper from "../helpers/UserHelper";
+import AdminLoginPage from "./index";
+import {useRouter} from "next/router";
 
-class ProbodyAdmin extends React.Component {
-    render() {
-        const {Component: Page, pageProps} = this.props
+function ProbodyAdmin(props) {
+    const {Component: Page, pageProps} = props,
+        router = useRouter(),
+        [isLoggedIn, setLoggedIn] = useState(false)
 
-        return <AdminLayout>
-            <Page {...pageProps} />
-        </AdminLayout>
-    }
+    useEffect(() => setLoggedIn(UserHelper.isLoggedIn()), [router])
+
+    return isLoggedIn ? <AdminLayout>
+        <Page {...pageProps} />
+    </AdminLayout> : <AdminLoginPage {...pageProps} />
 }
 
 export default React.memo(ProbodyAdmin)

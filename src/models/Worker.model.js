@@ -193,6 +193,15 @@ const WorkerSchema = new Schema({
     workDays: {
         type: [String],
         enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+    },
+    paused: {
+        type: Boolean,
+        default: false
+    },
+    approvalState: {
+        type: String,
+        enum: ["waiting", "approved", "declined"],
+        default: 'waiting'
     }
 }, {
     versionKey: false,

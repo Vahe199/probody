@@ -220,7 +220,7 @@ export default class APIRequests {
     }
 
     static logOut() {
-        fetch(`https://probody.kz/auth/logout`, {
+        fetch(`https://probody.kz/v1/auth/logout`, {
             method: 'POST',
             headers: APIRequests.withCredentials()
         })

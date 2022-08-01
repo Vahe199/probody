@@ -6,154 +6,154 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/:uuid/view', async (req, res) => {
-    try {
-        const redisKey = 'pending:check:worker:' + req.params.uuid,
-            doc = JSON.parse(await RedisHelper.get(redisKey))
+// router.get('/:uuid/view', async (req, res) => {
+//     try {
+//         const redisKey = 'pending:check:worker:' + req.params.uuid,
+//             doc = JSON.parse(await RedisHelper.get(redisKey))
+//
+//         if (!doc) {
+//             return res.status(404).json({
+//                 message: 'Entity not found'
+//             })
+//         }
+//
+//         res.status(200).json({
+//             data: doc
+//         })
+//     } catch (err) {
+//         console.error(err)
+//
+//         res.status(500).json({
+//             message: 'Internal Server Error'
+//         })
+//     }
+// })
 
-        if (!doc) {
-            return res.status(404).json({
-                message: 'Entity not found'
-            })
-        }
+// router.patch('/:uuid/approve', async (req, res) => {
+//     try {
+//         const redisKey = 'pending:check:worker:' + req.params.uuid,
+//             doc = JSON.parse(await RedisHelper.get(redisKey))
+//
+//         if (!doc) {
+//             return res.status(500).json({
+//                 message: 'Internal Server Error'
+//             })
+//         }
+//
+//         let parentWorker
+//
+//         if (doc._id) {
+//             const docId = doc._id
+//
+//             delete doc._id
+//             delete doc.host
+//
+//             parentWorker = await Worker.findByIdAndUpdate(docId, doc)
+//
+//             await Worker.deleteMany({ host: parentWorker._id })
+//         } else {
+//             parentWorker = await (new Worker(doc)).save()
+//         }
+//
+//         if (doc.kind === 'salon') {
+//             doc.masters.forEach(master => {
+//                 const masterDoc = {
+//                         kind: 'master',
+//                         name: master.name,
+//                         characteristics: master.characteristics,
+//                         parent: parentWorker._id,
+//                         host: doc.host,
+//                         photos: master.photos
+//                     }
+//
+//                 ;(new Worker(masterDoc)).save()
+//             })
+//         }
+//
+//         const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
+//
+//         await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
+//         await RedisHelper.unlink(redisKey)
+//         await RedisHelper.unlink('haspw:' + doc.host)
+//
+//         res.status(202).json({
+//             message: 'approvedWorker'
+//         })
+//     } catch (err) {
+//         console.error(err)
+//
+//         res.status(500).json({
+//             message: 'Internal Server Error'
+//         })
+//     }
+// })
 
-        res.status(200).json({
-            data: doc
-        })
-    } catch (err) {
-        console.error(err)
+// router.patch('/:uuid/decline', async (req, res) => {
+//     try {
+//         const redisKey = 'pending:check:worker:' + req.params.uuid,
+//             doc = JSON.parse(await RedisHelper.get(redisKey))
+//
+//         if (!doc) {
+//             return res.status(500).json({
+//                 message: 'Internal Server Error'
+//             })
+//         }
+//
+//         // maybe, we'll have to notify the user here...
+//         await RedisHelper.unlink(redisKey)
+//         await RedisHelper.unlink('haspw:' + doc.host)
+//
+//         res.status(202).json({
+//             message: 'declinedWorker'
+//         })
+//     } catch (err) {
+//         console.error(err)
+//
+//         res.status(500).json({
+//             message: 'Internal Server Error'
+//         })
+//     }
+// })
 
-        res.status(500).json({
-            message: 'Internal Server Error'
-        })
-    }
-})
-
-router.patch('/:uuid/approve', async (req, res) => {
-    try {
-        const redisKey = 'pending:check:worker:' + req.params.uuid,
-            doc = JSON.parse(await RedisHelper.get(redisKey))
-
-        if (!doc) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            })
-        }
-
-        let parentWorker
-
-        if (doc._id) {
-            const docId = doc._id
-
-            delete doc._id
-            delete doc.host
-
-            parentWorker = await Worker.findByIdAndUpdate(docId, doc)
-
-            await Worker.deleteMany({ host: parentWorker._id })
-        } else {
-            parentWorker = await (new Worker(doc)).save()
-        }
-
-        if (doc.kind === 'salon') {
-            doc.masters.forEach(master => {
-                const masterDoc = {
-                        kind: 'master',
-                        name: master.name,
-                        characteristics: master.characteristics,
-                        parent: parentWorker._id,
-                        host: doc.host,
-                        photos: master.photos
-                    }
-
-                ;(new Worker(masterDoc)).save()
-            })
-        }
-
-        const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
-
-        await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
-        await RedisHelper.unlink(redisKey)
-        await RedisHelper.unlink('haspw:' + doc.host)
-
-        res.status(202).json({
-            message: 'approvedWorker'
-        })
-    } catch (err) {
-        console.error(err)
-
-        res.status(500).json({
-            message: 'Internal Server Error'
-        })
-    }
-})
-
-router.patch('/:uuid/decline', async (req, res) => {
-    try {
-        const redisKey = 'pending:check:worker:' + req.params.uuid,
-            doc = JSON.parse(await RedisHelper.get(redisKey))
-
-        if (!doc) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            })
-        }
-
-        // maybe, we'll have to notify the user here...
-        await RedisHelper.unlink(redisKey)
-        await RedisHelper.unlink('haspw:' + doc.host)
-
-        res.status(202).json({
-            message: 'declinedWorker'
-        })
-    } catch (err) {
-        console.error(err)
-
-        res.status(500).json({
-            message: 'Internal Server Error'
-        })
-    }
-})
-
-router.patch('/:uuid/editandapprove', async (req, res) => {
-    try {
-        const redisKey = 'pending:check:worker:' + req.params.uuid,
-            doc = JSON.parse(await RedisHelper.get(redisKey))
-
-        if (!doc) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            })
-        }
-
-        Object.assign(doc, req.body)
-
-        // maybe, we'll have to notify the user here...
-        const mongoDoc = new Worker(doc)
-
-        mongoDoc.validate(async (err) => {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Internal Server Error'
-                })
-            }
-
-            await mongoDoc.save()
-            await Search.addWorker('search:worker:', mongoDoc._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
-            await RedisHelper.unlink(redisKey)
-            await RedisHelper.unlink('haspw:' + doc.host)
-
-            res.status(202).json({
-                message: 'approvedWorker'
-            })
-        })
-    } catch (err) {
-        console.error(err)
-
-        res.status(500).json({
-            message: 'Internal Server Error'
-        })
-    }
-})
+// router.patch('/:uuid/editandapprove', async (req, res) => {
+//     try {
+//         const redisKey = 'pending:check:worker:' + req.params.uuid,
+//             doc = JSON.parse(await RedisHelper.get(redisKey))
+//
+//         if (!doc) {
+//             return res.status(500).json({
+//                 message: 'Internal Server Error'
+//             })
+//         }
+//
+//         Object.assign(doc, req.body)
+//
+//         // maybe, we'll have to notify the user here...
+//         const mongoDoc = new Worker(doc)
+//
+//         mongoDoc.validate(async (err) => {
+//             if (err) {
+//                 return res.status(500).json({
+//                     message: 'Internal Server Error'
+//                 })
+//             }
+//
+//             await mongoDoc.save()
+//             await Search.addWorker('search:worker:', mongoDoc._id, doc.kind, doc.name, doc.phone, doc.lastRaise, doc.rooms, doc.description, doc.leads, doc.services, doc.programs, (await Region.findById(doc.region)).name)
+//             await RedisHelper.unlink(redisKey)
+//             await RedisHelper.unlink('haspw:' + doc.host)
+//
+//             res.status(202).json({
+//                 message: 'approvedWorker'
+//             })
+//         })
+//     } catch (err) {
+//         console.error(err)
+//
+//         res.status(500).json({
+//             message: 'Internal Server Error'
+//         })
+//     }
+// })
 
 export default router

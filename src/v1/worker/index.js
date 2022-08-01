@@ -41,10 +41,39 @@ router.post('/', AuthGuard('serviceProvider'), async (req, res) => {
             })
         }
 
-        const redisKey = 'pending:check:worker:' + uuidv4()
+        let parentWorker
 
-        await RedisHelper.set('haspw:' + req.user._id, '')
-        await RedisHelper.set(redisKey, JSON.stringify(req.body))
+        if (req.body._id) {
+            const docId = req.body._id
+
+            delete req.body._id
+            delete req.body.host
+
+            parentWorker = await Worker.findByIdAndUpdate(docId, req.body)
+
+            await Worker.deleteMany({host: parentWorker._id})
+        } else {
+            parentWorker = await (new Worker(req.body)).save()
+        }
+
+        if (req.body.kind === 'salon') {
+            req.body.masters.forEach(master => {
+                const masterDoc = {
+                        kind: 'master',
+                        name: master.name,
+                        characteristics: master.characteristics,
+                        parent: parentWorker._id,
+                        host: req.body.host,
+                        photos: master.photos
+                    }
+
+                ;(new Worker(masterDoc)).save()
+            })
+        }
+
+        const populatedDoc = await Worker.findById(parentWorker._id).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
+
+        await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
 
         res.status(202).json({
             message: "createdWorker"

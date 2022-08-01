@@ -274,12 +274,6 @@ router.get('/allowpa', AuthGuard('serviceProvider'), async (req, res) => {
         return res.json(true)
     }
 
-    const hasPendingWorker = await RedisHelper.keys('haspw:' + req.user._id)
-
-    if (hasPendingWorker.length > 0) {
-        return res.json(true)
-    }
-
     return res.json(false)
 })
 
