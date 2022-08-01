@@ -2,27 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/UserHelper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Worker.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Worker.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/kit/imagecarousel.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/auth/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,14 +210,7 @@
       <workItem from="1659203592403" duration="2162000" />
       <workItem from="1659343327777" duration="1345000" />
       <workItem from="1659347854075" duration="2651000" />
-      <workItem from="1659355507131" duration="2231000" />
-    </task>
-    <task id="LOCAL-00447" summary="added social block on mobile">
-      <created>1658320542172</created>
-      <option name="number" value="00447" />
-      <option name="presentableId" value="LOCAL-00447" />
-      <option name="project" value="LOCAL" />
-      <updated>1658320542172</updated>
+      <workItem from="1659355507131" duration="3056000" />
     </task>
     <task id="LOCAL-00448" summary="added social block on mobile">
       <created>1658320655328</created>
@@ -574,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659203800333</updated>
     </task>
-    <option name="localTasksCounter" value="496" />
+    <task id="LOCAL-00496" summary="added modals">
+      <created>1659357744961</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1659357744961</updated>
+    </task>
+    <option name="localTasksCounter" value="497" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

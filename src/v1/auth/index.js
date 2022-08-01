@@ -210,7 +210,7 @@ router.post('/login', AuthValidator.auth, async (req, res) => {
 
         phone = parsePhoneNumber(phone, process.env.PHONE_REGION).number
 
-        let userDoc = await User.findOne({phone})
+        let userDoc = await User.findOne(Object.assign({phone}, req.query.admin ? {role: {$ne: 'serviceProvider'}} : {}))
 
         if (userDoc) {
             if ((new Password(password)).equal(userDoc.password)) {
