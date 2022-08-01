@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['serviceProvider', 'admin'],
+    enum: ['serviceProvider', 'admin', 'manager'],
     default: 'serviceProvider'
   },
   paymentCode: {

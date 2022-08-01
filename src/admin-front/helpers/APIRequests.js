@@ -44,7 +44,7 @@ export default class APIRequests {
     }
 
     static async logIn(phone, password) {
-        return (await fetch(`${API_URL}/auth/login`, {
+        return (await fetch(`${API_URL}/auth/login?admin=1`, {
             method: 'POST',
             headers: APIRequests.withJSON(),
             body: JSON.stringify({
