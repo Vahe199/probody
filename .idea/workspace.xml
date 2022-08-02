@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/kz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/kz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/worker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/worker/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,14 +212,8 @@
       <workItem from="1659343327777" duration="1345000" />
       <workItem from="1659347854075" duration="2651000" />
       <workItem from="1659355507131" duration="3677000" />
-      <workItem from="1659360160214" duration="1863000" />
-    </task>
-    <task id="LOCAL-00452" summary="added social block on mobile">
-      <created>1658394254147</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1658394254147</updated>
+      <workItem from="1659360160214" duration="2457000" />
+      <workItem from="1659443109480" duration="314000" />
     </task>
     <task id="LOCAL-00453" summary="added social block on mobile">
       <created>1658394397843</created>
@@ -555,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659361407945</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary="added modals">
+      <created>1659362195088</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1659362195088</updated>
+    </task>
+    <option name="localTasksCounter" value="502" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

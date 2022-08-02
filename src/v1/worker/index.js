@@ -1,8 +1,6 @@
 import express from "express"
 import AuthGuard from "../../middlewares/AuthGuard.js"
 import Worker from '../../models/Worker.model.js'
-import {v4 as uuidv4} from 'uuid'
-import RedisHelper from "../../helpers/RedisHelper.js"
 import apicache from "apicache";
 import Review from "../../models/Review.model.js"
 import DefaultProgram from "../../models/DefaultProgram.model.js";
