@@ -1,39 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/WorkerClosedCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/Icon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/ControlledInput.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/ControlledTextArea.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/TextArea.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/TextInput.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/accounts/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/close.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/error.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/hidden.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/visible.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/components/cards.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/kit/forms/input.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/kit/icon.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/bs/scss/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/news/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/reviews/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/stats/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/vacancies/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/workers/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Worker.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Worker.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -247,14 +215,7 @@
       <workItem from="1659530920644" duration="417000" />
       <workItem from="1659534937258" duration="3802000" />
       <workItem from="1659539019944" duration="2356000" />
-      <workItem from="1659543020968" duration="2700000" />
-    </task>
-    <task id="LOCAL-00463" summary="added social block on mobile">
-      <created>1658413152439</created>
-      <option name="number" value="00463" />
-      <option name="presentableId" value="LOCAL-00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1658413152439</updated>
+      <workItem from="1659543020968" duration="3027000" />
     </task>
     <task id="LOCAL-00464" summary="added social block on mobile">
       <created>1658416293928</created>
@@ -592,7 +553,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659535481496</updated>
     </task>
-    <option name="localTasksCounter" value="512" />
+    <task id="LOCAL-00512" summary="added modals">
+      <created>1659551233900</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1659551233900</updated>
+    </task>
+    <option name="localTasksCounter" value="513" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

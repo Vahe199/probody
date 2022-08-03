@@ -20,6 +20,7 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         phone,
         approvedEmail,
         internalRole,
+        name,
         subscriptionTo,
         role
     } = req.user;//req.user это объект, который пришел из AuthGuard
@@ -39,6 +40,7 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         email,
         reffCode,
         internalRole,
+        name,
         verificationStatus,
         subscriptionTo,
         role,
