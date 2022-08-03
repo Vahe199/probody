@@ -69,7 +69,7 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
     delete req.body.tab
 
     const selector = Object.assign(conditions, {
-        $or: [
+        $and: [
             {
                 name: new RegExp(query, "i")
             }
