@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import APIRequests from "../helpers/APIRequests";
 import Head from "next/head";
 import {TITLE_POSTFIX} from "../helpers/constants";
-import TextInput from "../components/kit/Form/TextInput";
+import TextInput from "../components/kit/form/TextInput";
 
 export default function AdminLoginPage() {
     const router = useRouter()
