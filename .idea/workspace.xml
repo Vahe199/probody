@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/AuthGuard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/AuthGuard.js" afterDir="false" />
-    </list>
+    <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -214,21 +211,7 @@
       <workItem from="1659360160214" duration="2457000" />
       <workItem from="1659443109480" duration="6349000" />
       <workItem from="1659519810317" duration="543000" />
-      <workItem from="1659526507064" duration="596000" />
-    </task>
-    <task id="LOCAL-00455" summary="added social block on mobile">
-      <created>1658398175187</created>
-      <option name="number" value="00455" />
-      <option name="presentableId" value="LOCAL-00455" />
-      <option name="project" value="LOCAL" />
-      <updated>1658398175187</updated>
-    </task>
-    <task id="LOCAL-00456" summary="added social block on mobile">
-      <created>1658408733552</created>
-      <option name="number" value="00456" />
-      <option name="presentableId" value="LOCAL-00456" />
-      <option name="project" value="LOCAL" />
-      <updated>1658408733553</updated>
+      <workItem from="1659526507064" duration="1011000" />
     </task>
     <task id="LOCAL-00457" summary="added social block on mobile">
       <created>1658408897497</created>
@@ -559,7 +542,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659526646572</updated>
     </task>
-    <option name="localTasksCounter" value="504" />
+    <task id="LOCAL-00504" summary="added modals">
+      <created>1659528559644</created>
+      <option name="number" value="00504" />
+      <option name="presentableId" value="LOCAL-00504" />
+      <option name="project" value="LOCAL" />
+      <updated>1659528559644</updated>
+    </task>
+    <task id="LOCAL-00505" summary="added modals">
+      <created>1659528730342</created>
+      <option name="number" value="00505" />
+      <option name="presentableId" value="LOCAL-00505" />
+      <option name="project" value="LOCAL" />
+      <updated>1659528730342</updated>
+    </task>
+    <option name="localTasksCounter" value="506" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

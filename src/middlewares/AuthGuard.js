@@ -2,7 +2,7 @@ import AuthorizedToken from "../models/AuthorizedToken.model.js"
 
 export default function AuthGuard(allowedRole /* serviceProvider | admin */) {
     return async function (req, res, next) {
-        console.log('here')
+        console.log(req.get('X-Auth-Token'))
         if (!req.get('X-Auth-Token')) {
             return res.status(401).json({
                 message: 'Unauthorized'
