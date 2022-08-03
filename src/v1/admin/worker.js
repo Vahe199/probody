@@ -49,7 +49,7 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
             conditions = {kind: 'salon', approvalState: 'waiting'}
             break
 
-        case 'salonMasterss':
+        case 'salonMasters':
             conditions = {parent: {$exists: true}, kind: 'master', approvalState: 'waiting'}
             break
 
