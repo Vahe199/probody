@@ -36,6 +36,12 @@ export default class APIRequests {
         })
     }
 
+    static async getMe() {
+        return ((await fetch(`${API_URL}/user/me`, {
+            headers: APIRequests.withCredentials()
+        })).json())
+    }
+
     static async searchWorkers(page, dto, sortBy, sortDir) {
         return (await fetch(`${API_URL}/admin/worker/search?page=${page}&sortBy=${sortBy}&sortDir=${sortDir}`, {
             method: 'POST',

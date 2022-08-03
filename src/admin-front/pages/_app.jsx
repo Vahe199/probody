@@ -11,6 +11,21 @@ function ProbodyAdmin(props) {
         [isLoggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => setLoggedIn(UserHelper.isLoggedIn()), [router])
+    useEffect(() => {
+        const { fetch: originalFetch } = window;
+        window.fetch = async (...args) => {
+            let [resource, config ] = args;
+
+            const response = await originalFetch(resource, config);
+
+            if (response.status === 401) {
+                UserHelper.logOut()
+                router.push('/')
+            }
+
+            return response;
+        };
+    }, [])
 
     return isLoggedIn ? <AdminLayout>
         <Page {...pageProps} />

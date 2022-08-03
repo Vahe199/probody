@@ -33,6 +33,9 @@ const UserSchema = new Schema({
     type: String,
     default: ReffCode.generate
   },
+  name: {
+    type: String
+  },
   approvedEmail: {
     type: Boolean,
     default: false

@@ -1,14 +1,16 @@
-import {TITLE_POSTFIX} from "../helpers/constants";
+import {TITLE_POSTFIX} from "../../helpers/constants";
 import Head from "next/head";
 import {useState} from "react";
-import useAsyncEffect from "../helpers/AsyncEffect";
-import APIRequests from "../helpers/APIRequests";
+import useAsyncEffect from "../../helpers/AsyncEffect";
+import APIRequests from "../../helpers/APIRequests";
+import WorkerClosedCard from "../../components/WorkerClosedCard";
 
 export default function WorkersPage(props) {
     const [tab, setTab] = useState('all'),
         [query, setQuery] = useState(''),
         [salons, setSalons] = useState([]),
-        [page, setPage] = useState(1)
+        [page, setPage] = useState(1),
+        [pageCnt, setPageCnt] = useState(1)
 
     useAsyncEffect(runSearch, [tab])
 
@@ -19,7 +21,8 @@ export default function WorkersPage(props) {
         console.groupEnd()
 
         APIRequests.searchWorkers(page, {query, tab}, 'createdAt', 'ASC').then(salons => {
-            console.log(salons)
+            setPageCnt(salons.pageCount)
+            setSalons(salons.results)
         })
     }
 
@@ -52,9 +55,9 @@ export default function WorkersPage(props) {
             </div>
         </form>
 
-        <div style={{marginTop: 48, display: 'flex', gap: '16px 0'}}>
+        <div style={{marginTop: 48, display: 'flex', flexDirection: 'column', gap: '16px 0'}}>
             {salons.map((worker, i) =>
-                <p key={i}>fred</p>
+                <WorkerClosedCard dto={worker} key={i} />
             )}
         </div>
     </>

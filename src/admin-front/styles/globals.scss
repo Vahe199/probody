@@ -127,10 +127,26 @@ $btn-border-radius: 12px;
   line-height: 16px;
 }
 
+@mixin textXSBold() {
+  @include textXS();
+  font-weight: 700;
+}
+
 @mixin textSubtitle2() {
-  font-weight: 900;
+  font-weight: 800;
   font-size: 24px;
   line-height: 30px;
+}
+
+@mixin textM() {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin textSubtitle1Desktop() {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 40px;
 }
 
 @for $i from 1 through 6 {
@@ -151,12 +167,28 @@ p {
   @include textMBold();
 }
 
+.textM {
+  @include textM();
+}
+
+.textSubtitle1 {
+  @include textSubtitle1Desktop();
+}
+
+.textXSBold {
+  @include textXSBold();
+}
+
 .textSubtitle2 {
   @include textSubtitle2();
 }
 
 .textXS {
   @include textXS();
+}
+
+.textSBold {
+  @include textSBold()
 }
 
 .sidenav {
@@ -180,6 +212,8 @@ main {
     display: flex;
     justify-content: space-between;
     top: 0;
+    z-index: 5;
+    background: #ffffff;
     padding: 16px 90px;
     width: calc(100% - 212px);
     border-bottom: 1px solid map-get($theme-colors, 'dividers');
@@ -224,4 +258,48 @@ h3 {
 .btn-icon-right {
   margin-left: 10px;
   margin-bottom: 2px;
+}
+
+html, body {
+  //overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #ffc83a85;
+}
+
+* {
+  transition: background-color .3s linear, border-color .3s linear, color .1s linear, box-shadow .3s linear;
+}
+
+input, textarea, select {
+  border: none;
+  min-width: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+  transition: background-color 0.2s linear;
+  font-size: 16px;
+  background: transparent;
+
+  &[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #ccc;
+    //font-family: Lack, sans-serif;
+    user-select: none;
+  }
 }

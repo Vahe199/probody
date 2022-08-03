@@ -198,6 +198,10 @@ const WorkerSchema = new Schema({
         type: Boolean,
         default: false
     },
+    hideFromArchive: {
+        type: Boolean,
+        default: false
+    },
     approvalState: {
         type: String,
         enum: ["waiting", "approved", "declined"],

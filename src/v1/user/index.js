@@ -20,7 +20,8 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         phone,
         approvedEmail,
         internalRole,
-        subscriptionTo
+        subscriptionTo,
+        role
     } = req.user;//req.user это объект, который пришел из AuthGuard
 
     let verificationStatus
@@ -40,6 +41,7 @@ router.get('/me', AuthGuard('serviceProvider'), async (req, res) => {
         internalRole,
         verificationStatus,
         subscriptionTo,
+        role,
         phone//это все нужно для того, чтоб не светить пароль в ответе
     })
 });

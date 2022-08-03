@@ -62,7 +62,7 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
             break
 
         case 'archive':
-            conditions = {approvalState: {$ne: 'waiting'}}
+            conditions = {approvalState: {$ne: 'waiting'}, hideFromArchive: false}
             break
     }
 

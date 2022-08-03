@@ -2,7 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/WorkerClosedCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/Icon.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/ControlledInput.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/ControlledTextArea.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/TextArea.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/components/kit/form/TextInput.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/pages/accounts/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/close.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/error.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/hidden.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/public/icons/visible.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/components/cards.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/kit/forms/input.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/admin-front/styles/kit/icon.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/bs/scss/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/bs/scss/_buttons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/_app.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/news/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/reviews/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/stats/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/vacancies/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/workers/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Worker.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Worker.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/user/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +84,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.13.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.11.43&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/admin-front/pages&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mike/PhpstormProjects/probody/src/admin-front/public/icons&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -66,18 +96,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/admin-front/pages" />
-      <recent name="$PROJECT_DIR$/src/admin-front/helpers" />
-      <recent name="$PROJECT_DIR$/src/uploads" />
-      <recent name="$PROJECT_DIR$/src/public/icons" />
-      <recent name="$PROJECT_DIR$/src/admin-front/bs" />
+      <recent name="$PROJECT_DIR$/src/admin-front/public/icons" />
+      <recent name="$PROJECT_DIR$/src/admin-front/styles/kit/forms" />
+      <recent name="$PROJECT_DIR$/src/admin-front/components/kit" />
+      <recent name="$PROJECT_DIR$/src/admin-front/components/kit/form" />
+      <recent name="$PROJECT_DIR$/src/admin-front/components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/admin-front/public/icons" />
-      <recent name="$PROJECT_DIR$/src/admin-front/public" />
-      <recent name="$PROJECT_DIR$/src/public/icons" />
-      <recent name="$PROJECT_DIR$/src/public/illustrations" />
-      <recent name="$PROJECT_DIR$/src/public" />
+      <recent name="$PROJECT_DIR$/src/admin-front/styles/kit" />
+      <recent name="$PROJECT_DIR$/src/admin-front/pages/workers" />
+      <recent name="$PROJECT_DIR$/src/admin-front/pages/vacancies" />
+      <recent name="$PROJECT_DIR$/src/admin-front/pages/stats" />
+      <recent name="$PROJECT_DIR$/src/admin-front/pages/reviews" />
     </key>
   </component>
   <component name="RunManager" selected="npm.admindev">
@@ -215,28 +245,9 @@
       <workItem from="1659519810317" duration="543000" />
       <workItem from="1659526507064" duration="1011000" />
       <workItem from="1659530920644" duration="417000" />
-      <workItem from="1659534937258" duration="323000" />
-    </task>
-    <task id="LOCAL-00460" summary="added social block on mobile">
-      <created>1658410152097</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1658410152099</updated>
-    </task>
-    <task id="LOCAL-00461" summary="added social block on mobile">
-      <created>1658410230590</created>
-      <option name="number" value="00461" />
-      <option name="presentableId" value="LOCAL-00461" />
-      <option name="project" value="LOCAL" />
-      <updated>1658410230590</updated>
-    </task>
-    <task id="LOCAL-00462" summary="added social block on mobile">
-      <created>1658410272652</created>
-      <option name="number" value="00462" />
-      <option name="presentableId" value="LOCAL-00462" />
-      <option name="project" value="LOCAL" />
-      <updated>1658410272653</updated>
+      <workItem from="1659534937258" duration="3802000" />
+      <workItem from="1659539019944" duration="2356000" />
+      <workItem from="1659543020968" duration="2700000" />
     </task>
     <task id="LOCAL-00463" summary="added social block on mobile">
       <created>1658413152439</created>
@@ -560,7 +571,28 @@
       <option name="project" value="LOCAL" />
       <updated>1659535193635</updated>
     </task>
-    <option name="localTasksCounter" value="509" />
+    <task id="LOCAL-00509" summary="added modals">
+      <created>1659535266067</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1659535266067</updated>
+    </task>
+    <task id="LOCAL-00510" summary="added modals">
+      <created>1659535397413</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1659535397413</updated>
+    </task>
+    <task id="LOCAL-00511" summary="added modals">
+      <created>1659535481496</created>
+      <option name="number" value="00511" />
+      <option name="presentableId" value="LOCAL-00511" />
+      <option name="project" value="LOCAL" />
+      <updated>1659535481496</updated>
+    </task>
+    <option name="localTasksCounter" value="512" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
