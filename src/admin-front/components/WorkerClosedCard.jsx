@@ -1,7 +1,9 @@
 import css from '../styles/components/cards.module.scss'
 import {cnb} from "cnbuilder";
+import {useEffect} from "react";
 
 export default function WorkerClosedCard({dto}) {
+    useEffect(() => console.log(dto), [])
     return <div className={cnb("card", "fullwidth", css.root)}>
         <div className="card-body" style={{display: "flex", gap: '0 32px'}}>
             <img className={css.pic} width={335} height={240} src={dto.photos[0]} alt={"Фото " + dto.name}/>

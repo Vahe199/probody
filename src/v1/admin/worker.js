@@ -77,7 +77,29 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
     })
 
     res.json({
-        results: await Worker.find(selector).populate('region parent host').limit(PAGE_SIZE).skip((Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE).sort({[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}),
+        // results: await Worker.find(selector).populate('region parent host').limit(PAGE_SIZE).skip((Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE).sort({[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}),
+        results: await Worker.aggregate([
+            {
+                $match: selector
+            },
+            {
+                $skip: (Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE
+            },
+            {
+                $limit: PAGE_SIZE
+            },
+            {
+                $sort: {[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}
+            },
+            {
+                $lookup: {
+                    from: 'workers',
+                    localField: '_id',
+                    foreignField: 'parent',
+                    as: 'masters'
+                }
+            }
+        ]),
         pageCount: Math.ceil(await Worker.countDocuments(selector) / PAGE_SIZE)
     })
 })
