@@ -32,21 +32,45 @@ const router = express.Router();
 // }
 router.post('/search', AuthGuard('notClient'), async (req, res) => {
     const PAGE_SIZE = 10
-    let query = ''
+    let query = '',
+        conditions = {}
 
     if (req.body.query) {
         query = req.body.query
         delete req.body.query
     }
 
-    const selector = Object.assign({}, req.body, {
+    switch (req.body.tab) {
+        case 'all':
+            conditions = {approvalState: 'waiting'}
+            break
+
+        case 'salons':
+            conditions = {kind: 'salon', approvalState: 'waiting'}
+            break
+
+        case 'salonMasterss':
+            conditions = {parent: {$exists: true}, kind: 'master', approvalState: 'waiting'}
+            break
+
+        case 'privateMasters':
+            conditions = {parent: {$exists: false}, kind: 'master', approvalState: 'waiting'}
+            break
+
+        case 'paused':
+            conditions = {paused: true}
+            break
+
+        case 'archive':
+            conditions = {approvalState: {$ne: 'waiting'}}
+            break
+    }
+
+    const selector = Object.assign(conditions, {
         $or: [
             {
                 name: new RegExp(query, "i")
-            },
-            // {
-            //     description: new RegExp(query, "i")
-            // }
+            }
         ]
     })
 
