@@ -13,22 +13,22 @@ export default function WorkerClosedCard({dto}) {
                 <div style={{display: "flex", gap: '0 40px'}}>
                     <div>
                         <p className={'textXS'} style={{marginBottom: 8}}>Город</p>
-                        <p className={'textSBold'}>city</p>
+                        <p className={'textSBold'}>{dto.region.name}</p>
                     </div>
 
                     <div>
                         <p className={'textXS'} style={{marginBottom: 8}}>Мессенджеры</p>
-                        <p className={'textSBold'}>city</p>
+                        <p className={'textSBold'}>{Object.values(dto.messengers || {}).some(i => i.length > 0) ? 'Есть' : 'Нет'}</p>
                     </div>
 
                     {dto.kind === 'salon' && <div>
                         <p className={'textXS'} style={{marginBottom: 8}}>Мастера</p>
-                        <p className={'textSBold'}>city</p>
+                        <p className={'textSBold'}>{dto.masters.length}</p>
                     </div>}
 
                     <div>
                         <p className={'textXS'} style={{marginBottom: 8}}>Услуги</p>
-                        <p className={'textSBold'}>city</p>
+                        <p className={'textSBold'}>{dto.programs.length}</p>
                     </div>
                 </div>
             </div>

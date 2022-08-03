@@ -77,7 +77,6 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
     })
 
     res.json({
-        // results: await Worker.find(selector).populate('region parent host').limit(PAGE_SIZE).skip((Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE).sort({[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}),
         results: await Worker.aggregate([
             {
                 $match: selector
@@ -97,6 +96,30 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
                     localField: '_id',
                     foreignField: 'parent',
                     as: 'masters'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'regions',
+                    localField: 'region',
+                    foreignField: '_id',
+                    as: 'region'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'workers',
+                    localField: 'parent',
+                    foreignField: '_id',
+                    as: 'parent'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'host',
+                    foreignField: '_id',
+                    as: 'host'
                 }
             }
         ]),
