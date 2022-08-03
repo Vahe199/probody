@@ -154,7 +154,7 @@ export default function AdminLayout(props) {
                 </div>
             </nav>
 
-            <div style={{marginTop: 83}}>{props.children}</div>
+            <div style={{marginTop: 83, padding: '0 90px'}}>{props.children}</div>
         </main>
     </div>
 }

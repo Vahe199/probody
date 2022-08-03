@@ -1,11 +1,11 @@
 const API_URL = 'https://probody.kz/v1';
 // const API_URL = 'http://0.0.0.0:4119/v1';
-const PAGE_SIZES = {
-    MAIN: 5,
-    MAIN_MAP: 15,
-    REVIEWS: 3,
-    VACANCY: 5
-};
+// const PAGE_SIZES = {
+//     MAIN: 5,
+//     MAIN_MAP: 15,
+//     REVIEWS: 3,
+//     VACANCY: 5
+// };
 
 export default class APIRequests {
     static withCredentials(headers) {
@@ -34,6 +34,14 @@ export default class APIRequests {
             }),
             body: formData
         })
+    }
+
+    static async searchWorkers(page, dto, sortBy, sortDir) {
+        return (await fetch(`${API_URL}/admin/worker/search?page=${page}&sortBy=${sortBy}&sortDir=${sortDir}`, {
+            method: 'POST',
+            headers: APIRequests.withCredentials(APIRequests.withJSON()),
+            body: JSON.stringify(dto)
+        })).json()
     }
 
     static logOut() {

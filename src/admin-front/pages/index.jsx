@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import UserHelper from "../helpers/UserHelper";
 import {useRouter} from "next/router";
 import APIRequests from "../helpers/APIRequests";
+import Head from "next/head";
+import {TITLE_POSTFIX} from "../helpers/constants";
 
 export default function AdminLoginPage() {
     const router = useRouter()
@@ -53,7 +55,11 @@ export default function AdminLoginPage() {
         }
     }
 
-    return <div>
+    return <>
+        <Head>
+            <title>Вход{TITLE_POSTFIX}</title>
+        </Head>
+
         <form onSubmit={e => {
             e.preventDefault()
             logIn()
@@ -70,5 +76,5 @@ export default function AdminLoginPage() {
             })} placeholder={'password'}/>
             <button type={'submit'}>log in</button>
         </form>
-    </div>
+    </>
 }

@@ -19,7 +19,7 @@ import SupportRouter from "./support/index.js";
 const router = express.Router()
 
 router.use('/auth', AuthRouter)
-router.use('/admin-front', AuthGuard('notClient'), AdminRouter)
+router.use('/admin', AuthGuard('notClient'), AdminRouter)
 router.use('/worker', WorkerRouter)
 router.use('/program', ProgramRouter)
 router.use('/service', ServiceRouter)

@@ -356,7 +356,7 @@ export default {
     "entireKZ": "Қазақстан",
     "verified": "Тексерілді",
     "back": "Артқа",
-    "masters": "Магистрлер",
+    "masters": "Шеберлер",
     "save": "Сақтау",
     "addOwnVariant": "Таңдауыңызды қосыңыз",
     "lengthMustNotBeLessThan": "Таңбалар саны кемінде болуы керек",

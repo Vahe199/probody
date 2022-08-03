@@ -30,7 +30,7 @@ const router = express.Router();
 //     }
 // }
 router.post('/search', async (req, res) => {
-        const PAGE_SIZE = 10
+    const PAGE_SIZE = 10
     let query = ''
 
     if (req.body.query) {
@@ -41,11 +41,11 @@ router.post('/search', async (req, res) => {
     const selector = Object.assign({}, req.body, {
         $or: [
             {
-                code: new RegExp(query, "i")
+                name: new RegExp(query, "i")
             },
-            {
-                comment: new RegExp(query, "i")
-            }
+            // {
+            //     description: new RegExp(query, "i")
+            // }
         ]
     })
 
