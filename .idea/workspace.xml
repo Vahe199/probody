@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a2ae0e-cb0f-47c4-83f3-0fe27a34d1b1" name="Changes" comment="added modals">
-      <change afterPath="$PROJECT_DIR$/src/admin-front/helpers/AsyncEffect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/helpers/APIRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/layouts/AdminLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/news.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/reviews.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/stats.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/vacancies.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/pages/workers.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin-front/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locales/kz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/locales/kz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v1/admin/worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/admin/worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/AuthGuard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/AuthGuard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,13 +214,7 @@
       <workItem from="1659360160214" duration="2457000" />
       <workItem from="1659443109480" duration="6349000" />
       <workItem from="1659519810317" duration="543000" />
-    </task>
-    <task id="LOCAL-00454" summary="added social block on mobile">
-      <created>1658397574349</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1658397574349</updated>
+      <workItem from="1659526507064" duration="596000" />
     </task>
     <task id="LOCAL-00455" summary="added social block on mobile">
       <created>1658398175187</created>
@@ -569,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659443426365</updated>
     </task>
-    <option name="localTasksCounter" value="503" />
+    <task id="LOCAL-00503" summary="added modals">
+      <created>1659526646572</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1659526646572</updated>
+    </task>
+    <option name="localTasksCounter" value="504" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

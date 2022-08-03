@@ -25,6 +25,7 @@ export default function AuthGuard(allowedRole /* serviceProvider | admin-front *
 
             case 'notClient':
                 tokenDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
+                console.log(tokenDoc, !tokenDoc || tokenDoc.userId.role === 'serviceProvider')
 
                 if (!tokenDoc || tokenDoc.userId.role === 'serviceProvider') {
                     return res.status(401).json({
