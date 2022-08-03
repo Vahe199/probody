@@ -1,6 +1,7 @@
 import Worker from "../../models/Worker.model.js";
 import Search from "../../helpers/Search.js";
 import express from "express";
+import AuthGuard from "../../middlewares/AuthGuard.js";
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ const router = express.Router();
 //         pageCount: Math.ceil(await this.promocodeModel.countDocuments(selector) / PAGE_SIZE)
 //     }
 // }
-router.post('/search', async (req, res) => {
+router.post('/search', AuthGuard('notClient'), async (req, res) => {
     const PAGE_SIZE = 10
     let query = ''
 
@@ -78,27 +79,27 @@ router.post('/search', async (req, res) => {
 //     }
 // })
 
-router.patch('/:workerId/approve', async (req, res) => {
-    try {
-        const worker = await Worker.findOneAndUpdate({_id: req.params.workerId})
-
-        if (!worker.parent) {
-            const populatedDoc = await Worker.findById(req.params.workerId).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
-
-            await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
-        }
-
-        res.status(202).json({
-            message: 'approvedWorker'
-        })
-    } catch (err) {
-        console.error(err)
-
-        res.status(500).json({
-            message: 'Internal Server Error'
-        })
-    }
-})
+// router.patch('/:workerId/approve', async (req, res) => {
+//     try {
+//         const worker = await Worker.findOneAndUpdate({_id: req.params.workerId})
+//
+//         if (!worker.parent) {
+//             const populatedDoc = await Worker.findById(req.params.workerId).populate('services', 'name').populate('leads', 'name').populate('region', 'name')
+//
+//             await Search.addWorker('search:worker:', populatedDoc._id, populatedDoc.kind, populatedDoc.name, populatedDoc.phone, populatedDoc.lastRaise, populatedDoc.avgCost, populatedDoc.rooms, populatedDoc.description, populatedDoc.leads, populatedDoc.services, populatedDoc.programs, populatedDoc.region.name, populatedDoc.messengers, populatedDoc.location.coordinates)
+//         }
+//
+//         res.status(202).json({
+//             message: 'approvedWorker'
+//         })
+//     } catch (err) {
+//         console.error(err)
+//
+//         res.status(500).json({
+//             message: 'Internal Server Error'
+//         })
+//     }
+// })
 
 // router.patch('/:uuid/decline', async (req, res) => {
 //     try {

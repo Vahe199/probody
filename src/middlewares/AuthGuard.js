@@ -2,7 +2,6 @@ import AuthorizedToken from "../models/AuthorizedToken.model.js"
 
 export default function AuthGuard(allowedRole /* serviceProvider | admin */) {
     return async function (req, res, next) {
-        console.log(req.get('X-Auth-Token'))
         if (!req.get('X-Auth-Token')) {
             return res.status(401).json({
                 message: 'Unauthorized'
@@ -26,7 +25,6 @@ export default function AuthGuard(allowedRole /* serviceProvider | admin */) {
 
             case 'notClient':
                 tokenDoc = await AuthorizedToken.findOne({token: req.get('X-Auth-Token')}).populate('userId')
-                console.log(tokenDoc, !tokenDoc || tokenDoc.userId.role === 'serviceProvider')
 
                 if (!tokenDoc || tokenDoc.userId.role === 'serviceProvider') {
                     return res.status(401).json({
