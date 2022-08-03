@@ -66,6 +66,8 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
             break
     }
 
+    delete req.body.tab
+
     const selector = Object.assign(conditions, {
         $or: [
             {
@@ -74,10 +76,10 @@ router.post('/search', AuthGuard('notClient'), async (req, res) => {
         ]
     })
 
-    return {
+    res.json({
         results: await Worker.find(selector).populate('region parent host').limit(PAGE_SIZE).skip((Math.max(Number(req.query.page), 1) - 1) * PAGE_SIZE).sort({[req.query.sortBy]: req.query.sortDir === 'ASC' ? 1 : -1}),
         pageCount: Math.ceil(await Worker.countDocuments(selector) / PAGE_SIZE)
-    }
+    })
 })
 
 // router.get('/:uuid/view', async (req, res) => {
