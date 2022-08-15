@@ -1,13 +1,13 @@
 db = db.getSiblingDB('admin')
 
-db.auth('root', '2jkpJeB8yGXt')
+db.auth('root', 'vHHCsbSAxrEkYJhy')
 
 db = db.getSiblingDB('probodydb')
 
 db.createUser(
     {
         user: "probody",
-        pwd: "3ZCnInWRdJt0",
+        pwd: "Z5evNte7YN96bt4B",
         roles: [
             {
                 role: "readWrite",
