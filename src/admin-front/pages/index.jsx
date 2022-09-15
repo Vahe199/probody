@@ -70,7 +70,10 @@ export default function AdminLoginPage() {
                     }}>
                         <h1 className={'textSubtitle1'}>Вход в админ-панель probody.kz</h1>
                         <p className="textM" style={{marginTop: 16, marginBottom: 24}}>Введите свой номер телефона <br/>и пароль для входа на сервис</p>
-                        <TextInput style={{marginBottom: 12}} label={'Номер телефона'} placeholder={''} value={credentials.phone} type={'phone'} onUpdate={val => setCredentials({
+                        <TextInput style={{marginBottom: 12}} l
+                                   abel={'Номер телефона'} placeholder={''}
+                                   value={credentials.phone} type={'phone'}
+                                   onUpdate={val => setCredentials({
                             ...credentials,
                             phone: val
                         })} />
